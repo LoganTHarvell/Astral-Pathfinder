@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		020CF625200DCEE10095E611 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020CF624200DCEE10095E611 /* main.cpp */; };
+		02DFDC4E200DD09E00A136AF /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02DFDC4D200DD09E00A136AF /* SDL2.framework */; };
+		02DFDC50200DD0A900A136AF /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02DFDC4F200DD0A900A136AF /* SDL2_image.framework */; };
+		02DFDC5A200DD16000A136AF /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DFDC53200DD16000A136AF /* Game.cpp */; };
+		02DFDC5B200DD16000A136AF /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DFDC55200DD16000A136AF /* GameObject.cpp */; };
+		02DFDC5C200DD16000A136AF /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DFDC57200DD16000A136AF /* TextureManager.cpp */; };
+		02DFDC5D200DD16000A136AF /* Galaxy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DFDC59200DD16000A136AF /* Galaxy.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +31,19 @@
 /* Begin PBXFileReference section */
 		020CF621200DCEE10095E611 /* Astral Pathfinder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Astral Pathfinder"; sourceTree = BUILT_PRODUCTS_DIR; };
 		020CF624200DCEE10095E611 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		02DFDC4D200DD09E00A136AF /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		02DFDC4F200DD0A900A136AF /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
+		02DFDC51200DD16000A136AF /* TextureManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextureManager.hpp; sourceTree = "<group>"; };
+		02DFDC52200DD16000A136AF /* Galaxy.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Galaxy.hpp; sourceTree = "<group>"; };
+		02DFDC53200DD16000A136AF /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		02DFDC54200DD16000A136AF /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
+		02DFDC55200DD16000A136AF /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
+		02DFDC56200DD16000A136AF /* parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parameters.h; sourceTree = "<group>"; };
+		02DFDC57200DD16000A136AF /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
+		02DFDC58200DD16000A136AF /* GameObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameObject.hpp; sourceTree = "<group>"; };
+		02DFDC59200DD16000A136AF /* Galaxy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Galaxy.cpp; sourceTree = "<group>"; };
+		02DFDC5E200DD34700A136AF /* planet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planet.png; path = Resources/Assets/planet.png; sourceTree = SOURCE_ROOT; };
+		02DFDC5F200DD34700A136AF /* simpleSpaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = simpleSpaceship.png; path = Resources/Assets/simpleSpaceship.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +51,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02DFDC50200DD0A900A136AF /* SDL2_image.framework in Frameworks */,
+				02DFDC4E200DD09E00A136AF /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,7 +63,9 @@
 			isa = PBXGroup;
 			children = (
 				020CF623200DCEE10095E611 /* Astral Pathfinder */,
+				02DFDC49200DD02700A136AF /* Resources */,
 				020CF622200DCEE10095E611 /* Products */,
+				02DFDC4C200DD09E00A136AF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +81,44 @@
 			isa = PBXGroup;
 			children = (
 				020CF624200DCEE10095E611 /* main.cpp */,
+				02DFDC56200DD16000A136AF /* parameters.h */,
+				02DFDC53200DD16000A136AF /* Game.cpp */,
+				02DFDC54200DD16000A136AF /* Game.hpp */,
+				02DFDC59200DD16000A136AF /* Galaxy.cpp */,
+				02DFDC52200DD16000A136AF /* Galaxy.hpp */,
+				02DFDC55200DD16000A136AF /* GameObject.cpp */,
+				02DFDC58200DD16000A136AF /* GameObject.hpp */,
+				02DFDC57200DD16000A136AF /* TextureManager.cpp */,
+				02DFDC51200DD16000A136AF /* TextureManager.hpp */,
 			);
 			path = "Astral Pathfinder";
+			sourceTree = "<group>";
+		};
+		02DFDC49200DD02700A136AF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				02DFDC4B200DD04F00A136AF /* Assets */,
+			);
+			name = Resources;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		02DFDC4B200DD04F00A136AF /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				02DFDC5E200DD34700A136AF /* planet.png */,
+				02DFDC5F200DD34700A136AF /* simpleSpaceship.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		02DFDC4C200DD09E00A136AF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				02DFDC4F200DD0A900A136AF /* SDL2_image.framework */,
+				02DFDC4D200DD09E00A136AF /* SDL2.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,6 +179,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				020CF625200DCEE10095E611 /* main.cpp in Sources */,
+				02DFDC5D200DD16000A136AF /* Galaxy.cpp in Sources */,
+				02DFDC5A200DD16000A136AF /* Game.cpp in Sources */,
+				02DFDC5B200DD16000A136AF /* GameObject.cpp in Sources */,
+				02DFDC5C200DD16000A136AF /* TextureManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +297,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WUP28GH2WB;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -243,6 +310,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WUP28GH2WB;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
