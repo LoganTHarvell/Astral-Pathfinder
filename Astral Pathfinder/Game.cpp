@@ -1,29 +1,31 @@
 //
 //  Game.cpp
-//  SDL_Test
+//  Astral Pathfinder
 //
 //  Created by Logan Harvell on 1/14/18.
 //  Copyright © 2018 Logan Harvell. All rights reserved.
 //
 
+// MARK: Header File
 #include "Game.hpp"
 
+// MARK: Libraries and Frameworks
 #include <iostream>
 
+// MARK: Source Files
 #include "Galaxy.hpp"
 #include "GameObject.hpp"
 
 SDL_Renderer* Game::renderer = nullptr;
 
 Game::Game() {
-  
 }
 
 Game::~Game() {
-  
 }
 
-void Game::init(const char * title, int x, int y, int w, int h, bool fullscreen) {
+void Game::init(const char * title,
+                int x, int y, int w, int h, bool fullscreen) {
   
   int flags = 0;
   
@@ -35,7 +37,6 @@ void Game::init(const char * title, int x, int y, int w, int h, bool fullscreen)
     std::cout << "SDL initialised!..." << std::endl;
     
     window = SDL_CreateWindow(title, x, y, w, h, flags);
-
     if (window) {
       std::cout << "Window created." << std::endl;
     }
@@ -56,6 +57,8 @@ void Game::init(const char * title, int x, int y, int w, int h, bool fullscreen)
   SDL_Rect tmpRect = { 0, 0, 24, 32 };
   ship = new GameObject("Resources/Assets/simpleSpaceship.png",
                         tmpRect, MAP_X_ORIGIN, MAP_Y_ORIGIN);
+  ship->scale(0.8);
+  
 }
 
 void Game::handleEvents() {

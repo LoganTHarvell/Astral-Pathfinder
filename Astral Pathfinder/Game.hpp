@@ -1,6 +1,6 @@
 //
 //  Game.hpp
-//  SDL_Test
+//  Astral Pathfinder
 //
 //  Created by Logan Harvell on 1/14/18.
 //  Copyright © 2018 Logan Harvell. All rights reserved.
@@ -9,8 +9,10 @@
 #ifndef Game_hpp
 #define Game_hpp
 
+// MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 
+// MARK: Source Files
 #include "parameters.h"
 
 // UI constants

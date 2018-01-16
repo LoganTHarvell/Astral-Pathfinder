@@ -1,11 +1,12 @@
 //
 //  main.cpp
-//  SDL_Test
+//  Astral Pathfinder
 //
 //  Created by Logan Harvell on 1/14/18.
 //  Copyright © 2018 Logan Harvell. All rights reserved.
 //
 
+// MARK: Source Files
 #include "Game.hpp"
 
 int main(int argc, const char * argv[]) {

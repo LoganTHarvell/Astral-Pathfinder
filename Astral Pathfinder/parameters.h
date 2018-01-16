@@ -1,6 +1,6 @@
 //
 //  parameters.h
-//  Galaxy Project
+//  Astral Pathfinder
 //
 //  Created by Logan Harvell on 11/20/15.
 //  Copyright © 2015 Logan Harvell. All rights reserved.
@@ -8,7 +8,6 @@
 
 #ifndef parameters_h
 #define parameters_h
-
 
 //defines game introduction
 #define TITLE "It is recommended you enlarge your screen for optimal gameplay.\n\

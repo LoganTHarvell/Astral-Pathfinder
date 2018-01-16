@@ -1,17 +1,19 @@
 //
 //  Galaxy.cpp
-//  SDL_Test
+//  Astral Pathfinder
 //
 //  Created by Logan Harvell on 1/15/18.
 //  Copyright © 2018 Logan Harvell. All rights reserved.
 //
 
+// MARK: Header File
 #include "Galaxy.hpp"
 
+// MARK: Libraries and Frameworks
 #include <stdlib.h>
 #include <time.h>
 
-#include "parameters.h"
+// MARK: Source Files
 #include "Game.hpp"
 
 const SDL_Rect Galaxy::planetSrcRect = { 0, 0, PLANET_TEXTURE_SIZE,
