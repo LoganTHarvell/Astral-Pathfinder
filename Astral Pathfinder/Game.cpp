@@ -54,10 +54,13 @@ void Game::init(const char * title,
   
   galaxy = new Galaxy();
   
-  SDL_Rect tmpRect = { 0, 0, 24, 32 };
-  ship = new GameObject("Resources/Assets/simpleSpaceship.png",
-                        tmpRect, MAP_X_ORIGIN, MAP_Y_ORIGIN);
-  ship->scale(0.8);
+  SDL_Rect tmpRect = { 0, 0, 325, 628 };
+  int xpos = galaxy->planets[0].gameObject->getPosition().x;
+  int ypos = galaxy->planets[0].gameObject->getPosition().y;
+  ship = new GameObject("Resources/Assets/simpleSpaceship.png", tmpRect,
+                        xpos, ypos);
+  ship->scale(0.07);
+  ship->setPosition(xpos - (ship->getSize().w/2), ypos - (ship->getSize().h/2));
   
 }
 

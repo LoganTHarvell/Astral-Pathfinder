@@ -19,10 +19,10 @@ GameObject::GameObject(const char* textureSheet, SDL_Rect srcRect,
   
   srcR = srcRect;
   
-  xpos = x;
-  ypos = y;
-  
-  destR = srcR;
+  position.x = x;
+  position.y = y;
+  size.w = srcR.w;
+  size.h = srcR.h;
 }
 
 GameObject::~GameObject() {
@@ -30,15 +30,30 @@ GameObject::~GameObject() {
 }
 
 void GameObject::update() {
-  destR.x = xpos;
-  destR.y = ypos;
+  destR.x = position.x;
+  destR.y = position.y;
+  destR.w = size.w;
+  destR.h = size.h;
 }
 
 void GameObject::render() {
   SDL_RenderCopy(Game::renderer, texture, &srcR, &destR);
 }
 
+void GameObject::setPosition(int x, int y) {
+  position.x = x;
+  position.y = y;
+}
+
+GameObject::Coordinates GameObject::getPosition() {
+  return position;
+}
+
+GameObject::Size GameObject::getSize() {
+  return size;
+}
+
 void GameObject::scale(float x) {
-  destR.w *= x;
-  destR.h *= x;
+  size.w *= x;
+  size.h *= x;
 }

@@ -14,6 +14,14 @@
 
 class GameObject {
   
+  struct Coordinates {
+    int x, y;
+  };
+  
+  struct Size {
+    int w, h;
+  };
+  
 public:
   GameObject(const char* textureSheet, SDL_Rect src, int x, int y);
   ~GameObject();
@@ -21,11 +29,14 @@ public:
   void update();
   void render();
   
+  void setPosition(int x, int y);
+  Coordinates getPosition();
+  Size getSize();
   void scale(float x);
   
 private:
-  int xpos;
-  int ypos;
+  Coordinates position;
+  Size size;
   
   SDL_Texture* texture;
   SDL_Rect srcR, destR;
