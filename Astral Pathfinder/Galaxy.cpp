@@ -66,8 +66,8 @@ Galaxy::Planet Galaxy::initHomeworld() {
   homeworld.status = Planet::colonized;
   
   // initializes game object
-  int x = MAP_X_ORIGIN + (homeworld.xpos * GRID_SIZE) + PLANET_TEXTURE_OFFSET;
-  int y = MAP_Y_ORIGIN + (homeworld.ypos * GRID_SIZE) + PLANET_TEXTURE_OFFSET;
+  int x = GRID_X_ORIGIN + (homeworld.xpos * GRID_WIDTH) + PLANET_TEXTURE_OFFSET_X;
+  int y = GRID_Y_ORIGIN + (homeworld.ypos * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
   homeworld.gameObject = new GameObject("Resources/Assets/planet.png",
                                         planetSrcRect, x, y);
   
@@ -90,8 +90,8 @@ Galaxy::Planet Galaxy::initPlanet() {
   planet.status = Planet::undiscovered;
   
   // initializes game object
-  int x = MAP_X_ORIGIN + (planet.xpos * GRID_SIZE) + PLANET_TEXTURE_OFFSET;
-  int y = MAP_Y_ORIGIN + (planet.ypos * GRID_SIZE) + PLANET_TEXTURE_OFFSET;
+  int x = GRID_X_ORIGIN + (planet.xpos * GRID_WIDTH) + PLANET_TEXTURE_OFFSET_X;
+  int y = GRID_Y_ORIGIN + (planet.ypos * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
   planet.gameObject = new GameObject("Resources/Assets/planet.png",
                                      planetSrcRect, x, y);
   

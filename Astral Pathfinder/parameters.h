@@ -35,7 +35,7 @@ You are the Astral Pathfinder."
 
 
 //defines planet information
-#define NUMBER_OF_PLANETS 100
+#define NUMBER_OF_PLANETS 50
 #define MIN_FERTILITY 0
 #define MAX_FERTILITY 200
 #define MIN_DEPOSITS 100
