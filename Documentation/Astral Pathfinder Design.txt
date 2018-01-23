@@ -1,0 +1,35 @@
+Title: Astral Pathfinder
+Current Version: 0.1
+Repo: https://github.com/LoganTHarvell/Astral-Pathfinder
+
+Platform: Xcode/MacOS Binary
+Language: C++
+Frameworks: SDL, SDL_Image
+
+Genre: 2D RTS
+Setting: Space/Future
+
+Description
+
+Gameplay:
+  => Exploration
+  => Resource Management
+  => Population Growth
+
+AI:
+
+Endgame Conditions:
+  => Discover all planets
+  => Run out of fuel in space
+  => Run out of fuel on planet with no deposits
+
+UI:
+  => Map
+    - cursor selectable planets
+    - arrow key controlled ship
+  => Current planet info
+    - displays info when a ship collides with a planet on the map
+  => Selected planet info
+    - displays info when a player hovers the cursor over a planet
+  => Dialog box
+    - displays dialog to player during events
