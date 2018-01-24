@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/logan/Documents/Programming Projects/Xcode Workspace/Astral Pathfinder (C++)/Documentation">
+      location = "group:../Documentation">
    </FileRef>
    <FileRef
       location = "self:">

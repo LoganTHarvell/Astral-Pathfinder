@@ -31,8 +31,9 @@
 /* Begin PBXFileReference section */
 		020CF621200DCEE10095E611 /* Astral Pathfinder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Astral Pathfinder"; sourceTree = BUILT_PRODUCTS_DIR; };
 		020CF624200DCEE10095E611 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		02DFDC4D200DD09E00A136AF /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
-		02DFDC4F200DD0A900A136AF /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
+		02674CB820194C7300A4B6F0 /* Documentation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Documentation; sourceTree = "<group>"; };
+		02DFDC4D200DD09E00A136AF /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		02DFDC4F200DD0A900A136AF /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		02DFDC51200DD16000A136AF /* TextureManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextureManager.hpp; sourceTree = "<group>"; };
 		02DFDC52200DD16000A136AF /* Galaxy.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Galaxy.hpp; sourceTree = "<group>"; };
 		02DFDC53200DD16000A136AF /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
@@ -62,6 +63,7 @@
 		020CF618200DCEE10095E611 = {
 			isa = PBXGroup;
 			children = (
+				02674CB820194C7300A4B6F0 /* Documentation */,
 				020CF623200DCEE10095E611 /* Astral Pathfinder */,
 				02DFDC49200DD02700A136AF /* Resources */,
 				020CF622200DCEE10095E611 /* Products */,
@@ -99,8 +101,7 @@
 			children = (
 				02DFDC4B200DD04F00A136AF /* Assets */,
 			);
-			name = Resources;
-			path = "New Group";
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		02DFDC4B200DD04F00A136AF /* Assets */ = {
