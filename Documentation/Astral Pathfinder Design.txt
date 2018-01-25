@@ -10,7 +10,7 @@ Genre: 2D RTS
 Setting: Space/Future
 
 Description:
-  A simple space colonization game inspired by the classic resource management game called Hammurabi. Set in a random galaxy of the universe, the player is an inhabitant of a world that can no longer support a growing population. In the efforts of the government to save society from the suffering caused by overpopulation, the player has been called upon to serve as the Astral Pathfinder.
+  A simple space colonization game inspired by the classic resource management game called Hammurabi. Set in a random galaxy of the universe, the player is an inhabitant of a world no longer able to support a growing population. In the efforts of the Hegemony to save society from collapse, the Hegemony used the last of its resources to create a vessel capable of traversing the stars. Named the Astral Pathfinder, the player has been called upon to serve as Captain, placing the responsibility of society's future in their hands. The Captain must discover new worlds, colonize them, and manage the resources of this new interplanetary civilization.
 
 Gameplay:
   => Exploration
