@@ -12,6 +12,17 @@ Setting: Space/Future
 Description:
   A simple space colonization game inspired by the classic resource management game called Hammurabi. Set in a random galaxy of the universe, the player is an inhabitant of a world no longer able to support a growing population. In the efforts of the Hegemony to save society from collapse, the Hegemony used the last of its resources to create a vessel capable of traversing the stars. Named the Astral Pathfinder, the player has been called upon to serve as Captain, placing the responsibility of society's future in their hands. The Captain must discover new worlds, colonize them, and manage the resources of this new interplanetary civilization.
 
+UI:
+  => Map
+    - Cursor selects planets
+    - Arrow keys control ship
+  => Current planet info
+    - Displays info when a ship collides with a planet on the map
+  => Selected planet info
+    - Displays info when a player hovers the cursor over a planet
+  => Dialogue box
+    - Displays dialog to player during events
+
 Gameplay:
   => Exploration
     - Move ship around the map to visit each planet
@@ -26,7 +37,7 @@ Gameplay:
       > Population
       > Fuel
 
-    - Ship must be on planet to receieve a planet's resources
+    - Ship must be on planet to receive a planet's resources
     - Deposits can be used to create fuel for the ship
 
   => Population Growth
@@ -39,23 +50,9 @@ Gameplay:
       > Population can be used to gather resources
     - Events/disasters can happen periodically
 
+  => Endgame:
+    - Discover all planets
+    - Run out of fuel in space
+    - Run out of fuel on planet with no deposits
+
 AI:
-
-Endgame Conditions:
-  => Discover all planets
-  => Run out of fuel in space
-  => Run out of fuel on planet with no deposits
-
-UI:
-  => Map
-    - Cursor selects planets
-    - Arrow keys control ship
-
-  => Current planet info
-    - Displays info when a ship collides with a planet on the map
-
-  => Selected planet info
-    - Displays info when a player hovers the cursor over a planet
-
-  => Dialog box
-    - Displays dialog to player during events

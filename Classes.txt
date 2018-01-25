@@ -1,0 +1,20 @@
+Game Classes:
+  => Game
+  => Galaxy
+    - struct Planet
+      > enum Status
+  => Ship
+
+UI Classes
+  => Map
+    - GameObjects
+  => CurrentPlanetInfo
+  => SelectedPlanetInfo
+  => Dialogue Box
+
+Utility Classes
+  => TextureManager
+  => GameObject
+
+
+Initialization:
