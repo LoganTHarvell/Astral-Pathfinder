@@ -9,11 +9,21 @@ Frameworks: SDL2, SDL2_Image
 Genre: 2D RTS
 Setting: Space/Future
 
-Description
+Description:
+  A simple space colonization game inspired by the classic resource management game called Hammurabi. Set in a random galaxy of the universe, the player is an inhabitant of a world that can no longer support a growing population. In the efforts of the government to save society from the suffering caused by overpopulation, the player has been called upon to serve as the Astral Pathfinder.
 
 Gameplay:
   => Exploration
+
   => Resource Management
+    - Planet Resources:
+      > Food
+      > Deposits
+
+    - Ship Resources:
+      > Population
+      > Fuel
+
   => Population Growth
 
 AI:
@@ -25,11 +35,14 @@ Endgame Conditions:
 
 UI:
   => Map
-    - cursor selectable planets
-    - arrow key controlled ship
+    - cursor selects planets
+    - arrow keys control ship
+
   => Current planet info
     - displays info when a ship collides with a planet on the map
+
   => Selected planet info
     - displays info when a player hovers the cursor over a planet
+
   => Dialog box
     - displays dialog to player during events
