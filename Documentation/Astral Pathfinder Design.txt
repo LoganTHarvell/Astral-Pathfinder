@@ -14,6 +14,8 @@ Description:
 
 Gameplay:
   => Exploration
+    - Move ship around the map to visit each planet
+    - Movement on the map consumes fuel
 
   => Resource Management
     - Planet Resources:
@@ -24,7 +26,18 @@ Gameplay:
       > Population
       > Fuel
 
+    - Ship must be on planet to receieve a planet's resources
+    - Deposits can be used to create fuel for the ship
+
   => Population Growth
+    - Grows and shrinks in real time through births and deaths
+    - Food must sustain population
+
+  => Planets
+    - Each planet has a specific amount of each resource
+    - Can be colonized by sending population to surface
+      > Population can be used to gather resources
+    - Events/disasters can happen periodically
 
 AI:
 
@@ -35,14 +48,14 @@ Endgame Conditions:
 
 UI:
   => Map
-    - cursor selects planets
-    - arrow keys control ship
+    - Cursor selects planets
+    - Arrow keys control ship
 
   => Current planet info
-    - displays info when a ship collides with a planet on the map
+    - Displays info when a ship collides with a planet on the map
 
   => Selected planet info
-    - displays info when a player hovers the cursor over a planet
+    - Displays info when a player hovers the cursor over a planet
 
   => Dialog box
-    - displays dialog to player during events
+    - Displays dialog to player during events
