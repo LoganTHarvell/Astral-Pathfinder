@@ -11,6 +11,7 @@
 
 // MARK: Libraries and Frameworks
 #include <iostream>
+#include "SDL2_image/SDL_image.h"
 
 // MARK: Source Files
 #include "Galaxy.hpp"
@@ -28,13 +29,15 @@ void Game::init(const char * title,
                 int x, int y, int w, int h, bool fullscreen) {
   
   int flags = 0;
+  int imgFlags = IMG_INIT_PNG;
   
   if (fullscreen) {
     flags = SDL_WINDOW_FULLSCREEN_DESKTOP;
   }
   
-  if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
-    std::cout << "SDL initialised!..." << std::endl;
+  if (SDL_Init(SDL_INIT_EVERYTHING) == 0
+      && ( IMG_Init( imgFlags ) & imgFlags )) {
+    std::cout << "SDL and SDL_image initialised!..." << std::endl;
     
     window = SDL_CreateWindow(title, x, y, w, h, flags | SDL_WINDOW_RESIZABLE );
     if (window) {
@@ -55,6 +58,8 @@ void Game::init(const char * title,
     
   } else {
     isRunning = false;
+    std::cerr << "SDL and/or SDL_image initialization failed, errors: "
+              << SDL_GetError() << ", " << IMG_GetError() << std::endl;
   }
 
   SDL_Rect tmpRect = { 0, 0, 1600, 900 };
@@ -107,6 +112,7 @@ void Game::clean() {
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
   SDL_Quit();
+  IMG_Quit();
   
   std::cout << "Game cleaned." << std::endl;
 }

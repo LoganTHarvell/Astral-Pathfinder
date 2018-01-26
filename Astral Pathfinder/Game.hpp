@@ -16,7 +16,6 @@
 #include "parameters.h"
 
 // UI constants
-#define BORDER_WIDTH 6
 #define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT 900
 #define MAP_WIDTH 800
@@ -49,7 +48,6 @@ public:
   bool running() { return isRunning; };
   
   static SDL_Renderer* renderer;
-  static SDL_PixelFormat* pxlFmt;
   
 private:
   bool isRunning = false;

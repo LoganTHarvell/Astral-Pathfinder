@@ -10,6 +10,7 @@
 #include "TextureManager.hpp"
 
 // MARK: Libraries and Frameworks
+#include <iostream>
 #include "SDL2_image/SDL_image.h"
 
 // MARK: Source Files
@@ -20,7 +21,8 @@ SDL_Texture* TextureManager::loadTexture(const char *textureFile) {
   SDL_Surface* tmpSurface = IMG_Load(textureFile);
   
   if (tmpSurface == NULL) {
-    printf("Error loading texture from image at %s", textureFile);
+    std::cerr << "Error loading texture from image at " <<  textureFile
+              << " error: " << IMG_GetError() << std::endl;
   } else {
     texture = SDL_CreateTextureFromSurface(Game::renderer, tmpSurface);
     SDL_FreeSurface(tmpSurface);
