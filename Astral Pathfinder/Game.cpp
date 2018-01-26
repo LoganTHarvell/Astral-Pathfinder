@@ -48,7 +48,7 @@ void Game::init(const char * title,
     if (renderer) {
       // sets render scale info
       SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
-      SDL_RenderSetLogicalSize(renderer, 1600, 900);
+      SDL_RenderSetLogicalSize(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
       
       SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
       std::cout << "Renderer created." << std::endl;
@@ -62,18 +62,17 @@ void Game::init(const char * title,
               << SDL_GetError() << ", " << IMG_GetError() << std::endl;
   }
 
-  SDL_Rect tmpRect = { 0, 0, 1600, 900 };
+  SDL_Rect tmpRect = { 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT };
   gameScreen = new GameObject("Resources/Assets/gameScreen.png",
                               tmpRect, 0, 0);
   
   galaxy = new Galaxy();
   
-  tmpRect = { 0, 0, 325, 628 };
+  tmpRect = { 0, 0, 24, 45 };
   int xpos = galaxy->planets[0].gameObject->getPosition().x;
   int ypos = galaxy->planets[0].gameObject->getPosition().y;
   ship = new GameObject("Resources/Assets/simpleSpaceship.png",
                         tmpRect, xpos, ypos);
-  ship->scale(0.07);
   ship->setPosition(xpos - (ship->getSize().w/2), ypos - (ship->getSize().h/2));
   
 }

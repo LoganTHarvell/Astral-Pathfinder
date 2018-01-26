@@ -16,8 +16,8 @@
 // MARK: Source Files
 #include "Game.hpp"
 
-const SDL_Rect Galaxy::planetSrcRect = { 0, 0, PLANET_IMG_SIZE,
-                                               PLANET_IMG_SIZE };
+const SDL_Rect Galaxy::planetSrcRect = { 0, 0, PLANET_TEXTURE_SIZE,
+                                               PLANET_TEXTURE_SIZE };
 
 Galaxy::Galaxy() {
   
@@ -70,7 +70,6 @@ Galaxy::Planet Galaxy::initHomeworld() {
   int y = GRID_Y_ORIGIN + (homeworld.ypos * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
   homeworld.gameObject = new GameObject("Resources/Assets/planet.png",
                                         planetSrcRect, x, y);
-  homeworld.gameObject->scale(0.016);
   
   return homeworld;
 }
@@ -95,7 +94,6 @@ Galaxy::Planet Galaxy::initPlanet() {
   int y = GRID_Y_ORIGIN + (planet.ypos * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
   planet.gameObject = new GameObject("Resources/Assets/planet.png",
                                      planetSrcRect, x, y);
-  planet.gameObject->scale(0.016);
   
   return planet;
 }
