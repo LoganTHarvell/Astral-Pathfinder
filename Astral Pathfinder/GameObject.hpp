@@ -23,7 +23,8 @@ class GameObject {
   };
   
 public:
-  GameObject(const char* textureSheet, SDL_Rect src, int x, int y);
+  GameObject(const char* textureSheet,
+             SDL_Rect src, int x, int y);
   ~GameObject();
   
   void update();

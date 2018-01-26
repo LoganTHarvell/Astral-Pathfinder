@@ -17,17 +17,15 @@
 
 // UI constants
 #define BORDER_WIDTH 6
-#define WINDOW_WIDTH 1400 + (BORDER_WIDTH * 3)
-#define WINDOW_HEIGHT 1000 + (BORDER_WIDTH * 2)
-#define MAP_WIDTH 1000
-#define MAP_HEIGHT MAP_WIDTH
-#define INFO_WIDTH 400
-#define INFO_HEIGHT (MAP_HEIGHT/2) - (BORDER_WIDTH/2)
-#define MAP_X_ORIGIN 0 + BORDER_WIDTH
-#define MAP_Y_ORIGIN 0 + BORDER_WIDTH
-#define INFO_X_ORIGIN MAP_X_ORIGIN + MAP_WIDTH + BORDER_WIDTH
-#define INFO_Y_ORIGIN MAP_Y_ORIGIN
-#define INFO2_Y_ORIGIN MAP_Y_ORIGIN + INFO_HEIGHT + BORDER_WIDTH
+#define WINDOW_WIDTH 1600
+#define WINDOW_HEIGHT 900
+#define MAP_WIDTH 800
+#define MAP_HEIGHT 800
+#define MAP_X_ORIGIN 400
+#define MAP_Y_ORIGIN 50
+#define INFO_X_ORIGIN 0
+#define INFO_Y_ORIGIN 0
+#define INFO2_Y_ORIGIN 0
 
 // FPS constants
 #define FPS 60
@@ -51,13 +49,14 @@ public:
   bool running() { return isRunning; };
   
   static SDL_Renderer* renderer;
+  static SDL_PixelFormat* pxlFmt;
   
 private:
   bool isRunning = false;
   SDL_Window *window;
   
+  GameObject* gameScreen;
   Galaxy* galaxy;
-  
   GameObject* ship;
 };
 

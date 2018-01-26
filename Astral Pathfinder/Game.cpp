@@ -30,19 +30,24 @@ void Game::init(const char * title,
   int flags = 0;
   
   if (fullscreen) {
-    flags = SDL_WINDOW_FULLSCREEN;
+    flags = SDL_WINDOW_FULLSCREEN_DESKTOP;
   }
   
   if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
     std::cout << "SDL initialised!..." << std::endl;
     
-    window = SDL_CreateWindow(title, x, y, w, h, flags);
+    window = SDL_CreateWindow(title, x, y, w, h, flags | SDL_WINDOW_RESIZABLE );
     if (window) {
       std::cout << "Window created." << std::endl;
     }
     
     renderer = SDL_CreateRenderer(window, -1, 0);
     if (renderer) {
+      // sets render scale info
+      SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+      SDL_RenderSetLogicalSize(renderer, 1600, 900);
+      
+      SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
       std::cout << "Renderer created." << std::endl;
     }
     
@@ -51,14 +56,18 @@ void Game::init(const char * title,
   } else {
     isRunning = false;
   }
+
+  SDL_Rect tmpRect = { 0, 0, 1600, 900 };
+  gameScreen = new GameObject("Resources/Assets/gameScreen.png",
+                              tmpRect, 0, 0);
   
   galaxy = new Galaxy();
   
-  SDL_Rect tmpRect = { 0, 0, 325, 628 };
+  tmpRect = { 0, 0, 325, 628 };
   int xpos = galaxy->planets[0].gameObject->getPosition().x;
   int ypos = galaxy->planets[0].gameObject->getPosition().y;
-  ship = new GameObject("Resources/Assets/simpleSpaceship.png", tmpRect,
-                        xpos, ypos);
+  ship = new GameObject("Resources/Assets/simpleSpaceship.png",
+                        tmpRect, xpos, ypos);
   ship->scale(0.07);
   ship->setPosition(xpos - (ship->getSize().w/2), ypos - (ship->getSize().h/2));
   
@@ -71,7 +80,6 @@ void Game::handleEvents() {
     case SDL_QUIT:
       isRunning = false;
       break;
-      
     default:
       break;
   }
@@ -84,18 +92,10 @@ void Game::update() {
 }
 
 void Game::render() {
-  SDL_SetRenderDrawColor(renderer, 0, 150, 0, 255);
   SDL_RenderClear(renderer);
   
-  // Sets background
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-  SDL_Rect rect = { MAP_X_ORIGIN, MAP_Y_ORIGIN, MAP_WIDTH, MAP_HEIGHT };
-  SDL_RenderFillRect(renderer, &rect);
-  rect = { INFO_X_ORIGIN, INFO_Y_ORIGIN, INFO_WIDTH, INFO_HEIGHT };
-  SDL_RenderFillRect(renderer, &rect);
-  rect = { INFO_X_ORIGIN, INFO2_Y_ORIGIN, INFO_WIDTH, INFO_HEIGHT };
-  SDL_RenderFillRect(renderer, &rect);
-  
+  gameScreen->render();
+
   // render stuff
   galaxy->render();
   ship->render();

@@ -16,9 +16,15 @@
 #include "Game.hpp"
 
 SDL_Texture* TextureManager::loadTexture(const char *textureFile) {
+  SDL_Texture* texture = NULL;
   SDL_Surface* tmpSurface = IMG_Load(textureFile);
-  SDL_Texture* texture = SDL_CreateTextureFromSurface(Game::renderer, tmpSurface);
-  SDL_FreeSurface(tmpSurface);
+  
+  if (tmpSurface == NULL) {
+    printf("Error loading texture from image at %s", textureFile);
+  } else {
+    texture = SDL_CreateTextureFromSurface(Game::renderer, tmpSurface);
+    SDL_FreeSurface(tmpSurface);
+  }
   
   return texture;
 }

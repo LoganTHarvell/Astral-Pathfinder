@@ -32,6 +32,7 @@
 		020CF621200DCEE10095E611 /* Astral Pathfinder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Astral Pathfinder"; sourceTree = BUILT_PRODUCTS_DIR; };
 		020CF624200DCEE10095E611 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		02674CB820194C7300A4B6F0 /* Documentation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Documentation; sourceTree = "<group>"; };
+		0279AC2D201AC0A700ECE4AE /* gameScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameScreen.png; sourceTree = "<group>"; };
 		02DFDC4D200DD09E00A136AF /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		02DFDC4F200DD0A900A136AF /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		02DFDC51200DD16000A136AF /* TextureManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextureManager.hpp; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 		02DFDC4B200DD04F00A136AF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				0279AC2D201AC0A700ECE4AE /* gameScreen.png */,
 				02DFDC5E200DD34700A136AF /* planet.png */,
 				02DFDC5F200DD34700A136AF /* simpleSpaceship.png */,
 			);

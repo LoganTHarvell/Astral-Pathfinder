@@ -13,16 +13,16 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
 
-GameObject::GameObject(const char* textureSheet, SDL_Rect srcRect,
-                       int x, int y) {
+GameObject::GameObject(const char* textureSheet,
+                       SDL_Rect srcRect, int x, int y) {
   texture = TextureManager::loadTexture(textureSheet);
   
   srcR = srcRect;
   
-  position.x = x;
-  position.y = y;
-  size.w = srcR.w;
-  size.h = srcR.h;
+  destR.x = position.x = x;
+  destR.y = position.y = y;
+  destR.w = size.w = srcR.w;
+  destR.h = size.h = srcR.h;
 }
 
 GameObject::~GameObject() {
