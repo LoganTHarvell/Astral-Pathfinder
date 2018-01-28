@@ -9,6 +9,9 @@
 #ifndef parameters_h
 #define parameters_h
 
+
+// MARK: Parameter Constants
+
 //defines game introduction
 #define TITLE "It is recommended you enlarge your screen for optimal gameplay.\n\
 \n\
@@ -34,14 +37,14 @@ prepare for any unexpected disasters, and grow your population.\n\
 You are the Astral Pathfinder."
 
 
-//defines planet information
+// Defines planet information
 #define NUMBER_OF_PLANETS 50
 #define MIN_FERTILITY 0
 #define MAX_FERTILITY 200
 #define MIN_DEPOSITS 100
 #define DEPOSITS_RANGE (600-MIN_DEPOSITS)
 
-//defines resource information
+// Defines resource information
 #define STARTING_POPULATION 5000
 #define PEOPLE_FOOD_RQMT 50
 #define FARMING_COST 25
@@ -51,7 +54,7 @@ You are the Astral Pathfinder."
 #define SHIP_FOOD_RQMT 4
 #define INFRASTRUCTURE_COST 0.05
 
-//defines random event chances
+// Defines random event chances
 #define ALIEN_ATTACK_CHANCE 0.005
 #define BLIGHT_CHANCE 0.1
 #define EXPLOSION_CHANCE 0.05
@@ -59,16 +62,16 @@ You are the Astral Pathfinder."
 #define EPIDEMIC_DEATH_RATE 0.8
 #define SHIP_LOST_CHANCE 0.01
 
-//defines population growth information
+// Defines population growth information
 #define MIN_BIRTH_MULTIPLIER 0.1
 #define BIRTH_MULTIPLIER_RANGE (0.5-MIN_BIRTH_MULTIPLIER)
 #define MIN_DEATH_MULTIPLIER 0.01
 #define DEATH_MULTIPLIER_RANGE (0.1-MIN_DEATH_MULTIPLIER)
 
-//defines other info
+// Defines other info
 #define RESOURCES 2
 #define MAX_NUM_SCORES 10
 #define MAX_NAME_LENGTH 20
-#define MAX_NAME_LENGTH_STR "20"        //should contain MAX_NAME_LENGTH in string form
+#define MAX_NAME_LENGTH_STR "20" // MAX_NAME_LENGTH in string form
  
 #endif /* parameters_h */

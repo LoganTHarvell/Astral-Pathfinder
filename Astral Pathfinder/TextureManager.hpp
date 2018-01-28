@@ -12,10 +12,13 @@
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 
+
 class TextureManager {
   
 public:
-  static SDL_Texture* loadTexture(const char* textureFile);  
+  // Loads textures from image file
+  static SDL_Texture* loadTexture(const char* textureFile);
+  
 };
 
 #endif /* TextureManager_hpp */

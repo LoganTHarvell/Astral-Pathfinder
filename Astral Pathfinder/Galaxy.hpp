@@ -16,6 +16,7 @@
 #include "parameters.h"
 #include "GameObject.hpp"
 
+// MARK: Parameter Constants
 #define GRID_OFFSET 50
 #define GRID_X_ORIGIN MAP_X_ORIGIN + (GRID_OFFSET/2)
 #define GRID_Y_ORIGIN MAP_Y_ORIGIN + (GRID_OFFSET/2)
@@ -24,6 +25,7 @@
 #define PLANET_TEXTURE_SIZE 8
 #define PLANET_TEXTURE_OFFSET_X (GRID_WIDTH - PLANET_TEXTURE_SIZE)/2
 #define PLANET_TEXTURE_OFFSET_Y (GRID_HEIGHT - PLANET_TEXTURE_SIZE)/2
+
 
 class Galaxy {
   
@@ -39,6 +41,8 @@ class Galaxy {
     int fertility;
     int deposits;
     Status status;
+    
+    // TODO: Once planet rendering has moved to Map class, remove gameObject
     GameObject* gameObject;
     
   };
