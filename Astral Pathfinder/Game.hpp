@@ -31,7 +31,7 @@
 #define FRAME_DELAY 1000/FPS
 
 class GameObject;
-class Map;
+class Galaxy;
 
 class Game {
   
@@ -54,7 +54,8 @@ private:
   SDL_Window *window;
   
   GameObject* gameScreen;
-  Map* map;
+  Galaxy* galaxy;
+  GameObject* ship;
 };
 
 
