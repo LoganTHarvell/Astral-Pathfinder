@@ -10,8 +10,8 @@
 #include "Galaxy.hpp"
 
 // MARK: Libraries and Frameworks
-#include <stdlib.h>
-#include <time.h>
+#include <cstdlib>
+#include <ctime>
 
 // MARK: Source Files
 #include "Game.hpp"
