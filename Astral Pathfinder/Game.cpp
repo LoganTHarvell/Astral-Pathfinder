@@ -17,13 +17,20 @@
 #include "Galaxy.hpp"
 #include "GameObject.hpp"
 
+
 SDL_Renderer* Game::renderer = nullptr;
+
+
+// MARK: - Game Contructor
 
 Game::Game() {
 }
 
 Game::~Game() {
 }
+
+
+// MARK: - Game Initialization
 
 void Game::init(const char * title,
                 int x, int y, int w, int h, bool fullscreen) {
@@ -35,18 +42,21 @@ void Game::init(const char * title,
     flags = SDL_WINDOW_FULLSCREEN_DESKTOP;
   }
   
+  // Initializes SDL frameworks
   if (SDL_Init(SDL_INIT_EVERYTHING) == 0
       && ( IMG_Init( imgFlags ) & imgFlags )) {
     std::cout << "SDL and SDL_image initialised!..." << std::endl;
     
+    // Initializes window
     window = SDL_CreateWindow(title, x, y, w, h, flags | SDL_WINDOW_RESIZABLE );
     if (window) {
       std::cout << "Window created." << std::endl;
     }
     
+    // Initializes renderer
     renderer = SDL_CreateRenderer(window, -1, 0);
     if (renderer) {
-      // sets render scale info
+      // Sets render scaling
       SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
       SDL_RenderSetLogicalSize(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
       
@@ -62,12 +72,14 @@ void Game::init(const char * title,
               << SDL_GetError() << ", " << IMG_GetError() << std::endl;
   }
 
+  // Initializes game screen
   SDL_Rect tmpRect = { 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT };
   gameScreen = new GameObject("Resources/Assets/gameScreen.png",
                               tmpRect, 0, 0);
   
   galaxy = new Galaxy();
   
+  // TODO: Once planet rendering has moved to Map class, remove ship gameObject
   tmpRect = { 0, 0, 24, 45 };
   int xpos = galaxy->planets[0].gameObject->getPosition().x;
   int ypos = galaxy->planets[0].gameObject->getPosition().y;
@@ -76,6 +88,9 @@ void Game::init(const char * title,
   ship->setPosition(xpos - (ship->getSize().w/2), ypos - (ship->getSize().h/2));
   
 }
+
+
+// MARK: - Game Functions
 
 void Game::handleEvents() {
   SDL_Event event;
@@ -100,7 +115,7 @@ void Game::render() {
   
   gameScreen->render();
 
-  // render stuff
+  // Render stuff
   galaxy->render();
   ship->render();
 

@@ -12,6 +12,7 @@
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 
+
 class GameObject {
   
   struct Coordinates {
@@ -30,10 +31,11 @@ public:
   void update();
   void render();
   
-  void setPosition(int x, int y);
-  Coordinates getPosition();
-  Size getSize();
-  void scale(float x);
+  // Get and Set functions for position and size
+  Coordinates getPosition() { return position; };
+  void setPosition(int x, int y) { position.x = x; position.y = y; };
+  Size getSize() { return size; };
+  void scale(float x) { size.w *= x; size.h *= x; };
   
 private:
   Coordinates position;

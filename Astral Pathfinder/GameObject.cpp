@@ -13,6 +13,9 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
 
+
+// MARK: - GameObject Contructor/Initialization
+
 GameObject::GameObject(const char* textureSheet,
                        SDL_Rect srcRect, int x, int y) {
   texture = TextureManager::loadTexture(textureSheet);
@@ -29,31 +32,23 @@ GameObject::~GameObject() {
   
 }
 
+
+// MARK: - GameObject Functions
+
 void GameObject::update() {
+  
+  // Updates destination rect position and size
   destR.x = position.x;
   destR.y = position.y;
   destR.w = size.w;
   destR.h = size.h;
+  
 }
 
 void GameObject::render() {
+  
+  // Renders game object in destination rect
   SDL_RenderCopy(Game::renderer, texture, &srcR, &destR);
+  
 }
 
-void GameObject::setPosition(int x, int y) {
-  position.x = x;
-  position.y = y;
-}
-
-GameObject::Coordinates GameObject::getPosition() {
-  return position;
-}
-
-GameObject::Size GameObject::getSize() {
-  return size;
-}
-
-void GameObject::scale(float x) {
-  size.w *= x;
-  size.h *= x;
-}

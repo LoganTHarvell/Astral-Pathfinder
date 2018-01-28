@@ -16,14 +16,20 @@
 // MARK: Source Files
 #include "Game.hpp"
 
+
+// MARK: - TextureManager Functions
+
+// Loads textures from image file
 SDL_Texture* TextureManager::loadTexture(const char *textureFile) {
+  
   SDL_Texture* texture = NULL;
   SDL_Surface* tmpSurface = IMG_Load(textureFile);
   
   if (tmpSurface == NULL) {
     std::cerr << "Error loading texture from image at " <<  textureFile
               << " error: " << IMG_GetError() << std::endl;
-  } else {
+  }
+  else {
     texture = SDL_CreateTextureFromSurface(Game::renderer, tmpSurface);
     SDL_FreeSurface(tmpSurface);
   }
