@@ -12,7 +12,7 @@
 int main(int argc, const char * argv[]) {
   
   Game *game = new Game();
-  game->init("Astral Pathfinder ©", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+  game->init("Title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
              WINDOW_WIDTH, WINDOW_HEIGHT, false);
   
   Uint32 frameStart;
