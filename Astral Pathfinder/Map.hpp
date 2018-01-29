@@ -28,7 +28,7 @@ class GameObject;
 
 class Map {
 public:
-    Map(Galaxy galaxy);
+    Map(Galaxy::Planet *planetArray);
     ~Map();
     
     void update();

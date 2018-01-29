@@ -28,7 +28,7 @@
 
 
 class Galaxy {
-  
+public:
   struct Planet {
     
     enum Status {
@@ -43,7 +43,6 @@ class Galaxy {
     Status status;
   };
   
-public:
   Galaxy();
   ~Galaxy();
 

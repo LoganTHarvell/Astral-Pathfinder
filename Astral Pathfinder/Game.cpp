@@ -79,7 +79,7 @@ void Game::init(const char * title,
                               tmpRect, 0, 0);
   
   galaxy = new Galaxy();
-  map = new Map(*galaxy);
+  map = new Map(galaxy -> planets);
 }
 
 

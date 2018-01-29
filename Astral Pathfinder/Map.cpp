@@ -13,19 +13,19 @@
 #include "Game.hpp"
 #include "Galaxy.hpp"
 
-
 const SDL_Rect Map::planetSrcRect = {0, 0, PLANET_TEXTURE_SIZE, PLANET_TEXTURE_SIZE};
 
-Map::Map(Galaxy galaxy) {
+Map::Map(Galaxy::Planet *planetArray) {
     // Initialize planets
     for(int i = 0; i < NUMBER_OF_PLANETS; i++) {
-        int x = GRID_X_ORIGIN + (galaxy.getXCord(i) * GRID_WIDTH) + PLANET_TEXTURE_OFFSET_X;
-        int y = GRID_Y_ORIGIN + (galaxy.getYCord(i) * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
+        int x = GRID_X_ORIGIN + (planetArray[i].xpos * GRID_WIDTH) + PLANET_TEXTURE_OFFSET_X;
+        int y = GRID_Y_ORIGIN + (planetArray[i].ypos * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
         planets[i] = new GameObject("Resources/Assets/planet.png", planetSrcRect, x, y);
     }
     
     // Initialize Ship
     SDL_Rect tmpRect = { 0, 0, 24, 45 };
+    
     int xpos = planets[0] -> getPosition().x;
     int ypos = planets[0] -> getPosition().y;
     ship = new GameObject("Resources/Assets/simpleSpaceship.png", tmpRect, xpos, ypos);
