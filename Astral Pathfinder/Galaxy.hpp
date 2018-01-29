@@ -37,7 +37,7 @@ class Galaxy {
       colonized
     };
     
-    int xpos, ypos;
+    SDL_Point position;
     int fertility;
     int deposits;
     Status status;

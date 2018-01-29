@@ -33,7 +33,7 @@ Galaxy::Galaxy() {
   // Initializes first element in planets array as homeworld
   planets[i] = initHomeworld();
   // Marks planet coordinates as occupied
-  hasPlanet[planets[i].xpos][planets[i].ypos] = true;
+  hasPlanet[planets[i].position.x][planets[i].position.y] = true;
 
   // Initializes galaxy with number of planets
   for (i=1; i<NUMBER_OF_PLANETS; i++) {
@@ -41,10 +41,10 @@ Galaxy::Galaxy() {
     // Prevents duplicate coordinates
     do {
       planets[i] = initPlanet();
-    } while (hasPlanet[planets[i].xpos][planets[i].ypos]);
+    } while (hasPlanet[planets[i].position.x][planets[i].position.y]);
     
     // Marks planet coordinates as occupied
-    hasPlanet[planets[i].xpos][planets[i].ypos] = true;
+    hasPlanet[planets[i].position.x][planets[i].position.y] = true;
   }
   
 };
@@ -79,8 +79,8 @@ Galaxy::Planet Galaxy::initHomeworld() {
   Planet homeworld;
   
   // Sets homeworld coordinates
-  homeworld.xpos = rand()%NUMBER_OF_PLANETS;
-  homeworld.ypos = rand()%NUMBER_OF_PLANETS;
+  homeworld.position.x = rand()%NUMBER_OF_PLANETS;
+  homeworld.position.y = rand()%NUMBER_OF_PLANETS;
   
   // Sets homeworld resources
   homeworld.fertility = STARTING_POPULATION/PEOPLE_FOOD_RQMT;
@@ -90,8 +90,10 @@ Galaxy::Planet Galaxy::initHomeworld() {
   homeworld.status = Planet::colonized;
   
   // TODO: Once planet rendering has moved to Map class, remove homeworld.gameObject
-  int x = GRID_X_ORIGIN + (homeworld.xpos * GRID_WIDTH) + PLANET_TEXTURE_OFFSET_X;
-  int y = GRID_Y_ORIGIN + (homeworld.ypos * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
+  int x = GRID_X_ORIGIN + (homeworld.position.x * GRID_WIDTH)
+          + PLANET_TEXTURE_OFFSET_X;
+  int y = GRID_Y_ORIGIN + (homeworld.position.y * GRID_HEIGHT)
+          + PLANET_TEXTURE_OFFSET_Y;
   homeworld.gameObject = new GameObject("Resources/Assets/planet.png",
                                         planetSrcRect, x, y);
   
@@ -102,8 +104,8 @@ Galaxy::Planet Galaxy::initPlanet() {
   Planet planet;
   
   // Set planet coordinates
-  planet.xpos = rand()%NUMBER_OF_PLANETS;
-  planet.ypos = rand()%NUMBER_OF_PLANETS;
+  planet.position.x = rand()%NUMBER_OF_PLANETS;
+  planet.position.y = rand()%NUMBER_OF_PLANETS;
   
   // Sets planet fertility to random value
   planet.fertility = (rand()%(MAX_FERTILITY-MIN_FERTILITY+1) + MIN_FERTILITY);
@@ -114,8 +116,8 @@ Galaxy::Planet Galaxy::initPlanet() {
   planet.status = Planet::undiscovered;
   
   // TODO: Once planet rendering has moved to Map class, remove planet.gameObject
-  int x = GRID_X_ORIGIN + (planet.xpos * GRID_WIDTH) + PLANET_TEXTURE_OFFSET_X;
-  int y = GRID_Y_ORIGIN + (planet.ypos * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
+  int x = GRID_X_ORIGIN + (planet.position.x * GRID_WIDTH) + PLANET_TEXTURE_OFFSET_X;
+  int y = GRID_Y_ORIGIN + (planet.position.y * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
   planet.gameObject = new GameObject("Resources/Assets/planet.png",
                                      planetSrcRect, x, y);
   
