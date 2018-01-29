@@ -10,6 +10,11 @@
 #define parameters_h
 
 
+/* TODO: - Move global defines to dependant files and remove this file. Mitigate
+ global defines by converting them to class constants. Make sure game parameters
+ are easy to find and change. */
+
+
 // MARK: Parameter Constants
 
 //defines game introduction
