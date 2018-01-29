@@ -41,10 +41,6 @@ class Galaxy {
     int fertility;
     int deposits;
     Status status;
-    
-    // TODO: Once planet rendering has moved to Map class, remove gameObject
-    GameObject* gameObject;
-    
   };
   
 public:
@@ -52,9 +48,9 @@ public:
   ~Galaxy();
 
   Planet planets[NUMBER_OF_PLANETS];
- 
-  void update();
-  void render();
+
+  int getXCord(int n);
+  int getYCord(int n);
   
 private:
   static const SDL_Rect planetSrcRect;

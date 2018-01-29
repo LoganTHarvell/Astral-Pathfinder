@@ -16,10 +16,6 @@
 // MARK: Source Files
 #include "Game.hpp"
 
-// TODO: Once planet rendering has moved to Map class, remove planetSrcRect
-const SDL_Rect Galaxy::planetSrcRect = { 0, 0, PLANET_TEXTURE_SIZE,
-                                               PLANET_TEXTURE_SIZE };
-
 
 // MARK: - Galaxy Constructor/Initialization
 
@@ -55,23 +51,14 @@ Galaxy::~Galaxy() {
 
 // MARK: - Galaxy Functions
 
-void Galaxy::render() {
-  
-  // Renders planets game objects
-  for (int i = 0; i < SDL_arraysize(planets) ; i++) {
-    planets[i].gameObject->render();
-  }
+// Returns coordinates of specified planet
+int Galaxy::getXCord(int n) {
+    return planets[n].xpos;
 }
 
-void Galaxy::update() {
-  
-  // Updates planets game objects
-  for (int i = 0; i < NUMBER_OF_PLANETS; i++) {
-    planets[i].gameObject->update();
-  }
-  
+int Galaxy::getYCord(int n) {
+    return planets[n].ypos;
 }
-
 
 // MARK: - Planet Initialization Functions
 
@@ -88,12 +75,6 @@ Galaxy::Planet Galaxy::initHomeworld() {
   
   // Initializes homeworld status to colonized
   homeworld.status = Planet::colonized;
-  
-  // TODO: Once planet rendering has moved to Map class, remove homeworld.gameObject
-  int x = GRID_X_ORIGIN + (homeworld.xpos * GRID_WIDTH) + PLANET_TEXTURE_OFFSET_X;
-  int y = GRID_Y_ORIGIN + (homeworld.ypos * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
-  homeworld.gameObject = new GameObject("Resources/Assets/planet.png",
-                                        planetSrcRect, x, y);
   
   return homeworld;
 }
@@ -112,12 +93,6 @@ Galaxy::Planet Galaxy::initPlanet() {
   
   // Initializes planet status to undiscovered
   planet.status = Planet::undiscovered;
-  
-  // TODO: Once planet rendering has moved to Map class, remove planet.gameObject
-  int x = GRID_X_ORIGIN + (planet.xpos * GRID_WIDTH) + PLANET_TEXTURE_OFFSET_X;
-  int y = GRID_Y_ORIGIN + (planet.ypos * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
-  planet.gameObject = new GameObject("Resources/Assets/planet.png",
-                                     planetSrcRect, x, y);
   
   return planet;
 }

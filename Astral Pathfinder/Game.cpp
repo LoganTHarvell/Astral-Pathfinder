@@ -16,6 +16,7 @@
 // MARK: Source Files
 #include "Galaxy.hpp"
 #include "GameObject.hpp"
+#include "Map.hpp"
 
 
 SDL_Renderer* Game::renderer = nullptr;
@@ -78,15 +79,7 @@ void Game::init(const char * title,
                               tmpRect, 0, 0);
   
   galaxy = new Galaxy();
-  
-  // TODO: Once planet rendering has moved to Map class, remove ship gameObject
-  tmpRect = { 0, 0, 24, 45 };
-  int xpos = galaxy->planets[0].gameObject->getPosition().x;
-  int ypos = galaxy->planets[0].gameObject->getPosition().y;
-  ship = new GameObject("Resources/Assets/simpleSpaceship.png",
-                        tmpRect, xpos, ypos);
-  ship->setPosition(xpos - (ship->getSize().w/2), ypos - (ship->getSize().h/2));
-  
+  map = new Map(*galaxy);
 }
 
 
@@ -106,8 +99,7 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-  galaxy->update();
-  ship->update();
+  map->update();
 }
 
 void Game::render() {
@@ -116,8 +108,7 @@ void Game::render() {
   gameScreen->render();
 
   // Render stuff
-  galaxy->render();
-  ship->render();
+  map->render();
 
   SDL_RenderPresent(renderer);
 }

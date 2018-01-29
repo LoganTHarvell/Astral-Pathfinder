@@ -34,6 +34,7 @@
 
 class GameObject;
 class Galaxy;
+class Map;
 
 class Game {
   
@@ -57,9 +58,7 @@ private:
   
   GameObject* gameScreen;
   Galaxy* galaxy;
-  
-  // TODO: Once planet rendering has moved to Map class, remove ship gameObject
-  GameObject* ship;
+  Map* map;
 };
 
 
