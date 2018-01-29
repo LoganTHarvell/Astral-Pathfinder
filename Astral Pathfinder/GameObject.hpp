@@ -15,10 +15,6 @@
 
 class GameObject {
   
-  struct Coordinates {
-    int x, y;
-  };
-  
   struct Size {
     int w, h;
   };
@@ -32,13 +28,13 @@ public:
   void render();
   
   // Get and Set functions for position and size
-  Coordinates getPosition() { return position; };
+  SDL_Point getPosition() { return position; };
   void setPosition(int x, int y) { position.x = x; position.y = y; };
   Size getSize() { return size; };
   void scale(float x) { size.w *= x; size.h *= x; };
   
 private:
-  Coordinates position;
+  SDL_Point position;
   Size size;
   
   SDL_Texture* texture;

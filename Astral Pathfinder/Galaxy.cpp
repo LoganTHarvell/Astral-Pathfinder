@@ -29,7 +29,7 @@ Galaxy::Galaxy() {
   // Initializes first element in planets array as homeworld
   planets[i] = initHomeworld();
   // Marks planet coordinates as occupied
-  hasPlanet[planets[i].xpos][planets[i].ypos] = true;
+  hasPlanet[planets[i].position.x][planets[i].position.y] = true;
 
   // Initializes galaxy with number of planets
   for (i=1; i<NUMBER_OF_PLANETS; i++) {
@@ -37,10 +37,10 @@ Galaxy::Galaxy() {
     // Prevents duplicate coordinates
     do {
       planets[i] = initPlanet();
-    } while (hasPlanet[planets[i].xpos][planets[i].ypos]);
+    } while (hasPlanet[planets[i].position.x][planets[i].position.y]);
     
     // Marks planet coordinates as occupied
-    hasPlanet[planets[i].xpos][planets[i].ypos] = true;
+    hasPlanet[planets[i].position.x][planets[i].position.y] = true;
   }
   
 };
@@ -60,14 +60,15 @@ int Galaxy::getYCord(int n) {
     return planets[n].ypos;
 }
 
+
 // MARK: - Planet Initialization Functions
 
 Galaxy::Planet Galaxy::initHomeworld() {
   Planet homeworld;
   
   // Sets homeworld coordinates
-  homeworld.xpos = rand()%NUMBER_OF_PLANETS;
-  homeworld.ypos = rand()%NUMBER_OF_PLANETS;
+  homeworld.position.x = rand()%NUMBER_OF_PLANETS;
+  homeworld.position.y = rand()%NUMBER_OF_PLANETS;
   
   // Sets homeworld resources
   homeworld.fertility = STARTING_POPULATION/PEOPLE_FOOD_RQMT;
@@ -83,8 +84,8 @@ Galaxy::Planet Galaxy::initPlanet() {
   Planet planet;
   
   // Set planet coordinates
-  planet.xpos = rand()%NUMBER_OF_PLANETS;
-  planet.ypos = rand()%NUMBER_OF_PLANETS;
+  planet.position.x = rand()%NUMBER_OF_PLANETS;
+  planet.position.y = rand()%NUMBER_OF_PLANETS;
   
   // Sets planet fertility to random value
   planet.fertility = (rand()%(MAX_FERTILITY-MIN_FERTILITY+1) + MIN_FERTILITY);
