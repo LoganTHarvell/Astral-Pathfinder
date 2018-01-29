@@ -28,7 +28,7 @@
 
 
 class Galaxy {
-  
+public:
   struct Planet {
     
     enum Status {
@@ -41,23 +41,14 @@ class Galaxy {
     int fertility;
     int deposits;
     Status status;
-    
-    // TODO: Once planet rendering has moved to Map class, remove gameObject
-    GameObject* gameObject;
-    
   };
   
-public:
   Galaxy();
   ~Galaxy();
 
   Planet planets[NUMBER_OF_PLANETS];
- 
-  void update();
-  void render();
   
 private:
-  static const SDL_Rect planetSrcRect;
   bool hasPlanet[NUMBER_OF_PLANETS][NUMBER_OF_PLANETS] = { false };
   
   static Planet initHomeworld();
