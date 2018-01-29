@@ -52,7 +52,6 @@ public:
   int getYCord(int n);
   
 private:
-  static const SDL_Rect planetSrcRect;
   bool hasPlanet[NUMBER_OF_PLANETS][NUMBER_OF_PLANETS] = { false };
   
   static Planet initHomeworld();

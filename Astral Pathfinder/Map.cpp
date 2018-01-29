@@ -18,8 +18,8 @@ const SDL_Rect Map::planetSrcRect = {0, 0, PLANET_TEXTURE_SIZE, PLANET_TEXTURE_S
 Map::Map(Galaxy::Planet *planetArray) {
     // Initialize planets
     for(int i = 0; i < NUMBER_OF_PLANETS; i++) {
-        int x = GRID_X_ORIGIN + (planetArray[i].xpos * GRID_WIDTH) + PLANET_TEXTURE_OFFSET_X;
-        int y = GRID_Y_ORIGIN + (planetArray[i].ypos * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
+        int x = GRID_X_ORIGIN + (planetArray[i].position.x * GRID_WIDTH) + PLANET_TEXTURE_OFFSET_X;
+        int y = GRID_Y_ORIGIN + (planetArray[i].position.y * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
         planets[i] = new GameObject("Resources/Assets/planet.png", planetSrcRect, x, y);
     }
     

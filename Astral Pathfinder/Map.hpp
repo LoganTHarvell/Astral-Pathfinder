@@ -37,7 +37,7 @@ public:
 private:
     static const SDL_Rect planetSrcRect;
     GameObject *ship;
-    GameObject* planets[NUMBER_OF_PLANETS];
+    GameObject *planets[NUMBER_OF_PLANETS];
 };
 
 #endif /* Map_hpp */
