@@ -49,7 +49,6 @@ Galaxy::~Galaxy() {
 };
 
 
-// MARK: - Galaxy Functions
 // MARK: - Planet Initialization Functions
 
 Galaxy::Planet Galaxy::initHomeworld() {
