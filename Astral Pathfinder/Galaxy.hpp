@@ -47,9 +47,6 @@ public:
   ~Galaxy();
 
   Planet planets[NUMBER_OF_PLANETS];
-
-  int getXCord(int n);
-  int getYCord(int n);
   
 private:
   bool hasPlanet[NUMBER_OF_PLANETS][NUMBER_OF_PLANETS] = { false };

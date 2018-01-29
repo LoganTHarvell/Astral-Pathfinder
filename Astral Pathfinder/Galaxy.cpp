@@ -50,17 +50,6 @@ Galaxy::~Galaxy() {
 
 
 // MARK: - Galaxy Functions
-
-// Returns coordinates of specified planet
-int Galaxy::getXCord(int n) {
-    return planets[n].xpos;
-}
-
-int Galaxy::getYCord(int n) {
-    return planets[n].ypos;
-}
-
-
 // MARK: - Planet Initialization Functions
 
 Galaxy::Planet Galaxy::initHomeworld() {
