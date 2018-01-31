@@ -15,15 +15,20 @@
 
 class GameObject {
   
-  struct Size {
-    int w, h;
-  };
-  
 public:
-  GameObject(const char* textureSheet,
-             SDL_Rect src, int x, int y);
+  GameObject(const char* textureSheet, SDL_Rect src, int x, int y);
   ~GameObject();
   
+private:
+  SDL_Point position;
+  struct Size {
+    int w, h;
+  } size;
+  
+  SDL_Texture* texture;
+  SDL_Rect srcR, destR;
+
+public:
   void update();
   void render();
   
@@ -33,13 +38,6 @@ public:
   Size getSize() { return size; };
   void scale(float x) { size.w *= x; size.h *= x; };
   
-private:
-  SDL_Point position;
-  Size size;
-  
-  SDL_Texture* texture;
-  SDL_Rect srcR, destR;
-
 };
 
 #endif /* GameObject_hpp */

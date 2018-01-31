@@ -15,6 +15,10 @@
 #include "Galaxy.hpp"
 
 // MARK: Parameter Constants
+#define MAP_WIDTH 800
+#define MAP_HEIGHT 800
+#define MAP_X_ORIGIN 400
+#define MAP_Y_ORIGIN 50
 #define GRID_OFFSET 50
 #define GRID_X_ORIGIN MAP_X_ORIGIN + (GRID_OFFSET/2)
 #define GRID_Y_ORIGIN MAP_Y_ORIGIN + (GRID_OFFSET/2)
@@ -27,8 +31,9 @@
 class GameObject;
 
 class Map {
+  
 public:
-    Map(Galaxy::Planet *planetArray);
+    Map(Galaxy::Planet* planetArray);
     ~Map();
     
     void update();
@@ -38,6 +43,7 @@ private:
     static const SDL_Rect planetSrcRect;
     GameObject *ship;
     GameObject *planets[NUMBER_OF_PLANETS];
+  
 };
 
 #endif /* Map_hpp */
