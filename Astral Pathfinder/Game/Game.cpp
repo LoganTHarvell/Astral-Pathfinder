@@ -19,7 +19,7 @@
 #include "Map.hpp"
 
 
-SDL_Renderer* Game::renderer = nullptr;
+SDL_Renderer *Game::renderer = nullptr;
 
 
 // MARK: - Game Contructor
@@ -33,7 +33,7 @@ Game::~Game() {
 
 // MARK: - Game Initialization
 
-void Game::init(const char * title,
+void Game::init(const char *title,
                 int x, int y, int w, int h, bool fullscreen) {
   
   int flags = 0;

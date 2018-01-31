@@ -16,7 +16,7 @@
 
 // MARK: - GameObject Contructor/Initialization
 
-GameObject::GameObject(const char* textureSheet,
+GameObject::GameObject(const char *textureSheet,
                        SDL_Rect srcRect, int x, int y) {
   texture = TextureManager::loadTexture(textureSheet);
   

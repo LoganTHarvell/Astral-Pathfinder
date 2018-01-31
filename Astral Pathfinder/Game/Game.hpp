@@ -41,9 +41,9 @@ private:
   bool isRunning = false;
   SDL_Window *window;
   
-  GameObject* gameScreen;
-  Galaxy* galaxy;
-  Map* map;
+  GameObject *gameScreen;
+  Galaxy *galaxy;
+  Map *map;
   
 public:
   void handleEvents();
@@ -53,7 +53,7 @@ public:
   
   bool running() { return isRunning; };
   
-  static SDL_Renderer* renderer;
+  static SDL_Renderer *renderer;
   
 };
 

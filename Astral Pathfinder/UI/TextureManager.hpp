@@ -17,7 +17,7 @@ class TextureManager {
   
 public:
   // Loads textures from image file
-  static SDL_Texture* loadTexture(const char* textureFile);
+  static SDL_Texture *loadTexture(const char *textureFile);
   
 };
 

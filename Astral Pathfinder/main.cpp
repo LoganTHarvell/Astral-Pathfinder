@@ -10,7 +10,7 @@
 #include "Game.hpp"
 
 
-int main(int argc, const char * argv[]) {
+int main(int argc, const char *argv[]) {
   
   Game *game = new Game();
   game->init("Astral Pathfinder ©", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
