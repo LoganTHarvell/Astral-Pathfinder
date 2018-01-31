@@ -25,6 +25,7 @@ Galaxy::Galaxy() {
   srand((unsigned)time(NULL));
   
   int i = 0;
+  bool hasPlanet[NUMBER_OF_PLANETS][NUMBER_OF_PLANETS] = { false };
   
   // Initializes first element in planets array as homeworld
   planets[i] = initHomeworld();

@@ -18,29 +18,28 @@
 
 
 class Galaxy {
+  
 public:
+  Galaxy();
+  ~Galaxy();
+  
   struct Planet {
+    SDL_Point position;
     
-    enum Status {
+    // resources
+    int fertility;
+    int deposits;
+    
+    enum {
       undiscovered,
       discovered,
       colonized
-    };
-    
-    SDL_Point position;
-    int fertility;
-    int deposits;
-    Status status;
+    } status;
   };
   
-  Galaxy();
-  ~Galaxy();
-
   Planet planets[NUMBER_OF_PLANETS];
   
 private:
-  bool hasPlanet[NUMBER_OF_PLANETS][NUMBER_OF_PLANETS] = { false };
-  
   static Planet initHomeworld();
   static Planet initPlanet();
   
