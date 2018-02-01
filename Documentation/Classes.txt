@@ -1,20 +1,78 @@
 Game Classes:
+
   => Game
-  => Galaxy
-    - struct Planet
-      > enum Status
+    - Fields
+      > Galaxy
+    - Methods
+      > Handle Events
+      > Update
+      > Render
+
+  => Galaxy (maybe pointless?)
+    - Fields
+      > Planets array
+    - Methods
+
+  => Planet
+    - Fields
+      > Position
+      > Population
+      > Fertility
+      > Deposits
+      > Status
+    - Methods
+      > Init Homeworld
+      > Init Planet
+
   => Ship
+    - Fields
+      > Position
+    - Methods
+      > landShip
+
+  => Player Ship subclass of Ship
+    - Fields
+      > State
+      > Population
+      > Fuel
+    - Methods
+      > State Changes
+
+  => Alien Warship subclasses Ship
+    - Fields
+      > State
+    - Methods
+      > State Changes
 
 UI Classes
   => Map
-    - GameObjects
-  => CurrentPlanetInfo
-  => SelectedPlanetInfo
-  => Dialogue Box
+    - Fields
+      > GameObjects = Ship, Planets, Alien Warship
+    - Methods
+      > update
+      > render
+
+  => PlanetInfo
+    - Fields
+      > Position text
+      > Population/Limit text
+      > Food/Fertilty text
+      > Minerals/Deposits text
+      > Farmer/Miner ratio
+      > Infrastructure ratio
+    - Methods
+      > Handle events
+      > update
+      > render
+
+  => CurrentPlanetInfo, subclass of PlanetInfo
+    - Fields
+      > Ship position text
+      > Ship Fuel text
+    - Methods
+
+  => Dialogue Box ?
 
 Utility Classes
   => TextureManager
   => GameObject
-
-
-Initialization:
