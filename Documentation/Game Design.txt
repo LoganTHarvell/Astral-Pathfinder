@@ -18,10 +18,10 @@ UI:
     - Arrow keys control ship
 
   => Current planet info
-    - Displays info when a ship collides with a planet on the map
+    - Displays planet info when a ship collides with a planet on the map
 
   => Selected planet info
-    - Displays info when a player hovers the cursor over a planet
+    - Displays planet info when a player hovers the cursor over a planet
 
   => Dialogue box
     - Displays dialog to player during events
@@ -32,7 +32,7 @@ Gameplay:
       > Galaxy contains fixed number of planets
       > Planets can be undiscovered, discovered, colonized (state machine)
         + Undiscovered planets can't be selected
-        + Discovered planets become Colonized if population is > 0, vice versa
+        + Discovered planets become colonized if population is > 0, vice versa
     - Ship
       > Ship has fixed population
       > Movement on the map consumes fuel
@@ -52,14 +52,14 @@ Gameplay:
       > Planet has fixed max food production per frame, randomly set
     - Deposits
       > Planet has fixed total deposits that can be mined, randomly set
-      > Miners turn deposits into usable minerals, used as fuel
+      > Miners turn deposits into usable minerals, which can be used as fuel
       > Minerals can be used to build infrastructure and raise max population limit
 
   => Random Events
     - Random events affect food, mining, births, deaths
 
   => Alien Warship
-    - Alien warship roams and wipes planet populations
+    - Alien warship roams and can potentially wipe planet population
 
   => Endgame:
     - Maximizing population gives score
