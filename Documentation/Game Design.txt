@@ -2,11 +2,11 @@ Title: Astral Pathfinder
 Current Version: 0.1
 Repo: https://github.com/LoganTHarvell/Astral-Pathfinder
 
-Platform: Xcode/MacOS Binary
+Platform: MacOS Binary, developed in Xcode
 Language: C++
 Frameworks: SDL2, SDL2_Image
 
-Genre: 2D RTS
+Genre: Top-down 2D Space Sim
 Setting: Space/Future
 
 Description:
@@ -16,43 +16,68 @@ UI:
   => Map
     - Cursor selects planets
     - Arrow keys control ship
+
   => Current planet info
     - Displays info when a ship collides with a planet on the map
+
   => Selected planet info
     - Displays info when a player hovers the cursor over a planet
+
   => Dialogue box
     - Displays dialog to player during events
 
 Gameplay:
   => Exploration
-    - Move ship around the map to visit each planet
-    - Movement on the map consumes fuel
+    - Planets
+      > Galaxy contains fixed number of planets
+      > Planets can be undiscovered, discovered, colonized (state machine)
+        + Undiscovered planets can't be selected
+        + Discovered planets become Colonized if population is > 0, vice versa
+    - Ship
+      > Ship has fixed population
+      > Movement on the map consumes fuel
+      > Move ship around the map to visit each planet
+      > Ship population temporarily added to planet when landed
+      > Ship must be on planet to receive minerals for fuel
 
   => Resource Management
-    - Planet Resources:
-      > Food
-      > Deposits
+    - Population
+      > Planet max population limited by infrastructure, uniformly set on discovery
+      > Planet birth and death rate dependant on excess food, slightly random
+      > People consume fixed amount of food per frame
+      > People produce fixed amount of food per frame
+      > Player chooses ratio of farmers to miners per planet
+      > Player chooses ratio of minerals (mined deposits) used for infrastructure
+    - Food
+      > Planet has fixed max food production per frame, randomly set
+    - Deposits
+      > Planet has fixed total deposits that can be mined, randomly set
+      > Miners turn deposits into usable minerals, used as fuel
+      > Minerals can be used to build infrastructure and raise max population limit
 
-    - Ship Resources:
-      > Population
-      > Fuel
+  => Random Events
+    - Random events affect food, mining, births, deaths
 
-    - Ship must be on planet to receive a planet's resources
-    - Deposits can be used to create fuel for the ship
-
-  => Population Growth
-    - Grows and shrinks in real time through births and deaths
-    - Food must sustain population
-
-  => Planets
-    - Each planet has a specific amount of each resource
-    - Can be colonized by sending population to surface
-      > Population can be used to gather resources
-    - Events/disasters can happen periodically
+  => Alien Warship
+    - Alien warship roams and wipes planet populations
 
   => Endgame:
-    - Discover all planets
+    - Maximizing population gives score
+    - Discover all planets, "win condition" bonus?
     - Run out of fuel in space
     - Run out of fuel on planet with no deposits
+    - Ship collides with Alien Warship
 
 AI:
+  => Map generation
+    - homeworld vs planet, resources
+
+  => Population Growth
+
+  => Random events
+    - fair/balanced randomness
+
+  => Alien Warship
+    - basic pathfinding, decision making
+
+
