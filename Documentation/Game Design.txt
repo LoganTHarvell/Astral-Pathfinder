@@ -80,4 +80,13 @@ AI:
   => Alien Warship
     - basic pathfinding, decision making
 
-
+Work Split (fluid):
+  => Logan
+    - Data structures
+    - Game logic
+  => Ian
+    - UI
+    - Graphics/Rendering
+    - Movement
+  => Both
+    - AI
