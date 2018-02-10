@@ -9,7 +9,7 @@
 #ifndef Ship_hpp
 #define Ship_hpp
 
-#include <stdio.h>
+// MARK: Source Files
 #include "GameObject.hpp"
 
 class Ship : public GameObject {
