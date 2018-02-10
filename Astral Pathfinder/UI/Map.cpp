@@ -12,6 +12,7 @@
 // MARK: Source Files
 #include "Game.hpp"
 #include "Galaxy.hpp"
+#include "Ship.hpp"
 
 const SDL_Rect Map::planetSrcRect = {0, 0, PLANET_TEXTURE_SIZE, PLANET_TEXTURE_SIZE};
 
@@ -29,7 +30,7 @@ Map::Map(Galaxy::Planet *planetArray) {
     
     int xpos = planets[0] -> getPosition().x;
     int ypos = planets[0] -> getPosition().y;
-    ship = new GameObject("Resources/Assets/simpleSpaceship.png",
+    ship = new Ship("Resources/Assets/simpleSpaceship.png",
                           tmpRect, xpos, ypos);
     ship->setPosition(xpos - (ship->getSize().w/2), ypos - (ship->getSize().h/2));
 
