@@ -14,7 +14,7 @@
 #include "SDL2_image/SDL_image.h"
 
 // MARK: Source Files
-#include "PlanetManager.hpp"
+#include "Galaxy.hpp"
 #include "GameObject.hpp"
 #include "Map.hpp"
 
@@ -78,10 +78,8 @@ void Game::init(const char *title,
   gameScreen = new GameObject("Resources/Assets/gameScreen.png",
                               tmpRect, 0, 0);
   
-  planetManager = new PlanetManager();
-  map = new Map();
-  map->loadPlanets(planetManager->planets);
-  map->loadShip();
+  galaxy = new Galaxy();
+  map = new Map(galaxy -> planets);
 }
 
 
