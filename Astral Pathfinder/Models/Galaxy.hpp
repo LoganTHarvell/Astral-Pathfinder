@@ -2,7 +2,7 @@
 //  Galaxy.hpp
 //  Astral Pathfinder
 //
-//  Created by Logan Harvell on 1/15/18.
+//  Created by Logan Harvell, Ian Holdeman on 1/15/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
@@ -15,14 +15,27 @@
 // MARK: Source Files
 #include "parameters.h"
 #include "GameObject.hpp"
-#include "Planet.hpp"
 
 
-class PlanetManager {
+class Galaxy {
   
 public:
-  PlanetManager();
-  ~PlanetManager();
+  Galaxy();
+  ~Galaxy();
+  
+  struct Planet {
+    SDL_Point position;
+    
+    // resources
+    int fertility;
+    int deposits;
+    
+    enum {
+      undiscovered,
+      discovered,
+      colonized
+    } status;
+  };
   
   Planet planets[NUMBER_OF_PLANETS];
   
