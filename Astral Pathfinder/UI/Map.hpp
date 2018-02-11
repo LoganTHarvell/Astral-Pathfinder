@@ -33,7 +33,7 @@ class GameObject;
 class Map {
   
 public:
-    Map(Galaxy::Planet *planetArray);
+    Map(Planet *planetArray);
     ~Map();
     
     void update();

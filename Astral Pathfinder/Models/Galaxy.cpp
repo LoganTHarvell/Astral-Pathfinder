@@ -52,7 +52,7 @@ Galaxy::~Galaxy() {
 
 // MARK: - Planet Initialization Functions
 
-Galaxy::Planet Galaxy::initHomeworld() {
+Planet Galaxy::initHomeworld() {
   Planet homeworld;
   
   // Sets homeworld coordinates
@@ -69,7 +69,7 @@ Galaxy::Planet Galaxy::initHomeworld() {
   return homeworld;
 }
 
-Galaxy::Planet Galaxy::initPlanet() {
+Planet Galaxy::initPlanet() {
   Planet planet;
   
   // Set planet coordinates

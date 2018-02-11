@@ -16,7 +16,7 @@
 
 const SDL_Rect Map::planetSrcRect = {0, 0, PLANET_TEXTURE_SIZE, PLANET_TEXTURE_SIZE};
 
-Map::Map(Galaxy::Planet *planetArray) {
+Map::Map(Planet *planetArray) {
     // Initialize planets
     for(int i = 0; i < NUMBER_OF_PLANETS; i++) {
         int x = GRID_X_ORIGIN + (planetArray[i].position.x * GRID_WIDTH) + PLANET_TEXTURE_OFFSET_X;
