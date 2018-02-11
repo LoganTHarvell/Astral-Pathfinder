@@ -2,8 +2,8 @@
 //  Map.cpp
 //  Astral Pathfinder
 //
-//  Created by Ian Holdeman on 1/28/18.
-//  Copyright © 2018 Ian Holdeman, Logan Harvell. All rights reserved.
+//  Created by Logan Harvell, Ian Holdeman on 1/28/18.
+//  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
 // MARK: Header File
