@@ -9,6 +9,7 @@
 #ifndef Planet_hpp
 #define Planet_hpp
 
+// MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 
 class Planet {
