@@ -15,27 +15,14 @@
 // MARK: Source Files
 #include "parameters.h"
 #include "GameObject.hpp"
+#include "Planet.hpp"
 
 
-class Galaxy {
+class PlanetManager {
   
 public:
-  Galaxy();
-  ~Galaxy();
-  
-  struct Planet {
-    SDL_Point position;
-    
-    // resources
-    int fertility;
-    int deposits;
-    
-    enum {
-      undiscovered,
-      discovered,
-      colonized
-    } status;
-  };
+  PlanetManager();
+  ~PlanetManager();
   
   Planet planets[NUMBER_OF_PLANETS];
   

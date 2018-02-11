@@ -12,7 +12,7 @@
 // MARK: Source Files
 #include "GameObject.hpp"
 #include "parameters.h"
-#include "Galaxy.hpp"
+#include "PlanetManager.hpp"
 
 // MARK: Parameter Constants
 #define MAP_WIDTH 800
@@ -33,11 +33,13 @@ class GameObject;
 class Map {
   
 public:
-    Map(Galaxy::Planet *planetArray);
+    Map();
     ~Map();
     
     void update();
     void render();
+    void loadPlanets(Planet planets[NUMBER_OF_PLANETS]);
+    void loadShip();
     
 private:
     static const SDL_Rect planetSrcRect;
