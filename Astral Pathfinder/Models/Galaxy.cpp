@@ -3,7 +3,7 @@
 //  Astral Pathfinder
 //
 //  Created by Logan Harvell on 1/15/18.
-//  Copyright © 2018 Logan Harvell. All rights reserved.
+//  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
 // MARK: Header File
