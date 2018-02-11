@@ -26,7 +26,7 @@
 
 
 class GameObject;
-class PlanetManager;
+class Galaxy;
 class Map;
 
 class Game {
@@ -42,7 +42,7 @@ private:
   SDL_Window *window;
   
   GameObject *gameScreen;
-  PlanetManager *planetManager;
+  Galaxy *galaxy;
   Map *map;
   
 public:
