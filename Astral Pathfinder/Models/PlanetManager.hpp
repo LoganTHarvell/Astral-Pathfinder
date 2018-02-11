@@ -2,8 +2,8 @@
 //  Galaxy.hpp
 //  Astral Pathfinder
 //
-//  Created by Logan Harvell on 1/15/18.
-//  Copyright © 2018 Logan Harvell. All rights reserved.
+//  Created by Logan Harvell, Ian Holdeman on 1/15/18.
+//  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
 #ifndef Galaxy_hpp
@@ -18,11 +18,11 @@
 #include "Planet.hpp"
 
 
-class Galaxy {
+class PlanetManager {
   
 public:
-  Galaxy();
-  ~Galaxy();
+  PlanetManager();
+  ~PlanetManager();
   
   Planet planets[NUMBER_OF_PLANETS];
   

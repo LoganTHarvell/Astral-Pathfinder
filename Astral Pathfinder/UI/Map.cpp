@@ -2,8 +2,8 @@
 //  Map.cpp
 //  Astral Pathfinder
 //
-//  Created by Ian Holdeman on 1/28/18.
-//  Copyright © 2018 Ian Holdeman. All rights reserved.
+//  Created by Logan Harvell, Ian Holdeman on 1/28/18.
+//  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
 // MARK: Header File
@@ -11,7 +11,7 @@
 
 // MARK: Source Files
 #include "Game.hpp"
-#include "Galaxy.hpp"
+#include "PlanetManager.hpp"
 
 const SDL_Rect Map::planetSrcRect = {0, 0, PLANET_TEXTURE_SIZE, PLANET_TEXTURE_SIZE};
 

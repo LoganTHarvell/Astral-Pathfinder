@@ -2,8 +2,8 @@
 //  Game.hpp
 //  Astral Pathfinder
 //
-//  Created by Logan Harvell on 1/14/18.
-//  Copyright © 2018 Logan Harvell. All rights reserved.
+//  Created by Logan Harvell, Ian Holdeman on 1/14/18.
+//  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
 #ifndef Game_hpp
@@ -26,7 +26,7 @@
 
 
 class GameObject;
-class Galaxy;
+class PlanetManager;
 class Map;
 
 class Game {
@@ -42,7 +42,7 @@ private:
   SDL_Window *window;
   
   GameObject *gameScreen;
-  Galaxy *galaxy;
+  PlanetManager *planetManager;
   Map *map;
   
 public:

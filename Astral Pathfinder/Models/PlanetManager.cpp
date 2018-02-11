@@ -2,12 +2,12 @@
 //  Galaxy.cpp
 //  Astral Pathfinder
 //
-//  Created by Logan Harvell on 1/15/18.
-//  Copyright © 2018 Logan Harvell. All rights reserved.
+//  Created by Logan Harvell, Ian Holdeman on 1/15/18.
+//  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
 // MARK: Header File
-#include "Galaxy.hpp"
+#include "PlanetManager.hpp"
 
 // MARK: Libraries and Frameworks
 #include <cstdlib>
@@ -19,7 +19,7 @@
 
 // MARK: - Galaxy Constructor/Initialization
 
-Galaxy::Galaxy() {
+PlanetManager::PlanetManager() {
   
   // Sees rand function
   srand((unsigned)time(NULL));
@@ -46,13 +46,13 @@ Galaxy::Galaxy() {
   
 };
 
-Galaxy::~Galaxy() {
+PlanetManager::~PlanetManager() {
 };
 
 
 // MARK: - Planet Initialization Functions
 
-Planet Galaxy::initHomeworld() {
+Planet PlanetManager::initHomeworld() {
   Planet homeworld;
   
   // Initialize homeworld variables
@@ -61,7 +61,7 @@ Planet Galaxy::initHomeworld() {
   return homeworld;
 }
 
-Planet Galaxy::initPlanet() {
+Planet PlanetManager::initPlanet() {
   Planet planet;
   
   // Initialize planet variables

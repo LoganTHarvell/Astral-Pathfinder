@@ -2,8 +2,8 @@
 //  parameters.h
 //  Astral Pathfinder
 //
-//  Created by Logan Harvell on 11/20/15.
-//  Copyright © 2015 Logan Harvell. All rights reserved.
+//  Created by Logan Harvell, Ian Holdeman on 11/20/15.
+//  Copyright © 2015 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
 #ifndef parameters_h

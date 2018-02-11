@@ -2,8 +2,8 @@
 //  Game.cpp
 //  Astral Pathfinder
 //
-//  Created by Logan Harvell on 1/14/18.
-//  Copyright © 2018 Logan Harvell. All rights reserved.
+//  Created by Logan Harvell, Ian Holdeman on 1/14/18.
+//  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
 // MARK: Header File
@@ -14,7 +14,7 @@
 #include "SDL2_image/SDL_image.h"
 
 // MARK: Source Files
-#include "Galaxy.hpp"
+#include "PlanetManager.hpp"
 #include "GameObject.hpp"
 #include "Map.hpp"
 
@@ -78,9 +78,9 @@ void Game::init(const char *title,
   gameScreen = new GameObject("Resources/Assets/gameScreen.png",
                               tmpRect, 0, 0);
   
-  galaxy = new Galaxy();
+  planetManager = new PlanetManager();
   map = new Map();
-  map->loadPlanets(galaxy->planets);
+  map->loadPlanets(planetManager->planets);
   map->loadShip();
 }
 

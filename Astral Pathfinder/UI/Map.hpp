@@ -2,8 +2,8 @@
 //  Map.hpp
 //  Astral Pathfinder
 //
-//  Created by Ian Holdeman on 1/28/18.
-//  Copyright © 2018 Ian Holdeman. All rights reserved.
+//  Created by Logan Harvell, Ian Holdeman on 1/28/18.
+//  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
 #ifndef Map_hpp
@@ -12,7 +12,7 @@
 // MARK: Source Files
 #include "GameObject.hpp"
 #include "parameters.h"
-#include "Galaxy.hpp"
+#include "PlanetManager.hpp"
 
 // MARK: Parameter Constants
 #define MAP_WIDTH 800
