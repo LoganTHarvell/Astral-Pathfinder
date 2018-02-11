@@ -79,7 +79,9 @@ void Game::init(const char *title,
                               tmpRect, 0, 0);
   
   galaxy = new Galaxy();
-  map = new Map(galaxy -> planets);
+  map = new Map();
+  map->loadPlanets(galaxy->planets);
+  map->loadShip();
 }
 
 

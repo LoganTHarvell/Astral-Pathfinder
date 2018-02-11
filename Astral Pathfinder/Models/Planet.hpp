@@ -12,21 +12,31 @@
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 
+#include "parameters.h"
+
 class Planet {
 public:
-  Planet();
-  ~Planet();
+    Planet();
+    ~Planet();
   
-  SDL_Point position;
+    void initHomeworld();
+    void initPlanet();
+    int getPositionX();
+    int getPositionY();
+    int getDeposits();
+    int getFertility();
   
-  // resources
-  int deposits, fertility;
+private:
+    SDL_Point position;
   
-  enum {
-    undiscovered,
-    discovered,
-    colonized
-  } status;
+    enum {
+      undiscovered,
+      discovered,
+      colonized
+    } status;
+  
+    // resources
+    int deposits, fertility;
 };
 
 #endif /* Planet_hpp */

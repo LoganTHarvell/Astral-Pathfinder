@@ -33,11 +33,13 @@ class GameObject;
 class Map {
   
 public:
-    Map(Planet *planetArray);
+    Map();
     ~Map();
     
     void update();
     void render();
+    void loadPlanets(Planet planets[NUMBER_OF_PLANETS]);
+    void loadShip();
     
 private:
     static const SDL_Rect planetSrcRect;

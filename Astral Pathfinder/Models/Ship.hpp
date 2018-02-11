@@ -9,12 +9,9 @@
 #ifndef Ship_hpp
 #define Ship_hpp
 
-// MARK: Source Files
-#include "GameObject.hpp"
-
-class Ship : public GameObject {
+class Ship {
 public:
-    Ship(const char *textureSheet, SDL_Rect src, int x, int y);
+    Ship();
     ~Ship();    
 };
 
