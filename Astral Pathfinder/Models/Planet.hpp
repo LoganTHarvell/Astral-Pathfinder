@@ -20,8 +20,8 @@ public:
   void initHomeworld();
   void initPlanet();
   
-  int getPositionX() { return position.y; };
-  int getPositionY() { return position.x; };
+  int getPositionX() { return position.x; };
+  int getPositionY() { return position.y; };
   int getDeposits() { return deposits; };
   int getFertility() { return fertility; };
   
