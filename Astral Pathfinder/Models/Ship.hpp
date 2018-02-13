@@ -11,8 +11,7 @@
 
 class Ship {
 public:
-    Ship();
-    ~Ship();    
+
 };
 
 #endif /* Ship_hpp */

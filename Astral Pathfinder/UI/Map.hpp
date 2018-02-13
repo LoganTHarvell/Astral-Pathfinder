@@ -33,19 +33,16 @@ class GameObject;
 class Map {
   
 public:
-    Map();
-    ~Map();
-    
-    void update();
-    void render();
-    void loadPlanets(Planet planets[NUMBER_OF_PLANETS]);
-    void loadShip();
-    
-private:
-    static const SDL_Rect planetSrcRect;
-    GameObject *ship;
-    GameObject *planets[NUMBER_OF_PLANETS];
+  void update();
+  void render();
+  void loadPlanets(Planet planets[NUMBER_OF_PLANETS]);
+  void loadShip();
   
+private:
+  static const SDL_Rect planetSrcRect;
+  GameObject *ship;
+  GameObject *planets[NUMBER_OF_PLANETS];
+
 };
 
 #endif /* Map_hpp */

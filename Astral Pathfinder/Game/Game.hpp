@@ -32,9 +32,6 @@ class Map;
 class Game {
   
 public:
-  Game();
-  ~Game();
-
   void init(const char *title, int x, int y, int w, int h, bool fullscreen);
   
 private:

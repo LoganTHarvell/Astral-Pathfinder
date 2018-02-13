@@ -9,14 +9,6 @@
 // MARK: Header File
 #include "Planet.hpp"
 
-Planet::Planet() {
-  
-}
-
-Planet::~Planet() {
-  
-}
-
 void Planet::initHomeworld() {
   // Set planet coordinates
   this->position.x = rand()%NUMBER_OF_PLANETS;
