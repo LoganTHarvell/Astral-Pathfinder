@@ -21,16 +21,6 @@
 
 SDL_Renderer *Game::renderer = nullptr;
 
-
-// MARK: - Game Contructor
-
-Game::Game() {
-}
-
-Game::~Game() {
-}
-
-
 // MARK: - Game Initialization
 
 void Game::init(const char *title,
@@ -78,7 +68,8 @@ void Game::init(const char *title,
   gameScreen = new GameObject("Resources/Assets/gameScreen.png",
                               tmpRect, 0, 0);
   
-  planetManager = new PlanetManager();
+  planetManager = new PlanetManager;
+  planetManager->initGalaxy();
   map = new Map();
   map->loadPlanets(planetManager->planets);
   map->loadShip();

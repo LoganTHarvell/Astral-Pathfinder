@@ -15,28 +15,27 @@
 #include "parameters.h"
 
 class Planet {
+
 public:
-    Planet();
-    ~Planet();
+  void initHomeworld();
+  void initPlanet();
   
-    void initHomeworld();
-    void initPlanet();
-    int getPositionX();
-    int getPositionY();
-    int getDeposits();
-    int getFertility();
+  int getPositionX() { return position.x; };
+  int getPositionY() { return position.y; };
+  int getDeposits() { return deposits; };
+  int getFertility() { return fertility; };
   
 private:
-    SDL_Point position;
-  
-    enum {
-      undiscovered,
-      discovered,
-      colonized
-    } status;
-  
-    // resources
-    int deposits, fertility;
+  SDL_Point position;
+
+  enum {
+    undiscovered,
+    discovered,
+    colonized
+  } status;
+
+  // resources
+  int deposits, fertility;
 };
 
 #endif /* Planet_hpp */

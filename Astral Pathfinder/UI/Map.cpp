@@ -15,14 +15,6 @@
 
 const SDL_Rect Map::planetSrcRect = {0, 0, PLANET_TEXTURE_SIZE, PLANET_TEXTURE_SIZE};
 
-Map::Map() {  
-  
-}
-
-Map::~Map() {
-  
-}
-
 void Map::loadPlanets(Planet *planetArray) {
   // Initialize planets
   for(int i = 0; i < NUMBER_OF_PLANETS; i++) {

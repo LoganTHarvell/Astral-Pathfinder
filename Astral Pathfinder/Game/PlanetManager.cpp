@@ -17,9 +17,9 @@
 #include "Game.hpp"
 
 
-// MARK: - Galaxy Constructor/Initialization
+// MARK: - Galaxy Initialization
 
-PlanetManager::PlanetManager() {
+void PlanetManager::initGalaxy() {
   
   // Sees rand function
   srand((unsigned)time(NULL));
@@ -44,9 +44,6 @@ PlanetManager::PlanetManager() {
     hasPlanet[planets[i].getPositionX()][planets[i].getPositionY()] = true;
   }
   
-};
-
-PlanetManager::~PlanetManager() {
 };
 
 

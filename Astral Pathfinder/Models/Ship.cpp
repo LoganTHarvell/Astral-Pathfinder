@@ -9,10 +9,3 @@
 // MARK: Header File
 #include "Ship.hpp"
 
-Ship::Ship() {
-
-}
-
-Ship::~Ship() {
-    
-}

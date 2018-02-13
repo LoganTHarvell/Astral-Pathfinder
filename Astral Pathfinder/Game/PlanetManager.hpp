@@ -21,8 +21,7 @@
 class PlanetManager {
   
 public:
-  PlanetManager();
-  ~PlanetManager();
+  void initGalaxy();
   
   Planet planets[NUMBER_OF_PLANETS];
   
