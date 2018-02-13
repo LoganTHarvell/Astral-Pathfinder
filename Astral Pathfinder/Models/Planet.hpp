@@ -19,11 +19,12 @@ class Planet {
 public:
   void initHomeworld();
   void initPlanet();
-  int getPositionX();
-  int getPositionY();
-  int getDeposits();
-  int getFertility();
-
+  
+  int getPositionX() { return position.y; };
+  int getPositionY() { return position.x; };
+  int getDeposits() { return deposits; };
+  int getFertility() { return fertility; };
+  
 private:
   SDL_Point position;
 
