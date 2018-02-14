@@ -20,23 +20,21 @@ class GameObject {
   };
   
 public:
-  GameObject(const char *textureSheet, SDL_Rect src, int x, int y);
-  ~GameObject();
-  
-  void update();
-  void render();
+  virtual void update() = 0;
+  virtual void render() = 0;
   
   // Get and Set functions for position and size
-  SDL_Point getPosition() { return position; };
-  void setPosition(int x, int y) { position.x = x; position.y = y; };
-  Size getSize() { return size; }
-  void scale(float x) { size.w *= x; size.h *= x; };
+  SDL_Point getPosition();
+  void setPosition(int x, int y);
+  Size getSize();
+  void scale(float x);
   
-private:
+protected:
   SDL_Point position;
   Size size;
+  
   SDL_Texture *texture;
-  SDL_Rect srcR, destR;
+  SDL_Rect destR;
   
 };
 

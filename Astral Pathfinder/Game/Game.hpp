@@ -27,6 +27,7 @@
 
 class GameObject;
 class PlanetManager;
+class ShipManager;
 class Map;
 
 class Game {
@@ -46,8 +47,9 @@ private:
   bool isRunning = false;
   SDL_Window *window;
   
-  GameObject *gameScreen;
+  SDL_Texture *gameScreen;
   PlanetManager *planetManager;
+  ShipManager *shipManager;
   Map *map;
   
 };

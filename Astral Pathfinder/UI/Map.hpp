@@ -9,10 +9,11 @@
 #ifndef Map_hpp
 #define Map_hpp
 
+// MARK: Libraries and Frameworks
+#include "SDL2/SDL.h"
+
 // MARK: Source Files
-#include "GameObject.hpp"
 #include "parameters.h"
-#include "PlanetManager.hpp"
 
 // MARK: Parameter Constants
 #define MAP_WIDTH 800
@@ -28,21 +29,13 @@
 #define PLANET_TEXTURE_OFFSET_X (GRID_WIDTH - PLANET_TEXTURE_SIZE)/2
 #define PLANET_TEXTURE_OFFSET_Y (GRID_HEIGHT - PLANET_TEXTURE_SIZE)/2
 
-class GameObject;
-
 class Map {
   
 public:
-  void update();
-  void render();
-  void loadPlanets(Planet planets[NUMBER_OF_PLANETS]);
-  void loadShip();
+  static SDL_Point uiPosition(SDL_Point position);
   
 private:
-  static const SDL_Rect planetSrcRect;
-  GameObject *ship;
-  GameObject *planets[NUMBER_OF_PLANETS];
-
+  
 };
 
 #endif /* Map_hpp */

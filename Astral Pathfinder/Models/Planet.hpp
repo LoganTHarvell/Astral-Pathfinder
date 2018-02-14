@@ -12,22 +12,24 @@
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 
-#include "parameters.h"
+// MARK: Source Files
+#include "GameObject.hpp"
 
-class Planet {
+#define PLANET_TEXTURE_SIZE 8
+
+class Planet: public GameObject {
 
 public:
   void initHomeworld();
   void initPlanet();
   
-  int getPositionX() { return position.x; };
-  int getPositionY() { return position.y; };
+  void update();
+  void render();
+  
   int getDeposits() { return deposits; };
   int getFertility() { return fertility; };
   
 private:
-  SDL_Point position;
-
   enum {
     undiscovered,
     discovered,
@@ -36,6 +38,8 @@ private:
 
   // resources
   int deposits, fertility;
+  
+  SDL_Point uiPosition();
 };
 
 #endif /* Planet_hpp */

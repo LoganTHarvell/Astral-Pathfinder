@@ -9,9 +9,33 @@
 #ifndef Ship_hpp
 #define Ship_hpp
 
-class Ship {
-public:
+// MARK: Libraries and Frameworks
+#include "SDL2/SDL.h"
 
+// MARK: Source Files
+#include "GameObject.hpp"
+
+#define SHIP_WIDTH 24
+#define SHIP_HEIGHT 45
+
+class Ship: public GameObject {
+  
+public:
+  const int population = 10000;
+  const int velocity = 5;
+  
+  void init(SDL_Point position);
+  
+  void update();
+  void render();
+  
+  int getFuel() { return fuel; };
+
+private:
+  int rotation;
+  int fuel;
+  
+  SDL_Point uiPosition();
 };
 
 #endif /* Ship_hpp */

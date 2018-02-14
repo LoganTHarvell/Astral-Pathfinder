@@ -30,7 +30,7 @@ void PlanetManager::initGalaxy() {
   // Initializes first element in planets array as homeworld
   planets[i] = initHomeworld();
   // Marks planet coordinates as occupied
-  hasPlanet[planets[i].getPositionX()][planets[i].getPositionY()] = true;
+  hasPlanet[planets[i].getPosition().x][planets[i].getPosition().y] = true;
 
   // Initializes galaxy with number of planets
   for (i=1; i<NUMBER_OF_PLANETS; i++) {
@@ -38,13 +38,27 @@ void PlanetManager::initGalaxy() {
     // Prevents duplicate coordinates
     do {
       planets[i] = initPlanet();
-    } while (hasPlanet[planets[i].getPositionX()][planets[i].getPositionY()]);
+    } while (hasPlanet[planets[i].getPosition().x][planets[i].getPosition().y]);
     
     // Marks planet coordinates as occupied
-    hasPlanet[planets[i].getPositionX()][planets[i].getPositionY()] = true;
+    hasPlanet[planets[i].getPosition().x][planets[i].getPosition().y] = true;
   }
   
 };
+
+
+// Mark: - Game Loop Functions
+void PlanetManager::update() {
+  for (Planet& p : planets) {
+    p.update();
+  }
+}
+
+void PlanetManager::render() {
+  for(Planet p : planets) {
+    p.render();
+  }
+}
 
 
 // MARK: - Planet Initialization Functions

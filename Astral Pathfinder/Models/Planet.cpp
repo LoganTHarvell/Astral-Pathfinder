@@ -9,30 +9,55 @@
 // MARK: Header File
 #include "Planet.hpp"
 
+// MARK: Source Files
+#include "parameters.h"
+#include "Game.hpp"
+#include "TextureManager.hpp"
+#include "Map.hpp"
+
 void Planet::initHomeworld() {
-  // Set planet coordinates
-  this->position.x = rand()%NUMBER_OF_PLANETS;
-  this->position.y = rand()%NUMBER_OF_PLANETS;
+  // initializes random planet
+  initPlanet();
   
   // Sets homeword resources
-  this->fertility = STARTING_POPULATION/PEOPLE_FOOD_RQMT;
-  this->deposits = SHIP_COST * 2 + 50;
+  fertility = STARTING_POPULATION/PEOPLE_FOOD_RQMT;
+  deposits = SHIP_COST * 2 + 50;
   
   // Sets homeworld status
-  this->status = colonized;
+  status = colonized;
 }
 
 void Planet::initPlanet() {
   // Set planet coordinates
-  this->position.x = rand()%NUMBER_OF_PLANETS;
-  this->position.y = rand()%NUMBER_OF_PLANETS;
+  position.x = rand()%NUMBER_OF_PLANETS;
+  position.y = rand()%NUMBER_OF_PLANETS;
+  
+  size = { PLANET_TEXTURE_SIZE, PLANET_TEXTURE_SIZE };
+  texture = TextureManager::loadTexture("Resources/Assets/planet.png");
   
   // Sets planet fertility to random value
-  this->fertility = (rand()%(MAX_FERTILITY-MIN_FERTILITY+1) + MIN_FERTILITY);
+  fertility = (rand()%(MAX_FERTILITY-MIN_FERTILITY+1) + MIN_FERTILITY);
   
   // Sets planet deposits to random value
-  this->deposits = (rand()%(DEPOSITS_RANGE+1)) + MIN_DEPOSITS;
+  deposits = (rand()%(DEPOSITS_RANGE+1)) + MIN_DEPOSITS;
   
   // Sets planet status
-  this->status = undiscovered;
+  status = undiscovered;
+}
+
+void Planet::update() {
+  SDL_Point pos = uiPosition();
+  destR.x = pos.x;
+  destR.y = pos.y;
+  
+  destR.w = size.w;
+  destR.h = size.h;
+}
+
+void Planet::render() {
+  SDL_RenderCopy(Game::renderer, texture, NULL, &destR);
+}
+
+SDL_Point Planet::uiPosition() {
+  return Map::uiPosition(position);
 }
