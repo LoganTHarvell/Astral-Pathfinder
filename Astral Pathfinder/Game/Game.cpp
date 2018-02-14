@@ -15,7 +15,7 @@
 
 // MARK: Source Files
 #include "PlanetManager.hpp"
-#include "GameObject.hpp"
+#include "ShipManager.hpp"
 #include "Map.hpp"
 #include "TextureManager.hpp"
 
@@ -69,9 +69,9 @@ void Game::init(const char *title,
   
   planetManager = new PlanetManager;
   planetManager->initGalaxy();
-//  map = new Map();
-//  map->loadPlanets(planetManager->planets);
-//  map->loadShip();
+
+  shipManager = new ShipManager;
+  shipManager->init(planetManager->planets[0].getPosition());
 }
 
 
@@ -92,7 +92,7 @@ void Game::handleEvents() {
 
 void Game::update() {
   planetManager->update();
-//  map->update();
+  shipManager->update();
 }
 
 void Game::render() {
@@ -102,8 +102,7 @@ void Game::render() {
 
   // Render stuff
   planetManager->render();
-//  map->render();
-//  shipManager->render();
+  shipManager->render();
 
   SDL_RenderPresent(renderer);
 }

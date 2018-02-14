@@ -27,6 +27,7 @@
 
 class GameObject;
 class PlanetManager;
+class ShipManager;
 class Map;
 
 class Game {
@@ -48,6 +49,7 @@ private:
   
   SDL_Texture *gameScreen;
   PlanetManager *planetManager;
+  ShipManager *shipManager;
   Map *map;
   
 };
