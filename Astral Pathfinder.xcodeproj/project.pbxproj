@@ -105,8 +105,6 @@
 			children = (
 				0210E9DF201F011A00F5E497 /* Map.cpp */,
 				0210E9E0201F011A00F5E497 /* Map.hpp */,
-				02DFDC55200DD16000A136AF /* GameObject.cpp */,
-				02DFDC58200DD16000A136AF /* GameObject.hpp */,
 				02DFDC57200DD16000A136AF /* TextureManager.cpp */,
 				02DFDC51200DD16000A136AF /* TextureManager.hpp */,
 			);
@@ -116,6 +114,8 @@
 		0210E9E3201F022800F5E497 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				02DFDC55200DD16000A136AF /* GameObject.cpp */,
+				02DFDC58200DD16000A136AF /* GameObject.hpp */,
 				02AA85392030ECA6009F5DA1 /* Planet.cpp */,
 				02AA853C2030ECA6009F5DA1 /* Planet.hpp */,
 				02AA853A2030ECA6009F5DA1 /* Ship.cpp */,
