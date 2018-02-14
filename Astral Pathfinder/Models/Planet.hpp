@@ -20,8 +20,7 @@ public:
   void initHomeworld();
   void initPlanet();
   
-  int getPositionX() { return position.x; };
-  int getPositionY() { return position.y; };
+  SDL_Point getPosition() { return position; };
   int getDeposits() { return deposits; };
   int getFertility() { return fertility; };
   
