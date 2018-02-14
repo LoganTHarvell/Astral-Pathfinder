@@ -18,8 +18,8 @@ const SDL_Rect Map::planetSrcRect = {0, 0, PLANET_TEXTURE_SIZE, PLANET_TEXTURE_S
 void Map::loadPlanets(Planet *planetArray) {
   // Initialize planets
   for(int i = 0; i < NUMBER_OF_PLANETS; i++) {
-    int x = GRID_X_ORIGIN + (planetArray[i].getPositionX() * GRID_WIDTH) + PLANET_TEXTURE_OFFSET_X;
-    int y = GRID_Y_ORIGIN + (planetArray[i].getPositionY() * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
+    int x = GRID_X_ORIGIN + (planetArray[i].getPosition().x * GRID_WIDTH) + PLANET_TEXTURE_OFFSET_X;
+    int y = GRID_Y_ORIGIN + (planetArray[i].getPosition().y * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
     planets[i] = new GameObject("Resources/Assets/planet.png", planetSrcRect, x, y);
   }
 }
@@ -38,17 +38,17 @@ void Map::loadShip() {
 void Map::update() {
   // Updates planet game objects
   for (int i = 0; i < NUMBER_OF_PLANETS; i++)
-      planets[i] -> update();
+      planets[i]->update();
   
   // Updates the ship game object
-  ship -> update();
+  ship->update();
 }
 
 void Map::render() {
   // Renders the planet game objects
   for (int i = 0; i < NUMBER_OF_PLANETS; i++)
-      planets[i] -> render();
+      planets[i]->render();
   
   // Renders the ship game object
-  ship -> render();
+  ship->render();
 }
