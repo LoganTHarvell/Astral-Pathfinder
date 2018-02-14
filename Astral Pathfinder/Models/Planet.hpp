@@ -23,7 +23,9 @@ public:
   void initHomeworld();
   void initPlanet();
   
-  SDL_Point getPosition() { return position; };
+  void update();
+  void render();
+  
   int getDeposits() { return deposits; };
   int getFertility() { return fertility; };
   
@@ -36,6 +38,8 @@ private:
 
   // resources
   int deposits, fertility;
+  
+  SDL_Point uiPosition();
 };
 
 #endif /* Planet_hpp */
