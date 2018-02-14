@@ -15,28 +15,28 @@
 
 class GameObject {
   
+  struct Size {
+    int w, h;
+  };
+  
 public:
   GameObject(const char *textureSheet, SDL_Rect src, int x, int y);
   ~GameObject();
   
-private:
-  SDL_Point position;
-  struct Size {
-    int w, h;
-  } size;
-  
-  SDL_Texture *texture;
-  SDL_Rect srcR, destR;
-
-public:
   void update();
   void render();
   
   // Get and Set functions for position and size
   SDL_Point getPosition() { return position; };
   void setPosition(int x, int y) { position.x = x; position.y = y; };
-  Size getSize() { return size; };
+  Size getSize() { return size; }
   void scale(float x) { size.w *= x; size.h *= x; };
+  
+private:
+  SDL_Point position;
+  Size size;
+  SDL_Texture *texture;
+  SDL_Rect srcR, destR;
   
 };
 
