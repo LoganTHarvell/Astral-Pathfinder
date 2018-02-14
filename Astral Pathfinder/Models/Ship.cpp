@@ -9,3 +9,33 @@
 // MARK: Header File
 #include "Ship.hpp"
 
+// MARK: Source Files
+#include "Game.hpp"
+#include "Map.hpp"
+#include "TextureManager.hpp"
+
+void Ship::init(SDL_Point p) {
+  position = p;
+  size = { SHIP_WIDTH, SHIP_HEIGHT };
+  texture = TextureManager::loadTexture("Resources/Assets/simpleSpaceship.png");
+  
+  rotation = 0;
+  fuel = 0;
+}
+
+void Ship::update() {
+  SDL_Point pos = uiPosition();
+  destR.x = pos.x;
+  destR.y = pos.y;
+  
+  destR.w = size.w;
+  destR.h = size.h;
+}
+
+void Ship::render() {
+  SDL_RenderCopy(Game::renderer, texture, NULL, &destR);
+}
+
+SDL_Point Ship::uiPosition() {
+  return Map::uiPosition(position);
+}

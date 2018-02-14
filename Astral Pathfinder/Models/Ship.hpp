@@ -15,6 +15,9 @@
 // MARK: Source Files
 #include "GameObject.hpp"
 
+#define SHIP_WIDTH 8
+#define SHIP_HEIGHT 15
+
 class Ship: public GameObject {
   
 public:
@@ -26,13 +29,13 @@ public:
   void update();
   void render();
   
-  SDL_Point getPosition() { return position; };
   int getFuel() { return fuel; };
 
 private:
   int rotation;
-  
   int fuel;
+  
+  SDL_Point uiPosition();
 };
 
 #endif /* Ship_hpp */
