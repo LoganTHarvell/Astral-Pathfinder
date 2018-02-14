@@ -15,19 +15,6 @@
 #include "TextureManager.hpp"
 #include "Map.hpp"
 
-void Planet::update() {
-  SDL_Point pos = uiPosition();
-  destR.x = pos.x;
-  destR.y = pos.y;
-  
-  destR.w = size.w;
-  destR.h = size.h;
-}
-
-void Planet::render() {
-  SDL_RenderCopy(Game::renderer, texture, NULL, &destR);
-}
-
 void Planet::initHomeworld() {
   // initializes random planet
   initPlanet();
@@ -56,6 +43,19 @@ void Planet::initPlanet() {
   
   // Sets planet status
   status = undiscovered;
+}
+
+void Planet::update() {
+  SDL_Point pos = uiPosition();
+  destR.x = pos.x;
+  destR.y = pos.y;
+  
+  destR.w = size.w;
+  destR.h = size.h;
+}
+
+void Planet::render() {
+  SDL_RenderCopy(Game::renderer, texture, NULL, &destR);
 }
 
 SDL_Point Planet::uiPosition() {
