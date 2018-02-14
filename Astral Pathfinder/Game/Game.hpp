@@ -33,16 +33,6 @@ class Game {
   
 public:
   void init(const char *title, int x, int y, int w, int h, bool fullscreen);
-  
-private:
-  bool isRunning = false;
-  SDL_Window *window;
-  
-  GameObject *gameScreen;
-  PlanetManager *planetManager;
-  Map *map;
-  
-public:
   void handleEvents();
   void update();
   void render();
@@ -51,6 +41,14 @@ public:
   bool running() { return isRunning; };
   
   static SDL_Renderer *renderer;
+  
+private:
+  bool isRunning = false;
+  SDL_Window *window;
+  
+  GameObject *gameScreen;
+  PlanetManager *planetManager;
+  Map *map;
   
 };
 
