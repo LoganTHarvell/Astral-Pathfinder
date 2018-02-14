@@ -20,14 +20,14 @@ class GameObject {
   };
   
 public:
-  void update();
-  void render();
+  virtual void update() = 0;
+  virtual void render() = 0;
   
   // Get and Set functions for position and size
-  SDL_Point getPosition() { return position; };
-  void setPosition(int x, int y) { position.x = x; position.y = y; };
-  Size getSize() { return size; }
-  void scale(float x) { size.w *= x; size.h *= x; };
+  SDL_Point getPosition();
+  void setPosition(int x, int y);
+  Size getSize();
+  void scale(float x);
   
 protected:
   SDL_Point position;
