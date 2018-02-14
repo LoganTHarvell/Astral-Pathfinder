@@ -9,9 +9,33 @@
 #ifndef Ship_hpp
 #define Ship_hpp
 
-class Ship {
-public:
+// MARK: Libraries and Frameworks
+#include "SDL2/SDL.h"
 
+class Ship {
+  
+public:
+  const int population = 10000;
+  const int velocity = 5;
+  
+  void init(SDL_Point position);
+  
+  void update();
+  void render();
+  
+  SDL_Point getPosition() { return position; };
+  int getFuel() { return fuel; };
+
+private:
+  SDL_Point position;
+  int rotation;
+  
+  int fuel;
+  
+  SDL_Texture *texture;
+  
+  
+  
 };
 
 #endif /* Ship_hpp */
