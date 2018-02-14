@@ -49,8 +49,8 @@ void PlanetManager::initGalaxy() {
 
 // Mark: - Game Loop Functions
 void PlanetManager::update() {
-  for(int i = 0; i<NUMBER_OF_PLANETS; i++) {
-    planets[i].update();
+  for (Planet& p : planets) {
+    p.update();
   }
 }
 
