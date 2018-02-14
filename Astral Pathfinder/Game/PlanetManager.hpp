@@ -25,12 +25,12 @@ public:
   
   void update();
   void render();
-  
-  Planet planets[NUMBER_OF_PLANETS];
+  Planet getPlanet(int n);
   
 private:
   static Planet initHomeworld();
   static Planet initPlanet();
+  Planet planets[NUMBER_OF_PLANETS];
   
 };
 
