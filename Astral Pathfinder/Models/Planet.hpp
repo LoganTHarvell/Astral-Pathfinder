@@ -12,9 +12,11 @@
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 
-#include "parameters.h"
+// MARK: Source Files
+#include "GameObject.hpp"
 
-class Planet {
+
+class Planet: public GameObject {
 
 public:
   void initHomeworld();
@@ -25,8 +27,6 @@ public:
   int getFertility() { return fertility; };
   
 private:
-  SDL_Point position;
-
   enum {
     undiscovered,
     discovered,

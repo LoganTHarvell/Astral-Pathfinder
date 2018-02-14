@@ -12,7 +12,10 @@
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 
-class Ship {
+// MARK: Source Files
+#include "GameObject.hpp"
+
+class Ship: public GameObject {
   
 public:
   const int population = 10000;
@@ -27,15 +30,9 @@ public:
   int getFuel() { return fuel; };
 
 private:
-  SDL_Point position;
   int rotation;
   
   int fuel;
-  
-  SDL_Texture *texture;
-  
-  
-  
 };
 
 #endif /* Ship_hpp */

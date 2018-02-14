@@ -20,9 +20,6 @@ class GameObject {
   };
   
 public:
-  GameObject(const char *textureSheet, SDL_Rect src, int x, int y);
-  ~GameObject();
-  
   void update();
   void render();
   
@@ -32,9 +29,10 @@ public:
   Size getSize() { return size; }
   void scale(float x) { size.w *= x; size.h *= x; };
   
-private:
+protected:
   SDL_Point position;
   Size size;
+  
   SDL_Texture *texture;
   SDL_Rect srcR, destR;
   

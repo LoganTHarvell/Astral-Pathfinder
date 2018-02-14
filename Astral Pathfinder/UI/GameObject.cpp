@@ -14,25 +14,6 @@
 #include "TextureManager.hpp"
 
 
-// MARK: - GameObject Contructor/Initialization
-
-GameObject::GameObject(const char *textureSheet,
-                       SDL_Rect srcRect, int x, int y) {
-  texture = TextureManager::loadTexture(textureSheet);
-  
-  srcR = srcRect;
-  
-  destR.x = position.x = x;
-  destR.y = position.y = y;
-  destR.w = size.w = srcR.w;
-  destR.h = size.h = srcR.h;
-}
-
-GameObject::~GameObject() {
-  
-}
-
-
 // MARK: - GameObject Functions
 
 void GameObject::update() {
