@@ -11,11 +11,15 @@
 
 // MARK: Source Files
 #include "parameters.h"
+#include "TextureManager.hpp"
 
 void Planet::initHomeworld() {
   // Set planet coordinates
   position.x = rand()%NUMBER_OF_PLANETS;
   position.y = rand()%NUMBER_OF_PLANETS;
+  
+  size = { PLANET_TEXTURE_SIZE, PLANET_TEXTURE_SIZE };
+  texture = TextureManager::loadTexture("Resources/Assets/planet.png");
   
   // Sets homeword resources
   fertility = STARTING_POPULATION/PEOPLE_FOOD_RQMT;
@@ -29,6 +33,9 @@ void Planet::initPlanet() {
   // Set planet coordinates
   position.x = rand()%NUMBER_OF_PLANETS;
   position.y = rand()%NUMBER_OF_PLANETS;
+  
+  size = { PLANET_TEXTURE_SIZE, PLANET_TEXTURE_SIZE };
+  texture = TextureManager::loadTexture("Resources/Assets/planet.png");
   
   // Sets planet fertility to random value
   fertility = (rand()%(MAX_FERTILITY-MIN_FERTILITY+1) + MIN_FERTILITY);
