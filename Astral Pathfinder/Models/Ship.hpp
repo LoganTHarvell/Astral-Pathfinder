@@ -15,8 +15,8 @@
 // MARK: Source Files
 #include "GameObject.hpp"
 
-#define SHIP_WIDTH 8
-#define SHIP_HEIGHT 15
+#define SHIP_WIDTH 24
+#define SHIP_HEIGHT 45
 
 class Ship: public GameObject {
   
