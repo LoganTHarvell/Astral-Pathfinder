@@ -60,6 +60,10 @@ void PlanetManager::render() {
   }
 }
 
+Planet PlanetManager::getPlanet(int n) {
+  return planets[n];
+}
+
 
 // MARK: - Planet Initialization Functions
 
