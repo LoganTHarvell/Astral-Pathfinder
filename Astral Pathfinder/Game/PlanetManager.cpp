@@ -47,6 +47,18 @@ void PlanetManager::initGalaxy() {
 };
 
 
+// Mark: - Game Loop Functions
+void PlanetManager::update() {
+  
+}
+
+void PlanetManager::render() {
+  for(Planet p : planets) {
+    p.render();
+  }
+}
+
+
 // MARK: - Planet Initialization Functions
 
 Planet PlanetManager::initHomeworld() {

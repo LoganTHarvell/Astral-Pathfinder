@@ -17,6 +17,7 @@
 #include "PlanetManager.hpp"
 #include "GameObject.hpp"
 #include "Map.hpp"
+#include "TextureManager.hpp"
 
 
 SDL_Renderer *Game::renderer = nullptr;
@@ -64,15 +65,13 @@ void Game::init(const char *title,
   }
 
   // Initializes game screen
-  SDL_Rect tmpRect = { 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT };
-  gameScreen = new GameObject("Resources/Assets/gameScreen.png",
-                              tmpRect, 0, 0);
+  gameScreen = TextureManager::loadTexture("Resources/Assets/gameScreen.png");
   
   planetManager = new PlanetManager;
   planetManager->initGalaxy();
-  map = new Map();
-  map->loadPlanets(planetManager->planets);
-  map->loadShip();
+//  map = new Map();
+//  map->loadPlanets(planetManager->planets);
+//  map->loadShip();
 }
 
 
@@ -92,16 +91,19 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-  map->update();
+//  map->update();
 }
 
 void Game::render() {
   SDL_RenderClear(renderer);
   
-  gameScreen->render();
+  SDL_Rect tmpR = {0, 0, NULL, NULL};
+  SDL_RenderCopy(renderer, gameScreen, &tmpR, &tmpR);
 
   // Render stuff
-  map->render();
+//  map->render();
+  planetManager->render();
+//  shipManager->render();
 
   SDL_RenderPresent(renderer);
 }

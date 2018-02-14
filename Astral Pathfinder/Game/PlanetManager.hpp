@@ -23,6 +23,9 @@ class PlanetManager {
 public:
   void initGalaxy();
   
+  void update();
+  void render();
+  
   Planet planets[NUMBER_OF_PLANETS];
   
 private:

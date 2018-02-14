@@ -46,7 +46,7 @@ private:
   bool isRunning = false;
   SDL_Window *window;
   
-  GameObject *gameScreen;
+  SDL_Texture *gameScreen;
   PlanetManager *planetManager;
   Map *map;
   
