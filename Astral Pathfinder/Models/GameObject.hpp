@@ -34,8 +34,7 @@ protected:
   Size size;
   
   SDL_Texture *texture;
-  SDL_Rect srcR = { 0, 0, NULL, NULL };
-  SDL_Rect destR = srcR;
+  SDL_Rect destR;
   
 };
 

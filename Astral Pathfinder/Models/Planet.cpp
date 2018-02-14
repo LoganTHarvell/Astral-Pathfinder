@@ -24,17 +24,13 @@ void Planet::update() {
   destR.h = size.h;
 }
 
-void GameObject::render() {
-  SDL_RenderCopy(Game::renderer, texture, &srcR, &destR);
+void Planet::render() {
+  SDL_RenderCopy(Game::renderer, texture, NULL, &destR);
 }
 
 void Planet::initHomeworld() {
-  // Set planet coordinates
-  position.x = rand()%NUMBER_OF_PLANETS;
-  position.y = rand()%NUMBER_OF_PLANETS;
-  
-  size = { PLANET_TEXTURE_SIZE, PLANET_TEXTURE_SIZE };
-  texture = TextureManager::loadTexture("Resources/Assets/planet.png");
+  // initializes random planet
+  initPlanet();
   
   // Sets homeword resources
   fertility = STARTING_POPULATION/PEOPLE_FOOD_RQMT;

@@ -91,18 +91,18 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
+  planetManager->update();
 //  map->update();
 }
 
 void Game::render() {
   SDL_RenderClear(renderer);
   
-  SDL_Rect tmpR = {0, 0, NULL, NULL};
-  SDL_RenderCopy(renderer, gameScreen, &tmpR, &tmpR);
+  SDL_RenderCopy(renderer, gameScreen, NULL, NULL);
 
   // Render stuff
-//  map->render();
   planetManager->render();
+//  map->render();
 //  shipManager->render();
 
   SDL_RenderPresent(renderer);
