@@ -20,16 +20,20 @@
 class Planet: public GameObject {
 
 public:
+  // MARK: - Initialization Methods
   void initHomeworld();
   void initPlanet();
   
+  // MARK: - Game Loop Methods
   void update();
   void render();
   
+  // MARK: - Planet Methods
   int getDeposits() { return deposits; };
   int getFertility() { return fertility; };
   
 private:
+  // MARK: - Planet Fields
   enum {
     undiscovered,
     discovered,
@@ -39,6 +43,7 @@ private:
   // resources
   int deposits, fertility;
   
+  // MARK: - Helper Methods
   SDL_Point uiPosition();
 };
 

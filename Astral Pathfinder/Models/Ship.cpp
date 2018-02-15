@@ -14,6 +14,8 @@
 #include "Map.hpp"
 #include "TextureManager.hpp"
 
+// MARK: - Initialization Methods
+
 void Ship::init(SDL_Point p) {
   position = p;
   size = { SHIP_WIDTH, SHIP_HEIGHT };
@@ -22,6 +24,8 @@ void Ship::init(SDL_Point p) {
   rotation = 0;
   fuel = 0;
 }
+
+// MARK: - Game Loop Methods
 
 void Ship::update() {
   SDL_Point pos = uiPosition();
@@ -35,6 +39,8 @@ void Ship::update() {
 void Ship::render() {
   SDL_RenderCopy(Game::renderer, texture, NULL, &destR);
 }
+
+// MARK: - Helper Methods
 
 SDL_Point Ship::uiPosition() {
   return Map::uiPosition(position);

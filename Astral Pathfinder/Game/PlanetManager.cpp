@@ -21,7 +21,7 @@
 
 void PlanetManager::initGalaxy() {
   
-  // Sees rand function
+  // Sees rand method
   srand((unsigned)time(NULL));
   
   int i = 0;
@@ -47,7 +47,8 @@ void PlanetManager::initGalaxy() {
 };
 
 
-// Mark: - Game Loop Functions
+// Mark: - Game Loop Methods
+
 void PlanetManager::update() {
   for (Planet& p : planets) {
     p.update();
@@ -60,13 +61,16 @@ void PlanetManager::render() {
   }
 }
 
+// MARK: - PlanetManager Methods
+
 Planet PlanetManager::getPlanet(int n) {
   return planets[n];
 }
 
 
-// MARK: - Planet Initialization Functions
+// MARK: - Initialization Helper Methods
 
+// Homeworld Initialization
 Planet PlanetManager::initHomeworld() {
   Planet homeworld;
   
@@ -76,6 +80,7 @@ Planet PlanetManager::initHomeworld() {
   return homeworld;
 }
 
+// Planet Initialization
 Planet PlanetManager::initPlanet() {
   Planet planet;
   

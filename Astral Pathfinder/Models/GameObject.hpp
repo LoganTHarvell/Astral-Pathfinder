@@ -15,24 +15,27 @@
 
 class GameObject {
   
+  // Size helper struct
   struct Size {
     int w, h;
   };
   
 public:
+  // MARK: - Game Loop Methods
   virtual void update() = 0;
   virtual void render() = 0;
   
-  // Get and Set functions for position and size
+  //MARK: - GameObject Methods
+  // Get and Set methods for position and size
   SDL_Point getPosition();
   void setPosition(int x, int y);
   Size getSize();
   void scale(float x);
   
 protected:
+  // MARK: - GameObject Fields
   SDL_Point position;
   Size size;
-  
   SDL_Texture *texture;
   SDL_Rect destR;
   

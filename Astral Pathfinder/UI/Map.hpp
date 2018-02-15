@@ -32,9 +32,11 @@
 class Map {
   
 public:
-  static SDL_Point uiPosition(SDL_Point position);
+  // MARK: - Map Constants
+  // TODO: Move defines here
   
-private:
+  // MARK: - Map Methods
+  static SDL_Point uiPosition(SDL_Point position);
   
 };
 

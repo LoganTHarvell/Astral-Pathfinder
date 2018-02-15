@@ -9,7 +9,7 @@
 // MARK: Header File
 #include "GameObject.hpp"
 
-// MARK: - GameObject Functions
+// MARK: - GameObject Methods
 
 SDL_Point GameObject::getPosition() {
   return position;

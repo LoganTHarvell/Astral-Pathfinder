@@ -34,16 +34,21 @@ class Game {
   
 public:
   void init(const char *title, int x, int y, int w, int h, bool fullscreen);
+  
+  // MARK: Game Loop Methods
   void handleEvents();
   void update();
   void render();
-  void clean();
   
+  // MARK: Game Methods
   bool running() { return isRunning; };
-  
+  void clean();
+
+  // Global renderer
   static SDL_Renderer *renderer;
   
 private:
+  // MARK: Game Fields
   bool isRunning = false;
   SDL_Window *window;
   

@@ -75,7 +75,7 @@ void Game::init(const char *title,
 }
 
 
-// MARK: - Game Functions
+// MARK: - Game Loop Methods
 
 void Game::handleEvents() {
   SDL_Event event;
@@ -106,6 +106,8 @@ void Game::render() {
 
   SDL_RenderPresent(renderer);
 }
+
+// MARK: - Game Methods
 
 void Game::clean() {
   SDL_DestroyWindow(window);

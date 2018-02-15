@@ -21,20 +21,26 @@
 class Ship: public GameObject {
   
 public:
+  // MARK: - Ship Constants
   const int population = 10000;
   const int velocity = 5;
   
+  // MARK: - Initialization Methods
   void init(SDL_Point position);
   
+  // MARK: - Game Loop Methods
   void update();
   void render();
   
+  // MARK: - Helper Methods
   int getFuel() { return fuel; };
 
 private:
+  // MARK: - Ship Fields
   int rotation;
   int fuel;
   
+  // MARK: - Helper Methods
   SDL_Point uiPosition();
 };
 
