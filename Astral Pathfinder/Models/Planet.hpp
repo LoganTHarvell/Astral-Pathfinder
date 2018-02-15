@@ -19,6 +19,10 @@
 class Planet: public GameObject {
 
 public:
+  // MARK: - Planet Constants
+  static const int planetTexSize;
+
+  
   // MARK: - Initialization Methods
   void initHomeworld();
   void initPlanet();

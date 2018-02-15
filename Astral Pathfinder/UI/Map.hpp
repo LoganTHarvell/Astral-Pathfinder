@@ -23,6 +23,10 @@ class Map {
   };
   
 public:
+  // MARK: - Map Methods
+  static SDL_Point uiPosition(SDL_Point position);
+  
+private:
   // MARK: - Map Constants
   static const int mapWidth;
   static const int mapHeight;
@@ -31,12 +35,7 @@ public:
   static const SDL_Point gridOrigin;
   static const int gridWidth;
   static const int gridHeight;
-  static const int planetTexSize;
   static const SDL_Point planetTexOffset;
-  
-  
-  // MARK: - Map Methods
-  static SDL_Point uiPosition(SDL_Point position);
   
 };
 

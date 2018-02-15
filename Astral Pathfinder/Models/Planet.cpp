@@ -16,6 +16,11 @@
 #include "Map.hpp"
 
 
+// MARK: - Planet Constants
+
+const int Planet::planetTexSize = 8;
+
+
 // MARK: - Initialization Methods
 
 void Planet::initHomeworld() {
@@ -35,7 +40,7 @@ void Planet::initPlanet() {
   position.x = rand()%NUMBER_OF_PLANETS;
   position.y = rand()%NUMBER_OF_PLANETS;
   
-  size = { PLANET_TEXTURE_SIZE, PLANET_TEXTURE_SIZE };
+  size = { planetTexSize, planetTexSize };
   texture = TextureManager::loadTexture("Resources/Assets/planet.png");
   
   // Sets planet fertility to random value
