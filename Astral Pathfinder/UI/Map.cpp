@@ -10,6 +10,20 @@
 #include "Map.hpp"
 
 
+// MARK: - Map Constants
+const int Map::mapWidth = 800;
+const int Map::mapHeight = 800;
+const SDL_Point Map::mapOrigin = { 400, 50 };
+const int Map::gridOffset = 50;
+const SDL_Point Map::gridOrigin = { mapOrigin.x + (gridOffset/2),
+  mapOrigin.y + (gridOffset/2) };
+const int Map::gridWidth = (mapWidth - gridOffset)/NUMBER_OF_PLANETS;
+const int Map::gridHeight = (mapHeight - gridOffset)/NUMBER_OF_PLANETS;
+const int Map::planetTexSize = 8;
+const SDL_Point Map::planetTexOffset = { (gridWidth-planetTexSize)/2,
+                                         (gridHeight-planetTexSize)/2 };
+
+
 // MARK: - Map Methods
 
 SDL_Point Map::uiPosition(SDL_Point position) {

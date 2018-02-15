@@ -15,11 +15,8 @@
 // MARK: Source Files
 #include "parameters.h"
 
+
 class Map {
-  
-  struct Coordinates {
-    float x,y;
-  };
   
   struct Size {
     int w, h;
@@ -27,17 +24,15 @@ class Map {
   
 public:
   // MARK: - Map Constants
-  static const int mapWidth = 800;
-  static const int mapHeight = 800;
-  static constexpr Coordinates mapOrigin = { 400, 50 };
-  static const int gridOffset = 50;
-  static constexpr Coordinates gridOrigin = { mapOrigin.x + (gridOffset/2.0),
-                                              mapOrigin.y + (gridOffset/2.0) };
-  static constexpr float gridWidth = (mapWidth - gridOffset)/NUMBER_OF_PLANETS;
-  static constexpr float gridHeight = (mapHeight - gridOffset)/NUMBER_OF_PLANETS;
-  static const int planetTexSize = 8;
-  static constexpr Coordinates planetTexOffset = { (gridWidth-planetTexSize)/2,
-                                                   (gridHeight-planetTexSize)/2 };
+  static const int mapWidth;
+  static const int mapHeight;
+  static const SDL_Point mapOrigin;
+  static const int gridOffset;
+  static const SDL_Point gridOrigin;
+  static const int gridWidth;
+  static const int gridHeight;
+  static const int planetTexSize;
+  static const SDL_Point planetTexOffset;
   
   
   // MARK: - Map Methods

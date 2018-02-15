@@ -15,6 +15,7 @@
 #include "TextureManager.hpp"
 #include "Map.hpp"
 
+
 // MARK: - Initialization Methods
 
 void Planet::initHomeworld() {

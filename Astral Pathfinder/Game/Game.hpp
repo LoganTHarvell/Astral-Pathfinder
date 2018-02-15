@@ -19,7 +19,6 @@
 #define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT 900
 
-
 // FPS constants
 #define FPS 60
 #define FRAME_DELAY 1000/FPS

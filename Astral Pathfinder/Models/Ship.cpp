@@ -14,6 +14,7 @@
 #include "Map.hpp"
 #include "TextureManager.hpp"
 
+
 // MARK: - Initialization Methods
 
 void Ship::init(SDL_Point p) {

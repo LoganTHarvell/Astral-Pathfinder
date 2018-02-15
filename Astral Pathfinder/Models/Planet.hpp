@@ -15,7 +15,6 @@
 // MARK: Source Files
 #include "GameObject.hpp"
 
-#define PLANET_TEXTURE_SIZE 8
 
 class Planet: public GameObject {
 
