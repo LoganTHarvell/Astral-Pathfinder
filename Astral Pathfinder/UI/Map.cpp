@@ -9,6 +9,7 @@
 // MARK: Header File
 #include "Map.hpp"
 
+
 // MARK: - Map Constants
 const int Map::mapWidth = 800;
 const int Map::mapHeight = 800;

@@ -8,6 +8,7 @@
 
 #include "ShipManager.hpp"
 
+
 // MARK: - ShipManager Initialization
 
 void ShipManager::init(SDL_Point homeworldPos) {

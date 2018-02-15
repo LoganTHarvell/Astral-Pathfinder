@@ -18,6 +18,7 @@
 #define SHIP_WIDTH 24
 #define SHIP_HEIGHT 45
 
+
 class Ship: public GameObject {
   
 public:

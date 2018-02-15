@@ -9,6 +9,7 @@
 // MARK: Header File
 #include "GameObject.hpp"
 
+
 // MARK: - GameObject Methods
 
 SDL_Point GameObject::getPosition() {
