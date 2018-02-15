@@ -14,7 +14,28 @@
 
 // MARK: Source Files
 #include "parameters.h"
+#include "Planet.hpp"
 
+
+// MARK: - Map Parameters
+
+namespace MapParameters {
+  
+  const int width = 800;
+  const int height = 800;
+  const SDL_Point mapOrigin = { 400, 50 };
+  const int gridOffset = 50;
+  const SDL_Point gridOrigin = { mapOrigin.x + (gridOffset/2),
+                                 mapOrigin.y + (gridOffset/2) };
+  const int gridWidth = (width - gridOffset)/NUMBER_OF_PLANETS;
+  const int gridHeight = (height - gridOffset)/NUMBER_OF_PLANETS;
+  const SDL_Point planetTexOffset = { (gridWidth-Planet::planetTexSize)/2,
+    (gridHeight-Planet::planetTexSize)/2 };
+
+}
+
+
+// MARK: - Map Class
 
 class Map {
   
@@ -25,17 +46,6 @@ class Map {
 public:
   // MARK: - Map Methods
   static SDL_Point uiPosition(SDL_Point position);
-  
-private:
-  // MARK: - Map Private Constants
-  static const int mapWidth;
-  static const int mapHeight;
-  static const SDL_Point mapOrigin;
-  static const int gridOffset;
-  static const SDL_Point gridOrigin;
-  static const int gridWidth;
-  static const int gridHeight;
-  static const SDL_Point planetTexOffset;
   
 };
 
