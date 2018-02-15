@@ -22,6 +22,7 @@
 
 SDL_Renderer *Game::renderer = nullptr;
 
+
 // MARK: - Game Initialization
 
 void Game::init(const char *title,
@@ -106,6 +107,7 @@ void Game::render() {
 
   SDL_RenderPresent(renderer);
 }
+
 
 // MARK: - Game Methods
 

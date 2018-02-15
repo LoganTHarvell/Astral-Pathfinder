@@ -27,7 +27,7 @@ public:
   static SDL_Point uiPosition(SDL_Point position);
   
 private:
-  // MARK: - Map Constants
+  // MARK: - Map Private Constants
   static const int mapWidth;
   static const int mapHeight;
   static const SDL_Point mapOrigin;

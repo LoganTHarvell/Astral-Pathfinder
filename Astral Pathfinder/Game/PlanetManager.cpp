@@ -61,6 +61,7 @@ void PlanetManager::render() {
   }
 }
 
+
 // MARK: - PlanetManager Methods
 
 Planet PlanetManager::getPlanet(int n) {

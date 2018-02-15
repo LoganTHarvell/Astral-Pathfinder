@@ -23,7 +23,8 @@ SDL_Point Map::uiPosition(SDL_Point position) {
   return { x, y };
 }
 
-// MARK: - Map Constants
+
+// MARK: - Map Private Constants
 
 const int Map::mapWidth = 800;
 const int Map::mapHeight = 800;

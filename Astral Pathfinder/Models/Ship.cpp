@@ -26,6 +26,7 @@ void Ship::init(SDL_Point p) {
   fuel = 0;
 }
 
+
 // MARK: - Game Loop Methods
 
 void Ship::update() {
@@ -40,6 +41,7 @@ void Ship::update() {
 void Ship::render() {
   SDL_RenderCopy(Game::renderer, texture, NULL, &destR);
 }
+
 
 // MARK: - Helper Methods
 
