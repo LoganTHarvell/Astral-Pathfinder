@@ -19,7 +19,7 @@
 class Planet: public GameObject {
 
 public:
-  // MARK: - Planet Constants
+  // MARK: - Planet Global Constants
   static const int planetTexSize;
 
   
@@ -36,6 +36,12 @@ public:
   int getFertility() { return fertility; };
   
 private:
+  // MARK: - Planet Private Constants
+  static const int minFertility;
+  static const int fertilityRange;
+  static const int minDeposits;
+  static const int depositsRange;
+  
   // MARK: - Planet Fields
   enum {
     undiscovered,

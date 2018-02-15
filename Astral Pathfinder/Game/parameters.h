@@ -44,10 +44,6 @@ You are the Astral Pathfinder."
 
 // Defines planet information
 #define NUMBER_OF_PLANETS 50
-#define MIN_FERTILITY 0
-#define MAX_FERTILITY 200
-#define MIN_DEPOSITS 100
-#define DEPOSITS_RANGE (600-MIN_DEPOSITS)
 
 // Defines resource information
 #define STARTING_POPULATION 5000

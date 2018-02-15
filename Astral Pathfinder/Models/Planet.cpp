@@ -16,7 +16,7 @@
 #include "Map.hpp"
 
 
-// MARK: - Planet Constants
+// MARK: - Planet Global Constants
 
 const int Planet::planetTexSize = 8;
 
@@ -44,14 +44,15 @@ void Planet::initPlanet() {
   texture = TextureManager::loadTexture("Resources/Assets/planet.png");
   
   // Sets planet fertility to random value
-  fertility = (rand()%(MAX_FERTILITY-MIN_FERTILITY+1) + MIN_FERTILITY);
+  fertility = (rand()%(fertilityRange+1) + minFertility);
   
   // Sets planet deposits to random value
-  deposits = (rand()%(DEPOSITS_RANGE+1)) + MIN_DEPOSITS;
+  deposits = (rand()%(depositsRange+1)) + minDeposits;
   
   // Sets planet status
   status = undiscovered;
 }
+
 
 // MARK: - Game Loop Methods
 
@@ -67,6 +68,15 @@ void Planet::update() {
 void Planet::render() {
   SDL_RenderCopy(Game::renderer, texture, NULL, &destR);
 }
+
+
+// MARK: - Planet Private Constants
+
+const int Planet::minFertility = 0;
+const int Planet::fertilityRange = (200-minFertility);
+const int Planet::minDeposits = 100;
+const int Planet::depositsRange = (600-minDeposits);
+
 
 // MARK: - Helper Methods
 
