@@ -15,6 +15,8 @@
 #include "TextureManager.hpp"
 #include "Map.hpp"
 
+// MARK: - Initialization Methods
+
 void Planet::initHomeworld() {
   // initializes random planet
   initPlanet();
@@ -45,6 +47,8 @@ void Planet::initPlanet() {
   status = undiscovered;
 }
 
+// MARK: - Game Loop Methods
+
 void Planet::update() {
   SDL_Point pos = uiPosition();
   destR.x = pos.x;
@@ -57,6 +61,8 @@ void Planet::update() {
 void Planet::render() {
   SDL_RenderCopy(Game::renderer, texture, NULL, &destR);
 }
+
+// MARK: - Helper Methods
 
 SDL_Point Planet::uiPosition() {
   return Map::uiPosition(position);

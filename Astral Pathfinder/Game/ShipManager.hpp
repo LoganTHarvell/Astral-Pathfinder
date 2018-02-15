@@ -18,12 +18,15 @@
 class ShipManager {
   
 public:
+  // MARK: - ShipManager Initialization
   void init(SDL_Point homeworldPos);
   
+  // MARK: - Game Loop Methods
   void update();
   void render();
   
 private:
+  // MARK: - ShipManager Fields
   Ship playerShip;
 };
 

@@ -21,15 +21,22 @@
 class PlanetManager {
   
 public:
+  // MARK: - Galaxy Initialization
   void initGalaxy();
   
+  // MARK: - Game Loop Methods
   void update();
   void render();
+  
+  // MARK: - PlanetManager Methods
   Planet getPlanet(int n);
   
 private:
+  // MARK: - Initialization Helper Methods
   static Planet initHomeworld();
   static Planet initPlanet();
+  
+  // MARK: - PlanetManager Fields
   Planet planets[NUMBER_OF_PLANETS];
   
 };

@@ -17,7 +17,7 @@
 #include "Game.hpp"
 
 
-// MARK: - TextureManager Functions
+// MARK: - TextureManager Methods
 
 // Loads textures from image file
 SDL_Texture *TextureManager::loadTexture(const char *textureFile) {

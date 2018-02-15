@@ -8,9 +8,13 @@
 
 #include "ShipManager.hpp"
 
+// MARK: - ShipManager Initialization
+
 void ShipManager::init(SDL_Point homeworldPos) {
   playerShip.init(homeworldPos);
 }
+
+// MARK: - Game Loop Methods
 
 void ShipManager::update() {
   playerShip.update();

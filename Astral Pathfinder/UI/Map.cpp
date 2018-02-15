@@ -9,9 +9,8 @@
 // MARK: Header File
 #include "Map.hpp"
 
-// MARK: Source Files
 
-
+// MARK: - Map Methods
 
 SDL_Point Map::uiPosition(SDL_Point position) {
   
