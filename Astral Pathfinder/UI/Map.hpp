@@ -15,25 +15,30 @@
 // MARK: Source Files
 #include "parameters.h"
 
-// MARK: Parameter Constants
-#define MAP_WIDTH 800
-#define MAP_HEIGHT 800
-#define MAP_X_ORIGIN 400
-#define MAP_Y_ORIGIN 50
-#define GRID_OFFSET 50
-#define GRID_X_ORIGIN MAP_X_ORIGIN + (GRID_OFFSET/2)
-#define GRID_Y_ORIGIN MAP_Y_ORIGIN + (GRID_OFFSET/2)
-#define GRID_WIDTH (MAP_WIDTH - GRID_OFFSET)/NUMBER_OF_PLANETS
-#define GRID_HEIGHT (MAP_HEIGHT - GRID_OFFSET)/NUMBER_OF_PLANETS
-#define PLANET_TEXTURE_SIZE 8
-#define PLANET_TEXTURE_OFFSET_X (GRID_WIDTH - PLANET_TEXTURE_SIZE)/2
-#define PLANET_TEXTURE_OFFSET_Y (GRID_HEIGHT - PLANET_TEXTURE_SIZE)/2
-
 class Map {
+  
+  struct Coordinates {
+    float x,y;
+  };
+  
+  struct Size {
+    int w, h;
+  };
   
 public:
   // MARK: - Map Constants
-  // TODO: Move defines here
+  static const int mapWidth = 800;
+  static const int mapHeight = 800;
+  static constexpr Coordinates mapOrigin = { 400, 50 };
+  static const int gridOffset = 50;
+  static constexpr Coordinates gridOrigin = { mapOrigin.x + (gridOffset/2.0),
+                                              mapOrigin.y + (gridOffset/2.0) };
+  static constexpr float gridWidth = (mapWidth - gridOffset)/NUMBER_OF_PLANETS;
+  static constexpr float gridHeight = (mapHeight - gridOffset)/NUMBER_OF_PLANETS;
+  static const int planetTexSize = 8;
+  static constexpr Coordinates planetTexOffset = { (gridWidth-planetTexSize)/2,
+                                                   (gridHeight-planetTexSize)/2 };
+  
   
   // MARK: - Map Methods
   static SDL_Point uiPosition(SDL_Point position);
