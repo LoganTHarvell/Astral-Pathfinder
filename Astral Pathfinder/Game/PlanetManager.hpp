@@ -15,6 +15,7 @@
 // MARK: Source Files
 #include "GameObject.hpp"
 #include "Planet.hpp"
+#include "ShipManager.hpp"
 
 
 // MARK: - PlanetManager Parameters
@@ -35,16 +36,19 @@ public:
   void initGalaxy();
   
   // MARK: - Game Loop Methods
-  void update();
+  void update(ShipManager *shipManager);
   void render();
   
   // MARK: - PlanetManager Methods
   Planet getPlanet(int n);
   
 private:
-  // MARK: - Initialization Helper Methods
+  // MARK: - Helper Methods
+  // Initialiation helper methods
   static Planet initHomeworld();
   static Planet initPlanet();
+  
+  void collision(SDL_Rect r);
   
   // MARK: - PlanetManager Fields
   Planet planets[PlanetManagerParameters::numberOfPlanets];

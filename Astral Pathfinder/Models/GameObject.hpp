@@ -27,6 +27,9 @@ public:
   SDL_Rect getRect();
   void scale(float x);
   
+  bool collision(SDL_Rect r);
+
+  
 protected:
   // MARK: - GameObject Fields
   SDL_Rect rect;

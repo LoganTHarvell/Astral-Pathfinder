@@ -10,6 +10,7 @@
 #include "PlanetManager.hpp"
 
 // MARK: Libraries and Frameworks
+#include <iostream>
 #include <cstdlib>
 #include <ctime>
 
@@ -50,9 +51,10 @@ void PlanetManager::initGalaxy() {
 
 // Mark: - Game Loop Methods
 
-void PlanetManager::update() {
+void PlanetManager::update(ShipManager *shipManager) {
   for (Planet& p : planets) {
     p.update();
+    p.collision(shipManager->getPlayerShip().getRect());
   }
 }
 
@@ -90,4 +92,10 @@ Planet PlanetManager::initPlanet() {
   planet.initPlanet();
   
   return planet;
+}
+
+void PlanetManager::collision(SDL_Rect r) {
+  for (Planet p : planets) {
+    p.collision(r);
+  }
 }

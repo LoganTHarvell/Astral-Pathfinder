@@ -9,6 +9,8 @@
 // MARK: Header File
 #include "GameObject.hpp"
 
+// MARK: Libraries and Frameworks
+#include <iostream>
 
 // MARK: - GameObject Methods
 
@@ -30,3 +32,21 @@ void GameObject::scale(float x) {
   rect.h *= x;
 };
 
+bool GameObject::collision(SDL_Rect r) {
+  
+  if (rect.x > r.x + r.w) {
+    return false;
+  }
+  if (rect.x + rect.w < r.x) {
+    return false;
+  }
+  if (rect.y > r.y + r.h) {
+    return false;
+  }
+  if (rect.y + rect.h < r.y) {
+    return false;
+  }
+  
+  std::cout << "Collision" << std::endl;
+  return true;
+}
