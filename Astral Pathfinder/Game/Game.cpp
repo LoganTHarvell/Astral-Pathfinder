@@ -18,6 +18,7 @@
 #include "ShipManager.hpp"
 #include "Map.hpp"
 #include "TextureManager.hpp"
+#include "ShipManager.hpp"
 
 
 SDL_Renderer *Game::renderer = nullptr;
@@ -85,6 +86,9 @@ void Game::handleEvents() {
   switch (event.type) {
     case SDL_QUIT:
       isRunning = false;
+      break;
+    case SDL_KEYDOWN:
+      shipManager->shipMovement(event);
       break;
     default:
       break;

@@ -20,8 +20,9 @@
 void Ship::init(SDL_Point p) {
   using namespace ShipParameters;
   
-  position = p;
+  position = uiPosition(p);
   size = { shipSize.w, shipSize.h };
+
   texture = TextureManager::loadTexture("Resources/Assets/simpleSpaceship.png");
   
   rotation = 0;
@@ -32,9 +33,8 @@ void Ship::init(SDL_Point p) {
 // MARK: - Game Loop Methods
 
 void Ship::update() {
-  SDL_Point pos = uiPosition();
-  destR.x = pos.x;
-  destR.y = pos.y;
+  destR.x = position.x;
+  destR.y = position.y;
   
   destR.w = size.w;
   destR.h = size.h;
@@ -47,6 +47,11 @@ void Ship::render() {
 
 // MARK: - Helper Methods
 
-SDL_Point Ship::uiPosition() {
-  return Map::uiPosition(position);
+void Ship::updatePosition(SDL_Point p) {
+  position.x += p.x;
+  position.y += p.y;
+}
+
+SDL_Point Ship::uiPosition(SDL_Point p) {
+  return Map::uiPosition(p);
 }

@@ -44,6 +44,7 @@ public:
   
   // MARK: - Helper Methods
   int getFuel() { return fuel; };
+  void updatePosition(SDL_Point p);
 
 private:
   // MARK: - Ship Fields
@@ -51,7 +52,7 @@ private:
   int fuel;
   
   // MARK: - Helper Methods
-  SDL_Point uiPosition();
+  SDL_Point uiPosition(SDL_Point p);
 };
 
 #endif /* Ship_hpp */
