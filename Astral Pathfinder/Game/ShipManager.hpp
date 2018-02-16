@@ -27,6 +27,8 @@ public:
   // MARK: - Movement Method
   void shipMovement(SDL_Event e);
   
+  Ship getPlayerShip() { return playerShip; };
+  
 private:
   // MARK: - ShipManager Fields
   Ship playerShip;
