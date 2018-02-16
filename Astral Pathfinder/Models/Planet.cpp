@@ -10,35 +10,33 @@
 #include "Planet.hpp"
 
 // MARK: Source Files
-#include "parameters.h"
 #include "Game.hpp"
+#include "PlanetManager.hpp"
 #include "TextureManager.hpp"
 #include "Map.hpp"
-
-
-// MARK: - Planet Global Constants
-
-const int Planet::planetTexSize = 8;
 
 
 // MARK: - Initialization Methods
 
 void Planet::initHomeworld() {
+  using namespace PlanetParameters;
   // initializes random planet
   initPlanet();
   
   // Sets homeword resources
-  fertility = STARTING_POPULATION/PEOPLE_FOOD_RQMT;
-  deposits = SHIP_COST * 2 + 50;
+  fertility = startPopulation/foodRqmt;
+  deposits = (shipCost*2) + 50;
   
   // Sets homeworld status
   status = colonized;
 }
 
 void Planet::initPlanet() {
+  using namespace PlanetParameters;
+  
   // Set planet coordinates
-  position.x = rand()%NUMBER_OF_PLANETS;
-  position.y = rand()%NUMBER_OF_PLANETS;
+  position.x = rand()%PlanetManagerParameters::numberOfPlanets;
+  position.y = rand()%PlanetManagerParameters::numberOfPlanets;
   
   size = { planetTexSize, planetTexSize };
   texture = TextureManager::loadTexture("Resources/Assets/planet.png");
@@ -68,15 +66,6 @@ void Planet::update() {
 void Planet::render() {
   SDL_RenderCopy(Game::renderer, texture, NULL, &destR);
 }
-
-
-// MARK: - Planet Private Constants
-
-const int Planet::minFertility = 0;
-const int Planet::fertilityRange = (200-minFertility);
-const int Planet::minDeposits = 100;
-const int Planet::depositsRange = (600-minDeposits);
-
 
 // MARK: - Helper Methods
 

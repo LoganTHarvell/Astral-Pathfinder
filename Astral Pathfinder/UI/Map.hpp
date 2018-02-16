@@ -13,13 +13,15 @@
 #include "SDL2/SDL.h"
 
 // MARK: Source Files
-#include "parameters.h"
+#include "PlanetManager.hpp"
 #include "Planet.hpp"
 
 
 // MARK: - Map Parameters
 
 namespace MapParameters {
+  using PlanetManagerParameters::numberOfPlanets;
+  using PlanetParameters::planetTexSize;
   
   const int width = 800;
   const int height = 800;
@@ -27,10 +29,10 @@ namespace MapParameters {
   const int gridOffset = 50;
   const SDL_Point gridOrigin = { mapOrigin.x + (gridOffset/2),
                                  mapOrigin.y + (gridOffset/2) };
-  const int gridWidth = (width - gridOffset)/NUMBER_OF_PLANETS;
-  const int gridHeight = (height - gridOffset)/NUMBER_OF_PLANETS;
-  const SDL_Point planetTexOffset = { (gridWidth-Planet::planetTexSize)/2,
-    (gridHeight-Planet::planetTexSize)/2 };
+  const int gridWidth = (width - gridOffset)/numberOfPlanets;
+  const int gridHeight = (height - gridOffset)/numberOfPlanets;
+  const SDL_Point planetTexOffset = { (gridWidth-planetTexSize)/2,
+                                      (gridHeight-planetTexSize)/2 };
 
 }
 

@@ -27,6 +27,7 @@ SDL_Renderer *Game::renderer = nullptr;
 
 void Game::init(const char *title,
                 int x, int y, int w, int h, bool fullscreen) {
+  using namespace GameParameters;
   
   int flags = 0;
   int imgFlags = IMG_INIT_PNG;
@@ -51,7 +52,7 @@ void Game::init(const char *title,
     if (renderer) {
       // Sets render scaling
       SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
-      SDL_RenderSetLogicalSize(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
+      SDL_RenderSetLogicalSize(renderer, windowSize.w, windowSize.h);
       
       SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
       std::cout << "Renderer created." << std::endl;

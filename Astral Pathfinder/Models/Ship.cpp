@@ -18,8 +18,10 @@
 // MARK: - Initialization Methods
 
 void Ship::init(SDL_Point p) {
+  using namespace ShipParameters;
+  
   position = p;
-  size = { SHIP_WIDTH, SHIP_HEIGHT };
+  size = { shipSize.w, shipSize.h };
   texture = TextureManager::loadTexture("Resources/Assets/simpleSpaceship.png");
   
   rotation = 0;

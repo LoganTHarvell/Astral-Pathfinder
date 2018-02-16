@@ -41,20 +41,6 @@ prepare for any unexpected disasters, and grow your population.\n\
 \n\
 You are the Astral Pathfinder."
 
-
-// Defines planet information
-#define NUMBER_OF_PLANETS 50
-
-// Defines resource information
-#define STARTING_POPULATION 5000
-#define PEOPLE_FOOD_RQMT 50
-#define FARMING_COST 25
-#define MINING_COST 30
-#define SHIP_COST 100
-#define SHIP_PERSONNEL_RQMT 100
-#define SHIP_FOOD_RQMT 4
-#define INFRASTRUCTURE_COST 0.05
-
 // Defines random event chances
 #define ALIEN_ATTACK_CHANCE 0.005
 #define BLIGHT_CHANCE 0.1

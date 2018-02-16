@@ -16,12 +16,31 @@
 #include "GameObject.hpp"
 
 
+// MARK: - Planet Parameters
+
+namespace PlanetParameters {
+  
+  const int planetTexSize = 8;
+  const int minFertility = 0;
+  const int fertilityRange = (200-minFertility);
+  const int minDeposits = 100;
+  const int depositsRange = (600-minDeposits);
+  
+  // Defines resource information
+  const int startPopulation = 5000;
+  const int foodRqmt = 50;
+  const int farminCost = 25;
+  const int miningCost = 30;
+  const int shipCost = 100;
+  const float infrastructureCost = 0.05;
+}
+
+
+// MARK: - Planet Class
+
 class Planet: public GameObject {
 
 public:
-  // MARK: - Planet Global Constants
-  static const int planetTexSize;
-
   
   // MARK: - Initialization Methods
   void initHomeworld();
@@ -36,12 +55,6 @@ public:
   int getFertility() { return fertility; };
   
 private:
-  // MARK: - Planet Private Constants
-  static const int minFertility;
-  static const int fertilityRange;
-  static const int minDeposits;
-  static const int depositsRange;
-  
   // MARK: - Planet Fields
   enum {
     undiscovered,
