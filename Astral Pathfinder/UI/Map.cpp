@@ -33,19 +33,21 @@ SDL_Point Map::mapPosition(SDL_Point p) {
 bool Map::checkBounds(SDL_Rect r) {
   
   if (r.x <= mapOrigin.x) {
+    std::cout << "Hit left bound" << std::endl;
     return true;
   }
   if (r.y <= mapOrigin.y) {
+    std::cout << "Hit upper bound" << std::endl;
     return true;
   }
   if (r.x + r.w >= mapOrigin.x + width) {
+    std::cout << "Hit right bound" << std::endl;
     return true;
   }
   if (r.y + r.h >= mapOrigin.y + height) {
+    std::cout << "Hit lower bound" << std::endl;
     return true;
   }
-  
-  std::cout << "Hit Bounds" << std::endl;
   
   return false;
 }

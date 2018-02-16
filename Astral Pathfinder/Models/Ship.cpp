@@ -51,14 +51,19 @@ void Ship::render() {
 void Ship::updatePosition(SDL_Point p) {
   rect.x += p.x;
   rect.y += p.y;
-}
-
-bool Ship::checkBounds() {
-  return Map::checkBounds(rect);
+  
+  if (checkBounds()) {
+    rect.x -= p.x;
+    rect.y -= p.y;
+  }
 }
 
 // MARK: - Helper Methods
 
-SDL_Point Ship::uiPosition(SDL_Point p) {
-  return Map::uiPosition(p);
+SDL_Point Ship::mapPosition(SDL_Point p) {
+  return Map::mapPosition(p);
+}
+
+bool Ship::checkBounds() {
+  return Map::checkBounds(rect);
 }
