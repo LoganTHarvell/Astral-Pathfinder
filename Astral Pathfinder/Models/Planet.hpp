@@ -16,9 +16,32 @@
 #include "GameObject.hpp"
 
 
+// MARK: - Planet Parameters
+
+namespace PlanetParameters {
+  
+  const int planetTexSize = 8;
+  const int minFertility = 0;
+  const int fertilityRange = (200-minFertility);
+  const int minDeposits = 100;
+  const int depositsRange = (600-minDeposits);
+  
+  // Defines resource information
+  const int startPopulation = 5000;
+  const int foodRqmt = 50;
+  const int farminCost = 25;
+  const int miningCost = 30;
+  const int shipCost = 100;
+  const float infrastructureCost = 0.05;
+}
+
+
+// MARK: - Planet Class
+
 class Planet: public GameObject {
 
 public:
+  
   // MARK: - Initialization Methods
   void initHomeworld();
   void initPlanet();

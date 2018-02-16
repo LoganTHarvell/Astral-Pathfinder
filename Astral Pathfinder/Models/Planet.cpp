@@ -10,8 +10,8 @@
 #include "Planet.hpp"
 
 // MARK: Source Files
-#include "parameters.h"
 #include "Game.hpp"
+#include "PlanetManager.hpp"
 #include "TextureManager.hpp"
 #include "Map.hpp"
 
@@ -19,34 +19,38 @@
 // MARK: - Initialization Methods
 
 void Planet::initHomeworld() {
+  using namespace PlanetParameters;
   // initializes random planet
   initPlanet();
   
   // Sets homeword resources
-  fertility = STARTING_POPULATION/PEOPLE_FOOD_RQMT;
-  deposits = SHIP_COST * 2 + 50;
+  fertility = startPopulation/foodRqmt;
+  deposits = (shipCost*2) + 50;
   
   // Sets homeworld status
   status = colonized;
 }
 
 void Planet::initPlanet() {
-  // Set planet coordinates
-  position.x = rand()%NUMBER_OF_PLANETS;
-  position.y = rand()%NUMBER_OF_PLANETS;
+  using namespace PlanetParameters;
   
-  size = { PLANET_TEXTURE_SIZE, PLANET_TEXTURE_SIZE };
+  // Set planet coordinates
+  position.x = rand()%PlanetManagerParameters::numberOfPlanets;
+  position.y = rand()%PlanetManagerParameters::numberOfPlanets;
+  
+  size = { planetTexSize, planetTexSize };
   texture = TextureManager::loadTexture("Resources/Assets/planet.png");
   
   // Sets planet fertility to random value
-  fertility = (rand()%(MAX_FERTILITY-MIN_FERTILITY+1) + MIN_FERTILITY);
+  fertility = (rand()%(fertilityRange+1) + minFertility);
   
   // Sets planet deposits to random value
-  deposits = (rand()%(DEPOSITS_RANGE+1)) + MIN_DEPOSITS;
+  deposits = (rand()%(depositsRange+1)) + minDeposits;
   
   // Sets planet status
   status = undiscovered;
 }
+
 
 // MARK: - Game Loop Methods
 

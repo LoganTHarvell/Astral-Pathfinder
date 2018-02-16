@@ -11,10 +11,11 @@
 
 
 int main(int argc, const char *argv[]) {
+  using namespace GameParameters;
   
   Game game;
   game.init("Astral Pathfinder ©", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-             WINDOW_WIDTH, WINDOW_HEIGHT, false);
+            windowSize.w, windowSize.h, false);
 
   // Tracks time to complete frame
   Uint32 frameStart;
@@ -31,8 +32,8 @@ int main(int argc, const char *argv[]) {
     
     // Uses frame time and set frame delay to enforce FPS
     frameTime = SDL_GetTicks() - frameStart;
-    if (FRAME_DELAY > frameTime) {
-      SDL_Delay(FRAME_DELAY - frameTime);
+    if (frameDelay > frameTime) {
+      SDL_Delay(frameDelay - frameTime);
     }
   }
 

@@ -15,16 +15,25 @@
 // MARK: Source Files
 #include "GameObject.hpp"
 
-#define SHIP_WIDTH 24
-#define SHIP_HEIGHT 45
+
+// MARK: - Ship Parameters
+
+namespace ShipParameters {
+  
+  const struct {
+    int w = 24, h = 45;
+  } shipSize;
+  
+  const int population = 10000;
+  const int velocity = 5;
+  
+}
 
 
+// MARK: - Ship Class
 class Ship: public GameObject {
   
 public:
-  // MARK: - Ship Constants
-  const int population = 10000;
-  const int velocity = 5;
   
   // MARK: - Initialization Methods
   void init(SDL_Point position);

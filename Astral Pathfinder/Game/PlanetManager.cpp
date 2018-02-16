@@ -20,12 +20,13 @@
 // MARK: - Galaxy Initialization
 
 void PlanetManager::initGalaxy() {
+  using PlanetManagerParameters::numberOfPlanets;
   
   // Sees rand method
   srand((unsigned)time(NULL));
   
   int i = 0;
-  bool hasPlanet[NUMBER_OF_PLANETS][NUMBER_OF_PLANETS] = { false };
+  bool hasPlanet[numberOfPlanets][numberOfPlanets] = { false };
   
   // Initializes first element in planets array as homeworld
   planets[i] = initHomeworld();
@@ -33,7 +34,7 @@ void PlanetManager::initGalaxy() {
   hasPlanet[planets[i].getPosition().x][planets[i].getPosition().y] = true;
 
   // Initializes galaxy with number of planets
-  for (i=1; i<NUMBER_OF_PLANETS; i++) {
+  for (i=1; i<numberOfPlanets; i++) {
     
     // Prevents duplicate coordinates
     do {
@@ -60,6 +61,7 @@ void PlanetManager::render() {
     p.render();
   }
 }
+
 
 // MARK: - PlanetManager Methods
 
