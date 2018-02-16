@@ -13,10 +13,20 @@
 #include "SDL2/SDL.h"
 
 // MARK: Source Files
-#include "parameters.h"
 #include "GameObject.hpp"
 #include "Planet.hpp"
 
+
+// MARK: - PlanetManager Parameters
+
+namespace PlanetManagerParameters {
+  
+  const int numberOfPlanets = 50;
+  
+}
+
+
+// MARK: - PlanetManager Class
 
 class PlanetManager {
   
@@ -37,7 +47,7 @@ private:
   static Planet initPlanet();
   
   // MARK: - PlanetManager Fields
-  Planet planets[NUMBER_OF_PLANETS];
+  Planet planets[PlanetManagerParameters::numberOfPlanets];
   
 };
 

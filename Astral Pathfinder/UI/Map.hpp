@@ -13,28 +13,39 @@
 #include "SDL2/SDL.h"
 
 // MARK: Source Files
-#include "parameters.h"
+#include "PlanetManager.hpp"
+#include "Planet.hpp"
 
-// MARK: Parameter Constants
-#define MAP_WIDTH 800
-#define MAP_HEIGHT 800
-#define MAP_X_ORIGIN 400
-#define MAP_Y_ORIGIN 50
-#define GRID_OFFSET 50
-#define GRID_X_ORIGIN MAP_X_ORIGIN + (GRID_OFFSET/2)
-#define GRID_Y_ORIGIN MAP_Y_ORIGIN + (GRID_OFFSET/2)
-#define GRID_WIDTH (MAP_WIDTH - GRID_OFFSET)/NUMBER_OF_PLANETS
-#define GRID_HEIGHT (MAP_HEIGHT - GRID_OFFSET)/NUMBER_OF_PLANETS
-#define PLANET_TEXTURE_SIZE 8
-#define PLANET_TEXTURE_OFFSET_X (GRID_WIDTH - PLANET_TEXTURE_SIZE)/2
-#define PLANET_TEXTURE_OFFSET_Y (GRID_HEIGHT - PLANET_TEXTURE_SIZE)/2
+
+// MARK: - Map Parameters
+
+namespace MapParameters {
+  using PlanetManagerParameters::numberOfPlanets;
+  using PlanetParameters::planetTexSize;
+  
+  const int width = 800;
+  const int height = 800;
+  const SDL_Point mapOrigin = { 400, 50 };
+  const int gridOffset = 50;
+  const SDL_Point gridOrigin = { mapOrigin.x + (gridOffset/2),
+                                 mapOrigin.y + (gridOffset/2) };
+  const int gridWidth = (width - gridOffset)/numberOfPlanets;
+  const int gridHeight = (height - gridOffset)/numberOfPlanets;
+  const SDL_Point planetTexOffset = { (gridWidth-planetTexSize)/2,
+                                      (gridHeight-planetTexSize)/2 };
+
+}
+
+
+// MARK: - Map Class
 
 class Map {
   
-public:
-  // MARK: - Map Constants
-  // TODO: Move defines here
+  struct Size {
+    int w, h;
+  };
   
+public:
   // MARK: - Map Methods
   static SDL_Point uiPosition(SDL_Point position);
   

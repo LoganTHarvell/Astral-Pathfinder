@@ -9,13 +9,18 @@
 // MARK: Header File
 #include "Map.hpp"
 
+// MARK: Source Files
+#include "Planet.hpp"
+
 
 // MARK: - Map Methods
 
 SDL_Point Map::uiPosition(SDL_Point position) {
-  
-  int x = GRID_X_ORIGIN + (position.x * GRID_WIDTH) + PLANET_TEXTURE_OFFSET_X;
-  int y = GRID_Y_ORIGIN + (position.y * GRID_HEIGHT) + PLANET_TEXTURE_OFFSET_Y;
+  using namespace MapParameters;
+
+  int x = gridOrigin.x + (position.x * gridWidth) + planetTexOffset.x;
+  int y = gridOrigin.y + (position.y * gridHeight) + planetTexOffset.y;
   
   return { x, y };
 }
+

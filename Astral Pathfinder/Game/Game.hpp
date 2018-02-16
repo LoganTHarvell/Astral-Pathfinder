@@ -12,19 +12,26 @@
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 
-// MARK: Source Files
-#include "parameters.h"
 
-// MARK: Parameter Constants
-#define WINDOW_WIDTH 1600
-#define WINDOW_HEIGHT 900
+// MARK: - Game Parameters
+
+namespace GameParameters {
+
+  const struct {
+    int w = 1600;
+    int h = 900;
+  } windowSize;
+  
+  // FPS constants
+  const int fps = 60;
+  const int frameDelay = 1000/fps;
+  
+}
 
 
-// FPS constants
-#define FPS 60
-#define FRAME_DELAY 1000/FPS
+// MARK: - Game Class
 
-
+// Forwards classes in Game class
 class GameObject;
 class PlanetManager;
 class ShipManager;
