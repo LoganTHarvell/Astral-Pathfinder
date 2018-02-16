@@ -46,12 +46,18 @@ void Ship::render() {
 }
 
 
-// MARK: - Helper Methods
+// MARK: - Ship Methods
 
 void Ship::updatePosition(SDL_Point p) {
   rect.x += p.x;
   rect.y += p.y;
 }
+
+bool Ship::checkBounds() {
+  return Map::checkBounds(rect);
+}
+
+// MARK: - Helper Methods
 
 SDL_Point Ship::uiPosition(SDL_Point p) {
   return Map::uiPosition(p);

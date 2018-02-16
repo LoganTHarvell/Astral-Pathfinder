@@ -44,6 +44,7 @@ public:
   // MARK: - Ship Methods
   int getFuel() { return fuel; };
   void updatePosition(SDL_Point p);
+  bool checkBounds();
 
 private:
   // MARK: - Ship Fields
