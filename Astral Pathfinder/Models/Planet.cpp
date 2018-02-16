@@ -56,15 +56,15 @@ void Planet::initPlanet() {
 
 void Planet::update() {
   SDL_Point pos = uiPosition();
-  destR.x = pos.x;
-  destR.y = pos.y;
+  rect.x = pos.x;
+  rect.y = pos.y;
   
-  destR.w = size.w;
-  destR.h = size.h;
+  rect.w = size.w;
+  rect.h = size.h;
 }
 
 void Planet::render() {
-  SDL_RenderCopy(Game::renderer, texture, NULL, &destR);
+  SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
 }
 
 // MARK: - Helper Methods

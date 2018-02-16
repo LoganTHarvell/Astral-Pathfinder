@@ -37,7 +37,7 @@ protected:
   SDL_Point position;
   Size size;
   SDL_Texture *texture;
-  SDL_Rect destR;
+  SDL_Rect rect;
   
 };
 

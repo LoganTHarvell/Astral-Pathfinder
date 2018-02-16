@@ -33,15 +33,15 @@ void Ship::init(SDL_Point p) {
 // MARK: - Game Loop Methods
 
 void Ship::update() {
-  destR.x = position.x;
-  destR.y = position.y;
+  rect.x = position.x;
+  rect.y = position.y;
   
-  destR.w = size.w;
-  destR.h = size.h;
+  rect.w = size.w;
+  rect.h = size.h;
 }
 
 void Ship::render() {
-  SDL_RenderCopy(Game::renderer, texture, NULL, &destR);
+  SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
 }
 
 
