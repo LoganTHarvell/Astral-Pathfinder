@@ -29,6 +29,9 @@ namespace GameParameters {
 }
 
 
+// MARK: - Game Class
+
+// Forwards classes in Game class
 class GameObject;
 class PlanetManager;
 class ShipManager;
