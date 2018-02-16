@@ -16,24 +16,21 @@
 #include "Planet.hpp"
 
 
-using namespace Map::Functions;
-using namespace Map::Parameters;
-
 // MARK: - Map Methods
 
-SDL_Point uiPosition(SDL_Point p) {
+SDL_Point Map::uiPosition(SDL_Point p) {
   int x = gridOrigin.x + (p.x * gridWidth) + planetTexOffset.x;
   int y = gridOrigin.y + (p.y * gridHeight) + planetTexOffset.y;
   return { x, y };
 }
 
-SDL_Point mapPosition(SDL_Point p) {
+SDL_Point Map::mapPosition(SDL_Point p) {
   int x = p.x - mapOrigin.x;
   int y = p.x - mapOrigin.y;
   return { x, y };
 }
 
-bool checkBounds(SDL_Rect r) {
+bool Map::checkBounds(SDL_Rect r) {
   
   if (r.x <= mapOrigin.x) {
     return true;

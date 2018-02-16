@@ -18,37 +18,31 @@
 
 
 namespace Map {
-
+  
+  using PlanetManagerParameters::numberOfPlanets;
+  using PlanetParameters::planetTexSize;
+  
+  
   // MARK: - Map Parameters
-
-  namespace Parameters {
-    using PlanetManagerParameters::numberOfPlanets;
-    using PlanetParameters::planetTexSize;
-    
-    const int width = 800;
-    const int height = 800;
-    const SDL_Point mapOrigin = { 400, 50 };
-    const int gridOffset = 50;
-    const SDL_Point gridOrigin = { mapOrigin.x + (gridOffset/2),
-                                   mapOrigin.y + (gridOffset/2) };
-    const int gridWidth = (width - gridOffset)/numberOfPlanets;
-    const int gridHeight = (height - gridOffset)/numberOfPlanets;
-    const SDL_Point planetTexOffset = { (gridWidth-planetTexSize)/2,
-                                        (gridHeight-planetTexSize)/2 };
-
-  }
+  
+  const int width = 800;
+  const int height = 800;
+  const SDL_Point mapOrigin = { 400, 50 };
+  const int gridOffset = 50;
+  const SDL_Point gridOrigin = { mapOrigin.x + (gridOffset/2),
+                                 mapOrigin.y + (gridOffset/2) };
+  const int gridWidth = (width - gridOffset)/numberOfPlanets;
+  const int gridHeight = (height - gridOffset)/numberOfPlanets;
+  const SDL_Point planetTexOffset = { (gridWidth-planetTexSize)/2,
+                                      (gridHeight-planetTexSize)/2 };
 
 
   // MARK: - Map Methods
+ 
+  SDL_Point uiPosition(SDL_Point p);
+  SDL_Point mapPosition(SDL_Point p);
+  bool checkBounds(SDL_Rect r);
 
-  namespace Functions {
-    
-    SDL_Point uiPosition(SDL_Point p);
-    SDL_Point mapPosition(SDL_Point p);
-    bool checkBounds(SDL_Rect r);
-    
-  };
-  
 }
 
 #endif /* Map_hpp */
