@@ -17,39 +17,38 @@
 #include "Planet.hpp"
 
 
-// MARK: - Map Parameters
+namespace Map {
 
-namespace MapParameters {
-  using PlanetManagerParameters::numberOfPlanets;
-  using PlanetParameters::planetTexSize;
-  
-  const int width = 800;
-  const int height = 800;
-  const SDL_Point mapOrigin = { 400, 50 };
-  const int gridOffset = 50;
-  const SDL_Point gridOrigin = { mapOrigin.x + (gridOffset/2),
-                                 mapOrigin.y + (gridOffset/2) };
-  const int gridWidth = (width - gridOffset)/numberOfPlanets;
-  const int gridHeight = (height - gridOffset)/numberOfPlanets;
-  const SDL_Point planetTexOffset = { (gridWidth-planetTexSize)/2,
-                                      (gridHeight-planetTexSize)/2 };
+  // MARK: - Map Parameters
 
-}
+  namespace Parameters {
+    using PlanetManagerParameters::numberOfPlanets;
+    using PlanetParameters::planetTexSize;
+    
+    const int width = 800;
+    const int height = 800;
+    const SDL_Point mapOrigin = { 400, 50 };
+    const int gridOffset = 50;
+    const SDL_Point gridOrigin = { mapOrigin.x + (gridOffset/2),
+                                   mapOrigin.y + (gridOffset/2) };
+    const int gridWidth = (width - gridOffset)/numberOfPlanets;
+    const int gridHeight = (height - gridOffset)/numberOfPlanets;
+    const SDL_Point planetTexOffset = { (gridWidth-planetTexSize)/2,
+                                        (gridHeight-planetTexSize)/2 };
+
+  }
 
 
-// MARK: - Map Class
+  // MARK: - Map Methods
 
-class Map {
-  
-  struct Size {
-    int w, h;
+  namespace Functions {
+    
+    SDL_Point uiPosition(SDL_Point p);
+    SDL_Point mapPosition(SDL_Point p);
+    bool checkBounds(SDL_Rect r);
+    
   };
   
-public:
-  // MARK: - Map Methods
-  static SDL_Point uiPosition(SDL_Point p);
-  static SDL_Point mapPosition(SDL_Point p);
-  
-};
+}
 
 #endif /* Map_hpp */
