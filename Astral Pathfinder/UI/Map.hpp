@@ -47,7 +47,8 @@ class Map {
   
 public:
   // MARK: - Map Methods
-  static SDL_Point uiPosition(SDL_Point position);
+  static SDL_Point uiPosition(SDL_Point p);
+  static SDL_Point mapPosition(SDL_Point p);
   
 };
 

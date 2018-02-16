@@ -13,18 +13,20 @@
 // MARK: - GameObject Methods
 
 SDL_Point GameObject::getPosition() {
-  return position;
+  return { rect.x, rect.y };
 }
 
-void GameObject::setPosition(int x, int y) {
-  position.x = x; position.y = y;
+void GameObject::setPosition(SDL_Point p) {
+  rect.x = p.x;
+  rect.y = p.y;
 }
 
-GameObject::Size GameObject::getSize() {
-  return size;
+SDL_Rect GameObject::getRect() {
+  return rect;
 }
 
 void GameObject::scale(float x) {
-  size.w *= x; size.h *= x;
+  rect.w *= x;
+  rect.h *= x;
 };
 
