@@ -34,7 +34,6 @@ namespace ShipParameters {
 class Ship: public GameObject {
   
 public:
-  
   // MARK: - Initialization Methods
   void init(SDL_Point position);
   
@@ -42,7 +41,7 @@ public:
   void update();
   void render();
   
-  // MARK: - Helper Methods
+  // MARK: - Ship Methods
   int getFuel() { return fuel; };
   void updatePosition(SDL_Point p);
 
@@ -53,6 +52,7 @@ private:
   
   // MARK: - Helper Methods
   SDL_Point uiPosition(SDL_Point p);
+  
 };
 
 #endif /* Ship_hpp */

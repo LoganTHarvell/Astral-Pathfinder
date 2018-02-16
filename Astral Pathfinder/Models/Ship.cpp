@@ -9,6 +9,9 @@
 // MARK: Header File
 #include "Ship.hpp"
 
+// MARK: Libraries and Frameworks
+#include <iostream>
+
 // MARK: Source Files
 #include "Game.hpp"
 #include "Map.hpp"
@@ -36,11 +39,6 @@ void Ship::init(SDL_Point p) {
 // MARK: - Game Loop Methods
 
 void Ship::update() {
-//  rect.x = position.x;
-//  rect.y = position.y;
-//
-//  rect.w = size.w;
-//  rect.h = size.h;
 }
 
 void Ship::render() {
