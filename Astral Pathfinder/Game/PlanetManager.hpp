@@ -1,13 +1,13 @@
 //
-//  Galaxy.hpp
+//  PlanetManager.hpp
 //  Astral Pathfinder
 //
 //  Created by Logan Harvell, Ian Holdeman on 1/15/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
-#ifndef Galaxy_hpp
-#define Galaxy_hpp
+#ifndef PlanetManager_hpp
+#define PlanetManager_hpp
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
@@ -51,4 +51,4 @@ private:
   
 };
 
-#endif /* Galaxy_hpp */
+#endif /* PlanetManager_hpp */

@@ -1,5 +1,5 @@
 //
-//  Galaxy.cpp
+//  PlanetManager.cpp
 //  Astral Pathfinder
 //
 //  Created by Logan Harvell, Ian Holdeman on 1/15/18.
@@ -31,7 +31,7 @@ void PlanetManager::initGalaxy() {
   // Initializes first element in planets array as homeworld
   planets[i] = initHomeworld();
   // Marks planet coordinates as occupied
-  hasPlanet[planets[i].getPosition().x][planets[i].getPosition().y] = true;
+  hasPlanet[planets[i].getCoordinates().x][planets[i].getCoordinates().y] = true;
 
   // Initializes galaxy with number of planets
   for (i=1; i<numberOfPlanets; i++) {
@@ -39,10 +39,10 @@ void PlanetManager::initGalaxy() {
     // Prevents duplicate coordinates
     do {
       planets[i] = initPlanet();
-    } while (hasPlanet[planets[i].getPosition().x][planets[i].getPosition().y]);
+    } while (hasPlanet[planets[i].getCoordinates().x][planets[i].getCoordinates().y]);
     
     // Marks planet coordinates as occupied
-    hasPlanet[planets[i].getPosition().x][planets[i].getPosition().y] = true;
+    hasPlanet[planets[i].getCoordinates().x][planets[i].getCoordinates().y] = true;
   }
   
 };
