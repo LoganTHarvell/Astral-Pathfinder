@@ -18,7 +18,6 @@
 #include "ShipManager.hpp"
 #include "Map.hpp"
 #include "TextureManager.hpp"
-#include "ShipManager.hpp"
 
 
 SDL_Renderer *Game::renderer = nullptr;
@@ -97,7 +96,7 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-  planetManager->update();
+  planetManager->update(shipManager);
   shipManager->update();
 }
 

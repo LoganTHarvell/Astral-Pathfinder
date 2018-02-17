@@ -1,5 +1,5 @@
 //
-//  Galaxy.cpp
+//  PlanetManager.cpp
 //  Astral Pathfinder
 //
 //  Created by Logan Harvell, Ian Holdeman on 1/15/18.
@@ -10,6 +10,7 @@
 #include "PlanetManager.hpp"
 
 // MARK: Libraries and Frameworks
+#include <iostream>
 #include <cstdlib>
 #include <ctime>
 
@@ -31,7 +32,7 @@ void PlanetManager::initGalaxy() {
   // Initializes first element in planets array as homeworld
   planets[i] = initHomeworld();
   // Marks planet coordinates as occupied
-  hasPlanet[planets[i].getPosition().x][planets[i].getPosition().y] = true;
+  hasPlanet[planets[i].getCoordinates().x][planets[i].getCoordinates().y] = true;
 
   // Initializes galaxy with number of planets
   for (i=1; i<numberOfPlanets; i++) {
@@ -39,10 +40,10 @@ void PlanetManager::initGalaxy() {
     // Prevents duplicate coordinates
     do {
       planets[i] = initPlanet();
-    } while (hasPlanet[planets[i].getPosition().x][planets[i].getPosition().y]);
+    } while (hasPlanet[planets[i].getCoordinates().x][planets[i].getCoordinates().y]);
     
     // Marks planet coordinates as occupied
-    hasPlanet[planets[i].getPosition().x][planets[i].getPosition().y] = true;
+    hasPlanet[planets[i].getCoordinates().x][planets[i].getCoordinates().y] = true;
   }
   
 };
@@ -50,9 +51,10 @@ void PlanetManager::initGalaxy() {
 
 // Mark: - Game Loop Methods
 
-void PlanetManager::update() {
+void PlanetManager::update(ShipManager *shipManager) {
   for (Planet& p : planets) {
     p.update();
+    p.collision(shipManager->getPlayerShip().getRect());
   }
 }
 
@@ -90,4 +92,10 @@ Planet PlanetManager::initPlanet() {
   planet.initPlanet();
   
   return planet;
+}
+
+void PlanetManager::collision(SDL_Rect r) {
+  for (Planet p : planets) {
+    p.collision(r);
+  }
 }

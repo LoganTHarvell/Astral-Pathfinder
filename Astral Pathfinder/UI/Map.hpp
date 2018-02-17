@@ -17,11 +17,13 @@
 #include "Planet.hpp"
 
 
-// MARK: - Map Parameters
-
-namespace MapParameters {
+namespace Map {
+  
   using PlanetManagerParameters::numberOfPlanets;
   using PlanetParameters::planetTexSize;
+  
+  
+  // MARK: - Map Parameters
   
   const int width = 800;
   const int height = 800;
@@ -34,21 +36,13 @@ namespace MapParameters {
   const SDL_Point planetTexOffset = { (gridWidth-planetTexSize)/2,
                                       (gridHeight-planetTexSize)/2 };
 
-}
 
-
-// MARK: - Map Class
-
-class Map {
-  
-  struct Size {
-    int w, h;
-  };
-  
-public:
   // MARK: - Map Methods
-  static SDL_Point uiPosition(SDL_Point position);
-  
-};
+ 
+  SDL_Point uiPosition(SDL_Point p);
+  SDL_Point mapPosition(SDL_Point p);
+  bool checkBounds(SDL_Rect r);
+
+}
 
 #endif /* Map_hpp */

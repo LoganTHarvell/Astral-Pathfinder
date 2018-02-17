@@ -9,6 +9,9 @@
 // MARK: Header File
 #include "Ship.hpp"
 
+// MARK: Libraries and Frameworks
+#include <iostream>
+
 // MARK: Source Files
 #include "Game.hpp"
 #include "Map.hpp"
@@ -20,8 +23,11 @@
 void Ship::init(SDL_Point p) {
   using namespace ShipParameters;
   
-  position = uiPosition(p);
-  size = { shipSize.w, shipSize.h };
+  SDL_Point tmp = p;
+  rect.x = tmp.x;
+  rect.y = tmp.y;
+  rect.w = shipSize.w;
+  rect.h = shipSize.h;
 
   texture = TextureManager::loadTexture("Resources/Assets/simpleSpaceship.png");
   
@@ -33,25 +39,31 @@ void Ship::init(SDL_Point p) {
 // MARK: - Game Loop Methods
 
 void Ship::update() {
-  destR.x = position.x;
-  destR.y = position.y;
-  
-  destR.w = size.w;
-  destR.h = size.h;
 }
 
 void Ship::render() {
-  SDL_RenderCopy(Game::renderer, texture, NULL, &destR);
+  SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
 }
 
+
+// MARK: - Ship Methods
+
+void Ship::updatePosition(SDL_Point p) {
+  rect.x += p.x;
+  rect.y += p.y;
+  
+  if (checkBounds()) {
+    rect.x -= p.x;
+    rect.y -= p.y;
+  }
+}
 
 // MARK: - Helper Methods
 
-void Ship::updatePosition(SDL_Point p) {
-  position.x += p.x;
-  position.y += p.y;
+SDL_Point Ship::mapPosition(SDL_Point p) {
+  return Map::mapPosition(p);
 }
 
-SDL_Point Ship::uiPosition(SDL_Point p) {
-  return Map::uiPosition(p);
+bool Ship::checkBounds() {
+  return Map::checkBounds(rect);
 }
