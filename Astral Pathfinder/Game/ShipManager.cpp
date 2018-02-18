@@ -17,8 +17,10 @@ void ShipManager::init(SDL_Point homeworldPos) {
 
 // MARK: - Game Loop Methods
 
-void ShipManager::update() {
+void ShipManager::update(Uint32 ticks) {
+  // TODO: see ship update comment; we don't want to call move
   playerShip.update();
+  playerShip.move(ticks);
 }
 
 void ShipManager::render() {
@@ -26,26 +28,5 @@ void ShipManager::render() {
 }
 
 void ShipManager::shipMovement(SDL_Event e) {
-  using ShipParameters::velocity;
-  SDL_Point temp;
-  switch(e.key.keysym.sym) {
-    case SDLK_UP:
-      temp = { 0, -velocity };
-      playerShip.updatePosition(temp);
-      break;
-    case SDLK_RIGHT:
-      temp = { velocity, 0 };
-      playerShip.updatePosition(temp);
-      break;
-    case SDLK_DOWN:
-      temp = { 0, velocity };
-      playerShip.updatePosition(temp);
-      break;
-    case SDLK_LEFT:
-      temp = { -velocity, 0 };
-      playerShip.updatePosition(temp);
-      break;
-    default:
-      break;
-  }
+  playerShip.updateVelocity(e);
 }

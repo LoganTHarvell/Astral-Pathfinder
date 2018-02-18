@@ -9,7 +9,6 @@
 // MARK: Source Files
 #include "Game.hpp"
 
-
 int main(int argc, const char *argv[]) {
   using namespace GameParameters;
   
@@ -18,16 +17,17 @@ int main(int argc, const char *argv[]) {
             windowSize.w, windowSize.h, false);
 
   // Tracks time to complete frame
-  Uint32 frameStart;
+  Uint32 frameStart = 0;
+  Uint32 prevTick;
   int frameTime;
   
   // MARK: Game Loop
   while (game.running()) {
-
+    prevTick = frameStart;
     frameStart = SDL_GetTicks();
     
     game.handleEvents();
-    game.update();
+    game.update(frameStart - prevTick);
     game.render();
     
     // Uses frame time and set frame delay to enforce FPS

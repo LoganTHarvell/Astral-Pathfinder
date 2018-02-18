@@ -43,7 +43,7 @@ public:
   
   // MARK: Game Loop Methods
   void handleEvents();
-  void update();
+  void update(Uint32 ticks);
   void render();
   
   // MARK: Game Methods

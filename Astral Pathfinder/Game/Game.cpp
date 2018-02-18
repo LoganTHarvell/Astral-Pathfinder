@@ -89,15 +89,18 @@ void Game::handleEvents() {
     case SDL_KEYDOWN:
       shipManager->shipMovement(event);
       break;
+    case SDL_KEYUP:
+      shipManager->shipMovement(event);
+      break;
     default:
       break;
   }
   
 }
 
-void Game::update() {
+void Game::update(Uint32 ticks) {
   planetManager->update(shipManager);
-  shipManager->update();
+  shipManager->update(ticks);
 }
 
 void Game::render() {

@@ -23,9 +23,10 @@
 void Ship::init(SDL_Point p) {
   using namespace ShipParameters;
   
-  SDL_Point tmp = p;
-  rect.x = tmp.x;
-  rect.y = tmp.y;
+  rect.x = p.x;
+  rect.y = p.y;
+  xVel = 0;
+  yVel = 0;
   rect.w = shipSize.w;
   rect.h = shipSize.h;
 
@@ -39,6 +40,7 @@ void Ship::init(SDL_Point p) {
 // MARK: - Game Loop Methods
 
 void Ship::update() {
+  // TODO: find way to pass variable in and not trigger "ship is abstract"
 }
 
 void Ship::render() {
@@ -48,14 +50,57 @@ void Ship::render() {
 
 // MARK: - Ship Methods
 
-void Ship::updatePosition(SDL_Point p) {
-  rect.x += p.x;
-  rect.y += p.y;
+
+void Ship::updateVelocity(SDL_Event e) {
+  using namespace ShipParameters;
+  if(e.type == SDL_KEYDOWN) {
+    switch(e.key.keysym.sym) {
+      case SDLK_UP:
+        yVel = (-velocity);
+        break;
+      case SDLK_DOWN:
+        yVel = velocity;
+        break;
+      case SDLK_RIGHT:
+        xVel = velocity;
+        break;
+      case SDLK_LEFT:
+        xVel = (-velocity);
+        break;
+      default:
+        break;
+    }
+  }
   
-  if (checkBounds()) {
+  if(e.type == SDL_KEYUP) {
+    switch(e.key.keysym.sym) {
+      case SDLK_UP:
+        yVel = 0;
+        break;
+      case SDLK_DOWN:
+        yVel = 0;
+        break;
+      case SDLK_RIGHT:
+        xVel = 0;
+        break;
+      case SDLK_LEFT:
+        xVel = 0;
+        break;
+      default:
+        break;
+    }
+  }
+}
+
+void Ship::move(Uint32 ticks) {
+  
+  rect.x += (xVel * (ticks/10));
+  rect.y += (yVel * (ticks/10));
+  
+/*  if (checkBounds()) {
     rect.x -= p.x;
     rect.y -= p.y;
-  }
+  }  to be fixed */
 }
 
 // MARK: - Helper Methods

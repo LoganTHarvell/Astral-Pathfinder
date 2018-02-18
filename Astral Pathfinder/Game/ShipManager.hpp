@@ -21,7 +21,7 @@ public:
   void init(SDL_Point homeworldPos);
   
   // MARK: - Game Loop Methods
-  void update();
+  void update(Uint32 ticks);
   void render();
   
   // MARK: - Movement Method
