@@ -25,7 +25,8 @@ namespace ShipParameters {
   } shipSize;
   
   const int population = 10000;
-  const int velocity = 5;
+  // TODO: figure out real velocity/ticks formula
+  const int velocity = 1;
   
 }
 
@@ -34,7 +35,6 @@ namespace ShipParameters {
 class Ship: public GameObject {
   
 public:
-  
   // MARK: - Initialization Methods
   void init(SDL_Point position);
   
@@ -42,16 +42,22 @@ public:
   void update();
   void render();
   
-  // MARK: - Helper Methods
+  // MARK: - Ship Methods
   int getFuel() { return fuel; };
+  
+  void updateVelocity(SDL_Event e);
+  void move(Uint32 ticks);
 
 private:
   // MARK: - Ship Fields
   int rotation;
   int fuel;
+  int xVel, yVel;
   
   // MARK: - Helper Methods
-  SDL_Point uiPosition();
+  SDL_Point mapPosition(SDL_Point p);
+  bool checkBounds();
+  
 };
 
 #endif /* Ship_hpp */

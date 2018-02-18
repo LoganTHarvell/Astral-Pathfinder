@@ -21,8 +21,13 @@ public:
   void init(SDL_Point homeworldPos);
   
   // MARK: - Game Loop Methods
-  void update();
+  void update(Uint32 ticks);
   void render();
+  
+  // MARK: - Movement Method
+  void shipMovement(SDL_Event e);
+  
+  Ship getPlayerShip() { return playerShip; };
   
 private:
   // MARK: - ShipManager Fields

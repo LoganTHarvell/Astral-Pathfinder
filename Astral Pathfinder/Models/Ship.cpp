@@ -9,6 +9,9 @@
 // MARK: Header File
 #include "Ship.hpp"
 
+// MARK: Libraries and Frameworks
+#include <iostream>
+
 // MARK: Source Files
 #include "Game.hpp"
 #include "Map.hpp"
@@ -20,8 +23,13 @@
 void Ship::init(SDL_Point p) {
   using namespace ShipParameters;
   
-  position = p;
-  size = { shipSize.w, shipSize.h };
+  rect.x = p.x;
+  rect.y = p.y;
+  xVel = 0;
+  yVel = 0;
+  rect.w = shipSize.w;
+  rect.h = shipSize.h;
+
   texture = TextureManager::loadTexture("Resources/Assets/simpleSpaceship.png");
   
   rotation = 0;
@@ -32,21 +40,69 @@ void Ship::init(SDL_Point p) {
 // MARK: - Game Loop Methods
 
 void Ship::update() {
-  SDL_Point pos = uiPosition();
-  destR.x = pos.x;
-  destR.y = pos.y;
-  
-  destR.w = size.w;
-  destR.h = size.h;
+  // TODO: find way to pass variable in and not trigger "ship is abstract"
 }
 
 void Ship::render() {
-  SDL_RenderCopy(Game::renderer, texture, NULL, &destR);
+  SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
 }
 
 
+// MARK: - Ship Methods
+
+
+void Ship::updateVelocity(SDL_Event e) {
+  using namespace ShipParameters;
+  if(e.type == SDL_KEYDOWN) {
+    switch(e.key.keysym.sym) {
+      case SDLK_UP:
+        yVel = (-velocity);
+        break;
+      case SDLK_DOWN:
+        yVel = velocity;
+        break;
+      case SDLK_RIGHT:
+        xVel = velocity;
+        break;
+      case SDLK_LEFT:
+        xVel = (-velocity);
+        break;
+      default:
+        break;
+    }
+  }
+  
+  if(e.type == SDL_KEYUP) {
+    switch(e.key.keysym.sym) {
+      case SDLK_UP: case SDLK_DOWN:
+        yVel = 0;
+        break;
+      case SDLK_RIGHT: case SDLK_LEFT:
+        xVel = 0;
+        break;
+      default:
+        break;
+    }
+  }
+}
+
+void Ship::move(Uint32 ticks) {
+  
+  rect.x += (xVel * (ticks/10));
+  rect.y += (yVel * (ticks/10));
+  
+  if (checkBounds()) {
+    rect.x -= (xVel * (ticks/10));
+    rect.y -= (yVel * (ticks/10));
+  }
+}
+
 // MARK: - Helper Methods
 
-SDL_Point Ship::uiPosition() {
-  return Map::uiPosition(position);
+SDL_Point Ship::mapPosition(SDL_Point p) {
+  return Map::mapPosition(p);
+}
+
+bool Ship::checkBounds() {
+  return Map::checkBounds(rect);
 }

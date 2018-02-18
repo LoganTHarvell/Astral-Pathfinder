@@ -35,10 +35,16 @@ void Planet::initPlanet() {
   using namespace PlanetParameters;
   
   // Set planet coordinates
-  position.x = rand()%PlanetManagerParameters::numberOfPlanets;
-  position.y = rand()%PlanetManagerParameters::numberOfPlanets;
+  coordinates.x = rand()%PlanetManagerParameters::numberOfPlanets;
+  coordinates.y = rand()%PlanetManagerParameters::numberOfPlanets;
   
-  size = { planetTexSize, planetTexSize };
+  // Set planet rect
+  SDL_Point tmp = uiPosition(coordinates);
+  rect.x = tmp.x;
+  rect.y = tmp.y;
+  rect.w = planetTexSize;
+  rect.h = planetTexSize;
+  
   texture = TextureManager::loadTexture("Resources/Assets/planet.png");
   
   // Sets planet fertility to random value
@@ -55,20 +61,15 @@ void Planet::initPlanet() {
 // MARK: - Game Loop Methods
 
 void Planet::update() {
-  SDL_Point pos = uiPosition();
-  destR.x = pos.x;
-  destR.y = pos.y;
   
-  destR.w = size.w;
-  destR.h = size.h;
 }
 
 void Planet::render() {
-  SDL_RenderCopy(Game::renderer, texture, NULL, &destR);
+  SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
 }
 
 // MARK: - Helper Methods
 
-SDL_Point Planet::uiPosition() {
-  return Map::uiPosition(position);
+SDL_Point Planet::uiPosition(SDL_Point p) {
+  return Map::uiPosition(p);
 }

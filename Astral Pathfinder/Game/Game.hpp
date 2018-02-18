@@ -35,7 +35,6 @@ namespace GameParameters {
 class GameObject;
 class PlanetManager;
 class ShipManager;
-class Map;
 
 class Game {
   
@@ -44,7 +43,7 @@ public:
   
   // MARK: Game Loop Methods
   void handleEvents();
-  void update();
+  void update(Uint32 ticks);
   void render();
   
   // MARK: Game Methods
@@ -62,7 +61,6 @@ private:
   SDL_Texture *gameScreen;
   PlanetManager *planetManager;
   ShipManager *shipManager;
-  Map *map;
   
 };
 

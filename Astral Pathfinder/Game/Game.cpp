@@ -86,15 +86,21 @@ void Game::handleEvents() {
     case SDL_QUIT:
       isRunning = false;
       break;
+    case SDL_KEYDOWN:
+      shipManager->shipMovement(event);
+      break;
+    case SDL_KEYUP:
+      shipManager->shipMovement(event);
+      break;
     default:
       break;
   }
   
 }
 
-void Game::update() {
-  planetManager->update();
-  shipManager->update();
+void Game::update(Uint32 ticks) {
+  planetManager->update(shipManager);
+  shipManager->update(ticks);
 }
 
 void Game::render() {

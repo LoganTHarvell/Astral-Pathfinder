@@ -17,10 +17,16 @@ void ShipManager::init(SDL_Point homeworldPos) {
 
 // MARK: - Game Loop Methods
 
-void ShipManager::update() {
+void ShipManager::update(Uint32 ticks) {
+  // TODO: see ship update comment; we don't want to call move
   playerShip.update();
+  playerShip.move(ticks);
 }
 
 void ShipManager::render() {
   playerShip.render();
+}
+
+void ShipManager::shipMovement(SDL_Event e) {
+  playerShip.updateVelocity(e);
 }

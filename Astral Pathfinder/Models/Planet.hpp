@@ -41,7 +41,6 @@ namespace PlanetParameters {
 class Planet: public GameObject {
 
 public:
-  
   // MARK: - Initialization Methods
   void initHomeworld();
   void initPlanet();
@@ -51,11 +50,14 @@ public:
   void render();
   
   // MARK: - Planet Methods
+  SDL_Point getCoordinates() { return coordinates; };
   int getDeposits() { return deposits; };
   int getFertility() { return fertility; };
   
 private:
   // MARK: - Planet Fields
+  SDL_Point coordinates;
+  
   enum {
     undiscovered,
     discovered,
@@ -66,7 +68,7 @@ private:
   int deposits, fertility;
   
   // MARK: - Helper Methods
-  SDL_Point uiPosition();
+  SDL_Point uiPosition(SDL_Point p);
 };
 
 #endif /* Planet_hpp */
