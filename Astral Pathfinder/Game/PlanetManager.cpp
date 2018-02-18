@@ -54,7 +54,7 @@ void PlanetManager::initGalaxy() {
 void PlanetManager::update(ShipManager *shipManager) {
   for (Planet& p : planets) {
     p.update();
-   // p.collision(shipManager->getPlayerShip().getRect());
+    p.collision(shipManager->getPlayerShip().getRect());
   }
 }
 
@@ -95,7 +95,7 @@ Planet PlanetManager::initPlanet() {
 }
 
 void PlanetManager::collision(SDL_Rect r) {
- // for (Planet p : planets) {
- //   p.collision(r);
- // }
+  for (Planet p : planets) {
+    p.collision(r);
+  }
 }

@@ -74,16 +74,10 @@ void Ship::updateVelocity(SDL_Event e) {
   
   if(e.type == SDL_KEYUP) {
     switch(e.key.keysym.sym) {
-      case SDLK_UP:
+      case SDLK_UP: case SDLK_DOWN:
         yVel = 0;
         break;
-      case SDLK_DOWN:
-        yVel = 0;
-        break;
-      case SDLK_RIGHT:
-        xVel = 0;
-        break;
-      case SDLK_LEFT:
+      case SDLK_RIGHT: case SDLK_LEFT:
         xVel = 0;
         break;
       default:
@@ -97,10 +91,10 @@ void Ship::move(Uint32 ticks) {
   rect.x += (xVel * (ticks/10));
   rect.y += (yVel * (ticks/10));
   
-/*  if (checkBounds()) {
-    rect.x -= p.x;
-    rect.y -= p.y;
-  }  to be fixed */
+  if (checkBounds()) {
+    rect.x -= (xVel * (ticks/10));
+    rect.y -= (yVel * (ticks/10));
+  }
 }
 
 // MARK: - Helper Methods
