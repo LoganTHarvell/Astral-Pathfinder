@@ -26,8 +26,8 @@ namespace ShipParameters {
   
   const int population = 10000;
   // TODO: figure out real velocity/ticks formula
-  const int velocity = 1;
-  
+  const int speed = 1;
+  const int turnSpeed = 5;
 }
 
 
@@ -52,12 +52,12 @@ private:
   // MARK: - Ship Fields
   int rotation;
   int fuel;
-  int xVel, yVel;
+  SDL_Point velocity;
   
   // MARK: - Helper Methods
   SDL_Point mapPosition(SDL_Point p);
   bool checkBounds();
-  
+  void updateRotation();
 };
 
 #endif /* Ship_hpp */

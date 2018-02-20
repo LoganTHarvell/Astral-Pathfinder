@@ -25,8 +25,8 @@ void Ship::init(SDL_Point p) {
   
   rect.x = p.x;
   rect.y = p.y;
-  xVel = 0;
-  yVel = 0;
+  velocity.x = 0;
+  velocity.y = 0;
   rect.w = shipSize.w;
   rect.h = shipSize.h;
 
@@ -41,31 +41,33 @@ void Ship::init(SDL_Point p) {
 
 void Ship::update() {
   // TODO: find way to pass variable in and not trigger "ship is abstract"
+  updateRotation();
+
 }
 
 void Ship::render() {
-  SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
+  SDL_RenderCopyEx(Game::renderer, texture, NULL, &rect,
+                   rotation, NULL, SDL_FLIP_NONE);
 }
 
 
 // MARK: - Ship Methods
-
 
 void Ship::updateVelocity(SDL_Event e) {
   using namespace ShipParameters;
   if(e.type == SDL_KEYDOWN) {
     switch(e.key.keysym.sym) {
       case SDLK_UP:
-        yVel = (-velocity);
+        velocity.y = (-speed);
         break;
       case SDLK_DOWN:
-        yVel = velocity;
+        velocity.y = speed;
         break;
       case SDLK_RIGHT:
-        xVel = velocity;
+        velocity.x = speed;
         break;
       case SDLK_LEFT:
-        xVel = (-velocity);
+        velocity.x = (-speed);
         break;
       default:
         break;
@@ -75,10 +77,10 @@ void Ship::updateVelocity(SDL_Event e) {
   if(e.type == SDL_KEYUP) {
     switch(e.key.keysym.sym) {
       case SDLK_UP: case SDLK_DOWN:
-        yVel = 0;
+        velocity.y = 0;
         break;
       case SDLK_RIGHT: case SDLK_LEFT:
-        xVel = 0;
+        velocity.x = 0;
         break;
       default:
         break;
@@ -87,13 +89,12 @@ void Ship::updateVelocity(SDL_Event e) {
 }
 
 void Ship::move(Uint32 ticks) {
-  
-  rect.x += (xVel * (ticks/10));
-  rect.y += (yVel * (ticks/10));
+  rect.x += (velocity.x * (ticks/10));
+  rect.y += (velocity.y * (ticks/10));
   
   if (checkBounds()) {
-    rect.x -= (xVel * (ticks/10));
-    rect.y -= (yVel * (ticks/10));
+    rect.x -= (velocity.x * (ticks/10));
+    rect.y -= (velocity.y * (ticks/10));
   }
 }
 
@@ -105,4 +106,49 @@ SDL_Point Ship::mapPosition(SDL_Point p) {
 
 bool Ship::checkBounds() {
   return Map::checkBounds(rect);
+}
+
+void Ship::updateRotation() {
+  using ShipParameters:: turnSpeed;
+  
+  int desiredRotation = 0;
+  
+  enum Quadrant {
+    first = 0,
+    second = 90,
+    third = 180,
+    fourth = 270
+  };
+  
+  if (velocity.x && velocity.y) {
+    desiredRotation = 45;
+    if (velocity.x > 0 && velocity.y < 0) desiredRotation += Quadrant::first;
+    if (velocity.x > 0 && velocity.y > 0) desiredRotation += Quadrant::second;
+    if (velocity.x < 0 && velocity.y > 0) desiredRotation += Quadrant::third;
+    if (velocity.x < 0 && velocity.y < 0) desiredRotation += Quadrant::fourth;
+  }
+  else if (velocity.x || velocity.y) {
+    if (velocity.x) desiredRotation += (velocity.x > 0) ? 90 : 270;
+    if (velocity.y) desiredRotation += (velocity.y > 0) ? 180 : 0;
+  }
+  else return;
+  
+  if (desiredRotation == rotation) return;
+
+  int ts;
+  if (desiredRotation >= Quadrant::third) {
+    if (desiredRotation > rotation && rotation >= (desiredRotation+180)%360)
+      ts = turnSpeed;
+    else
+      ts = -turnSpeed;
+  }
+  else {
+    if (desiredRotation < rotation && rotation <= (desiredRotation+180)%360)
+      ts = -turnSpeed;
+    else 
+      ts = turnSpeed;
+  }
+  
+  rotation = (rotation+ts)%360;
+  if (rotation < 0) rotation = rotation + 360;
 }
