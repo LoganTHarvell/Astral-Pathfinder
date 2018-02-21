@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0208D44B2034B13A009C8181 /* ShipManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0208D4492034B13A009C8181 /* ShipManager.cpp */; };
+		020C4921203DFCF100C4A41B /* UIManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020C491F203DFCF100C4A41B /* UIManager.cpp */; };
 		020CF625200DCEE10095E611 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020CF624200DCEE10095E611 /* main.cpp */; };
 		0210E9E1201F011B00F5E497 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0210E9DF201F011A00F5E497 /* Map.cpp */; };
 		02AA853E2030ECA6009F5DA1 /* PlanetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02AA85382030ECA6009F5DA1 /* PlanetManager.cpp */; };
@@ -35,6 +36,8 @@
 /* Begin PBXFileReference section */
 		0208D4492034B13A009C8181 /* ShipManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShipManager.cpp; sourceTree = "<group>"; };
 		0208D44A2034B13A009C8181 /* ShipManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShipManager.hpp; sourceTree = "<group>"; };
+		020C491F203DFCF100C4A41B /* UIManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIManager.cpp; sourceTree = "<group>"; };
+		020C4920203DFCF100C4A41B /* UIManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIManager.hpp; sourceTree = "<group>"; };
 		020CF621200DCEE10095E611 /* Astral Pathfinder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Astral Pathfinder"; sourceTree = BUILT_PRODUCTS_DIR; };
 		020CF624200DCEE10095E611 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		0210E9DF201F011A00F5E497 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 				02AA853D2030ECA6009F5DA1 /* PlanetManager.hpp */,
 				0208D4492034B13A009C8181 /* ShipManager.cpp */,
 				0208D44A2034B13A009C8181 /* ShipManager.hpp */,
+				020C491F203DFCF100C4A41B /* UIManager.cpp */,
+				020C4920203DFCF100C4A41B /* UIManager.hpp */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 				0210E9E1201F011B00F5E497 /* Map.cpp in Sources */,
 				020CF625200DCEE10095E611 /* main.cpp in Sources */,
 				02DFDC5A200DD16000A136AF /* Game.cpp in Sources */,
+				020C4921203DFCF100C4A41B /* UIManager.cpp in Sources */,
 				02AA853E2030ECA6009F5DA1 /* PlanetManager.cpp in Sources */,
 				02AA853F2030ECA6009F5DA1 /* Planet.cpp in Sources */,
 				02AA85402030ECA6009F5DA1 /* Ship.cpp in Sources */,
