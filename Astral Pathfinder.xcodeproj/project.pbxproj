@@ -37,6 +37,7 @@
 		0208D44A2034B13A009C8181 /* ShipManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShipManager.hpp; sourceTree = "<group>"; };
 		020C4922203E61E400C4A41B /* playerShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playerShip.png; sourceTree = "<group>"; };
 		020C4923203E61E400C4A41B /* movingPlayerShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movingPlayerShip.png; sourceTree = "<group>"; };
+		020C4925203E7C7900C4A41B /* planet2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planet2.png; sourceTree = "<group>"; };
 		020CF621200DCEE10095E611 /* Astral Pathfinder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Astral Pathfinder"; sourceTree = BUILT_PRODUCTS_DIR; };
 		020CF624200DCEE10095E611 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		0210E9DF201F011A00F5E497 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
@@ -153,6 +154,7 @@
 		02DFDC4B200DD04F00A136AF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				020C4925203E7C7900C4A41B /* planet2.png */,
 				020C4923203E61E400C4A41B /* movingPlayerShip.png */,
 				020C4922203E61E400C4A41B /* playerShip.png */,
 				0279AC2D201AC0A700ECE4AE /* gameScreen.png */,
