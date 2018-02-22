@@ -35,6 +35,8 @@
 /* Begin PBXFileReference section */
 		0208D4492034B13A009C8181 /* ShipManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShipManager.cpp; sourceTree = "<group>"; };
 		0208D44A2034B13A009C8181 /* ShipManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShipManager.hpp; sourceTree = "<group>"; };
+		020C4922203E61E400C4A41B /* playerShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playerShip.png; sourceTree = "<group>"; };
+		020C4923203E61E400C4A41B /* movingPlayerShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movingPlayerShip.png; sourceTree = "<group>"; };
 		020CF621200DCEE10095E611 /* Astral Pathfinder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Astral Pathfinder"; sourceTree = BUILT_PRODUCTS_DIR; };
 		020CF624200DCEE10095E611 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		0210E9DF201F011A00F5E497 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
@@ -57,7 +59,6 @@
 		02DFDC57200DD16000A136AF /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
 		02DFDC58200DD16000A136AF /* GameObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameObject.hpp; sourceTree = "<group>"; };
 		02DFDC5E200DD34700A136AF /* planet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planet.png; path = Resources/Assets/planet.png; sourceTree = SOURCE_ROOT; };
-		02DFDC5F200DD34700A136AF /* simpleSpaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = simpleSpaceship.png; path = Resources/Assets/simpleSpaceship.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,9 +153,10 @@
 		02DFDC4B200DD04F00A136AF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				020C4923203E61E400C4A41B /* movingPlayerShip.png */,
+				020C4922203E61E400C4A41B /* playerShip.png */,
 				0279AC2D201AC0A700ECE4AE /* gameScreen.png */,
 				02DFDC5E200DD34700A136AF /* planet.png */,
-				02DFDC5F200DD34700A136AF /* simpleSpaceship.png */,
 			);
 			path = Assets;
 			sourceTree = "<group>";

@@ -25,14 +25,14 @@ void Ship::init(SDL_Point p) {
   
   rect.x = p.x;
   rect.y = p.y;
-  xVel = 0;
-  yVel = 0;
+  velocity.x = 0;
+  velocity.y = 0;
   rect.w = shipSize.w;
   rect.h = shipSize.h;
 
-  texture = TextureManager::loadTexture("Resources/Assets/simpleSpaceship.png");
+  texture = TextureManager::loadTexture("Resources/Assets/movingPlayerShip.png");
   
-  rotation = 0;
+  rotation = 270;
   fuel = 0;
 }
 
@@ -41,31 +41,33 @@ void Ship::init(SDL_Point p) {
 
 void Ship::update() {
   // TODO: find way to pass variable in and not trigger "ship is abstract"
+  updateRotation();
+
 }
 
 void Ship::render() {
-  SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
+  SDL_RenderCopyEx(Game::renderer, texture, NULL, &rect,
+                   rotation, NULL, SDL_FLIP_NONE);
 }
 
 
 // MARK: - Ship Methods
-
 
 void Ship::updateVelocity(SDL_Event e) {
   using namespace ShipParameters;
   if(e.type == SDL_KEYDOWN) {
     switch(e.key.keysym.sym) {
       case SDLK_UP:
-        yVel = (-velocity);
+        velocity.y = (-speed);
         break;
       case SDLK_DOWN:
-        yVel = velocity;
+        velocity.y = speed;
         break;
       case SDLK_RIGHT:
-        xVel = velocity;
+        velocity.x = speed;
         break;
       case SDLK_LEFT:
-        xVel = (-velocity);
+        velocity.x = (-speed);
         break;
       default:
         break;
@@ -75,10 +77,10 @@ void Ship::updateVelocity(SDL_Event e) {
   if(e.type == SDL_KEYUP) {
     switch(e.key.keysym.sym) {
       case SDLK_UP: case SDLK_DOWN:
-        yVel = 0;
+        velocity.y = 0;
         break;
       case SDLK_RIGHT: case SDLK_LEFT:
-        xVel = 0;
+        velocity.x = 0;
         break;
       default:
         break;
@@ -87,13 +89,12 @@ void Ship::updateVelocity(SDL_Event e) {
 }
 
 void Ship::move(Uint32 ticks) {
-  
-  rect.x += (xVel * (ticks/10));
-  rect.y += (yVel * (ticks/10));
+  rect.x += (velocity.x * (ticks/10));
+  rect.y += (velocity.y * (ticks/10));
   
   if (checkBounds()) {
-    rect.x -= (xVel * (ticks/10));
-    rect.y -= (yVel * (ticks/10));
+    rect.x -= (velocity.x * (ticks/10));
+    rect.y -= (velocity.y * (ticks/10));
   }
 }
 
@@ -105,4 +106,47 @@ SDL_Point Ship::mapPosition(SDL_Point p) {
 
 bool Ship::checkBounds() {
   return Map::checkBounds(rect);
+}
+
+void Ship::updateRotation() {
+  using ShipParameters:: turnSpeed;
+  
+  int desiredRotation = 0;
+  
+  enum Direction {
+    right = 0, downRight = 45,
+    down = 90, downLeft = 135,
+    left = 180, upLeft = 225,
+    up = 270, upRight = 315
+  };
+  
+  if (velocity.x == 0 && velocity.y == 0) return;
+  if (velocity.x > 0 && velocity.y == 0) desiredRotation = Direction::right;
+  if (velocity.x > 0 && velocity.y > 0) desiredRotation = Direction::downRight;
+  if (velocity.x == 0 && velocity.y > 0) desiredRotation = Direction::down;
+  if (velocity.x < 0 && velocity.y > 0) desiredRotation = Direction::downLeft;
+  if (velocity.x < 0 && velocity.y == 0) desiredRotation = Direction::left;
+  if (velocity.x < 0 && velocity.y < 0) desiredRotation = Direction::upLeft;
+  if (velocity.x == 0 && velocity.y < 0) desiredRotation = Direction::up;
+  if (velocity.x > 0 && velocity.y < 0) desiredRotation = Direction::upRight;
+
+
+  if (desiredRotation == rotation) return;
+
+  int ts;
+  if (desiredRotation >= 180) {
+    if (desiredRotation > rotation && rotation >= (desiredRotation+180)%360)
+      ts = turnSpeed;
+    else
+      ts = -turnSpeed;
+  }
+  else {
+    if (desiredRotation < rotation && rotation <= (desiredRotation+180)%360)
+      ts = -turnSpeed;
+    else 
+      ts = turnSpeed;
+  }
+  
+  rotation = (rotation+ts)%360;
+  if (rotation < 0) rotation = rotation + 360;
 }
