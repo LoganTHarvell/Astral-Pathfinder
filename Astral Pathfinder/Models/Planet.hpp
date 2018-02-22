@@ -53,6 +53,7 @@ public:
   SDL_Point getCoordinates() { return coordinates; };
   int getDeposits() { return deposits; };
   int getFertility() { return fertility; };
+  void clicked();
   
 private:
   // MARK: - Planet Fields

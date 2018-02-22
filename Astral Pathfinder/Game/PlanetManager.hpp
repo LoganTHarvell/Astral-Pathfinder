@@ -41,6 +41,7 @@ public:
   
   // MARK: - PlanetManager Methods
   Planet getPlanet(int n);
+  void checkClicked(SDL_Event e);
   
 private:
   // MARK: - Helper Methods

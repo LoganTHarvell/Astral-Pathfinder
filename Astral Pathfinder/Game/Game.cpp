@@ -92,6 +92,9 @@ void Game::handleEvents() {
     case SDL_KEYUP:
       shipManager->shipMovement(event);
       break;
+    case SDL_MOUSEBUTTONUP:
+      planetManager->checkClicked(event);
+      break;
     default:
       break;
   }

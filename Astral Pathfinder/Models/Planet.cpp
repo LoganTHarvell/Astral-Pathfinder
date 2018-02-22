@@ -70,6 +70,10 @@ void Planet::render() {
 
 // MARK: - Helper Methods
 
+void Planet::clicked() {
+  texture = TextureManager::loadTexture("Resources/Assets/planet2.png");
+}
+
 SDL_Point Planet::uiPosition(SDL_Point p) {
   return Map::uiPosition(p);
 }
