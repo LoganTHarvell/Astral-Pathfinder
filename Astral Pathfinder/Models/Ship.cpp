@@ -30,9 +30,9 @@ void Ship::init(SDL_Point p) {
   rect.w = shipSize.w;
   rect.h = shipSize.h;
 
-  texture = TextureManager::loadTexture("Resources/Assets/simpleSpaceship.png");
+  texture = TextureManager::loadTexture("Resources/Assets/movingPlayerShip.png");
   
-  rotation = 0;
+  rotation = 270;
   fuel = 0;
 }
 
@@ -113,30 +113,28 @@ void Ship::updateRotation() {
   
   int desiredRotation = 0;
   
-  enum Quadrant {
-    first = 0,
-    second = 90,
-    third = 180,
-    fourth = 270
+  enum Direction {
+    right = 0, downRight = 45,
+    down = 90, downLeft = 135,
+    left = 180, upLeft = 225,
+    up = 270, upRight = 315
   };
   
-  if (velocity.x && velocity.y) {
-    desiredRotation = 45;
-    if (velocity.x > 0 && velocity.y < 0) desiredRotation += Quadrant::first;
-    if (velocity.x > 0 && velocity.y > 0) desiredRotation += Quadrant::second;
-    if (velocity.x < 0 && velocity.y > 0) desiredRotation += Quadrant::third;
-    if (velocity.x < 0 && velocity.y < 0) desiredRotation += Quadrant::fourth;
-  }
-  else if (velocity.x || velocity.y) {
-    if (velocity.x) desiredRotation += (velocity.x > 0) ? 90 : 270;
-    if (velocity.y) desiredRotation += (velocity.y > 0) ? 180 : 0;
-  }
-  else return;
-  
+  if (velocity.x == 0 && velocity.y == 0) return;
+  if (velocity.x > 0 && velocity.y == 0) desiredRotation = Direction::right;
+  if (velocity.x > 0 && velocity.y > 0) desiredRotation = Direction::downRight;
+  if (velocity.x == 0 && velocity.y > 0) desiredRotation = Direction::down;
+  if (velocity.x < 0 && velocity.y > 0) desiredRotation = Direction::downLeft;
+  if (velocity.x < 0 && velocity.y == 0) desiredRotation = Direction::left;
+  if (velocity.x < 0 && velocity.y < 0) desiredRotation = Direction::upLeft;
+  if (velocity.x == 0 && velocity.y < 0) desiredRotation = Direction::up;
+  if (velocity.x > 0 && velocity.y < 0) desiredRotation = Direction::upRight;
+
+
   if (desiredRotation == rotation) return;
 
   int ts;
-  if (desiredRotation >= Quadrant::third) {
+  if (desiredRotation >= 180) {
     if (desiredRotation > rotation && rotation >= (desiredRotation+180)%360)
       ts = turnSpeed;
     else

@@ -21,7 +21,7 @@
 namespace ShipParameters {
   
   const struct {
-    int w = 24, h = 45;
+    int w = 40, h = 24;
   } shipSize;
   
   const int population = 10000;
