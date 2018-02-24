@@ -92,6 +92,9 @@ void Game::handleEvents() {
     case SDL_KEYUP:
       shipManager->shipMovement(event);
       break;
+    case SDL_MOUSEBUTTONUP:
+      planetManager->checkClicked(event);
+      break;
     default:
       break;
   }
@@ -106,7 +109,9 @@ void Game::update(Uint32 ticks) {
 void Game::render() {
   SDL_RenderClear(renderer);
   
-  SDL_RenderCopy(renderer, gameScreen, NULL, NULL);
+  using GameParameters::windowSize;
+  SDL_Rect windowR = { 0, 0, windowSize.w, windowSize.h };
+  SDL_RenderCopy(renderer, gameScreen, NULL, &windowR);
 
   // Render stuff
   planetManager->render();
