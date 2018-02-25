@@ -16,6 +16,7 @@
 #include "GameObject.hpp"
 #include "Planet.hpp"
 #include "ShipManager.hpp"
+#include "UIManager.hpp"
 
 
 // MARK: - PlanetManager Parameters
@@ -41,7 +42,7 @@ public:
   
   // MARK: - PlanetManager Methods
   Planet getPlanet(int n);
-  void checkClicked(SDL_Event e);
+  bool checkClicked(SDL_Event e, UIManager *ui);
   
 private:
   // MARK: - Helper Methods

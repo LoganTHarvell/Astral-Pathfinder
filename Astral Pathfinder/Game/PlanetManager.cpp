@@ -71,15 +71,19 @@ Planet PlanetManager::getPlanet(int n) {
   return planets[n];
 }
 
-void PlanetManager::checkClicked(SDL_Event e) {
+bool PlanetManager::checkClicked(SDL_Event e, UIManager *ui) {
   int x = e.button.x;
   int y = e.button.y;
   
   for(Planet& p : planets) {
     SDL_Rect temp = p.getRect();
-    if((x > temp.x) && (x < temp.x + temp.w) && (y > temp.y) && (y < temp.y + temp.h))
+    if((x > temp.x) && (x < temp.x + temp.w) && (y > temp.y) && (y < temp.y + temp.h)) {
       p.clicked();
+      ui->setText(p.getDeposits(), p.getFertility());
+      return true;
+    }
   }
+  return false;
 }
 
 

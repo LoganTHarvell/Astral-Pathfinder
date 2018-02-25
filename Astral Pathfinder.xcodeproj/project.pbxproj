@@ -19,6 +19,8 @@
 		02DFDC5A200DD16000A136AF /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DFDC53200DD16000A136AF /* Game.cpp */; };
 		02DFDC5B200DD16000A136AF /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DFDC55200DD16000A136AF /* GameObject.cpp */; };
 		02DFDC5C200DD16000A136AF /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DFDC57200DD16000A136AF /* TextureManager.cpp */; };
+		9175F95320421E6A008D9828 /* Text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9175F95120421E6A008D9828 /* Text.cpp */; };
+		91EC30BC20425B060068D2F4 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9175F94F20421777008D9828 /* SDL2_ttf.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +65,10 @@
 		02DFDC57200DD16000A136AF /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
 		02DFDC58200DD16000A136AF /* GameObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameObject.hpp; sourceTree = "<group>"; };
 		02DFDC5E200DD34700A136AF /* planet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planet.png; path = Resources/Assets/planet.png; sourceTree = SOURCE_ROOT; };
+		9175F94F20421777008D9828 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
+		9175F95120421E6A008D9828 /* Text.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Text.cpp; sourceTree = "<group>"; };
+		9175F954204227A8008D9828 /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Arial.ttf; path = ../../../../../../../Library/Fonts/Arial.ttf; sourceTree = "<group>"; };
+		91EC30BD20425BE20068D2F4 /* Text.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Text.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91EC30BC20425B060068D2F4 /* SDL2_ttf.framework in Frameworks */,
 				02DFDC50200DD0A900A136AF /* SDL2_image.framework in Frameworks */,
 				02DFDC4E200DD09E00A136AF /* SDL2.framework in Frameworks */,
 			);
@@ -128,6 +135,8 @@
 				02AA853C2030ECA6009F5DA1 /* Planet.hpp */,
 				02AA853A2030ECA6009F5DA1 /* Ship.cpp */,
 				02AA853B2030ECA6009F5DA1 /* Ship.hpp */,
+				9175F95120421E6A008D9828 /* Text.cpp */,
+				91EC30BD20425BE20068D2F4 /* Text.hpp */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -159,6 +168,7 @@
 		02DFDC4B200DD04F00A136AF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				9175F954204227A8008D9828 /* Arial.ttf */,
 				020C4925203E7C7900C4A41B /* planet2.png */,
 				020C4923203E61E400C4A41B /* movingPlayerShip.png */,
 				020C4922203E61E400C4A41B /* playerShip.png */,
@@ -171,6 +181,7 @@
 		02DFDC4C200DD09E00A136AF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9175F94F20421777008D9828 /* SDL2_ttf.framework */,
 				02DFDC4F200DD0A900A136AF /* SDL2_image.framework */,
 				02DFDC4D200DD09E00A136AF /* SDL2.framework */,
 			);
@@ -238,6 +249,7 @@
 				020CF625200DCEE10095E611 /* main.cpp in Sources */,
 				02DFDC5A200DD16000A136AF /* Game.cpp in Sources */,
 				020C4921203DFCF100C4A41B /* UIManager.cpp in Sources */,
+				9175F95320421E6A008D9828 /* Text.cpp in Sources */,
 				02AA853E2030ECA6009F5DA1 /* PlanetManager.cpp in Sources */,
 				02AA853F2030ECA6009F5DA1 /* Planet.cpp in Sources */,
 				02AA85402030ECA6009F5DA1 /* Ship.cpp in Sources */,
@@ -357,12 +369,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WUP28GH2WB;
+				DEVELOPMENT_TEAM = MXYX4524CL;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -371,12 +384,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WUP28GH2WB;
+				DEVELOPMENT_TEAM = MXYX4524CL;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

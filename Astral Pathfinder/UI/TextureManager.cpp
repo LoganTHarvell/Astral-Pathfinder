@@ -36,3 +36,19 @@ SDL_Texture *TextureManager::loadTexture(const char *textureFile) {
   
   return texture;
 }
+
+/*static SDL_Texture *loadTextTexture(_TTF_Font font, const char *text, SDL_Color color) {
+  
+  SDL_Texture *texture = NULL;
+  SDL_Surface *tmpSurface = TTF_RenderText_Solid(font, text, color);
+  
+  if (tmpSurface == NULL) {
+    std::cerr << "Error getting text" << IMG_GetError() << std::endl;
+  }
+  else {
+    texture = SDL_CreateTextureFromSurface(Game::renderer, tmpSurface);
+    SDL_FreeSurface(tmpSurface);
+  }
+  
+  return texture;
+} */

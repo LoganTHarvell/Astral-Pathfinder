@@ -9,6 +9,7 @@
 #ifndef UIManager_hpp
 #define UIManager_hpp
 
+#include "Text.hpp"
 
 class UIManager {
   
@@ -17,9 +18,10 @@ public:
   
   void update();
   void render();
+  void setText(int deposits, int fertility);
   
 private:
-  
+  Text depositsBox, fertilityBox;
   
 };
 

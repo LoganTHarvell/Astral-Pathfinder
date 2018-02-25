@@ -18,6 +18,7 @@
 #include "ShipManager.hpp"
 #include "Map.hpp"
 #include "TextureManager.hpp"
+#include "UIManager.hpp"
 
 
 SDL_Renderer *Game::renderer = nullptr;
@@ -38,8 +39,8 @@ void Game::init(const char *title,
   
   // Initializes SDL frameworks
   if (SDL_Init(SDL_INIT_EVERYTHING) == 0
-      && ( IMG_Init( imgFlags ) & imgFlags )) {
-    std::cout << "SDL and SDL_image initialised!..." << std::endl;
+      && ( IMG_Init( imgFlags ) & imgFlags ) && TTF_Init() == 0) {
+    std::cout << "Frameworks initialised!..." << std::endl;
     
     // Initializes window
     window = SDL_CreateWindow(title, x, y, w, h, flags | SDL_WINDOW_RESIZABLE );
@@ -74,6 +75,9 @@ void Game::init(const char *title,
 
   shipManager = new ShipManager;
   shipManager->init(planetManager->getPlanet(0).getPosition());
+  
+  uiManager = new UIManager;
+  uiManager->init();
 }
 
 
@@ -93,7 +97,7 @@ void Game::handleEvents() {
       shipManager->shipMovement(event);
       break;
     case SDL_MOUSEBUTTONUP:
-      planetManager->checkClicked(event);
+      clickFlag = planetManager->checkClicked(event, uiManager);
       break;
     default:
       break;
@@ -116,6 +120,8 @@ void Game::render() {
   // Render stuff
   planetManager->render();
   shipManager->render();
+  if(clickFlag)
+    uiManager->render();
 
   SDL_RenderPresent(renderer);
 }
@@ -128,6 +134,7 @@ void Game::clean() {
   SDL_DestroyRenderer(renderer);
   SDL_Quit();
   IMG_Quit();
+  TTF_Quit();
   
   std::cout << "Game cleaned." << std::endl;
 }
