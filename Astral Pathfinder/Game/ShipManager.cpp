@@ -12,7 +12,13 @@
 // MARK: - ShipManager Initialization
 
 void ShipManager::init(SDL_Point homeworldPos) {
-  playerShip.init(homeworldPos);
+  using namespace ShipParameters;
+  
+  // Centers ship on homeworld
+  SDL_Point p = { homeworldPos.x - (shipSize.w/2),
+                  homeworldPos.y - (shipSize.h/2) };
+  
+  playerShip.init(p);
 }
 
 // MARK: - Game Loop Methods

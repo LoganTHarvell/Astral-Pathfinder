@@ -74,7 +74,7 @@ void Game::init(const char *title,
   planetManager->initGalaxy();
 
   shipManager = new ShipManager;
-  shipManager->init(planetManager->getPlanet(0).getPosition());
+  shipManager->init(planetManager->getPlanet(0).getCenter());
   
   uiManager = new UIManager;
   uiManager->init();
