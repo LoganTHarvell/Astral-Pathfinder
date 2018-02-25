@@ -43,6 +43,7 @@ public:
   // MARK: - PlanetManager Methods
   Planet getPlanet(int n);
   bool checkClicked(SDL_Event e, UIManager *ui);
+  void revertClick();
   
 private:
   // MARK: - Helper Methods
@@ -54,6 +55,7 @@ private:
   
   // MARK: - PlanetManager Fields
   Planet planets[PlanetManagerParameters::numberOfPlanets];
+  int chosenPlanet;
   
 };
 

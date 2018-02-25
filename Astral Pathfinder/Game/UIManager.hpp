@@ -19,6 +19,7 @@ public:
   void update();
   void render();
   void setText(int deposits, int fertility);
+  void resetText();
   
 private:
   Text depositsBox, fertilityBox;
