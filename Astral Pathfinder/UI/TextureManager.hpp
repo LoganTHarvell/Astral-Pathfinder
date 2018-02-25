@@ -20,7 +20,6 @@ public:
   // MARK: - TextureManager Methods
   // Loads textures from image file
   static SDL_Texture *loadTexture(const char *textureFile);
-  static SDL_Texture *loadTextTexture(_TTF_Font font, const char *text, SDL_Color color);
   
 };
 
