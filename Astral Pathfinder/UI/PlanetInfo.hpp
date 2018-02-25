@@ -28,14 +28,14 @@ public:
   // MARK: - Game Loop Methods
   void update(Planet p);
   void render();
-  
-  // MARK: - PlanetInfo Methods
-  void setBoxes(Planet p);
   void resetText();
-
+  
 private:
   // MARK: - PlanetInfo Fields
   TextBox depositsText, fertilityText;
+  
+  // MARK: - PlanetInfo Methods
+  void setBoxes(Planet p);
 };
 
 #endif /* PlanetInfo_hpp */

@@ -11,7 +11,6 @@
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
-#include "SDL2_ttf/SDL_ttf.h"
 
 
 class TextureManager {

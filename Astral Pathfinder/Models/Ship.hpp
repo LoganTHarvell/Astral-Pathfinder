@@ -32,6 +32,7 @@ namespace ShipParameters {
 
 
 // MARK: - Ship Class
+
 class Ship: public GameObject {
   
 public:

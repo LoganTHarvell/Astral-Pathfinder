@@ -123,6 +123,10 @@
 			children = (
 				0210E9DF201F011A00F5E497 /* Map.cpp */,
 				0210E9E0201F011A00F5E497 /* Map.hpp */,
+				9138E32120433371009C3D6D /* PlanetInfo.cpp */,
+				9138E32220433371009C3D6D /* PlanetInfo.hpp */,
+				9175F95120421E6A008D9828 /* TextBox.cpp */,
+				91EC30BD20425BE20068D2F4 /* TextBox.hpp */,
 				02DFDC57200DD16000A136AF /* TextureManager.cpp */,
 				02DFDC51200DD16000A136AF /* TextureManager.hpp */,
 			);
@@ -138,8 +142,6 @@
 				02AA853C2030ECA6009F5DA1 /* Planet.hpp */,
 				02AA853A2030ECA6009F5DA1 /* Ship.cpp */,
 				02AA853B2030ECA6009F5DA1 /* Ship.hpp */,
-				9175F95120421E6A008D9828 /* TextBox.cpp */,
-				91EC30BD20425BE20068D2F4 /* TextBox.hpp */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -156,8 +158,6 @@
 				0208D44A2034B13A009C8181 /* ShipManager.hpp */,
 				020C491F203DFCF100C4A41B /* UIManager.cpp */,
 				020C4920203DFCF100C4A41B /* UIManager.hpp */,
-				9138E32120433371009C3D6D /* PlanetInfo.cpp */,
-				9138E32220433371009C3D6D /* PlanetInfo.hpp */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -374,8 +374,9 @@
 		020CF629200DCEE10095E611 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MXYX4524CL;
+				DEVELOPMENT_TEAM = WUP28GH2WB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
@@ -383,14 +384,16 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
 		020CF62A200DCEE10095E611 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MXYX4524CL;
+				DEVELOPMENT_TEAM = WUP28GH2WB;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
@@ -398,6 +401,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

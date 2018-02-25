@@ -6,21 +6,22 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
-
-// MARKL: Header File
+// MARK: Header File
 #include "TextBox.hpp"
 
 // MARK: Source Files
 #include "Game.hpp"
 #include "TextureManager.hpp"
 
+
 // MARK: - TextBox Initialization
 
 void TextBox::init(SDL_Rect rectangle) {
-  font = TTF_OpenFont("Resources/Assets/Arial.ttf", 36);
+  font = TTF_OpenFont(TextParameters::fontFile, 36);
   
   rect = rectangle;
 }
+
 
 // MARK: - Game Loop Methods
 
@@ -31,6 +32,7 @@ void TextBox::update() {
 void TextBox::render() {
   SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
 }
+
 
 // MARK: - TextBox Methods
 

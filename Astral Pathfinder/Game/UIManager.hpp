@@ -23,8 +23,8 @@ public:
   void render();
   
   // MARK: - UIManager Methods
-  void setText(Planet p);
-  void resetText();
+  void setSelectedPlanet(Planet p);
+  void resetSelectedPlanet();
   
 private:
   // MARK: - UIManager Fields

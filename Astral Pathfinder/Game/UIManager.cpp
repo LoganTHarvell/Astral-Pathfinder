@@ -6,7 +6,6 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
-
 // MARK: Header File
 #include "UIManager.hpp"
 
@@ -32,10 +31,11 @@ void UIManager::render() {
 
 // MARK: - UIManager Methods
 
-void UIManager::setText(Planet p) {
+void UIManager::setSelectedPlanet(Planet p) {
   planetInfo.update(p);
 }
 
-void UIManager::resetText() {
+void UIManager::resetSelectedPlanet() {
   planetInfo.resetText();
 }
+

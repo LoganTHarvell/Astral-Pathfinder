@@ -96,7 +96,7 @@ void Game::handleEvents() {
     case SDL_KEYUP:
       if(event.key.keysym.sym == SDLK_ESCAPE && clickFlag) {
         clickFlag = false;
-        uiManager->resetText();
+        uiManager->resetSelectedPlanet();
         planetManager->revertClick();
       }
       else

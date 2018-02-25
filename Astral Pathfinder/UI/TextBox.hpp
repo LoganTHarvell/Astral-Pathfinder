@@ -11,17 +11,22 @@
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
-#include "Game.hpp"
+#include "SDL2_ttf/SDL_ttf.h"
 
 // MARK: Source Files
+#include "Game.hpp"
 #include "GameObject.hpp"
+
 
 // MARK: - TextBox Parameters
 
 namespace TextParameters {
   const SDL_Color color = {255, 255, 255};
+  const auto fontFile = "Resources/Assets/Arial.ttf";
 }
 
+
+// MARK: - TextBox Class
 
 class TextBox : public GameObject {
 public:
@@ -40,7 +45,6 @@ public:
 private:
   // MARK: - Textbox Fields
   TTF_Font *font;
-  SDL_Surface *surface;
 };
 
 #endif /* Text_hpp */

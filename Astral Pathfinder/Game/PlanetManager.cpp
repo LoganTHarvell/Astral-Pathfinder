@@ -81,10 +81,10 @@ bool PlanetManager::checkClicked(SDL_Event e, UIManager *ui, bool flag) {
     if((x > temp.x) && (x < temp.x + temp.w) && (y > temp.y) && (y < temp.y + temp.h)) {
       if(flag) {
         revertClick();
-        ui->resetText();
+        ui->resetSelectedPlanet();
       }
       p.clicked();
-      ui->setText(p);
+      ui->setSelectedPlanet(p);
       chosenPlanet = i;
       return true;
     }
