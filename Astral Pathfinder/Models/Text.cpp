@@ -9,8 +9,6 @@
 #include "Text.hpp"
 #include "Game.hpp"
 #include "TextureManager.hpp"
-#include <iostream>
-#include <string.h>
 
 using namespace TextParameters;
 
