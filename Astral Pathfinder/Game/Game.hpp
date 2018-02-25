@@ -59,7 +59,7 @@ private:
   // MARK: Game Fields
   bool isRunning = false;
   SDL_Window *window;
-  bool clickFlag;
+  bool clickFlag = false;
   
   SDL_Texture *gameScreen;
   PlanetManager *planetManager;

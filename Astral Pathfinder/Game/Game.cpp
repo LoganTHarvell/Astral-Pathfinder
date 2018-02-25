@@ -103,7 +103,7 @@ void Game::handleEvents() {
         shipManager->shipMovement(event);
       break;
     case SDL_MOUSEBUTTONUP:
-      clickFlag = planetManager->checkClicked(event, uiManager);
+      clickFlag = planetManager->checkClicked(event, uiManager, clickFlag);
       break;
     default:
       break;

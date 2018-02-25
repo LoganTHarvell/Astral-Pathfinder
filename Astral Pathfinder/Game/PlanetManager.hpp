@@ -42,7 +42,7 @@ public:
   
   // MARK: - PlanetManager Methods
   Planet getPlanet(int n);
-  bool checkClicked(SDL_Event e, UIManager *ui);
+  bool checkClicked(SDL_Event e, UIManager *ui, bool flag);
   void revertClick();
   
 private:
