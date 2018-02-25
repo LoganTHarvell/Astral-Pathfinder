@@ -94,7 +94,12 @@ void Game::handleEvents() {
       shipManager->shipMovement(event);
       break;
     case SDL_KEYUP:
-      shipManager->shipMovement(event);
+      if(event.key.keysym.sym == SDLK_ESCAPE) {
+        clickFlag = false;
+        uiManager->resetText();
+      }
+      else
+        shipManager->shipMovement(event);
       break;
     case SDL_MOUSEBUTTONUP:
       clickFlag = planetManager->checkClicked(event, uiManager);

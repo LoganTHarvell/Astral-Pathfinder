@@ -30,3 +30,8 @@ void UIManager::setText(int deposits, int fertility) {
   depositsBox.setMessage(depo.c_str());
   fertilityBox.setMessage(fert.c_str());
 }
+
+void UIManager::resetText() {
+  depositsBox.reset();
+  fertilityBox.reset();
+}

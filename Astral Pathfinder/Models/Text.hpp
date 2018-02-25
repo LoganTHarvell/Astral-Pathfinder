@@ -34,6 +34,7 @@ public:
   void render();
   
   void setMessage(const char *words);
+  void reset();
   
   
 private:

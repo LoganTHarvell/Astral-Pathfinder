@@ -46,3 +46,8 @@ void Text::setMessage(const char *words) {
   texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
   SDL_FreeSurface(surface);
 }
+
+void Text::reset() {
+  SDL_DestroyTexture(texture);
+  texture = nullptr;
+}
