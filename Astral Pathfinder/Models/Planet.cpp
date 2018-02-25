@@ -71,11 +71,11 @@ void Planet::render() {
 // MARK: - Helper Methods
 
 void Planet::clicked() {
-  texture = TextureManager::loadTexture("Resources/Assets/planet2.png");
+  SDL_SetTextureColorMod(texture, 0, 255, 0);
 }
 
 void Planet::revertClick() {
-  texture = TextureManager::loadTexture("Resources/Assets/planet.png");
+  SDL_SetTextureColorMod(texture, 255, 255, 255);
 }
 
 SDL_Point Planet::uiPosition(SDL_Point p) {
