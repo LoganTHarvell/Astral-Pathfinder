@@ -94,9 +94,10 @@ void Game::handleEvents() {
       shipManager->shipMovement(event);
       break;
     case SDL_KEYUP:
-      if(event.key.keysym.sym == SDLK_ESCAPE) {
+      if(event.key.keysym.sym == SDLK_ESCAPE && clickFlag) {
         clickFlag = false;
         uiManager->resetText();
+        planetManager->revertClick();
       }
       else
         shipManager->shipMovement(event);

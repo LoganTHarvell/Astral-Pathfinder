@@ -74,16 +74,24 @@ Planet PlanetManager::getPlanet(int n) {
 bool PlanetManager::checkClicked(SDL_Event e, UIManager *ui) {
   int x = e.button.x;
   int y = e.button.y;
+  int i = 0;
   
   for(Planet& p : planets) {
     SDL_Rect temp = p.getRect();
     if((x > temp.x) && (x < temp.x + temp.w) && (y > temp.y) && (y < temp.y + temp.h)) {
       p.clicked();
       ui->setText(p.getDeposits(), p.getFertility());
+      chosenPlanet = i;
       return true;
     }
+    i++;
   }
   return false;
+}
+
+void PlanetManager::revertClick() {
+  planets[chosenPlanet].revertClick();
+  chosenPlanet = NULL;
 }
 
 

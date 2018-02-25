@@ -74,6 +74,10 @@ void Planet::clicked() {
   texture = TextureManager::loadTexture("Resources/Assets/planet2.png");
 }
 
+void Planet::revertClick() {
+  texture = TextureManager::loadTexture("Resources/Assets/planet.png");
+}
+
 SDL_Point Planet::uiPosition(SDL_Point p) {
   return Map::uiPosition(p);
 }
