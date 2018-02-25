@@ -12,12 +12,8 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
 
-// MARK: Libraries and Frameworks
-#include <string>
-
 void UIManager::init() {
-  depositsBox.initDeposits();
-  fertilityBox.initFertility();
+  planetInfo.init();
 }
 
 void UIManager::update() {
@@ -25,20 +21,13 @@ void UIManager::update() {
 }
 
 void UIManager::render() {
-  depositsBox.render();
-  fertilityBox.render();
+  planetInfo.render();
 }
 
-void UIManager::setText(int deposits, int fertility) {
-  std::string depo = "Deposits: " + std::to_string(deposits);
-  std::string fert = "Fertility: " + std::to_string(fertility);
-  
-  depositsBox.setMessage(depo.c_str());
-  fertilityBox.setMessage(fert.c_str());
-  
+void UIManager::setText(Planet p) {
+  planetInfo.setBoxes(p);
 }
 
 void UIManager::resetText() {
-  depositsBox.reset();
-  fertilityBox.reset();
+  planetInfo.resetText();
 }

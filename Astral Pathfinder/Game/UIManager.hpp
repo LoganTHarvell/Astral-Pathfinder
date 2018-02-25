@@ -10,7 +10,8 @@
 #define UIManager_hpp
 
 // MARK: Source Files
-#include "Text.hpp"
+#include "PlanetInfo.hpp"
+#include "Planet.hpp"
 
 class UIManager {
   
@@ -19,11 +20,11 @@ public:
   
   void update();
   void render();
-  void setText(int deposits, int fertility);
+  void setText(Planet p);
   void resetText();
   
 private:
-  Text depositsBox, fertilityBox;
+  PlanetInfo planetInfo;
 };
 
 #endif /* UIManager_hpp */

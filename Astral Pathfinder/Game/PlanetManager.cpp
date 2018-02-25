@@ -84,7 +84,7 @@ bool PlanetManager::checkClicked(SDL_Event e, UIManager *ui, bool flag) {
         ui->resetText();
       }
       p.clicked();
-      ui->setText(p.getDeposits(), p.getFertility());
+      ui->setText(p);
       chosenPlanet = i;
       return true;
     }

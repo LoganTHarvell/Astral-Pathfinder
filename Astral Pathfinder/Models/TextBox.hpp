@@ -1,5 +1,5 @@
 //
-//  Text.hpp
+//  TextBox.hpp
 //  Astral Pathfinder
 //
 //  Created by Ian Holdeman on 2/24/18.
@@ -16,18 +16,17 @@
 // MARK: Source Files
 #include "GameObject.hpp"
 
-// MARK: - Text Parameters
+// MARK: - TextBox Parameters
 
 namespace TextParameters {
   const SDL_Color color = {255, 255, 255};
 }
 
 
-class Text : public GameObject {
+class TextBox : public GameObject {
 public:
   // MARK: - Initialization Methods
-  void initDeposits();
-  void initFertility();
+  void init(SDL_Rect rect);
   
   // MARK: - Game Loop Methods
   void update();
@@ -38,9 +37,8 @@ public:
   
   
 private:
-  SDL_Surface *surface;
   TTF_Font *font;
-  char *message;
+  SDL_Surface *surface;
 };
 
 #endif /* Text_hpp */

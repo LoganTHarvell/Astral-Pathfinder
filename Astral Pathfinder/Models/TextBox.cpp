@@ -1,5 +1,5 @@
 //
-//  Text.cpp
+//  TextBox.cpp
 //  Astral Pathfinder
 //
 //  Created by Ian Holdeman on 2/24/18.
@@ -8,40 +8,27 @@
 
 
 // MARKL: Header File
-#include "Text.hpp"
+#include "TextBox.hpp"
 
 // MARK: Source Files
 #include "Game.hpp"
 #include "TextureManager.hpp"
 
-
-void Text::initDeposits() {
+void TextBox::init(SDL_Rect rectangle) {
   font = TTF_OpenFont("Resources/Assets/Arial.ttf", 24);
   
-  rect.x = 1275;
-  rect.y = 600;
-  rect.w = 225;
-  rect.h = 50;
+  rect = rectangle;
 }
 
-void Text::initFertility() {
-  font = TTF_OpenFont("Resources/Assets/Arial.ttf", 24);
-  
-  rect.x = 1275;
-  rect.y = 650;
-  rect.w = 225;
-  rect.h = 50;
-}
-
-void Text::update() {
+void TextBox::update() {
   
 }
 
-void Text::render() {
+void TextBox::render() {
   SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
 }
 
-void Text::setMessage(const char *words) {
+void TextBox::setMessage(const char *words) {
   using TextParameters::color;
 
   SDL_Surface *surface = TTF_RenderText_Solid(font, words, color);
@@ -50,7 +37,7 @@ void Text::setMessage(const char *words) {
   SDL_FreeSurface(surface);
 }
 
-void Text::reset() {
+void TextBox::reset() {
   SDL_DestroyTexture(texture);
   texture = nullptr;
 }
