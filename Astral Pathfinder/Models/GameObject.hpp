@@ -26,6 +26,7 @@ public:
   void setPosition(SDL_Point p);
   SDL_Rect getRect();
   void scale(float x);
+  SDL_Point getCenter();
   
   bool collision(SDL_Rect r);
 

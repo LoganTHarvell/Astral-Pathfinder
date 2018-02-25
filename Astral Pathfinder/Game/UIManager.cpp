@@ -6,9 +6,13 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
+
+// MARK: Header File
 #include "UIManager.hpp"
 #include "Game.hpp"
 #include "TextureManager.hpp"
+
+// MARK: Libraries and Frameworks
 #include <string>
 
 void UIManager::init() {

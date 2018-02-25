@@ -6,11 +6,14 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
+
+// MARKL: Header File
 #include "Text.hpp"
+
+// MARK: Source Files
 #include "Game.hpp"
 #include "TextureManager.hpp"
 
-using namespace TextParameters;
 
 void Text::initDeposits() {
   font = TTF_OpenFont("Resources/Assets/Arial.ttf", 24);
@@ -39,6 +42,8 @@ void Text::render() {
 }
 
 void Text::setMessage(const char *words) {
+  using TextParameters::color;
+
   SDL_Surface *surface = TTF_RenderText_Solid(font, words, color);
   
   texture = SDL_CreateTextureFromSurface(Game::renderer, surface);

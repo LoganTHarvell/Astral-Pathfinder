@@ -16,7 +16,7 @@
 // MARK: Source Files
 #include "GameObject.hpp"
 
-// MARK: - Ship Parameters
+// MARK: - Text Parameters
 
 namespace TextParameters {
   const SDL_Color color = {255, 255, 255};
