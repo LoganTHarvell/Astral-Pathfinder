@@ -90,6 +90,10 @@ bool PlanetManager::checkClicked(SDL_Event e, UIManager *ui, bool flag) {
     }
     i++;
   }
+  
+  if(flag)
+    return true;
+  
   return false;
 }
 
