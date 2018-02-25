@@ -14,16 +14,20 @@
 #include "Planet.hpp"
 
 class UIManager {
-  
 public:
+  // MARK: - UIManager Initialization
   void init();
   
+  // MARK: - Game Loop Methods
   void update();
   void render();
+  
+  // MARK: - UIManager Methods
   void setText(Planet p);
   void resetText();
   
 private:
+  // MARK: - UIManager Fields
   PlanetInfo planetInfo;
 };
 

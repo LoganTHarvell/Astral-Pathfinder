@@ -14,11 +14,15 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
 
+// MARK: - TextBox Initialization
+
 void TextBox::init(SDL_Rect rectangle) {
-  font = TTF_OpenFont("Resources/Assets/Arial.ttf", 24);
+  font = TTF_OpenFont("Resources/Assets/Arial.ttf", 36);
   
   rect = rectangle;
 }
+
+// MARK: - Game Loop Methods
 
 void TextBox::update() {
   
@@ -27,6 +31,8 @@ void TextBox::update() {
 void TextBox::render() {
   SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
 }
+
+// MARK: - TextBox Methods
 
 void TextBox::setMessage(const char *words) {
   using TextParameters::color;

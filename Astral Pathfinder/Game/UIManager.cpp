@@ -9,12 +9,18 @@
 
 // MARK: Header File
 #include "UIManager.hpp"
+
+// MARK: Source Files
 #include "Game.hpp"
 #include "TextureManager.hpp"
+
+// MARK: - UIManager Initialization
 
 void UIManager::init() {
   planetInfo.init();
 }
+
+// MARK: - Game Loop Methods
 
 void UIManager::update() {
   
@@ -23,6 +29,8 @@ void UIManager::update() {
 void UIManager::render() {
   planetInfo.render();
 }
+
+// MARK: - UIManager Methods
 
 void UIManager::setText(Planet p) {
   planetInfo.setBoxes(p);

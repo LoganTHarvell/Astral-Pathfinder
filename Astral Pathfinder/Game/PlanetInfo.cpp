@@ -6,16 +6,21 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
+// MARK: Header File
 #include "PlanetInfo.hpp"
+
+// MARK: Libraries and Frameworks
 #include <string>
-#include "TextBox.hpp"
+
+// MARK: - PlanetInfo Initialization
+
 void PlanetInfo::init() {
-  SDL_Rect temp = {1275, 600, 225, 50};
-  depositsText.init(temp);
-  
-  temp = {1275, 650, 225, 50};
-  fertilityText.init(temp);
+  using namespace InfoParameters;
+  depositsText.init(depositsRect);
+  fertilityText.init(fertilityRect);
 }
+
+// MARK: - Game Loop Methods
 
 void PlanetInfo::update() {
   
@@ -25,6 +30,8 @@ void PlanetInfo::render() {
   depositsText.render();
   fertilityText.render();
 }
+
+// MARK: - PlanetInfo Methods
 
 void PlanetInfo::setBoxes(Planet p) {
   std::string depo = "Deposits: " + std::to_string(p.getDeposits());

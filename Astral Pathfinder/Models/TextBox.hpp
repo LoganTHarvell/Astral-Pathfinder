@@ -32,11 +32,13 @@ public:
   void update();
   void render();
   
+  // MARK: - TextBox Methods
   void setMessage(const char *words);
   void reset();
   
   
 private:
+  // MARK: - Textbox Fields
   TTF_Font *font;
   SDL_Surface *surface;
 };
