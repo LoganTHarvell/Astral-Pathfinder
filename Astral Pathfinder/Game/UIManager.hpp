@@ -24,9 +24,6 @@ public:
   
 private:
   Text depositsBox, fertilityBox;
-  SDL_Texture *imageTexture;
-  SDL_Rect imageRect;
-  
 };
 
 #endif /* UIManager_hpp */

@@ -19,7 +19,7 @@ void Text::initDeposits() {
   font = TTF_OpenFont("Resources/Assets/Arial.ttf", 24);
   
   rect.x = 1275;
-  rect.y = 700;
+  rect.y = 600;
   rect.w = 225;
   rect.h = 50;
 }
@@ -28,7 +28,7 @@ void Text::initFertility() {
   font = TTF_OpenFont("Resources/Assets/Arial.ttf", 24);
   
   rect.x = 1275;
-  rect.y = 750;
+  rect.y = 650;
   rect.w = 225;
   rect.h = 50;
 }
