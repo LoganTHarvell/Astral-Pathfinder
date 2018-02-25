@@ -11,6 +11,7 @@
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
+#include "SDL2_ttf/SDL_ttf.h"
 
 
 // MARK: - Game Parameters
@@ -35,6 +36,7 @@ namespace GameParameters {
 class GameObject;
 class PlanetManager;
 class ShipManager;
+class UIManager;
 
 class Game {
   
@@ -57,10 +59,12 @@ private:
   // MARK: Game Fields
   bool isRunning = false;
   SDL_Window *window;
+  bool clickFlag = false;
   
   SDL_Texture *gameScreen;
   PlanetManager *planetManager;
   ShipManager *shipManager;
+  UIManager *uiManager;
   
 };
 

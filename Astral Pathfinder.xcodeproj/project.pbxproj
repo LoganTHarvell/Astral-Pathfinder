@@ -8,16 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		0208D44B2034B13A009C8181 /* ShipManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0208D4492034B13A009C8181 /* ShipManager.cpp */; };
+		020C4921203DFCF100C4A41B /* UIManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020C491F203DFCF100C4A41B /* UIManager.cpp */; };
 		020CF625200DCEE10095E611 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020CF624200DCEE10095E611 /* main.cpp */; };
 		0210E9E1201F011B00F5E497 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0210E9DF201F011A00F5E497 /* Map.cpp */; };
 		02AA853E2030ECA6009F5DA1 /* PlanetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02AA85382030ECA6009F5DA1 /* PlanetManager.cpp */; };
 		02AA853F2030ECA6009F5DA1 /* Planet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02AA85392030ECA6009F5DA1 /* Planet.cpp */; };
 		02AA85402030ECA6009F5DA1 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02AA853A2030ECA6009F5DA1 /* Ship.cpp */; };
+		02DA48C720426A8400EF7EBB /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02DA48C620426A8300EF7EBB /* SDL2_ttf.framework */; };
 		02DFDC4E200DD09E00A136AF /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02DFDC4D200DD09E00A136AF /* SDL2.framework */; };
 		02DFDC50200DD0A900A136AF /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02DFDC4F200DD0A900A136AF /* SDL2_image.framework */; };
 		02DFDC5A200DD16000A136AF /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DFDC53200DD16000A136AF /* Game.cpp */; };
 		02DFDC5B200DD16000A136AF /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DFDC55200DD16000A136AF /* GameObject.cpp */; };
 		02DFDC5C200DD16000A136AF /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DFDC57200DD16000A136AF /* TextureManager.cpp */; };
+		9138E32320433371009C3D6D /* PlanetInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9138E32120433371009C3D6D /* PlanetInfo.cpp */; };
+		9175F95320421E6A008D9828 /* TextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9175F95120421E6A008D9828 /* TextBox.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,9 +39,10 @@
 /* Begin PBXFileReference section */
 		0208D4492034B13A009C8181 /* ShipManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShipManager.cpp; sourceTree = "<group>"; };
 		0208D44A2034B13A009C8181 /* ShipManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShipManager.hpp; sourceTree = "<group>"; };
+		020C491F203DFCF100C4A41B /* UIManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIManager.cpp; sourceTree = "<group>"; };
+		020C4920203DFCF100C4A41B /* UIManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIManager.hpp; sourceTree = "<group>"; };
 		020C4922203E61E400C4A41B /* playerShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playerShip.png; sourceTree = "<group>"; };
 		020C4923203E61E400C4A41B /* movingPlayerShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movingPlayerShip.png; sourceTree = "<group>"; };
-		020C4925203E7C7900C4A41B /* planet2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planet2.png; sourceTree = "<group>"; };
 		020CF621200DCEE10095E611 /* Astral Pathfinder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Astral Pathfinder"; sourceTree = BUILT_PRODUCTS_DIR; };
 		020CF624200DCEE10095E611 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		0210E9DF201F011A00F5E497 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
@@ -50,6 +55,7 @@
 		02AA853B2030ECA6009F5DA1 /* Ship.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ship.hpp; sourceTree = "<group>"; };
 		02AA853C2030ECA6009F5DA1 /* Planet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Planet.hpp; sourceTree = "<group>"; };
 		02AA853D2030ECA6009F5DA1 /* PlanetManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlanetManager.hpp; sourceTree = "<group>"; };
+		02DA48C620426A8300EF7EBB /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
 		02DFDC4D200DD09E00A136AF /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		02DFDC4F200DD0A900A136AF /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		02DFDC51200DD16000A136AF /* TextureManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextureManager.hpp; sourceTree = "<group>"; };
@@ -60,6 +66,12 @@
 		02DFDC57200DD16000A136AF /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
 		02DFDC58200DD16000A136AF /* GameObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameObject.hpp; sourceTree = "<group>"; };
 		02DFDC5E200DD34700A136AF /* planet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planet.png; path = Resources/Assets/planet.png; sourceTree = SOURCE_ROOT; };
+		9138E32120433371009C3D6D /* PlanetInfo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlanetInfo.cpp; sourceTree = "<group>"; };
+		9138E32220433371009C3D6D /* PlanetInfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlanetInfo.hpp; sourceTree = "<group>"; };
+		9175F94F20421777008D9828 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
+		9175F95120421E6A008D9828 /* TextBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextBox.cpp; sourceTree = "<group>"; };
+		9175F954204227A8008D9828 /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Arial.ttf; path = ../../../../../../../Library/Fonts/Arial.ttf; sourceTree = "<group>"; };
+		91EC30BD20425BE20068D2F4 /* TextBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextBox.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02DA48C720426A8400EF7EBB /* SDL2_ttf.framework in Frameworks */,
 				02DFDC50200DD0A900A136AF /* SDL2_image.framework in Frameworks */,
 				02DFDC4E200DD09E00A136AF /* SDL2.framework in Frameworks */,
 			);
@@ -110,6 +123,10 @@
 			children = (
 				0210E9DF201F011A00F5E497 /* Map.cpp */,
 				0210E9E0201F011A00F5E497 /* Map.hpp */,
+				9138E32120433371009C3D6D /* PlanetInfo.cpp */,
+				9138E32220433371009C3D6D /* PlanetInfo.hpp */,
+				9175F95120421E6A008D9828 /* TextBox.cpp */,
+				91EC30BD20425BE20068D2F4 /* TextBox.hpp */,
 				02DFDC57200DD16000A136AF /* TextureManager.cpp */,
 				02DFDC51200DD16000A136AF /* TextureManager.hpp */,
 			);
@@ -139,6 +156,8 @@
 				02AA853D2030ECA6009F5DA1 /* PlanetManager.hpp */,
 				0208D4492034B13A009C8181 /* ShipManager.cpp */,
 				0208D44A2034B13A009C8181 /* ShipManager.hpp */,
+				020C491F203DFCF100C4A41B /* UIManager.cpp */,
+				020C4920203DFCF100C4A41B /* UIManager.hpp */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -154,7 +173,7 @@
 		02DFDC4B200DD04F00A136AF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				020C4925203E7C7900C4A41B /* planet2.png */,
+				9175F954204227A8008D9828 /* Arial.ttf */,
 				020C4923203E61E400C4A41B /* movingPlayerShip.png */,
 				020C4922203E61E400C4A41B /* playerShip.png */,
 				0279AC2D201AC0A700ECE4AE /* gameScreen.png */,
@@ -166,6 +185,8 @@
 		02DFDC4C200DD09E00A136AF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9175F94F20421777008D9828 /* SDL2_ttf.framework */,
+				02DA48C620426A8300EF7EBB /* SDL2_ttf.framework */,
 				02DFDC4F200DD0A900A136AF /* SDL2_image.framework */,
 				02DFDC4D200DD09E00A136AF /* SDL2.framework */,
 			);
@@ -232,6 +253,9 @@
 				0210E9E1201F011B00F5E497 /* Map.cpp in Sources */,
 				020CF625200DCEE10095E611 /* main.cpp in Sources */,
 				02DFDC5A200DD16000A136AF /* Game.cpp in Sources */,
+				9138E32320433371009C3D6D /* PlanetInfo.cpp in Sources */,
+				020C4921203DFCF100C4A41B /* UIManager.cpp in Sources */,
+				9175F95320421E6A008D9828 /* TextBox.cpp in Sources */,
 				02AA853E2030ECA6009F5DA1 /* PlanetManager.cpp in Sources */,
 				02AA853F2030ECA6009F5DA1 /* Planet.cpp in Sources */,
 				02AA85402030ECA6009F5DA1 /* Ship.cpp in Sources */,
@@ -350,6 +374,7 @@
 		020CF629200DCEE10095E611 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WUP28GH2WB;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -357,13 +382,16 @@
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
 		020CF62A200DCEE10095E611 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WUP28GH2WB;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -371,7 +399,9 @@
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

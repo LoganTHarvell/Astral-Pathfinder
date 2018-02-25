@@ -6,13 +6,20 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
+// MARK: Header File
 #include "ShipManager.hpp"
 
 
 // MARK: - ShipManager Initialization
 
 void ShipManager::init(SDL_Point homeworldPos) {
-  playerShip.init(homeworldPos);
+  using namespace ShipParameters;
+  
+  // Centers ship on homeworld
+  SDL_Point p = { homeworldPos.x - (shipSize.w/2),
+                  homeworldPos.y - (shipSize.h/2) };
+  
+  playerShip.init(p);
 }
 
 // MARK: - Game Loop Methods

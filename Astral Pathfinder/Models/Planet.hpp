@@ -54,6 +54,7 @@ public:
   int getDeposits() { return deposits; };
   int getFertility() { return fertility; };
   void clicked();
+  void revertClick();
   
 private:
   // MARK: - Planet Fields

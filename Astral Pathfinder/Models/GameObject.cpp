@@ -32,6 +32,13 @@ void GameObject::scale(float x) {
   rect.h *= x;
 };
 
+SDL_Point GameObject::getCenter() {
+  SDL_Point c;
+  c.x = rect.x + (rect.w/2);
+  c.y = rect.y + (rect.w/2);
+  return c;
+}
+
 bool GameObject::collision(SDL_Rect r) {
   
   if (rect.x > r.x + r.w) {
