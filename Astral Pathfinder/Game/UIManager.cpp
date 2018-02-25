@@ -33,7 +33,7 @@ void UIManager::render() {
 // MARK: - UIManager Methods
 
 void UIManager::setText(Planet p) {
-  planetInfo.setBoxes(p);
+  planetInfo.update(p);
 }
 
 void UIManager::resetText() {

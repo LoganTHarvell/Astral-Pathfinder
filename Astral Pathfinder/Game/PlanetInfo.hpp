@@ -26,7 +26,7 @@ public:
   void init();
   
   // MARK: - Game Loop Methods
-  void update();
+  void update(Planet p);
   void render();
   
   // MARK: - PlanetInfo Methods

@@ -22,8 +22,8 @@ void PlanetInfo::init() {
 
 // MARK: - Game Loop Methods
 
-void PlanetInfo::update() {
-  
+void PlanetInfo::update(Planet p) {
+  setBoxes(p);
 }
 
 void PlanetInfo::render() {
