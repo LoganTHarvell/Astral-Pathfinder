@@ -58,7 +58,7 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
     p.collision(shipManager->getPlayerShip().getRect());
   }
   
-  if (!gameState->planetSelected && selectedPlanetIndex > 0) {
+  if (!gameState->planetSelected && selectedPlanetIndex >= 0) {
     deselectPlanet(&(gameState->planetSelected));
   }
   
@@ -118,7 +118,7 @@ void PlanetManager::handleClickEvent(SDL_Point p, bool *planetSelected) {
     if((p.x > temp.x) && (p.x < temp.x + temp.w)
        && (p.y > temp.y) && (p.y < temp.y + temp.h)) {
       
-      if (selectedPlanetIndex > 0) deselectPlanet(planetSelected);
+      if (selectedPlanetIndex >= 0) deselectPlanet(planetSelected);
       
       selectedPlanetIndex = i;
       selectPlanet(planetSelected);
