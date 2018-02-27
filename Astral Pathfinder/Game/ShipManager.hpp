@@ -26,9 +26,7 @@ public:
   void update(Uint32 ticks);
   void render();
   
-  // MARK: - Movement Method
-  void shipMovement(SDL_Event e);
-  
+  // MARK: - ShipManager Methods
   Ship getPlayerShip() { return playerShip; };
   
 private:

@@ -59,10 +59,10 @@ void Game::init(const char *title,
       std::cout << "Renderer created." << std::endl;
     }
     
-    isRunning = true;
+    gameState.isRunning = true;
     
   } else {
-    isRunning = false;
+    gameState.isRunning = false;
     std::cerr << "SDL and/or SDL_image initialization failed, errors: "
               << SDL_GetError() << ", " << IMG_GetError() << std::endl;
   }
@@ -85,35 +85,39 @@ void Game::init(const char *title,
 
 void Game::handleEvents() {
   SDL_Event event;
-  SDL_PollEvent(&event);
-  switch (event.type) {
-    case SDL_QUIT:
-      isRunning = false;
-      break;
-    case SDL_KEYDOWN:
-      shipManager->shipMovement(event);
-      break;
-    case SDL_KEYUP:
-      if(event.key.keysym.sym == SDLK_ESCAPE && clickFlag) {
-        clickFlag = false;
-        uiManager->resetSelectedPlanet();
-        planetManager->revertClick();
+  
+  while(SDL_PollEvent(&event)) {
+    switch (event.type) {
+      case SDL_QUIT:
+        gameState.isRunning = false;
+        break;
+      case SDL_KEYDOWN:
+      {
+        // Gets pressed key
+        auto key = event.key.keysym.sym;
+        
+        // GameState logic
+        if(key == SDLK_ESCAPE && gameState.planetSelected) {
+          gameState.planetSelected = false;
+        }
+        
+        break;
       }
-      else
-        shipManager->shipMovement(event);
-      break;
-    case SDL_MOUSEBUTTONUP:
-      clickFlag = planetManager->checkClicked(event, uiManager, clickFlag);
-      break;
-    default:
-      break;
+      case SDL_MOUSEBUTTONUP:
+        gameState.clickFlag = true;
+        gameState.clickLocation = { event.button.x, event.button.y };
+        break;
+      default:
+        break;
+    }
   }
   
 }
 
 void Game::update(Uint32 ticks) {
-  planetManager->update(shipManager);
+  planetManager->update(&gameState, shipManager);
   shipManager->update(ticks);
+  uiManager->update(&gameState, planetManager);
 }
 
 void Game::render() {
@@ -126,8 +130,7 @@ void Game::render() {
   // Render stuff
   planetManager->render();
   shipManager->render();
-  if(clickFlag)
-    uiManager->render();
+  uiManager->render(&gameState);
 
   SDL_RenderPresent(renderer);
 }

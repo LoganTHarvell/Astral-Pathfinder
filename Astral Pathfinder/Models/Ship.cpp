@@ -41,6 +41,7 @@ void Ship::init(SDL_Point p) {
 
 void Ship::update() {
   // TODO: find way to pass variable in and not trigger "ship is abstract"
+  updateVelocity();
   updateRotation();
 
 }
@@ -53,39 +54,19 @@ void Ship::render() {
 
 // MARK: - Ship Methods
 
-void Ship::updateVelocity(SDL_Event e) {
+void Ship::updateVelocity() {
   using namespace ShipParameters;
-  if(e.type == SDL_KEYDOWN) {
-    switch(e.key.keysym.sym) {
-      case SDLK_UP:
-        velocity.y = (-speed);
-        break;
-      case SDLK_DOWN:
-        velocity.y = speed;
-        break;
-      case SDLK_RIGHT:
-        velocity.x = speed;
-        break;
-      case SDLK_LEFT:
-        velocity.x = (-speed);
-        break;
-      default:
-        break;
-    }
-  }
   
-  if(e.type == SDL_KEYUP) {
-    switch(e.key.keysym.sym) {
-      case SDLK_UP: case SDLK_DOWN:
-        velocity.y = 0;
-        break;
-      case SDLK_RIGHT: case SDLK_LEFT:
-        velocity.x = 0;
-        break;
-      default:
-        break;
-    }
-  }
+  auto *keyState = SDL_GetKeyboardState(NULL);
+  
+  if (keyState[SDL_SCANCODE_UP]) velocity.y = (-speed);
+  else if (keyState[SDL_SCANCODE_DOWN]) velocity.y = speed;
+  else velocity.y = 0;
+  
+  if (keyState[SDL_SCANCODE_RIGHT]) velocity.x = speed;
+  else if (keyState[SDL_SCANCODE_LEFT]) velocity.x = (-speed);
+  else velocity.x = 0;
+  
 }
 
 void Ship::move(Uint32 ticks) {

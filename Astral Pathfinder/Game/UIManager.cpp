@@ -10,7 +10,6 @@
 #include "UIManager.hpp"
 
 // MARK: Source Files
-#include "Game.hpp"
 #include "TextureManager.hpp"
 
 // MARK: - UIManager Initialization
@@ -21,21 +20,21 @@ void UIManager::init() {
 
 // MARK: - Game Loop Methods
 
-void UIManager::update() {
+void UIManager::update(Game::State *gameState, PlanetManager *planetManager) {
+  
+  if (gameState->planetSelected)
+    setSelectedPlanet(planetManager->getSelectedPlanet());
+  else planetInfo.clean();
   
 }
 
-void UIManager::render() {
-  planetInfo.render();
+void UIManager::render(Game::State *gameState) {
+  if (gameState->planetSelected) planetInfo.render();
 }
 
 // MARK: - UIManager Methods
 
 void UIManager::setSelectedPlanet(Planet p) {
-  planetInfo.update(p);
-}
-
-void UIManager::resetSelectedPlanet() {
-  planetInfo.resetText();
+  planetInfo.setText(p);
 }
 

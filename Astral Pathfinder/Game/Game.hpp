@@ -41,6 +41,17 @@ class UIManager;
 class Game {
   
 public:
+  // Data structure for keeping track of the game state
+  struct State {
+    // Flags
+    bool isRunning = false;
+    bool clickFlag = false;
+    bool planetSelected = false;
+    
+    // Fields
+    SDL_Point clickLocation;
+  };
+  
   void init(const char *title, int x, int y, int w, int h, bool fullscreen);
   
   // MARK: Game Loop Methods
@@ -49,7 +60,7 @@ public:
   void render();
   
   // MARK: Game Methods
-  bool running() { return isRunning; };
+  bool running() { return gameState.isRunning; };
   void clean();
 
   // Global renderer
@@ -57,10 +68,9 @@ public:
   
 private:
   // MARK: Game Fields
-  bool isRunning = false;
   SDL_Window *window;
-  bool clickFlag = false;
-  
+  State gameState;
+
   SDL_Texture *gameScreen;
   PlanetManager *planetManager;
   ShipManager *shipManager;
