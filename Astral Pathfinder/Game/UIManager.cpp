@@ -10,7 +10,6 @@
 #include "UIManager.hpp"
 
 // MARK: Source Files
-#include "Game.hpp"
 #include "TextureManager.hpp"
 
 // MARK: - UIManager Initialization
@@ -25,8 +24,8 @@ void UIManager::update() {
   
 }
 
-void UIManager::render() {
-  planetInfo.render();
+void UIManager::render(Game::State gs) {
+  if (gs.clickFlag) planetInfo.render();
 }
 
 // MARK: - UIManager Methods

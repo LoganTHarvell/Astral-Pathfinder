@@ -10,6 +10,7 @@
 #define UIManager_hpp
 
 // MARK: Source Files
+#include "Game.hpp"
 #include "PlanetInfo.hpp"
 #include "Planet.hpp"
 
@@ -20,7 +21,7 @@ public:
   
   // MARK: - Game Loop Methods
   void update();
-  void render();
+  void render(Game::State gs);
   
   // MARK: - UIManager Methods
   void setSelectedPlanet(Planet p);
