@@ -59,10 +59,10 @@ void Game::init(const char *title,
       std::cout << "Renderer created." << std::endl;
     }
     
-    isRunning = true;
+    gameState.isRunning = true;
     
   } else {
-    isRunning = false;
+    gameState.isRunning = false;
     std::cerr << "SDL and/or SDL_image initialization failed, errors: "
               << SDL_GetError() << ", " << IMG_GetError() << std::endl;
   }
@@ -90,14 +90,14 @@ void Game::handleEvents() {
   while(SDL_PollEvent(&event)) {
     switch (event.type) {
       case SDL_QUIT:
-        isRunning = false;
+        gameState.isRunning = false;
         break;
       case SDL_KEYDOWN:
         shipManager->shipMovement(event);
         break;
       case SDL_KEYUP:
-        if(event.key.keysym.sym == SDLK_ESCAPE && clickFlag) {
-          clickFlag = false;
+        if(event.key.keysym.sym == SDLK_ESCAPE && gameState.clickFlag) {
+          gameState.clickFlag = false;
           uiManager->resetSelectedPlanet();
           planetManager->revertClick();
         }
@@ -105,7 +105,8 @@ void Game::handleEvents() {
           shipManager->shipMovement(event);
         break;
       case SDL_MOUSEBUTTONUP:
-        clickFlag = planetManager->checkClicked(event, uiManager, clickFlag);
+        gameState.clickFlag = planetManager->checkClicked(event, uiManager,
+                                                          gameState.clickFlag);
         break;
       default:
         break;
@@ -129,8 +130,8 @@ void Game::render() {
   // Render stuff
   planetManager->render();
   shipManager->render();
-  if(clickFlag)
-    uiManager->render();
+  
+  uiManager->render(gameState);
 
   SDL_RenderPresent(renderer);
 }
