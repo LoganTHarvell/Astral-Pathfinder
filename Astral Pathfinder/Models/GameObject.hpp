@@ -34,7 +34,7 @@ public:
 protected:
   // MARK: - GameObject Fields
   SDL_Rect rect;
-  SDL_Texture *texture;
+  SDL_Texture *texture = nullptr;
   
 };
 

@@ -12,6 +12,7 @@
 // MARK: Libraries and Frameworks
 #include <string>
 
+
 // MARK: - PlanetInfo Initialization
 
 void PlanetInfo::init() {
@@ -20,18 +21,27 @@ void PlanetInfo::init() {
   fertilityText.init(fertilityRect);
 }
 
-// MARK: - Game Loop Methods
 
-void PlanetInfo::update(Planet p) {
-  setBoxes(p);
-}
+// MARK: - Game Loop Methods
 
 void PlanetInfo::render() {
   depositsText.render();
   fertilityText.render();
 }
 
+void PlanetInfo::clean() {
+  depositsText.clean();
+  fertilityText.clean();
+}
+
+
 // MARK: - PlanetInfo Methods
+
+void PlanetInfo::setText(Planet p) {
+  setBoxes(p);
+}
+
+// MARK: - Helper Methods
 
 void PlanetInfo::setBoxes(Planet p) {
   std::string depo = "Deposits: " + std::to_string(p.getDeposits());
@@ -41,7 +51,3 @@ void PlanetInfo::setBoxes(Planet p) {
   fertilityText.setMessage(fert.c_str());
 }
 
-void PlanetInfo::resetText() {
-  depositsText.reset();
-  fertilityText.reset();
-}

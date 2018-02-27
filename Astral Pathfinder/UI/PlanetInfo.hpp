@@ -11,6 +11,7 @@
 
 // MARK: Source Files
 #include "TextBox.hpp"
+#include "PlanetManager.hpp"
 #include "Planet.hpp"
 
 // MARK: - PlanetInfo Parameters
@@ -26,16 +27,21 @@ public:
   void init();
   
   // MARK: - Game Loop Methods
-  void update(Planet p);
   void render();
-  void resetText();
+  void clean();
+
+  
+  // MARK: - PlanetInfo Methods
+  void setText(Planet p);
+
   
 private:
   // MARK: - PlanetInfo Fields
   TextBox depositsText, fertilityText;
   
-  // MARK: - PlanetInfo Methods
+  // MARK: - Helper Methods
   void setBoxes(Planet p);
+
 };
 
 #endif /* PlanetInfo_hpp */

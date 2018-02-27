@@ -48,6 +48,8 @@ public:
     bool clickFlag = false;
     bool planetSelected = false;
     
+    // Fields
+    SDL_Point clickLocation;
   };
   
   void init(const char *title, int x, int y, int w, int h, bool fullscreen);
@@ -66,9 +68,9 @@ public:
   
 private:
   // MARK: Game Fields
-  State gameState;
   SDL_Window *window;
-  
+  State gameState;
+
   SDL_Texture *gameScreen;
   PlanetManager *planetManager;
   ShipManager *shipManager;

@@ -13,10 +13,8 @@
 #include "SDL2/SDL.h"
 
 // MARK: Source Files
-#include "GameObject.hpp"
+#include "Game.hpp"
 #include "Planet.hpp"
-#include "ShipManager.hpp"
-#include "UIManager.hpp"
 
 
 // MARK: - PlanetManager Parameters
@@ -37,13 +35,12 @@ public:
   void initGalaxy();
   
   // MARK: - Game Loop Methods
-  void update(ShipManager *shipManager);
+  void update(Game::State *gameState, ShipManager *shipManager);
   void render();
   
   // MARK: - PlanetManager Methods
   Planet getPlanet(int n);
-  bool checkClicked(SDL_Event e, UIManager *ui, bool flag);
-  void revertClick();
+  Planet getSelectedPlanet();
   
 private:
   // MARK: - Helper Methods
@@ -51,12 +48,16 @@ private:
   static Planet initHomeworld();
   static Planet initPlanet();
   
+  void handleClickEvent(SDL_Point p, bool *planetSelected);
+  void selectPlanet(bool *planetSelected);
+  void deselectPlanet(bool *planetSelected);
+  
   void collision(SDL_Rect r);
   
   // MARK: - PlanetManager Fields
   Planet planets[PlanetManagerParameters::numberOfPlanets];
-  int chosenPlanet;
-  
+  int selectedPlanetIndex;
+
 };
 
 #endif /* PlanetManager_hpp */

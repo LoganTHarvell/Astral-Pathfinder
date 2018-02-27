@@ -36,10 +36,10 @@ public:
   // MARK: - Game Loop Methods
   void update();
   void render();
+  void clean();
   
   // MARK: - TextBox Methods
   void setMessage(const char *words);
-  void reset();
   
   
 private:

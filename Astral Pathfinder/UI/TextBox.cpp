@@ -45,7 +45,9 @@ void TextBox::setMessage(const char *words) {
   SDL_FreeSurface(surface);
 }
 
-void TextBox::reset() {
+void TextBox::clean() {
+  if (texture == nullptr) return;
+  
   SDL_DestroyTexture(texture);
   texture = nullptr;
 }

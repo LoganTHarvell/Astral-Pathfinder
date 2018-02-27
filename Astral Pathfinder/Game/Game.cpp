@@ -86,7 +86,6 @@ void Game::init(const char *title,
 void Game::handleEvents() {
   SDL_Event event;
   
-  // TODO: Separate event handling and game logic using a GameState structure
   while(SDL_PollEvent(&event)) {
     switch (event.type) {
       case SDL_QUIT:
@@ -98,20 +97,15 @@ void Game::handleEvents() {
         auto key = event.key.keysym.sym;
         
         // GameState logic
-        if(key == SDLK_ESCAPE && gameState.clickFlag) {
-          gameState.clickFlag = false;
-          
-          // TODO: Move to respected manager classes update(gameState)
-          uiManager->resetSelectedPlanet();
-          planetManager->revertClick();
+        if(key == SDLK_ESCAPE && gameState.planetSelected) {
+          gameState.planetSelected = false;
         }
         
         break;
       }
       case SDL_MOUSEBUTTONUP:
-        // TODO: Separate gameState and game logic, move planet selection to planetManager update(gameState)
-        gameState.clickFlag = planetManager->checkClicked(event, uiManager,
-                                                          gameState.clickFlag);
+        gameState.clickFlag = true;
+        gameState.clickLocation = { event.button.x, event.button.y };
         break;
       default:
         break;
@@ -121,8 +115,9 @@ void Game::handleEvents() {
 }
 
 void Game::update(Uint32 ticks) {
-  planetManager->update(shipManager);
+  planetManager->update(&gameState, shipManager);
   shipManager->update(ticks);
+  uiManager->update(&gameState, planetManager);
 }
 
 void Game::render() {
@@ -135,8 +130,7 @@ void Game::render() {
   // Render stuff
   planetManager->render();
   shipManager->render();
-  
-  uiManager->render(gameState);
+  uiManager->render(&gameState);
 
   SDL_RenderPresent(renderer);
 }

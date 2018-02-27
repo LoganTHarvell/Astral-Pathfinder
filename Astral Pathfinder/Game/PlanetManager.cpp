@@ -15,8 +15,7 @@
 #include <ctime>
 
 // MARK: Source Files
-#include "Game.hpp"
-
+#include "ShipManager.hpp"
 
 // MARK: - Galaxy Initialization
 
@@ -51,11 +50,23 @@ void PlanetManager::initGalaxy() {
 
 // Mark: - Game Loop Methods
 
-void PlanetManager::update(ShipManager *shipManager) {
+void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
   for (Planet& p : planets) {
     p.update();
+    
+    // TODO: Remove and implement collision logic
     p.collision(shipManager->getPlayerShip().getRect());
   }
+  
+  if (!gameState->planetSelected && selectedPlanetIndex > 0) {
+    deselectPlanet(&(gameState->planetSelected));
+  }
+  
+  if (gameState->clickFlag) {
+    handleClickEvent(gameState->clickLocation, &(gameState->planetSelected));
+    gameState->clickFlag = false;
+  }
+  
 }
 
 void PlanetManager::render() {
@@ -71,35 +82,8 @@ Planet PlanetManager::getPlanet(int n) {
   return planets[n];
 }
 
-bool PlanetManager::checkClicked(SDL_Event e, UIManager *ui, bool flag) {
-  int x = e.button.x;
-  int y = e.button.y;
-  int i = 0;
-  
-  for(Planet& p : planets) {
-    SDL_Rect temp = p.getRect();
-    if((x > temp.x) && (x < temp.x + temp.w) && (y > temp.y) && (y < temp.y + temp.h)) {
-      if(flag) {
-        revertClick();
-        ui->resetSelectedPlanet();
-      }
-      p.clicked();
-      ui->setSelectedPlanet(p);
-      chosenPlanet = i;
-      return true;
-    }
-    i++;
-  }
-  
-  if(flag)
-    return true;
-  
-  return false;
-}
-
-void PlanetManager::revertClick() {
-  planets[chosenPlanet].revertClick();
-  chosenPlanet = NULL;
+Planet PlanetManager::getSelectedPlanet() {
+  return planets[selectedPlanetIndex];
 }
 
 
@@ -123,6 +107,37 @@ Planet PlanetManager::initPlanet() {
   planet.initPlanet();
   
   return planet;
+}
+
+void PlanetManager::handleClickEvent(SDL_Point p, bool *planetSelected) {
+  
+  int i = 0;
+  for(Planet planet : planets) {
+    SDL_Rect temp = planet.getRect();
+    
+    if((p.x > temp.x) && (p.x < temp.x + temp.w)
+       && (p.y > temp.y) && (p.y < temp.y + temp.h)) {
+      
+      if (selectedPlanetIndex > 0) deselectPlanet(planetSelected);
+      
+      selectedPlanetIndex = i;
+      selectPlanet(planetSelected);
+    }
+    
+    i++;
+  }
+  
+}
+
+void PlanetManager::selectPlanet(bool *planetSelected) {
+  planets[selectedPlanetIndex].clicked();
+  *planetSelected = true;
+}
+
+void PlanetManager::deselectPlanet(bool *planetSelected) {
+  planets[selectedPlanetIndex].revertClick();
+  selectedPlanetIndex = -1;
+  *planetSelected = false;
 }
 
 void PlanetManager::collision(SDL_Rect r) {
