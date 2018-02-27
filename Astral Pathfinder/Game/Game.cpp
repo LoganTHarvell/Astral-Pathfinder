@@ -85,28 +85,31 @@ void Game::init(const char *title,
 
 void Game::handleEvents() {
   SDL_Event event;
-  SDL_PollEvent(&event);
-  switch (event.type) {
-    case SDL_QUIT:
-      isRunning = false;
-      break;
-    case SDL_KEYDOWN:
-      shipManager->shipMovement(event);
-      break;
-    case SDL_KEYUP:
-      if(event.key.keysym.sym == SDLK_ESCAPE && clickFlag) {
-        clickFlag = false;
-        uiManager->resetSelectedPlanet();
-        planetManager->revertClick();
-      }
-      else
+  
+  // TODO: Separate event handling and game logic using a GameState structure
+  while(SDL_PollEvent(&event)) {
+    switch (event.type) {
+      case SDL_QUIT:
+        isRunning = false;
+        break;
+      case SDL_KEYDOWN:
         shipManager->shipMovement(event);
-      break;
-    case SDL_MOUSEBUTTONUP:
-      clickFlag = planetManager->checkClicked(event, uiManager, clickFlag);
-      break;
-    default:
-      break;
+        break;
+      case SDL_KEYUP:
+        if(event.key.keysym.sym == SDLK_ESCAPE && clickFlag) {
+          clickFlag = false;
+          uiManager->resetSelectedPlanet();
+          planetManager->revertClick();
+        }
+        else
+          shipManager->shipMovement(event);
+        break;
+      case SDL_MOUSEBUTTONUP:
+        clickFlag = planetManager->checkClicked(event, uiManager, clickFlag);
+        break;
+      default:
+        break;
+    }
   }
   
 }
