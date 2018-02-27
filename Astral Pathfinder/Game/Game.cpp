@@ -93,18 +93,23 @@ void Game::handleEvents() {
         gameState.isRunning = false;
         break;
       case SDL_KEYDOWN:
-        shipManager->shipMovement(event);
-        break;
-      case SDL_KEYUP:
-        if(event.key.keysym.sym == SDLK_ESCAPE && gameState.clickFlag) {
+      {
+        // Gets pressed key
+        auto key = event.key.keysym.sym;
+        
+        // GameState logic
+        if(key == SDLK_ESCAPE && gameState.clickFlag) {
           gameState.clickFlag = false;
+          
+          // TODO: Move to respected manager classes update(gameState)
           uiManager->resetSelectedPlanet();
           planetManager->revertClick();
         }
-        else
-          shipManager->shipMovement(event);
+        
         break;
+      }
       case SDL_MOUSEBUTTONUP:
+        // TODO: Separate gameState and game logic, move planet selection to planetManager update(gameState)
         gameState.clickFlag = planetManager->checkClicked(event, uiManager,
                                                           gameState.clickFlag);
         break;

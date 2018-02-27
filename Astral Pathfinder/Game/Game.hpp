@@ -46,9 +46,7 @@ public:
     // Flags
     bool isRunning = false;
     bool clickFlag = false;
-    
-    // Fields
-    
+    bool planetSelected = false;
     
   };
   
