@@ -14,6 +14,7 @@
 		02AA853E2030ECA6009F5DA1 /* PlanetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02AA85382030ECA6009F5DA1 /* PlanetManager.cpp */; };
 		02AA853F2030ECA6009F5DA1 /* Planet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02AA85392030ECA6009F5DA1 /* Planet.cpp */; };
 		02AA85402030ECA6009F5DA1 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02AA853A2030ECA6009F5DA1 /* Ship.cpp */; };
+		02AC9C00204669DC00907514 /* ColliderComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02AC9BFE204669DC00907514 /* ColliderComponent.cpp */; };
 		02DA48C720426A8400EF7EBB /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02DA48C620426A8300EF7EBB /* SDL2_ttf.framework */; };
 		02DFDC4E200DD09E00A136AF /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02DFDC4D200DD09E00A136AF /* SDL2.framework */; };
 		02DFDC50200DD0A900A136AF /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02DFDC4F200DD0A900A136AF /* SDL2_image.framework */; };
@@ -55,6 +56,8 @@
 		02AA853B2030ECA6009F5DA1 /* Ship.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ship.hpp; sourceTree = "<group>"; };
 		02AA853C2030ECA6009F5DA1 /* Planet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Planet.hpp; sourceTree = "<group>"; };
 		02AA853D2030ECA6009F5DA1 /* PlanetManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlanetManager.hpp; sourceTree = "<group>"; };
+		02AC9BFE204669DC00907514 /* ColliderComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ColliderComponent.cpp; sourceTree = "<group>"; };
+		02AC9BFF204669DC00907514 /* ColliderComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ColliderComponent.hpp; sourceTree = "<group>"; };
 		02DA48C620426A8300EF7EBB /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
 		02DFDC4D200DD09E00A136AF /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		02DFDC4F200DD0A900A136AF /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
@@ -136,8 +139,7 @@
 		0210E9E3201F022800F5E497 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				02DFDC55200DD16000A136AF /* GameObject.cpp */,
-				02DFDC58200DD16000A136AF /* GameObject.hpp */,
+				02AC9C01204669F800907514 /* Game Object */,
 				02AA85392030ECA6009F5DA1 /* Planet.cpp */,
 				02AA853C2030ECA6009F5DA1 /* Planet.hpp */,
 				02AA853A2030ECA6009F5DA1 /* Ship.cpp */,
@@ -160,6 +162,17 @@
 				020C4920203DFCF100C4A41B /* UIManager.hpp */,
 			);
 			path = Game;
+			sourceTree = "<group>";
+		};
+		02AC9C01204669F800907514 /* Game Object */ = {
+			isa = PBXGroup;
+			children = (
+				02DFDC55200DD16000A136AF /* GameObject.cpp */,
+				02DFDC58200DD16000A136AF /* GameObject.hpp */,
+				02AC9BFE204669DC00907514 /* ColliderComponent.cpp */,
+				02AC9BFF204669DC00907514 /* ColliderComponent.hpp */,
+			);
+			path = "Game Object";
 			sourceTree = "<group>";
 		};
 		02DFDC49200DD02700A136AF /* Resources */ = {
@@ -260,6 +273,7 @@
 				02AA853F2030ECA6009F5DA1 /* Planet.cpp in Sources */,
 				02AA85402030ECA6009F5DA1 /* Ship.cpp in Sources */,
 				02DFDC5B200DD16000A136AF /* GameObject.cpp in Sources */,
+				02AC9C00204669DC00907514 /* ColliderComponent.cpp in Sources */,
 				02DFDC5C200DD16000A136AF /* TextureManager.cpp in Sources */,
 				0208D44B2034B13A009C8181 /* ShipManager.cpp in Sources */,
 			);

@@ -45,7 +45,9 @@ public:
   
   // MARK: - Ship Methods
   int getFuel() { return fuel; };
+  int getRotation() { return rotation; };
   void move(Uint32 ticks);
+  
 
 private:
   // MARK: - Ship Fields

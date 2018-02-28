@@ -45,6 +45,8 @@ void Planet::initPlanet() {
   rect.w = planetTexSize;
   rect.h = planetTexSize;
   
+  collider = new ColliderComponent(&rect);
+  
   texture = TextureManager::loadTexture("Resources/Assets/planet.png");
   
   // Sets planet fertility to random value
