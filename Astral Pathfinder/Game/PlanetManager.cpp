@@ -58,7 +58,6 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
     SDL_Rect shipR = shipManager->getPlayerShip().getRect();
     int shipAngle = shipManager->getPlayerShip().getRotation();
     p.getCollider().collisionOBB(shipR, shipAngle);
-//    p.collisionAABB(shipManager->getPlayerShip().getRect());
   }
   
   if (!gameState->planetSelected && selectedPlanetIndex >= 0) {
@@ -145,7 +144,6 @@ void PlanetManager::deselectPlanet(bool *planetSelected) {
 
 void PlanetManager::collision(SDL_Rect r, int angle) {
   for (Planet p : planets) {
-//    p.collisionAABB(r);
     p.getCollider().collisionOBB(r, angle);
   }
 }

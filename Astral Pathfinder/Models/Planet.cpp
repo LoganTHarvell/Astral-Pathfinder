@@ -45,7 +45,7 @@ void Planet::initPlanet() {
   rect.w = planetTexSize;
   rect.h = planetTexSize;
   
-  collider = new ColliderComponent(&rect);
+  collider = new ColliderComponent(rect);
   
   texture = TextureManager::loadTexture("Resources/Assets/planet.png");
   

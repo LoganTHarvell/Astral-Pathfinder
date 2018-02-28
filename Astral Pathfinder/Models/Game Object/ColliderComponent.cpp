@@ -12,14 +12,12 @@
 #include <cmath>
 
 
-ColliderComponent::ColliderComponent(SDL_Rect *r) {
+ColliderComponent::ColliderComponent(SDL_Rect r) {
   rect = r;
 }
 
 
 bool ColliderComponent::collisionAABB(SDL_Rect r) {
-  SDL_Rect rect = *(this->rect);
-  
   if (rect.x > r.x + r.w) {
     return false;
   }
@@ -38,13 +36,11 @@ bool ColliderComponent::collisionAABB(SDL_Rect r) {
 }
 
 bool ColliderComponent::collisionOBB(SDL_Rect r, int angle) {
-  SDL_Rect rect = *(this->rect);
-  
   SDL_Point min = minAlong(corners(r, angle));
   SDL_Point max = maxAlong(corners(r, angle));
   
-  if (rect.x > min.x && rect.x < max.x) return false;
-  if (rect.y > min.y && rect.y < max.y) return false;
+  if (rect.x + rect.w < min.x || rect.x > max.x) return false;
+  if (rect.y + rect.h < min.y || rect.y > max.y) return false;
     
   std::cout << "Collision" << std::endl;
   return true;
@@ -79,12 +75,12 @@ std::vector<SDL_Point> ColliderComponent::corners(SDL_Rect r, int angle) {
   std::vector<SDL_Point> corners;
   
   SDL_Point center = { r.x + (r.w / 2), r.y + (r.h / 2) };
-  double a = angle * (180 / M_PI);
+  double a = angle * (M_PI / 180.0);
   
   std::vector<SDL_Point> cv = cornerVectors(r);
   for (auto& v : cv) {
-    corners.push_back({ static_cast<int>(v.x * cos(a) - v.y * sin(a)),
-                        static_cast<int>(v.x * sin(a) + v.y * cos(a)) });
+    corners.push_back({ static_cast<int>(v.x * cos(a) + v.y * sin(a)),
+                        static_cast<int>(v.x * sin(a) - v.y * cos(a)) });
     
     corners.back().x += center.x;
     corners.back().y += center.y;

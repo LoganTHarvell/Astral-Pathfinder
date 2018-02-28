@@ -17,10 +17,10 @@ class ColliderComponent {
   
 public:
   ColliderComponent() = default;
-  ColliderComponent(SDL_Rect *r);
+  ColliderComponent(SDL_Rect r);
   ~ColliderComponent() = default;
   
-  SDL_Rect *rect;
+  SDL_Rect rect;
   
   bool collisionAABB(SDL_Rect r);
   bool collisionOBB(SDL_Rect r, int angle);
