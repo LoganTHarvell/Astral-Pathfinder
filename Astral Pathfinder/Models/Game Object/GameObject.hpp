@@ -12,6 +12,7 @@
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 
+#include "ColliderComponent.hpp"
 
 class GameObject {
   
@@ -21,20 +22,20 @@ public:
   virtual void render() = 0;
   
   //MARK: - GameObject Methods
-  // Get and Set methods for position and size
+  ColliderComponent getCollider();
   SDL_Point getPosition();
   void setPosition(SDL_Point p);
   SDL_Rect getRect();
   void scale(float x);
   SDL_Point getCenter();
   
-  bool collision(SDL_Rect r);
+  bool collisionAABB(SDL_Rect r);
 
-  
 protected:
   // MARK: - GameObject Fields
   SDL_Rect rect;
   SDL_Texture *texture = nullptr;
+  ColliderComponent *collider = nullptr;
   
 };
 

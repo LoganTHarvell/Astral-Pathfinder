@@ -14,6 +14,10 @@
 
 // MARK: - GameObject Methods
 
+ColliderComponent GameObject::getCollider() {
+  return *collider;
+}
+
 SDL_Point GameObject::getPosition() {
   return { rect.x, rect.y };
 }
@@ -39,7 +43,7 @@ SDL_Point GameObject::getCenter() {
   return c;
 }
 
-bool GameObject::collision(SDL_Rect r) {
+bool GameObject::collisionAABB(SDL_Rect r) {
   
   if (rect.x > r.x + r.w) {
     return false;

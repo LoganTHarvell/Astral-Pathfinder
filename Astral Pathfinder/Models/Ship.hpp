@@ -21,7 +21,7 @@
 namespace ShipParameters {
   
   const struct {
-    int w = 50, h = 25;
+    int w = 48, h = 24;
   } shipSize;
   
   const int population = 10000;
@@ -45,7 +45,9 @@ public:
   
   // MARK: - Ship Methods
   int getFuel() { return fuel; };
+  int getRotation() { return rotation; };
   void move(Uint32 ticks);
+  
 
 private:
   // MARK: - Ship Fields
@@ -55,7 +57,7 @@ private:
   
   // MARK: - Helper Methods
   SDL_Point mapPosition(SDL_Point p);
-  bool checkBounds();
+  bool boundaryCollision();
   
   void updateVelocity();
   void updateRotation();
