@@ -56,7 +56,7 @@ private:
   
   // MARK: - PlanetManager Fields
   Planet planets[PlanetManagerParameters::numberOfPlanets];
-  int selectedPlanetIndex;
+  int selectedPlanetIndex = -1;
 
 };
 
