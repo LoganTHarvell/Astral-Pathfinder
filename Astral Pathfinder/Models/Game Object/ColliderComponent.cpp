@@ -95,7 +95,7 @@ std::vector<SDL_Point> ColliderComponent::shipVertexVectors(SDL_Rect r) {
   cornerVectors.push_back({ r.x, r.y + r.h/2 });
   cornerVectors.push_back({ r.x + r.w/2, r.y });
   cornerVectors.push_back({ r.x + r.w, r.y + r.h/2 });
-  cornerVectors.push_back({ r.x + r.w/2, r.y + r.h/2 });
+  cornerVectors.push_back({ r.x + r.w/2, r.y + r.h });
   
   SDL_Point center = { r.x + (r.w / 2), r.y + (r.h / 2) };
   for (auto& cv : cornerVectors) {
