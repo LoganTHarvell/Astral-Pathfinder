@@ -12,7 +12,7 @@
 #include "SDL2/SDL.h"
 #include <vector>
 
-
+// TODO: Generalize class for any game object
 class ColliderComponent {
   
 public:
@@ -28,10 +28,10 @@ public:
   
 private:
   // MARK: - Helper Methods
-  SDL_Point minAlong(std::vector<SDL_Point> corners);
-  SDL_Point maxAlong(std::vector<SDL_Point> corners);
-  std::vector<SDL_Point> corners(SDL_Rect r, int angle);
-  std::vector<SDL_Point> cornerVectors(SDL_Rect r);
+  SDL_Point minAlongXY(std::vector<SDL_Point> corners);
+  SDL_Point maxAlongXY(std::vector<SDL_Point> corners);
+  std::vector<SDL_Point> shipVertices(SDL_Rect r, int angle);
+  std::vector<SDL_Point> shipVertexVectors(SDL_Rect r);
   
 };
 
