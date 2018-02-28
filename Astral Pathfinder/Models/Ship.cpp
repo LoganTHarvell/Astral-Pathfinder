@@ -29,6 +29,8 @@ void Ship::init(SDL_Point p) {
   velocity.y = 0;
   rect.w = shipSize.w;
   rect.h = shipSize.h;
+  
+  collider = new ColliderComponent(rect);
 
   texture = TextureManager::loadTexture("Resources/Assets/movingPlayerShip.png");
   
@@ -73,7 +75,7 @@ void Ship::move(Uint32 ticks) {
   rect.x += (velocity.x * (ticks/10));
   rect.y += (velocity.y * (ticks/10));
   
-  if (checkBounds()) {
+  if (boundaryCollision()) {
     rect.x -= (velocity.x * (ticks/10));
     rect.y -= (velocity.y * (ticks/10));
   }
@@ -85,8 +87,10 @@ SDL_Point Ship::mapPosition(SDL_Point p) {
   return Map::mapPosition(p);
 }
 
-bool Ship::checkBounds() {
-  return Map::checkBounds(rect);
+bool Ship::boundaryCollision() {
+  auto vertices = collider->shipVertices(rect, rotation);
+  return Map::checkBounds(collider->minAlongXY(vertices),
+                          collider->maxAlongXY(vertices));
 }
 
 void Ship::updateRotation() {
@@ -128,6 +132,12 @@ void Ship::updateRotation() {
       ts = turnSpeed;
   }
   
+  int tmp = rotation;
   rotation = (rotation+ts)%360;
   if (rotation < 0) rotation = rotation + 360;
+  
+  if (boundaryCollision()) {
+    rotation = tmp;
+  }
+  
 }

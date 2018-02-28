@@ -25,12 +25,13 @@ public:
   bool collisionAABB(SDL_Rect r);
   bool collisionOBB(SDL_Rect r, int angle);
 
+  SDL_Point minAlongXY(std::vector<SDL_Point> corners);
+  SDL_Point maxAlongXY(std::vector<SDL_Point> corners);
+  
+  std::vector<SDL_Point> shipVertices(SDL_Rect r, int angle);
   
 private:
   // MARK: - Helper Methods
-  SDL_Point minAlongXY(std::vector<SDL_Point> corners);
-  SDL_Point maxAlongXY(std::vector<SDL_Point> corners);
-  std::vector<SDL_Point> shipVertices(SDL_Rect r, int angle);
   std::vector<SDL_Point> shipVertexVectors(SDL_Rect r);
   
 };

@@ -57,7 +57,7 @@ private:
   
   // MARK: - Helper Methods
   SDL_Point mapPosition(SDL_Point p);
-  bool checkBounds();
+  bool boundaryCollision();
   
   void updateVelocity();
   void updateRotation();
