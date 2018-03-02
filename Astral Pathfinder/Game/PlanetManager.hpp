@@ -52,7 +52,7 @@ private:
   void selectPlanet(bool *planetSelected);
   void deselectPlanet(bool *planetSelected);
   
-  void collision(SDL_Rect r, int angle);
+  void collision(std::vector<SDL_Point> vertices, int angle);
   
   // MARK: - PlanetManager Fields
   Planet planets[PlanetManagerParameters::numberOfPlanets];

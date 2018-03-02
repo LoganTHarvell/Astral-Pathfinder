@@ -55,9 +55,9 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
     p.update();
     
     // TODO: Remove and implement collision logic
-    SDL_Rect shipR = shipManager->getPlayerShip().getRect();
-    int shipAngle = shipManager->getPlayerShip().getRotation();
-    p.getCollider().collisionOBB(shipR, shipAngle);
+    auto shipCollider = shipManager->getPlayerShip().getCollider();
+    auto shipVertices = shipCollider.getVertices();
+    p.getCollider().collisionOBB(shipVertices);
   }
   
   if (!gameState->planetSelected && selectedPlanetIndex >= 0) {
@@ -73,6 +73,13 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
 
 void PlanetManager::render() {
   for(Planet p : planets) {
+    // MARK: DEBUG ONLY
+    auto planetV = p.getCollider().getVertices();
+    SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
+    for (auto v : planetV) {
+      SDL_RenderDrawPoint(Game::renderer, v.x, v.y);
+    }
+    SDL_SetRenderDrawColor(Game::renderer, 0, 0, 0, 255);
     p.render();
   }
 }
@@ -142,8 +149,8 @@ void PlanetManager::deselectPlanet(bool *planetSelected) {
   *planetSelected = false;
 }
 
-void PlanetManager::collision(SDL_Rect r, int angle) {
+void PlanetManager::collision(std::vector<SDL_Point> vertices, int angle) {
   for (Planet p : planets) {
-    p.getCollider().collisionOBB(r, angle);
+    p.getCollider().collisionOBB(vertices);
   }
 }

@@ -30,11 +30,15 @@ void Ship::init(SDL_Point p) {
   rect.w = shipSize.w;
   rect.h = shipSize.h;
   
-  collider = new ColliderComponent(rect);
+  rotation = 270;
+  
+  auto shipVertices = ColliderComponent::computeVertices(getCenter(),
+                                                         shipVertexVectors(),
+                                                         rotation);
+  collider = new ColliderComponent(getCenter(), shipVertices);
 
   texture = TextureManager::loadTexture("Resources/Assets/movingPlayerShip.png");
   
-  rotation = 270;
   fuel = 0;
 }
 
@@ -42,13 +46,25 @@ void Ship::init(SDL_Point p) {
 // MARK: - Game Loop Methods
 
 void Ship::update() {
-  // TODO: find way to pass variable in and not trigger "ship is abstract"
   updateVelocity();
   updateRotation();
-
+  
+  auto shipVertices = ColliderComponent::computeVertices(getCenter(),
+                                                         shipVertexVectors(),
+                                                         rotation);
+  collider->update(getCenter(), shipVertices);
 }
 
 void Ship::render() {
+
+  // MARK: DEBUG ONLY
+  auto shipVertices = collider->getVertices();
+  SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
+  for (auto v : shipVertices) {
+    SDL_RenderDrawPoint(Game::renderer, v.x, v.y);
+  }
+  SDL_SetRenderDrawColor(Game::renderer, 0, 0, 0, 255);
+
   SDL_RenderCopyEx(Game::renderer, texture, NULL, &rect,
                    rotation, NULL, SDL_FLIP_NONE);
 }
@@ -88,10 +104,30 @@ SDL_Point Ship::mapPosition(SDL_Point p) {
 }
 
 bool Ship::boundaryCollision() {
-  auto vertices = collider->shipVertices(rect, rotation);
+  auto vertexV = shipVertexVectors();
+  auto vertices = collider->computeVertices(getCenter(), vertexV, rotation);
+  
   return Map::checkBounds(collider->minAlongXY(vertices),
                           collider->maxAlongXY(vertices));
 }
+
+std::vector<SDL_Point> Ship::shipVertexVectors() {
+  std::vector<SDL_Point> cornerVectors;
+  
+  cornerVectors.push_back({ rect.x, rect.y + rect.h/2 });
+  cornerVectors.push_back({ rect.x + rect.w/2, rect.y });
+  cornerVectors.push_back({ rect.x + rect.w, rect.y + rect.h/2 });
+  cornerVectors.push_back({ rect.x + rect.w/2, rect.y + rect.h });
+  
+  SDL_Point center = getCenter();
+  for (auto& cv : cornerVectors) {
+    cv.x -= center.x;
+    cv.y -= center.y;
+  }
+  
+  return cornerVectors;
+}
+
 
 void Ship::updateRotation() {
   using ShipParameters:: turnSpeed;

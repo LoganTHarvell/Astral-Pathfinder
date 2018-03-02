@@ -39,7 +39,7 @@ void GameObject::scale(float x) {
 SDL_Point GameObject::getCenter() {
   SDL_Point c;
   c.x = rect.x + (rect.w/2);
-  c.y = rect.y + (rect.w/2);
+  c.y = rect.y + (rect.h/2);
   return c;
 }
 

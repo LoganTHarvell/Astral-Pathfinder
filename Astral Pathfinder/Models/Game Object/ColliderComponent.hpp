@@ -11,28 +11,41 @@
 
 #include "SDL2/SDL.h"
 #include <vector>
+#include <experimental/optional>
+
 
 // TODO: Generalize class for any game object
 class ColliderComponent {
+  using Vector = std::vector<SDL_Point>;
   
 public:
   ColliderComponent() = default;
   ColliderComponent(SDL_Rect r);
+  ColliderComponent(SDL_Point center, Vector vertices);
   ~ColliderComponent() = default;
   
-  SDL_Rect rect;
+  void update(SDL_Point center, Vector vertices);
+  Vector getVertices() { return vertices; };
   
   bool collisionAABB(SDL_Rect r);
-  bool collisionOBB(SDL_Rect r, int angle);
+  bool collisionOBB(Vector vertices);
 
-  SDL_Point minAlongXY(std::vector<SDL_Point> corners);
-  SDL_Point maxAlongXY(std::vector<SDL_Point> corners);
+  SDL_Point minAlongXY(Vector corners);
+  SDL_Point maxAlongXY(Vector corners);
   
-  std::vector<SDL_Point> shipVertices(SDL_Rect r, int angle);
+  static Vector computeVertices(SDL_Point center, Vector verticesV, int angle);
   
 private:
+  SDL_Point center;
+  Vector vertices;
+  
+  SDL_Point min;
+  SDL_Point max;
+  
+  std::experimental::optional<int> radius;
+  
   // MARK: - Helper Methods
-  std::vector<SDL_Point> shipVertexVectors(SDL_Rect r);
+  Vector rectVertexVectors(SDL_Rect r);
   
 };
 
