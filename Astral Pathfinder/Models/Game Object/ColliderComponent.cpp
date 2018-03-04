@@ -16,7 +16,8 @@
 // MARK: Source Files
 #include "Game.hpp"
 
-using Vector = std::vector<SDL_Point>;
+using PointVector = std::vector<SDL_Point>;
+using Axis = std::vector<double>;
 
 
 // MARK: - Constructors
@@ -26,8 +27,7 @@ ColliderComponent::ColliderComponent(SDL_Rect r) {
   vertices = computeVertices(center, rectVertexVectors(r), 0);
 }
 
-ColliderComponent::ColliderComponent(SDL_Point center,
-                                     std::vector<SDL_Point> vertices) {
+ColliderComponent::ColliderComponent(SDL_Point center, PointVector vertices) {
   this->center = center;
   this->vertices = vertices;
 }
@@ -35,7 +35,7 @@ ColliderComponent::ColliderComponent(SDL_Point center,
 
 // MARK: - Game Loop Methods
 
-void ColliderComponent::update(SDL_Point center, Vector vertices) {
+void ColliderComponent::update(SDL_Point center, PointVector vertices) {
   this->center = center;
   this->vertices = vertices;
 }
@@ -59,7 +59,7 @@ bool ColliderComponent::collisionAABB(SDL_Rect r) {
   return true;
 }
 
-bool ColliderComponent::collisionOBB(Vector vertices, int angle) {
+bool ColliderComponent::collisionOBB(PointVector vertices, int angle) {
   // Gets axes of self and test boxes
   std::vector<std::vector<double>> axes = getAxes(0);
   auto tmp = getAxes(angle);
@@ -81,9 +81,10 @@ bool ColliderComponent::collisionOBB(Vector vertices, int angle) {
   return true;
 }
 
-Vector ColliderComponent::computeVertices(SDL_Point center, Vector vertexV,
-                                          int angle) {
-  Vector vertices;
+PointVector ColliderComponent::computeVertices(SDL_Point center,
+                                               PointVector vertexV,
+                                               int angle) {
+  PointVector vertices;
   
   double a = angle * (M_PI / 180.0);  // degrees to radians
   
@@ -100,9 +101,9 @@ Vector ColliderComponent::computeVertices(SDL_Point center, Vector vertexV,
   return vertices;
 }
 
-std::vector<std::vector<double>> ColliderComponent::getAxes(int angle) {
-  std::vector<std::vector<double>> axes;
-  axes.reserve(2 * sizeof(std::vector<std::vector<double>>));
+std::vector<Axis> ColliderComponent::getAxes(int angle) {
+  std::vector<Axis> axes;
+  axes.reserve(2 * sizeof(std::vector<Axis>));
   
   // Computes axes angle offsets in radians
   double a = angle * (M_PI / 180.0);
@@ -112,41 +113,33 @@ std::vector<std::vector<double>> ColliderComponent::getAxes(int angle) {
   axes.push_back({ cos(a), sin(a) });
   axes.push_back({ cos(b), sin(b) });
   
-  Vector normalizedAxes;
-    for (auto axis : axes) {
-      // Computes magnitude of axis vector
-      double magnitude = sqrt(pow(axis[0], 2) + pow(axis[1], 2));
-      // Normalizes axis vector
-      axis = { axis[0] / magnitude, axis[1] / magnitude };
-      
-      // Adds 0.5 to reduce impact of rounding error during truncation
-      normalizedAxes.push_back({ static_cast<int>(axis[0]+0.5),
-                                 static_cast<int>(axis[1]+0.5) });
-    }
-  
   return axes;
 }
 
-int ColliderComponent::minAlongAxis(Vector vertices, std::vector<double> axis) {
+int ColliderComponent::minAlongAxis(PointVector vertices, Axis axis) {
+  enum { x, y };  // Axis components
+
   // Initializes min to first vertex projection along axis
-  int min = (vertices[0].x * axis[0]) + (vertices[0].y * axis[1]);
+  int min = (vertices[0].x * axis[x]) + (vertices[0].y * axis[y]);
   
   // Projects each vertex along axis and keeps minimum value
   for (auto v : vertices) {
-    int dotProd = (v.x * axis[0]) + (v.y * axis[1]);
+    int dotProd = (v.x * axis[x]) + (v.y * axis[y]);
     if (dotProd < min) min = dotProd;
   }
   
   return min;
 }
 
-int ColliderComponent::maxAlongAxis(Vector vertices, std::vector<double> axis) {
+int ColliderComponent::maxAlongAxis(PointVector vertices, Axis axis) {
+  enum { x, y };  // Axis components
+
   // Initializes max to first vertex projection along axis
-  int max = (vertices[0].x * axis[0]) + (vertices[0].y * axis[1]);
+  int max = (vertices[0].x * axis[x]) + (vertices[0].y * axis[y]);
   
   // Projects each vertex along axis and keeps maximum value
   for (auto v : vertices) {
-    int dotProd = (v.x * axis[0]) + (v.y * axis[1]);
+    int dotProd = (v.x * axis[x]) + (v.y * axis[y]);
     if (dotProd > max) max = dotProd;
   }
   
@@ -156,8 +149,8 @@ int ColliderComponent::maxAlongAxis(Vector vertices, std::vector<double> axis) {
 
 // MARK: - Helper Methods
 
-Vector ColliderComponent::rectVertexVectors(SDL_Rect r) {
-  Vector vertexVectors;
+PointVector ColliderComponent::rectVertexVectors(SDL_Rect r) {
+  PointVector vertexVectors;
   
   // Computes rect vertices
   vertexVectors.push_back({ r.x, r.y });
@@ -178,7 +171,7 @@ Vector ColliderComponent::rectVertexVectors(SDL_Rect r) {
 
 // MARK: - Debug Tools
 
-void DebugTools::renderVertices(Vector vertices) {
+void DebugTools::renderVertices(std::vector<SDL_Point> vertices) {
   SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
   for (auto v : vertices) {
     SDL_RenderDrawPoint(Game::renderer, v.x, v.y);

@@ -16,49 +16,50 @@
 
 
 class ColliderComponent {
-  using Vector = std::vector<SDL_Point>;
+  using PointVector = std::vector<SDL_Point>;
+  using Axis = std::vector<double>;
   
 public:
   // MARK: - Constructors, Destructor
   ColliderComponent() = default;
   ColliderComponent(SDL_Rect r);
-  ColliderComponent(SDL_Point center, Vector vertices);
+  ColliderComponent(SDL_Point center, PointVector vertices);
   ~ColliderComponent() = default;
   
   // MARK: - Game Loop Methods
-  void update(SDL_Point center, Vector vertices);
+  void update(SDL_Point center, PointVector vertices);
   
   //MARK: - Collider Methods
   bool collisionAABB(SDL_Rect r);
-  bool collisionOBB(Vector vertices, int angle);
+  bool collisionOBB(PointVector vertices, int angle);
   
-  Vector getVertices() { return vertices; };
-  static Vector computeVertices(SDL_Point center, Vector verticesV, int angle);
+  PointVector getVertices() { return vertices; };
+  static PointVector computeVertices(SDL_Point center, PointVector verticesV,
+                                     int angle);
   
-  std::vector<std::vector<double>> getAxes(int angle);
-  int minAlongAxis(Vector vertices, std::vector<double> axis);
-  int maxAlongAxis(Vector vertices, std::vector<double> axis);
+  std::vector<Axis> getAxes(int angle);
+  int minAlongAxis(PointVector vertices, Axis axis);
+  int maxAlongAxis(PointVector vertices, Axis axis);
   
 private:
   // MARK: - Collider Fields
   SDL_Point center;
-  Vector vertices;
+  PointVector vertices;
   
   // TODO: - Circle collisions?
   std::experimental::optional<int> radius;
   
   // MARK: - Helper Methods
-  Vector rectVertexVectors(SDL_Rect r);
+  PointVector rectVertexVectors(SDL_Rect r);
 };
 
 
 // MARK: - Debug Tools
 
 namespace DebugTools {
-  using Vector = std::vector<SDL_Point>;
-
-  void renderVertices(Vector vertices);
   
+  void renderVertices(std::vector<SDL_Point> vertices);
+
 }
 
 #endif /* ColliderComponent_hpp */
