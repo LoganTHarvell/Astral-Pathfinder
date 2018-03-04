@@ -97,12 +97,15 @@ SDL_Point Ship::mapPosition(SDL_Point p) {
 bool Ship::boundaryCollision() {
   auto vertexV = shipVertexVectors();
   auto vertices = collider->computeVertices(getCenter(), vertexV, rotation);
-  auto axes = collider->getAxes(0);
+  
+  std::vector<SDL_Point> axes;
+  axes.push_back({ 1, 0 });   // X axis normal vector
+  axes.push_back({ 0, 1 });   // Y axis normal vector
   
   SDL_Point mins = { collider->minAlongAxis(vertices, axes[0]),
-                    collider->minAlongAxis(vertices, axes[1]) };
+                     collider->minAlongAxis(vertices, axes[1]) };
   SDL_Point maxs = { collider->maxAlongAxis(vertices, axes[0]),
-                    collider->maxAlongAxis(vertices, axes[1]) };
+                     collider->maxAlongAxis(vertices, axes[1]) };
   
   return Map::checkBounds(mins, maxs);
 }

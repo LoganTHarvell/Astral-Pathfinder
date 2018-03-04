@@ -17,7 +17,6 @@
 
 class ColliderComponent {
   using PointVector = std::vector<SDL_Point>;
-  using Axis = std::vector<double>;
   
 public:
   // MARK: - Constructors, Destructor
@@ -37,9 +36,8 @@ public:
   static PointVector computeVertices(SDL_Point center, PointVector verticesV,
                                      int angle);
   
-  std::vector<Axis> getAxes(int angle);
-  int minAlongAxis(PointVector vertices, Axis axis);
-  int maxAlongAxis(PointVector vertices, Axis axis);
+  int minAlongAxis(PointVector vertices, SDL_Point axis);
+  int maxAlongAxis(PointVector vertices, SDL_Point axis);
   
 private:
   // MARK: - Collider Fields
@@ -51,6 +49,7 @@ private:
   
   // MARK: - Helper Methods
   PointVector rectVertexVectors(SDL_Rect r);
+  PointVector getNormals(PointVector vertices);
 };
 
 

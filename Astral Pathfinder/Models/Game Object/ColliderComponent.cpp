@@ -17,7 +17,6 @@
 #include "Game.hpp"
 
 using PointVector = std::vector<SDL_Point>;
-using Axis = std::vector<double>;
 
 
 // MARK: - Constructors
@@ -61,9 +60,9 @@ bool ColliderComponent::collisionAABB(SDL_Rect r) {
 
 bool ColliderComponent::collisionOBB(PointVector vertices, int angle) {
   // Gets axes of self and test boxes
-  std::vector<std::vector<double>> axes = getAxes(0);
-  auto tmp = getAxes(angle);
-  axes.insert( axes.end(), tmp.begin(), tmp.end());
+  PointVector axes = getNormals(this->vertices);
+  auto tmp = getNormals(vertices);
+  axes.insert(axes.end(), tmp.begin(), tmp.end());
 
   // Loop axes
   for (auto axis : axes) {
@@ -101,45 +100,26 @@ PointVector ColliderComponent::computeVertices(SDL_Point center,
   return vertices;
 }
 
-std::vector<Axis> ColliderComponent::getAxes(int angle) {
-  std::vector<Axis> axes;
-  axes.reserve(2 * sizeof(std::vector<Axis>));
-  
-  // Computes axes angle offsets in radians
-  double a = angle * (M_PI / 180.0);
-  double b = (angle + 90) * (M_PI / 180.0);
-  
-  // Computes axes vectors
-  axes.push_back({ cos(a), sin(a) });
-  axes.push_back({ cos(b), sin(b) });
-  
-  return axes;
-}
-
-int ColliderComponent::minAlongAxis(PointVector vertices, Axis axis) {
-  enum { x, y };  // Axis components
-
+int ColliderComponent::minAlongAxis(PointVector vertices, SDL_Point axis) {
   // Initializes min to first vertex projection along axis
-  int min = (vertices[0].x * axis[x]) + (vertices[0].y * axis[y]);
+  int min = (vertices[0].x * axis.x) + (vertices[0].y * axis.y);
   
   // Projects each vertex along axis and keeps minimum value
   for (auto v : vertices) {
-    int dotProd = (v.x * axis[x]) + (v.y * axis[y]);
+    int dotProd = (v.x * axis.x) + (v.y * axis.y);
     if (dotProd < min) min = dotProd;
   }
   
   return min;
 }
 
-int ColliderComponent::maxAlongAxis(PointVector vertices, Axis axis) {
-  enum { x, y };  // Axis components
-
+int ColliderComponent::maxAlongAxis(PointVector vertices, SDL_Point axis) {
   // Initializes max to first vertex projection along axis
-  int max = (vertices[0].x * axis[x]) + (vertices[0].y * axis[y]);
+  int max = (vertices[0].x * axis.x) + (vertices[0].y * axis.y);
   
   // Projects each vertex along axis and keeps maximum value
   for (auto v : vertices) {
-    int dotProd = (v.x * axis[x]) + (v.y * axis[y]);
+    int dotProd = (v.x * axis.x) + (v.y * axis.y);
     if (dotProd > max) max = dotProd;
   }
   
@@ -166,6 +146,20 @@ PointVector ColliderComponent::rectVertexVectors(SDL_Rect r) {
   }
   
   return vertexVectors;
+}
+
+PointVector ColliderComponent::getNormals(PointVector vertices) {
+  PointVector normals;
+  
+  for (int i = 1; i < vertices.size()-1; i++) {
+    normals.push_back({ vertices[i + 1].x - vertices[i].x,
+                        -(vertices[i + 1].y - vertices[i].y) });
+  }
+  
+  normals.push_back({ vertices[1].x - vertices[vertices.size()-1].x,
+                      -(vertices[1].y - vertices[vertices.size()-1].y) });
+  
+  return normals;
 }
 
 
