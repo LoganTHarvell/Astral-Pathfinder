@@ -6,6 +6,7 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
+
 #include "ColliderComponent.hpp"
 
 #include <iostream>
@@ -16,24 +17,18 @@ using Vector = std::vector<SDL_Point>;
 ColliderComponent::ColliderComponent(SDL_Rect r) {
   center = { r.x + (r.w / 2), r.y + (r.h / 2) };
   vertices = computeVertices(center, rectVertexVectors(r), 0);
-  min = minAlongXY(vertices);
-  max = maxAlongXY(vertices);
 }
 
 ColliderComponent::ColliderComponent(SDL_Point center,
                                      std::vector<SDL_Point> vertices) {
   this->center = center;
   this->vertices = vertices;
-  min = minAlongXY(vertices);
-  max = maxAlongXY(vertices);
 }
 
 
 void ColliderComponent::update(SDL_Point center, Vector vertices) {
   this->center = center;
   this->vertices = vertices;
-  min = minAlongXY(vertices);
-  max = maxAlongXY(vertices);
 }
 
 // MARK: - Collision Methods
@@ -54,36 +49,42 @@ bool ColliderComponent::collisionAABB(SDL_Rect r) {
   return true;
 }
 
-bool ColliderComponent::collisionOBB(Vector vertices) {
-  SDL_Point min = minAlongXY(vertices);
-  SDL_Point max = maxAlongXY(vertices);
-  
-  if (this->max.x < min.x || this->min.x > max.x) return false;
-  if (this->max.y < min.y || this->min.y > max.y) return false;
+bool ColliderComponent::collisionOBB(Vector vertices, int angle) {
+  std::vector<std::vector<double>> axes = getAxes(0);
+  auto tmp = getAxes(angle);
+  axes.insert( axes.end(), tmp.begin(), tmp.end());
+
+  for (auto axis : axes) {
+    int thisMin = minAlongAxis(this->vertices, axis);
+    int thisMax = maxAlongAxis(this->vertices, axis);
+    int testMin = minAlongAxis(vertices, axis);
+    int testMax = maxAlongAxis(vertices, axis);
     
-  std::cout << "Collision" << std::endl;
+    if (thisMax < testMin || thisMin > testMax) return false;
+  }
   
+  std::cout << "Collision" << std::endl;
   return true;
 }
 
 
-SDL_Point ColliderComponent::minAlongXY(std::vector<SDL_Point> corners) {
-  SDL_Point min = corners.front();
+int ColliderComponent::minAlongAxis(Vector corners, std::vector<double> axis) {
+  int min = (corners[0].x * axis[0]) + (corners[0].y * axis[1]);
   
   for (auto c : corners) {
-    if (c.x < min.x) min.x = c.x;
-    if (c.y < min.y) min.y = c.y;
+    int dotProd = (c.x * axis[0]) + (c.y * axis[1]);
+    if (dotProd < min) min = dotProd;
   }
   
   return min;
 }
 
-SDL_Point ColliderComponent::maxAlongXY(Vector corners) {
-  SDL_Point max = corners.front();
+int ColliderComponent::maxAlongAxis(Vector corners, std::vector<double> axis) {
+  int max = (corners[0].x * axis[0]) + (corners[0].y * axis[1]);
   
   for (auto c : corners) {
-    if (c.x > max.x) max.x = c.x;
-    if (c.y > max.y) max.y = c.y;
+    int dotProd = (c.x * axis[0]) + (c.y * axis[1]);
+    if (dotProd > max) max = dotProd;
   }
   
   return max;
@@ -120,4 +121,25 @@ Vector ColliderComponent::rectVertexVectors(SDL_Rect r) {
   }
   
   return cornerVectors;
+}
+
+std::vector<std::vector<double>> ColliderComponent::getAxes(int angle) {
+  std::vector<std::vector<double>> axes;
+  axes.reserve(2 * sizeof(std::vector<std::vector<double>>));
+  
+  double a = angle * (M_PI / 180.0);
+  double b = (angle + 90) * (M_PI / 180.0);
+
+  axes.push_back({ cos(a), sin(a) });
+  axes.push_back({ cos(b), sin(b) });
+  
+  std::vector<std::vector<double>> normalizedAxes = axes;
+//  for (auto axis : axes) {
+//    double magnitude = sqrt(pow(axis[0], 2) + pow(axis[1], 2));
+//    axis = { axis[0] / magnitude, axis[1] / magnitude };
+//    normalizedAxes.push_back({ static_cast<int>(axis[0]),
+//                               static_cast<int>(axis[1]) });
+//  }
+  
+  return normalizedAxes;
 }

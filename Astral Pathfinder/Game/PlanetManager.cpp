@@ -55,9 +55,10 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
     p.update();
     
     // TODO: Remove and implement collision logic
-    auto shipCollider = shipManager->getPlayerShip().getCollider();
-    auto shipVertices = shipCollider.getVertices();
-    p.getCollider().collisionOBB(shipVertices);
+    auto ship = shipManager->getPlayerShip();
+    auto shipVertices = ship.getCollider().getVertices();
+    auto shipAngle = ship.getRotation();
+    p.getCollider().collisionOBB(shipVertices, shipAngle);
   }
   
   if (!gameState->planetSelected && selectedPlanetIndex >= 0) {
@@ -151,6 +152,6 @@ void PlanetManager::deselectPlanet(bool *planetSelected) {
 
 void PlanetManager::collision(std::vector<SDL_Point> vertices, int angle) {
   for (Planet p : planets) {
-    p.getCollider().collisionOBB(vertices);
+    p.getCollider().collisionOBB(vertices, angle);
   }
 }
