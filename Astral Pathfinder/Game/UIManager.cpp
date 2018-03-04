@@ -21,19 +21,9 @@ void UIManager::init() {
 // MARK: - Game Loop Methods
 
 void UIManager::update(Game::State *gameState, PlanetManager *planetManager) {
-  // -----------------------------------------------------
-  if (gameState->planetSelected) {
-    if(planetIndex != planetManager->getSelectedPlanetIndex()) {
-      setSelectedPlanet(planetManager->getSelectedPlanet());
-      planetIndex = planetManager->getSelectedPlanetIndex();
-    }
-  }
-  else {
-    planetInfo.clean();
-    planetIndex = -1;
-  }
-  // -----------------------------------------------------
-  // This one block of code has caused a lot of pain and suffering
+  if (gameState->planetSelected)
+    setSelectedPlanet(planetManager->getSelectedPlanet());
+  else planetInfo.clean();
   
   if(!gameState->down) {
     planetInfo.setSliderNum(-1);
