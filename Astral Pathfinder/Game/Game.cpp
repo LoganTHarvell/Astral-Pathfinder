@@ -21,6 +21,7 @@
 #include "UIManager.hpp"
 
 
+// MARK: - Game Globals
 SDL_Renderer *Game::renderer = nullptr;
 
 
@@ -67,7 +68,7 @@ void Game::init(const char *title,
               << SDL_GetError() << ", " << IMG_GetError() << std::endl;
   }
 
-  // Initializes game screen
+  // Object Initialization
   gameScreen = TextureManager::loadTexture("Resources/Assets/gameScreen.png");
   
   planetManager = new PlanetManager;

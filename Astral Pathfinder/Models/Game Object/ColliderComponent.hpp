@@ -9,6 +9,7 @@
 #ifndef ColliderComponent_hpp
 #define ColliderComponent_hpp
 
+// MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 #include <vector>
 #include <experimental/optional>
@@ -19,24 +20,28 @@ class ColliderComponent {
   using Vector = std::vector<SDL_Point>;
   
 public:
+  // MARK: - Constructors, Destructor
   ColliderComponent() = default;
   ColliderComponent(SDL_Rect r);
   ColliderComponent(SDL_Point center, Vector vertices);
   ~ColliderComponent() = default;
   
+  // MARK: - Game Loop Methods
   void update(SDL_Point center, Vector vertices);
-  Vector getVertices() { return vertices; };
   
+  //MARK: - Collider Methods
   bool collisionAABB(SDL_Rect r);
   bool collisionOBB(Vector vertices, int angle);
-
-  int minAlongAxis(Vector corners, std::vector<double> axis);
-  int maxAlongAxis(Vector corners, std::vector<double> axis);
   
-  std::vector<std::vector<double>> getAxes(int angle);
+  Vector getVertices() { return vertices; };
   static Vector computeVertices(SDL_Point center, Vector verticesV, int angle);
   
+  std::vector<std::vector<double>> getAxes(int angle);
+  int minAlongAxis(Vector vertices, std::vector<double> axis);
+  int maxAlongAxis(Vector vertices, std::vector<double> axis);
+  
 private:
+  // MARK: - Collider Fields
   SDL_Point center;
   Vector vertices;
   

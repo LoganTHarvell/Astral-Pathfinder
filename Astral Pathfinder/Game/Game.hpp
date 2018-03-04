@@ -11,7 +11,6 @@
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
-#include "SDL2_ttf/SDL_ttf.h"
 
 
 // MARK: - Game Parameters
@@ -54,12 +53,12 @@ public:
   
   void init(const char *title, int x, int y, int w, int h, bool fullscreen);
   
-  // MARK: Game Loop Methods
+  // MARK: - Game Loop Methods
   void handleEvents();
   void update(Uint32 ticks);
   void render();
   
-  // MARK: Game Methods
+  // MARK: - Game Methods
   bool running() { return gameState.isRunning; };
   void clean();
 
@@ -67,7 +66,7 @@ public:
   static SDL_Renderer *renderer;
   
 private:
-  // MARK: Game Fields
+  // MARK: - Game Fields
   SDL_Window *window;
   State gameState;
 
