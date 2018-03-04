@@ -87,10 +87,6 @@ Planet PlanetManager::getSelectedPlanet() {
   return planets[selectedPlanetIndex];
 }
 
-int PlanetManager::getSelectedPlanetIndex() {
-  return selectedPlanetIndex;
-}
-
 void PlanetManager::setPlanetDepoPercent(int p) {
   planets[selectedPlanetIndex].setDepositsPercent(p);
 }
