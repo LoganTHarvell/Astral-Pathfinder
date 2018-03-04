@@ -21,8 +21,9 @@ void PlanetInfo::init() {
   fertilityText.init(fertilityRect);
   dpText.init(depositsPercentRect);
   fpText.init(fertilityPercentRect);
-  depoSlider.init(slideBase, circle);
-  fertSlider.init(slideBase2, circle2);
+  mining.init(miningLabel);
+  farming.init(farmingLabel);
+  slider.init(slideBase, circle);
 }
 
 
@@ -33,8 +34,9 @@ void PlanetInfo::render() {
   fertilityText.render();
   dpText.render();
   fpText.render();
-  depoSlider.render();
-  fertSlider.render();
+  mining.render();
+  farming.render();
+  slider.render();
 }
 
 void PlanetInfo::clean() {
@@ -42,8 +44,9 @@ void PlanetInfo::clean() {
   fertilityText.clean();
   dpText.clean();
   fpText.clean();
-  depoSlider.clean();
-  fertSlider.clean();
+  mining.clean();
+  farming.clean();
+  slider.clean();
 }
 
 
@@ -51,48 +54,26 @@ void PlanetInfo::clean() {
 
 void PlanetInfo::setText(Planet p) {
   setBoxes(p);
-  depoSlider.setTextures(p.getDepositsPercent());
-  fertSlider.setTextures(p.getFertilityPercent());
+  slider.setTextures(p.getFertilityPercent());
 }
 
 bool PlanetInfo::checkClick(Game::State *gameState) {
   int x = gameState->clickLocation.x;
   int y = gameState->clickLocation.y;
-  SDL_Rect tempDepo = depoSlider.getCirclePosition();
-  SDL_Rect tempFert = fertSlider.getCirclePosition();
-  if((x > tempDepo.x) && (x < tempDepo.x + tempDepo.w)
-     && (y > tempDepo.y) && (y < tempDepo.y + tempDepo.h)) {
-    sliderNum = 1;
+  SDL_Rect temp = slider.getCirclePosition();
+  if((x > temp.x) && (x < temp.x + temp.w)
+     && (y > temp.y) && (y < temp.y + temp.h))
     return true;
-  }
   
-  if((x > tempFert.x) && (x < tempFert.x + tempFert.w)
-     && (y > tempFert.y) && (y < tempFert.y + tempFert.h)) {
-    sliderNum = 2;
-    return true;
-  }
-  
-  sliderNum = -1;
   return false;
 }
 
 int PlanetInfo::moveSlider(Game::State *gameState) {
-  SDL_Rect temp;
-  int p = 0;
   int x = gameState->dragLocation.x;
-  
-  if(sliderNum == 1)
-    temp = depoSlider.getBasePosition();
-  
-  if(sliderNum == 2)
-    temp = fertSlider.getBasePosition();
+  SDL_Rect temp = slider.getBasePosition();
   
   if((x > temp.x) && (x < temp.x + temp.w + 1)) {
-    if(sliderNum == 1)
-      p = depoSlider.setCirclePosition(x);
-    
-    if(sliderNum == 2)
-      p = fertSlider.setCirclePosition(x);
+    int p = slider.setCirclePosition(x);
     setNewPercent(p);
     return p;
   }
@@ -103,27 +84,25 @@ int PlanetInfo::moveSlider(Game::State *gameState) {
 // MARK: - Helper Methods
 
 void PlanetInfo::setBoxes(Planet p) {
-  std::string depo = "Deposits: " + std::to_string(p.getDeposits());
-  std::string fert = "Fertility: " + std::to_string(p.getFertility());
-  std::string depoPercent = " : " + setSpaces(p.getDepositsPercent()) + std::to_string(p.getDepositsPercent()) + "%";
-  std::string fertPercent = " : " + setSpaces(p.getFertilityPercent()) + std::to_string(p.getFertilityPercent()) + "%";
+  std::string depo = "Deposits: " + setSpaces(p.getDeposits()) + std::to_string(p.getDeposits());
+  std::string fert = "Fertility: " + setSpaces(p.getFertility()) + std::to_string(p.getFertility());
+  std::string depoPercent = setSpaces(p.getDepositsPercent()) + std::to_string(p.getDepositsPercent()) + "%";
+  std::string fertPercent = setSpaces(p.getFertilityPercent()) + std::to_string(p.getFertilityPercent()) + "%";
   
   depositsText.setMessage(depo.c_str());
   fertilityText.setMessage(fert.c_str());
   dpText.setMessage(depoPercent.c_str());
   fpText.setMessage(fertPercent.c_str());
+  mining.setMessage("Mining");
+  farming.setMessage("Farming");
 }
 
 void PlanetInfo::setNewPercent(int p) {
-  if(sliderNum == 1) {
-    std::string depoPercent = " : " + setSpaces(p) + std::to_string(p) + "%";
-    dpText.setMessage(depoPercent.c_str());
-  }
+  std::string depoPercent = setSpaces(100-p) + std::to_string(100-p) + "%";
+  dpText.setMessage(depoPercent.c_str());
   
-  if(sliderNum == 2) {
-    std::string fertPercent = " : " + setSpaces(p) + std::to_string(p) + "%";
-    fpText.setMessage(fertPercent.c_str());
-  }
+  std::string fertPercent = setSpaces(p) + std::to_string(p) + "%";
+  fpText.setMessage(fertPercent.c_str());
 }
 
 std::string PlanetInfo::setSpaces(int p) {

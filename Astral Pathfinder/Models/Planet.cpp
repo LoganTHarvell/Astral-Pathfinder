@@ -62,7 +62,7 @@ void Planet::initPlanet() {
   // Sets planet status
   status = undiscovered;
   
-  depositsPercent = 0;
+  depositsPercent = 50;
   fertilityPercent = 50;
 }
 

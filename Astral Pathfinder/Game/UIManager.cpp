@@ -25,10 +25,8 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager) {
     setSelectedPlanet(planetManager->getSelectedPlanet());
   else planetInfo.clean();
   
-  if(!gameState->down) {
-    planetInfo.setSliderNum(-1);
+  if(!gameState->down)
     return;
-  }
   
   if(gameState->down && !gameState->drag)
     if(planetInfo.checkClick(gameState))
@@ -36,11 +34,10 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager) {
   
   if(gameState->drag) {
     int percent = planetInfo.moveSlider(gameState);
-    if(percent != -1 && planetInfo.getSliderNum() == 1)
-      planetManager->setPlanetDepoPercent(percent);
-    
-    if(percent != -1 && planetInfo.getSliderNum() == 2)
+    if(percent != -1) {
+      planetManager->setPlanetDepoPercent(100-percent);
       planetManager->setPlanetFertPercent(percent);
+    }
   }
 }
 
