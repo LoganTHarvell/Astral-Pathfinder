@@ -19,6 +19,7 @@ void PlanetInfo::init() {
   using namespace InfoParameters;
   depositsText.init(depositsRect);
   fertilityText.init(fertilityRect);
+  slider.init(slideBase, circle);
 }
 
 
@@ -27,11 +28,13 @@ void PlanetInfo::init() {
 void PlanetInfo::render() {
   depositsText.render();
   fertilityText.render();
+  slider.render();
 }
 
 void PlanetInfo::clean() {
   depositsText.clean();
   fertilityText.clean();
+  slider.clean();
 }
 
 
@@ -39,6 +42,7 @@ void PlanetInfo::clean() {
 
 void PlanetInfo::setText(Planet p) {
   setBoxes(p);
+  slider.setTextures();
 }
 
 // MARK: - Helper Methods

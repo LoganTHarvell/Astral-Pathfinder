@@ -10,6 +10,7 @@
 #define PlanetInfo_hpp
 
 // MARK: Source Files
+#include "Slider.hpp"
 #include "TextBox.hpp"
 #include "PlanetManager.hpp"
 #include "Planet.hpp"
@@ -19,6 +20,8 @@
 namespace InfoParameters {
   const SDL_Rect depositsRect = {1275, 600, 225, 50};
   const SDL_Rect fertilityRect = {1275, 650, 225, 50};
+  const SDL_Rect slideBase = {1225, 700, 300, 100};
+  const SDL_Rect circle = {1345, 720, 60, 60};
 }
 
 class PlanetInfo {
@@ -38,6 +41,7 @@ public:
 private:
   // MARK: - PlanetInfo Fields
   TextBox depositsText, fertilityText;
+  Slider slider;
   
   // MARK: - Helper Methods
   void setBoxes(Planet p);
