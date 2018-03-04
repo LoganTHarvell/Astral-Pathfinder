@@ -14,6 +14,7 @@
 
 // MARK: Source Files
 #include "Game.hpp"
+#include "Planet.hpp"
 
 
 // MARK: - Slider Class
@@ -29,15 +30,16 @@ public:
   void clean();
   
   // MARK: - Slider Methods
-  void setTextures();
+  void setTextures(Planet p);
   SDL_Rect getBasePosition() { return base; }
   SDL_Rect getCirclePosition() { return circle; }
-  void setCirclePosition(int pos);
+  int setCirclePosition(int pos);
   
 private:
   // MARK: - Slider Fields
   SDL_Rect base, circle;
   SDL_Texture *bar, *circ;
+  bool setPos = false;
 };
 
 

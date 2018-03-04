@@ -27,6 +27,7 @@ public:
 private:
   // MARK: - UIManager Fields
   PlanetInfo planetInfo;
+  int planetIndex = -1;
   
   // MARK: - Helper Methods
   void setSelectedPlanet(Planet p);

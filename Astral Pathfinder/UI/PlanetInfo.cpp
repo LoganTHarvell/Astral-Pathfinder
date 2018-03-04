@@ -11,7 +11,8 @@
 
 // MARK: Libraries and Frameworks
 #include <string>
-#include "Map.hpp"
+#include <iostream>
+#include <iomanip>
 
 
 // MARK: - PlanetInfo Initialization
@@ -20,6 +21,8 @@ void PlanetInfo::init() {
   using namespace InfoParameters;
   depositsText.init(depositsRect);
   fertilityText.init(fertilityRect);
+  dpText.init(depositsPercent);
+ // fpText.init(fertilityPercent);
   slider.init(slideBase, circle);
 }
 
@@ -29,12 +32,16 @@ void PlanetInfo::init() {
 void PlanetInfo::render() {
   depositsText.render();
   fertilityText.render();
+  dpText.render();
+ // fpText.render();
   slider.render();
 }
 
 void PlanetInfo::clean() {
   depositsText.clean();
   fertilityText.clean();
+  dpText.clean();
+ // fpText.clean();
   slider.clean();
 }
 
@@ -43,7 +50,7 @@ void PlanetInfo::clean() {
 
 void PlanetInfo::setText(Planet p) {
   setBoxes(p);
-  slider.setTextures();
+  slider.setTextures(p);
 }
 
 bool PlanetInfo::checkClick(Game::State *gameState) {
@@ -57,12 +64,16 @@ bool PlanetInfo::checkClick(Game::State *gameState) {
   return false;
 }
 
-void PlanetInfo::moveSlider(Game::State *gameState) {
+int PlanetInfo::moveSlider(Game::State *gameState) {
   int x = gameState->dragLocation.x;
   SDL_Rect temp = slider.getBasePosition();
-  if((x > temp.x) && (x < temp.x + temp.w)) {
-    slider.setCirclePosition(x);
+  if((x > temp.x) && (x < temp.x + temp.w + 1)) {
+    int p = slider.setCirclePosition(x);
+    setNewPercent(p);
+    return p;
   }
+  
+  return -1;
 }
 
 // MARK: - Helper Methods
@@ -70,8 +81,27 @@ void PlanetInfo::moveSlider(Game::State *gameState) {
 void PlanetInfo::setBoxes(Planet p) {
   std::string depo = "Deposits: " + std::to_string(p.getDeposits());
   std::string fert = "Fertility: " + std::to_string(p.getFertility());
+  std::string depoPercent = " : " + setSpaces(p.getDepositsPercent()) + std::to_string(p.getDepositsPercent()) + "%";
+  //std::string fertPercent = " : " + std::to_string(p.getFertilityPercent()) + "%";
   
   depositsText.setMessage(depo.c_str());
   fertilityText.setMessage(fert.c_str());
+  dpText.setMessage(depoPercent.c_str());
+  //fpText.setMessage(fertPercent.c_str());
 }
 
+void PlanetInfo::setNewPercent(int p) {
+  std::string depoPercent = " : " + setSpaces(p) + std::to_string(p) + "%";
+  dpText.setMessage(depoPercent.c_str());
+}
+
+std::string PlanetInfo::setSpaces(int p) {
+  std::string s;
+  
+  if(p >= 0 && p < 10)
+    s = s + " " + " ";
+  else if(p >= 10 && p < 100)
+    s = s + " ";
+  
+  return s;
+}

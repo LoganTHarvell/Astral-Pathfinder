@@ -108,7 +108,7 @@ void Game::handleEvents() {
         gameState.clickLocation = { event.button.x, event.button.y };
         break;
       case SDL_MOUSEMOTION:
-        if(gameState.drag)
+        if(gameState.planetSelected)
           gameState.dragLocation = { event.motion.x, event.motion.y};
         break;
       case SDL_MOUSEBUTTONUP:

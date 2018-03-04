@@ -52,11 +52,15 @@ void Slider::clean() {
   }
 }
 
-void Slider::setTextures() {
+void Slider::setTextures(Planet p) {
   bar = TextureManager::loadTexture("Resources/Assets/bar.png");
   circ = TextureManager::loadTexture("Resources/Assets/ball.png");
+
+  circle.x = (int)((float)p.getDepositsPercent()*2.65)+base.x-(circle.w/2);
 }
 
-void Slider::setCirclePosition(int pos) {
-  circle.x = pos-30;
+int Slider::setCirclePosition(int pos) {
+  circle.x = pos-25;
+  int temp = (circle.x+25) - base.x;
+  return (int)(((float)temp)/2.65);
 }

@@ -29,6 +29,10 @@ void Planet::initHomeworld() {
   
   // Sets homeworld status
   status = colonized;
+  
+  depositsPercent = 0;
+  fertilityPercent = 50;
+  
 }
 
 void Planet::initPlanet() {
@@ -57,6 +61,9 @@ void Planet::initPlanet() {
   
   // Sets planet status
   status = undiscovered;
+  
+  depositsPercent = 0;
+  fertilityPercent = 50;
 }
 
 

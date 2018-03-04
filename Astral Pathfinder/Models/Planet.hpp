@@ -53,6 +53,10 @@ public:
   SDL_Point getCoordinates() { return coordinates; };
   int getDeposits() { return deposits; };
   int getFertility() { return fertility; };
+  int getDepositsPercent() { return depositsPercent; };
+  int getFertilityPercent() { return fertilityPercent; };
+  void setDepositsPercent(int percent) { depositsPercent = percent; };
+  void setFertilityPercent(int percent) { fertilityPercent = percent; };
   void clicked();
   void revertClick();
   
@@ -67,7 +71,7 @@ private:
   } status;
 
   // resources
-  int deposits, fertility;
+  int deposits, fertility, depositsPercent, fertilityPercent;
   
   // MARK: - Helper Methods
   SDL_Point uiPosition(SDL_Point p);
