@@ -11,14 +11,16 @@
 
 // MARK: Source Files
 #include "Game.hpp"
-#include <iostream>
 #include "TextureManager.hpp"
 
 // MARK: - TextBox Initialization
 
 void Slider::init(SDL_Rect rectOne, SDL_Rect rectTwo) {
-  this->base = rectOne;
+  base = rectOne;
   circle = rectTwo;
+  
+  bar = nullptr;
+  circ = nullptr;
 }
 
 
@@ -39,14 +41,22 @@ void Slider::render() {
 void Slider::clean() {
   if (bar == nullptr || circ == nullptr) return;
   
-  SDL_DestroyTexture(bar);
-  bar = nullptr;
+  if(bar != nullptr) {
+    SDL_DestroyTexture(bar);
+    bar = nullptr;
+  }
   
-  SDL_DestroyTexture(circ);
-  circ = nullptr;
+  if(circ != nullptr) {
+    SDL_DestroyTexture(circ);
+    circ = nullptr;
+  }
 }
 
 void Slider::setTextures() {
   bar = TextureManager::loadTexture("Resources/Assets/bar.png");
   circ = TextureManager::loadTexture("Resources/Assets/ball.png");
+}
+
+void Slider::setCirclePosition(int pos) {
+  circle.x = pos-30;
 }

@@ -20,7 +20,7 @@
 namespace InfoParameters {
   const SDL_Rect depositsRect = {1275, 600, 225, 50};
   const SDL_Rect fertilityRect = {1275, 650, 225, 50};
-  const SDL_Rect slideBase = {1225, 700, 300, 100};
+  const SDL_Rect slideBase = {1225, 732, 300, 35};
   const SDL_Rect circle = {1345, 720, 60, 60};
 }
 
@@ -36,6 +36,8 @@ public:
   
   // MARK: - PlanetInfo Methods
   void setText(Planet p);
+  bool checkClick(Game::State *gameState);
+  void moveSlider(Game::State *gameState);
 
   
 private:

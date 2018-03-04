@@ -11,6 +11,8 @@
 
 // MARK: Libraries and Frameworks
 #include <string>
+#include <iostream>
+#include "Map.hpp"
 
 
 // MARK: - PlanetInfo Initialization
@@ -43,6 +45,25 @@ void PlanetInfo::clean() {
 void PlanetInfo::setText(Planet p) {
   setBoxes(p);
   slider.setTextures();
+}
+
+bool PlanetInfo::checkClick(Game::State *gameState) {
+  int x = gameState->clickLocation.x;
+  int y = gameState->clickLocation.y;
+  SDL_Rect temp = slider.getCirclePosition();
+  if((x > temp.x) && (x < temp.x + temp.w)
+     && (y > temp.y) && (y < temp.y + temp.h))
+    return true;
+  
+  return false;
+}
+
+void PlanetInfo::moveSlider(Game::State *gameState) {
+  int x = gameState->dragLocation.x;
+  SDL_Rect temp = slider.getBasePosition();
+  if((x > temp.x) && (x < temp.x + temp.w)) {
+    slider.setCirclePosition(x);
+  }
 }
 
 // MARK: - Helper Methods

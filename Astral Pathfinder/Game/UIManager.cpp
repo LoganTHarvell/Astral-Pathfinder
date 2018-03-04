@@ -26,6 +26,12 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager) {
     setSelectedPlanet(planetManager->getSelectedPlanet());
   else planetInfo.clean();
   
+  if(gameState->down && !gameState->drag)
+    if(planetInfo.checkClick(gameState))
+      gameState->drag = true;
+  
+  if(gameState->drag)
+    planetInfo.moveSlider(gameState);
 }
 
 void UIManager::render(Game::State *gameState) {

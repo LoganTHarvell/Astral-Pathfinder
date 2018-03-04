@@ -30,6 +30,9 @@ public:
   
   // MARK: - Slider Methods
   void setTextures();
+  SDL_Rect getBasePosition() { return base; }
+  SDL_Rect getCirclePosition() { return circle; }
+  void setCirclePosition(int pos);
   
 private:
   // MARK: - Slider Fields
