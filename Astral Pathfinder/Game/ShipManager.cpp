@@ -30,6 +30,10 @@ void ShipManager::update(Uint32 ticks) {
   playerShip.move(ticks);
 }
 
-void ShipManager::render() {
+void ShipManager::render(Game::State *gameState) {
   playerShip.render();
+  
+  if (gameState->debugMode) {
+    DebugTools::renderVertices(playerShip.getCollider().getVertices());
+  }
 }

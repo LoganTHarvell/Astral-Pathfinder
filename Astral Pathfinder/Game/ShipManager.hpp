@@ -13,8 +13,8 @@
 #include "SDL2/SDL.h"
 
 // MARK: Source Files
+#include "Game.hpp"
 #include "Ship.hpp"
-
 
 class ShipManager {
   
@@ -24,7 +24,7 @@ public:
   
   // MARK: - Game Loop Methods
   void update(Uint32 ticks);
-  void render();
+  void render(Game::State *gameState);
   
   // MARK: - ShipManager Methods
   Ship getPlayerShip() { return playerShip; };

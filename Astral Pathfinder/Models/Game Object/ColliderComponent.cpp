@@ -13,6 +13,9 @@
 #include <iostream>
 #include <cmath>
 
+// MARK: Source Files
+#include "Game.hpp"
+
 using Vector = std::vector<SDL_Point>;
 
 
@@ -170,4 +173,15 @@ Vector ColliderComponent::rectVertexVectors(SDL_Rect r) {
   }
   
   return vertexVectors;
+}
+
+
+// MARK: - Debug Tools
+
+void DebugTools::renderVertices(Vector vertices) {
+  SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
+  for (auto v : vertices) {
+    SDL_RenderDrawPoint(Game::renderer, v.x, v.y);
+  }
+  SDL_SetRenderDrawColor(Game::renderer, 0, 0, 0, 255);
 }

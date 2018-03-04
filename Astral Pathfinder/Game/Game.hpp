@@ -25,7 +25,7 @@ namespace GameParameters {
   // FPS constants
   const int fps = 60;
   const int frameDelay = 1000/fps;
-  
+
 }
 
 
@@ -46,6 +46,8 @@ public:
     bool isRunning = false;
     bool clickFlag = false;
     bool planetSelected = false;
+    
+    bool debugMode = false;
     
     // Fields
     SDL_Point clickLocation;

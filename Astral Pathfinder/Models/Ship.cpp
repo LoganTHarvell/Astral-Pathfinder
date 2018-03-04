@@ -56,15 +56,6 @@ void Ship::update() {
 }
 
 void Ship::render() {
-
-  // MARK: DEBUG ONLY
-  auto shipVertices = collider->getVertices();
-  SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
-  for (auto v : shipVertices) {
-    SDL_RenderDrawPoint(Game::renderer, v.x, v.y);
-  }
-  SDL_SetRenderDrawColor(Game::renderer, 0, 0, 0, 255);
-
   SDL_RenderCopyEx(Game::renderer, texture, NULL, &rect,
                    rotation, NULL, SDL_FLIP_NONE);
 }

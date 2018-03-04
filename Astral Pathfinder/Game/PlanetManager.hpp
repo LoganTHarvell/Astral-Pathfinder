@@ -36,7 +36,7 @@ public:
   
   // MARK: - Game Loop Methods
   void update(Game::State *gameState, ShipManager *shipManager);
-  void render();
+  void render(Game::State *gameState);
   
   // MARK: - PlanetManager Methods
   Planet getPlanet(int n);

@@ -15,7 +15,6 @@
 #include <experimental/optional>
 
 
-// TODO: Generalize class for any game object
 class ColliderComponent {
   using Vector = std::vector<SDL_Point>;
   
@@ -45,11 +44,21 @@ private:
   SDL_Point center;
   Vector vertices;
   
+  // TODO: - Circle collisions?
   std::experimental::optional<int> radius;
   
   // MARK: - Helper Methods
   Vector rectVertexVectors(SDL_Rect r);
 };
 
+
+// MARK: - Debug Tools
+
+namespace DebugTools {
+  using Vector = std::vector<SDL_Point>;
+
+  void renderVertices(Vector vertices);
+  
+}
 
 #endif /* ColliderComponent_hpp */

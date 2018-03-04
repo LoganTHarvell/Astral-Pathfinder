@@ -72,16 +72,13 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
   
 }
 
-void PlanetManager::render() {
+void PlanetManager::render(Game::State *gameState) {
   for(Planet p : planets) {
-    // MARK: DEBUG ONLY
-    auto planetV = p.getCollider().getVertices();
-    SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
-    for (auto v : planetV) {
-      SDL_RenderDrawPoint(Game::renderer, v.x, v.y);
-    }
-    SDL_SetRenderDrawColor(Game::renderer, 0, 0, 0, 255);
     p.render();
+    
+    if (gameState->debugMode) {
+      DebugTools::renderVertices(p.getCollider().getVertices());
+    }
   }
 }
 
