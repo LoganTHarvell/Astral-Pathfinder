@@ -30,7 +30,7 @@ public:
   void clean();
   
   // MARK: - Slider Methods
-  void setTextures(Planet p);
+  void setTextures(int percent);
   SDL_Rect getBasePosition() { return base; }
   SDL_Rect getCirclePosition() { return circle; }
   int setCirclePosition(int pos);

@@ -95,6 +95,10 @@ void PlanetManager::setPlanetDepoPercent(int p) {
   planets[selectedPlanetIndex].setDepositsPercent(p);
 }
 
+void PlanetManager::setPlanetFertPercent(int p) {
+  planets[selectedPlanetIndex].setFertilityPercent(p);
+}
+
 
 // MARK: - Initialization Helper Methods
 

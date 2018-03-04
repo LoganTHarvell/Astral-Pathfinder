@@ -20,10 +20,12 @@
 namespace InfoParameters {
   const SDL_Rect depositsRect = {1245, 510, 200, 50};
   const SDL_Rect fertilityRect = {1245, 650, 200, 50};
-  const SDL_Rect depositsPercent = {1450, 510, 75, 50};
-  const SDL_Rect fertilityPercent = {1450, 650, 75, 50};
+  const SDL_Rect depositsPercentRect = {1450, 510, 75, 50};
+  const SDL_Rect fertilityPercentRect = {1450, 650, 75, 50};
   const SDL_Rect slideBase = {1245, 582, 265, 35};
   const SDL_Rect circle = {1245, 570, 50, 50};
+  const SDL_Rect slideBase2 = {1245, 722, 265, 35};
+  const SDL_Rect circle2 = {1245, 710, 50, 50};
 }
 
 class PlanetInfo {
@@ -40,12 +42,15 @@ public:
   void setText(Planet p);
   bool checkClick(Game::State *gameState);
   int moveSlider(Game::State *gameState);
+  int getSliderNum() { return sliderNum; }
+  void setSliderNum(int n) { sliderNum = n; }
 
   
 private:
   // MARK: - PlanetInfo Fields
   TextBox depositsText, fertilityText, dpText, fpText;
-  Slider slider;
+  Slider depoSlider, fertSlider;
+  int sliderNum = -1;
   
   // MARK: - Helper Methods
   void setBoxes(Planet p);

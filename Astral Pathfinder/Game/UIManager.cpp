@@ -35,14 +35,22 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager) {
   // -----------------------------------------------------
   // This one block of code has caused a lot of pain and suffering
   
+  if(!gameState->down) {
+    planetInfo.setSliderNum(-1);
+    return;
+  }
+  
   if(gameState->down && !gameState->drag)
     if(planetInfo.checkClick(gameState))
       gameState->drag = true;
   
   if(gameState->drag) {
     int percent = planetInfo.moveSlider(gameState);
-    if(percent != -1)
+    if(percent != -1 && planetInfo.getSliderNum() == 1)
       planetManager->setPlanetDepoPercent(percent);
+    
+    if(percent != -1 && planetInfo.getSliderNum() == 2)
+      planetManager->setPlanetFertPercent(percent);
   }
 }
 

@@ -11,8 +11,6 @@
 
 // MARK: Libraries and Frameworks
 #include <string>
-#include <iostream>
-#include <iomanip>
 
 
 // MARK: - PlanetInfo Initialization
@@ -21,9 +19,10 @@ void PlanetInfo::init() {
   using namespace InfoParameters;
   depositsText.init(depositsRect);
   fertilityText.init(fertilityRect);
-  dpText.init(depositsPercent);
- // fpText.init(fertilityPercent);
-  slider.init(slideBase, circle);
+  dpText.init(depositsPercentRect);
+  fpText.init(fertilityPercentRect);
+  depoSlider.init(slideBase, circle);
+  fertSlider.init(slideBase2, circle2);
 }
 
 
@@ -33,16 +32,18 @@ void PlanetInfo::render() {
   depositsText.render();
   fertilityText.render();
   dpText.render();
- // fpText.render();
-  slider.render();
+  fpText.render();
+  depoSlider.render();
+  fertSlider.render();
 }
 
 void PlanetInfo::clean() {
   depositsText.clean();
   fertilityText.clean();
   dpText.clean();
- // fpText.clean();
-  slider.clean();
+  fpText.clean();
+  depoSlider.clean();
+  fertSlider.clean();
 }
 
 
@@ -50,25 +51,48 @@ void PlanetInfo::clean() {
 
 void PlanetInfo::setText(Planet p) {
   setBoxes(p);
-  slider.setTextures(p);
+  depoSlider.setTextures(p.getDepositsPercent());
+  fertSlider.setTextures(p.getFertilityPercent());
 }
 
 bool PlanetInfo::checkClick(Game::State *gameState) {
   int x = gameState->clickLocation.x;
   int y = gameState->clickLocation.y;
-  SDL_Rect temp = slider.getCirclePosition();
-  if((x > temp.x) && (x < temp.x + temp.w)
-     && (y > temp.y) && (y < temp.y + temp.h))
+  SDL_Rect tempDepo = depoSlider.getCirclePosition();
+  SDL_Rect tempFert = fertSlider.getCirclePosition();
+  if((x > tempDepo.x) && (x < tempDepo.x + tempDepo.w)
+     && (y > tempDepo.y) && (y < tempDepo.y + tempDepo.h)) {
+    sliderNum = 1;
     return true;
+  }
   
+  if((x > tempFert.x) && (x < tempFert.x + tempFert.w)
+     && (y > tempFert.y) && (y < tempFert.y + tempFert.h)) {
+    sliderNum = 2;
+    return true;
+  }
+  
+  sliderNum = -1;
   return false;
 }
 
 int PlanetInfo::moveSlider(Game::State *gameState) {
+  SDL_Rect temp;
+  int p = 0;
   int x = gameState->dragLocation.x;
-  SDL_Rect temp = slider.getBasePosition();
+  
+  if(sliderNum == 1)
+    temp = depoSlider.getBasePosition();
+  
+  if(sliderNum == 2)
+    temp = fertSlider.getBasePosition();
+  
   if((x > temp.x) && (x < temp.x + temp.w + 1)) {
-    int p = slider.setCirclePosition(x);
+    if(sliderNum == 1)
+      p = depoSlider.setCirclePosition(x);
+    
+    if(sliderNum == 2)
+      p = fertSlider.setCirclePosition(x);
     setNewPercent(p);
     return p;
   }
@@ -82,17 +106,24 @@ void PlanetInfo::setBoxes(Planet p) {
   std::string depo = "Deposits: " + std::to_string(p.getDeposits());
   std::string fert = "Fertility: " + std::to_string(p.getFertility());
   std::string depoPercent = " : " + setSpaces(p.getDepositsPercent()) + std::to_string(p.getDepositsPercent()) + "%";
-  //std::string fertPercent = " : " + std::to_string(p.getFertilityPercent()) + "%";
+  std::string fertPercent = " : " + setSpaces(p.getFertilityPercent()) + std::to_string(p.getFertilityPercent()) + "%";
   
   depositsText.setMessage(depo.c_str());
   fertilityText.setMessage(fert.c_str());
   dpText.setMessage(depoPercent.c_str());
-  //fpText.setMessage(fertPercent.c_str());
+  fpText.setMessage(fertPercent.c_str());
 }
 
 void PlanetInfo::setNewPercent(int p) {
-  std::string depoPercent = " : " + setSpaces(p) + std::to_string(p) + "%";
-  dpText.setMessage(depoPercent.c_str());
+  if(sliderNum == 1) {
+    std::string depoPercent = " : " + setSpaces(p) + std::to_string(p) + "%";
+    dpText.setMessage(depoPercent.c_str());
+  }
+  
+  if(sliderNum == 2) {
+    std::string fertPercent = " : " + setSpaces(p) + std::to_string(p) + "%";
+    fpText.setMessage(fertPercent.c_str());
+  }
 }
 
 std::string PlanetInfo::setSpaces(int p) {
