@@ -13,7 +13,7 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
 
-// MARK: - TextBox Initialization
+// MARK: - Slider Initialization
 
 void Slider::init(SDL_Rect rectOne, SDL_Rect rectTwo) {
   base = rectOne;
@@ -36,7 +36,7 @@ void Slider::render() {
 }
 
 
-// MARK: - TextBox Methods
+// MARK: - Slider Methods
 
 void Slider::clean() {
   if (bar == nullptr || circ == nullptr) return;
