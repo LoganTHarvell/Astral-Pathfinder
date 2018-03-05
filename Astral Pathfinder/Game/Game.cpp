@@ -107,9 +107,19 @@ void Game::handleEvents() {
         
         break;
       }
+      case SDL_MOUSEBUTTONDOWN:
+        gameState.mouseDown = true;
+        gameState.clickLocation = { event.button.x, event.button.y };
+        break;
+      case SDL_MOUSEMOTION:
+        if(gameState.planetSelected)
+          gameState.dragLocation = { event.motion.x, event.motion.y };
+        break;
       case SDL_MOUSEBUTTONUP:
         gameState.clickFlag = true;
         gameState.clickLocation = { event.button.x, event.button.y };
+        gameState.mouseDown = false;
+        gameState.sliderDrag = false;
         break;
       default:
         break;

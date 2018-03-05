@@ -41,6 +41,8 @@ public:
   // MARK: - PlanetManager Methods
   Planet getPlanet(int n);
   Planet getSelectedPlanet();
+  void setPlanetDepoPercent(int p);
+  void setPlanetFertPercent(int p);
   
 private:
   // MARK: - Helper Methods

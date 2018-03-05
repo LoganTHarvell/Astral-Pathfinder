@@ -10,7 +10,6 @@
 #include "PlanetManager.hpp"
 
 // MARK: Libraries and Frameworks
-#include <iostream>
 #include <cstdlib>
 #include <ctime>
 
@@ -91,6 +90,14 @@ Planet PlanetManager::getPlanet(int n) {
 
 Planet PlanetManager::getSelectedPlanet() {
   return planets[selectedPlanetIndex];
+}
+
+void PlanetManager::setPlanetDepoPercent(int p) {
+  planets[selectedPlanetIndex].setDepositsPercent(p);
+}
+
+void PlanetManager::setPlanetFertPercent(int p) {
+  planets[selectedPlanetIndex].setFertilityPercent(p);
 }
 
 

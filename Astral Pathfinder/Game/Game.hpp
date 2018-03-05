@@ -46,11 +46,14 @@ public:
     bool isRunning = false;
     bool clickFlag = false;
     bool planetSelected = false;
+    bool mouseDown = false;
+    bool sliderDrag = false;
     
     bool debugMode = false;
     
     // Fields
     SDL_Point clickLocation;
+    SDL_Point dragLocation;
   };
   
   void init(const char *title, int x, int y, int w, int h, bool fullscreen);
