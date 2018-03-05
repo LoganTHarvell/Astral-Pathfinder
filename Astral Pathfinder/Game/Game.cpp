@@ -104,7 +104,7 @@ void Game::handleEvents() {
         break;
       }
       case SDL_MOUSEBUTTONDOWN:
-        gameState.down = true;
+        gameState.mouseDown = true;
         gameState.clickLocation = { event.button.x, event.button.y };
         break;
       case SDL_MOUSEMOTION:
@@ -114,8 +114,8 @@ void Game::handleEvents() {
       case SDL_MOUSEBUTTONUP:
         gameState.clickFlag = true;
         gameState.clickLocation = { event.button.x, event.button.y };
-        gameState.down = false;
-        gameState.drag = false;
+        gameState.mouseDown = false;
+        gameState.sliderDrag = false;
         break;
       default:
         break;

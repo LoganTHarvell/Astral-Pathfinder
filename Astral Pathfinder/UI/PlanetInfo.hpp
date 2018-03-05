@@ -39,7 +39,7 @@ public:
 
   
   // MARK: - PlanetInfo Methods
-  void setText(Planet p);
+  void setUiTextures(Planet p);
   bool checkClick(Game::State *gameState);
   int moveSlider(Game::State *gameState);
 
@@ -52,7 +52,7 @@ private:
   // MARK: - Helper Methods
   void setBoxes(Planet p);
   void setNewPercent(int p);
-  std::string setSpaces(int p);
+  std::string setStringSpaces(int p);
 
 };
 

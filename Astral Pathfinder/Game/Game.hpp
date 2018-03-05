@@ -47,8 +47,8 @@ public:
     bool isRunning = false;
     bool clickFlag = false;
     bool planetSelected = false;
-    bool down = false;
-    bool drag = false;
+    bool mouseDown = false;
+    bool sliderDrag = false;
     
     // Fields
     SDL_Point clickLocation;

@@ -52,7 +52,7 @@ void PlanetInfo::clean() {
 
 // MARK: - PlanetInfo Methods
 
-void PlanetInfo::setText(Planet p) {
+void PlanetInfo::setUiTextures(Planet p) {
   setBoxes(p);
   slider.setTextures(p.getFertilityPercent());
 }
@@ -84,10 +84,10 @@ int PlanetInfo::moveSlider(Game::State *gameState) {
 // MARK: - Helper Methods
 
 void PlanetInfo::setBoxes(Planet p) {
-  std::string depo = "Deposits: " + setSpaces(p.getDeposits()) + std::to_string(p.getDeposits());
-  std::string fert = "Fertility: " + setSpaces(p.getFertility()) + std::to_string(p.getFertility());
-  std::string depoPercent = setSpaces(p.getDepositsPercent()) + std::to_string(p.getDepositsPercent()) + "%";
-  std::string fertPercent = setSpaces(p.getFertilityPercent()) + std::to_string(p.getFertilityPercent()) + "%";
+  std::string depo = "Deposits: " + setStringSpaces(p.getDeposits()) + std::to_string(p.getDeposits());
+  std::string fert = "Fertility: " + setStringSpaces(p.getFertility()) + std::to_string(p.getFertility());
+  std::string depoPercent = setStringSpaces(p.getDepositsPercent()) + std::to_string(p.getDepositsPercent()) + "%";
+  std::string fertPercent = setStringSpaces(p.getFertilityPercent()) + std::to_string(p.getFertilityPercent()) + "%";
   
   depositsText.setMessage(depo.c_str());
   fertilityText.setMessage(fert.c_str());
@@ -98,14 +98,15 @@ void PlanetInfo::setBoxes(Planet p) {
 }
 
 void PlanetInfo::setNewPercent(int p) {
-  std::string depoPercent = setSpaces(100-p) + std::to_string(100-p) + "%";
+  std::string depoPercent = setStringSpaces(100-p) + std::to_string(100-p) + "%";
   dpText.setMessage(depoPercent.c_str());
   
-  std::string fertPercent = setSpaces(p) + std::to_string(p) + "%";
+  std::string fertPercent = setStringSpaces(p) + std::to_string(p) + "%";
   fpText.setMessage(fertPercent.c_str());
 }
 
-std::string PlanetInfo::setSpaces(int p) {
+// Creates buffer with spaces for displayed numbers on UI so textboxes don't adjust
+std::string PlanetInfo::setStringSpaces(int p) {
   std::string s;
   
   if(p >= 0 && p < 10)

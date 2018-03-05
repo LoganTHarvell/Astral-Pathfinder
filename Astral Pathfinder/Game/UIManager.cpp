@@ -25,14 +25,17 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager) {
     setSelectedPlanet(planetManager->getSelectedPlanet());
   else planetInfo.clean();
   
-  if(!gameState->down)
+  // If mouse button not pressed down, don't check for slider movement
+  if(!gameState->mouseDown)
     return;
   
-  if(gameState->down && !gameState->drag)
+  // If down, but not dragging, check if slider was clicked
+  if(gameState->mouseDown && !gameState->sliderDrag)
     if(planetInfo.checkClick(gameState))
-      gameState->drag = true;
+      gameState->sliderDrag = true;
   
-  if(gameState->drag) {
+  // If so, check mouse movement and adjust slider appropriately
+  if(gameState->sliderDrag) {
     int percent = planetInfo.moveSlider(gameState);
     if(percent != -1) {
       planetManager->setPlanetDepoPercent(100-percent);
@@ -48,6 +51,6 @@ void UIManager::render(Game::State *gameState) {
 // MARK: - UIManager Methods
 
 void UIManager::setSelectedPlanet(Planet p) {
-  planetInfo.setText(p);
+  planetInfo.setUiTextures(p);
 }
 

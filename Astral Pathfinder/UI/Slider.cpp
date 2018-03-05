@@ -56,11 +56,11 @@ void Slider::setTextures(int percent) {
   bar = TextureManager::loadTexture("Resources/Assets/bar.png");
   circ = TextureManager::loadTexture("Resources/Assets/ball.png");
 
-  circle.x = (int)((float)percent*((float)base.w/100.0f))+base.x-(circle.w/2);
+  circle.x = static_cast<int>((static_cast<float>(percent))*(static_cast<float>(base.w/100.0f))+base.x-(circle.w/2));
 }
 
 int Slider::setCirclePosition(int pos) {
   circle.x = pos-(circle.w/2);
   int temp = (circle.x+(circle.w/2)) - base.x;
-  return (int)(((float)temp)/(((float)base.w)/100.0f));
+  return static_cast<int>(static_cast<float>(temp))/(static_cast<float>(base.w/100.0f));
 }
