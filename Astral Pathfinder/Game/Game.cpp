@@ -21,6 +21,7 @@
 #include "UIManager.hpp"
 
 
+// MARK: - Game Globals
 SDL_Renderer *Game::renderer = nullptr;
 
 
@@ -67,7 +68,7 @@ void Game::init(const char *title,
               << SDL_GetError() << ", " << IMG_GetError() << std::endl;
   }
 
-  // Initializes game screen
+  // Object Initialization
   gameScreen = TextureManager::loadTexture("Resources/Assets/gameScreen.png");
   
   planetManager = new PlanetManager;
@@ -100,6 +101,9 @@ void Game::handleEvents() {
         if(key == SDLK_ESCAPE && gameState.planetSelected) {
           gameState.planetSelected = false;
         }
+        else if (key == SDLK_d) {
+          gameState.debugMode = !gameState.debugMode;
+        }
         
         break;
       }
@@ -128,8 +132,8 @@ void Game::render() {
   SDL_RenderCopy(renderer, gameScreen, NULL, &windowR);
 
   // Render stuff
-  planetManager->render();
-  shipManager->render();
+  planetManager->render(&gameState);
+  shipManager->render(&gameState);
   uiManager->render(&gameState);
 
   SDL_RenderPresent(renderer);

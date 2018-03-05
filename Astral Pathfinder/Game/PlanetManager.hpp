@@ -36,7 +36,7 @@ public:
   
   // MARK: - Game Loop Methods
   void update(Game::State *gameState, ShipManager *shipManager);
-  void render();
+  void render(Game::State *gameState);
   
   // MARK: - PlanetManager Methods
   Planet getPlanet(int n);
@@ -52,7 +52,7 @@ private:
   void selectPlanet(bool *planetSelected);
   void deselectPlanet(bool *planetSelected);
   
-  void collision(SDL_Rect r, int angle);
+  void collision(std::vector<SDL_Point> vertices, int angle);
   
   // MARK: - PlanetManager Fields
   Planet planets[PlanetManagerParameters::numberOfPlanets];

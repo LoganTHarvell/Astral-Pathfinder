@@ -6,102 +6,169 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
+// MARK: Header File
 #include "ColliderComponent.hpp"
 
+// MARK: Libraries and Frameworks
 #include <iostream>
 #include <cmath>
 
+// MARK: Source Files
+#include "Game.hpp"
+
+using PointVector = std::vector<SDL_Point>;
+
+
+// MARK: - Constructors
 
 ColliderComponent::ColliderComponent(SDL_Rect r) {
-  rect = r;
+  center = { r.x + (r.w / 2), r.y + (r.h / 2) };
+  vertices = computeVertices(center, rectVertexVectors(r), 0);
 }
 
+ColliderComponent::ColliderComponent(SDL_Point center, PointVector vertices) {
+  this->center = center;
+  this->vertices = vertices;
+}
+
+
+// MARK: - Game Loop Methods
+
+void ColliderComponent::update(SDL_Point center, PointVector vertices) {
+  this->center = center;
+  this->vertices = vertices;
+}
+
+
+// MARK: - Collider Methods
 
 bool ColliderComponent::collisionAABB(SDL_Rect r) {
-  if (rect.x > r.x + r.w) {
-    return false;
-  }
-  if (rect.x + rect.w < r.x) {
-    return false;
-  }
-  if (rect.y > r.y + r.h) {
-    return false;
-  }
-  if (rect.y + rect.h < r.y) {
-    return false;
-  }
   
+  int topBound = vertices[0].y;
+  int leftBound = vertices[0].x;
+  int rightBound = vertices[1].x;
+  int bottomBound = vertices[2].y;
+  
+  if (leftBound > r.x + r.w) return false;
+  if (rightBound < r.x) return false;
+  if (topBound > r.y + r.h) return false;
+  if (bottomBound < r.y) return false;
+
   std::cout << "Collision" << std::endl;
   return true;
 }
 
-bool ColliderComponent::collisionOBB(SDL_Rect r, int angle) {
-  SDL_Point min = minAlongXY(shipVertices(r, angle));
-  SDL_Point max = maxAlongXY(shipVertices(r, angle));
-  
-  if (rect.x + rect.w < min.x || rect.x > max.x) return false;
-  if (rect.y + rect.h < min.y || rect.y > max.y) return false;
+bool ColliderComponent::collisionOBB(PointVector vertices, int angle) {
+  // Gets axes of self and test boxes
+  PointVector axes = getNormals(this->vertices);
+  auto tmp = getNormals(vertices);
+  axes.insert(axes.end(), tmp.begin(), tmp.end());
+
+  // Loop axes
+  for (auto axis : axes) {
+    int thisMin = minAlongAxis(this->vertices, axis);
+    int thisMax = maxAlongAxis(this->vertices, axis);
+    int testMin = minAlongAxis(vertices, axis);
+    int testMax = maxAlongAxis(vertices, axis);
     
-  std::cout << "Collision" << std::endl;
-  return true;
+    // No overlap along axis
+    if (thisMax < testMin || thisMin > testMax) return false;
+  }
   
+  // Overlap on all axes
+  std::cout << "Collision" << std::endl;
   return true;
 }
 
-
-SDL_Point ColliderComponent::minAlongXY(std::vector<SDL_Point> corners) {
-  SDL_Point min = corners.front();
+PointVector ColliderComponent::computeVertices(SDL_Point center,
+                                               PointVector vertexV,
+                                               int angle) {
+  PointVector vertices;
   
-  for (auto c : corners) {
-    if (c.x < min.x) min.x = c.x;
-    if (c.y < min.y) min.y = c.y;
+  double a = angle * (M_PI / 180.0);  // degrees to radians
+  
+  for (auto v : vertexV) {
+    // Computes new vertex vector given rotation angle
+    vertices.push_back({ static_cast<int>(v.x * cos(a) + v.y * sin(a)),
+                         static_cast<int>(v.x * sin(a) - v.y * cos(a)) });
+    
+    // Adds center point to vertex vector to compute new vertex
+    vertices.back().x += center.x;
+    vertices.back().y += center.y;
+  }
+  
+  return vertices;
+}
+
+int ColliderComponent::minAlongAxis(PointVector vertices, SDL_Point axis) {
+  // Initializes min to first vertex projection along axis
+  int min = (vertices[0].x * axis.x) + (vertices[0].y * axis.y);
+  
+  // Projects each vertex along axis and keeps minimum value
+  for (auto v : vertices) {
+    int dotProd = (v.x * axis.x) + (v.y * axis.y);
+    if (dotProd < min) min = dotProd;
   }
   
   return min;
 }
 
-SDL_Point ColliderComponent::maxAlongXY(std::vector<SDL_Point> corners) {
-  SDL_Point max = corners.front();
+int ColliderComponent::maxAlongAxis(PointVector vertices, SDL_Point axis) {
+  // Initializes max to first vertex projection along axis
+  int max = (vertices[0].x * axis.x) + (vertices[0].y * axis.y);
   
-  for (auto c : corners) {
-    if (c.x > max.x) max.x = c.x;
-    if (c.y > max.y) max.y = c.y;
+  // Projects each vertex along axis and keeps maximum value
+  for (auto v : vertices) {
+    int dotProd = (v.x * axis.x) + (v.y * axis.y);
+    if (dotProd > max) max = dotProd;
   }
   
   return max;
 }
 
-std::vector<SDL_Point> ColliderComponent::shipVertices(SDL_Rect r, int angle) {
-  std::vector<SDL_Point> corners;
+
+// MARK: - Helper Methods
+
+PointVector ColliderComponent::rectVertexVectors(SDL_Rect r) {
+  PointVector vertexVectors;
   
-  SDL_Point center = { r.x + (r.w / 2), r.y + (r.h / 2) };
-  double a = angle * (M_PI / 180.0);
+  // Computes rect vertices
+  vertexVectors.push_back({ r.x, r.y });
+  vertexVectors.push_back({ r.x + r.w, r.y });
+  vertexVectors.push_back({ r.x + r.w, r.y + r.h });
+  vertexVectors.push_back({ r.x, r.y + r.h });
   
-  std::vector<SDL_Point> cv = shipVertexVectors(r);
-  for (auto& v : cv) {
-    corners.push_back({ static_cast<int>(v.x * cos(a) + v.y * sin(a)),
-                        static_cast<int>(v.x * sin(a) - v.y * cos(a)) });
-    
-    corners.back().x += center.x;
-    corners.back().y += center.y;
+  // Subtracts center point from each vertex
+  SDL_Point rectCenter = { r.x + (r.w / 2), r.y + (r.h / 2) };
+  for (auto& v : vertexVectors) {
+    v.x -= rectCenter.x;
+    v.y -= rectCenter.y;
   }
   
-  return corners;
+  return vertexVectors;
 }
 
-std::vector<SDL_Point> ColliderComponent::shipVertexVectors(SDL_Rect r) {
-  std::vector<SDL_Point> cornerVectors;
+PointVector ColliderComponent::getNormals(PointVector vertices) {
+  PointVector normals;
   
-  cornerVectors.push_back({ r.x, r.y + r.h/2 });
-  cornerVectors.push_back({ r.x + r.w/2, r.y });
-  cornerVectors.push_back({ r.x + r.w, r.y + r.h/2 });
-  cornerVectors.push_back({ r.x + r.w/2, r.y + r.h });
-  
-  SDL_Point center = { r.x + (r.w / 2), r.y + (r.h / 2) };
-  for (auto& cv : cornerVectors) {
-    cv.x -= center.x;
-    cv.y -= center.y;
+  for (int i = 1; i < vertices.size()-1; i++) {
+    normals.push_back({ vertices[i + 1].x - vertices[i].x,
+                        -(vertices[i + 1].y - vertices[i].y) });
   }
   
-  return cornerVectors;
+  normals.push_back({ vertices[1].x - vertices[vertices.size()-1].x,
+                      -(vertices[1].y - vertices[vertices.size()-1].y) });
+  
+  return normals;
+}
+
+
+// MARK: - Debug Tools
+
+void DebugTools::renderVertices(std::vector<SDL_Point> vertices) {
+  SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
+  for (auto v : vertices) {
+    SDL_RenderDrawPoint(Game::renderer, v.x, v.y);
+  }
+  SDL_SetRenderDrawColor(Game::renderer, 0, 0, 0, 255);
 }
