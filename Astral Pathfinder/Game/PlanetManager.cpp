@@ -50,15 +50,7 @@ void PlanetManager::initGalaxy() {
 // Mark: - Game Loop Methods
 
 void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
-  for (Planet& p : planets) {
-    p.update();
-    
-    // TODO: Remove and implement collision logic
-    auto ship = shipManager->getPlayerShip();
-    auto shipVertices = ship.getCollider().getVertices();
-    auto shipAngle = ship.getRotation();
-    p.getCollider().collisionOBB(shipVertices, shipAngle);
-  }
+  for (Planet& p : planets) p.update();
   
   if (!gameState->planetSelected && selectedPlanetIndex >= 0) {
     deselectPlanet(&(gameState->planetSelected));
@@ -69,6 +61,8 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
     gameState->clickFlag = false;
   }
   
+  // TODO: Remove and implement collision logic
+  handleCollisions(shipManager);
 }
 
 void PlanetManager::render(Game::State *gameState) {
@@ -154,8 +148,12 @@ void PlanetManager::deselectPlanet(bool *planetSelected) {
   *planetSelected = false;
 }
 
-void PlanetManager::collision(std::vector<SDL_Point> vertices, int angle) {
+void PlanetManager::handleCollisions(ShipManager *sm) {
+  Ship player = sm->getPlayerShip();
+  std::vector<SDL_Point> playerVertices = player.getCollider().getVertices();
+  int playerAngle = player.getRotation();
+  
   for (Planet p : planets) {
-    p.getCollider().collisionOBB(vertices, angle);
+    if (p.getCollider().collisionOBB(playerVertices, playerAngle)) p.dockShip();
   }
 }

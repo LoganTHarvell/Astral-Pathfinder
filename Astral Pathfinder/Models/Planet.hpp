@@ -11,6 +11,7 @@
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
+#include <string>
 
 // MARK: Source Files
 #include "GameObject.hpp"
@@ -20,6 +21,7 @@
 
 namespace PlanetParameters {
   
+  const std::string planetTextureFile = "Resources/Assets/planet.png";
   const int planetTexSize = 8;
   const int minFertility = 0;
   const int fertilityRange = (200-minFertility);
@@ -51,14 +53,19 @@ public:
   
   // MARK: - Planet Methods
   SDL_Point getCoordinates() { return coordinates; };
+  
   int getDeposits() { return deposits; };
   int getFertility() { return fertility; };
+  
   int getDepositsPercent() { return depositsPercent; };
   int getFertilityPercent() { return fertilityPercent; };
   void setDepositsPercent(int percent) { depositsPercent = percent; };
   void setFertilityPercent(int percent) { fertilityPercent = percent; };
+  
   void clicked();
   void revertClick();
+  
+  void dockShip();
   
 private:
   // MARK: - Planet Fields
@@ -71,7 +78,12 @@ private:
   } status;
 
   // resources
-  int deposits, fertility, depositsPercent, fertilityPercent;
+  int population;
+  int deposits, fertility;
+  int depositsPercent, fertilityPercent;
+  int minerals, food;
+  
+  bool shipDocked;
   
   // MARK: - Helper Methods
   SDL_Point uiPosition(SDL_Point p);

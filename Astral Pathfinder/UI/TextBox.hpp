@@ -12,6 +12,7 @@
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 #include "SDL2_ttf/SDL_ttf.h"
+#include <string>
 
 // MARK: Source Files
 #include "Game.hpp"
@@ -22,7 +23,7 @@
 
 namespace TextParameters {
   const SDL_Color color = {255, 255, 255};
-  const auto fontFile = "Resources/Assets/Arial.ttf";
+  const std::string fontFile = "Resources/Assets/Arial.ttf";
 }
 
 
@@ -39,7 +40,7 @@ public:
   void clean();
   
   // MARK: - TextBox Methods
-  void setMessage(const char *words);
+  void setMessage(const std::string words);
   
   
 private:

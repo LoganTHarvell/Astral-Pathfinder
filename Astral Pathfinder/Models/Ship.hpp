@@ -11,6 +11,7 @@
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
+#include <string>
 
 // MARK: Source Files
 #include "GameObject.hpp"
@@ -19,6 +20,8 @@
 // MARK: - Ship Parameters
 
 namespace ShipParameters {
+  
+  const std::string shipTexture = "Resources/Assets/movingPlayerShip.png";
   
   const struct {
     int w = 48, h = 24;
@@ -34,6 +37,7 @@ namespace ShipParameters {
 // MARK: - Ship Class
 
 class Ship: public GameObject {
+  using PointVector = std::vector<SDL_Point>;
   
 public:
   // MARK: - Initialization Methods
@@ -46,19 +50,24 @@ public:
   // MARK: - Ship Methods
   int getFuel() { return fuel; };
   int getRotation() { return rotation; };
+  SDL_Point getUIPosition() { return getCenter(); };
+  SDL_Point getMapPosition(SDL_Point uiPosition);
+  
   void move(Uint32 ticks);
   
 
 private:
   // MARK: - Ship Fields
-  int rotation;
+  int population;
   int fuel;
+  
   SDL_Point velocity;
+  int rotation;
   
   // MARK: - Helper Methods
-  SDL_Point mapPosition(SDL_Point p);
   bool boundaryCollision();
-  std::vector<SDL_Point> shipVertexVectors();
+  PointVector shipVertexVectors();
+  PointVector computeShipVertices();
   
   void updateVelocity();
   void updateRotation();
