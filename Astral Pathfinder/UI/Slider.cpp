@@ -70,8 +70,9 @@ void Slider::setTextures(int percent) {
   circle.x = static_cast<int>(p*scale)+base.x-(circle.w/2);
 }
 
+// TODO: - Separate setting and getting slider position
 int Slider::setCirclePosition(int pos) {
-  circle.x = pos-(circle.w/2);
+  circle.x = pos-(circle.w/2) + base.x;
   int temp = (circle.x+(circle.w/2)) - base.x;
   return static_cast<int>(temp / (base.w/100.0f));
 }
