@@ -18,15 +18,15 @@
 
 // MARK: - Map Methods
 
-SDL_Point Map::uiPosition(SDL_Point p) {
-  int x = gridOrigin.x + (p.x * gridWidth) + planetTexOffset.x;
-  int y = gridOrigin.y + (p.y * gridHeight) + planetTexOffset.y;
+SDL_Point Map::uiPosition(SDL_Point coordinates) {
+  int x = gridOrigin.x + (coordinates.x * gridWidth) + planetTexOffset.x;
+  int y = gridOrigin.y + (coordinates.y * gridHeight) + planetTexOffset.y;
   return { x, y };
 }
 
-SDL_Point Map::mapPosition(SDL_Point p) {
-  int x = p.x - mapOrigin.x;
-  int y = p.x - mapOrigin.y;
+SDL_Point Map::mapPosition(SDL_Point uiPosition) {
+  int x = uiPosition.x - mapOrigin.x;
+  int y = uiPosition.x - mapOrigin.y;
   return { x, y };
 }
 

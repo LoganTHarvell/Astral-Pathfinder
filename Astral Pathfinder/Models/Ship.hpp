@@ -50,6 +50,9 @@ public:
   // MARK: - Ship Methods
   int getFuel() { return fuel; };
   int getRotation() { return rotation; };
+  SDL_Point getUIPosition() { return getCenter(); };
+  SDL_Point getMapPosition(SDL_Point uiPosition);
+  
   void move(Uint32 ticks);
   
 
@@ -62,7 +65,6 @@ private:
   int rotation;
   
   // MARK: - Helper Methods
-  SDL_Point mapPosition(SDL_Point p);
   bool boundaryCollision();
   PointVector shipVertexVectors();
   PointVector computeShipVertices();

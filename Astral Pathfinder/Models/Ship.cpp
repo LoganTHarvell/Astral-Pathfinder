@@ -86,8 +86,8 @@ void Ship::move(Uint32 ticks) {
 
 // MARK: - Helper Methods
 
-SDL_Point Ship::mapPosition(SDL_Point p) {
-  return Map::mapPosition(p);
+SDL_Point Ship::getMapPosition(SDL_Point uiPosition) {
+  return Map::mapPosition(uiPosition);
 }
 
 bool Ship::boundaryCollision() {

@@ -39,8 +39,8 @@ namespace Map {
 
   // MARK: - Map Methods
  
-  SDL_Point uiPosition(SDL_Point p);
-  SDL_Point mapPosition(SDL_Point p);
+  SDL_Point uiPosition(SDL_Point coordinates);
+  SDL_Point mapPosition(SDL_Point uiPosition);
   bool checkBounds(SDL_Point min, SDL_Point max);
 
 }
