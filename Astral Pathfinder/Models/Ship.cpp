@@ -91,7 +91,7 @@ SDL_Point Ship::getMapPosition(SDL_Point uiPosition) {
 }
 
 bool Ship::boundaryCollision() {
-  PointVector vertices = computeShipVertices();
+  PointVector vertices = getCollider().getVertices();
   
   PointVector axes;
   axes.push_back({ 1, 0 });   // X axis normal vector

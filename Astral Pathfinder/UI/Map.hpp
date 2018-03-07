@@ -18,7 +18,6 @@
 
 
 namespace Map {
-  
   using PlanetManagerParameters::numberOfPlanets;
   using PlanetParameters::planetTexSize;
   
