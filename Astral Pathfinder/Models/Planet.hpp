@@ -53,14 +53,19 @@ public:
   
   // MARK: - Planet Methods
   SDL_Point getCoordinates() { return coordinates; };
+  
   int getDeposits() { return deposits; };
   int getFertility() { return fertility; };
+  
   int getDepositsPercent() { return depositsPercent; };
   int getFertilityPercent() { return fertilityPercent; };
   void setDepositsPercent(int percent) { depositsPercent = percent; };
   void setFertilityPercent(int percent) { fertilityPercent = percent; };
+  
   void clicked();
   void revertClick();
+  
+  void dockShip();
   
 private:
   // MARK: - Planet Fields
@@ -77,6 +82,8 @@ private:
   int deposits, fertility;
   int depositsPercent, fertilityPercent;
   int minerals, food;
+  
+  bool shipDocked;
   
   // MARK: - Helper Methods
   SDL_Point uiPosition(SDL_Point p);

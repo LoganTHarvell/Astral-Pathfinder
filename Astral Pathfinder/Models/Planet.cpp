@@ -60,6 +60,8 @@ void Planet::initPlanet() {
   depositsPercent = fertilityPercent = 50;
   minerals = food = 0;
   
+  shipDocked = false;
+  
   // Sets planet status
   status = undiscovered;
 }
@@ -75,7 +77,7 @@ void Planet::render() {
   SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
 }
 
-// MARK: - Helper Methods
+// MARK: - Planet Methods
 
 void Planet::clicked() {
   SDL_SetTextureColorMod(texture, 0, 255, 0);
@@ -84,6 +86,13 @@ void Planet::clicked() {
 void Planet::revertClick() {
   SDL_SetTextureColorMod(texture, 255, 255, 255);
 }
+
+void Planet::dockShip() {
+  shipDocked = true;
+}
+
+
+// MARK: - Helper Methods
 
 SDL_Point Planet::uiPosition(SDL_Point p) {
   return Map::uiPosition(p);
