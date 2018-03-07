@@ -54,9 +54,9 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
     p.update();
     
     // TODO: Remove and implement collision logic
-    auto ship = shipManager->getPlayerShip();
-    auto shipVertices = ship.getCollider().getVertices();
-    auto shipAngle = ship.getRotation();
+    Ship ship = shipManager->getPlayerShip();
+    std::vector<SDL_Point> shipVertices = ship.getCollider().getVertices();
+    int shipAngle = ship.getRotation();
     p.getCollider().collisionOBB(shipVertices, shipAngle);
   }
   

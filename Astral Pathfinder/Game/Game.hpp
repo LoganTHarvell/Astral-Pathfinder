@@ -11,17 +11,18 @@
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
+#include <string>
 
 
 // MARK: - Game Parameters
 
 namespace GameParameters {
 
-  const struct {
-    int w = 1600;
-    int h = 900;
-  } windowSize;
-  
+  // Window parameters x, y, w, h
+  const SDL_Rect windowRect = { SDL_WINDOWPOS_CENTERED,
+                                SDL_WINDOWPOS_CENTERED,
+                                1600, 900 };
+
   // FPS constants
   const int fps = 60;
   const int frameDelay = 1000/fps;
@@ -56,7 +57,7 @@ public:
     SDL_Point dragLocation;
   };
   
-  void init(const char *title, int x, int y, int w, int h, bool fullscreen);
+  void init(const std::string title, SDL_Rect rect, bool fullscreen);
   
   // MARK: - Game Loop Methods
   void handleEvents();

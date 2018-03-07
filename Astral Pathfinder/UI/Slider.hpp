@@ -11,6 +11,7 @@
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
+#include <string>
 
 // MARK: Source Files
 #include "Game.hpp"
@@ -21,8 +22,8 @@
 
 namespace SliderParameters {
   
-  const auto barFilename = "Resources/Assets/bar.png";
-  const auto circFilename = "Resources/Assets/ball.png";
+  const std::string barFilename = "Resources/Assets/bar.png";
+  const std::string circFilename = "Resources/Assets/ball.png";
 
 }
 
