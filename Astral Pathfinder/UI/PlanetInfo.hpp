@@ -41,7 +41,7 @@ public:
   // MARK: - PlanetInfo Methods
   void setUiTextures(Planet p);
   bool checkClick(Game::State *gameState);
-  void moveSlider(Game::State *gameState);
+  bool moveSlider(Game::State *gameState);
   int getSliderPercent() { return slider.getPercent(); }
 
   

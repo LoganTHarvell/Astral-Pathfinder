@@ -78,14 +78,16 @@ bool PlanetInfo::checkClick(Game::State *gameState) {
   return false;
 }
 
-void PlanetInfo::moveSlider(Game::State *gameState) {
+bool PlanetInfo::moveSlider(Game::State *gameState) {
   SDL_Rect temp = slider.getBaseRect();
   int x = gameState->dragLocation.x - temp.x;
   
   if((x > 0) && (x < temp.w + 1)) {
     slider.setSliderPosition(x);
     setNewPercentText();
+    return true;
   }
+  return false;
 }
 
 // MARK: - Helper Methods
