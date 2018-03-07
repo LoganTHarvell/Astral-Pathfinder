@@ -11,6 +11,7 @@
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
+#include <string>
 
 // MARK: Source Files
 #include "GameObject.hpp"
@@ -20,6 +21,7 @@
 
 namespace PlanetParameters {
   
+  const std::string planetTextureFile = "Resources/Assets/planet.png";
   const int planetTexSize = 8;
   const int minFertility = 0;
   const int fertilityRange = (200-minFertility);
@@ -71,7 +73,10 @@ private:
   } status;
 
   // resources
-  int deposits, fertility, depositsPercent, fertilityPercent;
+  int population;
+  int deposits, fertility;
+  int depositsPercent, fertilityPercent;
+  int minerals, food;
   
   // MARK: - Helper Methods
   SDL_Point uiPosition(SDL_Point p);

@@ -24,15 +24,13 @@ void Planet::initHomeworld() {
   initPlanet();
   
   // Sets homeword resources
-  fertility = startPopulation/foodRqmt;
+  population = startPopulation;
   deposits = (shipCost*2) + 50;
+  fertility = population/foodRqmt;
+  food = population*foodRqmt;
   
   // Sets homeworld status
   status = colonized;
-  
-  depositsPercent = 50;
-  fertilityPercent = 50;
-  
 }
 
 void Planet::initPlanet() {
@@ -49,21 +47,21 @@ void Planet::initPlanet() {
   rect.w = planetTexSize;
   rect.h = planetTexSize;
   
+  texture = TextureManager::loadTexture(planetTextureFile);
   collider = new ColliderComponent(rect);
   
-  texture = TextureManager::loadTexture("Resources/Assets/planet.png");
+  population = 0;
   
   // Sets planet fertility to random value
   fertility = (rand()%(fertilityRange+1) + minFertility);
-  
   // Sets planet deposits to random value
   deposits = (rand()%(depositsRange+1)) + minDeposits;
   
+  depositsPercent = fertilityPercent = 50;
+  minerals = food = 0;
+  
   // Sets planet status
   status = undiscovered;
-  
-  depositsPercent = 50;
-  fertilityPercent = 50;
 }
 
 
