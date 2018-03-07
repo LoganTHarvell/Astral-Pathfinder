@@ -59,7 +59,7 @@ void PlanetInfo::setUiTextures(Planet p) {
     // Sets correct slider position for given planet
     float ratio = p.getFertilityPercent()/100.0f;
     SDL_Rect tmpR = slider.getBaseRect();
-    slider.setCirclePosition(static_cast<int>(tmpR.w * ratio));
+    slider.setSliderPosition(static_cast<int>(tmpR.w * ratio));
   }
   // Sets slider textures if not initialized
   else slider.setTextures(p.getFertilityPercent());
@@ -84,7 +84,7 @@ int PlanetInfo::moveSlider(Game::State *gameState) {
   
   // TODO: - Separate setting and getting slider position
   if((x > 0) && (x < temp.w + 1)) {
-    int p = slider.setCirclePosition(x);
+    int p = slider.setSliderPosition(x);
     setNewPercent(p);
     return p;
   }

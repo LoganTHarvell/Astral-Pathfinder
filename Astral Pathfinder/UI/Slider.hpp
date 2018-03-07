@@ -45,7 +45,7 @@ public:
   SDL_Rect getBaseRect() { return base; }
   SDL_Rect getSliderRect() { return slider; }
   SDL_Point getSliderPosition() { return { slider.x, slider.y }; };
-  int setCirclePosition(int pos);
+  int setSliderPosition(int pos);
   
 private:
   // MARK: - Slider Fields
