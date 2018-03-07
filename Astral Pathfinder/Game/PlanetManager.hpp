@@ -57,8 +57,10 @@ private:
   void handleCollisions(ShipManager *sm);
   
   // MARK: - PlanetManager Fields
-  Planet planets[PlanetManagerParameters::numberOfPlanets];
-  int selectedPlanetIndex = -1;
+  std::vector<Planet> planets;
+  
+  int dockedPlanetIndex;
+  int selectedPlanetIndex;
 
 };
 

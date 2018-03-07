@@ -65,7 +65,9 @@ public:
   void clicked();
   void revertClick();
   
-  void dockShip();
+  bool playerIsDocked() { return playerDocked; };
+  bool alienIsDocked() { return alienDocked; };
+  void toggleDockedShip(int tag);
   
 private:
   // MARK: - Planet Fields
@@ -83,7 +85,8 @@ private:
   int depositsPercent, fertilityPercent;
   int minerals, food;
   
-  bool shipDocked;
+  bool playerDocked;
+  bool alienDocked;
   
   // MARK: - Helper Methods
   SDL_Point uiPosition(SDL_Point p);

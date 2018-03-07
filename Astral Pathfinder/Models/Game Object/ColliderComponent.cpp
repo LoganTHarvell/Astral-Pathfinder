@@ -54,7 +54,6 @@ bool ColliderComponent::collisionAABB(SDL_Rect r) {
   if (topBound > r.y + r.h) return false;
   if (bottomBound < r.y) return false;
 
-  std::cout << "Collision" << std::endl;
   return true;
 }
 
@@ -76,7 +75,6 @@ bool ColliderComponent::collisionOBB(PointVector vertices, int angle) {
   }
   
   // Overlap on all axes
-  std::cout << "Collision" << std::endl;
   return true;
 }
 

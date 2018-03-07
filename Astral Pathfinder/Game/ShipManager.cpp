@@ -19,7 +19,7 @@ void ShipManager::init(SDL_Point homeworldPos) {
   SDL_Point p = { homeworldPos.x - (shipSize.w/2),
                   homeworldPos.y - (shipSize.h/2) };
   
-  playerShip.init(p);
+  playerShip.init(p, ShipType::playerShip);
 }
 
 // MARK: - Game Loop Methods
