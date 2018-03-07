@@ -21,9 +21,10 @@ using PointVector = std::vector<SDL_Point>;
 
 // MARK: - Initialization Methods
 
-void Ship::init(SDL_Point p) {
+void Ship::init(SDL_Point startPosition, ShipParameters::ShipType type) {
   using namespace ShipParameters;
   
+  tag = type;
   population = 1000;
   fuel = 0;
 
@@ -32,13 +33,13 @@ void Ship::init(SDL_Point p) {
   
   rotation = 270;
   
-  rect.x = p.x;
-  rect.y = p.y;
+  rect.x = startPosition.x;
+  rect.y = startPosition.y;
   rect.w = shipSize.w;
   rect.h = shipSize.h;
   
   collider = new ColliderComponent(getCenter(), computeShipVertices());
-  texture = TextureManager::loadTexture(shipTexture);
+  texture = TextureManager::loadTexture(movingPlayerTex);
 }
 
 
@@ -91,7 +92,7 @@ SDL_Point Ship::getMapPosition(SDL_Point uiPosition) {
 }
 
 bool Ship::boundaryCollision() {
-  PointVector vertices = getCollider().getVertices();
+  PointVector vertices = computeShipVertices();
   
   PointVector axes;
   axes.push_back({ 1, 0 });   // X axis normal vector

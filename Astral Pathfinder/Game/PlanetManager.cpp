@@ -10,6 +10,7 @@
 #include "PlanetManager.hpp"
 
 // MARK: Libraries and Frameworks
+#include <iostream>
 #include <cstdlib>
 #include <ctime>
 
@@ -21,29 +22,37 @@
 void PlanetManager::initGalaxy() {
   using PlanetManagerParameters::numberOfPlanets;
   
+  planets.reserve(sizeof(Planet) * numberOfPlanets);
+  
   // Sees rand method
   srand((unsigned)time(NULL));
   
-  int i = 0;
   bool hasPlanet[numberOfPlanets][numberOfPlanets] = { false };
   
   // Initializes first element in planets array as homeworld
-  planets[i] = initHomeworld();
+  auto i = planets.begin();
+  planets.emplace(i, initHomeworld());
+  
   // Marks planet coordinates as occupied
-  hasPlanet[planets[i].getCoordinates().x][planets[i].getCoordinates().y] = true;
+  SDL_Point coordinates = i->getCoordinates();
+  hasPlanet[coordinates.x][coordinates.y] = true;
 
   // Initializes galaxy with number of planets
-  for (i=1; i<numberOfPlanets; i++) {
-    
+  while (planets.size() < numberOfPlanets) {
     // Prevents duplicate coordinates
+    auto tmp = i;
     do {
-      planets[i] = initPlanet();
-    } while (hasPlanet[planets[i].getCoordinates().x][planets[i].getCoordinates().y]);
-    
+      tmp = planets.emplace(i, initPlanet());
+      coordinates = i->getCoordinates();
+    } while (hasPlanet[coordinates.x][coordinates.y]);
+    i = tmp;
+
     // Marks planet coordinates as occupied
-    hasPlanet[planets[i].getCoordinates().x][planets[i].getCoordinates().y] = true;
+    hasPlanet[coordinates.x][coordinates.y] = true;
   }
   
+  dockedPlanetIndex = selectedPlanetIndex = -1;
+
 };
 
 
@@ -79,19 +88,19 @@ void PlanetManager::render(Game::State *gameState) {
 // MARK: - PlanetManager Methods
 
 Planet PlanetManager::getPlanet(int n) {
-  return planets[n];
+  return planets.at(n);
 }
 
 Planet PlanetManager::getSelectedPlanet() {
-  return planets[selectedPlanetIndex];
+  return planets.at(selectedPlanetIndex);
 }
 
 void PlanetManager::setPlanetDepoPercent(int p) {
-  planets[selectedPlanetIndex].setDepositsPercent(p);
+  planets.at(selectedPlanetIndex).setDepositsPercent(p);
 }
 
 void PlanetManager::setPlanetFertPercent(int p) {
-  planets[selectedPlanetIndex].setFertilityPercent(p);
+  planets.at(selectedPlanetIndex).setFertilityPercent(p);
 }
 
 
@@ -153,7 +162,24 @@ void PlanetManager::handleCollisions(ShipManager *sm) {
   std::vector<SDL_Point> playerVertices = player.getCollider().getVertices();
   int playerAngle = player.getRotation();
   
-  for (Planet p : planets) {
-    if (p.getCollider().collisionOBB(playerVertices, playerAngle)) p.dockShip();
+  // Checks all planets for collisions if player ship hasn't docked
+  if (dockedPlanetIndex < 0) {
+    for (int i = 0; i < planets.size(); i++) {
+      if (planets[i].getCollider().collisionOBB(playerVertices, playerAngle)) {
+        planets.at(i).toggleDockedShip(player.getTag());
+        dockedPlanetIndex = i;
+        std::cout << "Collision at: "
+                  << planets.at(i).getCoordinates().x << ","
+                  << planets.at(i).getCoordinates().y << std::endl;
+      }
+    }
+  }
+  // If player has docked checks docked planet for continued collision
+  else {
+    ColliderComponent collider = planets[dockedPlanetIndex].getCollider();
+    if (!collider.collisionOBB(playerVertices, playerAngle)) {
+      planets.at(dockedPlanetIndex).toggleDockedShip(player.getTag());
+      dockedPlanetIndex = -1;
+    }
   }
 }

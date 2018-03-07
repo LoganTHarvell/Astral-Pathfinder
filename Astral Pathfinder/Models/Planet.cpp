@@ -14,6 +14,7 @@
 #include "PlanetManager.hpp"
 #include "TextureManager.hpp"
 #include "Map.hpp"
+#include "Ship.hpp"
 
 
 // MARK: - Initialization Methods
@@ -60,7 +61,7 @@ void Planet::initPlanet() {
   depositsPercent = fertilityPercent = 50;
   minerals = food = 0;
   
-  shipDocked = false;
+  playerDocked = alienDocked = false;
   
   // Sets planet status
   status = undiscovered;
@@ -87,10 +88,21 @@ void Planet::revertClick() {
   SDL_SetTextureColorMod(texture, 255, 255, 255);
 }
 
-void Planet::dockShip() {
-  shipDocked = true;
+void Planet::toggleDockedShip(int tag) {
+  using ShipType = ShipParameters::ShipType;
+  
+  switch (tag) {
+    case ShipType::playerShip:
+      playerDocked = !playerDocked;
+      break;
+    case ShipType::alienWarship:
+      alienDocked = !alienDocked;
+      break;
+      
+    default:
+      break;
+  }
 }
-
 
 // MARK: - Helper Methods
 

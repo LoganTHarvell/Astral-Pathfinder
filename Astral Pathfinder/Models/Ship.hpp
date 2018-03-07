@@ -21,7 +21,12 @@
 
 namespace ShipParameters {
   
-  const std::string shipTexture = "Resources/Assets/movingPlayerShip.png";
+  enum ShipType {
+    playerShip,
+    alienWarship
+  };
+  
+  const std::string movingPlayerTex = "Resources/Assets/movingPlayerShip.png";
   
   const struct {
     int w = 48, h = 24;
@@ -41,13 +46,14 @@ class Ship: public GameObject {
   
 public:
   // MARK: - Initialization Methods
-  void init(SDL_Point position);
+  void init(SDL_Point startPosition, ShipParameters::ShipType type);
   
   // MARK: - Game Loop Methods
   void update();
   void render();
   
   // MARK: - Ship Methods
+  ShipParameters::ShipType getTag() { return tag; };
   int getFuel() { return fuel; };
   int getRotation() { return rotation; };
   SDL_Point getUIPosition() { return getCenter(); };
@@ -58,6 +64,7 @@ public:
 
 private:
   // MARK: - Ship Fields
+  ShipParameters::ShipType tag;
   int population;
   int fuel;
   
