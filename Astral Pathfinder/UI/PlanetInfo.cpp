@@ -78,6 +78,7 @@ bool PlanetInfo::checkClick(Game::State *gameState) {
   return false;
 }
 
+// TODO: - Separate moving slider from getting slider position
 int PlanetInfo::moveSlider(Game::State *gameState) {
   SDL_Rect temp = slider.getBaseRect();
   int x = gameState->dragLocation.x - temp.x;

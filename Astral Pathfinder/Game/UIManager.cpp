@@ -36,7 +36,10 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager) {
   
   // If so, check mouse movement and adjust slider appropriately
   if(gameState->sliderDrag) {
+    // TODO: - After separating moving and getting slider position, call move slider here but have separate method for getting percent
     int percent = planetInfo.moveSlider(gameState);
+    
+    // TODO: - Consider moving into PlanetManager update() ?
     if(percent != -1) {
       planetManager->setPlanetDepoPercent(100-percent);
       planetManager->setPlanetFertPercent(percent);
