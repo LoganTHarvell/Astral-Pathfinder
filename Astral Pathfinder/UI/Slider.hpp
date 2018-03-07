@@ -45,7 +45,8 @@ public:
   SDL_Rect getBaseRect() { return base; }
   SDL_Rect getSliderRect() { return slider; }
   SDL_Point getSliderPosition() { return { slider.x, slider.y }; };
-  int setSliderPosition(int pos);
+  void setSliderPosition(int pos);
+  int getPercent();
   
 private:
   // MARK: - Slider Fields

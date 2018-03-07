@@ -78,19 +78,14 @@ bool PlanetInfo::checkClick(Game::State *gameState) {
   return false;
 }
 
-// TODO: - Separate moving slider from getting slider position
-int PlanetInfo::moveSlider(Game::State *gameState) {
+void PlanetInfo::moveSlider(Game::State *gameState) {
   SDL_Rect temp = slider.getBaseRect();
   int x = gameState->dragLocation.x - temp.x;
   
-  // TODO: - Separate setting and getting slider position
   if((x > 0) && (x < temp.w + 1)) {
-    int p = slider.setSliderPosition(x);
-    setNewPercent(p);
-    return p;
+    slider.setSliderPosition(x);
+    setNewPercentText();
   }
-  
-  return -1;
 }
 
 // MARK: - Helper Methods
@@ -109,7 +104,9 @@ void PlanetInfo::setBoxes(Planet p) {
   farming.setMessage("Farming");
 }
 
-void PlanetInfo::setNewPercent(int p) {
+void PlanetInfo::setNewPercentText() {
+  int p = getSliderPercent();
+  
   std::string depoPercent = setStringSpaces(100-p) + std::to_string(100-p) + "%";
   dpText.setMessage(depoPercent.c_str());
   
