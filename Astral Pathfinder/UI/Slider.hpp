@@ -17,6 +17,8 @@
 #include "Planet.hpp"
 
 
+// MARK: - Slider Parameters
+
 namespace SliderParameters {
   
   const auto barFilename = "Resources/Assets/bar.png";
@@ -41,15 +43,14 @@ public:
   bool isInitialized();
   void setTextures(int percent);
   SDL_Rect getBaseRect() { return base; }
-  SDL_Rect getCircleRect() { return circle; }
-  SDL_Point getCirclePosition() { return { circle.x, circle.y }; };
+  SDL_Rect getSliderRect() { return slider; }
+  SDL_Point getSliderPosition() { return { slider.x, slider.y }; };
   int setCirclePosition(int pos);
   
 private:
   // MARK: - Slider Fields
-  // TODO: - Rename bar and circle to slider and base
-  SDL_Rect base, circle;
-  SDL_Texture *bar, *circ;
+  SDL_Rect base, slider;
+  SDL_Texture *baseTexture, *sliderTexture;
   bool setPos = false;
 };
 

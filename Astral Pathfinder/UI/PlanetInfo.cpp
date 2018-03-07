@@ -70,7 +70,7 @@ void PlanetInfo::setUiTextures(Planet p) {
 bool PlanetInfo::checkClick(Game::State *gameState) {
   int x = gameState->clickLocation.x;
   int y = gameState->clickLocation.y;
-  SDL_Rect temp = slider.getCircleRect();
+  SDL_Rect temp = slider.getSliderRect();
   if((x > temp.x) && (x < temp.x + temp.w)
      && (y > temp.y) && (y < temp.y + temp.h))
     return true;
@@ -82,6 +82,7 @@ int PlanetInfo::moveSlider(Game::State *gameState) {
   SDL_Rect temp = slider.getBaseRect();
   int x = gameState->dragLocation.x - temp.x;
   
+  // TODO: - Separate setting and getting slider position
   if((x > 0) && (x < temp.w + 1)) {
     int p = slider.setCirclePosition(x);
     setNewPercent(p);

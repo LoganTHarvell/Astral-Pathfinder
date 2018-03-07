@@ -17,10 +17,10 @@
 
 void Slider::init(SDL_Rect rectOne, SDL_Rect rectTwo) {
   base = rectOne;
-  circle = rectTwo;
+  slider = rectTwo;
   
-  bar = nullptr;
-  circ = nullptr;
+  baseTexture = nullptr;
+  sliderTexture = nullptr;
 }
 
 
@@ -31,21 +31,21 @@ void Slider::update() {
 }
 
 void Slider::render() {
-  SDL_RenderCopy(Game::renderer, bar, NULL, &base);
-  SDL_RenderCopy(Game::renderer, circ, NULL, &circle);
+  SDL_RenderCopy(Game::renderer, baseTexture, NULL, &base);
+  SDL_RenderCopy(Game::renderer, sliderTexture, NULL, &slider);
 }
 
 void Slider::clean() {
-  if (bar == nullptr || circ == nullptr) return;
+  if (baseTexture == nullptr || sliderTexture == nullptr) return;
   
-  if(bar != nullptr) {
-    SDL_DestroyTexture(bar);
-    bar = nullptr;
+  if(baseTexture != nullptr) {
+    SDL_DestroyTexture(baseTexture);
+    baseTexture = nullptr;
   }
   
-  if(circ != nullptr) {
-    SDL_DestroyTexture(circ);
-    circ = nullptr;
+  if(sliderTexture != nullptr) {
+    SDL_DestroyTexture(sliderTexture);
+    sliderTexture = nullptr;
   }
 }
 
@@ -53,7 +53,7 @@ void Slider::clean() {
 // MARK: - Slider Methods
 
 bool Slider::isInitialized() {
-  if (bar != nullptr && circ != nullptr) return true;
+  if (baseTexture != nullptr && sliderTexture != nullptr) return true;
   else return false;
 }
 
@@ -61,18 +61,18 @@ bool Slider::isInitialized() {
 void Slider::setTextures(int percent) {
   clean();
   
-  bar = TextureManager::loadTexture(SliderParameters::barFilename);
-  circ = TextureManager::loadTexture(SliderParameters::circFilename);
+  baseTexture = TextureManager::loadTexture(SliderParameters::barFilename);
+  sliderTexture = TextureManager::loadTexture(SliderParameters::circFilename);
 
   float p = static_cast<float>(percent);
   float scale = base.w/100.0f;
   
-  circle.x = static_cast<int>(p*scale)+base.x-(circle.w/2);
+  slider.x = static_cast<int>(p*scale)+base.x-(slider.w/2);
 }
 
 // TODO: - Separate setting and getting slider position
 int Slider::setCirclePosition(int pos) {
-  circle.x = pos-(circle.w/2) + base.x;
-  int temp = (circle.x+(circle.w/2)) - base.x;
+  slider.x = pos-(slider.w/2) + base.x;
+  int temp = (slider.x+(slider.w/2)) - base.x;
   return static_cast<int>(temp / (base.w/100.0f));
 }
