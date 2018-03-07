@@ -22,6 +22,7 @@
 namespace ShipParameters {
   
   const std::string shipTexture = "Resources/Assets/movingPlayerShip.png";
+  
   const struct {
     int w = 48, h = 24;
   } shipSize;
@@ -54,9 +55,11 @@ public:
 
 private:
   // MARK: - Ship Fields
-  int rotation;
+  int population;
   int fuel;
+  
   SDL_Point velocity;
+  int rotation;
   
   // MARK: - Helper Methods
   SDL_Point mapPosition(SDL_Point p);

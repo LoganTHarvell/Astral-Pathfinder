@@ -24,22 +24,21 @@ using PointVector = std::vector<SDL_Point>;
 void Ship::init(SDL_Point p) {
   using namespace ShipParameters;
   
-  rect.x = p.x;
-  rect.y = p.y;
-  rect.w = shipSize.w;
-  rect.h = shipSize.h;
-  
+  population = 1000;
+  fuel = 0;
+
   velocity.x = 0;
   velocity.y = 0;
   
   rotation = 270;
   
-  // Initializes collider
-  collider = new ColliderComponent(getCenter(), computeShipVertices());
-
-  texture = TextureManager::loadTexture(shipTexture);
+  rect.x = p.x;
+  rect.y = p.y;
+  rect.w = shipSize.w;
+  rect.h = shipSize.h;
   
-  fuel = 0;
+  collider = new ColliderComponent(getCenter(), computeShipVertices());
+  texture = TextureManager::loadTexture(shipTexture);
 }
 
 
