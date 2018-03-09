@@ -17,29 +17,29 @@
 #include "Map.hpp"
 #include "TextureManager.hpp"
 
+using PointVector = std::vector<SDL_Point>;
 
 // MARK: - Initialization Methods
 
-void Ship::init(SDL_Point p) {
+void Ship::init(SDL_Point startPosition, ShipParameters::ShipType type) {
   using namespace ShipParameters;
   
-  rect.x = p.x;
-  rect.y = p.y;
+  tag = type;
+  population = 1000;
+  fuel = 0;
+
   velocity.x = 0;
   velocity.y = 0;
-  rect.w = shipSize.w;
-  rect.h = shipSize.h;
   
   rotation = 270;
   
-  auto shipVertices = ColliderComponent::computeVertices(getCenter(),
-                                                         shipVertexVectors(),
-                                                         rotation);
-  collider = new ColliderComponent(getCenter(), shipVertices);
-
-  texture = TextureManager::loadTexture("Resources/Assets/movingPlayerShip.png");
+  rect.x = startPosition.x;
+  rect.y = startPosition.y;
+  rect.w = shipSize.w;
+  rect.h = shipSize.h;
   
-  fuel = 0;
+  collider = new ColliderComponent(getCenter(), computeShipVertices());
+  texture = TextureManager::loadTexture(movingPlayerTex);
 }
 
 
@@ -49,10 +49,7 @@ void Ship::update() {
   updateVelocity();
   updateRotation();
   
-  auto shipVertices = ColliderComponent::computeVertices(getCenter(),
-                                                         shipVertexVectors(),
-                                                         rotation);
-  collider->update(getCenter(), shipVertices);
+  collider->update(getCenter(), computeShipVertices());
 }
 
 void Ship::render() {
@@ -90,15 +87,14 @@ void Ship::move(Uint32 ticks) {
 
 // MARK: - Helper Methods
 
-SDL_Point Ship::mapPosition(SDL_Point p) {
-  return Map::mapPosition(p);
+SDL_Point Ship::getMapPosition(SDL_Point uiPosition) {
+  return Map::mapPosition(uiPosition);
 }
 
 bool Ship::boundaryCollision() {
-  auto vertexV = shipVertexVectors();
-  auto vertices = collider->computeVertices(getCenter(), vertexV, rotation);
+  PointVector vertices = computeShipVertices();
   
-  std::vector<SDL_Point> axes;
+  PointVector axes;
   axes.push_back({ 1, 0 });   // X axis normal vector
   axes.push_back({ 0, 1 });   // Y axis normal vector
   
@@ -110,8 +106,8 @@ bool Ship::boundaryCollision() {
   return Map::checkBounds(mins, maxs);
 }
 
-std::vector<SDL_Point> Ship::shipVertexVectors() {
-  std::vector<SDL_Point> cornerVectors;
+PointVector Ship::shipVertexVectors() {
+  PointVector cornerVectors;
   
   cornerVectors.push_back({ rect.x, rect.y + rect.h/2 });
   cornerVectors.push_back({ rect.x + rect.w/2, rect.y });
@@ -125,6 +121,14 @@ std::vector<SDL_Point> Ship::shipVertexVectors() {
   }
   
   return cornerVectors;
+}
+
+PointVector Ship::computeShipVertices() {
+  SDL_Point c = getCenter();
+  PointVector svv = shipVertexVectors();
+  int r = rotation;
+  PointVector shipVertices = ColliderComponent::computeVertices(c, svv, r);
+  return shipVertices;
 }
 
 

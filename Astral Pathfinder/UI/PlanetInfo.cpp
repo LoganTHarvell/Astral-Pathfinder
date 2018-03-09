@@ -54,13 +54,23 @@ void PlanetInfo::clean() {
 
 void PlanetInfo::setUiTextures(Planet p) {
   setBoxes(p);
-  slider.setTextures(p.getFertilityPercent());
+  
+  if (slider.isInitialized()) {
+    // Sets correct slider position for given planet
+    float ratio = p.getFertilityPercent()/100.0f;
+    SDL_Rect tmpR = slider.getBaseRect();
+    slider.setSliderPosition(static_cast<int>(tmpR.w * ratio));
+  }
+  // Sets slider textures if not initialized
+  else slider.setTextures(p.getFertilityPercent());
+
+  
 }
 
 bool PlanetInfo::checkClick(Game::State *gameState) {
   int x = gameState->clickLocation.x;
   int y = gameState->clickLocation.y;
-  SDL_Rect temp = slider.getCirclePosition();
+  SDL_Rect temp = slider.getSliderRect();
   if((x > temp.x) && (x < temp.x + temp.w)
      && (y > temp.y) && (y < temp.y + temp.h))
     return true;
@@ -68,12 +78,14 @@ bool PlanetInfo::checkClick(Game::State *gameState) {
   return false;
 }
 
+// TODO: - Separate moving slider from getting slider position
 int PlanetInfo::moveSlider(Game::State *gameState) {
-  int x = gameState->dragLocation.x;
-  SDL_Rect temp = slider.getBasePosition();
+  SDL_Rect temp = slider.getBaseRect();
+  int x = gameState->dragLocation.x - temp.x;
   
-  if((x > temp.x) && (x < temp.x + temp.w + 1)) {
-    int p = slider.setCirclePosition(x);
+  // TODO: - Separate setting and getting slider position
+  if((x > 0) && (x < temp.w + 1)) {
+    int p = slider.setSliderPosition(x);
     setNewPercent(p);
     return p;
   }

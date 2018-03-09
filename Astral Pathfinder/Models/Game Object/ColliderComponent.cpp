@@ -54,14 +54,13 @@ bool ColliderComponent::collisionAABB(SDL_Rect r) {
   if (topBound > r.y + r.h) return false;
   if (bottomBound < r.y) return false;
 
-  std::cout << "Collision" << std::endl;
   return true;
 }
 
 bool ColliderComponent::collisionOBB(PointVector vertices, int angle) {
   // Gets axes of self and test boxes
   PointVector axes = getNormals(this->vertices);
-  auto tmp = getNormals(vertices);
+  std::vector<SDL_Point> tmp = getNormals(vertices);
   axes.insert(axes.end(), tmp.begin(), tmp.end());
 
   // Loop axes
@@ -76,7 +75,6 @@ bool ColliderComponent::collisionOBB(PointVector vertices, int angle) {
   }
   
   // Overlap on all axes
-  std::cout << "Collision" << std::endl;
   return true;
 }
 

@@ -17,10 +17,10 @@
 
 void Slider::init(SDL_Rect rectOne, SDL_Rect rectTwo) {
   base = rectOne;
-  circle = rectTwo;
+  slider = rectTwo;
   
-  bar = nullptr;
-  circ = nullptr;
+  baseTexture = nullptr;
+  sliderTexture = nullptr;
 }
 
 
@@ -31,36 +31,48 @@ void Slider::update() {
 }
 
 void Slider::render() {
-  SDL_RenderCopy(Game::renderer, bar, NULL, &base);
-  SDL_RenderCopy(Game::renderer, circ, NULL, &circle);
+  SDL_RenderCopy(Game::renderer, baseTexture, NULL, &base);
+  SDL_RenderCopy(Game::renderer, sliderTexture, NULL, &slider);
+}
+
+void Slider::clean() {
+  if (baseTexture == nullptr || sliderTexture == nullptr) return;
+  
+  if(baseTexture != nullptr) {
+    SDL_DestroyTexture(baseTexture);
+    baseTexture = nullptr;
+  }
+  
+  if(sliderTexture != nullptr) {
+    SDL_DestroyTexture(sliderTexture);
+    sliderTexture = nullptr;
+  }
 }
 
 
 // MARK: - Slider Methods
 
-void Slider::clean() {
-  if (bar == nullptr || circ == nullptr) return;
-  
-  if(bar != nullptr) {
-    SDL_DestroyTexture(bar);
-    bar = nullptr;
-  }
-  
-  if(circ != nullptr) {
-    SDL_DestroyTexture(circ);
-    circ = nullptr;
-  }
+bool Slider::isInitialized() {
+  if (baseTexture != nullptr && sliderTexture != nullptr) return true;
+  else return false;
 }
+
 
 void Slider::setTextures(int percent) {
-  bar = TextureManager::loadTexture("Resources/Assets/bar.png");
-  circ = TextureManager::loadTexture("Resources/Assets/ball.png");
+  clean();
+  
+  baseTexture = TextureManager::loadTexture(SliderParameters::barFilename);
+  sliderTexture = TextureManager::loadTexture(SliderParameters::circFilename);
 
-  circle.x = static_cast<int>((static_cast<float>(percent))*(static_cast<float>(base.w/100.0f))+base.x-(circle.w/2));
+  float p = static_cast<float>(percent);
+  float scale = base.w/100.0f;
+  
+  slider.x = static_cast<int>(p*scale)+base.x-(slider.w/2);
 }
 
-int Slider::setCirclePosition(int pos) {
-  circle.x = pos-(circle.w/2);
-  int temp = (circle.x+(circle.w/2)) - base.x;
-  return static_cast<int>(static_cast<float>(temp))/(static_cast<float>(base.w/100.0f));
+// TODO: - Separate setting and getting slider position
+int Slider::setSliderPosition(int pos) {
+  slider.x = pos-(slider.w/2) + base.x;
+  int temp = (slider.x+(slider.w/2)) - base.x;
+  return static_cast<int>(temp / (base.w/100.0f));
 }

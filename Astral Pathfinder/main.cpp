@@ -13,8 +13,7 @@ int main(int argc, const char *argv[]) {
   using namespace GameParameters;
   
   Game game;
-  game.init("Astral Pathfinder ©", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-            windowSize.w, windowSize.h, false);
+  game.init("Astral Pathfinder ©", windowRect, false);
 
   // Tracks time to complete frame
   Uint32 frameStart = 0;

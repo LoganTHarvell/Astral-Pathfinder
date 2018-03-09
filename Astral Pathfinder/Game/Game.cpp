@@ -27,8 +27,7 @@ SDL_Renderer *Game::renderer = nullptr;
 
 // MARK: - Game Initialization
 
-void Game::init(const char *title,
-                int x, int y, int w, int h, bool fullscreen) {
+void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
   using namespace GameParameters;
   
   int flags = 0;
@@ -44,7 +43,8 @@ void Game::init(const char *title,
     std::cout << "Frameworks initialised!..." << std::endl;
     
     // Initializes window
-    window = SDL_CreateWindow(title, x, y, w, h, flags | SDL_WINDOW_RESIZABLE );
+    window = SDL_CreateWindow(title.c_str(), rect.x, rect.y, rect.w, rect.h,
+                              flags | SDL_WINDOW_RESIZABLE);
     if (window) {
       std::cout << "Window created." << std::endl;
     }
@@ -54,7 +54,7 @@ void Game::init(const char *title,
     if (renderer) {
       // Sets render scaling
       SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
-      SDL_RenderSetLogicalSize(renderer, windowSize.w, windowSize.h);
+      SDL_RenderSetLogicalSize(renderer, rect.w, rect.h);
       
       SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
       std::cout << "Renderer created." << std::endl;
@@ -95,7 +95,7 @@ void Game::handleEvents() {
       case SDL_KEYDOWN:
       {
         // Gets pressed key
-        auto key = event.key.keysym.sym;
+        SDL_Keycode key = event.key.keysym.sym;
         
         // GameState logic
         if(key == SDLK_ESCAPE && gameState.planetSelected) {
@@ -135,11 +135,12 @@ void Game::update(Uint32 ticks) {
 }
 
 void Game::render() {
+  using GameParameters::windowRect;
+
   SDL_RenderClear(renderer);
   
-  using GameParameters::windowSize;
-  SDL_Rect windowR = { 0, 0, windowSize.w, windowSize.h };
-  SDL_RenderCopy(renderer, gameScreen, NULL, &windowR);
+  SDL_Rect screenRect = { 0, 0, windowRect.w, windowRect.h };
+  SDL_RenderCopy(renderer, gameScreen, NULL, &screenRect);
 
   // Render stuff
   planetManager->render(&gameState);

@@ -11,10 +11,21 @@
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
+#include <string>
 
 // MARK: Source Files
 #include "Game.hpp"
 #include "Planet.hpp"
+
+
+// MARK: - Slider Parameters
+
+namespace SliderParameters {
+  
+  const std::string barFilename = "Resources/Assets/bar.png";
+  const std::string circFilename = "Resources/Assets/ball.png";
+
+}
 
 
 // MARK: - Slider Class
@@ -30,15 +41,17 @@ public:
   void clean();
   
   // MARK: - Slider Methods
+  bool isInitialized();
   void setTextures(int percent);
-  SDL_Rect getBasePosition() { return base; }
-  SDL_Rect getCirclePosition() { return circle; }
-  int setCirclePosition(int pos);
+  SDL_Rect getBaseRect() { return base; }
+  SDL_Rect getSliderRect() { return slider; }
+  SDL_Point getSliderPosition() { return { slider.x, slider.y }; };
+  int setSliderPosition(int pos);
   
 private:
   // MARK: - Slider Fields
-  SDL_Rect base, circle;
-  SDL_Texture *bar, *circ;
+  SDL_Rect base, slider;
+  SDL_Texture *baseTexture, *sliderTexture;
   bool setPos = false;
 };
 
