@@ -66,7 +66,7 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
   }
   
   if (gameState->clickFlag) {
-    handleClickEvent(gameState->clickLocation, &(gameState->planetSelected));
+    handleClickEvent(gameState->clickLocation, gameState);
     gameState->clickFlag = false;
   }
   
@@ -126,8 +126,7 @@ Planet PlanetManager::initPlanet() {
   return planet;
 }
 
-void PlanetManager::handleClickEvent(SDL_Point p, bool *planetSelected) {
-  
+void PlanetManager::handleClickEvent(SDL_Point p, Game::State *gs) {
   int i = 0;
   for(Planet planet : planets) {
     SDL_Rect temp = planet.getRect();
@@ -135,10 +134,14 @@ void PlanetManager::handleClickEvent(SDL_Point p, bool *planetSelected) {
     if((p.x > temp.x) && (p.x < temp.x + temp.w)
        && (p.y > temp.y) && (p.y < temp.y + temp.h)) {
       
-      if (selectedPlanetIndex >= 0) deselectPlanet(planetSelected);
+      if (selectedPlanetIndex >= 0) deselectPlanet(&gs->planetSelected);
       
-      selectedPlanetIndex = i;
-      selectPlanet(planetSelected);
+      if (planet.getStatus() == Planet::discovered || gs->debugMode) {
+        selectedPlanetIndex = i;
+        selectPlanet(&gs->planetSelected);
+      }
+      else
+        selectedPlanetIndex = -1;
     }
     
     i++;
