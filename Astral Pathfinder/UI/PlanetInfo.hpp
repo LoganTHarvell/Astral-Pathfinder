@@ -35,11 +35,13 @@ public:
 private:
   // MARK: - PlanetInfo Fields
   TextBox depositsText, fertilityText, dpText, fpText, mining, farming,
-          infrastructureText, reserveText, ipText, rpText;
+          infrastructureText, reserveText, ipText, rpText, locationText,
+          popText, mineralText, foodText;
   Slider sliderOne, sliderTwo;
   SDL_Rect origin, depositsRect, fertilityRect, miningLabel, farmingLabel,
            depositsPercentRect, fertilityPercentRect, slideBaseOne, circleOne,
-           slideBaseTwo, circleTwo, infraRect, reserveRect, ipRect, rpRect;
+           slideBaseTwo, circleTwo, infraRect, reserveRect, ipRect, rpRect,
+           locationRect, popRect, mineralRect, foodRect;
   int sliderNum = -1;
   
   // MARK: - Helper Methods

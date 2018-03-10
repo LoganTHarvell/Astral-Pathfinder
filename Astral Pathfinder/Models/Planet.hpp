@@ -65,6 +65,10 @@ public:
   
   int getDeposits() { return deposits; };
   int getFertility() { return fertility; };
+  SDL_Point getLocation() { return coordinates; };
+  int getPopulation() { return population; };
+  int getFood() { return food; };
+  int getMinerals() { return minerals; };
   
   int getDepositsPercent() { return depositsPercent; };
   int getFertilityPercent() { return fertilityPercent; };

@@ -31,6 +31,10 @@ void PlanetInfo::init(SDL_Rect src) {
   ipText.init(ipRect);
   rpText.init(rpRect);
   sliderTwo.init(slideBaseTwo, circleTwo);
+  locationText.init(locationRect);
+  popText.init(popRect);
+  mineralText.init(mineralRect);
+  foodText.init(foodRect);
 }
 
 
@@ -49,6 +53,10 @@ void PlanetInfo::render() {
   ipText.render();
   rpText.render();
   sliderTwo.render();
+  locationText.render();
+  popText.render();
+  mineralText.render();
+  foodText.render();
 }
 
 void PlanetInfo::clean() {
@@ -64,6 +72,10 @@ void PlanetInfo::clean() {
   ipText.clean();
   rpText.clean();
   sliderTwo.clean();
+  locationText.clean();
+  popText.clean();
+  mineralText.clean();
+  foodText.clean();
 }
 
 
@@ -156,6 +168,11 @@ int PlanetInfo::getSliderPercent() {
 void PlanetInfo::setBoxes(Planet p) {
   std::string depo = "Deposits: " + setStringSpaces(p.getDeposits()) + std::to_string(p.getDeposits());
   std::string fert = "Fertility: " + setStringSpaces(p.getFertility()) + std::to_string(p.getFertility());
+  std::string location = "Location: " + setStringSpaces(p.getLocation().x) + std::to_string(p.getLocation().x)
+                                      + setStringSpaces(p.getLocation().y) + std::to_string(p.getLocation().y);
+  std::string population = "Population: " + setStringSpaces(p.getPopulation()) + std::to_string(p.getPopulation());
+  std::string food = "Food: " + setStringSpaces(p.getFood()) + std::to_string(p.getFood());
+  std::string mineral = "Minerals: " + setStringSpaces(p.getMinerals()) + std::to_string(p.getMinerals());
   std::string depoPercent = setStringSpaces(p.getDepositsPercent()) + std::to_string(p.getDepositsPercent()) + "%";
   std::string fertPercent = setStringSpaces(p.getFertilityPercent()) + std::to_string(p.getFertilityPercent()) + "%";
   std::string infPercent = setStringSpaces(p.getInfraPercent()) + std::to_string(p.getInfraPercent()) + "%";
@@ -163,6 +180,10 @@ void PlanetInfo::setBoxes(Planet p) {
   
   depositsText.setMessage(depo.c_str());
   fertilityText.setMessage(fert.c_str());
+  locationText.setMessage(location.c_str());
+  popText.setMessage(population.c_str());
+  mineralText.setMessage(mineral.c_str());
+  foodText.setMessage(food.c_str());
   dpText.setMessage(depoPercent.c_str());
   fpText.setMessage(fertPercent.c_str());
   ipText.setMessage(infPercent.c_str());
@@ -210,8 +231,12 @@ void PlanetInfo::setUiRects() {
   int topBuffer = origin.y+10;
   int midW = origin.x + (origin.w/2);
   
-  depositsRect = {leftBuffer, topBuffer, 135, 35};
-  fertilityRect = {midW+10, topBuffer, 135, 35};
+  locationRect = {leftBuffer, topBuffer, 135, 35};
+  popRect = {midW+10, topBuffer, 135, 35};
+  mineralRect = {leftBuffer, locationRect.y+50, 135, 35};
+  foodRect = {midW+10, popRect.y+50, 135, 35};
+  depositsRect = {leftBuffer, mineralRect.y+50, 135, 35};
+  fertilityRect = {midW+10, foodRect.y+50, 135, 35};
   miningLabel = {leftBuffer, depositsRect.y+50, 75, 30};
   depositsPercentRect = {miningLabel.x+(miningLabel.w/2)-25, miningLabel.y+40, 50, 25};
   slideBaseOne = {leftBuffer+miningLabel.w+15, miningLabel.y+20, 125, 15};
