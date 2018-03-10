@@ -15,23 +15,10 @@
 #include "PlanetManager.hpp"
 #include "Planet.hpp"
 
-// MARK: - PlanetInfo Parameters
-
-namespace InfoParameters {
-  const SDL_Rect depositsRect = {1220, 510, 135, 35};
-  const SDL_Rect fertilityRect = {1395, 510, 135, 35};
-  const SDL_Rect miningLabel = {1220, 560, 75, 30};
-  const SDL_Rect farmingLabel = {1455, 560, 75, 30};
-  const SDL_Rect depositsPercentRect = {1232, 600, 50, 25};
-  const SDL_Rect fertilityPercentRect = {1467, 600, 50, 25};
-  const SDL_Rect slideBase = {1310, 582, 125, 15};
-  const SDL_Rect circle = {NULL, 576, 25, 25};
-}
-
 class PlanetInfo {
 public:
   // MARK: - PlanetInfo Initialization
-  void init();
+  void init(SDL_Rect src);
   
   // MARK: - Game Loop Methods
   void render();
@@ -49,11 +36,21 @@ private:
   // MARK: - PlanetInfo Fields
   TextBox depositsText, fertilityText, dpText, fpText, mining, farming;
   Slider slider;
+  SDL_Rect origin;
+  SDL_Rect depositsRect;
+  SDL_Rect fertilityRect;
+  SDL_Rect miningLabel;
+  SDL_Rect farmingLabel;
+  SDL_Rect depositsPercentRect;
+  SDL_Rect fertilityPercentRect;
+  SDL_Rect slideBase;
+  SDL_Rect circle;
   
   // MARK: - Helper Methods
   void setBoxes(Planet p);
   void setNewPercentText();
   std::string setStringSpaces(int p);
+  void setUiRects();
 
 };
 

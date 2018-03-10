@@ -15,7 +15,8 @@
 // MARK: - UIManager Initialization
 
 void UIManager::init() {
-  planetInfo.init();
+  using namespace UiParamters;
+  planetInfo.init(selectedPlanetOrigin);
 }
 
 // MARK: - Game Loop Methods

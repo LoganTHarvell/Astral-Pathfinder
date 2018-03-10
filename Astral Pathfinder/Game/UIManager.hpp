@@ -14,6 +14,13 @@
 #include "PlanetManager.hpp"
 #include "PlanetInfo.hpp"
 
+// MARK: - UIManager Parameters
+
+namespace UiParamters {
+  const SDL_Rect shipInfoOrigin = {1215, 100, 320, 345};
+  const SDL_Rect selectedPlanetOrigin = {1215, 500, 320, 300};
+}
+
 class UIManager {
 
 public:

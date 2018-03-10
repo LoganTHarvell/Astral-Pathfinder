@@ -15,8 +15,10 @@
 
 // MARK: - PlanetInfo Initialization
 
-void PlanetInfo::init() {
-  using namespace InfoParameters;
+void PlanetInfo::init(SDL_Rect src) {
+  origin = src;
+  setUiRects();
+  
   depositsText.init(depositsRect);
   fertilityText.init(fertilityRect);
   dpText.init(depositsPercentRect);
@@ -126,4 +128,19 @@ std::string PlanetInfo::setStringSpaces(int p) {
     s = s + " ";
   
   return s;
+}
+
+void PlanetInfo::setUiRects() {
+  int leftBuffer = origin.x+10;
+  int topBuffer = origin.y+10;
+  int midW = origin.x + (origin.w/2);
+  
+  depositsRect = {leftBuffer, topBuffer, 135, 35};
+  fertilityRect = {midW+10, topBuffer, 135, 35};
+  miningLabel = {leftBuffer, depositsRect.y+50, 75, 30};
+  depositsPercentRect = {miningLabel.x+(miningLabel.w/2)-25, miningLabel.y+40, 50, 25};
+  slideBase = {leftBuffer+miningLabel.w+15, miningLabel.y+20, 125, 15};
+  circle = {NULL, slideBase.y-6, 25, 25};
+  farmingLabel = {slideBase.x+slideBase.w+15, miningLabel.y, 75, 30};
+  fertilityPercentRect = {farmingLabel.x+(farmingLabel.w/2)-25, farmingLabel.y+40, 50, 25};
 }
