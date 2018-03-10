@@ -103,6 +103,14 @@ void PlanetManager::setPlanetFertPercent(int p) {
   planets.at(selectedPlanetIndex).setFertilityPercent(p);
 }
 
+void PlanetManager::setPlanetInfraPercent(int p) {
+  planets.at(selectedPlanetIndex).setInfraPercent(p);
+}
+
+void PlanetManager::setPlanetReservePercent(int p) {
+  planets.at(selectedPlanetIndex).setReservePercent(p);
+}
+
 
 // MARK: - Initialization Helper Methods
 

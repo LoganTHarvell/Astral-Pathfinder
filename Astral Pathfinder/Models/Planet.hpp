@@ -59,8 +59,12 @@ public:
   
   int getDepositsPercent() { return depositsPercent; };
   int getFertilityPercent() { return fertilityPercent; };
+  int getInfraPercent() { return infraPercent; };
+  int getReservePercent() { return reservePercent; };
   void setDepositsPercent(int percent) { depositsPercent = percent; };
   void setFertilityPercent(int percent) { fertilityPercent = percent; };
+  void setInfraPercent(int percent) { infraPercent = percent; };
+  void setReservePercent(int percent) { reservePercent = percent; };
   
   void clicked();
   void revertClick();
@@ -82,7 +86,7 @@ private:
   // resources
   int population;
   int deposits, fertility;
-  int depositsPercent, fertilityPercent;
+  int depositsPercent, fertilityPercent, infraPercent, reservePercent;
   int minerals, food;
   
   bool playerDocked;

@@ -31,18 +31,32 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager) {
     return;
   
   // If down, but not dragging, check if slider was clicked
-  if(gameState->mouseDown && !gameState->sliderDrag)
-    if(planetInfo.checkClick(gameState))
-      gameState->sliderDrag = true;
+  if(gameState->mouseDown && !gameState->sliderOneDrag && !gameState->sliderTwoDrag) {
+    if(planetInfo.checkClick(gameState) == 1)
+      gameState->sliderOneDrag = true;
+    
+    if(planetInfo.checkClick(gameState) == 2)
+      gameState->sliderTwoDrag = true;
+  }
   
   // If so, check mouse movement and adjust slider appropriately
-  if(gameState->sliderDrag) {
+  if(gameState->sliderOneDrag) {
     bool movement = planetInfo.moveSlider(gameState);
     int percent = planetInfo.getSliderPercent();
     
     if(movement) {
       planetManager->setPlanetDepoPercent(100-percent);
       planetManager->setPlanetFertPercent(percent);
+    }
+  }
+  
+  if(gameState->sliderTwoDrag) {
+    bool movement = planetInfo.moveSlider(gameState);
+    int percent = planetInfo.getSliderPercent();
+    
+    if(movement) {
+      planetManager->setPlanetInfraPercent(100-percent);
+      planetManager->setPlanetReservePercent(percent);
     }
   }
 }

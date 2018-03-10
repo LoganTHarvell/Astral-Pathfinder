@@ -48,7 +48,8 @@ public:
     bool clickFlag = false;
     bool planetSelected = false;
     bool mouseDown = false;
-    bool sliderDrag = false;
+    bool sliderOneDrag = false;
+    bool sliderTwoDrag = false;
     
     bool debugMode = false;
     

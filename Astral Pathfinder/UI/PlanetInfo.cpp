@@ -25,7 +25,12 @@ void PlanetInfo::init(SDL_Rect src) {
   fpText.init(fertilityPercentRect);
   mining.init(miningLabel);
   farming.init(farmingLabel);
-  slider.init(slideBase, circle);
+  sliderOne.init(slideBaseOne, circleOne);
+  infrastructureText.init(infraRect);
+  reserveText.init(reserveRect);
+  ipText.init(ipRect);
+  rpText.init(rpRect);
+  sliderTwo.init(slideBaseTwo, circleTwo);
 }
 
 
@@ -38,7 +43,12 @@ void PlanetInfo::render() {
   fpText.render();
   mining.render();
   farming.render();
-  slider.render();
+  sliderOne.render();
+  infrastructureText.render();
+  reserveText.render();
+  ipText.render();
+  rpText.render();
+  sliderTwo.render();
 }
 
 void PlanetInfo::clean() {
@@ -48,7 +58,12 @@ void PlanetInfo::clean() {
   fpText.clean();
   mining.clean();
   farming.clean();
-  slider.clean();
+  sliderOne.clean();
+  infrastructureText.clean();
+  reserveText.clean();
+  ipText.clean();
+  rpText.clean();
+  sliderTwo.clean();
 }
 
 
@@ -57,39 +72,83 @@ void PlanetInfo::clean() {
 void PlanetInfo::setUiTextures(Planet p) {
   setBoxes(p);
   
-  if (slider.isInitialized()) {
+  if (sliderOne.isInitialized() && sliderTwo.isInitialized()) {
+    SDL_Rect tmpR;
+    float ratio;
     // Sets correct slider position for given planet
-    float ratio = p.getFertilityPercent()/100.0f;
-    SDL_Rect tmpR = slider.getBaseRect();
-    slider.setSliderPosition(static_cast<int>(tmpR.w * ratio));
+    ratio = p.getFertilityPercent()/100.0f;
+    tmpR = sliderOne.getBaseRect();
+    sliderOne.setSliderPosition(static_cast<int>(tmpR.w * ratio));
+    
+    ratio = p.getReservePercent()/100.0f;
+    tmpR = sliderTwo.getBaseRect();
+    sliderTwo.setSliderPosition(static_cast<int>(tmpR.w * ratio));
   }
   // Sets slider textures if not initialized
-  else slider.setTextures(p.getFertilityPercent());
-
+  else {
+    sliderOne.setTextures(p.getFertilityPercent());
+    sliderTwo.setTextures(p.getReservePercent());
+  }
   
 }
 
-bool PlanetInfo::checkClick(Game::State *gameState) {
+int PlanetInfo::checkClick(Game::State *gameState) {
   int x = gameState->clickLocation.x;
   int y = gameState->clickLocation.y;
-  SDL_Rect temp = slider.getSliderRect();
-  if((x > temp.x) && (x < temp.x + temp.w)
-     && (y > temp.y) && (y < temp.y + temp.h))
-    return true;
+  SDL_Rect temp;
   
-  return false;
+  temp = sliderOne.getSliderRect();
+  if((x > temp.x) && (x < temp.x + temp.w)
+     && (y > temp.y) && (y < temp.y + temp.h)) {
+    sliderNum = 1;
+    return 1;
+  }
+  
+  temp = sliderTwo.getSliderRect();
+  if((x > temp.x) && (x < temp.x + temp.w)
+     && (y > temp.y) && (y < temp.y + temp.h)) {
+    sliderNum = 2;
+    return 2;
+  }
+  
+  sliderNum = -1;
+  return -1;
 }
 
 bool PlanetInfo::moveSlider(Game::State *gameState) {
-  SDL_Rect temp = slider.getBaseRect();
+  SDL_Rect temp;
+  
+  if(sliderNum == 1)
+    temp = sliderOne.getBaseRect();
+  
+  else
+    temp = sliderTwo.getBaseRect();
+  
   int x = gameState->dragLocation.x - temp.x;
   
-  if((x > 0) && (x < temp.w + 1)) {
-    slider.setSliderPosition(x);
+  if(sliderNum == 1 && (x > 0) && (x < temp.w + 1)) {
+    sliderOne.setSliderPosition(x);
     setNewPercentText();
     return true;
   }
+  
+  if(sliderNum == 2 && (x > 0) && (x < temp.w + 1)) {
+    sliderTwo.setSliderPosition(x);
+    setNewPercentText();
+    return true;
+  }
+  
   return false;
+}
+
+int PlanetInfo::getSliderPercent() {
+  if(sliderNum == 1)
+    return sliderOne.getPercent();
+  
+  if(sliderNum == 2)
+    return sliderTwo.getPercent();
+  
+  return NULL;
 }
 
 // MARK: - Helper Methods
@@ -99,23 +158,39 @@ void PlanetInfo::setBoxes(Planet p) {
   std::string fert = "Fertility: " + setStringSpaces(p.getFertility()) + std::to_string(p.getFertility());
   std::string depoPercent = setStringSpaces(p.getDepositsPercent()) + std::to_string(p.getDepositsPercent()) + "%";
   std::string fertPercent = setStringSpaces(p.getFertilityPercent()) + std::to_string(p.getFertilityPercent()) + "%";
+  std::string infPercent = setStringSpaces(p.getInfraPercent()) + std::to_string(p.getInfraPercent()) + "%";
+  std::string resPercent = setStringSpaces(p.getReservePercent()) + std::to_string(p.getReservePercent()) + "%";
   
   depositsText.setMessage(depo.c_str());
   fertilityText.setMessage(fert.c_str());
   dpText.setMessage(depoPercent.c_str());
   fpText.setMessage(fertPercent.c_str());
+  ipText.setMessage(infPercent.c_str());
+  rpText.setMessage(resPercent.c_str());
   mining.setMessage("Mining");
   farming.setMessage("Farming");
+  infrastructureText.setMessage("Infrastructure");
+  reserveText.setMessage("Reserve");
 }
 
 void PlanetInfo::setNewPercentText() {
   int p = getSliderPercent();
   
-  std::string depoPercent = setStringSpaces(100-p) + std::to_string(100-p) + "%";
-  dpText.setMessage(depoPercent.c_str());
+  if(sliderNum == 1) {
+    std::string depoPercent = setStringSpaces(100-p) + std::to_string(100-p) + "%";
+    dpText.setMessage(depoPercent.c_str());
+    
+    std::string fertPercent = setStringSpaces(p) + std::to_string(p) + "%";
+    fpText.setMessage(fertPercent.c_str());
+  }
   
-  std::string fertPercent = setStringSpaces(p) + std::to_string(p) + "%";
-  fpText.setMessage(fertPercent.c_str());
+  if(sliderNum == 2) {
+    std::string infPercent = setStringSpaces(100-p) + std::to_string(100-p) + "%";
+    ipText.setMessage(infPercent.c_str());
+    
+    std::string resPercent = setStringSpaces(p) + std::to_string(p) + "%";
+    rpText.setMessage(resPercent.c_str());
+  }
 }
 
 // Creates buffer with spaces for displayed numbers on UI so textboxes don't adjust
@@ -139,8 +214,14 @@ void PlanetInfo::setUiRects() {
   fertilityRect = {midW+10, topBuffer, 135, 35};
   miningLabel = {leftBuffer, depositsRect.y+50, 75, 30};
   depositsPercentRect = {miningLabel.x+(miningLabel.w/2)-25, miningLabel.y+40, 50, 25};
-  slideBase = {leftBuffer+miningLabel.w+15, miningLabel.y+20, 125, 15};
-  circle = {NULL, slideBase.y-6, 25, 25};
-  farmingLabel = {slideBase.x+slideBase.w+15, miningLabel.y, 75, 30};
+  slideBaseOne = {leftBuffer+miningLabel.w+15, miningLabel.y+20, 125, 15};
+  circleOne = {NULL, slideBaseOne.y-6, 25, 25};
+  farmingLabel = {slideBaseOne.x+slideBaseOne.w+15, miningLabel.y, 75, 30};
   fertilityPercentRect = {farmingLabel.x+(farmingLabel.w/2)-25, farmingLabel.y+40, 50, 25};
+  infraRect = {leftBuffer, depositsPercentRect.y+50, 75, 30};
+  ipRect = {infraRect.x+(infraRect.w/2)-25, infraRect.y+40, 50, 25};
+  slideBaseTwo = {leftBuffer+infraRect.w+15, infraRect.y+20, 125, 15};
+  reserveRect = {slideBaseTwo.x+slideBaseTwo.w+15, infraRect.y, 75, 30};
+  rpRect = {reserveRect.x+(reserveRect.w/2)-25, reserveRect.y+40, 50, 25};
+  circleTwo = {NULL, slideBaseTwo.y-6, 25, 25};
 }

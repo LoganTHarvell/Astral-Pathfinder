@@ -27,24 +27,20 @@ public:
   
   // MARK: - PlanetInfo Methods
   void setUiTextures(Planet p);
-  bool checkClick(Game::State *gameState);
+  int checkClick(Game::State *gameState);
   bool moveSlider(Game::State *gameState);
-  int getSliderPercent() { return slider.getPercent(); }
+  int getSliderPercent();
 
   
 private:
   // MARK: - PlanetInfo Fields
-  TextBox depositsText, fertilityText, dpText, fpText, mining, farming;
-  Slider slider;
-  SDL_Rect origin;
-  SDL_Rect depositsRect;
-  SDL_Rect fertilityRect;
-  SDL_Rect miningLabel;
-  SDL_Rect farmingLabel;
-  SDL_Rect depositsPercentRect;
-  SDL_Rect fertilityPercentRect;
-  SDL_Rect slideBase;
-  SDL_Rect circle;
+  TextBox depositsText, fertilityText, dpText, fpText, mining, farming,
+          infrastructureText, reserveText, ipText, rpText;
+  Slider sliderOne, sliderTwo;
+  SDL_Rect origin, depositsRect, fertilityRect, miningLabel, farmingLabel,
+           depositsPercentRect, fertilityPercentRect, slideBaseOne, circleOne,
+           slideBaseTwo, circleTwo, infraRect, reserveRect, ipRect, rpRect;
+  int sliderNum = -1;
   
   // MARK: - Helper Methods
   void setBoxes(Planet p);

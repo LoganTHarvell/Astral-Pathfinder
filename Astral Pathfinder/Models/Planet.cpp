@@ -58,7 +58,7 @@ void Planet::initPlanet() {
   // Sets planet deposits to random value
   deposits = (rand()%(depositsRange+1)) + minDeposits;
   
-  depositsPercent = fertilityPercent = 50;
+  depositsPercent = fertilityPercent = infraPercent = reservePercent = 50;
   minerals = food = 0;
   
   playerDocked = alienDocked = false;

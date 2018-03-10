@@ -43,6 +43,8 @@ public:
   Planet getSelectedPlanet();
   void setPlanetDepoPercent(int p);
   void setPlanetFertPercent(int p);
+  void setPlanetInfraPercent(int p);
+  void setPlanetReservePercent(int p);
   
 private:
   // MARK: - Helper Methods
