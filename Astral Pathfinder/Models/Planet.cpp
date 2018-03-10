@@ -71,7 +71,7 @@ void Planet::initPlanet() {
 // MARK: - Game Loop Methods
 
 void Planet::update() {
-  
+  updateStatus();
 }
 
 void Planet::render() {
@@ -105,6 +105,12 @@ void Planet::toggleDockedShip(int tag) {
 }
 
 // MARK: - Helper Methods
+
+void Planet::updateStatus() {
+  if (status == undiscovered && playerDocked) status = discovered;
+  if (status == discovered && population > 0) status = colonized;
+  if (status == colonized && population == 0) status = discovered;
+}
 
 SDL_Point Planet::uiPosition(SDL_Point p) {
   return Map::uiPosition(p);

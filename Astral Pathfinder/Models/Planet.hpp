@@ -51,7 +51,16 @@ public:
   void update();
   void render();
   
+  // Planet States
+  enum Status {
+    undiscovered,
+    discovered,
+    colonized
+  };
+  
   // MARK: - Planet Methods
+  Status getStatus() { return status; };
+  
   SDL_Point getCoordinates() { return coordinates; };
   
   int getDeposits() { return deposits; };
@@ -71,13 +80,8 @@ public:
   
 private:
   // MARK: - Planet Fields
+  Status status;
   SDL_Point coordinates;
-  
-  enum {
-    undiscovered,
-    discovered,
-    colonized
-  } status;
 
   // resources
   int population;
@@ -89,6 +93,7 @@ private:
   bool alienDocked;
   
   // MARK: - Helper Methods
+  void updateStatus();
   SDL_Point uiPosition(SDL_Point p);
 };
 
