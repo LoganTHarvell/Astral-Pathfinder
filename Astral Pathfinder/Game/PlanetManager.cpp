@@ -70,7 +70,6 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
     gameState->clickFlag = false;
   }
   
-  // TODO: Remove and implement collision logic
   handleCollisions(shipManager);
 }
 
@@ -127,6 +126,7 @@ Planet PlanetManager::initPlanet() {
 }
 
 void PlanetManager::handleClickEvent(SDL_Point p, Game::State *gs) {
+  // Checks for planet selection
   int i = 0;
   for(Planet planet : planets) {
     SDL_Rect temp = planet.getRect();
@@ -146,7 +146,6 @@ void PlanetManager::handleClickEvent(SDL_Point p, Game::State *gs) {
     
     i++;
   }
-  
 }
 
 void PlanetManager::selectPlanet(bool *planetSelected) {
