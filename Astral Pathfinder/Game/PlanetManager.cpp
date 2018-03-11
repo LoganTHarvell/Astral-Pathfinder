@@ -50,6 +50,7 @@ void PlanetManager::initGalaxy() {
   }
   
   dockedPlanetIndex = selectedPlanetIndex = -1;
+  discoveryCount = 1;
 
 };
 
@@ -57,12 +58,22 @@ void PlanetManager::initGalaxy() {
 // Mark: - Game Loop Methods
 
 void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
-  for (Planet& p : planets) p.update();
+  // Updates each planet, also refreshes count of discovered planets
+  discoveryCount = 0;
+  for (Planet& p : planets) {
+    if (p.getStatus() != Planet::undiscovered) discoveryCount++;
+    p.update();
+  }
   
+  // Checks all planets discovered endgame condition
+  if (discoveryCount == PlanetManagerParameters::numberOfPlanets)
+    gameState->endgame = Game::State::allDiscovered;
+  
+  // Deselects a previously selected planet when selection ends
   if (!gameState->planetSelected && selectedPlanetIndex >= 0) {
     deselectPlanet(&(gameState->planetSelected));
   }
-  
+
   if (gameState->clickFlag) {
     handleClickEvent(gameState->clickLocation, gameState);
     gameState->clickFlag = false;
@@ -134,7 +145,7 @@ void PlanetManager::handleClickEvent(SDL_Point p, Game::State *gs) {
       
       if (selectedPlanetIndex >= 0) deselectPlanet(&gs->planetSelected);
       
-      if (planet.getStatus() == Planet::discovered || gs->debugMode) {
+      if (planet.getStatus() != Planet::undiscovered || gs->debugMode) {
         selectedPlanetIndex = i;
         selectPlanet(&gs->planetSelected);
       }
