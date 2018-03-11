@@ -26,9 +26,9 @@ void Planet::initHomeworld() {
   
   // Sets homeword resources
   population = startPopulation;
-  deposits = (shipCost*2) + 50;
-  fertility = population/foodRqmt;
-  food = population*foodRqmt;
+  fertility = population*foodRqmt;
+  deposits = fuelCost;
+  food = (population*(fertilityPercent/100.0f))*farmingCost;
   
   // Sets homeworld status
   status = colonized;
@@ -59,7 +59,10 @@ void Planet::initPlanet() {
   // Sets planet deposits to random value
   deposits = (rand()%(depositsRange+1)) + minDeposits;
   
-  depositsPercent = fertilityPercent = infraPercent = reservePercent = 50;
+  infraPercent = reservePercent = 50;
+  fertilityPercent = startFarmingPercent;
+  depositsPercent = startMiningPercent;
+  
   minerals = food = 0;
   
   playerDocked = alienDocked = false;

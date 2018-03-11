@@ -27,13 +27,15 @@ namespace PlanetParameters {
   const int fertilityRange = (200-minFertility);
   const int minDeposits = 100;
   const int depositsRange = (600-minDeposits);
+  const int startFarmingPercent = 50;
+  const int startMiningPercent = 100 - startFarmingPercent;
   
   // Defines resource information
   const int startPopulation = 5000;
-  const int foodRqmt = 50;
-  const int farminCost = 25;
+  const float foodRqmt = 0.02;
+  const float farmingCost = 0.04;
   const int miningCost = 30;
-  const int shipCost = 100;
+  const int fuelCost = 250;
   const float infrastructureCost = 0.05;
 }
 
