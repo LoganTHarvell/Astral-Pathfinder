@@ -104,33 +104,33 @@ Planet PlanetManager::getSelectedPlanet() {
 }
 
 Planet PlanetManager::getCurrentPlanet() {
-  return planets[currentPlanetIndex];
+  return planets[dockedPlanetIndex];
 }
 
 void PlanetManager::setPlanetDepoPercent(int p, int flag) {
   if(flag == 1)
-    planets[currentPlanetIndex].setDepositsPercent(p);
+    planets[dockedPlanetIndex].setDepositsPercent(p);
   if(flag == 2)
     planets[selectedPlanetIndex].setDepositsPercent(p);
 }
 
 void PlanetManager::setPlanetFertPercent(int p, int flag) {
   if(flag == 1)
-    planets[currentPlanetIndex].setFertilityPercent(p);
+    planets[dockedPlanetIndex].setFertilityPercent(p);
   if(flag == 2)
     planets[selectedPlanetIndex].setFertilityPercent(p);
 }
 
 void PlanetManager::setPlanetInfraPercent(int p, int flag) {
   if(flag == 1)
-    planets.at(currentPlanetIndex).setInfraPercent(p);
+    planets.at(dockedPlanetIndex).setInfraPercent(p);
   if(flag == 2)
     planets.at(selectedPlanetIndex).setInfraPercent(p);
 }
 
 void PlanetManager::setPlanetReservePercent(int p, int flag) {
   if(flag == 1)
-    planets.at(currentPlanetIndex).setReservePercent(p);
+    planets.at(dockedPlanetIndex).setReservePercent(p);
   if(flag == 2)
     planets.at(selectedPlanetIndex).setReservePercent(p);
 }
@@ -220,17 +220,11 @@ void PlanetManager::handleCollisions(ShipManager *sm) {
 }
 
 bool PlanetManager::checkDocked(Game::State *gameState) {
-  int i = 0;
-  for (Planet p : planets) {
-    if (p.playerIsDocked()) {
-      currentPlanetIndex = i;
-      gameState->planetCollided = true;
-      return true;
-    }
-    i++;
+  if (dockedPlanetIndex >= 0) {
+    gameState->planetCollided = true;
+    return true;
   }
   
-  currentPlanetIndex = -1;
   gameState->planetCollided = false;
   return false;
 }

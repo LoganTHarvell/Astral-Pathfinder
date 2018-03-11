@@ -65,7 +65,6 @@ private:
   
   int dockedPlanetIndex;
   int selectedPlanetIndex;
-  int currentPlanetIndex;
   int discoveryCount;
 
 };
