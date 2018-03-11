@@ -18,9 +18,7 @@
 void PlanetInfo::init(SDL_Rect src) {
   origin = src;
   setUiRects();
-  
-  depositsText.init(depositsRect);
-  fertilityText.init(fertilityRect);
+
   dpText.init(depositsPercentRect);
   fpText.init(fertilityPercentRect);
   mining.init(miningLabel);
@@ -33,16 +31,14 @@ void PlanetInfo::init(SDL_Rect src) {
   sliderTwo.init(slideBaseTwo, circleTwo);
   locationText.init(locationRect);
   popText.init(popRect);
-  mineralText.init(mineralRect);
-  foodText.init(foodRect);
+  miningText.init(miningRect);
+  farmingText.init(farmingRect);
 }
 
 
 // MARK: - Game Loop Methods
 
 void PlanetInfo::render() {
-  depositsText.render();
-  fertilityText.render();
   dpText.render();
   fpText.render();
   mining.render();
@@ -55,13 +51,11 @@ void PlanetInfo::render() {
   sliderTwo.render();
   locationText.render();
   popText.render();
-  mineralText.render();
-  foodText.render();
+  miningText.render();
+  farmingText.render();
 }
 
 void PlanetInfo::clean() {
-  depositsText.clean();
-  fertilityText.clean();
   dpText.clean();
   fpText.clean();
   mining.clean();
@@ -74,8 +68,8 @@ void PlanetInfo::clean() {
   sliderTwo.clean();
   locationText.clean();
   popText.clean();
-  mineralText.clean();
-  foodText.clean();
+  miningText.clean();
+  farmingText.clean();
 }
 
 
@@ -166,24 +160,23 @@ int PlanetInfo::getSliderPercent() {
 // MARK: - Helper Methods
 
 void PlanetInfo::setBoxes(Planet p) {
-  std::string depo = "Deposits: " + setStringSpaces(p.getDeposits()) + std::to_string(p.getDeposits());
-  std::string fert = "Fertility: " + setStringSpaces(p.getFertility()) + std::to_string(p.getFertility());
+  std::string depo = std::to_string(p.getDeposits());
   std::string location = "Location: " + setStringSpaces(p.getLocation().x) + std::to_string(p.getLocation().x)
-                                      + setStringSpaces(p.getLocation().y) + std::to_string(p.getLocation().y);
+                                      + "," + std::to_string(p.getLocation().y);
   std::string population = "Population: " + setStringSpaces(p.getPopulation()) + std::to_string(p.getPopulation());
-  std::string food = "Food: " + setStringSpaces(p.getFood()) + std::to_string(p.getFood());
-  std::string mineral = "Minerals: " + setStringSpaces(p.getMinerals()) + std::to_string(p.getMinerals());
+  std::string food = "Farming: " + setStringSpaces(p.getFood()) + std::to_string(p.getFood()) + "/"
+                      + std::to_string(p.getFertility());
+  std::string minerals = "Mining: " + setStringSpaces(p.getMinerals()) + std::to_string(p.getMinerals()) + "/"
+                          + std::to_string(p.getDeposits());
   std::string depoPercent = setStringSpaces(p.getDepositsPercent()) + std::to_string(p.getDepositsPercent()) + "%";
   std::string fertPercent = setStringSpaces(p.getFertilityPercent()) + std::to_string(p.getFertilityPercent()) + "%";
   std::string infPercent = setStringSpaces(p.getInfraPercent()) + std::to_string(p.getInfraPercent()) + "%";
   std::string resPercent = setStringSpaces(p.getReservePercent()) + std::to_string(p.getReservePercent()) + "%";
   
-  depositsText.setMessage(depo.c_str());
-  fertilityText.setMessage(fert.c_str());
   locationText.setMessage(location.c_str());
   popText.setMessage(population.c_str());
-  mineralText.setMessage(mineral.c_str());
-  foodText.setMessage(food.c_str());
+  miningText.setMessage(minerals.c_str());
+  farmingText.setMessage(food.c_str());
   dpText.setMessage(depoPercent.c_str());
   fpText.setMessage(fertPercent.c_str());
   ipText.setMessage(infPercent.c_str());
@@ -233,11 +226,9 @@ void PlanetInfo::setUiRects() {
   
   locationRect = {leftBuffer, topBuffer, 135, 35};
   popRect = {midW+10, topBuffer, 135, 35};
-  mineralRect = {leftBuffer, locationRect.y+50, 135, 35};
-  foodRect = {midW+10, popRect.y+50, 135, 35};
-  depositsRect = {leftBuffer, mineralRect.y+50, 135, 35};
-  fertilityRect = {midW+10, foodRect.y+50, 135, 35};
-  miningLabel = {leftBuffer, depositsRect.y+50, 75, 30};
+  miningRect = {leftBuffer, locationRect.y+50, 135, 35};
+  farmingRect = {midW+10, popRect.y+50, 135, 35};
+  miningLabel = {leftBuffer, miningRect.y+50, 75, 30};
   depositsPercentRect = {miningLabel.x+(miningLabel.w/2)-25, miningLabel.y+40, 50, 25};
   slideBaseOne = {leftBuffer+miningLabel.w+15, miningLabel.y+20, 125, 15};
   circleOne = {NULL, slideBaseOne.y-6, 25, 25};
