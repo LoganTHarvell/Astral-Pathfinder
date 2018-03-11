@@ -25,7 +25,7 @@ void Ship::init(SDL_Point startPosition, ShipParameters::ShipType type) {
   using namespace ShipParameters;
   
   tag = type;
-  population = 1000;
+  population = shipPopulation;
   fuel = 0;
 
   velocity.x = 0;

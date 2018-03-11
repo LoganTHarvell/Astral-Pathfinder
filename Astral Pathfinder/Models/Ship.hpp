@@ -32,7 +32,8 @@ namespace ShipParameters {
     int w = 48, h = 24;
   } shipSize;
   
-  const int population = 10000;
+  const int shipPopulation = 1000;
+  
   // TODO: figure out real velocity/ticks formula
   const int speed = 1;
   const int turnSpeed = 5;

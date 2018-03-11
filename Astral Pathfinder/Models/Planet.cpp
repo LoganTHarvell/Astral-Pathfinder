@@ -28,7 +28,7 @@ void Planet::initHomeworld() {
   population = startPopulation;
   fertility = population*foodRqmt;
   deposits = fuelCost;
-  food = (population*(fertilityPercent/100.0))*farmingCost;
+  food = (population*(fertilityPercent/100.0f))*farmingCost;
   
   // Sets homeworld status
   status = colonized;
