@@ -30,22 +30,20 @@ void PlanetManager::initGalaxy() {
   bool hasPlanet[numberOfPlanets][numberOfPlanets] = { false };
   
   // Initializes first element in planets array as homeworld
-  auto i = planets.begin();
-  planets.emplace(i, initHomeworld());
+  planets.insert(planets.begin(), initHomeworld());
   
   // Marks planet coordinates as occupied
-  SDL_Point coordinates = i->getCoordinates();
+  SDL_Point coordinates = planets.front().getCoordinates();
   hasPlanet[coordinates.x][coordinates.y] = true;
 
   // Initializes galaxy with number of planets
   while (planets.size() < numberOfPlanets) {
     // Prevents duplicate coordinates
-    auto tmp = i;
+    auto i = planets.end();
     do {
-      tmp = planets.emplace(i, initPlanet());
+      i = planets.insert(i, initPlanet());
       coordinates = i->getCoordinates();
     } while (hasPlanet[coordinates.x][coordinates.y]);
-    i = tmp;
 
     // Marks planet coordinates as occupied
     hasPlanet[coordinates.x][coordinates.y] = true;
@@ -87,19 +85,19 @@ void PlanetManager::render(Game::State *gameState) {
 // MARK: - PlanetManager Methods
 
 Planet PlanetManager::getPlanet(int n) {
-  return planets.at(n);
+  return planets[n];
 }
 
 Planet PlanetManager::getSelectedPlanet() {
-  return planets.at(selectedPlanetIndex);
+  return planets[selectedPlanetIndex];
 }
 
 void PlanetManager::setPlanetDepoPercent(int p) {
-  planets.at(selectedPlanetIndex).setDepositsPercent(p);
+  planets[selectedPlanetIndex].setDepositsPercent(p);
 }
 
 void PlanetManager::setPlanetFertPercent(int p) {
-  planets.at(selectedPlanetIndex).setFertilityPercent(p);
+  planets[selectedPlanetIndex].setFertilityPercent(p);
 }
 
 
@@ -168,11 +166,11 @@ void PlanetManager::handleCollisions(ShipManager *sm) {
   if (dockedPlanetIndex < 0) {
     for (int i = 0; i < planets.size(); i++) {
       if (planets[i].getCollider().collisionOBB(playerVertices, playerAngle)) {
-        planets.at(i).toggleDockedShip(player.getTag());
+        planets[i].toggleDockedShip(player.getTag());
         dockedPlanetIndex = i;
         std::cout << "Collision at: "
-                  << planets.at(i).getCoordinates().x << ","
-                  << planets.at(i).getCoordinates().y << std::endl;
+                  << planets[i].getCoordinates().x << ","
+                  << planets[i].getCoordinates().y << std::endl;
       }
     }
   }
@@ -180,7 +178,7 @@ void PlanetManager::handleCollisions(ShipManager *sm) {
   else {
     ColliderComponent collider = planets[dockedPlanetIndex].getCollider();
     if (!collider.collisionOBB(playerVertices, playerAngle)) {
-      planets.at(dockedPlanetIndex).toggleDockedShip(player.getTag());
+      planets[dockedPlanetIndex].toggleDockedShip(player.getTag());
       dockedPlanetIndex = -1;
     }
   }

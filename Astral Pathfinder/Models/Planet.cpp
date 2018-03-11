@@ -32,6 +32,7 @@ void Planet::initHomeworld() {
   
   // Sets homeworld status
   status = colonized;
+  SDL_SetTextureAlphaMod(texture, 255);
 }
 
 void Planet::initPlanet() {
