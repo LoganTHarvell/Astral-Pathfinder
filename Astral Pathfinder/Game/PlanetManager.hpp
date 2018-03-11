@@ -41,10 +41,12 @@ public:
   // MARK: - PlanetManager Methods
   Planet getPlanet(int n);
   Planet getSelectedPlanet();
-  void setPlanetDepoPercent(int p);
-  void setPlanetFertPercent(int p);
-  void setPlanetInfraPercent(int p);
-  void setPlanetReservePercent(int p);
+  Planet getCurrentPlanet();
+  void setPlanetDepoPercent(int p, int flag);
+  void setPlanetFertPercent(int p, int flag);
+  void setPlanetInfraPercent(int p, int flag);
+  void setPlanetReservePercent(int p, int flag);
+  bool checkDocked(Game::State *gameState);
   
 private:
   // MARK: - Helper Methods
@@ -63,6 +65,7 @@ private:
   
   int dockedPlanetIndex;
   int selectedPlanetIndex;
+  int currentPlanetIndex;
   int discoveryCount;
 
 };

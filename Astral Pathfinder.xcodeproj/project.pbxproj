@@ -24,6 +24,7 @@
 		9138E32320433371009C3D6D /* PlanetInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9138E32120433371009C3D6D /* PlanetInfo.cpp */; };
 		917590AB204B95A200783AA6 /* Slider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 917590A9204B95A200783AA6 /* Slider.cpp */; };
 		9175F95320421E6A008D9828 /* TextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9175F95120421E6A008D9828 /* TextBox.cpp */; };
+		91B54CA42055C2CD009838B5 /* ShipInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91B54CA22055C2CD009838B5 /* ShipInfo.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -79,6 +80,8 @@
 		9175F94F20421777008D9828 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
 		9175F95120421E6A008D9828 /* TextBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextBox.cpp; sourceTree = "<group>"; };
 		9175F954204227A8008D9828 /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arial.ttf; sourceTree = "<group>"; };
+		91B54CA22055C2CD009838B5 /* ShipInfo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShipInfo.cpp; sourceTree = "<group>"; };
+		91B54CA32055C2CD009838B5 /* ShipInfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShipInfo.hpp; sourceTree = "<group>"; };
 		91EC30BD20425BE20068D2F4 /* TextBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextBox.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +142,8 @@
 				02DFDC51200DD16000A136AF /* TextureManager.hpp */,
 				917590A9204B95A200783AA6 /* Slider.cpp */,
 				917590AA204B95A200783AA6 /* Slider.hpp */,
+				91B54CA22055C2CD009838B5 /* ShipInfo.cpp */,
+				91B54CA32055C2CD009838B5 /* ShipInfo.hpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -272,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91B54CA42055C2CD009838B5 /* ShipInfo.cpp in Sources */,
 				0210E9E1201F011B00F5E497 /* Map.cpp in Sources */,
 				020CF625200DCEE10095E611 /* main.cpp in Sources */,
 				02DFDC5A200DD16000A136AF /* Game.cpp in Sources */,
@@ -400,7 +406,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WUP28GH2WB;
+				DEVELOPMENT_TEAM = MXYX4524CL;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
@@ -417,7 +423,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WUP28GH2WB;
+				DEVELOPMENT_TEAM = MXYX4524CL;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",

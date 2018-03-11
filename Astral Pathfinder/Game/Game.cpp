@@ -113,7 +113,7 @@ void Game::handleEvents() {
         gameState.clickLocation = { event.button.x, event.button.y };
         break;
       case SDL_MOUSEMOTION:
-        if(gameState.planetSelected)
+        if(gameState.planetSelected || gameState.planetCollided)
           gameState.dragLocation = { event.motion.x, event.motion.y };
         break;
       case SDL_MOUSEBUTTONUP:

@@ -57,6 +57,7 @@ public:
     
     bool clickFlag = false;
     bool planetSelected = false;
+    bool planetCollided = false;
     bool mouseDown = false;
     bool debugMode = false;
     

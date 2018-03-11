@@ -39,11 +39,14 @@ private:
   // MainMenu mainMenu;
   PlanetInfo selectedPlanetInfo, currentPlanetInfo;
   ShipInfo shipInfo;
+  int window = -1;
   // EndScreen endScreen;
   
   // MARK: - Helper Methods
   void setSelectedPlanet(Planet p);
+  void setCurrentPlanet(Planet p);
   void handleMouseDown(Game::State *gs, PlanetManager *pm);
+  int checkClickedArea(SDL_Point p);
 
 };
 
