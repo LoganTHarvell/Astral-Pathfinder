@@ -22,13 +22,29 @@ void UIManager::init() {
 // MARK: - Game Loop Methods
 
 void UIManager::update(Game::State *gameState, PlanetManager *planetManager) {
+  
+  // TODO: Implement main menu and endscreen
+  if (gameState->mainMenu) {
+    // mainMenu.update(gameState);
+    return;
+  }
+  else if (gameState->endgame != Game::State::none) {
+    // endScreen.update(gameState);
+    gameState->isRunning = false;
+    return;
+  }
+  
+  // TODO: Add logic to skip cleaning planet info when already clean
   if (gameState->planetSelected)
     setSelectedPlanet(planetManager->getSelectedPlanet());
   else planetInfo.clean();
   
+  
+  // TODO: Move mousedown logic to handleMouseDown() helper method
+  // handleMouseDown(gameState, planetManager);
+  
   // If mouse button not pressed down, don't check for slider movement
-  if(!gameState->mouseDown)
-    return;
+  if(!gameState->mouseDown) return;
   
   // If down, but not dragging, check if slider was clicked
   if(gameState->mouseDown && !gameState->sliderOneDrag && !gameState->sliderTwoDrag) {
@@ -62,6 +78,15 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager) {
 }
 
 void UIManager::render(Game::State *gameState) {
+  if (gameState->mainMenu) {
+    // mainMenu.render();
+    return;
+  }
+  else if (gameState->endgame != Game::State::none) {
+    // endScreen.render();
+    return;
+  }
+  
   if (gameState->planetSelected) planetInfo.render();
 }
 

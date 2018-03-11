@@ -32,6 +32,7 @@ void Planet::initHomeworld() {
   
   // Sets homeworld status
   status = colonized;
+  SDL_SetTextureAlphaMod(texture, 255);
 }
 
 void Planet::initPlanet() {
@@ -65,6 +66,7 @@ void Planet::initPlanet() {
   
   // Sets planet status
   status = undiscovered;
+  SDL_SetTextureAlphaMod(texture, 127);
 }
 
 
@@ -107,9 +109,12 @@ void Planet::toggleDockedShip(int tag) {
 // MARK: - Helper Methods
 
 void Planet::updateStatus() {
-  if (status == undiscovered && playerDocked) status = discovered;
-  if (status == discovered && population > 0) status = colonized;
-  if (status == colonized && population == 0) status = discovered;
+  if (status == undiscovered && playerDocked) {
+    status = discovered;
+    SDL_SetTextureAlphaMod(texture, 255);
+  }
+  else if (status == discovered && population > 0) status = colonized;
+  else if (status == colonized && population == 0) status = discovered;
 }
 
 SDL_Point Planet::uiPosition(SDL_Point p) {

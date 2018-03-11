@@ -45,6 +45,12 @@ public:
   struct State {
     // Flags
     bool isRunning = false;
+    bool mainMenu = false;
+    
+    enum {
+      none, allDiscovered, fuel
+    } endgame = none;
+    
     bool clickFlag = false;
     bool planetSelected = false;
     bool mouseDown = false;
@@ -78,6 +84,8 @@ private:
   State gameState;
 
   SDL_Texture *gameScreen;
+  SDL_Rect screenRect;
+
   PlanetManager *planetManager;
   ShipManager *shipManager;
   UIManager *uiManager;

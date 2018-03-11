@@ -62,23 +62,24 @@ void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
     
     gameState.isRunning = true;
     
-  } else {
-    gameState.isRunning = false;
+    // Object Initialization
+    gameScreen = TextureManager::loadTexture("Resources/Assets/gameScreen.png");
+    screenRect = { 0, 0, windowRect.w, windowRect.h };
+    
+    planetManager = new PlanetManager;
+    planetManager->initGalaxy();
+    
+    shipManager = new ShipManager;
+    shipManager->init(planetManager->getPlanet(0).getCenter());
+    
+    uiManager = new UIManager;
+    uiManager->init();
+    
+  }
+  else {
     std::cerr << "SDL and/or SDL_image initialization failed, errors: "
               << SDL_GetError() << ", " << IMG_GetError() << std::endl;
   }
-
-  // Object Initialization
-  gameScreen = TextureManager::loadTexture("Resources/Assets/gameScreen.png");
-  
-  planetManager = new PlanetManager;
-  planetManager->initGalaxy();
-
-  shipManager = new ShipManager;
-  shipManager->init(planetManager->getPlanet(0).getCenter());
-  
-  uiManager = new UIManager;
-  uiManager->init();
 }
 
 
@@ -130,8 +131,11 @@ void Game::handleEvents() {
 }
 
 void Game::update(Uint32 ticks) {
-  planetManager->update(&gameState, shipManager);
-  shipManager->update(ticks);
+  if (!gameState.mainMenu || gameState.endgame == State::none) {
+    planetManager->update(&gameState, shipManager);
+    shipManager->update(ticks);
+  }
+  
   uiManager->update(&gameState, planetManager);
 }
 
@@ -140,12 +144,13 @@ void Game::render() {
 
   SDL_RenderClear(renderer);
   
-  SDL_Rect screenRect = { 0, 0, windowRect.w, windowRect.h };
-  SDL_RenderCopy(renderer, gameScreen, NULL, &screenRect);
-
   // Render stuff
-  planetManager->render(&gameState);
-  shipManager->render(&gameState);
+  if (!gameState.mainMenu || gameState.endgame == State::none) {
+    SDL_RenderCopy(renderer, gameScreen, NULL, &screenRect);
+    planetManager->render(&gameState);
+    shipManager->render(&gameState);
+  }
+  
   uiManager->render(&gameState);
 
   SDL_RenderPresent(renderer);
