@@ -44,42 +44,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     setSelectedPlanet(planetManager->getSelectedPlanet());
   else {selectedPlanetInfo.clean(); currentPlanetInfo.clean();}
   
-  
-  // TODO: Move mousedown logic to handleMouseDown() helper method
-  // handleMouseDown(gameState, planetManager);
-  
-  // If mouse button not pressed down, don't check for slider movement
-  if(!gameState->mouseDown) return;
-  
-  // If down, but not dragging, check if slider was clicked
-  if(gameState->mouseDown && !gameState->sliderOneDrag && !gameState->sliderTwoDrag) {
-    if(selectedPlanetInfo.checkClick(gameState) == 1)
-      gameState->sliderOneDrag = true;
-    
-    if(selectedPlanetInfo.checkClick(gameState) == 2)
-      gameState->sliderTwoDrag = true;
-  }
-  
-  // If so, check mouse movement and adjust slider appropriately
-  if(gameState->sliderOneDrag) {
-    bool movement = selectedPlanetInfo.moveSlider(gameState);
-    int percent = selectedPlanetInfo.getSliderPercent();
-    
-    if(movement) {
-      planetManager->setPlanetDepoPercent(100-percent);
-      planetManager->setPlanetFertPercent(percent);
-    }
-  }
-  
-  if(gameState->sliderTwoDrag) {
-    bool movement = selectedPlanetInfo.moveSlider(gameState);
-    int percent = selectedPlanetInfo.getSliderPercent();
-    
-    if(movement) {
-      planetManager->setPlanetInfraPercent(100-percent);
-      planetManager->setPlanetReservePercent(percent);
-    }
-  }
+  handleMouseDown(gameState, planetManager);
 }
 
 void UIManager::render(Game::State *gameState) {
@@ -103,3 +68,37 @@ void UIManager::setSelectedPlanet(Planet p) {
   currentPlanetInfo.setUiTextures(p);
 }
 
+void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
+  // If mouse button not pressed down, don't check for slider movement
+  if(!gs->mouseDown) return;
+  
+  // If down, but not dragging, check if slider was clicked
+  if(gs->mouseDown && gs->activeSlider == gs->State::inactive) {
+    if(selectedPlanetInfo.checkClick(gs->clickLocation) == 1)
+      gs->activeSlider = gs->State::selectOne;
+    
+    if(selectedPlanetInfo.checkClick(gs->clickLocation) == 2)
+      gs->activeSlider = gs->State::selectTwo;
+  }
+  
+  // If so, check mouse movement and adjust slider appropriately
+  if(gs->activeSlider == gs->State::selectOne) {
+    bool movement = selectedPlanetInfo.moveSlider(gs);
+    int percent = selectedPlanetInfo.getSliderPercent();
+    
+    if(movement) {
+      pm->setPlanetDepoPercent(100-percent);
+      pm->setPlanetFertPercent(percent);
+    }
+  }
+  
+  if(gs->activeSlider == gs->State::selectTwo) {
+    bool movement = selectedPlanetInfo.moveSlider(gs);
+    int percent = selectedPlanetInfo.getSliderPercent();
+    
+    if(movement) {
+      pm->setPlanetInfraPercent(100-percent);
+      pm->setPlanetReservePercent(percent);
+    }
+  }
+}

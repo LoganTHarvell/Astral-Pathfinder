@@ -27,7 +27,7 @@ public:
   
   // MARK: - PlanetInfo Methods
   void setUiTextures(Planet p);
-  int checkClick(Game::State *gameState);
+  int checkClick(SDL_Point click);
   bool moveSlider(Game::State *gameState);
   int getSliderPercent();
 

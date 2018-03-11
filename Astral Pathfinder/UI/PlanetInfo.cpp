@@ -98,21 +98,19 @@ void PlanetInfo::setUiTextures(Planet p) {
   
 }
 
-int PlanetInfo::checkClick(Game::State *gameState) {
-  int x = gameState->clickLocation.x;
-  int y = gameState->clickLocation.y;
+int PlanetInfo::checkClick(SDL_Point click) {
   SDL_Rect temp;
   
   temp = sliderOne.getSliderRect();
-  if((x > temp.x) && (x < temp.x + temp.w)
-     && (y > temp.y) && (y < temp.y + temp.h)) {
+  if((click.x > temp.x) && (click.x < temp.x + temp.w)
+     && (click.y > temp.y) && (click.y < temp.y + temp.h)) {
     sliderNum = 1;
     return 1;
   }
   
   temp = sliderTwo.getSliderRect();
-  if((x > temp.x) && (x < temp.x + temp.w)
-     && (y > temp.y) && (y < temp.y + temp.h)) {
+  if((click.x > temp.x) && (click.x < temp.x + temp.w)
+     && (click.y > temp.y) && (click.y < temp.y + temp.h)) {
     sliderNum = 2;
     return 2;
   }

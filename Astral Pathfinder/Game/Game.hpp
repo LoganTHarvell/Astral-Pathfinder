@@ -51,12 +51,13 @@ public:
       none, allDiscovered, fuel
     } endgame = none;
     
+    enum {
+      inactive, currentOne, currentTwo, selectOne, selectTwo
+    } activeSlider = inactive;
+    
     bool clickFlag = false;
     bool planetSelected = false;
     bool mouseDown = false;
-    bool sliderOneDrag = false;
-    bool sliderTwoDrag = false;
-    
     bool debugMode = false;
     
     // Fields

@@ -120,8 +120,7 @@ void Game::handleEvents() {
         gameState.clickFlag = true;
         gameState.clickLocation = { event.button.x, event.button.y };
         gameState.mouseDown = false;
-        gameState.sliderOneDrag = false;
-        gameState.sliderTwoDrag = false;
+        gameState.activeSlider = State::inactive;
         break;
       default:
         break;

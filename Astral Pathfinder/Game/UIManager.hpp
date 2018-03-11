@@ -43,6 +43,7 @@ private:
   
   // MARK: - Helper Methods
   void setSelectedPlanet(Planet p);
+  void handleMouseDown(Game::State *gs, PlanetManager *pm);
 
 };
 
