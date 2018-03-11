@@ -136,7 +136,7 @@ void Game::update(Uint32 ticks) {
     shipManager->update(ticks);
   }
   
-  uiManager->update(&gameState, planetManager);
+  uiManager->update(&gameState, planetManager, shipManager);
 }
 
 void Game::render() {

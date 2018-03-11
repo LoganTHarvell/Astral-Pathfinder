@@ -16,12 +16,14 @@
 
 void UIManager::init() {
   using namespace UiParamters;
-  planetInfo.init(selectedPlanetOrigin);
+  selectedPlanetInfo.init(selectedPlanetOrigin);
+  currentPlanetInfo.init(currentPlanetOrigin);
+  shipInfo.init(shipInfoOrigin);
 }
 
 // MARK: - Game Loop Methods
 
-void UIManager::update(Game::State *gameState, PlanetManager *planetManager) {
+void UIManager::update(Game::State *gameState, PlanetManager *planetManager, ShipManager *shipManager) {
   
   // TODO: Implement main menu and endscreen
   if (gameState->mainMenu) {
@@ -34,10 +36,13 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager) {
     return;
   }
   
+  shipInfo.clean();
+  shipInfo.setText(shipManager->getPlayerShip());
+  
   // TODO: Add logic to skip cleaning planet info when already clean
   if (gameState->planetSelected)
     setSelectedPlanet(planetManager->getSelectedPlanet());
-  else planetInfo.clean();
+  else {selectedPlanetInfo.clean(); currentPlanetInfo.clean();}
   
   
   // TODO: Move mousedown logic to handleMouseDown() helper method
@@ -48,17 +53,17 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager) {
   
   // If down, but not dragging, check if slider was clicked
   if(gameState->mouseDown && !gameState->sliderOneDrag && !gameState->sliderTwoDrag) {
-    if(planetInfo.checkClick(gameState) == 1)
+    if(selectedPlanetInfo.checkClick(gameState) == 1)
       gameState->sliderOneDrag = true;
     
-    if(planetInfo.checkClick(gameState) == 2)
+    if(selectedPlanetInfo.checkClick(gameState) == 2)
       gameState->sliderTwoDrag = true;
   }
   
   // If so, check mouse movement and adjust slider appropriately
   if(gameState->sliderOneDrag) {
-    bool movement = planetInfo.moveSlider(gameState);
-    int percent = planetInfo.getSliderPercent();
+    bool movement = selectedPlanetInfo.moveSlider(gameState);
+    int percent = selectedPlanetInfo.getSliderPercent();
     
     if(movement) {
       planetManager->setPlanetDepoPercent(100-percent);
@@ -67,8 +72,8 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager) {
   }
   
   if(gameState->sliderTwoDrag) {
-    bool movement = planetInfo.moveSlider(gameState);
-    int percent = planetInfo.getSliderPercent();
+    bool movement = selectedPlanetInfo.moveSlider(gameState);
+    int percent = selectedPlanetInfo.getSliderPercent();
     
     if(movement) {
       planetManager->setPlanetInfraPercent(100-percent);
@@ -87,12 +92,14 @@ void UIManager::render(Game::State *gameState) {
     return;
   }
   
-  if (gameState->planetSelected) planetInfo.render();
+  shipInfo.render();
+  if (gameState->planetSelected) {selectedPlanetInfo.render(); currentPlanetInfo.render();}
 }
 
 // MARK: - UIManager Methods
 
 void UIManager::setSelectedPlanet(Planet p) {
-  planetInfo.setUiTextures(p);
+  selectedPlanetInfo.setUiTextures(p);
+  currentPlanetInfo.setUiTextures(p);
 }
 
