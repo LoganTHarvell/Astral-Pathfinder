@@ -40,6 +40,7 @@ private:
   PlanetInfo selectedPlanetInfo, currentPlanetInfo;
   ShipInfo shipInfo;
   int window = -1;
+  bool oneClean = true, twoClean = true;
   // EndScreen endScreen;
   
   // MARK: - Helper Methods

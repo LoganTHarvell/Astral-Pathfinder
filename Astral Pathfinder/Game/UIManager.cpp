@@ -35,17 +35,26 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     return;
   }
   
-  // TODO: Add logic to skip cleaning planet info when already clean
   shipInfo.clean();
   shipInfo.setText(shipManager->getPlayerShip());
   
-  if (gameState->planetSelected)
+  if (gameState->planetSelected) {
     setSelectedPlanet(planetManager->getSelectedPlanet());
-  else selectedPlanetInfo.clean();
+    twoClean = false;
+  }
+  else if(!twoClean) {
+    selectedPlanetInfo.clean();
+    twoClean = true;
+  }
   
-  if(planetManager->checkDocked(gameState))
+  if(planetManager->checkDocked(gameState)) {
     setCurrentPlanet(planetManager->getCurrentPlanet());
-  else currentPlanetInfo.clean();
+    oneClean = false;
+  }
+  else if(!oneClean) {
+    currentPlanetInfo.clean();
+    oneClean = true;
+  }
   
   handleMouseDown(gameState, planetManager);
 }
@@ -82,6 +91,7 @@ void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
   if(gs->mouseDown)
     window = checkClickedArea(gs->clickLocation);
   
+  // Current Planet Window
   if(window == 1) {
     // If down, but not dragging, check if slider was clicked
     if(gs->mouseDown && gs->activeSlider == gs->State::inactive) {
@@ -114,6 +124,7 @@ void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
     }
   }
   
+  // Selected Planet Window
   if(window == 2) {
     // If down, but not dragging, check if slider was clicked
     if(gs->mouseDown && gs->activeSlider == gs->State::inactive) {
