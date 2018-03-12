@@ -50,7 +50,7 @@ private:
   static Planet initHomeworld();
   static Planet initPlanet();
   
-  void handleClickEvent(SDL_Point p, bool *planetSelected);
+  void handleClickEvent(SDL_Point p, Game::State *gs);
   void selectPlanet(bool *planetSelected);
   void deselectPlanet(bool *planetSelected);
   
@@ -61,6 +61,7 @@ private:
   
   int dockedPlanetIndex;
   int selectedPlanetIndex;
+  int discoveryCount;
 
 };
 

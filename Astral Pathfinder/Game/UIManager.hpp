@@ -26,7 +26,10 @@ public:
   
 private:
   // MARK: - UIManager Fields
+  // TODO: Implement main menu and endscreen
+  // MainMenu mainMenu;
   PlanetInfo planetInfo;
+  // EndScreen endScreen;
   
   // MARK: - Helper Methods
   void setSelectedPlanet(Planet p);

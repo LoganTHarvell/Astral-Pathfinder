@@ -27,13 +27,15 @@ namespace PlanetParameters {
   const int fertilityRange = (200-minFertility);
   const int minDeposits = 100;
   const int depositsRange = (600-minDeposits);
+  const int startFarmingPercent = 50;
+  const int startMiningPercent = 100 - startFarmingPercent;
   
   // Defines resource information
   const int startPopulation = 5000;
-  const int foodRqmt = 50;
-  const int farminCost = 25;
+  const float foodRqmt = 0.02;
+  const float farmingCost = 0.04;
   const int miningCost = 30;
-  const int shipCost = 100;
+  const int fuelCost = 250;
   const float infrastructureCost = 0.05;
 }
 
@@ -51,7 +53,16 @@ public:
   void update();
   void render();
   
+  // Planet States
+  enum Status {
+    undiscovered,
+    discovered,
+    colonized
+  };
+  
   // MARK: - Planet Methods
+  Status getStatus() { return status; };
+  
   SDL_Point getCoordinates() { return coordinates; };
   
   int getDeposits() { return deposits; };
@@ -71,24 +82,20 @@ public:
   
 private:
   // MARK: - Planet Fields
+  Status status;
   SDL_Point coordinates;
-  
-  enum {
-    undiscovered,
-    discovered,
-    colonized
-  } status;
 
   // resources
   int population;
-  int deposits, fertility;
-  int depositsPercent, fertilityPercent;
+  int fertility, deposits;
+  int fertilityPercent, depositsPercent;
   int minerals, food;
   
   bool playerDocked;
   bool alienDocked;
   
   // MARK: - Helper Methods
+  void updateStatus();
   SDL_Point uiPosition(SDL_Point p);
 };
 

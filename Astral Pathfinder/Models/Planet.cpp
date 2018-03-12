@@ -26,12 +26,13 @@ void Planet::initHomeworld() {
   
   // Sets homeword resources
   population = startPopulation;
-  deposits = (shipCost*2) + 50;
-  fertility = population/foodRqmt;
-  food = population*foodRqmt;
+  fertility = population*foodRqmt;
+  deposits = fuelCost;
+  food = (population*(fertilityPercent/100.0f))*farmingCost;
   
   // Sets homeworld status
   status = colonized;
+  SDL_SetTextureAlphaMod(texture, 255);
 }
 
 void Planet::initPlanet() {
@@ -58,20 +59,23 @@ void Planet::initPlanet() {
   // Sets planet deposits to random value
   deposits = (rand()%(depositsRange+1)) + minDeposits;
   
-  depositsPercent = fertilityPercent = 50;
+  fertilityPercent = startFarmingPercent;
+  depositsPercent = startMiningPercent;
+  
   minerals = food = 0;
   
   playerDocked = alienDocked = false;
   
   // Sets planet status
   status = undiscovered;
+  SDL_SetTextureAlphaMod(texture, 127);
 }
 
 
 // MARK: - Game Loop Methods
 
 void Planet::update() {
-  
+  updateStatus();
 }
 
 void Planet::render() {
@@ -105,6 +109,15 @@ void Planet::toggleDockedShip(int tag) {
 }
 
 // MARK: - Helper Methods
+
+void Planet::updateStatus() {
+  if (status == undiscovered && playerDocked) {
+    status = discovered;
+    SDL_SetTextureAlphaMod(texture, 255);
+  }
+  else if (status == discovered && population > 0) status = colonized;
+  else if (status == colonized && population == 0) status = discovered;
+}
 
 SDL_Point Planet::uiPosition(SDL_Point p) {
   return Map::uiPosition(p);
