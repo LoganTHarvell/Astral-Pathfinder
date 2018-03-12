@@ -41,6 +41,7 @@ public:
   
   // MARK: - TextBox Methods
   void setMessage(const std::string words);
+  bool checkNull();
   
   
 private:

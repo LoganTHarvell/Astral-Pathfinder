@@ -51,3 +51,9 @@ void TextBox::setMessage(const std::string words) {
   texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
   SDL_FreeSurface(surface);
 }
+
+bool TextBox::checkNull() {
+  if(texture == nullptr)
+    return true;
+  else return false;
+}

@@ -175,14 +175,18 @@ void PlanetInfo::setBoxes(Planet p) {
   popText.setMessage(population.c_str());
   miningText.setMessage(minerals.c_str());
   farmingText.setMessage(food.c_str());
-  dpText.setMessage(depoPercent.c_str());
-  fpText.setMessage(fertPercent.c_str());
-  ipText.setMessage(infPercent.c_str());
-  rpText.setMessage(resPercent.c_str());
-  mining.setMessage("Mining");
-  farming.setMessage("Farming");
-  infrastructureText.setMessage("Infrastructure");
-  reserveText.setMessage("Reserve");
+  if(dpText.checkNull()) {
+    dpText.setMessage(depoPercent.c_str());
+    fpText.setMessage(fertPercent.c_str());
+    ipText.setMessage(infPercent.c_str());
+    rpText.setMessage(resPercent.c_str());
+  }
+  if(mining.checkNull()) {
+    mining.setMessage("Mining");
+    farming.setMessage("Farming");
+    infrastructureText.setMessage("Infrastructure");
+    reserveText.setMessage("Reserve");
+  }
 }
 
 void PlanetInfo::setNewPercentText() {
