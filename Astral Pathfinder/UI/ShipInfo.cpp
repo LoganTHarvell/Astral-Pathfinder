@@ -69,10 +69,19 @@ void ShipInfo::setText(Ship ship) {
 // MARK: - Helper Methods
 
 void ShipInfo::setUiRects() {
-  locationRect = {1225, 110, 140, 30};
-  crewLabelRect = {1420, 110, 70, 30};
-  fuelRect = {1225, 150, 70, 30};
-  crewNumRect = {1430, 150, 50, 30};
-  curPlanetRect = {1290, 190, 170, 25};
-  barRect = {1215, 185, 320, 4};
+  int buffer = 5; // Small buffer from borders or other elements
+  int gapH = 40; // Space between elements
+  int midW = origin.x+(origin.w/2); // Midpoint of width
+  int threeQuarters = midW+((origin.x+origin.w-midW)/2); // Midpoint between midW and end point
+  
+  SDL_Point temp = {static_cast<int>(origin.w/4.57), origin.h/4};
+  int crewNumW = static_cast<int>(origin.w/6.4);
+  int curPlanetW = static_cast<int>(origin.w/1.88);
+  
+  locationRect = {origin.x+(buffer*2), origin.y+(buffer*2), static_cast<int>(origin.w/2.28), temp.y};
+  crewLabelRect = {threeQuarters-(temp.x/2), locationRect.y, temp.x, temp.y};
+  fuelRect = {locationRect.x, locationRect.y+gapH, temp.x, temp.y};
+  crewNumRect = {threeQuarters-(crewNumW/2), fuelRect.y, crewNumW, temp.y};
+  curPlanetRect = {midW-(curPlanetW/2), fuelRect.y+gapH, curPlanetW, static_cast<int>(origin.h/4.8)};
+  barRect = {origin.x, curPlanetRect.y-buffer, origin.w, 4};
 }

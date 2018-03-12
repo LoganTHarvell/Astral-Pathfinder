@@ -160,6 +160,8 @@ void PlanetInfo::setBoxes(Planet p) {
     minerals = "Deposits: " + std::to_string(p.getDeposits());
     popText.setRect(origin.x+(origin.w/2)+40, (origin.w/2)-50);
     farmingText.setRect(origin.x+(origin.w/2)+40, (origin.w/2)-50);
+    miningText.setRect(origin.x+5, (origin.w/2)-40);
+    locationText.setRect(origin.x+5, (origin.w/2)-40);
   }
   
   else {
@@ -172,8 +174,10 @@ void PlanetInfo::setBoxes(Planet p) {
     fertPercent = setStringSpaces(p.getFertilityPercent()) + std::to_string(p.getFertilityPercent()) + "%";
     infPercent = setStringSpaces(p.getInfraPercent()) + std::to_string(p.getInfraPercent()) + "%";
     resPercent = setStringSpaces(p.getReservePercent()) + std::to_string(p.getReservePercent()) + "%";
-    popText.setRect(origin.x+(origin.w/2), (origin.w/2)-15);
-    farmingText.setRect(origin.x+(origin.w/2), (origin.w/2)-15);
+    popText.setRect(origin.x+(origin.w/2), (origin.w/2)-10);
+    farmingText.setRect(origin.x+(origin.w/2), (origin.w/2)-10);
+    miningText.setRect(origin.x+5, (origin.w/2)-15);
+    locationText.setRect(origin.x+5, (origin.w/2)-15);
   }
   
   popText.setMessage(population.c_str());
