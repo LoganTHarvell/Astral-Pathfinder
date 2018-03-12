@@ -59,7 +59,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
   handleMouseDown(gameState, planetManager);
 }
 
-void UIManager::render(Game::State *gameState) {
+void UIManager::render(Game::State *gameState, PlanetManager *pm) {
   if (gameState->mainMenu) {
     // mainMenu.render();
     return;
@@ -70,8 +70,8 @@ void UIManager::render(Game::State *gameState) {
   }
   
   shipInfo.render();
-  if(gameState->planetSelected) selectedPlanetInfo.render();
-  if(gameState->planetCollided) currentPlanetInfo.render();
+  if(gameState->planetSelected) selectedPlanetInfo.render(pm->getSelectedPlanet().getPopulation());
+  if(gameState->planetCollided) currentPlanetInfo.render(pm->getCurrentPlanet().getPopulation());
 }
 
 // MARK: - UIManager Methods

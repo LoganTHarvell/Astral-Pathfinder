@@ -150,7 +150,7 @@ void Game::render() {
     shipManager->render(&gameState);
   }
   
-  uiManager->render(&gameState);
+  uiManager->render(&gameState, planetManager);
 
   SDL_RenderPresent(renderer);
 }

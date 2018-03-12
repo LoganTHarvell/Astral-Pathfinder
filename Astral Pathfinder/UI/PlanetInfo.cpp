@@ -38,21 +38,24 @@ void PlanetInfo::init(SDL_Rect src) {
 
 // MARK: - Game Loop Methods
 
-void PlanetInfo::render() {
-  dpText.render();
-  fpText.render();
-  mining.render();
-  farming.render();
-  sliderOne.render();
-  infrastructureText.render();
-  reserveText.render();
-  ipText.render();
-  rpText.render();
-  sliderTwo.render();
+void PlanetInfo::render(int population) {
   locationText.render();
   popText.render();
   miningText.render();
   farmingText.render();
+  
+  if(population != 0) {
+    dpText.render();
+    fpText.render();
+    mining.render();
+    farming.render();
+    sliderOne.render();
+    infrastructureText.render();
+    reserveText.render();
+    ipText.render();
+    rpText.render();
+    sliderTwo.render();
+  }
 }
 
 void PlanetInfo::clean() {
@@ -78,7 +81,7 @@ void PlanetInfo::clean() {
 void PlanetInfo::setUiTextures(Planet p) {
   setBoxes(p);
   
-  if (!sliderOne.isInitialized() && !sliderTwo.isInitialized()) {
+  if (!sliderOne.isInitialized() && !sliderTwo.isInitialized() && p.getPopulation() != 0) {
     sliderOne.setTextures(p.getFertilityPercent());
     sliderTwo.setTextures(p.getReservePercent());
   }
@@ -144,32 +147,46 @@ int PlanetInfo::getSliderPercent() {
 // MARK: - Helper Methods
 
 void PlanetInfo::setBoxes(Planet p) {
-  std::string depo = std::to_string(p.getDeposits());
-  std::string location = "Location: " + setStringSpaces(p.getLocation().x) + std::to_string(p.getLocation().x)
-                                      + "," + std::to_string(p.getLocation().y);
-  std::string population = "Population: " + setStringSpaces(p.getPopulation()) + std::to_string(p.getPopulation());
-  std::string food = "Farming: " + setStringSpaces(p.getFood()) + std::to_string(p.getFood()) + "/"
-                      + std::to_string(p.getFertility());
-  std::string minerals = "Mining: " + setStringSpaces(p.getMinerals()) + std::to_string(p.getMinerals()) + "/"
-                          + std::to_string(p.getDeposits());
-  std::string depoPercent = setStringSpaces(p.getDepositsPercent()) + std::to_string(p.getDepositsPercent()) + "%";
-  std::string fertPercent = setStringSpaces(p.getFertilityPercent()) + std::to_string(p.getFertilityPercent()) + "%";
-  std::string infPercent = setStringSpaces(p.getInfraPercent()) + std::to_string(p.getInfraPercent()) + "%";
-  std::string resPercent = setStringSpaces(p.getReservePercent()) + std::to_string(p.getReservePercent()) + "%";
+  std::string location, population, food, minerals,
+              depoPercent, fertPercent, infPercent, resPercent;
+  int populationAmount = p.getPopulation();
+  
+  location = "Location: " + setStringSpaces(p.getLocation().x) + std::to_string(p.getLocation().x)
+  + "," + std::to_string(p.getLocation().y);
+  
+  if(populationAmount == 0) {
+    population = "Uncolonized";
+    food = "Fertility: " + std::to_string(p.getFertility());
+    minerals = "Deposits: " + std::to_string(p.getDeposits());
+  }
+  
+  else {
+    population = "Population: " + setStringSpaces(p.getPopulation()) + std::to_string(p.getPopulation());
+    food = "Farming: " + setStringSpaces(p.getFood()) + std::to_string(p.getFood()) + "/"
+                        + std::to_string(p.getFertility());
+    minerals = "Mining: " + setStringSpaces(p.getMinerals()) + std::to_string(p.getMinerals()) + "/"
+                            + std::to_string(p.getDeposits());
+    depoPercent = setStringSpaces(p.getDepositsPercent()) + std::to_string(p.getDepositsPercent()) + "%";
+    fertPercent = setStringSpaces(p.getFertilityPercent()) + std::to_string(p.getFertilityPercent()) + "%";
+    infPercent = setStringSpaces(p.getInfraPercent()) + std::to_string(p.getInfraPercent()) + "%";
+    resPercent = setStringSpaces(p.getReservePercent()) + std::to_string(p.getReservePercent()) + "%";
+  }
   
   popText.setMessage(population.c_str());
   miningText.setMessage(minerals.c_str());
   farmingText.setMessage(food.c_str());
   if(locationText.checkNull()) {
     locationText.setMessage(location.c_str());
-    dpText.setMessage(depoPercent.c_str());
-    fpText.setMessage(fertPercent.c_str());
-    ipText.setMessage(infPercent.c_str());
-    rpText.setMessage(resPercent.c_str());
-    mining.setMessage("Mining");
-    farming.setMessage("Farming");
-    infrastructureText.setMessage("Infrastructure");
-    reserveText.setMessage("Reserve");
+    if(populationAmount != 0) {
+      dpText.setMessage(depoPercent.c_str());
+      fpText.setMessage(fertPercent.c_str());
+      ipText.setMessage(infPercent.c_str());
+      rpText.setMessage(resPercent.c_str());
+      mining.setMessage("Mining");
+      farming.setMessage("Farming");
+      infrastructureText.setMessage("Infrastructure");
+      reserveText.setMessage("Reserve");
+    }
   }
 }
 

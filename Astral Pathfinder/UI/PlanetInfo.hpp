@@ -21,7 +21,7 @@ public:
   void init(SDL_Rect src);
   
   // MARK: - Game Loop Methods
-  void render();
+  void render(int population);
   void clean();
 
   

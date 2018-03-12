@@ -31,7 +31,7 @@ public:
   
   // MARK: - Game Loop Methods
   void update(Game::State *gameState, PlanetManager *planetManager, ShipManager *shipManager);
-  void render(Game::State *gameState);
+  void render(Game::State *gameState, PlanetManager *pm);
   
 private:
   // MARK: - UIManager Fields
