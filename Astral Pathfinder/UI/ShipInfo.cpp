@@ -54,18 +54,13 @@ void ShipInfo::setText(Ship ship) {
   std::string crew = std::to_string(ship.getPopulation());
   
   location.setMessage(loc.c_str());
-  if(crewLabel.checkNull())
-    crewLabel.setMessage("Crew");
   fuel.setMessage(fuelNum.c_str());
   crewNum.setMessage(crew.c_str());
-  if(curPlanet.checkNull())
+  if(crewLabel.checkNull()) {
+    crewLabel.setMessage("Crew");
     curPlanet.setMessage("Current Planet: Hoth");
-  if(bar.checkNull())
     bar.setMessage("----------------------------------------------------");
-}
-
-void ShipInfo::setNewNumbers(Ship ship) {
-  
+  }
 }
 
 void ShipInfo::setUiRects() {

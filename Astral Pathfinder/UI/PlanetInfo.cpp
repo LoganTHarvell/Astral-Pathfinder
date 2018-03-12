@@ -171,17 +171,15 @@ void PlanetInfo::setBoxes(Planet p) {
   std::string infPercent = setStringSpaces(p.getInfraPercent()) + std::to_string(p.getInfraPercent()) + "%";
   std::string resPercent = setStringSpaces(p.getReservePercent()) + std::to_string(p.getReservePercent()) + "%";
   
-  locationText.setMessage(location.c_str());
   popText.setMessage(population.c_str());
   miningText.setMessage(minerals.c_str());
   farmingText.setMessage(food.c_str());
-  if(dpText.checkNull()) {
+  if(locationText.checkNull()) {
+    locationText.setMessage(location.c_str());
     dpText.setMessage(depoPercent.c_str());
     fpText.setMessage(fertPercent.c_str());
     ipText.setMessage(infPercent.c_str());
     rpText.setMessage(resPercent.c_str());
-  }
-  if(mining.checkNull()) {
     mining.setMessage("Mining");
     farming.setMessage("Farming");
     infrastructureText.setMessage("Infrastructure");

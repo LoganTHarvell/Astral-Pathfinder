@@ -25,7 +25,6 @@ public:
   void clean();
   
   void setText(Ship ship);
-  void setNewNumbers(Ship ship);
   
 private:
   // MARK: - ShipInfo Fields
