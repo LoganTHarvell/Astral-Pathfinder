@@ -78,24 +78,10 @@ void PlanetInfo::clean() {
 void PlanetInfo::setUiTextures(Planet p) {
   setBoxes(p);
   
-  if (sliderOne.isInitialized() && sliderTwo.isInitialized()) {
-    SDL_Rect tmpR;
-    float ratio;
-    // Sets correct slider position for given planet
-    ratio = p.getFertilityPercent()/100.0f;
-    tmpR = sliderOne.getBaseRect();
-    sliderOne.setSliderPosition(static_cast<int>(tmpR.w * ratio));
-    
-    ratio = p.getReservePercent()/100.0f;
-    tmpR = sliderTwo.getBaseRect();
-    sliderTwo.setSliderPosition(static_cast<int>(tmpR.w * ratio));
-  }
-  // Sets slider textures if not initialized
-  else {
+  if (!sliderOne.isInitialized() && !sliderTwo.isInitialized()) {
     sliderOne.setTextures(p.getFertilityPercent());
     sliderTwo.setTextures(p.getReservePercent());
   }
-  
 }
 
 int PlanetInfo::checkClick(SDL_Point click) {
