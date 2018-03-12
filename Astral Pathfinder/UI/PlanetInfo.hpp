@@ -34,11 +34,11 @@ public:
   
 private:
   // MARK: - PlanetInfo Fields
-  TextBox dpText, fpText, mining, farming,
-          infrastructureText, reserveText, ipText, rpText, locationText,
+  TextBox dpText, fpText, miningLabel, farmingLabel,
+          infraText, reserveText, ipText, rpText, locationText,
           popText, miningText, farmingText;
   Slider sliderOne, sliderTwo;
-  SDL_Rect origin, miningLabel, farmingLabel,
+  SDL_Rect origin, miningLabelRect, farmingLabelRect,
            depositsPercentRect, fertilityPercentRect, slideBaseOne, circleOne,
            slideBaseTwo, circleTwo, infraRect, reserveRect, ipRect, rpRect,
            locationRect, popRect, miningRect, farmingRect;
