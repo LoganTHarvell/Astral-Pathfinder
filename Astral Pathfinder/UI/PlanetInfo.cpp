@@ -158,6 +158,8 @@ void PlanetInfo::setBoxes(Planet p) {
     population = "Uncolonized";
     food = "Fertility: " + std::to_string(p.getFertility());
     minerals = "Deposits: " + std::to_string(p.getDeposits());
+    popText.setRect(origin.x+(origin.w/2)+40, (origin.w/2)-50);
+    farmingText.setRect(origin.x+(origin.w/2)+40, (origin.w/2)-50);
   }
   
   else {
@@ -170,6 +172,8 @@ void PlanetInfo::setBoxes(Planet p) {
     fertPercent = setStringSpaces(p.getFertilityPercent()) + std::to_string(p.getFertilityPercent()) + "%";
     infPercent = setStringSpaces(p.getInfraPercent()) + std::to_string(p.getInfraPercent()) + "%";
     resPercent = setStringSpaces(p.getReservePercent()) + std::to_string(p.getReservePercent()) + "%";
+    popText.setRect(origin.x+(origin.w/2), (origin.w/2)-15);
+    farmingText.setRect(origin.x+(origin.w/2), (origin.w/2)-15);
   }
   
   popText.setMessage(population.c_str());
@@ -223,31 +227,29 @@ std::string PlanetInfo::setStringSpaces(int p) {
 }
 
 void PlanetInfo::setUiRects() {
-  int unitH = 0.017 * origin.h;
-  int unitW = 0.016 * origin.w;
+  int buffer = 5; // Small buffer from borders or other elements
+  int midW = origin.x+(origin.w/2); // Midpoint of width
+  int gapH = origin.h/30; // Spaces between elements
+  int sliderW = static_cast<int>(origin.w/2.56);
   
-  SDL_Point header = {unitW*27, unitH*8};
-  SDL_Point label = {unitW*15, unitH*6};
-  SDL_Point percent = {unitW*10, unitH*5};
+  SDL_Point header = {(origin.w/2)-(buffer*3), origin.h/10};
+  SDL_Point label = {static_cast<int>(origin.w/4.57), origin.h/10};
+  SDL_Point percent = {static_cast<int>(origin.w/6.4), origin.h/12};
   
-  int leftBuffer = origin.x+(unitW*2);
-  int topBuffer = origin.y+(unitH*3);
-  int midW = origin.x + (origin.w/2);
-  
-  locationRect = {leftBuffer, topBuffer, header.x, header.y};
-  popRect = {midW+(unitW*2), locationRect.y, header.x, header.y};
-  miningRect = {locationRect.x, locationRect.y+(unitH*12), header.x, header.y};
+  locationRect = {origin.x+buffer, origin.y+(buffer*4), header.x, header.y};
+  popRect = {midW+(buffer*2), locationRect.y, header.x, header.y};
+  miningRect = {locationRect.x, locationRect.y+locationRect.h+gapH, header.x, header.y};
   farmingRect = {popRect.x, miningRect.y, header.x, header.y};
-  miningLabel = {locationRect.x, miningRect.y+(unitH*12), label.x, label.y};
-  depositsPercentRect = {miningLabel.x+(miningLabel.w/2)-(unitW*5), miningLabel.y+(unitH*8), percent.x, percent.y};
-  slideBaseOne = {leftBuffer+miningLabel.w+(unitW*3), miningLabel.y+(unitH*4), unitW*25, unitH*3};
-  circleOne = {NULL, slideBaseOne.h/2-((unitH*5)/2)+slideBaseOne.y, unitW*5, unitH*5};
-  farmingLabel = {slideBaseOne.x+slideBaseOne.w+(unitW*3), miningLabel.y, label.x, label.y};
-  fertilityPercentRect = {farmingLabel.x+(farmingLabel.w/2)-(unitW*5), depositsPercentRect.y, percent.x, percent.y};
-  infraRect = {locationRect.x, depositsPercentRect.y+(unitH*9), unitW*20, label.y};
-  ipRect = {depositsPercentRect.x, infraRect.y+(unitH*8), percent.x, percent.y};
-  slideBaseTwo = {slideBaseOne.x, infraRect.y+(unitH*8), slideBaseOne.w, slideBaseOne.h};
-  circleTwo = {NULL, slideBaseTwo.h/2-((unitH*5)/2)+slideBaseTwo.y, circleOne.w, circleOne.h};
+  miningLabel = {locationRect.x, miningRect.y+miningRect.h+(gapH*2), label.x, label.y};
+  depositsPercentRect = {miningLabel.x+(miningLabel.w/2)-(buffer*5), miningLabel.y+miningLabel.h+gapH, percent.x, percent.y};
+  slideBaseOne = {midW-(sliderW/2), depositsPercentRect.y, sliderW, origin.h/20};
+  circleOne = {NULL, slideBaseOne.h/2-((buffer*5)/2)+slideBaseOne.y, slideBaseOne.w/5, slideBaseOne.w/5};
+  farmingLabel = {slideBaseOne.x+slideBaseOne.w+(buffer*3), miningLabel.y, label.x, label.y};
+  fertilityPercentRect = {farmingLabel.x+(farmingLabel.w/2)-(buffer*5), depositsPercentRect.y, percent.x, percent.y};
+  infraRect = {locationRect.x, depositsPercentRect.y+depositsPercentRect.h+(gapH*2), buffer*20, label.y};
+  ipRect = {depositsPercentRect.x, infraRect.y+infraRect.h+gapH, percent.x, percent.y};
+  slideBaseTwo = {slideBaseOne.x, ipRect.y, slideBaseOne.w, slideBaseOne.h};
+  circleTwo = {NULL, slideBaseTwo.h/2-((buffer*5)/2)+slideBaseTwo.y, circleOne.w, circleOne.h};
   reserveRect = {farmingLabel.x, infraRect.y, label.x, label.y};
   rpRect = {fertilityPercentRect.x, ipRect.y, percent.x, percent.y};
 }
