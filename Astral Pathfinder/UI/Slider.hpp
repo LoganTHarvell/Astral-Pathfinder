@@ -22,8 +22,8 @@
 
 namespace SliderParameters {
   
-  const std::string barFilename = "Resources/Assets/bar.png";
-  const std::string circFilename = "Resources/Assets/ball.png";
+  const std::string barFilename = "Resources/Assets/base.png";
+  const std::string circFilename = "Resources/Assets/slider.png";
 
 }
 

@@ -9,10 +9,11 @@
 // MARK: Header File
 #include "ShipInfo.hpp"
 
+// MARK: Libraries and Frameworks
 #include <string>
 
 
-// MARK: - PlanetInfo Initialization
+// MARK: - ShipInfo Initialization
 
 void ShipInfo::init(SDL_Rect src) {
   origin = src;
@@ -47,6 +48,8 @@ void ShipInfo::clean() {
   bar.clean();
 }
 
+// MARK: - ShipInfo Methods
+
 void ShipInfo::setText(Ship ship) {
   SDL_Point pos = ship.getUIPosition();
   std::string loc = "Location: " + std::to_string(pos.x) + "," + std::to_string(pos.y);
@@ -62,6 +65,8 @@ void ShipInfo::setText(Ship ship) {
     bar.setMessage("----------------------------------------------------");
   }
 }
+
+// MARK: - Helper Methods
 
 void ShipInfo::setUiRects() {
   locationRect = {1225, 110, 140, 30};

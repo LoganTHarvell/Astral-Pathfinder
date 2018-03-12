@@ -24,6 +24,7 @@ public:
   void render();
   void clean();
   
+  // MARK: - ShipInfo Methods
   void setText(Ship ship);
   
 private:
