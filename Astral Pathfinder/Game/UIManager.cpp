@@ -15,9 +15,9 @@
 // MARK: - UIManager Initialization
 
 void UIManager::init() {
-  using namespace UiParamters;
+  using namespace UiParameters;
   selectedPlanetInfo.init(selectedPlanetOrigin);
-  currentPlanetInfo.init(currentPlanetOrigin);
+  DockedPlanetInfo.init(currentPlanetOrigin);
   shipInfo.init(shipInfoOrigin);
 }
 
@@ -40,20 +40,20 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
   
   if (gameState->planetSelected) {
     setSelectedPlanet(planetManager->getSelectedPlanet());
-    twoClean = false;
+    selectedPlanetWindowCleaned = false;
   }
-  else if(!twoClean) {
+  else if(!selectedPlanetWindowCleaned) {
     selectedPlanetInfo.clean();
-    twoClean = true;
+    selectedPlanetWindowCleaned = true;
   }
   
   if(planetManager->checkDocked(gameState)) {
-    setCurrentPlanet(planetManager->getCurrentPlanet());
-    oneClean = false;
+    setDockedPlanet(planetManager->getDockedPlanet());
+    currentPlanetWindowCleaned = false;
   }
-  else if(!oneClean) {
-    currentPlanetInfo.clean();
-    oneClean = true;
+  else if(!currentPlanetWindowCleaned) {
+    DockedPlanetInfo.clean();
+    currentPlanetWindowCleaned = true;
   }
   
   handleMouseDown(gameState, planetManager);
@@ -71,7 +71,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
   
   shipInfo.render();
   if(gameState->planetSelected) selectedPlanetInfo.render(pm->getSelectedPlanet().getPopulation());
-  if(gameState->planetCollided) currentPlanetInfo.render(pm->getCurrentPlanet().getPopulation());
+  if(gameState->planetCollided) DockedPlanetInfo.render(pm->getDockedPlanet().getPopulation());
 }
 
 // MARK: - UIManager Methods
@@ -80,8 +80,8 @@ void UIManager::setSelectedPlanet(Planet p) {
   selectedPlanetInfo.setUiTextures(p);
 }
 
-void UIManager::setCurrentPlanet(Planet p) {
-  currentPlanetInfo.setUiTextures(p);
+void UIManager::setDockedPlanet(Planet p) {
+  DockedPlanetInfo.setUiTextures(p);
 }
 
 void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
@@ -89,49 +89,49 @@ void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
   if(!gs->mouseDown) return;
   
   if(gs->mouseDown)
-    window = checkClickedArea(gs->clickLocation);
+    checkClickedArea(gs->clickLocation);
   
   // Current Planet Window
-  if(window == 1) {
+  if(currentWindow == currentPlanetWindow) {
     // If down, but not dragging, check if slider was clicked
     if(gs->mouseDown && gs->activeSlider == gs->State::inactive) {
-      if(currentPlanetInfo.checkClick(gs->clickLocation) == 1)
+      if(DockedPlanetInfo.checkClick(gs->clickLocation) == topSlider)
         gs->activeSlider = gs->State::currentOne;
       
-      if(currentPlanetInfo.checkClick(gs->clickLocation) == 2)
+      if(DockedPlanetInfo.checkClick(gs->clickLocation) == bottomSlider)
         gs->activeSlider = gs->State::currentTwo;
     }
   
     // If so, check mouse movement and adjust slider appropriately
     if(gs->activeSlider == gs->State::currentOne) {
-      bool movement = currentPlanetInfo.moveSlider(gs);
-      int percent = currentPlanetInfo.getSliderPercent();
+      bool movement = DockedPlanetInfo.moveSlider(gs);
+      int percent = DockedPlanetInfo.getSliderPercent();
       
       if(movement) {
-        pm->setPlanetDepoPercent(100-percent, window);
-        pm->setPlanetFertPercent(percent, window);
+        pm->setPlanetDepoPercent(100-percent, currentWindow);
+        pm->setPlanetFertPercent(percent, currentWindow);
       }
     }
   
     if(gs->activeSlider == gs->State::currentTwo) {
-      bool movement = currentPlanetInfo.moveSlider(gs);
-      int percent = currentPlanetInfo.getSliderPercent();
+      bool movement = DockedPlanetInfo.moveSlider(gs);
+      int percent = DockedPlanetInfo.getSliderPercent();
       
       if(movement) {
-        pm->setPlanetInfraPercent(100-percent, window);
-        pm->setPlanetReservePercent(percent, window);
+        pm->setPlanetInfraPercent(100-percent, currentWindow);
+        pm->setPlanetReservePercent(percent, currentWindow);
       }
     }
   }
   
   // Selected Planet Window
-  if(window == 2) {
+  if(currentWindow == selectedPlanetWindow) {
     // If down, but not dragging, check if slider was clicked
     if(gs->mouseDown && gs->activeSlider == gs->State::inactive) {
-      if(selectedPlanetInfo.checkClick(gs->clickLocation) == 1)
+      if(selectedPlanetInfo.checkClick(gs->clickLocation) == topSlider)
         gs->activeSlider = gs->State::selectOne;
       
-      if(selectedPlanetInfo.checkClick(gs->clickLocation) == 2)
+      if(selectedPlanetInfo.checkClick(gs->clickLocation) == bottomSlider)
         gs->activeSlider = gs->State::selectTwo;
     }
     
@@ -141,8 +141,8 @@ void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
       int percent = selectedPlanetInfo.getSliderPercent();
       
       if(movement) {
-        pm->setPlanetDepoPercent(100-percent, window);
-        pm->setPlanetFertPercent(percent, window);
+        pm->setPlanetDepoPercent(100-percent, currentWindow);
+        pm->setPlanetFertPercent(percent, currentWindow);
       }
     }
     
@@ -151,22 +151,22 @@ void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
       int percent = selectedPlanetInfo.getSliderPercent();
       
       if(movement) {
-        pm->setPlanetInfraPercent(100-percent, window);
-        pm->setPlanetReservePercent(percent, window);
+        pm->setPlanetInfraPercent(100-percent, currentWindow);
+        pm->setPlanetReservePercent(percent, currentWindow);
       }
     }
   }
 }
 
-int UIManager::checkClickedArea(SDL_Point p) {
-  using namespace UiParamters;
+void UIManager::checkClickedArea(SDL_Point p) {
+  using namespace UiParameters;
   if((p.x > currentPlanetOrigin.x) && (p.x < currentPlanetOrigin.x + currentPlanetOrigin.w)
      && (p.y > currentPlanetOrigin.y) && (p.y < currentPlanetOrigin.y + currentPlanetOrigin.h))
-    return 1;
+    currentWindow = currentPlanetWindow;
   
   else if((p.x > selectedPlanetOrigin.x) && (p.x < selectedPlanetOrigin.x + selectedPlanetOrigin.w)
           && (p.y > selectedPlanetOrigin.y) && (p.y < selectedPlanetOrigin.y + selectedPlanetOrigin.h))
-    return 2;
+    currentWindow = selectedPlanetWindow;
   
-  else return -1;
+  else currentWindow = none;
 }

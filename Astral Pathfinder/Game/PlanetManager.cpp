@@ -103,7 +103,7 @@ Planet PlanetManager::getSelectedPlanet() {
   return planets[selectedPlanetIndex];
 }
 
-Planet PlanetManager::getCurrentPlanet() {
+Planet PlanetManager::getDockedPlanet() {
   return planets[dockedPlanetIndex];
 }
 

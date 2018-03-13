@@ -48,6 +48,7 @@ public:
   SDL_Point getSliderPosition() { return { slider.x, slider.y }; };
   void setSliderPosition(int pos);
   int getPercent();
+  void setSliderTexture(int percent);
   
 private:
   // MARK: - Slider Fields

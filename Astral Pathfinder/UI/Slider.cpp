@@ -70,6 +70,13 @@ void Slider::setTextures(int percent) {
   slider.x = static_cast<int>(p*scale)+base.x-(slider.w/2);
 }
 
+void Slider::setSliderTexture(int percent) {
+  float p = static_cast<float>(percent);
+  float scale = base.w/100.0f;
+  
+  slider.x = static_cast<int>(p*scale)+base.x-(slider.w/2);
+}
+
 void Slider::setSliderPosition(int pos) {
   slider.x = pos-(slider.w/2) + base.x;
 }

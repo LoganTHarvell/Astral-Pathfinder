@@ -17,7 +17,7 @@
 
 // MARK: - UIManager Parameters
 
-namespace UiParamters {
+namespace UiParameters {
   const SDL_Rect shipInfoOrigin = {1215, 100, 320, 121};
   const SDL_Rect currentPlanetOrigin = {1215, 210, 320, 240};
   const SDL_Rect selectedPlanetOrigin = {1215, 500, 320, 300};
@@ -37,17 +37,24 @@ private:
   // MARK: - UIManager Fields
   // TODO: Implement main menu and endscreen
   // MainMenu mainMenu;
-  PlanetInfo selectedPlanetInfo, currentPlanetInfo;
+  PlanetInfo selectedPlanetInfo, DockedPlanetInfo;
   ShipInfo shipInfo;
-  int window = -1;
-  bool oneClean = true, twoClean = true;
+  enum {
+    none, currentPlanetWindow, selectedPlanetWindow
+  } currentWindow = none;
+  
+  enum {
+    neither, topSlider, bottomSlider
+  } slider = neither;
+  
+  bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true;
   // EndScreen endScreen;
   
   // MARK: - Helper Methods
   void setSelectedPlanet(Planet p);
-  void setCurrentPlanet(Planet p);
+  void setDockedPlanet(Planet p);
   void handleMouseDown(Game::State *gs, PlanetManager *pm);
-  int checkClickedArea(SDL_Point p);
+  void checkClickedArea(SDL_Point p);
 
 };
 

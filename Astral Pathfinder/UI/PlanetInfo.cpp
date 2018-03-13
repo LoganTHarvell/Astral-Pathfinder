@@ -85,6 +85,11 @@ void PlanetInfo::setUiTextures(Planet p) {
     sliderOne.setTextures(p.getFertilityPercent());
     sliderTwo.setTextures(p.getReservePercent());
   }
+  
+  else {
+    sliderOne.setSliderTexture(p.getFertilityPercent());
+    sliderTwo.setSliderTexture(p.getReservePercent());
+  }
 }
 
 int PlanetInfo::checkClick(SDL_Point click) {
@@ -93,25 +98,25 @@ int PlanetInfo::checkClick(SDL_Point click) {
   temp = sliderOne.getSliderRect();
   if((click.x > temp.x) && (click.x < temp.x + temp.w)
      && (click.y > temp.y) && (click.y < temp.y + temp.h)) {
-    sliderNum = 1;
-    return 1;
+    slider = topSlider;
+    return topSlider;
   }
   
   temp = sliderTwo.getSliderRect();
   if((click.x > temp.x) && (click.x < temp.x + temp.w)
      && (click.y > temp.y) && (click.y < temp.y + temp.h)) {
-    sliderNum = 2;
-    return 2;
+    slider = bottomSlider;
+    return bottomSlider;
   }
   
-  sliderNum = -1;
-  return -1;
+  slider = neither;
+  return neither;
 }
 
 bool PlanetInfo::moveSlider(Game::State *gameState) {
   SDL_Rect temp;
   
-  if(sliderNum == 1)
+  if(slider == topSlider)
     temp = sliderOne.getBaseRect();
   
   else
@@ -119,13 +124,13 @@ bool PlanetInfo::moveSlider(Game::State *gameState) {
   
   int x = gameState->dragLocation.x - temp.x;
   
-  if(sliderNum == 1 && (x > 0) && (x < temp.w + 1)) {
+  if(slider == topSlider && (x > 0) && (x < temp.w + 2)) {
     sliderOne.setSliderPosition(x);
     setNewPercentText();
     return true;
   }
   
-  if(sliderNum == 2 && (x > 0) && (x < temp.w + 1)) {
+  if(slider == bottomSlider && (x > 0) && (x < temp.w + 2)) {
     sliderTwo.setSliderPosition(x);
     setNewPercentText();
     return true;
@@ -135,10 +140,10 @@ bool PlanetInfo::moveSlider(Game::State *gameState) {
 }
 
 int PlanetInfo::getSliderPercent() {
-  if(sliderNum == 1)
+  if(slider == topSlider)
     return sliderOne.getPercent();
   
-  if(sliderNum == 2)
+  if(slider == bottomSlider)
     return sliderTwo.getPercent();
   
   return NULL;
@@ -183,13 +188,13 @@ void PlanetInfo::setBoxes(Planet p) {
   popText.setMessage(population.c_str());
   miningText.setMessage(minerals.c_str());
   farmingText.setMessage(food.c_str());
-  if(locationText.checkNull()) {
-    locationText.setMessage(location.c_str());
-    if(populationAmount != 0) {
-      dpText.setMessage(depoPercent.c_str());
-      fpText.setMessage(fertPercent.c_str());
-      ipText.setMessage(infPercent.c_str());
-      rpText.setMessage(resPercent.c_str());
+  if(populationAmount != 0) {
+    dpText.setMessage(depoPercent.c_str());
+    fpText.setMessage(fertPercent.c_str());
+    ipText.setMessage(infPercent.c_str());
+    rpText.setMessage(resPercent.c_str());
+    if(locationText.checkNull()) {
+      locationText.setMessage(location.c_str());
       miningLabel.setMessage("Mining");
       farmingLabel.setMessage("Farming");
       infraText.setMessage("Infrastructure");
@@ -201,7 +206,7 @@ void PlanetInfo::setBoxes(Planet p) {
 void PlanetInfo::setNewPercentText() {
   int p = getSliderPercent();
   
-  if(sliderNum == 1) {
+  if(slider == topSlider) {
     std::string depoPercent = setStringSpaces(100-p) + std::to_string(100-p) + "%";
     dpText.setMessage(depoPercent.c_str());
     
@@ -209,7 +214,7 @@ void PlanetInfo::setNewPercentText() {
     fpText.setMessage(fertPercent.c_str());
   }
   
-  if(sliderNum == 2) {
+  if(slider == bottomSlider) {
     std::string infPercent = setStringSpaces(100-p) + std::to_string(100-p) + "%";
     ipText.setMessage(infPercent.c_str());
     

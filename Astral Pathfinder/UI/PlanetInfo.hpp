@@ -42,7 +42,9 @@ private:
            depositsPercentRect, fertilityPercentRect, slideBaseOne, circleOne,
            slideBaseTwo, circleTwo, infraRect, reserveRect, ipRect, rpRect,
            locationRect, popRect, miningRect, farmingRect;
-  int sliderNum = -1;
+  enum {
+    neither, topSlider, bottomSlider
+  } slider = neither;
   
   // MARK: - Helper Methods
   void setBoxes(Planet p);

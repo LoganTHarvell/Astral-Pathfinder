@@ -41,7 +41,7 @@ public:
   // MARK: - PlanetManager Methods
   Planet getPlanet(int n);
   Planet getSelectedPlanet();
-  Planet getCurrentPlanet();
+  Planet getDockedPlanet();
   void setPlanetDepoPercent(int p, int flag);
   void setPlanetFertPercent(int p, int flag);
   void setPlanetInfraPercent(int p, int flag);
