@@ -36,7 +36,7 @@ void Slider::render() {
 }
 
 void Slider::clean() {
-  if (baseTexture == nullptr || sliderTexture == nullptr) return;
+  if (baseTexture == nullptr && sliderTexture == nullptr) return;
   
   if(baseTexture != nullptr) {
     SDL_DestroyTexture(baseTexture);
@@ -64,15 +64,21 @@ void Slider::setTextures(int percent) {
   baseTexture = TextureManager::loadTexture(SliderParameters::barFilename);
   sliderTexture = TextureManager::loadTexture(SliderParameters::circFilename);
 
+  updateSliderPosition(percent);
+}
+
+void Slider::updateSliderPosition(int percent) {
   float p = static_cast<float>(percent);
   float scale = base.w/100.0f;
   
   slider.x = static_cast<int>(p*scale)+base.x-(slider.w/2);
 }
 
-// TODO: - Separate setting and getting slider position
-int Slider::setSliderPosition(int pos) {
+void Slider::setSliderPosition(int pos) {
   slider.x = pos-(slider.w/2) + base.x;
+}
+
+int Slider::getPercent() {
   int temp = (slider.x+(slider.w/2)) - base.x;
   return static_cast<int>(temp / (base.w/100.0f));
 }

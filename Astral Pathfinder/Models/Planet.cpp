@@ -59,6 +59,7 @@ void Planet::initPlanet() {
   // Sets planet deposits to random value
   deposits = (rand()%(depositsRange+1)) + minDeposits;
   
+  infraPercent = reservePercent = 50;
   fertilityPercent = startFarmingPercent;
   depositsPercent = startMiningPercent;
   

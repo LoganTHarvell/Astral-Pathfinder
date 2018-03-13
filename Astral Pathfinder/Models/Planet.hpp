@@ -67,11 +67,19 @@ public:
   
   int getDeposits() { return deposits; };
   int getFertility() { return fertility; };
+  SDL_Point getLocation() { return coordinates; };
+  int getPopulation() { return population; };
+  int getFood() { return food; };
+  int getMinerals() { return minerals; };
   
   int getDepositsPercent() { return depositsPercent; };
   int getFertilityPercent() { return fertilityPercent; };
+  int getInfraPercent() { return infraPercent; };
+  int getReservePercent() { return reservePercent; };
   void setDepositsPercent(int percent) { depositsPercent = percent; };
   void setFertilityPercent(int percent) { fertilityPercent = percent; };
+  void setInfraPercent(int percent) { infraPercent = percent; };
+  void setReservePercent(int percent) { reservePercent = percent; };
   
   void clicked();
   void revertClick();
@@ -87,8 +95,8 @@ private:
 
   // resources
   int population;
-  int fertility, deposits;
-  int fertilityPercent, depositsPercent;
+  int deposits, fertility;
+  int depositsPercent, fertilityPercent, infraPercent, reservePercent;
   int minerals, food;
   
   bool playerDocked;

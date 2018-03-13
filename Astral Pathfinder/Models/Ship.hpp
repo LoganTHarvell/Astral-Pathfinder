@@ -56,6 +56,7 @@ public:
   // MARK: - Ship Methods
   ShipParameters::ShipType getTag() { return tag; };
   int getFuel() { return fuel; };
+  int getPopulation() { return population; };
   int getRotation() { return rotation; };
   SDL_Point getUIPosition() { return getCenter(); };
   SDL_Point getMapPosition(SDL_Point uiPosition);

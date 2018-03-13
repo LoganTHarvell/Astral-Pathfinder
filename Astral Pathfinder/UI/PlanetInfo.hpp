@@ -15,44 +15,42 @@
 #include "PlanetManager.hpp"
 #include "Planet.hpp"
 
-// MARK: - PlanetInfo Parameters
-
-namespace InfoParameters {
-  const SDL_Rect depositsRect = {1220, 510, 135, 35};
-  const SDL_Rect fertilityRect = {1395, 510, 135, 35};
-  const SDL_Rect miningLabel = {1220, 560, 75, 30};
-  const SDL_Rect farmingLabel = {1455, 560, 75, 30};
-  const SDL_Rect depositsPercentRect = {1232, 600, 50, 25};
-  const SDL_Rect fertilityPercentRect = {1467, 600, 50, 25};
-  const SDL_Rect slideBase = {1310, 582, 125, 15};
-  const SDL_Rect circle = {NULL, 576, 25, 25};
-}
-
 class PlanetInfo {
 public:
   // MARK: - PlanetInfo Initialization
-  void init();
+  void init(SDL_Rect src);
   
   // MARK: - Game Loop Methods
-  void render();
+  void render(int population);
   void clean();
 
   
   // MARK: - PlanetInfo Methods
   void setUiTextures(Planet p);
-  bool checkClick(Game::State *gameState);
-  int moveSlider(Game::State *gameState);
+  int checkClick(SDL_Point click);
+  bool moveSlider(Game::State *gameState);
+  int getSliderPercent();
 
   
 private:
   // MARK: - PlanetInfo Fields
-  TextBox depositsText, fertilityText, dpText, fpText, mining, farming;
-  Slider slider;
+  TextBox dpText, fpText, miningLabel, farmingLabel,
+          infraText, reserveText, ipText, rpText, locationText,
+          popText, miningText, farmingText;
+  Slider sliderOne, sliderTwo;
+  SDL_Rect origin, miningLabelRect, farmingLabelRect,
+           depositsPercentRect, fertilityPercentRect, slideBaseOne, circleOne,
+           slideBaseTwo, circleTwo, infraRect, reserveRect, ipRect, rpRect,
+           locationRect, popRect, miningRect, farmingRect;
+  enum {
+    neither, fertilitySlider, reserveSlider
+  } slider = neither;
   
   // MARK: - Helper Methods
   void setBoxes(Planet p);
-  void setNewPercent(int p);
+  void setNewPercentText();
   std::string setStringSpaces(int p);
+  void setUiRects();
 
 };
 

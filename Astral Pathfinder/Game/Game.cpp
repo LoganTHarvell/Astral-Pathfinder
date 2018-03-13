@@ -113,14 +113,14 @@ void Game::handleEvents() {
         gameState.clickLocation = { event.button.x, event.button.y };
         break;
       case SDL_MOUSEMOTION:
-        if(gameState.planetSelected)
+        if(gameState.planetSelected || gameState.planetCollided)
           gameState.dragLocation = { event.motion.x, event.motion.y };
         break;
       case SDL_MOUSEBUTTONUP:
         gameState.clickFlag = true;
         gameState.clickLocation = { event.button.x, event.button.y };
         gameState.mouseDown = false;
-        gameState.sliderDrag = false;
+        gameState.activeSlider = State::inactive;
         break;
       default:
         break;
@@ -135,7 +135,7 @@ void Game::update(Uint32 ticks) {
     shipManager->update(ticks);
   }
   
-  uiManager->update(&gameState, planetManager);
+  uiManager->update(&gameState, planetManager, shipManager);
 }
 
 void Game::render() {
@@ -150,7 +150,7 @@ void Game::render() {
     shipManager->render(&gameState);
   }
   
-  uiManager->render(&gameState);
+  uiManager->render(&gameState, planetManager);
 
   SDL_RenderPresent(renderer);
 }

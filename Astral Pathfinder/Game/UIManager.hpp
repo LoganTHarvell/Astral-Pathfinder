@@ -13,6 +13,15 @@
 #include "Game.hpp"
 #include "PlanetManager.hpp"
 #include "PlanetInfo.hpp"
+#include "ShipInfo.hpp"
+
+// MARK: - UIManager Parameters
+
+namespace UiParameters {
+  const SDL_Rect shipInfoOrigin = {1215, 100, 320, 121};
+  const SDL_Rect currentPlanetOrigin = {1215, 210, 320, 240};
+  const SDL_Rect selectedPlanetOrigin = {1215, 500, 320, 300};
+}
 
 class UIManager {
 
@@ -21,18 +30,31 @@ public:
   void init();
   
   // MARK: - Game Loop Methods
-  void update(Game::State *gameState, PlanetManager *planetManager);
-  void render(Game::State *gameState);
+  void update(Game::State *gameState, PlanetManager *planetManager, ShipManager *shipManager);
+  void render(Game::State *gameState, PlanetManager *pm);
   
 private:
   // MARK: - UIManager Fields
   // TODO: Implement main menu and endscreen
   // MainMenu mainMenu;
-  PlanetInfo planetInfo;
+  PlanetInfo selectedPlanetInfo, DockedPlanetInfo;
+  ShipInfo shipInfo;
+  enum {
+    none, currentPlanetWindow, selectedPlanetWindow
+  } currentWindow = none;
+  
+  enum {
+    neither, fertilitySlider, reserveSlider
+  } slider = neither;
+  
+  bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true;
   // EndScreen endScreen;
   
   // MARK: - Helper Methods
   void setSelectedPlanet(Planet p);
+  void setDockedPlanet(Planet p);
+  void handleMouseDown(Game::State *gs, PlanetManager *pm);
+  void checkClickedArea(SDL_Point p);
 
 };
 

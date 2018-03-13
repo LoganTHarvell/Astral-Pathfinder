@@ -22,8 +22,8 @@
 
 namespace SliderParameters {
   
-  const std::string barFilename = "Resources/Assets/bar.png";
-  const std::string circFilename = "Resources/Assets/ball.png";
+  const std::string barFilename = "Resources/Assets/base.png";
+  const std::string circFilename = "Resources/Assets/slider.png";
 
 }
 
@@ -46,7 +46,9 @@ public:
   SDL_Rect getBaseRect() { return base; }
   SDL_Rect getSliderRect() { return slider; }
   SDL_Point getSliderPosition() { return { slider.x, slider.y }; };
-  int setSliderPosition(int pos);
+  void setSliderPosition(int pos);
+  int getPercent();
+  void updateSliderPosition(int percent);
   
 private:
   // MARK: - Slider Fields

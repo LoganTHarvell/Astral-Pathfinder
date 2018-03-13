@@ -103,12 +103,36 @@ Planet PlanetManager::getSelectedPlanet() {
   return planets[selectedPlanetIndex];
 }
 
-void PlanetManager::setPlanetDepoPercent(int p) {
-  planets[selectedPlanetIndex].setDepositsPercent(p);
+Planet PlanetManager::getDockedPlanet() {
+  return planets[dockedPlanetIndex];
 }
 
-void PlanetManager::setPlanetFertPercent(int p) {
-  planets[selectedPlanetIndex].setFertilityPercent(p);
+void PlanetManager::setPlanetDepoPercent(int p, int flag) {
+  if(flag == 1)
+    planets[dockedPlanetIndex].setDepositsPercent(p);
+  if(flag == 2)
+    planets[selectedPlanetIndex].setDepositsPercent(p);
+}
+
+void PlanetManager::setPlanetFertPercent(int p, int flag) {
+  if(flag == 1)
+    planets[dockedPlanetIndex].setFertilityPercent(p);
+  if(flag == 2)
+    planets[selectedPlanetIndex].setFertilityPercent(p);
+}
+
+void PlanetManager::setPlanetInfraPercent(int p, int flag) {
+  if(flag == 1)
+    planets.at(dockedPlanetIndex).setInfraPercent(p);
+  if(flag == 2)
+    planets.at(selectedPlanetIndex).setInfraPercent(p);
+}
+
+void PlanetManager::setPlanetReservePercent(int p, int flag) {
+  if(flag == 1)
+    planets.at(dockedPlanetIndex).setReservePercent(p);
+  if(flag == 2)
+    planets.at(selectedPlanetIndex).setReservePercent(p);
 }
 
 
@@ -193,4 +217,14 @@ void PlanetManager::handleCollisions(ShipManager *sm) {
       dockedPlanetIndex = -1;
     }
   }
+}
+
+bool PlanetManager::checkDocked(Game::State *gameState) {
+  if (dockedPlanetIndex >= 0) {
+    gameState->planetCollided = true;
+    return true;
+  }
+  
+  gameState->planetCollided = false;
+  return false;
 }
