@@ -234,7 +234,7 @@ void PlanetInfo::setUiRects() {
   int buffer = 5; // Small buffer from borders or other elements
   int midW = origin.x+(origin.w/2); // Midpoint of width
   int gapH = origin.h/30; // Spaces between elements
-  int sliderW = static_cast<int>(origin.w/2.56);
+  int sliderW = static_cast<int>(origin.w/2.66);
   
   SDL_Point header = {(origin.w/2)-(buffer*3), origin.h/10};
   SDL_Point label = {static_cast<int>(origin.w/4.57), origin.h/10};
