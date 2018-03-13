@@ -87,8 +87,8 @@ void PlanetInfo::setUiTextures(Planet p) {
   }
   
   else {
-    sliderOne.setSliderTexture(p.getFertilityPercent());
-    sliderTwo.setSliderTexture(p.getReservePercent());
+    sliderOne.updateSliderPosition(p.getFertilityPercent());
+    sliderTwo.updateSliderPosition(p.getReservePercent());
   }
 }
 
