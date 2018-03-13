@@ -95,10 +95,10 @@ void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
   if(currentWindow == currentPlanetWindow) {
     // If down, but not dragging, check if slider was clicked
     if(gs->mouseDown && gs->activeSlider == gs->State::inactive) {
-      if(DockedPlanetInfo.checkClick(gs->clickLocation) == topSlider)
+      if(DockedPlanetInfo.checkClick(gs->clickLocation) == fertilitySlider)
         gs->activeSlider = gs->State::currentOne;
       
-      if(DockedPlanetInfo.checkClick(gs->clickLocation) == bottomSlider)
+      if(DockedPlanetInfo.checkClick(gs->clickLocation) == reserveSlider)
         gs->activeSlider = gs->State::currentTwo;
     }
   
@@ -128,10 +128,10 @@ void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
   if(currentWindow == selectedPlanetWindow) {
     // If down, but not dragging, check if slider was clicked
     if(gs->mouseDown && gs->activeSlider == gs->State::inactive) {
-      if(selectedPlanetInfo.checkClick(gs->clickLocation) == topSlider)
+      if(selectedPlanetInfo.checkClick(gs->clickLocation) == fertilitySlider)
         gs->activeSlider = gs->State::selectOne;
       
-      if(selectedPlanetInfo.checkClick(gs->clickLocation) == bottomSlider)
+      if(selectedPlanetInfo.checkClick(gs->clickLocation) == reserveSlider)
         gs->activeSlider = gs->State::selectTwo;
     }
     

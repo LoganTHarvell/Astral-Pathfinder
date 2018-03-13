@@ -43,7 +43,7 @@ private:
            slideBaseTwo, circleTwo, infraRect, reserveRect, ipRect, rpRect,
            locationRect, popRect, miningRect, farmingRect;
   enum {
-    neither, topSlider, bottomSlider
+    neither, fertilitySlider, reserveSlider
   } slider = neither;
   
   // MARK: - Helper Methods
