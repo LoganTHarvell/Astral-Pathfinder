@@ -188,13 +188,13 @@ void PlanetInfo::setBoxes(Planet p) {
   popText.setMessage(population.c_str());
   miningText.setMessage(minerals.c_str());
   farmingText.setMessage(food.c_str());
+  locationText.setMessage(location.c_str());
   if(populationAmount != 0) {
     dpText.setMessage(depoPercent.c_str());
     fpText.setMessage(fertPercent.c_str());
     ipText.setMessage(infPercent.c_str());
     rpText.setMessage(resPercent.c_str());
-    if(locationText.checkNull()) {
-      locationText.setMessage(location.c_str());
+    if(miningLabel.checkNull()) {
       miningLabel.setMessage("Mining");
       farmingLabel.setMessage("Farming");
       infraText.setMessage("Infrastructure");
