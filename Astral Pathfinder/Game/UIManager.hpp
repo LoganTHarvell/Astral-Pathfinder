@@ -43,10 +43,6 @@ private:
     none, currentPlanetWindow, selectedPlanetWindow
   } currentWindow = none;
   
-  enum {
-    neither, fertilitySlider, reserveSlider
-  } slider = neither;
-  
   bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true;
   // EndScreen endScreen;
   

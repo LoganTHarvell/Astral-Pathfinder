@@ -85,6 +85,10 @@ void UIManager::setDockedPlanet(Planet p) {
 }
 
 void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
+  enum {
+    neither, fertilitySlider, reserveSlider
+  };
+  
   // If mouse button not pressed down, don't check for slider movement
   if(!gs->mouseDown) return;
   
