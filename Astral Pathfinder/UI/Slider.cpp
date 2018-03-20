@@ -16,11 +16,13 @@
 // MARK: - Slider Initialization
 
 void Slider::init(SDL_Rect rectOne, SDL_Rect rectTwo) {
+  
   base = rectOne;
   slider = rectTwo;
   
   baseTexture = nullptr;
   sliderTexture = nullptr;
+  
 }
 
 
@@ -65,6 +67,11 @@ void Slider::setTextures(int percent) {
   sliderTexture = TextureManager::loadTexture(SliderParameters::circFilename);
 
   updateSliderPosition(percent);
+}
+
+void Slider::colorMod(SDL_Color base, SDL_Color slider) {
+  SDL_SetTextureColorMod(baseTexture, base.r, base.g, base.b);
+  SDL_SetTextureColorMod(sliderTexture, slider.r, slider.g, slider.b);
 }
 
 void Slider::updateSliderPosition(int percent) {
