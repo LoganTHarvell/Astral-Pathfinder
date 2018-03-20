@@ -62,6 +62,7 @@ public:
     bool debugMode = false;
     
     // Fields
+    Uint32 ticks;
     SDL_Point clickLocation;
     SDL_Point dragLocation;
   };

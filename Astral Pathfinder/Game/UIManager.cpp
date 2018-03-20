@@ -69,9 +69,16 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
     return;
   }
   
-  shipInfo.render();
-  if(gameState->planetSelected) selectedPlanetInfo.render(pm->getSelectedPlanet().getPopulation());
-  if(gameState->planetCollided) DockedPlanetInfo.render(pm->getDockedPlanet().getPopulation());
+  shipInfo.render(gameState);
+  
+  if(gameState->planetSelected) {
+    int selectedPop = pm->getSelectedPlanet().getPopulation();
+    selectedPlanetInfo.render(gameState, selectedPop);
+  }
+  if(gameState->planetCollided) {
+    int dockedPop = pm->getDockedPlanet().getPopulation();
+    DockedPlanetInfo.render(gameState, dockedPop);
+  }
 }
 
 // MARK: - UIManager Methods

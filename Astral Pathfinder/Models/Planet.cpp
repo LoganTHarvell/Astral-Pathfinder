@@ -75,11 +75,11 @@ void Planet::initPlanet() {
 
 // MARK: - Game Loop Methods
 
-void Planet::update() {
+void Planet::update(Game::State *gs) {
   updateStatus();
 }
 
-void Planet::render() {
+void Planet::render(Game::State *gs) {
   SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
 }
 

@@ -38,22 +38,22 @@ void PlanetInfo::init(SDL_Rect src) {
 
 // MARK: - Game Loop Methods
 
-void PlanetInfo::render(int population) {
-  locationText.render();
-  popText.render();
-  miningText.render();
-  farmingText.render();
+void PlanetInfo::render(Game::State *gs, int population) {
+  locationText.render(gs);
+  popText.render(gs);
+  miningText.render(gs);
+  farmingText.render(gs);
   
   if(population != 0) {
-    dpText.render();
-    fpText.render();
-    miningLabel.render();
-    farmingLabel.render();
+    dpText.render(gs);
+    fpText.render(gs);
+    miningLabel.render(gs);
+    farmingLabel.render(gs);
     sliderOne.render();
-    infraText.render();
-    reserveText.render();
-    ipText.render();
-    rpText.render();
+    infraText.render(gs);
+    reserveText.render(gs);
+    ipText.render(gs);
+    rpText.render(gs);
     sliderTwo.render();
   }
 }

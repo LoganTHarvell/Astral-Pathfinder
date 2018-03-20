@@ -23,7 +23,7 @@ public:
   void init(SDL_Point homeworldPos);
   
   // MARK: - Game Loop Methods
-  void update(Uint32 ticks);
+  void update(Game::State *gameState);
   void render(Game::State *gameState);
   
   // MARK: - ShipManager Methods

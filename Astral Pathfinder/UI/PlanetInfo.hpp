@@ -21,7 +21,7 @@ public:
   void init(SDL_Rect src);
   
   // MARK: - Game Loop Methods
-  void render(int population);
+  void render(Game::State *gs, int population);
   void clean();
 
   
