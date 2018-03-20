@@ -87,6 +87,7 @@ public:
   bool playerIsDocked() { return playerDocked; };
   bool alienIsDocked() { return alienDocked; };
   void toggleDockedShip(int tag);
+  int makeFuel(int amount);
   
 private:
   // MARK: - Planet Fields

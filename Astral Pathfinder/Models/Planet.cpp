@@ -109,6 +109,19 @@ void Planet::toggleDockedShip(int tag) {
   }
 }
 
+int Planet::makeFuel(int amount) {
+  if (amount <= 0) return 0;
+  
+  if (amount <= minerals) {
+    minerals -= amount;
+    return amount;
+  }
+  else {
+    minerals = 0;
+    return minerals;
+  }
+}
+
 // MARK: - Helper Methods
 
 void Planet::updateStatus() {

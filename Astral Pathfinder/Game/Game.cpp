@@ -134,7 +134,7 @@ void Game::update(Uint32 ticks) {
   
   if (!gameState.mainMenu || gameState.endgame == State::none) {
     planetManager->update(&gameState, shipManager);
-    shipManager->update(&gameState);
+    shipManager->update(&gameState, planetManager);
   }
   
   uiManager->update(&gameState, planetManager, shipManager);

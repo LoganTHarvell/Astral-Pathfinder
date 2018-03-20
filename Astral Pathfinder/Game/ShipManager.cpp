@@ -24,8 +24,11 @@ void ShipManager::init(SDL_Point homeworldPos) {
 
 // MARK: - Game Loop Methods
 
-void ShipManager::update(Game::State *gameState) {
+void ShipManager::update(Game::State *gameState, PlanetManager *pm) {
   playerShip.update(gameState);
+  
+  int minerals = pm->getDockedPlanet().getMinerals();
+  playerShip.updateFuel(pm->getDockedPlanet().makeFuel(minerals));
 }
 
 void ShipManager::render(Game::State *gameState) {
