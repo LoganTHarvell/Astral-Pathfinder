@@ -77,6 +77,8 @@ void Planet::initPlanet() {
 
 void Planet::update(Game::State *gs) {
   updateStatus();
+  
+  if (deposits > 0) updateMining();
 }
 
 void Planet::render(Game::State *gs) {
@@ -117,8 +119,9 @@ int Planet::makeFuel(int amount) {
     return amount;
   }
   else {
+    amount = minerals;
     minerals = 0;
-    return minerals;
+    return amount;
   }
 }
 
@@ -131,6 +134,12 @@ void Planet::updateStatus() {
   }
   else if (status == discovered && population > 0) status = colonized;
   else if (status == colonized && population == 0) status = discovered;
+}
+
+// TODO: Implement actual mining algorithm
+void Planet::updateMining() {
+  minerals = deposits;
+  deposits = 0;
 }
 
 SDL_Point Planet::uiPosition(SDL_Point p) {

@@ -80,6 +80,7 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
   }
   
   handleCollisions(shipManager);
+  gameState->planetCollided = planetIsDocked();
 }
 
 void PlanetManager::render(Game::State *gameState) {
@@ -101,6 +102,11 @@ Planet PlanetManager::getPlanet(int n) {
 
 Planet PlanetManager::getSelectedPlanet() {
   return planets[selectedPlanetIndex];
+}
+
+bool PlanetManager::planetIsDocked() {
+  if (dockedPlanetIndex >= 0) return true;
+  return false;
 }
 
 Planet PlanetManager::getDockedPlanet() {
@@ -135,6 +141,15 @@ void PlanetManager::setPlanetReservePercent(int p, int flag) {
     planets.at(selectedPlanetIndex).setReservePercent(p);
 }
 
+// TODO: Implement actual fuel algorithm
+int PlanetManager::fuelDockedShip() {
+  int fuel = 0;
+  
+  int amount = planets[dockedPlanetIndex].getMinerals();
+  fuel = planets[dockedPlanetIndex].makeFuel(amount);
+  
+  return fuel;
+}
 
 // MARK: - Initialization Helper Methods
 
@@ -217,14 +232,4 @@ void PlanetManager::handleCollisions(ShipManager *sm) {
       dockedPlanetIndex = -1;
     }
   }
-}
-
-bool PlanetManager::checkDocked(Game::State *gameState) {
-  if (dockedPlanetIndex >= 0) {
-    gameState->planetCollided = true;
-    return true;
-  }
-  
-  gameState->planetCollided = false;
-  return false;
 }

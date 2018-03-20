@@ -47,7 +47,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     selectedPlanetWindowCleaned = true;
   }
   
-  if(planetManager->checkDocked(gameState)) {
+  if(planetManager->planetIsDocked()) {
     setDockedPlanet(planetManager->getDockedPlanet());
     currentPlanetWindowCleaned = false;
   }

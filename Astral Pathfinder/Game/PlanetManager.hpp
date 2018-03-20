@@ -41,12 +41,14 @@ public:
   // MARK: - PlanetManager Methods
   Planet getPlanet(int n);
   Planet getSelectedPlanet();
+  bool planetIsDocked();
   Planet getDockedPlanet();
   void setPlanetDepoPercent(int p, int flag);
   void setPlanetFertPercent(int p, int flag);
   void setPlanetInfraPercent(int p, int flag);
   void setPlanetReservePercent(int p, int flag);
-  bool checkDocked(Game::State *gameState);
+  
+  int fuelDockedShip();
   
 private:
   // MARK: - Helper Methods
