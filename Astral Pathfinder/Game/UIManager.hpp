@@ -37,6 +37,7 @@ private:
   // MARK: - UIManager Fields
   // TODO: Implement main menu and endscreen
   // MainMenu mainMenu;
+  // EndScreen endScreen;
   PlanetInfo selectedPlanetInfo, DockedPlanetInfo;
   ShipInfo shipInfo;
   enum {
@@ -44,7 +45,6 @@ private:
   } currentWindow = none;
   
   bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true;
-  // EndScreen endScreen;
   
   // MARK: - Helper Methods
   void setSelectedPlanet(Planet p);

@@ -63,6 +63,7 @@ void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
     gameState.isRunning = true;
     
     // Object Initialization
+    // TODO: - Change to main menu
     gameScreen = TextureManager::loadTexture("Resources/Assets/gameScreen.png");
     screenRect = { 0, 0, windowRect.w, windowRect.h };
     
