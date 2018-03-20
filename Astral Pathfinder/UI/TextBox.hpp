@@ -23,7 +23,7 @@
 
 namespace TextParameters {
   const SDL_Color color = {255, 255, 255};
-  const std::string fontFile = "Resources/Assets/Arial.ttf";
+  const std::string fontFile = "Resources/Assets/MODENINE.TTF";
 }
 
 
