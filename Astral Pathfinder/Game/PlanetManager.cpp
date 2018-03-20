@@ -43,6 +43,10 @@ void PlanetManager::initGalaxy() {
     do {
       i = planets.insert(i, initPlanet());
       coordinates = i->getCoordinates();
+      
+      // Clears index for new planet
+      if (hasPlanet[coordinates.x][coordinates.y]) planets.erase(i);
+      
     } while (hasPlanet[coordinates.x][coordinates.y]);
 
     // Marks planet coordinates as occupied

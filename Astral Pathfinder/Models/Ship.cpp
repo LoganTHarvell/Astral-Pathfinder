@@ -183,7 +183,7 @@ void Ship::updatePosition(Uint32 ticks) {
     rect.y -= (velocity.y * (ticks/10));
   }
   
-  if (velocity.x > 0 || velocity.y > 0) fuel -=1;
+  if (velocity.x != 0 || velocity.y != 0) fuel -=1;
 }
 
 void Ship::updateFuel(int minerals) {

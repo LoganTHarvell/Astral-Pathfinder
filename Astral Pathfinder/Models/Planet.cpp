@@ -138,8 +138,10 @@ void Planet::updateStatus() {
 
 // TODO: Implement actual mining algorithm
 void Planet::updateMining() {
-  minerals = deposits;
-  deposits = 0;
+  if (playerDocked) {
+    minerals = deposits;
+    deposits = 0;
+  }
 }
 
 SDL_Point Planet::uiPosition(SDL_Point p) {
