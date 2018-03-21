@@ -62,7 +62,8 @@ public:
     bool debugMode = false;
     
     // Fields
-    int elapsedTime;
+    Uint32 frame;
+    Uint32 elapsedTime;
     Uint32 ticks;
     SDL_Point clickLocation;
     SDL_Point dragLocation;

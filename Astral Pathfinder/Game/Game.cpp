@@ -61,6 +61,7 @@ void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
     }
     
     gameState.isRunning = true;
+    gameState.frame = 0;
     
     // Object Initialization
     gameScreen = TextureManager::loadTexture("Resources/Assets/gameScreen.png");
@@ -130,6 +131,7 @@ void Game::handleEvents() {
 }
 
 void Game::update(Uint32 ticks) {
+  gameState.frame++;
   gameState.elapsedTime = SDL_GetTicks()/1000;
   gameState.ticks = ticks;
   
