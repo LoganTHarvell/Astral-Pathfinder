@@ -30,10 +30,10 @@ void Planet::initHomeworld() {
   deposits = fuelCost;
   
   // Sets homeworld to reserve all minerals mined
-  miningPercent = 50;
-  farmingPercent = 100 - miningPercent;
-  infraPercent = 0;
-  reservePercent = 100 - infraPercent;
+  miningPercent = homeStartMiningPercent;
+  farmingPercent = homeStartFarmingPercent;
+  infraPercent = homeStartInfraPercent;
+  reservePercent = homeStartReservePercent;
   
   food = (population*(farmingPercent/100.0f))*farmingCost;
   
@@ -85,7 +85,9 @@ void Planet::initPlanet() {
 
 void Planet::update(Game::State *gs) {
   updateStatus();
+  
   if (deposits > 0) updateMining();
+  if (fertility > 0) updateFarming();
   
 }
 
@@ -148,9 +150,11 @@ void Planet::updateStatus() {
   }
 }
 
-// TODO: Implement actual mining algorithm
 void Planet::updateMining() {
   using PlanetParameters::miningCost;
+  
+  // If there is no one to farm, then return right away
+  if (population <= 0 && !playerDocked) return;
   
   int workers = population;
   if (playerDocked) workers += ShipParameters::shipPopulation;
@@ -167,6 +171,32 @@ void Planet::updateMining() {
   else {
     minerals += deposits;
     deposits = 0;
+  }
+}
+
+void Planet::updateFarming() {
+  using PlanetParameters::farmingCost;
+  
+  // If there is no one to farm, then return right away
+  if (population <= 0 && !playerDocked) return;
+  
+  int workers = population;
+  if (playerDocked) workers += ShipParameters::shipPopulation;
+  workers *= (farmingPercent/100.0f);
+  
+  float product = workers*farmingCost;
+  
+  if (product < 0 ) return;
+  
+  if (product <= fertility) {
+    food = product;
+  }
+  else {
+    food = product;
+    fertility -= (product-fertility);
+    if (fertility < 0) fertility = 0;
+    
+    SDL_SetTextureColorMod(texture, 128, 0, 0);
   }
 }
 

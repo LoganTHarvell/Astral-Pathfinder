@@ -27,6 +27,12 @@ namespace PlanetParameters {
   const int fertilityRange = (200-minFertility);
   const int minDeposits = 100;
   const int depositsRange = (600-minDeposits);
+  
+  const int homeStartMiningPercent = 59;
+  const int homeStartFarmingPercent = 100 - homeStartMiningPercent;
+  const int homeStartInfraPercent = 0;
+  const int homeStartReservePercent = 100 - homeStartInfraPercent;
+  
   const int startInfraPercent = 50;
   const int startReservePercent = 100 - startInfraPercent;
   const int startMiningPercent = 100;
