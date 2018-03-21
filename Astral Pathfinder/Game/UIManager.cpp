@@ -32,7 +32,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
       checkClickedAreaMainMenu(gameState);
     return;
   }
-  else if (gameState->exitGame) {
+  else if (gameState->endgame != Game::State::none) {
     gameState->isRunning = false;
     gameState->mainMenu = false;
     return;
@@ -73,7 +73,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
-  else if (gameState->exitGame) {
+  else if (gameState->endgame != Game::State::none) {
     // endScreen.render();
     return;
   }
@@ -227,6 +227,6 @@ void UIManager::checkClickedAreaMainMenu(Game::State *gs) {
      && (p.y > exitGameLabel.y) && (p.y < exitGameLabel.y + exitGameLabel.h)) {
     mainMenuLabel = nothing;
     gs->mainMenu = false;
-    gs->exitGame = true;
+    gs->endgame = Game::State::quit;
   }
 }

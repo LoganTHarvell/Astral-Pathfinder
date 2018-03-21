@@ -46,10 +46,9 @@ public:
     // Flags
     bool isRunning = false;
     bool mainMenu = false;
-    bool exitGame = false;
     
     enum {
-      none, allDiscovered, fuel
+      none, allDiscovered, fuel, quit
     } endgame = none;
     
     enum {

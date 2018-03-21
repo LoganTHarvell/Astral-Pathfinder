@@ -136,7 +136,7 @@ void Game::handleEvents() {
 }
 
 void Game::update(Uint32 ticks) {
-  if (!gameState.mainMenu && !gameState.exitGame) {
+  if (!gameState.mainMenu && gameState.endgame == State::none) {
     planetManager->update(&gameState, shipManager);
     shipManager->update(ticks);
   }
@@ -153,7 +153,7 @@ void Game::render() {
   if(gameState.mainMenu)
     SDL_RenderCopy(renderer, mainMenu, NULL, &screenRect);
   
-  else if (!gameState.mainMenu && !gameState.exitGame) {
+  else if (!gameState.mainMenu && gameState.endgame == State::none) {
     SDL_RenderCopy(renderer, gameScreen, NULL, &screenRect);
     planetManager->render(&gameState);
     shipManager->render(&gameState);
