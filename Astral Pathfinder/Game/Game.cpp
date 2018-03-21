@@ -155,7 +155,7 @@ void Game::render() {
   if(gameState.mainMenu)
     SDL_RenderCopy(renderer, mainMenu, NULL, &screenRect);
   
-  else if (!gameState.mainMenu && gameState.endgame == State::none) {
+  else if (gameState.endgame == State::none) {
     SDL_RenderCopy(renderer, gameScreen, NULL, &screenRect);
     planetManager->render(&gameState);
     shipManager->render(&gameState);
