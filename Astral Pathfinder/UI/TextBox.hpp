@@ -22,7 +22,7 @@
 // MARK: - TextBox Parameters
 
 namespace TextParameters {
-  const SDL_Color color = {255, 255, 255};
+  const SDL_Color color = {0, 128, 0};
   const std::string fontFile = "Resources/Assets/MODENINE.TTF";
 }
 

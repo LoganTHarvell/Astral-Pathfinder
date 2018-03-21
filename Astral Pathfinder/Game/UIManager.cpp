@@ -19,6 +19,7 @@ void UIManager::init() {
   selectedPlanetInfo.init(selectedPlanetOrigin);
   DockedPlanetInfo.init(currentPlanetOrigin);
   shipInfo.init(shipInfoOrigin);
+  hoverBorder = TextureManager::loadTexture("Resources/Assets/border.png");
 }
 
 // MARK: - Game Loop Methods
@@ -26,12 +27,14 @@ void UIManager::init() {
 void UIManager::update(Game::State *gameState, PlanetManager *planetManager, ShipManager *shipManager) {
   // TODO: Implement main menu and endscreen
   if (gameState->mainMenu) {
-    // mainMenu.update(gameState);
+    checkForHovering(gameState->dragLocation);
+    if(gameState->mouseDown)
+      checkClickedAreaMainMenu(gameState);
     return;
   }
-  else if (gameState->endgame != Game::State::none) {
-    // endScreen.update(gameState);
+  else if (gameState->exitGame) {
     gameState->isRunning = false;
+    gameState->mainMenu = false;
     return;
   }
   
@@ -60,11 +63,17 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
 }
 
 void UIManager::render(Game::State *gameState, PlanetManager *pm) {
+  using namespace UiParameters;
   if (gameState->mainMenu) {
-    // mainMenu.render();
+    if(mainMenuLabel == startGame)
+      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
+    else if(mainMenuLabel == scoreboard)
+      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
+    else if(mainMenuLabel == exitGame)
+      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
-  else if (gameState->endgame != Game::State::none) {
+  else if (gameState->exitGame) {
     // endScreen.render();
     return;
   }
@@ -173,4 +182,51 @@ void UIManager::checkClickedArea(SDL_Point p) {
     currentWindow = selectedPlanetWindow;
   
   else currentWindow = none;
+}
+
+void UIManager::checkForHovering(SDL_Point p) {
+  using namespace UiParameters;
+  if((p.x > startGameLabel.x) && (p.x < startGameLabel.x + startGameLabel.w)
+     && (p.y > startGameLabel.y) && (p.y < startGameLabel.y + startGameLabel.h)) {
+    mainMenuLabel = startGame;
+    if(borderRect.y != startGameLabel.y-11)
+      borderRect = {582, 390, 460, 95};
+  }
+  
+  else if((p.x > scoreboardLabel.x) && (p.x < scoreboardLabel.x + scoreboardLabel.w)
+          && (p.y > scoreboardLabel.y) && (p.y < scoreboardLabel.y + scoreboardLabel.h)) {
+    mainMenuLabel = scoreboard;
+    if(borderRect.y != scoreboardLabel.y-11)
+      borderRect = {582, 527, 460, 96};
+  }
+  
+  else if((p.x > exitGameLabel.x) && (p.x < exitGameLabel.x + exitGameLabel.w)
+          && (p.y > exitGameLabel.y) && (p.y < exitGameLabel.y + exitGameLabel.h)) {
+    mainMenuLabel = exitGame;
+    if(borderRect.y != exitGameLabel.y-11)
+      borderRect = {582, 665, 460, 92};
+  }
+  
+  else mainMenuLabel = nothing;
+}
+
+void UIManager::checkClickedAreaMainMenu(Game::State *gs) {
+  SDL_Point p = gs->clickLocation;
+  using namespace UiParameters;
+  if((p.x > startGameLabel.x) && (p.x < startGameLabel.x + startGameLabel.w)
+     && (p.y > startGameLabel.y) && (p.y < startGameLabel.y + startGameLabel.h)) {
+    mainMenuLabel = nothing;
+    gs->mainMenu = false;
+  }
+  
+ /* else if((p.x > scoreboardLabel.x) && (p.x < scoreboardLabel.x + scoreboardLabel.w)
+          && (p.y > scoreboardLabel.y) && (p.y < scoreboardLabel.y + scoreboardLabel.h))
+    mainMenuLabel = nothing; */
+  
+  if((p.x > exitGameLabel.x) && (p.x < exitGameLabel.x + exitGameLabel.w)
+     && (p.y > exitGameLabel.y) && (p.y < exitGameLabel.y + exitGameLabel.h)) {
+    mainMenuLabel = nothing;
+    gs->mainMenu = false;
+    gs->exitGame = true;
+  }
 }

@@ -46,6 +46,7 @@ public:
     // Flags
     bool isRunning = false;
     bool mainMenu = false;
+    bool exitGame = false;
     
     enum {
       none, allDiscovered, fuel
@@ -85,7 +86,7 @@ private:
   SDL_Window *window;
   State gameState;
 
-  SDL_Texture *gameScreen;
+  SDL_Texture *mainMenu, *gameScreen, *endScreen;
   SDL_Rect screenRect;
 
   PlanetManager *planetManager;
