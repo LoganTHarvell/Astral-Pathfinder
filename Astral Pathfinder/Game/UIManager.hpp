@@ -49,7 +49,7 @@ private:
   // EndScreen endScreen;
   
   // MARK: - Helper Methods
-  void updateTime();
+  void updateTime(Uint32);
   void setSelectedPlanet(Planet p);
   void setDockedPlanet(Planet p);
   void handleMouseDown(Game::State *gs, PlanetManager *pm);

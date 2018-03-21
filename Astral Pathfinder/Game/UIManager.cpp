@@ -39,7 +39,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     return;
   }
   
-  updateTime();
+  updateTime(gameState->elapsedTime);
   
   shipInfo.clean();
   shipInfo.setText(shipManager->getPlayerShip());
@@ -90,11 +90,9 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
 
 // MARK: - UIManager Methods
 
-void UIManager::updateTime() {
-  int elapsedTime = SDL_GetTicks()/1000;
-  
+void UIManager::updateTime(Uint32 elapsedTime) {
   std::string secs = std::to_string(elapsedTime % 60);
-  std::string mins = std::to_string(elapsedTime/60);
+  std::string mins = std::to_string(elapsedTime / 60);
   
   time.setMessage("Time " + mins + ":" + secs);
 }

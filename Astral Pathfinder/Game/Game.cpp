@@ -130,6 +130,7 @@ void Game::handleEvents() {
 }
 
 void Game::update(Uint32 ticks) {
+  gameState.elapsedTime = SDL_GetTicks()/1000;
   gameState.ticks = ticks;
   
   if (!gameState.mainMenu || gameState.endgame == State::none) {
