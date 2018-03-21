@@ -27,14 +27,17 @@ namespace PlanetParameters {
   const int fertilityRange = (200-minFertility);
   const int minDeposits = 100;
   const int depositsRange = (600-minDeposits);
-  const int startFarmingPercent = 50;
-  const int startMiningPercent = 100 - startFarmingPercent;
+  const int startInfraPercent = 50;
+  const int startReservePercent = 100 - startInfraPercent;
+  const int startMiningPercent = 100;
+  const int startFarmingPercent = 100 - startMiningPercent;
   
   // Defines resource information
   const int startPopulation = 5000;
   const float foodRqmt = 0.02;
+  
+  const float miningCost = 0.00006;
   const float farmingCost = 0.04;
-  const int miningCost = 30;
   const int fuelCost = 250;
   const float infrastructureCost = 0.05;
 }
@@ -69,15 +72,15 @@ public:
   int getFertility() { return fertility; };
   SDL_Point getLocation() { return coordinates; };
   int getPopulation() { return population; };
-  int getFood() { return food; };
   int getMinerals() { return minerals; };
+  int getFood() { return food; };
   
-  int getDepositsPercent() { return depositsPercent; };
-  int getFertilityPercent() { return fertilityPercent; };
+  int getMiningPercent() { return miningPercent; };
+  int getFarmingPercent() { return farmingPercent; };
   int getInfraPercent() { return infraPercent; };
   int getReservePercent() { return reservePercent; };
-  void setDepositsPercent(int percent) { depositsPercent = percent; };
-  void setFertilityPercent(int percent) { fertilityPercent = percent; };
+  void setDepositsPercent(int percent) { miningPercent = percent; };
+  void setFertilityPercent(int percent) { farmingPercent = percent; };
   void setInfraPercent(int percent) { infraPercent = percent; };
   void setReservePercent(int percent) { reservePercent = percent; };
   
@@ -96,9 +99,9 @@ private:
 
   // resources
   int population;
-  int deposits, fertility;
-  int depositsPercent, fertilityPercent, infraPercent, reservePercent;
-  int minerals, food;
+  float deposits, fertility;
+  int miningPercent, farmingPercent, infraPercent, reservePercent;
+  float infrastructure, minerals, food;
   
   bool playerDocked;
   bool alienDocked;

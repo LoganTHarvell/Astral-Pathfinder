@@ -24,11 +24,18 @@ void Planet::initHomeworld() {
   // initializes random planet
   initPlanet();
   
-  // Sets homeword resources
+  // Sets homeworld resources
   population = startPopulation;
   fertility = population*foodRqmt;
   deposits = fuelCost;
-  food = (population*(fertilityPercent/100.0f))*farmingCost;
+  
+  // Sets homeworld to reserve all minerals mined
+  miningPercent = 50;
+  farmingPercent = 100 - miningPercent;
+  infraPercent = 0;
+  reservePercent = 100 - infraPercent;
+  
+  food = (population*(farmingPercent/100.0f))*farmingCost;
   
   // Sets homeworld status
   status = colonized;
@@ -59,9 +66,10 @@ void Planet::initPlanet() {
   // Sets planet deposits to random value
   deposits = (rand()%(depositsRange+1)) + minDeposits;
   
-  infraPercent = reservePercent = 50;
-  fertilityPercent = startFarmingPercent;
-  depositsPercent = startMiningPercent;
+  infraPercent = startInfraPercent;
+  reservePercent = startReservePercent;
+  farmingPercent = startFarmingPercent;
+  miningPercent = startMiningPercent;
   
   minerals = food = 0;
   
@@ -77,8 +85,8 @@ void Planet::initPlanet() {
 
 void Planet::update(Game::State *gs) {
   updateStatus();
-  
   if (deposits > 0) updateMining();
+  
 }
 
 void Planet::render(Game::State *gs) {
@@ -132,14 +140,32 @@ void Planet::updateStatus() {
     status = discovered;
     SDL_SetTextureAlphaMod(texture, 255);
   }
-  else if (status == discovered && population > 0) status = colonized;
-  else if (status == colonized && population == 0) status = discovered;
+  else if (status == discovered && (population > 0 || playerDocked)) {
+    status = colonized;
+  }
+  else if (status == colonized && (population == 0 && !playerDocked)) {
+    status = discovered;
+  }
 }
 
 // TODO: Implement actual mining algorithm
 void Planet::updateMining() {
-  if (playerDocked) {
-    minerals = deposits;
+  using PlanetParameters::miningCost;
+  
+  int workers = population;
+  if (playerDocked) workers += ShipParameters::shipPopulation;
+  workers *= (miningPercent/100.0f);
+  
+  float product = workers*miningCost;
+  
+  if (product < 0 ) return;
+  
+  if (product <= deposits) {
+    minerals += product;
+    deposits -= product;
+  }
+  else {
+    minerals += deposits;
     deposits = 0;
   }
 }

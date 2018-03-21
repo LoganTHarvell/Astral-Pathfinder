@@ -26,7 +26,7 @@ void ShipManager::init(SDL_Point homeworldPos) {
 
 void ShipManager::update(Game::State *gameState, PlanetManager *pm) {
   playerShip.update(gameState);
-  playerShip.updateFuel(pm->fuelDockedShip());
+  if (pm->planetIsDocked()) playerShip.updateFuel(pm->fuelDockedShip());
 }
 
 void ShipManager::render(Game::State *gameState) {

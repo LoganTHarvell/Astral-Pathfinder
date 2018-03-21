@@ -44,7 +44,7 @@ void PlanetInfo::render(Game::State *gs, int population) {
   miningText.render(gs);
   farmingText.render(gs);
   
-  if(population != 0) {
+  if(population > 0 || gs->planetCollided) {
     dpText.render(gs);
     fpText.render(gs);
     miningLabel.render(gs);
@@ -83,15 +83,15 @@ void PlanetInfo::setUiTextures(Planet p) {
   
   setBoxes(p);
   
-  if (!sliderOne.isInitialized() && !sliderTwo.isInitialized() && p.getPopulation() != 0) {
-    sliderOne.setTextures(p.getFertilityPercent());
+  if (!sliderOne.isInitialized() && !sliderTwo.isInitialized()
+      && (p.getPopulation() > 0 || p.playerIsDocked())) {
+    sliderOne.setTextures(p.getFarmingPercent());
     sliderOne.colorMod(baseColor, sliderColor);
     sliderTwo.setTextures(p.getReservePercent());
     sliderTwo.colorMod(baseColor, sliderColor);
   }
-  
   else {
-    sliderOne.updateSliderPosition(p.getFertilityPercent());
+    sliderOne.updateSliderPosition(p.getFarmingPercent());
     sliderTwo.updateSliderPosition(p.getReservePercent());
   }
 }
@@ -174,31 +174,27 @@ void PlanetInfo::setBoxes(Planet p) {
     miningText.setRect(origin.x+5, (origin.w/2)-40);
     locationText.setRect(origin.x+5, (origin.w/2)-40);
   }
-  else {
+  
+  if (populationAmount > 0 || p.playerIsDocked()) {
     population = "Population: " + setStringSpaces(p.getPopulation()) + std::to_string(p.getPopulation());
     food = "Farming: " + setStringSpaces(p.getFood()) + std::to_string(p.getFood()) + "/"
                         + std::to_string(p.getFertility());
     minerals = "Mining: " + setStringSpaces(p.getMinerals()) + std::to_string(p.getMinerals()) + "/"
                             + std::to_string(p.getDeposits());
-    depoPercent = setStringSpaces(p.getDepositsPercent()) + std::to_string(p.getDepositsPercent()) + "%";
-    fertPercent = setStringSpaces(p.getFertilityPercent()) + std::to_string(p.getFertilityPercent()) + "%";
+    depoPercent = setStringSpaces(p.getMiningPercent()) + std::to_string(p.getMiningPercent()) + "%";
+    fertPercent = setStringSpaces(p.getFarmingPercent()) + std::to_string(p.getFarmingPercent()) + "%";
     infPercent = setStringSpaces(p.getInfraPercent()) + std::to_string(p.getInfraPercent()) + "%";
     resPercent = setStringSpaces(p.getReservePercent()) + std::to_string(p.getReservePercent()) + "%";
     popText.setRect(origin.x+(origin.w/2), (origin.w/2)-10);
     farmingText.setRect(origin.x+(origin.w/2), (origin.w/2)-10);
     miningText.setRect(origin.x+5, (origin.w/2)-15);
     locationText.setRect(origin.x+5, (origin.w/2)-15);
-  }
-  
-  popText.setMessage(population.c_str());
-  miningText.setMessage(minerals.c_str());
-  farmingText.setMessage(food.c_str());
-  locationText.setMessage(location.c_str());
-  if(populationAmount != 0) {
+    
     dpText.setMessage(depoPercent.c_str());
     fpText.setMessage(fertPercent.c_str());
     ipText.setMessage(infPercent.c_str());
     rpText.setMessage(resPercent.c_str());
+    
     if(miningLabel.checkNull()) {
       miningLabel.setMessage("Mining");
       farmingLabel.setMessage("Farming");
@@ -206,6 +202,12 @@ void PlanetInfo::setBoxes(Planet p) {
       reserveText.setMessage("Reserve");
     }
   }
+  
+  popText.setMessage(population.c_str());
+  miningText.setMessage(minerals.c_str());
+  farmingText.setMessage(food.c_str());
+  locationText.setMessage(location.c_str());
+  
 }
 
 void PlanetInfo::setNewPercentText() {
