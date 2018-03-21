@@ -137,8 +137,10 @@ void Game::handleEvents() {
 
 void Game::update(Uint32 ticks) {
   if (!gameState.mainMenu && gameState.endgame == State::none) {
+    gameState.ticks = ticks;
+  
     planetManager->update(&gameState, shipManager);
-    shipManager->update(ticks);
+    shipManager->update(&gameState);
   }
   
   uiManager->update(&gameState, planetManager, shipManager);

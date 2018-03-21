@@ -62,7 +62,7 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
   discoveryCount = 0;
   for (Planet& p : planets) {
     if (p.getStatus() != Planet::undiscovered) discoveryCount++;
-    p.update();
+    p.update(gameState);
   }
   
   // Checks all planets discovered endgame condition
@@ -84,7 +84,7 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
 
 void PlanetManager::render(Game::State *gameState) {
   for(Planet p : planets) {
-    p.render();
+    p.render(gameState);
     
     if (gameState->debugMode) {
       DebugTools::renderVertices(p.getCollider().getVertices());

@@ -38,22 +38,22 @@ void PlanetInfo::init(SDL_Rect src) {
 
 // MARK: - Game Loop Methods
 
-void PlanetInfo::render(int population) {
-  locationText.render();
-  popText.render();
-  miningText.render();
-  farmingText.render();
+void PlanetInfo::render(Game::State *gs, int population) {
+  locationText.render(gs);
+  popText.render(gs);
+  miningText.render(gs);
+  farmingText.render(gs);
   
   if(population != 0) {
-    dpText.render();
-    fpText.render();
-    miningLabel.render();
-    farmingLabel.render();
+    dpText.render(gs);
+    fpText.render(gs);
+    miningLabel.render(gs);
+    farmingLabel.render(gs);
     sliderOne.render();
-    infraText.render();
-    reserveText.render();
-    ipText.render();
-    rpText.render();
+    infraText.render(gs);
+    reserveText.render(gs);
+    ipText.render(gs);
+    rpText.render(gs);
     sliderTwo.render();
   }
 }
@@ -79,11 +79,15 @@ void PlanetInfo::clean() {
 // MARK: - PlanetInfo Methods
 
 void PlanetInfo::setUiTextures(Planet p) {
+  using namespace SliderParameters;
+  
   setBoxes(p);
   
   if (!sliderOne.isInitialized() && !sliderTwo.isInitialized() && p.getPopulation() != 0) {
     sliderOne.setTextures(p.getFertilityPercent());
+    sliderOne.colorMod(baseColor, sliderColor);
     sliderTwo.setTextures(p.getReservePercent());
+    sliderTwo.colorMod(baseColor, sliderColor);
   }
   
   else {
@@ -160,7 +164,9 @@ void PlanetInfo::setBoxes(Planet p) {
   + "," + std::to_string(p.getLocation().y);
   
   if(populationAmount == 0) {
-    population = "Uncolonized";
+    if (p.getStatus() == Planet::undiscovered) population = "Undiscovered";
+    else if (p.getStatus() == Planet::discovered) population = "Discovered";
+    
     food = "Fertility: " + std::to_string(p.getFertility());
     minerals = "Deposits: " + std::to_string(p.getDeposits());
     popText.setRect(origin.x+(origin.w/2)+40, (origin.w/2)-50);
@@ -168,7 +174,6 @@ void PlanetInfo::setBoxes(Planet p) {
     miningText.setRect(origin.x+5, (origin.w/2)-40);
     locationText.setRect(origin.x+5, (origin.w/2)-40);
   }
-  
   else {
     population = "Population: " + setStringSpaces(p.getPopulation()) + std::to_string(p.getPopulation());
     food = "Farming: " + setStringSpaces(p.getFood()) + std::to_string(p.getFood()) + "/"

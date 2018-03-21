@@ -35,8 +35,8 @@ public:
   void init(SDL_Rect rect);
   
   // MARK: - Game Loop Methods
-  void update();
-  void render();
+  void update(Game::State *gs);
+  void render(Game::State *gs);
   void clean();
   
   // MARK: - TextBox Methods

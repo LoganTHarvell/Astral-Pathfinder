@@ -50,8 +50,8 @@ public:
   void initPlanet();
   
   // MARK: - Game Loop Methods
-  void update();
-  void render();
+  void update(Game::State *gs);
+  void render(Game::State *gs);
   
   // Planet States
   enum Status {
@@ -104,6 +104,12 @@ private:
   
   // MARK: - Helper Methods
   void updateStatus();
+  
+  // TODO: - Implement methods
+  void updatePopulation();
+  void updateMining();
+  void updateFarming();
+  
   SDL_Point uiPosition(SDL_Point p);
 };
 

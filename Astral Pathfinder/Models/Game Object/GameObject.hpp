@@ -12,14 +12,15 @@
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 
+#include "Game.hpp"
 #include "ColliderComponent.hpp"
 
 class GameObject {
   
 public:
   // MARK: - Game Loop Methods
-  virtual void update() = 0;
-  virtual void render() = 0;
+  virtual void update(Game::State *gs) = 0;
+  virtual void render(Game::State *gs) = 0;
   
   //MARK: - GameObject Methods
   ColliderComponent getCollider();

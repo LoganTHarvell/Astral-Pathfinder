@@ -25,11 +25,11 @@ void TextBox::init(SDL_Rect rectangle) {
 
 // MARK: - Game Loop Methods
 
-void TextBox::update() {
+void TextBox::update(Game::State *gs) {
   
 }
 
-void TextBox::render() {
+void TextBox::render(Game::State *gs) {
   SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
 }
 
