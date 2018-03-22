@@ -53,8 +53,9 @@ void PlanetManager::initGalaxy() {
     hasPlanet[coordinates.x][coordinates.y] = true;
   }
   
-  dockedPlanetIndex = selectedPlanetIndex = -1;
-  discoveryCount = 1;
+  dockedPlanetIndex = 0;      // Start with homeworld docked
+  selectedPlanetIndex = -1;   // Start with no planet selected
+  discoveryCount = 1;         // Start with 1 colonized planet
 
 };
 

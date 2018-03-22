@@ -44,6 +44,8 @@ namespace PlanetParameters {
   
   const float miningCost = 0.00006;
   const float farmingCost = 0.04;
+  const float fertDecay = 0.0001;
+  const int fertDecayDelay = 10;
   const int fuelCost = 250;
   const float infrastructureCost = 0.05;
 }
@@ -108,6 +110,10 @@ private:
   float deposits, fertility;
   int miningPercent, farmingPercent, infraPercent, reservePercent;
   float infrastructure, minerals, food;
+  
+  bool isOverproducing;
+  bool markedOverProd;
+  Uint32 overproductionStartTime;
   
   bool playerDocked;
   bool alienDocked;

@@ -39,6 +39,8 @@ void Planet::initHomeworld() {
   
   // Sets homeworld status
   status = colonized;
+  playerDocked = true;
+  
   SDL_SetTextureAlphaMod(texture, 255);
 }
 
@@ -72,6 +74,10 @@ void Planet::initPlanet() {
   miningPercent = startMiningPercent;
   
   minerals = food = 0;
+  
+  isOverproducing = false;
+  markedOverProd = false;
+  overproductionStartTime = 0;
   
   playerDocked = alienDocked = false;
   
@@ -175,7 +181,9 @@ void Planet::updateMining() {
 }
 
 void Planet::updateFarming() {
-  using PlanetParameters::farmingCost;
+  using namespace PlanetParameters;
+  
+  food = 0; // Resets food
   
   // If there is no one to farm, then return right away
   if (population <= 0 && !playerDocked) return;
@@ -186,17 +194,32 @@ void Planet::updateFarming() {
   
   float product = workers*farmingCost;
   
-  if (product < 0 ) return;
-  
-  if (product <= fertility) {
+  if (product < 0 ) {
+    if (isOverproducing) isOverproducing = markedOverProd = false;
+    return;
+  }
+  if (product < fertility+1) {
     food = product;
+    if (isOverproducing) isOverproducing = markedOverProd = false;
   }
   else {
-    food = product;
-    fertility -= (product-fertility);
-    if (fertility < 0) fertility = 0;
+    food = fertility + (sqrt(product-fertility));
     
-    SDL_SetTextureColorMod(texture, 128, 0, 0);
+    if (isOverproducing == false) {
+      overproductionStartTime = SDL_GetTicks();
+      isOverproducing = true;
+    }
+
+    Uint32 overprodTime = (SDL_GetTicks()-overproductionStartTime)/1000;
+    if (overprodTime >= fertDecayDelay) {
+      fertility -= sqrt(food-fertility) * fertDecay * overprodTime;
+      if (fertility < 0) fertility = 0;
+    }
+    
+    if (isOverproducing && !markedOverProd) {
+      SDL_SetTextureColorMod(texture, 200, 0, 0);
+      markedOverProd = true;
+    }
   }
 }
 
