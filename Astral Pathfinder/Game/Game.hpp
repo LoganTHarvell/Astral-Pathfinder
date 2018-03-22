@@ -86,7 +86,7 @@ private:
   SDL_Window *window;
   State gameState;
 
-  SDL_Texture *mainMenu, *gameScreen, *endScreen;
+  SDL_Texture *mainMenu, *gameScreen, *winScreen, *loseScreen;
   SDL_Rect screenRect;
 
   PlanetManager *planetManager;

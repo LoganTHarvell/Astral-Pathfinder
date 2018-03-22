@@ -24,6 +24,8 @@ namespace UiParameters {
   const SDL_Rect startGameLabel = {600, 401, 424, 57};
   const SDL_Rect scoreboardLabel = {600, 538, 424, 58};
   const SDL_Rect exitGameLabel = {600, 676, 424, 54};
+  const SDL_Rect playAgainLabel = {288, 673, 424, 57};
+  const SDL_Rect endGameExitLabel = {885, 676, 424, 54};
 }
 
 class UIManager {
@@ -47,8 +49,8 @@ private:
   } currentWindow = none;
   
   enum {
-    nothing, startGame, scoreboard, exitGame
-  } mainMenuLabel = nothing;
+    nothing, startGame, scoreboard, exitGame, playAgain, endGameExit
+  } hoveringLabel = nothing;
   
   bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true;
   
@@ -57,8 +59,8 @@ private:
   void setDockedPlanet(Planet p);
   void handleMouseDown(Game::State *gs, PlanetManager *pm);
   void checkClickedArea(SDL_Point p);
-  void checkForHovering(SDL_Point p);
-  void checkClickedAreaMainMenu(Game::State *gs);
+  void checkForHovering(Game::State *gs);
+  void checkClickedAreaOtherScreen(Game::State *gs);
 
 };
 

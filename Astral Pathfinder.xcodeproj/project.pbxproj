@@ -85,6 +85,8 @@
 		9175F954204227A8008D9828 /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arial.ttf; sourceTree = "<group>"; };
 		91B54CA22055C2CD009838B5 /* ShipInfo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShipInfo.cpp; sourceTree = "<group>"; };
 		91B54CA32055C2CD009838B5 /* ShipInfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShipInfo.hpp; sourceTree = "<group>"; };
+		91B97D642064246300701841 /* loseScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loseScreen.png; sourceTree = "<group>"; };
+		91B97D652064246300701841 /* winScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = winScreen.png; sourceTree = "<group>"; };
 		91EC30BD20425BE20068D2F4 /* TextBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextBox.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -201,6 +203,8 @@
 		02DFDC4B200DD04F00A136AF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				91B97D642064246300701841 /* loseScreen.png */,
+				91B97D652064246300701841 /* winScreen.png */,
 				9123A0092061E868009EA3DB /* border.png */,
 				021006092060B903001A0E90 /* MODENINE.TTF */,
 				9150685B20618D1F00EB1CCB /* mainMenu.png */,

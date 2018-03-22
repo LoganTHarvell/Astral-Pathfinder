@@ -66,6 +66,8 @@ void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
     // Object Initialization
     mainMenu = TextureManager::loadTexture("Resources/Assets/mainMenu.png");
     gameScreen = TextureManager::loadTexture("Resources/Assets/gameScreen.png");
+    winScreen = TextureManager::loadTexture("Resources/Assets/winScreen.png");
+    loseScreen = TextureManager::loadTexture("Resources/Assets/loseScreen.png");
     screenRect = { 0, 0, windowRect.w, windowRect.h };
     
     planetManager = new PlanetManager;
@@ -155,10 +157,18 @@ void Game::render() {
   if(gameState.mainMenu)
     SDL_RenderCopy(renderer, mainMenu, NULL, &screenRect);
   
-  else if (gameState.endgame == State::none) {
+  else if(gameState.endgame == State::none) {
     SDL_RenderCopy(renderer, gameScreen, NULL, &screenRect);
     planetManager->render(&gameState);
     shipManager->render(&gameState);
+  }
+  
+  else if(gameState.endgame == State::allDiscovered) {
+    SDL_RenderCopy(renderer, winScreen, NULL, &screenRect);
+  }
+  
+  else if(gameState.endgame == State::fuel) {
+    SDL_RenderCopy(renderer, loseScreen, NULL, &screenRect);
   }
   
   uiManager->render(&gameState, planetManager);
