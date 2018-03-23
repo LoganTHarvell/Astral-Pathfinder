@@ -21,33 +21,41 @@
 
 namespace PlanetParameters {
   
+  // Planet texture information
   const std::string planetTextureFile = "Resources/Assets/planet.png";
   const int planetTexSize = 8;
+  
+  // Planet initial attribute information
   const int minFertility = 0;
   const int fertilityRange = (200-minFertility);
   const int minDeposits = 100;
   const int depositsRange = (600-minDeposits);
-  
-  const int homeStartMiningPercent = 59;
-  const int homeStartFarmingPercent = 100 - homeStartMiningPercent;
-  const int homeStartInfraPercent = 0;
-  const int homeStartReservePercent = 100 - homeStartInfraPercent;
-  
   const int startInfraPercent = 50;
   const int startReservePercent = 100 - startInfraPercent;
   const int startMiningPercent = 100;
   const int startFarmingPercent = 100 - startMiningPercent;
   
-  // Defines resource information
-  const int startPopulation = 5000;
-  const float foodRqmt = 0.02;
+  // Homeworld initial attribute values
+  const int startPopulation = 4000;
+  const int homeStartDeposits = 250;
+  const int homeStartMiningPercent = 50;
+  const int homeStartFarmingPercent = 100 - homeStartMiningPercent;
+  const int homeStartInfraPercent = 0;
+  const int homeStartReservePercent = 100 - homeStartInfraPercent;
   
-  const float miningCost = 0.00006;
-  const float farmingCost = 0.04;
+  // Defines population growth information
+  const float minBirthMultiplier = 0.1;
+  const float birthMultiplierRange = (0.4-minBirthMultiplier);
+  const float minDeathMultiplier = 0.05;
+  const float deathMultiplerRange = (0.15-minDeathMultiplier);
+ 
+  // Defines resource information
+  const float foodRqmt = 0.02;      // Food required per person
+  const float miningRate = 0.00006; // Minerals produced per person per frame
+  const float farmingRate = 0.04;   // Food produced per person per frame
   const float fertDecay = 0.0001;
   const int fertDecayDelay = 10;
-  const int fuelCost = 250;
-  const float infrastructureCost = 0.05;
+  const float infrastructureCost = 0.05;    // Minerals per infrastructure
 }
 
 
@@ -120,8 +128,6 @@ private:
   
   // MARK: - Helper Methods
   void updateStatus();
-  
-  // TODO: - Implement methods
   void updatePopulation();
   void updateMining();
   void updateFarming();

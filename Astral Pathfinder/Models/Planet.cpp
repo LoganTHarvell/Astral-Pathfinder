@@ -27,15 +27,16 @@ void Planet::initHomeworld() {
   // Sets homeworld resources
   population = startPopulation;
   fertility = population*foodRqmt;
-  deposits = fuelCost;
+  deposits = homeStartDeposits;
   
   // Sets homeworld to reserve all minerals mined
   miningPercent = homeStartMiningPercent;
   farmingPercent = homeStartFarmingPercent;
   infraPercent = homeStartInfraPercent;
   reservePercent = homeStartReservePercent;
-  
-  food = (population*(farmingPercent/100.0f))*farmingCost;
+
+  infrastructure = 5000;
+  food = (population*(farmingPercent/100.0f))*farmingRate;
   
   // Sets homeworld status
   status = colonized;
@@ -73,8 +74,9 @@ void Planet::initPlanet() {
   farmingPercent = startFarmingPercent;
   miningPercent = startMiningPercent;
   
-  minerals = food = 0;
+  infrastructure = minerals = food = 0;
   
+  // Set flags
   isOverproducing = false;
   markedOverProd = false;
   overproductionStartTime = 0;
@@ -91,10 +93,9 @@ void Planet::initPlanet() {
 
 void Planet::update(Game::State *gs) {
   updateStatus();
-  
-  if (deposits > 0) updateMining();
-  if (fertility > 0) updateFarming();
-  
+  updatePopulation();
+  updateMining();
+  updateFarming();
 }
 
 void Planet::render(Game::State *gs) {
@@ -156,17 +157,60 @@ void Planet::updateStatus() {
   }
 }
 
-void Planet::updateMining() {
-  using PlanetParameters::miningCost;
+void Planet::updatePopulation() {
+  using namespace PlanetParameters;
   
-  // If there is no one to farm, then return right away
+  // If no people to populate, return immediately
   if (population <= 0 && !playerDocked) return;
   
+  // Calculates surplus food produced
+  int surplus = food-(population*foodRqmt);
+  if (0 > surplus) surplus = 0;
+  
+  
+  float multiplier; // Random multiplier used in birth and death calculations
+  
+  int births = 0;
+  multiplier = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
+  
+  // If player is docked, crew population is set to ship population
+  int crewPop = playerDocked ? ShipParameters::shipPopulation : 0;
+  births = (population+crewPop) * (multiplier+(surplus/(population*foodRqmt)));
+  population += births;
+  
+  int deaths = 0;
+  multiplier = (rand()/(RAND_MAX/deathMultiplerRange)) + minDeathMultiplier;
+  
+  deaths = population * multiplier;
+  population -= deaths;
+  
+  // Calculates deaths due to starvation
+  int fedPopulation = (food/foodRqmt);
+  if (population > (population*foodRqmt)) {
+    population -= (population-fedPopulation);
+  }
+  
+  // Calculates deaths due to infrastructure limitations
+  if (population > infrastructure) {
+    population -= (population-infrastructure);
+  }
+  
+  // Guards against negative population values
+  if (population < 0) population = 0;
+}
+
+void Planet::updateMining() {
+  using PlanetParameters::miningRate;
+  
+  // If there is no one or nothing to mine, then return right away
+  if ((population <= 0 && !playerDocked) || deposits <= 0) return;
+  
+  // Calculates amount of population dedicated to mining
   int workers = population;
   if (playerDocked) workers += ShipParameters::shipPopulation;
   workers *= (miningPercent/100.0f);
   
-  float product = workers*miningCost;
+  float product = workers*miningRate;
   
   if (product < 0 ) return;
   
@@ -185,37 +229,46 @@ void Planet::updateFarming() {
   
   food = 0; // Resets food
   
-  // If there is no one to farm, then return right away
-  if (population <= 0 && !playerDocked) return;
+  // If there is no one or nothing to farm, then return right away
+  if ((population <= 0 && !playerDocked) || fertility <= 0) return;
   
+  // Calculates amount of population dedicated to farming
   int workers = population;
   if (playerDocked) workers += ShipParameters::shipPopulation;
   workers *= (farmingPercent/100.0f);
   
-  float product = workers*farmingCost;
+  float product = workers*farmingRate;  // Food produced
   
+  // Return if no food produced
   if (product < 0 ) {
     if (isOverproducing) isOverproducing = markedOverProd = false;
     return;
   }
+  
+  // If food produced is less than max fertility, return produced amount
   if (product < fertility+1) {
     food = product;
     if (isOverproducing) isOverproducing = markedOverProd = false;
   }
+  // Else food is overproduced
   else {
+    // Reduced production after exceeding max fertility
     food = fertility + (sqrt(product-fertility));
     
+    // Flag overproduction and start time
     if (isOverproducing == false) {
       overproductionStartTime = SDL_GetTicks();
       isOverproducing = true;
     }
 
+    // Calculate time overproducing, decay fertility after delay
     Uint32 overprodTime = (SDL_GetTicks()-overproductionStartTime)/1000;
     if (overprodTime >= fertDecayDelay) {
       fertility -= sqrt(food-fertility) * fertDecay * overprodTime;
       if (fertility < 0) fertility = 0;
     }
     
+    // Mark visually with color mod when overproducing, flag as marked
     if (isOverproducing && !markedOverProd) {
       SDL_SetTextureColorMod(texture, 200, 0, 0);
       markedOverProd = true;
