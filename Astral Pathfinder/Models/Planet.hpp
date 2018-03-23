@@ -58,7 +58,7 @@ namespace PlanetParameters {
   const float farmingRate = 0.04;   // Food produced per person per frame
   const float fertDecay = 0.0001;
   const int fertDecayDelay = 10;
-  const float infrastructureCost = 0.05;    // Minerals per infrastructure
+  const float infrastructureCost = 20;    // Infrastructure per mineral
 }
 
 

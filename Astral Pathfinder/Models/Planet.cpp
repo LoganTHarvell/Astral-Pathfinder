@@ -206,7 +206,7 @@ void Planet::updatePopulation(Uint32 frame) {
   
   // Limits population to infrastructure limits
   if (population > infrastructure) {
-    population -= infrastructure;
+    population = infrastructure;
   }
   
   // Guards against ship crew "dying"
@@ -220,7 +220,7 @@ void Planet::updatePopulation(Uint32 frame) {
 }
 
 void Planet::updateMining() {
-  using PlanetParameters::miningRate;
+  using namespace PlanetParameters;
   
   // If there is no one or nothing to mine, then return right away
   if (population <= 0 || deposits <= 0) return;
@@ -234,7 +234,8 @@ void Planet::updateMining() {
   if (product < 0 ) return;
   
   if (product <= deposits) {
-    minerals += product;
+    minerals += (product * (reservePercent/100.0f));
+    infrastructure += (product * (infraPercent/100.0f)) * infrastructureCost;
     deposits -= product;
   }
   else {
