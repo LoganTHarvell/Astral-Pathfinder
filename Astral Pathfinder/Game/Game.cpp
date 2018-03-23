@@ -30,6 +30,9 @@ SDL_Renderer *Game::renderer = nullptr;
 void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
   using namespace GameParameters;
   
+  // Seeds random number generator
+  srand((unsigned)time(NULL));
+  
   int flags = 0;
   int imgFlags = IMG_INIT_PNG;
   

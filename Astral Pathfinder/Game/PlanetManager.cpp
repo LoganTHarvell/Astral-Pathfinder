@@ -24,9 +24,6 @@ void PlanetManager::initGalaxy() {
   
   planets.reserve(sizeof(Planet) * numberOfPlanets);
   
-  // Sees rand method
-  srand((unsigned)time(NULL));
-  
   bool hasPlanet[numberOfPlanets][numberOfPlanets] = { false };
   
   // Initializes first element in planets array as homeworld
