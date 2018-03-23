@@ -26,7 +26,7 @@ namespace PlanetParameters {
   const int planetTexSize = 8;
   
   // Planet initial attribute information
-  const int minFertility = 0;
+  const int minFertility = 20;
   const int fertilityRange = (200-minFertility);
   const int minDeposits = 100;
   const int depositsRange = (600-minDeposits);
@@ -36,7 +36,8 @@ namespace PlanetParameters {
   const int startFarmingPercent = 100 - startMiningPercent;
   
   // Homeworld initial attribute values
-  const int startPopulation = 4000;
+  const int homeStartPopulation = 5000;
+  const int homeStartFertility = 100;
   const int homeStartDeposits = 250;
   const int homeStartMiningPercent = 50;
   const int homeStartFarmingPercent = 100 - homeStartMiningPercent;
@@ -44,6 +45,7 @@ namespace PlanetParameters {
   const int homeStartReservePercent = 100 - homeStartInfraPercent;
   
   // Defines population growth information
+  const int growthPeriod = 30*GameParameters::fps;
   const float minBirthMultiplier = 0.1;
   const float birthMultiplierRange = (0.4-minBirthMultiplier);
   const float minDeathMultiplier = 0.05;
@@ -113,11 +115,15 @@ private:
   Status status;
   SDL_Point coordinates;
 
-  // resources
-  int population;
+  // Resources
+  float population;
   float deposits, fertility;
   int miningPercent, farmingPercent, infraPercent, reservePercent;
-  float infrastructure, minerals, food;
+  float minerals, infrastructure, food;
+  
+  // Population Growth Period attributes
+  int births, deaths;
+  float birthMult, deathMult;
   
   bool isOverproducing;
   bool markedOverProd;
@@ -128,8 +134,9 @@ private:
   
   // MARK: - Helper Methods
   void updateStatus();
-  void updatePopulation();
+  void updatePopulation(Uint32 frame);
   void updateMining();
+  void updateInfrastructure();
   void updateFarming();
   
   SDL_Point uiPosition(SDL_Point p);

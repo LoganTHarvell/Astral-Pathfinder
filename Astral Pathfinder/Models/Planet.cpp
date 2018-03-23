@@ -25,8 +25,8 @@ void Planet::initHomeworld() {
   initPlanet();
   
   // Sets homeworld resources
-  population = startPopulation;
-  fertility = population*foodRqmt;
+  population = homeStartPopulation;
+  fertility = homeStartFertility;
   deposits = homeStartDeposits;
   
   // Sets homeworld to reserve all minerals mined
@@ -36,7 +36,15 @@ void Planet::initHomeworld() {
   reservePercent = homeStartReservePercent;
 
   infrastructure = 5000;
-  food = (population*(farmingPercent/100.0f))*farmingRate;
+  food = homeStartFertility;
+  
+  // Initial birth and death rate multiplier
+  birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
+  deathMult = (rand()/(RAND_MAX/deathMultiplerRange)) + minDeathMultiplier;
+  
+  // Initial births and deaths in first growth period
+  births = population * birthMult;
+  deaths = population * deathMult;
   
   // Sets homeworld status
   status = colonized;
@@ -74,7 +82,15 @@ void Planet::initPlanet() {
   farmingPercent = startFarmingPercent;
   miningPercent = startMiningPercent;
   
-  infrastructure = minerals = food = 0;
+   minerals = infrastructure = food = 0;
+  
+  // Initial birth and death rate multiplier
+  birthMult = 0;
+  deathMult = 0;
+  
+  // Initial births and deaths in first growth period
+  births = 0;
+  deaths = 0;
   
   // Set flags
   isOverproducing = false;
@@ -93,7 +109,7 @@ void Planet::initPlanet() {
 
 void Planet::update(Game::State *gs) {
   updateStatus();
-  updatePopulation();
+  updatePopulation(gs->frame);
   updateMining();
   updateFarming();
 }
@@ -113,11 +129,12 @@ void Planet::revertClick() {
 }
 
 void Planet::toggleDockedShip(int tag) {
-  using ShipType = ShipParameters::ShipType;
+  using namespace ShipParameters;
   
   switch (tag) {
     case ShipType::playerShip:
       playerDocked = !playerDocked;
+      population += playerDocked ? shipPopulation : -(shipPopulation);
       break;
     case ShipType::alienWarship:
       alienDocked = !alienDocked;
@@ -157,7 +174,7 @@ void Planet::updateStatus() {
   }
 }
 
-void Planet::updatePopulation() {
+void Planet::updatePopulation(Uint32 frame) {
   using namespace PlanetParameters;
   
   // If no people to populate, return immediately
@@ -167,27 +184,20 @@ void Planet::updatePopulation() {
   int surplus = food-(population*foodRqmt);
   if (0 > surplus) surplus = 0;
   
+  if (frame%growthPeriod == 0) {
+    birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
+    deathMult = (rand()/(RAND_MAX/deathMultiplerRange)) + minDeathMultiplier;
+    births = (population) * (birthMult+(surplus/(population*foodRqmt)));
+    deaths = population * deathMult;
+  }
   
-  float multiplier; // Random multiplier used in birth and death calculations
-  
-  int births = 0;
-  multiplier = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
-  
-  // If player is docked, crew population is set to ship population
-  int crewPop = playerDocked ? ShipParameters::shipPopulation : 0;
-  births = (population+crewPop) * (multiplier+(surplus/(population*foodRqmt)));
-  population += births;
-  
-  int deaths = 0;
-  multiplier = (rand()/(RAND_MAX/deathMultiplerRange)) + minDeathMultiplier;
-  
-  deaths = population * multiplier;
-  population -= deaths;
+  population += (births/static_cast<float>(growthPeriod));
+  population -= (deaths/static_cast<float>(growthPeriod));
   
   // Calculates deaths due to starvation
   int fedPopulation = (food/foodRqmt);
-  if (population > (population*foodRqmt)) {
-    population -= (population-fedPopulation);
+  if (population > (fedPopulation)) {
+    population -= (population-fedPopulation)/static_cast<float>(growthPeriod);
   }
   
   // Calculates deaths due to infrastructure limitations
@@ -195,19 +205,24 @@ void Planet::updatePopulation() {
     population -= (population-infrastructure);
   }
   
+  // Guards against ship crew "dying"
+  if (playerDocked && population < ShipParameters::shipPopulation) {
+    population = ShipParameters::shipPopulation;
+  }
   // Guards against negative population values
-  if (population < 0) population = 0;
+  else if (population < 0) {
+    population = 0;
+  }
 }
 
 void Planet::updateMining() {
   using PlanetParameters::miningRate;
   
   // If there is no one or nothing to mine, then return right away
-  if ((population <= 0 && !playerDocked) || deposits <= 0) return;
+  if (population <= 0 || deposits <= 0) return;
   
   // Calculates amount of population dedicated to mining
   int workers = population;
-  if (playerDocked) workers += ShipParameters::shipPopulation;
   workers *= (miningPercent/100.0f);
   
   float product = workers*miningRate;
@@ -230,11 +245,10 @@ void Planet::updateFarming() {
   food = 0; // Resets food
   
   // If there is no one or nothing to farm, then return right away
-  if ((population <= 0 && !playerDocked) || fertility <= 0) return;
+  if (population <= 0 || fertility <= 0) return;
   
   // Calculates amount of population dedicated to farming
   int workers = population;
-  if (playerDocked) workers += ShipParameters::shipPopulation;
   workers *= (farmingPercent/100.0f);
   
   float product = workers*farmingRate;  // Food produced
