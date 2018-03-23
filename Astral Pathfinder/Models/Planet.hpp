@@ -45,11 +45,12 @@ namespace PlanetParameters {
   const int homeStartReservePercent = 100 - homeStartInfraPercent;
   
   // Defines population growth information
-  const int growthPeriod = 30*GameParameters::fps;
+  const int growthPeriod = 1800;      // Frames per growth period
+  const float starveRate = 0.0006;    // Starvation deaths per frame
   const float minBirthMultiplier = 0.1;
   const float birthMultiplierRange = (0.4-minBirthMultiplier);
   const float minDeathMultiplier = 0.05;
-  const float deathMultiplerRange = (0.15-minDeathMultiplier);
+  const float deathMultiplierRange = (0.15-minDeathMultiplier);
  
   // Defines resource information
   const float foodRqmt = 0.02;      // Food required per person
@@ -97,11 +98,11 @@ public:
   int getFarmingPercent() { return farmingPercent; };
   int getInfraPercent() { return infraPercent; };
   int getReservePercent() { return reservePercent; };
-  void setDepositsPercent(int percent) { miningPercent = percent; };
-  void setFertilityPercent(int percent) { farmingPercent = percent; };
+  void setMiningPercent(int percent) { miningPercent = percent; };
+  void setFarmingPercent(int percent) { farmingPercent = percent; };
   void setInfraPercent(int percent) { infraPercent = percent; };
   void setReservePercent(int percent) { reservePercent = percent; };
-  
+
   void clicked();
   void revertClick();
   
@@ -121,14 +122,17 @@ private:
   int miningPercent, farmingPercent, infraPercent, reservePercent;
   float minerals, infrastructure, food;
   
-  // Population Growth Period attributes
-  int births, deaths;
-  float birthMult, deathMult;
+  // Population growth period attributes
+  float birthMult, deathMult;   // Births/Deaths per person in a period
+  int births, deaths;           // Total Birth/Deaths in a period
+  float growthRate;             // Population change per frame
   
+  // Food production flags
   bool isOverproducing;
   bool markedOverProd;
   Uint32 overproductionStartTime;
   
+  // Docking flags
   bool playerDocked;
   bool alienDocked;
   
@@ -136,7 +140,6 @@ private:
   void updateStatus();
   void updatePopulation(Uint32 frame);
   void updateMining();
-  void updateInfrastructure();
   void updateFarming();
   
   SDL_Point uiPosition(SDL_Point p);

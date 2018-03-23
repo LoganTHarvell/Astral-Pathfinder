@@ -40,11 +40,12 @@ void Planet::initHomeworld() {
   
   // Initial birth and death rate multiplier
   birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
-  deathMult = (rand()/(RAND_MAX/deathMultiplerRange)) + minDeathMultiplier;
+  deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
   
   // Initial births and deaths in first growth period
   births = population * birthMult;
   deaths = population * deathMult;
+  growthRate = (births - deaths)/static_cast<float>(growthPeriod);
   
   // Sets homeworld status
   status = colonized;
@@ -77,12 +78,12 @@ void Planet::initPlanet() {
   // Sets planet deposits to random value
   deposits = (rand()%(depositsRange+1)) + minDeposits;
   
+  miningPercent = startMiningPercent;
+  farmingPercent = startFarmingPercent;
   infraPercent = startInfraPercent;
   reservePercent = startReservePercent;
-  farmingPercent = startFarmingPercent;
-  miningPercent = startMiningPercent;
   
-   minerals = infrastructure = food = 0;
+  minerals = infrastructure = food = 0;
   
   // Initial birth and death rate multiplier
   birthMult = 0;
@@ -91,6 +92,7 @@ void Planet::initPlanet() {
   // Initial births and deaths in first growth period
   births = 0;
   deaths = 0;
+  growthRate = 0;
   
   // Set flags
   isOverproducing = false;
@@ -184,25 +186,27 @@ void Planet::updatePopulation(Uint32 frame) {
   int surplus = food-(population*foodRqmt);
   if (0 > surplus) surplus = 0;
   
+  // Resets births and deaths rates for growth period
   if (frame%growthPeriod == 0) {
     birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
-    deathMult = (rand()/(RAND_MAX/deathMultiplerRange)) + minDeathMultiplier;
+    deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
     births = (population) * (birthMult+(surplus/(population*foodRqmt)));
     deaths = population * deathMult;
+    growthRate = (births - deaths)/static_cast<float>(growthPeriod);
   }
   
-  population += (births/static_cast<float>(growthPeriod));
-  population -= (deaths/static_cast<float>(growthPeriod));
+  // Updates population with growth rate (people per frame)
+  population += growthRate;
   
   // Calculates deaths due to starvation
   int fedPopulation = (food/foodRqmt);
   if (population > (fedPopulation)) {
-    population -= (population-fedPopulation)/static_cast<float>(growthPeriod);
+    population -= (population-fedPopulation)*starveRate;
   }
   
-  // Calculates deaths due to infrastructure limitations
+  // Limits population to infrastructure limits
   if (population > infrastructure) {
-    population -= (population-infrastructure);
+    population -= infrastructure;
   }
   
   // Guards against ship crew "dying"
