@@ -44,7 +44,7 @@ void PlanetInfo::render(Game::State *gs, int population) {
   miningText.render(gs);
   farmingText.render(gs);
   
-  if(population > 0 || gs->planetCollided) {
+  if(population > 0) {
     dpText.render(gs);
     fpText.render(gs);
     miningLabel.render(gs);
