@@ -155,6 +155,9 @@ int PlanetInfo::getSliderPercent() {
 
 // MARK: - Helper Methods
 
+// TODO: - Clean up all below code, add comments, whitespace
+// split long lines into multiple like this, assign long stuff to temp variables
+
 void PlanetInfo::setBoxes(Planet p) {
   std::string location, population, food, minerals,
               depoPercent, fertPercent, infPercent, resPercent;
@@ -176,7 +179,9 @@ void PlanetInfo::setBoxes(Planet p) {
   }
   
   if (populationAmount > 0 || p.playerIsDocked()) {
-    population = "Population: " + setStringSpaces(p.getPopulation()) + std::to_string(p.getPopulation());
+    population = "Population: " + setStringSpaces(p.getPopulation())
+                  + std::to_string(p.getPopulation()) + "/"
+                  + std::to_string(p.getInfrastructure());
     food = "Farming: " + setStringSpaces(p.getFood()) + std::to_string(p.getFood()) + "/"
                         + std::to_string(p.getFertility());
     minerals = "Mining: " + setStringSpaces(p.getMinerals()) + std::to_string(p.getMinerals()) + "/"

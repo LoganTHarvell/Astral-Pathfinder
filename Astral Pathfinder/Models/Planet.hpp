@@ -23,13 +23,13 @@ namespace PlanetParameters {
   
   // Planet texture information
   const std::string planetTextureFile = "Resources/Assets/planet.png";
-  const int planetTexSize = 8;
+  const int planetTexSize = 16;
   
   // Planet initial attribute information
   const int minFertility = 20;
   const int fertilityRange = (200-minFertility);
-  const int minDeposits = 100;
-  const int depositsRange = (600-minDeposits);
+  const int minDeposits = 200;
+  const int depositsRange = (1000-minDeposits);
   const int startInfraPercent = 50;
   const int startReservePercent = 100 - startInfraPercent;
   const int startMiningPercent = 100;
@@ -45,8 +45,8 @@ namespace PlanetParameters {
   const int homeStartReservePercent = 100 - homeStartInfraPercent;
   
   // Defines population growth information
-  const int growthPeriod = 1800;      // Frames per growth period
-  const float starveRate = 0.0006;    // Starvation deaths per frame
+  const int growthPeriod = 900;      // Frames per growth period
+  const float starveRate = 0.0008;    // Starvation deaths per frame
   const float minBirthMultiplier = 0.1;
   const float birthMultiplierRange = (0.4-minBirthMultiplier);
   const float minDeathMultiplier = 0.05;
@@ -54,7 +54,7 @@ namespace PlanetParameters {
  
   // Defines resource information
   const float foodRqmt = 0.02;      // Food required per person
-  const float miningRate = 0.00006; // Minerals produced per person per frame
+  const float miningRate = 0.0001; // Minerals produced per person per frame
   const float farmingRate = 0.04;   // Food produced per person per frame
   const float fertDecay = 0.0001;
   const int fertDecayDelay = 10;
@@ -92,6 +92,7 @@ public:
   SDL_Point getLocation() { return coordinates; };
   int getPopulation() { return population; };
   int getMinerals() { return minerals; };
+  int getInfrastructure() { return infrastructure; };
   int getFood() { return food; };
   
   int getMiningPercent() { return miningPercent; };
