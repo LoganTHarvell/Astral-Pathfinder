@@ -23,19 +23,30 @@ void UIManager::init() {
   selectedPlanetInfo.init(selectedPlanetRect);
   DockedPlanetInfo.init(currentPlanetRect);
   shipInfo.init(shipInfoRect);
+  hoverBorder = TextureManager::loadTexture("Resources/Assets/border.png");
 }
 
 // MARK: - Game Loop Methods
 
 void UIManager::update(Game::State *gameState, PlanetManager *planetManager, ShipManager *shipManager) {
-  // TODO: Implement main menu and endscreen
   if (gameState->mainMenu) {
-    // mainMenu.update(gameState);
+    checkForHovering(gameState);
+    if(gameState->mouseDown)
+      checkClickedAreaOtherScreen(gameState);
+    
     return;
   }
-  else if (gameState->endgame != Game::State::none) {
-    // endScreen.update(gameState);
+  else if (gameState->endgame == Game::State::quit) {
+    gameState->mainMenu = false;
     gameState->isRunning = false;
+    return;
+  }
+  else if (gameState->endgame != Game::State::none){
+    gameState->mainMenu = false;
+    checkForHovering(gameState);
+    if(gameState->mouseDown)
+      checkClickedAreaOtherScreen(gameState);
+
     return;
   }
   
@@ -66,12 +77,22 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
 }
 
 void UIManager::render(Game::State *gameState, PlanetManager *pm) {
+  using namespace UiParameters;
   if (gameState->mainMenu) {
-    // mainMenu.render();
+    if(hoveringLabel == startGame)
+      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
+    else if(hoveringLabel == scoreboard)
+      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
+    else if(hoveringLabel == exitGame)
+      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
   else if (gameState->endgame != Game::State::none) {
-    // endScreen.render();
+    // TODO: - Render score
+    if(hoveringLabel == playAgain)
+      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
+    else if(hoveringLabel == endGameExit)
+      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
   
@@ -194,4 +215,104 @@ void UIManager::checkClickedArea(SDL_Point p) {
     currentWindow = selectedPlanetWindow;
   
   else currentWindow = none;
+}
+
+void UIManager::checkForHovering(Game::State *gs) {
+  using namespace UiParameters;
+  SDL_Point p = gs->dragLocation;
+  
+  // Main Menu
+  if(gs->mainMenu) {
+    if((p.x > startGameLabel.x) && (p.x < startGameLabel.x + startGameLabel.w)
+       && (p.y > startGameLabel.y) && (p.y < startGameLabel.y + startGameLabel.h)) {
+      hoveringLabel = startGame;
+      
+      if(borderRect.y != startGameLabel.y-11)
+        borderRect = {582, 390, 460, 95};
+    }
+  
+    else if((p.x > scoreboardLabel.x) && (p.x < scoreboardLabel.x + scoreboardLabel.w)
+            && (p.y > scoreboardLabel.y) && (p.y < scoreboardLabel.y + scoreboardLabel.h)) {
+      hoveringLabel = scoreboard;
+      
+      if(borderRect.y != scoreboardLabel.y-11)
+        borderRect = {582, 527, 460, 96};
+    }
+  
+    else if((p.x > exitGameLabel.x) && (p.x < exitGameLabel.x + exitGameLabel.w)
+            && (p.y > exitGameLabel.y) && (p.y < exitGameLabel.y + exitGameLabel.h)) {
+      hoveringLabel = exitGame;
+      
+      if(borderRect.y != exitGameLabel.y-11)
+        borderRect = {582, 665, 460, 92};
+    }
+  
+    else hoveringLabel = nothing;
+  }
+  
+  // End Screen
+  else if(gs->endgame != Game::State::none && gs->endgame != Game::State::quit) {
+    if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
+       && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
+      hoveringLabel = playAgain;
+      
+      if(borderRect.y != playAgainLabel.y-11)
+        borderRect = {270, 662, 460, 95};
+    }
+    
+    else if((p.x > endGameExitLabel.x) && (p.x < endGameExitLabel.x + endGameExitLabel.w)
+            && (p.y > endGameExitLabel.y) && (p.y < endGameExitLabel.y + endGameExitLabel.h)) {
+      hoveringLabel = endGameExit;
+      
+      if(borderRect.y != endGameExitLabel.y-11)
+        borderRect = {867, 665, 460, 92};
+    }
+    
+    else hoveringLabel = nothing;
+  }
+}
+
+void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
+  SDL_Point p = gs->clickLocation;
+  using namespace UiParameters;
+  
+  // Main Menu
+  if(gs->mainMenu) {
+    if((p.x > startGameLabel.x) && (p.x < startGameLabel.x + startGameLabel.w)
+       && (p.y > startGameLabel.y) && (p.y < startGameLabel.y + startGameLabel.h)) {
+      hoveringLabel = nothing;
+      gs->mainMenu = false;
+    }
+  
+  // Future score board
+   /* else if((p.x > scoreboardLabel.x) && (p.x < scoreboardLabel.x + scoreboardLabel.w)
+            && (p.y > scoreboardLabel.y) && (p.y < scoreboardLabel.y + scoreboardLabel.h))
+    */
+  
+    else if((p.x > exitGameLabel.x) && (p.x < exitGameLabel.x + exitGameLabel.w)
+       && (p.y > exitGameLabel.y) && (p.y < exitGameLabel.y + exitGameLabel.h)) {
+      hoveringLabel = nothing;
+      gs->mainMenu = false;
+      gs->endgame = Game::State::quit;
+    }
+  }
+  
+  // End Screen
+  else if(gs->endgame != Game::State::none && gs->endgame != Game::State::quit) {
+    if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
+       && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
+      hoveringLabel = nothing;
+      gs->mainMenu = true;
+      gs->endgame = Game::State::none;
+      gs->restartGame = true;
+      gs->mouseDown = false;
+    }
+    
+    else if((p.x > endGameExitLabel.x) && (p.x < endGameExitLabel.x + endGameExitLabel.w)
+            && (p.y > endGameExitLabel.y) && (p.y < endGameExitLabel.y + endGameExitLabel.h)) {
+      hoveringLabel = nothing;
+      gs->mainMenu = false;
+      gs->endgame = Game::State::quit;
+    }
+  }
 }
