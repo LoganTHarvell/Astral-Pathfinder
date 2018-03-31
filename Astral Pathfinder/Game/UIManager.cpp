@@ -206,6 +206,8 @@ void UIManager::checkClickedArea(SDL_Point p) {
 void UIManager::checkForHovering(Game::State *gs) {
   using namespace UiParameters;
   SDL_Point p = gs->dragLocation;
+  
+  // Main Menu
   if(gs->mainMenu) {
     if((p.x > startGameLabel.x) && (p.x < startGameLabel.x + startGameLabel.w)
        && (p.y > startGameLabel.y) && (p.y < startGameLabel.y + startGameLabel.h)) {
@@ -234,6 +236,7 @@ void UIManager::checkForHovering(Game::State *gs) {
     else hoveringLabel = nothing;
   }
   
+  // End Screen
   else if(gs->endgame != Game::State::none && gs->endgame != Game::State::quit) {
     if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
        && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
@@ -258,6 +261,8 @@ void UIManager::checkForHovering(Game::State *gs) {
 void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
   SDL_Point p = gs->clickLocation;
   using namespace UiParameters;
+  
+  // Main Menu
   if(gs->mainMenu) {
     if((p.x > startGameLabel.x) && (p.x < startGameLabel.x + startGameLabel.w)
        && (p.y > startGameLabel.y) && (p.y < startGameLabel.y + startGameLabel.h)) {
@@ -265,6 +270,7 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
       gs->mainMenu = false;
     }
   
+  // Future score board
    /* else if((p.x > scoreboardLabel.x) && (p.x < scoreboardLabel.x + scoreboardLabel.w)
             && (p.y > scoreboardLabel.y) && (p.y < scoreboardLabel.y + scoreboardLabel.h))
     */
@@ -277,6 +283,7 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
     }
   }
   
+  // End Screen
   else if(gs->endgame != Game::State::none && gs->endgame != Game::State::quit) {
     if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
        && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
