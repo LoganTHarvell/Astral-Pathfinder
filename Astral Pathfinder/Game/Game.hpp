@@ -46,6 +46,7 @@ public:
     // Flags
     bool isRunning = false;
     bool mainMenu = false;
+    bool restartGame = false;
     
     enum {
       none, allDiscovered, fuel, quit
@@ -75,8 +76,10 @@ public:
   void render();
   
   // MARK: - Game Methods
-  bool running() { return gameState.isRunning; };
+  bool running() { return gameState.isRunning; }
+  bool restart() { return gameState.restartGame; }
   void clean();
+  void restartGame();
 
   // Global renderer
   static SDL_Renderer *renderer;

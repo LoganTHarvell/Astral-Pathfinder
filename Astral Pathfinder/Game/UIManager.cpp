@@ -6,6 +6,8 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
+#include <iostream>
+
 // MARK: Header File
 #include "UIManager.hpp"
 
@@ -265,7 +267,7 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
   
    /* else if((p.x > scoreboardLabel.x) && (p.x < scoreboardLabel.x + scoreboardLabel.w)
             && (p.y > scoreboardLabel.y) && (p.y < scoreboardLabel.y + scoreboardLabel.h))
-      mainMenuLabel = nothing; */
+    */
   
     else if((p.x > exitGameLabel.x) && (p.x < exitGameLabel.x + exitGameLabel.w)
        && (p.y > exitGameLabel.y) && (p.y < exitGameLabel.y + exitGameLabel.h)) {
@@ -275,13 +277,13 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
     }
   }
   
-  // TODO: - Implement real playAgain logic
   else if(gs->endgame != Game::State::none && gs->endgame != Game::State::quit) {
     if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
        && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
       hoveringLabel = nothing;
-      gs->mainMenu = false;
-      gs->endgame = Game::State::quit;
+      gs->mainMenu = true;
+      gs->endgame = Game::State::none;
+      gs->restartGame = true;
     }
     
     else if((p.x > endGameExitLabel.x) && (p.x < endGameExitLabel.x + endGameExitLabel.w)

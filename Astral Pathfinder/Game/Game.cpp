@@ -146,6 +146,9 @@ void Game::update(Uint32 ticks) {
   }
   
   uiManager->update(&gameState, planetManager, shipManager);
+  
+  if(gameState.restartGame)
+    restartGame();
 }
 
 void Game::render() {
@@ -188,4 +191,21 @@ void Game::clean() {
   TTF_Quit();
   
   std::cout << "Game cleaned." << std::endl;
+}
+
+void Game::restartGame() {
+  delete planetManager;
+  delete shipManager;
+  delete uiManager;
+  
+  planetManager = new PlanetManager;
+  planetManager->initGalaxy();
+  
+  shipManager = new ShipManager;
+  shipManager->init(planetManager->getPlanet(0).getCenter());
+  
+  uiManager = new UIManager;
+  uiManager->init();
+  
+  gameState.restartGame = false;
 }
