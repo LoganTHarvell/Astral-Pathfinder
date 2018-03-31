@@ -118,11 +118,11 @@ void Game::handleEvents() {
         gameState.clickLocation = { event.button.x, event.button.y };
         break;
       case SDL_MOUSEMOTION:
-        if(gameState.mainMenu)
+        if(gameState.mainMenu || (gameState.endgame != State::none && gameState.endgame != State::quit))
           gameState.dragLocation = { event.motion.x, event.motion.y };
         
-        else if(gameState.planetSelected || gameState.planetCollided)
-          gameState.dragLocation = { event.motion.x, event.motion.y };
+        //else if(gameState.planetSelected || gameState.planetCollided)
+        //  gameState.dragLocation = { event.motion.x, event.motion.y };
         break;
       case SDL_MOUSEBUTTONUP:
         gameState.clickFlag = true;

@@ -6,8 +6,6 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
-#include <iostream>
-
 // MARK: Header File
 #include "UIManager.hpp"
 
@@ -31,6 +29,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     checkForHovering(gameState);
     if(gameState->mouseDown)
       checkClickedAreaOtherScreen(gameState);
+    
     return;
   }
   else if (gameState->endgame == Game::State::quit) {
@@ -43,6 +42,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     checkForHovering(gameState);
     if(gameState->mouseDown)
       checkClickedAreaOtherScreen(gameState);
+
     return;
   }
   
@@ -291,6 +291,7 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
       gs->mainMenu = true;
       gs->endgame = Game::State::none;
       gs->restartGame = true;
+      gs->mouseDown = false;
     }
     
     else if((p.x > endGameExitLabel.x) && (p.x < endGameExitLabel.x + endGameExitLabel.w)
