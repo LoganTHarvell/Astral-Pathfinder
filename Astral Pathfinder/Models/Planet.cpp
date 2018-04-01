@@ -170,9 +170,11 @@ void Planet::updateStatus() {
   }
   else if (status == discovered && (population > 0 || playerDocked)) {
     status = colonized;
+    SDL_SetTextureColorMod(texture, 255, 255, 255);
   }
   else if (status == colonized && (population == 0 && !playerDocked)) {
     status = discovered;
+    SDL_SetTextureColorMod(texture, 50, 50, 50);
   }
 }
 
