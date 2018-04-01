@@ -41,27 +41,26 @@ void ShipInfo::render(Game::State *gs) {
 
 void ShipInfo::clean() {
   location.clean();
-  crewLabel.clean();
+  //crewLabel.clean();
   fuel.clean();
-  crewNum.clean();
+  //crewNum.clean();
   curPlanet.clean();
-  bar.clean();
+  //bar.clean();
 }
 
 // MARK: - ShipInfo Methods
 
 void ShipInfo::setText(Ship ship) {
-  SDL_Point pos = ship.getUIPosition();
+  SDL_Point pos = ship.getCenter();
   std::string loc = "Location: " + std::to_string(pos.x) + "," + std::to_string(pos.y);
   std::string fuelNum = "Fuel: " + std::to_string(ship.getFuel());
-  std::string crew = std::to_string(ship.getPopulation());
   
   location.setMessage(loc.c_str());
   fuel.setMessage(fuelNum.c_str());
-  crewNum.setMessage(crew.c_str());
+  curPlanet.setMessage("Current Planet: Hoth");
   if(crewLabel.checkNull()) {
     crewLabel.setMessage("Crew");
-    curPlanet.setMessage("Current Planet: Hoth");
+    crewNum.setMessage("1000");
     bar.setMessage("----------------------------------------------------");
   }
 }
@@ -86,9 +85,3 @@ void ShipInfo::setUiRects() {
   curPlanetRect = {midW-(curPlanetW/2), fuelRect.y+gapH, curPlanetW, static_cast<int>(origin.h/4.8)};
   barRect = {origin.x, curPlanetRect.y-buffer, origin.w, 4};
 }
-
-
-//crewLabelRect = {threeQuarters-(temp.x/2), locationRect.y, temp.x, temp.y};
-//locationRect = {midW+(buffer*2), origin.y+(buffer*2), static_cast<int>(origin.w/2.28), temp.y};
-//fuelRect = {locationRect.x, locationRect.y+gapH, temp.x, temp.y};
-//crewNumRect = {threeQuarters-(crewNumW/2), fuelRect.y, crewNumW, temp.y};
