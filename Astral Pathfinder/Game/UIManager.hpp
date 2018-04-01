@@ -54,8 +54,7 @@ private:
     nothing, startGame, scoreboard, exitGame, playAgain, endGameExit
   } hoveringLabel = nothing;
   
-  bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true,
-       shipInfoWindowDisplayed = false;
+  bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true;
   
   // MARK: - Helper Methods
   void updateTime(Uint32);

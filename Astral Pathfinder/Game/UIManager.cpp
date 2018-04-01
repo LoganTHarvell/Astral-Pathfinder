@@ -53,11 +53,10 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
   updateTime(gameState->elapsedTime);
   
   Ship player = shipManager->getPlayerShip();
-  if(!shipInfoWindowDisplayed || player.getVelocity().x != 0 ||
-    player.getVelocity().y != 0) {
+  if(player.getVelocity().x != 0 || player.getVelocity().y != 0
+     || planetManager->planetIsDocked()) {
     shipInfo.clean();
     shipInfo.setText(player);
-    shipInfoWindowDisplayed = true;
   }
   
   if (gameState->planetSelected) {
