@@ -115,14 +115,14 @@ Planet PlanetManager::getDockedPlanet() {
   return planets[dockedPlanetIndex];
 }
 
-void PlanetManager::setPlanetDepoPercent(int p, int flag) {
+void PlanetManager::setPlanetMiningPercent(int p, int flag) {
   if(flag == 1)
     planets[dockedPlanetIndex].setMiningPercent(p);
   if(flag == 2)
     planets[selectedPlanetIndex].setMiningPercent(p);
 }
 
-void PlanetManager::setPlanetFertPercent(int p, int flag) {
+void PlanetManager::setPlanetFarmingPercent(int p, int flag) {
   if(flag == 1)
     planets[dockedPlanetIndex].setFarmingPercent(p);
   if(flag == 2)

@@ -65,14 +65,6 @@ void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
     
     gameState.isRunning = true;
     gameState.frame = 0;
-    gameState.mainMenu = true;
-    
-    // Object Initialization
-    mainMenu = TextureManager::loadTexture("Resources/Assets/mainMenu.png");
-    gameScreen = TextureManager::loadTexture("Resources/Assets/gameScreen.png");
-    winScreen = TextureManager::loadTexture("Resources/Assets/winScreen.png");
-    loseScreen = TextureManager::loadTexture("Resources/Assets/loseScreen.png");
-    screenRect = { 0, 0, windowRect.w, windowRect.h };
     
     planetManager = new PlanetManager;
     planetManager->initGalaxy();
@@ -103,7 +95,7 @@ void Game::handleEvents() {
         break;
       case SDL_KEYDOWN:
       {
-        if(!gameState.mainMenu) {
+        if(!uiManager->checkMainMenu()) {
           // Gets pressed key
           SDL_Keycode key = event.key.keysym.sym;
           
@@ -122,7 +114,7 @@ void Game::handleEvents() {
         gameState.clickLocation = { event.button.x, event.button.y };
         break;
       case SDL_MOUSEMOTION:
-        if(gameState.mainMenu || (gameState.endgame != State::none && gameState.endgame != State::quit))
+        if(uiManager->checkMainMenu() || (gameState.endgame != State::none && gameState.endgame != State::quit))
           gameState.dragLocation = { event.motion.x, event.motion.y };
         
         else if(gameState.planetSelected || gameState.planetCollided)
@@ -142,11 +134,9 @@ void Game::handleEvents() {
 }
 
 void Game::update(Uint32 ticks) {
-  gameState.frame++;
-  gameState.elapsedTime = SDL_GetTicks()/1000;
-  gameState.ticks = ticks;
-
-  if (!gameState.mainMenu && gameState.endgame == State::none) {
+  if (!uiManager->checkMainMenu() && gameState.endgame == State::none) {
+    gameState.frame++;
+    gameState.elapsedTime = SDL_GetTicks()/1000;
     gameState.ticks = ticks;
   
     planetManager->update(&gameState, shipManager);
@@ -165,24 +155,12 @@ void Game::render() {
   SDL_RenderClear(renderer);
   
   // Render stuff
-  if(gameState.mainMenu)
-    SDL_RenderCopy(renderer, mainMenu, NULL, &screenRect);
+  uiManager->render(&gameState, planetManager);
   
-  else if(gameState.endgame == State::none) {
-    SDL_RenderCopy(renderer, gameScreen, NULL, &screenRect);
+  if(!uiManager->checkMainMenu() && gameState.endgame == State::none) {
     planetManager->render(&gameState);
     shipManager->render(&gameState);
   }
-  
-  else if(gameState.endgame == State::allDiscovered) {
-    SDL_RenderCopy(renderer, winScreen, NULL, &screenRect);
-  }
-  
-  else if(gameState.endgame == State::fuel) {
-    SDL_RenderCopy(renderer, loseScreen, NULL, &screenRect);
-  }
-  
-  uiManager->render(&gameState, planetManager);
 
   SDL_RenderPresent(renderer);
 }

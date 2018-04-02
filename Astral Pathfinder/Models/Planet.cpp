@@ -168,11 +168,11 @@ void Planet::updateStatus() {
     status = discovered;
     SDL_SetTextureAlphaMod(texture, 255);
   }
-  else if (status == discovered && (population > 0 || playerDocked)) {
+  else if (status == discovered && population > 0) {
     status = colonized;
     SDL_SetTextureColorMod(texture, 255, 255, 255);
   }
-  else if (status == colonized && (population == 0 && !playerDocked)) {
+  else if (status == colonized && population == 0) {
     status = discovered;
     SDL_SetTextureColorMod(texture, 50, 50, 50);
   }
@@ -182,7 +182,7 @@ void Planet::updatePopulation(Uint32 frame) {
   using namespace PlanetParameters;
   
   // If no people to populate, return immediately
-  if (population <= 0 && !playerDocked) return;
+  if (population <= 0) return;
   
   // Calculates surplus food produced
   int surplus = food-(population*foodRqmt);

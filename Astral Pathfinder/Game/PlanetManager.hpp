@@ -43,8 +43,8 @@ public:
   Planet getSelectedPlanet();
   bool planetIsDocked();
   Planet getDockedPlanet();
-  void setPlanetDepoPercent(int p, int flag);
-  void setPlanetFertPercent(int p, int flag);
+  void setPlanetMiningPercent(int p, int flag);
+  void setPlanetFarmingPercent(int p, int flag);
   void setPlanetInfraPercent(int p, int flag);
   void setPlanetReservePercent(int p, int flag);
   
