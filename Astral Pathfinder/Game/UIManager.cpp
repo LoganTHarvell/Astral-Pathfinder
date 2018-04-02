@@ -93,7 +93,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
   else if (gameState->endgame != Game::State::none) {
     if(gameState->endgame == Game::State::allDiscovered)
       SDL_RenderCopy(Game::renderer, winScreen, NULL, &screenRect);
-    else
+    else if(gameState->endgame == Game::State::noFuel)
       SDL_RenderCopy(Game::renderer, loseScreen, NULL, &screenRect);
     
     // TODO: - Render score

@@ -61,14 +61,6 @@ void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
     }
     
     gameState.isRunning = true;
-    //gameState.mainMenu = true;
-    
-    // Object Initialization
-    //mainMenu = TextureManager::loadTexture("Resources/Assets/mainMenu.png");
-    //gameScreen = TextureManager::loadTexture("Resources/Assets/gameScreen.png");
-    //winScreen = TextureManager::loadTexture("Resources/Assets/winScreen.png");
-    //loseScreen = TextureManager::loadTexture("Resources/Assets/loseScreen.png");
-    //screenRect = { 0, 0, windowRect.w, windowRect.h };
     
     planetManager = new PlanetManager;
     planetManager->initGalaxy();
