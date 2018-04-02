@@ -22,8 +22,8 @@
 // MARK: - TextBox Parameters
 
 namespace TextParameters {
-  const SDL_Color color = {255, 255, 255};
-  const std::string fontFile = "Resources/Assets/Arial.ttf";
+  const SDL_Color color = { 0, 128, 0 };
+  const std::string fontFile = "Resources/Assets/MODENINE.TTF";
 }
 
 
@@ -35,8 +35,8 @@ public:
   void init(SDL_Rect rect);
   
   // MARK: - Game Loop Methods
-  void update();
-  void render();
+  void update(Game::State *gs);
+  void render(Game::State *gs);
   void clean();
   
   // MARK: - TextBox Methods

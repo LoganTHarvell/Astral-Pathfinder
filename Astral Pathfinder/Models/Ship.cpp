@@ -45,14 +45,15 @@ void Ship::init(SDL_Point startPosition, ShipParameters::ShipType type) {
 
 // MARK: - Game Loop Methods
 
-void Ship::update() {
+void Ship::update(Game::State * gs) {
   updateVelocity();
   updateRotation();
+  updatePosition(gs->ticks);
   
   collider->update(getCenter(), computeShipVertices());
 }
 
-void Ship::render() {
+void Ship::render(Game::State *gs) {
   SDL_RenderCopyEx(Game::renderer, texture, NULL, &rect,
                    rotation, NULL, SDL_FLIP_NONE);
 }
@@ -60,36 +61,12 @@ void Ship::render() {
 
 // MARK: - Ship Methods
 
-void Ship::updateVelocity() {
-  using namespace ShipParameters;
-  
-  auto *keyState = SDL_GetKeyboardState(NULL);
-  
-  if (keyState[SDL_SCANCODE_UP]) velocity.y = (-speed);
-  else if (keyState[SDL_SCANCODE_DOWN]) velocity.y = speed;
-  else velocity.y = 0;
-  
-  if (keyState[SDL_SCANCODE_RIGHT]) velocity.x = speed;
-  else if (keyState[SDL_SCANCODE_LEFT]) velocity.x = (-speed);
-  else velocity.x = 0;
-  
-}
-
-void Ship::move(Uint32 ticks) {
-  rect.x += (velocity.x * (ticks/10));
-  rect.y += (velocity.y * (ticks/10));
-  
-  if (boundaryCollision()) {
-    rect.x -= (velocity.x * (ticks/10));
-    rect.y -= (velocity.y * (ticks/10));
-  }
-}
-
-// MARK: - Helper Methods
-
 SDL_Point Ship::getMapPosition(SDL_Point uiPosition) {
   return Map::mapPosition(uiPosition);
 }
+
+
+// MARK: - Helper Methods
 
 bool Ship::boundaryCollision() {
   PointVector vertices = computeShipVertices();
@@ -131,6 +108,20 @@ PointVector Ship::computeShipVertices() {
   return shipVertices;
 }
 
+void Ship::updateVelocity() {
+  using namespace ShipParameters;
+  
+  auto *keyState = SDL_GetKeyboardState(NULL);
+  
+  if (keyState[SDL_SCANCODE_UP]) velocity.y = (-speed);
+  else if (keyState[SDL_SCANCODE_DOWN]) velocity.y = speed;
+  else velocity.y = 0;
+  
+  if (keyState[SDL_SCANCODE_RIGHT]) velocity.x = speed;
+  else if (keyState[SDL_SCANCODE_LEFT]) velocity.x = (-speed);
+  else velocity.x = 0;
+  
+}
 
 void Ship::updateRotation() {
   using ShipParameters:: turnSpeed;
@@ -179,4 +170,22 @@ void Ship::updateRotation() {
     rotation = tmp;
   }
   
+}
+
+void Ship::updatePosition(Uint32 ticks) {
+  if (fuel <= 0) return;
+  
+  rect.x += (velocity.x * (ticks/10));
+  rect.y += (velocity.y * (ticks/10));
+  
+  if (boundaryCollision()) {
+    rect.x -= (velocity.x * (ticks/10));
+    rect.y -= (velocity.y * (ticks/10));
+  }
+  
+  if (velocity.x != 0 || velocity.y != 0) fuel -=1;
+}
+
+void Ship::updateFuel(int minerals) {
+  fuel += minerals;
 }

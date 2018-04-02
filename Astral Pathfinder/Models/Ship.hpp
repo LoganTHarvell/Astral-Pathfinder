@@ -50,8 +50,8 @@ public:
   void init(SDL_Point startPosition, ShipParameters::ShipType type);
   
   // MARK: - Game Loop Methods
-  void update();
-  void render();
+  void update(Game::State *gs);
+  void render(Game::State *gs);
   
   // MARK: - Ship Methods
   ShipParameters::ShipType getTag() { return tag; };
@@ -61,9 +61,8 @@ public:
   SDL_Point getUIPosition() { return getCenter(); };
   SDL_Point getMapPosition(SDL_Point uiPosition);
   
-  void move(Uint32 ticks);
+  void updateFuel(int minerals);
   
-
 private:
   // MARK: - Ship Fields
   ShipParameters::ShipType tag;
@@ -80,6 +79,8 @@ private:
   
   void updateVelocity();
   void updateRotation();
+  void updatePosition(Uint32 ticks);
+
 };
 
 #endif /* Ship_hpp */

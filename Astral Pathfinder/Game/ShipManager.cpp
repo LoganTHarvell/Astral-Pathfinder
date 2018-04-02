@@ -24,14 +24,13 @@ void ShipManager::init(SDL_Point homeworldPos) {
 
 // MARK: - Game Loop Methods
 
-void ShipManager::update(Uint32 ticks) {
-  // TODO: Put ticks in GameState then add GameState to update parameters
-  playerShip.update();
-  playerShip.move(ticks);
+void ShipManager::update(Game::State *gameState, PlanetManager *pm) {
+  playerShip.update(gameState);
+  if (pm->planetIsDocked()) playerShip.updateFuel(pm->fuelDockedShip());
 }
 
 void ShipManager::render(Game::State *gameState) {
-  playerShip.render();
+  playerShip.render(gameState);
   
   if (gameState->debugMode) {
     DebugTools::renderVertices(playerShip.getCollider().getVertices());

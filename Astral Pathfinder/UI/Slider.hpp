@@ -24,7 +24,9 @@ namespace SliderParameters {
   
   const std::string barFilename = "Resources/Assets/base.png";
   const std::string circFilename = "Resources/Assets/slider.png";
-
+  const SDL_Color baseColor = { 150, 150, 150 };
+  const SDL_Color sliderColor = { 0, 128, 0 };
+  
 }
 
 
@@ -43,6 +45,7 @@ public:
   // MARK: - Slider Methods
   bool isInitialized();
   void setTextures(int percent);
+  void colorMod(SDL_Color base, SDL_Color slider);
   SDL_Rect getBaseRect() { return base; }
   SDL_Rect getSliderRect() { return slider; }
   SDL_Point getSliderPosition() { return { slider.x, slider.y }; };

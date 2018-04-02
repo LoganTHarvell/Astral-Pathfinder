@@ -14,6 +14,7 @@
 
 // MARK: Source Files
 #include "Game.hpp"
+#include "PlanetManager.hpp"
 #include "Ship.hpp"
 
 class ShipManager {
@@ -23,7 +24,7 @@ public:
   void init(SDL_Point homeworldPos);
   
   // MARK: - Game Loop Methods
-  void update(Uint32 ticks);
+  void update(Game::State *gameState, PlanetManager *pm);
   void render(Game::State *gameState);
   
   // MARK: - ShipManager Methods

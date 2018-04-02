@@ -30,13 +30,13 @@ void ShipInfo::init(SDL_Rect src) {
 
 // MARK: - Game Loop Methods
 
-void ShipInfo::render() {
-  location.render();
-  crewLabel.render();
-  fuel.render();
-  crewNum.render();
-  curPlanet.render();
-  bar.render();
+void ShipInfo::render(Game::State *gs) {
+  location.render(gs);
+  crewLabel.render(gs);
+  fuel.render(gs);
+  crewNum.render(gs);
+  curPlanet.render(gs);
+  bar.render(gs);
 }
 
 void ShipInfo::clean() {

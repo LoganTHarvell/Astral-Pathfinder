@@ -24,14 +24,33 @@ void Planet::initHomeworld() {
   // initializes random planet
   initPlanet();
   
-  // Sets homeword resources
-  population = startPopulation;
-  fertility = population*foodRqmt;
-  deposits = fuelCost;
-  food = (population*(fertilityPercent/100.0f))*farmingCost;
+  // Sets homeworld resources
+  population = homeStartPopulation;
+  fertility = homeStartFertility;
+  deposits = homeStartDeposits;
+  
+  // Sets homeworld to reserve all minerals mined
+  miningPercent = homeStartMiningPercent;
+  farmingPercent = homeStartFarmingPercent;
+  infraPercent = homeStartInfraPercent;
+  reservePercent = homeStartReservePercent;
+
+  infrastructure = 5000;
+  food = homeStartFertility;
+  
+  // Initial birth and death rate multiplier
+  birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
+  deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
+  
+  // Initial births and deaths in first growth period
+  births = population * birthMult;
+  deaths = population * deathMult;
+  growthRate = (births - deaths)/static_cast<float>(growthPeriod);
   
   // Sets homeworld status
   status = colonized;
+  playerDocked = true;
+  
   SDL_SetTextureAlphaMod(texture, 255);
 }
 
@@ -59,11 +78,26 @@ void Planet::initPlanet() {
   // Sets planet deposits to random value
   deposits = (rand()%(depositsRange+1)) + minDeposits;
   
-  infraPercent = reservePercent = 50;
-  fertilityPercent = startFarmingPercent;
-  depositsPercent = startMiningPercent;
+  miningPercent = startMiningPercent;
+  farmingPercent = startFarmingPercent;
+  infraPercent = startInfraPercent;
+  reservePercent = startReservePercent;
   
-  minerals = food = 0;
+  minerals = infrastructure = food = 0;
+  
+  // Initial birth and death rate multiplier
+  birthMult = 0;
+  deathMult = 0;
+  
+  // Initial births and deaths in first growth period
+  births = 0;
+  deaths = 0;
+  growthRate = 0;
+  
+  // Set flags
+  isOverproducing = false;
+  markedOverProd = false;
+  overproductionStartTime = 0;
   
   playerDocked = alienDocked = false;
   
@@ -75,11 +109,14 @@ void Planet::initPlanet() {
 
 // MARK: - Game Loop Methods
 
-void Planet::update() {
+void Planet::update(Game::State *gs) {
   updateStatus();
+  updatePopulation(gs->frame);
+  updateMining();
+  updateFarming();
 }
 
-void Planet::render() {
+void Planet::render(Game::State *gs) {
   SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
 }
 
@@ -94,11 +131,12 @@ void Planet::revertClick() {
 }
 
 void Planet::toggleDockedShip(int tag) {
-  using ShipType = ShipParameters::ShipType;
+  using namespace ShipParameters;
   
   switch (tag) {
     case ShipType::playerShip:
       playerDocked = !playerDocked;
+      population += playerDocked ? shipPopulation : -(shipPopulation);
       break;
     case ShipType::alienWarship:
       alienDocked = !alienDocked;
@@ -109,6 +147,20 @@ void Planet::toggleDockedShip(int tag) {
   }
 }
 
+int Planet::makeFuel(int amount) {
+  if (amount <= 0) return 0;
+  
+  if (amount <= minerals) {
+    minerals -= amount;
+    return amount;
+  }
+  else {
+    amount = minerals;
+    minerals = 0;
+    return amount;
+  }
+}
+
 // MARK: - Helper Methods
 
 void Planet::updateStatus() {
@@ -116,8 +168,131 @@ void Planet::updateStatus() {
     status = discovered;
     SDL_SetTextureAlphaMod(texture, 255);
   }
-  else if (status == discovered && population > 0) status = colonized;
-  else if (status == colonized && population == 0) status = discovered;
+  else if (status == discovered && population > 0) {
+    status = colonized;
+  }
+  else if (status == colonized && population == 0) {
+    status = discovered;
+  }
+}
+
+void Planet::updatePopulation(Uint32 frame) {
+  using namespace PlanetParameters;
+  
+  // If no people to populate, return immediately
+  if (population <= 0) return;
+  
+  // Calculates surplus food produced
+  int surplus = food-(population*foodRqmt);
+  if (0 > surplus) surplus = 0;
+  
+  // Resets births and deaths rates for growth period
+  if (frame%growthPeriod == 0) {
+    birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
+    deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
+    births = (population) * (birthMult+(surplus/(population*foodRqmt)));
+    deaths = population * deathMult;
+    growthRate = (births - deaths)/static_cast<float>(growthPeriod);
+  }
+  
+  // Updates population with growth rate (people per frame)
+  population += growthRate;
+  
+  // Calculates deaths due to starvation
+  int fedPopulation = (food/foodRqmt);
+  if (population > (fedPopulation)) {
+    population -= (population-fedPopulation)*starveRate;
+  }
+  
+  // Limits population to infrastructure limits
+  if (population > infrastructure) {
+    population = infrastructure;
+  }
+  
+  // Guards against ship crew "dying"
+  if (playerDocked && population < ShipParameters::shipPopulation) {
+    population = ShipParameters::shipPopulation;
+  }
+  // Guards against negative population values
+  else if (population < 0) {
+    population = 0;
+  }
+}
+
+void Planet::updateMining() {
+  using namespace PlanetParameters;
+  
+  // If there is no one or nothing to mine, then return right away
+  if (population <= 0 || deposits <= 0) return;
+  
+  // Calculates amount of population dedicated to mining
+  int workers = population;
+  workers *= (miningPercent/100.0f);
+  
+  float product = workers*miningRate;
+  
+  if (product < 0 ) return;
+  
+  if (product <= deposits) {
+    minerals += (product * (reservePercent/100.0f));
+    infrastructure += (product * (infraPercent/100.0f)) * infrastructureCost;
+    deposits -= product;
+  }
+  else {
+    minerals += deposits;
+    deposits = 0;
+  }
+}
+
+void Planet::updateFarming() {
+  using namespace PlanetParameters;
+  
+  food = 0; // Resets food
+  
+  // If there is no one or nothing to farm, then return right away
+  if (population <= 0 || fertility <= 0) return;
+  
+  // Calculates amount of population dedicated to farming
+  int workers = population;
+  workers *= (farmingPercent/100.0f);
+  
+  float product = workers*farmingRate;  // Food produced
+  
+  // Return if no food produced
+  if (product < 0 ) {
+    if (isOverproducing) isOverproducing = markedOverProd = false;
+    return;
+  }
+  
+  // If food produced is less than max fertility, return produced amount
+  if (product < fertility+1) {
+    food = product;
+    if (isOverproducing) isOverproducing = markedOverProd = false;
+  }
+  // Else food is overproduced
+  else {
+    // Reduced production after exceeding max fertility
+    food = fertility + (sqrt(product-fertility));
+    
+    // Flag overproduction and start time
+    if (isOverproducing == false) {
+      overproductionStartTime = SDL_GetTicks();
+      isOverproducing = true;
+    }
+
+    // Calculate time overproducing, decay fertility after delay
+    Uint32 overprodTime = (SDL_GetTicks()-overproductionStartTime)/1000;
+    if (overprodTime >= fertDecayDelay) {
+      fertility -= sqrt(food-fertility) * fertDecay * overprodTime;
+      if (fertility < 0) fertility = 0;
+    }
+    
+    // Mark visually with color mod when overproducing, flag as marked
+    if (isOverproducing && !markedOverProd) {
+      SDL_SetTextureColorMod(texture, 200, 0, 0);
+      markedOverProd = true;
+    }
+  }
 }
 
 SDL_Point Planet::uiPosition(SDL_Point p) {

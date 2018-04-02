@@ -30,6 +30,9 @@ SDL_Renderer *Game::renderer = nullptr;
 void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
   using namespace GameParameters;
   
+  // Seeds random number generator
+  srand((unsigned)time(NULL));
+  
   int flags = 0;
   int imgFlags = IMG_INIT_PNG;
   
@@ -61,6 +64,7 @@ void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
     }
     
     gameState.isRunning = true;
+    gameState.frame = 0;
     
     // Object Initialization
     gameScreen = TextureManager::loadTexture("Resources/Assets/gameScreen.png");
@@ -130,9 +134,13 @@ void Game::handleEvents() {
 }
 
 void Game::update(Uint32 ticks) {
+  gameState.frame++;
+  gameState.elapsedTime = SDL_GetTicks()/1000;
+  gameState.ticks = ticks;
+  
   if (!gameState.mainMenu || gameState.endgame == State::none) {
     planetManager->update(&gameState, shipManager);
-    shipManager->update(ticks);
+    shipManager->update(&gameState, planetManager);
   }
   
   uiManager->update(&gameState, planetManager, shipManager);

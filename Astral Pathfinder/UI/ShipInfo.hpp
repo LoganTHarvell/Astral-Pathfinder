@@ -21,7 +21,7 @@ public:
   void init(SDL_Rect src);
   
   // MARK: - Game Loop Methods
-  void render();
+  void render(Game::State *gs);
   void clean();
   
   // MARK: - ShipInfo Methods

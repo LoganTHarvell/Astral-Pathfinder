@@ -18,9 +18,10 @@
 // MARK: - UIManager Parameters
 
 namespace UiParameters {
-  const SDL_Rect shipInfoOrigin = {1215, 100, 320, 121};
-  const SDL_Rect currentPlanetOrigin = {1215, 210, 320, 240};
-  const SDL_Rect selectedPlanetOrigin = {1215, 500, 320, 300};
+  const SDL_Rect timeRect = { 16, 8, 75, 36 };
+  const SDL_Rect shipInfoRect = {1215, 100, 320, 121};
+  const SDL_Rect currentPlanetRect = {1215, 210, 320, 240};
+  const SDL_Rect selectedPlanetRect = {1215, 500, 320, 300};
 }
 
 class UIManager {
@@ -37,6 +38,7 @@ private:
   // MARK: - UIManager Fields
   // TODO: Implement main menu and endscreen
   // MainMenu mainMenu;
+  TextBox time;
   PlanetInfo selectedPlanetInfo, DockedPlanetInfo;
   ShipInfo shipInfo;
   enum {
@@ -47,6 +49,7 @@ private:
   // EndScreen endScreen;
   
   // MARK: - Helper Methods
+  void updateTime(Uint32);
   void setSelectedPlanet(Planet p);
   void setDockedPlanet(Planet p);
   void handleMouseDown(Game::State *gs, PlanetManager *pm);
