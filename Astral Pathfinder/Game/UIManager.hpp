@@ -26,6 +26,11 @@ namespace UiParameters {
   const SDL_Rect exitGameLabel = {600, 676, 424, 54};
   const SDL_Rect playAgainLabel = {288, 673, 424, 57};
   const SDL_Rect endGameExitLabel = {885, 676, 424, 54};
+  const SDL_Rect startGameBorder = {582, 390, 460, 95};
+  const SDL_Rect scoreboardBorder = {582, 527, 460, 96};
+  const SDL_Rect exitGameBorder = {582, 665, 460, 92};
+  const SDL_Rect playAgainBorder = {270, 662, 460, 95};
+  const SDL_Rect endGameBorder = {867, 665, 460, 92};
 }
 
 class UIManager {
@@ -43,7 +48,7 @@ private:
   PlanetInfo selectedPlanetInfo, DockedPlanetInfo;
   ShipInfo shipInfo;
   SDL_Texture *hoverBorder;
-  SDL_Rect borderRect = {};
+  SDL_Rect borderRect;
   enum {
     none, currentPlanetWindow, selectedPlanetWindow
   } currentWindow = none;

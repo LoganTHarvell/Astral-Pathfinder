@@ -170,7 +170,7 @@ void Game::render() {
     SDL_RenderCopy(renderer, winScreen, NULL, &screenRect);
   }
   
-  else if(gameState.endgame == State::fuel) {
+  else if(gameState.endgame == State::noFuel) {
     SDL_RenderCopy(renderer, loseScreen, NULL, &screenRect);
   }
   

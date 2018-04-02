@@ -49,7 +49,7 @@ public:
     bool restartGame = false;
     
     enum {
-      none, allDiscovered, fuel, quit
+      none, allDiscovered, noFuel, quit
     } endgame = none;
     
     enum {

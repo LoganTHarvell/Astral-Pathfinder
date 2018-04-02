@@ -206,6 +206,7 @@ void UIManager::checkClickedArea(SDL_Point p) {
 void UIManager::checkForHovering(Game::State *gs) {
   using namespace UiParameters;
   SDL_Point p = gs->dragLocation;
+  int buffer = 11;
   
   // Main Menu
   if(gs->mainMenu) {
@@ -213,24 +214,24 @@ void UIManager::checkForHovering(Game::State *gs) {
        && (p.y > startGameLabel.y) && (p.y < startGameLabel.y + startGameLabel.h)) {
       hoveringLabel = startGame;
       
-      if(borderRect.y != startGameLabel.y-11)
-        borderRect = {582, 390, 460, 95};
+      if(borderRect.y != startGameLabel.y-buffer)
+        borderRect = startGameBorder;
     }
   
     else if((p.x > scoreboardLabel.x) && (p.x < scoreboardLabel.x + scoreboardLabel.w)
             && (p.y > scoreboardLabel.y) && (p.y < scoreboardLabel.y + scoreboardLabel.h)) {
       hoveringLabel = scoreboard;
       
-      if(borderRect.y != scoreboardLabel.y-11)
-        borderRect = {582, 527, 460, 96};
+      if(borderRect.y != scoreboardLabel.y-buffer)
+        borderRect = scoreboardBorder;
     }
   
     else if((p.x > exitGameLabel.x) && (p.x < exitGameLabel.x + exitGameLabel.w)
             && (p.y > exitGameLabel.y) && (p.y < exitGameLabel.y + exitGameLabel.h)) {
       hoveringLabel = exitGame;
       
-      if(borderRect.y != exitGameLabel.y-11)
-        borderRect = {582, 665, 460, 92};
+      if(borderRect.y != exitGameLabel.y-buffer)
+        borderRect = exitGameBorder;
     }
   
     else hoveringLabel = nothing;
@@ -242,16 +243,16 @@ void UIManager::checkForHovering(Game::State *gs) {
        && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
       hoveringLabel = playAgain;
       
-      if(borderRect.y != playAgainLabel.y-11)
-        borderRect = {270, 662, 460, 95};
+      if(borderRect.y != playAgainLabel.y-buffer)
+        borderRect = playAgainBorder;
     }
     
     else if((p.x > endGameExitLabel.x) && (p.x < endGameExitLabel.x + endGameExitLabel.w)
             && (p.y > endGameExitLabel.y) && (p.y < endGameExitLabel.y + endGameExitLabel.h)) {
       hoveringLabel = endGameExit;
       
-      if(borderRect.y != endGameExitLabel.y-11)
-        borderRect = {867, 665, 460, 92};
+      if(borderRect.y != endGameExitLabel.y-buffer)
+        borderRect = endGameBorder;
     }
     
     else hoveringLabel = nothing;
