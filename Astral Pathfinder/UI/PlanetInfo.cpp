@@ -84,7 +84,7 @@ void PlanetInfo::setUiTextures(Planet p) {
   setBoxes(p);
   
   if (!sliderOne.isInitialized() && !sliderTwo.isInitialized()
-      && (p.getPopulation() > 0 || p.playerIsDocked())) {
+      && (p.getPopulation() > 0)) {
     sliderOne.setTextures(p.getFarmingPercent());
     sliderOne.colorMod(baseColor, sliderColor);
     sliderTwo.setTextures(p.getReservePercent());
@@ -178,7 +178,7 @@ void PlanetInfo::setBoxes(Planet p) {
     locationText.setRect(origin.x+5, (origin.w/2)-40);
   }
   
-  if (populationAmount > 0 || p.playerIsDocked()) {
+  if (populationAmount > 0) {
     population = "Population: " + setStringSpaces(p.getPopulation())
                   + std::to_string(p.getPopulation()) + "/"
                   + std::to_string(p.getInfrastructure());

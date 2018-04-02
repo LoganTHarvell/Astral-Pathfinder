@@ -9,6 +9,7 @@
 // MARK: Header File
 #include "UIManager.hpp"
 
+// MARK: Libraries and Frameworks
 #include <string>
 
 // MARK: Source Files
@@ -133,8 +134,8 @@ void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
       int percent = DockedPlanetInfo.getSliderPercent();
       
       if(movement) {
-        pm->setPlanetDepoPercent(100-percent, currentWindow);
-        pm->setPlanetFertPercent(percent, currentWindow);
+        pm->setPlanetMiningPercent(100-percent, currentWindow);
+        pm->setPlanetFarmingPercent(percent, currentWindow);
       }
     }
   
@@ -166,8 +167,8 @@ void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
       int percent = selectedPlanetInfo.getSliderPercent();
       
       if(movement) {
-        pm->setPlanetDepoPercent(100-percent, currentWindow);
-        pm->setPlanetFertPercent(percent, currentWindow);
+        pm->setPlanetMiningPercent(100-percent, currentWindow);
+        pm->setPlanetFarmingPercent(percent, currentWindow);
       }
     }
     
