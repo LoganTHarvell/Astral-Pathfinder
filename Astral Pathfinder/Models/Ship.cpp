@@ -173,6 +173,8 @@ void Ship::updateRotation() {
 }
 
 void Ship::updatePosition(Uint32 ticks) {
+  if (fuel <= 0) return;
+  
   rect.x += (velocity.x * (ticks/10));
   rect.y += (velocity.y * (ticks/10));
   
@@ -180,6 +182,8 @@ void Ship::updatePosition(Uint32 ticks) {
     rect.x -= (velocity.x * (ticks/10));
     rect.y -= (velocity.y * (ticks/10));
   }
+  
+  if (velocity.x != 0 || velocity.y != 0) fuel -=1;
 }
 
 void Ship::updateFuel(int minerals) {

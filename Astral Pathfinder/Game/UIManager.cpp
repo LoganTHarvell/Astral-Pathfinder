@@ -9,6 +9,9 @@
 // MARK: Header File
 #include "UIManager.hpp"
 
+// MARK: Libraries and Frameworks
+#include <string>
+
 // MARK: Source Files
 #include "TextureManager.hpp"
 
@@ -16,9 +19,10 @@
 
 void UIManager::init() {
   using namespace UiParameters;
-  selectedPlanetInfo.init(selectedPlanetOrigin);
-  DockedPlanetInfo.init(currentPlanetOrigin);
-  shipInfo.init(shipInfoOrigin);
+  time.init(timeRect);
+  selectedPlanetInfo.init(selectedPlanetRect);
+  DockedPlanetInfo.init(currentPlanetRect);
+  shipInfo.init(shipInfoRect);
   hoverBorder = TextureManager::loadTexture("Resources/Assets/border.png");
   
   mainMenu = TextureManager::loadTexture("Resources/Assets/mainMenu.png");
@@ -54,6 +58,8 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     return;
   }
   
+  updateTime(gameState->elapsedTime);
+  
   shipInfo.clean();
   shipInfo.setText(shipManager->getPlayerShip());
   
@@ -66,7 +72,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     selectedPlanetWindowCleaned = true;
   }
   
-  if(planetManager->checkDocked(gameState)) {
+  if(planetManager->planetIsDocked()) {
     setDockedPlanet(planetManager->getDockedPlanet());
     currentPlanetWindowCleaned = false;
   }
@@ -106,6 +112,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
   else if(gameState->endgame == Game::State::none)
     SDL_RenderCopy(Game::renderer, gameScreen, NULL, &screenRect);
   
+  time.render(gameState);
   shipInfo.render(gameState);
   
   if(gameState->planetSelected) {
@@ -119,6 +126,13 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
 }
 
 // MARK: - UIManager Methods
+
+void UIManager::updateTime(Uint32 elapsedTime) {
+  std::string secs = std::to_string(elapsedTime % 60);
+  std::string mins = std::to_string(elapsedTime / 60);
+  
+  time.setMessage("Time " + mins + ":" + secs);
+}
 
 void UIManager::setSelectedPlanet(Planet p) {
   selectedPlanetInfo.setUiTextures(p);
@@ -156,8 +170,8 @@ void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
       int percent = DockedPlanetInfo.getSliderPercent();
       
       if(movement) {
-        pm->setPlanetDepoPercent(100-percent, currentWindow);
-        pm->setPlanetFertPercent(percent, currentWindow);
+        pm->setPlanetMiningPercent(100-percent, currentWindow);
+        pm->setPlanetFarmingPercent(percent, currentWindow);
       }
     }
   
@@ -189,8 +203,8 @@ void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
       int percent = selectedPlanetInfo.getSliderPercent();
       
       if(movement) {
-        pm->setPlanetDepoPercent(100-percent, currentWindow);
-        pm->setPlanetFertPercent(percent, currentWindow);
+        pm->setPlanetMiningPercent(100-percent, currentWindow);
+        pm->setPlanetFarmingPercent(percent, currentWindow);
       }
     }
     
@@ -208,12 +222,12 @@ void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
 
 void UIManager::checkClickedArea(SDL_Point p) {
   using namespace UiParameters;
-  if((p.x > currentPlanetOrigin.x) && (p.x < currentPlanetOrigin.x + currentPlanetOrigin.w)
-     && (p.y > currentPlanetOrigin.y) && (p.y < currentPlanetOrigin.y + currentPlanetOrigin.h))
+  if((p.x > currentPlanetRect.x) && (p.x < currentPlanetRect.x + currentPlanetRect.w)
+     && (p.y > currentPlanetRect.y) && (p.y < currentPlanetRect.y + currentPlanetRect.h))
     currentWindow = currentPlanetWindow;
   
-  else if((p.x > selectedPlanetOrigin.x) && (p.x < selectedPlanetOrigin.x + selectedPlanetOrigin.w)
-          && (p.y > selectedPlanetOrigin.y) && (p.y < selectedPlanetOrigin.y + selectedPlanetOrigin.h))
+  else if((p.x > selectedPlanetRect.x) && (p.x < selectedPlanetRect.x + selectedPlanetRect.w)
+          && (p.y > selectedPlanetRect.y) && (p.y < selectedPlanetRect.y + selectedPlanetRect.h))
     currentWindow = selectedPlanetWindow;
   
   else currentWindow = none;

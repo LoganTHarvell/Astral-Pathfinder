@@ -49,12 +49,6 @@ You are the Astral Pathfinder."
 #define EPIDEMIC_DEATH_RATE 0.8
 #define SHIP_LOST_CHANCE 0.01
 
-// Defines population growth information
-#define MIN_BIRTH_MULTIPLIER 0.1
-#define BIRTH_MULTIPLIER_RANGE (0.5-MIN_BIRTH_MULTIPLIER)
-#define MIN_DEATH_MULTIPLIER 0.01
-#define DEATH_MULTIPLIER_RANGE (0.1-MIN_DEATH_MULTIPLIER)
-
 // Defines other info
 #define RESOURCES 2
 #define MAX_NUM_SCORES 10

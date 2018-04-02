@@ -24,9 +24,6 @@ void PlanetManager::initGalaxy() {
   
   planets.reserve(sizeof(Planet) * numberOfPlanets);
   
-  // Sees rand method
-  srand((unsigned)time(NULL));
-  
   bool hasPlanet[numberOfPlanets][numberOfPlanets] = { false };
   
   // Initializes first element in planets array as homeworld
@@ -43,14 +40,19 @@ void PlanetManager::initGalaxy() {
     do {
       i = planets.insert(i, initPlanet());
       coordinates = i->getCoordinates();
+      
+      // Clears index for new planet
+      if (hasPlanet[coordinates.x][coordinates.y]) planets.erase(i);
+      
     } while (hasPlanet[coordinates.x][coordinates.y]);
 
     // Marks planet coordinates as occupied
     hasPlanet[coordinates.x][coordinates.y] = true;
   }
   
-  dockedPlanetIndex = selectedPlanetIndex = -1;
-  discoveryCount = 1;
+  dockedPlanetIndex = 0;      // Start with homeworld docked
+  selectedPlanetIndex = -1;   // Start with no planet selected
+  discoveryCount = 1;         // Start with 1 colonized planet
 
 };
 
@@ -80,6 +82,7 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
   }
   
   handleCollisions(shipManager);
+  gameState->planetCollided = planetIsDocked();
 }
 
 void PlanetManager::render(Game::State *gameState) {
@@ -103,22 +106,27 @@ Planet PlanetManager::getSelectedPlanet() {
   return planets[selectedPlanetIndex];
 }
 
+bool PlanetManager::planetIsDocked() {
+  if (dockedPlanetIndex >= 0) return true;
+  return false;
+}
+
 Planet PlanetManager::getDockedPlanet() {
   return planets[dockedPlanetIndex];
 }
 
-void PlanetManager::setPlanetDepoPercent(int p, int flag) {
+void PlanetManager::setPlanetMiningPercent(int p, int flag) {
   if(flag == 1)
-    planets[dockedPlanetIndex].setDepositsPercent(p);
+    planets[dockedPlanetIndex].setMiningPercent(p);
   if(flag == 2)
-    planets[selectedPlanetIndex].setDepositsPercent(p);
+    planets[selectedPlanetIndex].setMiningPercent(p);
 }
 
-void PlanetManager::setPlanetFertPercent(int p, int flag) {
+void PlanetManager::setPlanetFarmingPercent(int p, int flag) {
   if(flag == 1)
-    planets[dockedPlanetIndex].setFertilityPercent(p);
+    planets[dockedPlanetIndex].setFarmingPercent(p);
   if(flag == 2)
-    planets[selectedPlanetIndex].setFertilityPercent(p);
+    planets[selectedPlanetIndex].setFarmingPercent(p);
 }
 
 void PlanetManager::setPlanetInfraPercent(int p, int flag) {
@@ -135,6 +143,15 @@ void PlanetManager::setPlanetReservePercent(int p, int flag) {
     planets.at(selectedPlanetIndex).setReservePercent(p);
 }
 
+// TODO: Implement actual fuel algorithm
+int PlanetManager::fuelDockedShip() {
+  int fuel = 0;
+  
+  int amount = planets[dockedPlanetIndex].getMinerals();
+  fuel = planets[dockedPlanetIndex].makeFuel(amount);
+  
+  return fuel;
+}
 
 // MARK: - Initialization Helper Methods
 
@@ -217,14 +234,4 @@ void PlanetManager::handleCollisions(ShipManager *sm) {
       dockedPlanetIndex = -1;
     }
   }
-}
-
-bool PlanetManager::checkDocked(Game::State *gameState) {
-  if (dockedPlanetIndex >= 0) {
-    gameState->planetCollided = true;
-    return true;
-  }
-  
-  gameState->planetCollided = false;
-  return false;
 }

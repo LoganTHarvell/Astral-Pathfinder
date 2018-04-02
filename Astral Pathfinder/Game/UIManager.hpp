@@ -18,9 +18,10 @@
 // MARK: - UIManager Parameters
 
 namespace UiParameters {
-  const SDL_Rect shipInfoOrigin = {1215, 100, 320, 121};
-  const SDL_Rect currentPlanetOrigin = {1215, 210, 320, 240};
-  const SDL_Rect selectedPlanetOrigin = {1215, 500, 320, 300};
+  const SDL_Rect timeRect = { 16, 8, 75, 36 };
+  const SDL_Rect shipInfoRect = {1215, 100, 320, 121};
+  const SDL_Rect currentPlanetRect = {1215, 210, 320, 240};
+  const SDL_Rect selectedPlanetRect = {1215, 500, 320, 300};
   const SDL_Rect startGameLabel = {600, 401, 424, 57};
   const SDL_Rect scoreboardLabel = {600, 538, 424, 58};
   const SDL_Rect exitGameLabel = {600, 676, 424, 54};
@@ -48,6 +49,7 @@ public:
   
 private:
   // MARK: - UIManager Fields
+  TextBox time;
   PlanetInfo selectedPlanetInfo, DockedPlanetInfo;
   ShipInfo shipInfo;
   SDL_Texture *hoverBorder;
@@ -65,6 +67,7 @@ private:
   bool mainMenuFlag;
   
   // MARK: - Helper Methods
+  void updateTime(Uint32);
   void setSelectedPlanet(Planet p);
   void setDockedPlanet(Planet p);
   void handleMouseDown(Game::State *gs, PlanetManager *pm);

@@ -21,22 +21,44 @@
 
 namespace PlanetParameters {
   
+  // Planet texture information
   const std::string planetTextureFile = "Resources/Assets/planet.png";
-  const int planetTexSize = 8;
-  const int minFertility = 0;
-  const int fertilityRange = (200-minFertility);
-  const int minDeposits = 100;
-  const int depositsRange = (600-minDeposits);
-  const int startFarmingPercent = 50;
-  const int startMiningPercent = 100 - startFarmingPercent;
+  const int planetTexSize = 16;
   
+  // Planet initial attribute information
+  const int minFertility = 20;
+  const int fertilityRange = (200-minFertility);
+  const int minDeposits = 200;
+  const int depositsRange = (1000-minDeposits);
+  const int startInfraPercent = 50;
+  const int startReservePercent = 100 - startInfraPercent;
+  const int startMiningPercent = 100;
+  const int startFarmingPercent = 100 - startMiningPercent;
+  
+  // Homeworld initial attribute values
+  const int homeStartPopulation = 5000;
+  const int homeStartFertility = 100;
+  const int homeStartDeposits = 250;
+  const int homeStartMiningPercent = 50;
+  const int homeStartFarmingPercent = 100 - homeStartMiningPercent;
+  const int homeStartInfraPercent = 0;
+  const int homeStartReservePercent = 100 - homeStartInfraPercent;
+  
+  // Defines population growth information
+  const int growthPeriod = 900;      // Frames per growth period
+  const float starveRate = 0.0008;    // Starvation deaths per frame
+  const float minBirthMultiplier = 0.1;
+  const float birthMultiplierRange = (0.4-minBirthMultiplier);
+  const float minDeathMultiplier = 0.05;
+  const float deathMultiplierRange = (0.15-minDeathMultiplier);
+ 
   // Defines resource information
-  const int startPopulation = 5000;
-  const float foodRqmt = 0.02;
-  const float farmingCost = 0.04;
-  const int miningCost = 30;
-  const int fuelCost = 250;
-  const float infrastructureCost = 0.05;
+  const float foodRqmt = 0.02;      // Food required per person
+  const float miningRate = 0.0001; // Minerals produced per person per frame
+  const float farmingRate = 0.04;   // Food produced per person per frame
+  const float fertDecay = 0.0001;
+  const int fertDecayDelay = 10;
+  const float infrastructureCost = 20;    // Infrastructure per mineral
 }
 
 
@@ -69,44 +91,55 @@ public:
   int getFertility() { return fertility; };
   SDL_Point getLocation() { return coordinates; };
   int getPopulation() { return population; };
-  int getFood() { return food; };
   int getMinerals() { return minerals; };
+  int getInfrastructure() { return infrastructure; };
+  int getFood() { return food; };
   
-  int getDepositsPercent() { return depositsPercent; };
-  int getFertilityPercent() { return fertilityPercent; };
+  int getMiningPercent() { return miningPercent; };
+  int getFarmingPercent() { return farmingPercent; };
   int getInfraPercent() { return infraPercent; };
   int getReservePercent() { return reservePercent; };
-  void setDepositsPercent(int percent) { depositsPercent = percent; };
-  void setFertilityPercent(int percent) { fertilityPercent = percent; };
+  void setMiningPercent(int percent) { miningPercent = percent; };
+  void setFarmingPercent(int percent) { farmingPercent = percent; };
   void setInfraPercent(int percent) { infraPercent = percent; };
   void setReservePercent(int percent) { reservePercent = percent; };
-  
+
   void clicked();
   void revertClick();
   
   bool playerIsDocked() { return playerDocked; };
   bool alienIsDocked() { return alienDocked; };
   void toggleDockedShip(int tag);
+  int makeFuel(int amount);
   
 private:
   // MARK: - Planet Fields
   Status status;
   SDL_Point coordinates;
 
-  // resources
-  int population;
-  int deposits, fertility;
-  int depositsPercent, fertilityPercent, infraPercent, reservePercent;
-  int minerals, food;
+  // Resources
+  float population;
+  float deposits, fertility;
+  int miningPercent, farmingPercent, infraPercent, reservePercent;
+  float minerals, infrastructure, food;
   
+  // Population growth period attributes
+  float birthMult, deathMult;   // Births/Deaths per person in a period
+  int births, deaths;           // Total Birth/Deaths in a period
+  float growthRate;             // Population change per frame
+  
+  // Food production flags
+  bool isOverproducing;
+  bool markedOverProd;
+  Uint32 overproductionStartTime;
+  
+  // Docking flags
   bool playerDocked;
   bool alienDocked;
   
   // MARK: - Helper Methods
   void updateStatus();
-  
-  // TODO: - Implement methods
-  void updatePopulation();
+  void updatePopulation(Uint32 frame);
   void updateMining();
   void updateFarming();
   

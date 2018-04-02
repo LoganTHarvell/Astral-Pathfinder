@@ -61,6 +61,8 @@ public:
   SDL_Point getUIPosition() { return getCenter(); };
   SDL_Point getMapPosition(SDL_Point uiPosition);
   
+  void updateFuel(int minerals);
+  
 private:
   // MARK: - Ship Fields
   ShipParameters::ShipType tag;
@@ -78,7 +80,6 @@ private:
   void updateVelocity();
   void updateRotation();
   void updatePosition(Uint32 ticks);
-  void updateFuel(int minerals);
 
 };
 

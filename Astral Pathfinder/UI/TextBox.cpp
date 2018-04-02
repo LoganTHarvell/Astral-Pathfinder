@@ -45,8 +45,8 @@ void TextBox::clean() {
 
 void TextBox::setMessage(const std::string words) {
   using TextParameters::color;
-  if(texture != nullptr)
-    clean();
+  
+  if(texture != nullptr) clean();
   
   SDL_Surface *surface = TTF_RenderText_Solid(font, words.c_str(), color);
   texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
@@ -54,8 +54,7 @@ void TextBox::setMessage(const std::string words) {
 }
 
 bool TextBox::checkNull() {
-  if(texture == nullptr)
-    return true;
+  if(texture == nullptr) return true;
   else return false;
 }
 
