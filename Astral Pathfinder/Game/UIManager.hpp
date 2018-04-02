@@ -43,12 +43,16 @@ public:
   void update(Game::State *gameState, PlanetManager *planetManager, ShipManager *shipManager);
   void render(Game::State *gameState, PlanetManager *pm);
   
+  // MARK: - Helper Methods
+  bool checkMainMenu() { return mainMenuFlag; }
+  
 private:
   // MARK: - UIManager Fields
   PlanetInfo selectedPlanetInfo, DockedPlanetInfo;
   ShipInfo shipInfo;
   SDL_Texture *hoverBorder;
-  SDL_Rect borderRect;
+  SDL_Rect borderRect, screenRect;
+  SDL_Texture *mainMenu, *gameScreen, *winScreen, *loseScreen;
   enum {
     none, currentPlanetWindow, selectedPlanetWindow
   } currentWindow = none;
@@ -58,6 +62,7 @@ private:
   } hoveringLabel = nothing;
   
   bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true;
+  bool mainMenuFlag;
   
   // MARK: - Helper Methods
   void setSelectedPlanet(Planet p);

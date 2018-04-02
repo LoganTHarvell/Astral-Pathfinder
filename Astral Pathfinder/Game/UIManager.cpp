@@ -20,12 +20,20 @@ void UIManager::init() {
   DockedPlanetInfo.init(currentPlanetOrigin);
   shipInfo.init(shipInfoOrigin);
   hoverBorder = TextureManager::loadTexture("Resources/Assets/border.png");
+  
+  mainMenu = TextureManager::loadTexture("Resources/Assets/mainMenu.png");
+  gameScreen = TextureManager::loadTexture("Resources/Assets/gameScreen.png");
+  winScreen = TextureManager::loadTexture("Resources/Assets/winScreen.png");
+  loseScreen = TextureManager::loadTexture("Resources/Assets/loseScreen.png");
+  screenRect = { 0, 0, GameParameters::windowRect.w, GameParameters::windowRect.h };
+  
+  mainMenuFlag = true;
 }
 
 // MARK: - Game Loop Methods
 
 void UIManager::update(Game::State *gameState, PlanetManager *planetManager, ShipManager *shipManager) {
-  if (gameState->mainMenu) {
+  if (mainMenuFlag) {
     checkForHovering(gameState);
     if(gameState->mouseDown)
       checkClickedAreaOtherScreen(gameState);
@@ -33,12 +41,12 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     return;
   }
   else if (gameState->endgame == Game::State::quit) {
-    gameState->mainMenu = false;
+    mainMenuFlag = false;
     gameState->isRunning = false;
     return;
   }
   else if (gameState->endgame != Game::State::none){
-    gameState->mainMenu = false;
+    mainMenuFlag = false;
     checkForHovering(gameState);
     if(gameState->mouseDown)
       checkClickedAreaOtherScreen(gameState);
@@ -72,7 +80,8 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
 
 void UIManager::render(Game::State *gameState, PlanetManager *pm) {
   using namespace UiParameters;
-  if (gameState->mainMenu) {
+  if (mainMenuFlag) {
+    SDL_RenderCopy(Game::renderer, mainMenu, NULL, &screenRect);
     if(hoveringLabel == startGame)
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     else if(hoveringLabel == scoreboard)
@@ -82,6 +91,11 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
     return;
   }
   else if (gameState->endgame != Game::State::none) {
+    if(gameState->endgame == Game::State::allDiscovered)
+      SDL_RenderCopy(Game::renderer, winScreen, NULL, &screenRect);
+    else
+      SDL_RenderCopy(Game::renderer, loseScreen, NULL, &screenRect);
+    
     // TODO: - Render score
     if(hoveringLabel == playAgain)
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
@@ -89,6 +103,8 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
+  else if(gameState->endgame == Game::State::none)
+    SDL_RenderCopy(Game::renderer, gameScreen, NULL, &screenRect);
   
   shipInfo.render(gameState);
   
@@ -209,7 +225,7 @@ void UIManager::checkForHovering(Game::State *gs) {
   int buffer = 11;
   
   // Main Menu
-  if(gs->mainMenu) {
+  if(mainMenuFlag) {
     if((p.x > startGameLabel.x) && (p.x < startGameLabel.x + startGameLabel.w)
        && (p.y > startGameLabel.y) && (p.y < startGameLabel.y + startGameLabel.h)) {
       hoveringLabel = startGame;
@@ -264,11 +280,11 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
   using namespace UiParameters;
   
   // Main Menu
-  if(gs->mainMenu) {
+  if(mainMenuFlag) {
     if((p.x > startGameLabel.x) && (p.x < startGameLabel.x + startGameLabel.w)
        && (p.y > startGameLabel.y) && (p.y < startGameLabel.y + startGameLabel.h)) {
       hoveringLabel = nothing;
-      gs->mainMenu = false;
+      mainMenuFlag = false;
     }
   
   // Future score board
@@ -279,7 +295,7 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
     else if((p.x > exitGameLabel.x) && (p.x < exitGameLabel.x + exitGameLabel.w)
        && (p.y > exitGameLabel.y) && (p.y < exitGameLabel.y + exitGameLabel.h)) {
       hoveringLabel = nothing;
-      gs->mainMenu = false;
+      mainMenuFlag = false;
       gs->endgame = Game::State::quit;
     }
   }
@@ -289,7 +305,7 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
     if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
        && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
       hoveringLabel = nothing;
-      gs->mainMenu = true;
+      mainMenuFlag = true;
       gs->endgame = Game::State::none;
       gs->restartGame = true;
       gs->mouseDown = false;
@@ -298,7 +314,7 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
     else if((p.x > endGameExitLabel.x) && (p.x < endGameExitLabel.x + endGameExitLabel.w)
             && (p.y > endGameExitLabel.y) && (p.y < endGameExitLabel.y + endGameExitLabel.h)) {
       hoveringLabel = nothing;
-      gs->mainMenu = false;
+      mainMenuFlag = false;
       gs->endgame = Game::State::quit;
     }
   }

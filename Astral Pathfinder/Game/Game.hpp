@@ -45,7 +45,6 @@ public:
   struct State {
     // Flags
     bool isRunning = false;
-    bool mainMenu = false;
     bool restartGame = false;
     
     enum {
@@ -88,9 +87,6 @@ private:
   // MARK: - Game Fields
   SDL_Window *window;
   State gameState;
-
-  SDL_Texture *mainMenu, *gameScreen, *winScreen, *loseScreen;
-  SDL_Rect screenRect;
 
   PlanetManager *planetManager;
   ShipManager *shipManager;
