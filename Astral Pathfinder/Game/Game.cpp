@@ -66,10 +66,6 @@ void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
     gameState.isRunning = true;
     gameState.frame = 0;
     
-    // Object Initialization
-    gameScreen = TextureManager::loadTexture("Resources/Assets/gameScreen.png");
-    screenRect = { 0, 0, windowRect.w, windowRect.h };
-    
     planetManager = new PlanetManager;
     planetManager->initGalaxy();
     
@@ -99,17 +95,18 @@ void Game::handleEvents() {
         break;
       case SDL_KEYDOWN:
       {
-        // Gets pressed key
-        SDL_Keycode key = event.key.keysym.sym;
-        
-        // GameState logic
-        if(key == SDLK_ESCAPE && gameState.planetSelected) {
-          gameState.planetSelected = false;
+        if(!uiManager->checkMainMenu()) {
+          // Gets pressed key
+          SDL_Keycode key = event.key.keysym.sym;
+          
+          // GameState logic
+          if(key == SDLK_ESCAPE && gameState.planetSelected) {
+            gameState.planetSelected = false;
+          }
+          else if (key == SDLK_d) {
+            gameState.debugMode = !gameState.debugMode;
+          }
         }
-        else if (key == SDLK_d) {
-          gameState.debugMode = !gameState.debugMode;
-        }
-        
         break;
       }
       case SDL_MOUSEBUTTONDOWN:
@@ -117,7 +114,10 @@ void Game::handleEvents() {
         gameState.clickLocation = { event.button.x, event.button.y };
         break;
       case SDL_MOUSEMOTION:
-        if(gameState.planetSelected || gameState.planetCollided)
+        if(uiManager->checkMainMenu() || (gameState.endgame != State::none && gameState.endgame != State::quit))
+          gameState.dragLocation = { event.motion.x, event.motion.y };
+        
+        else if(gameState.planetSelected || gameState.planetCollided)
           gameState.dragLocation = { event.motion.x, event.motion.y };
         break;
       case SDL_MOUSEBUTTONUP:
@@ -134,16 +134,19 @@ void Game::handleEvents() {
 }
 
 void Game::update(Uint32 ticks) {
-  gameState.frame++;
-  gameState.elapsedTime = SDL_GetTicks()/1000;
-  gameState.ticks = ticks;
+  if (!uiManager->checkMainMenu() && gameState.endgame == State::none) {
+    gameState.frame++;
+    gameState.elapsedTime = SDL_GetTicks()/1000;
+    gameState.ticks = ticks;
   
-  if (!gameState.mainMenu || gameState.endgame == State::none) {
     planetManager->update(&gameState, shipManager);
     shipManager->update(&gameState, planetManager);
   }
   
   uiManager->update(&gameState, planetManager, shipManager);
+  
+  if(gameState.restartGame)
+    restartGame();
 }
 
 void Game::render() {
@@ -152,13 +155,12 @@ void Game::render() {
   SDL_RenderClear(renderer);
   
   // Render stuff
-  if (!gameState.mainMenu || gameState.endgame == State::none) {
-    SDL_RenderCopy(renderer, gameScreen, NULL, &screenRect);
+  uiManager->render(&gameState, planetManager);
+  
+  if(!uiManager->checkMainMenu() && gameState.endgame == State::none) {
     planetManager->render(&gameState);
     shipManager->render(&gameState);
   }
-  
-  uiManager->render(&gameState, planetManager);
 
   SDL_RenderPresent(renderer);
 }
@@ -175,4 +177,21 @@ void Game::clean() {
   TTF_Quit();
   
   std::cout << "Game cleaned." << std::endl;
+}
+
+void Game::restartGame() {
+  delete planetManager;
+  delete shipManager;
+  delete uiManager;
+  
+  planetManager = new PlanetManager;
+  planetManager->initGalaxy();
+  
+  shipManager = new ShipManager;
+  shipManager->init(planetManager->getPlanet(0).getCenter());
+  
+  uiManager = new UIManager;
+  uiManager->init();
+  
+  gameState.restartGame = false;
 }

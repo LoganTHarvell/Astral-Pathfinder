@@ -19,24 +19,42 @@
 
 void UIManager::init() {
   using namespace UiParameters;
-  
   time.init(timeRect);
   selectedPlanetInfo.init(selectedPlanetRect);
   DockedPlanetInfo.init(currentPlanetRect);
   shipInfo.init(shipInfoRect);
+  hoverBorder = TextureManager::loadTexture("Resources/Assets/border.png");
+  
+  mainMenu = TextureManager::loadTexture("Resources/Assets/mainMenu.png");
+  gameScreen = TextureManager::loadTexture("Resources/Assets/gameScreen.png");
+  winScreen = TextureManager::loadTexture("Resources/Assets/winScreen.png");
+  loseScreen = TextureManager::loadTexture("Resources/Assets/loseScreen.png");
+  screenRect = { 0, 0, GameParameters::windowRect.w, GameParameters::windowRect.h };
+  
+  mainMenuFlag = true;
 }
 
 // MARK: - Game Loop Methods
 
 void UIManager::update(Game::State *gameState, PlanetManager *planetManager, ShipManager *shipManager) {
-  // TODO: Implement main menu and endscreen
-  if (gameState->mainMenu) {
-    // mainMenu.update(gameState);
+  if (mainMenuFlag) {
+    checkForHovering(gameState);
+    if(gameState->mouseDown)
+      checkClickedAreaOtherScreen(gameState);
+    
     return;
   }
-  else if (gameState->endgame != Game::State::none) {
-    // endScreen.update(gameState);
+  else if (gameState->endgame == Game::State::quit) {
+    mainMenuFlag = false;
     gameState->isRunning = false;
+    return;
+  }
+  else if (gameState->endgame != Game::State::none){
+    mainMenuFlag = false;
+    checkForHovering(gameState);
+    if(gameState->mouseDown)
+      checkClickedAreaOtherScreen(gameState);
+
     return;
   }
   
@@ -67,14 +85,32 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
 }
 
 void UIManager::render(Game::State *gameState, PlanetManager *pm) {
-  if (gameState->mainMenu) {
-    // mainMenu.render();
+  using namespace UiParameters;
+  if (mainMenuFlag) {
+    SDL_RenderCopy(Game::renderer, mainMenu, NULL, &screenRect);
+    if(hoveringLabel == startGame)
+      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
+    else if(hoveringLabel == scoreboard)
+      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
+    else if(hoveringLabel == exitGame)
+      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
   else if (gameState->endgame != Game::State::none) {
-    // endScreen.render();
+    if(gameState->endgame == Game::State::allDiscovered)
+      SDL_RenderCopy(Game::renderer, winScreen, NULL, &screenRect);
+    else if(gameState->endgame == Game::State::noFuel)
+      SDL_RenderCopy(Game::renderer, loseScreen, NULL, &screenRect);
+    
+    // TODO: - Render score
+    if(hoveringLabel == playAgain)
+      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
+    else if(hoveringLabel == endGameExit)
+      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
+  else if(gameState->endgame == Game::State::none)
+    SDL_RenderCopy(Game::renderer, gameScreen, NULL, &screenRect);
   
   time.render(gameState);
   shipInfo.render(gameState);
@@ -195,4 +231,105 @@ void UIManager::checkClickedArea(SDL_Point p) {
     currentWindow = selectedPlanetWindow;
   
   else currentWindow = none;
+}
+
+void UIManager::checkForHovering(Game::State *gs) {
+  using namespace UiParameters;
+  SDL_Point p = gs->dragLocation;
+  int buffer = 11;
+  
+  // Main Menu
+  if(mainMenuFlag) {
+    if((p.x > startGameLabel.x) && (p.x < startGameLabel.x + startGameLabel.w)
+       && (p.y > startGameLabel.y) && (p.y < startGameLabel.y + startGameLabel.h)) {
+      hoveringLabel = startGame;
+      
+      if(borderRect.y != startGameLabel.y-buffer)
+        borderRect = startGameBorder;
+    }
+  
+    else if((p.x > scoreboardLabel.x) && (p.x < scoreboardLabel.x + scoreboardLabel.w)
+            && (p.y > scoreboardLabel.y) && (p.y < scoreboardLabel.y + scoreboardLabel.h)) {
+      hoveringLabel = scoreboard;
+      
+      if(borderRect.y != scoreboardLabel.y-buffer)
+        borderRect = scoreboardBorder;
+    }
+  
+    else if((p.x > exitGameLabel.x) && (p.x < exitGameLabel.x + exitGameLabel.w)
+            && (p.y > exitGameLabel.y) && (p.y < exitGameLabel.y + exitGameLabel.h)) {
+      hoveringLabel = exitGame;
+      
+      if(borderRect.y != exitGameLabel.y-buffer)
+        borderRect = exitGameBorder;
+    }
+  
+    else hoveringLabel = nothing;
+  }
+  
+  // End Screen
+  else if(gs->endgame != Game::State::none && gs->endgame != Game::State::quit) {
+    if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
+       && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
+      hoveringLabel = playAgain;
+      
+      if(borderRect.y != playAgainLabel.y-buffer)
+        borderRect = playAgainBorder;
+    }
+    
+    else if((p.x > endGameExitLabel.x) && (p.x < endGameExitLabel.x + endGameExitLabel.w)
+            && (p.y > endGameExitLabel.y) && (p.y < endGameExitLabel.y + endGameExitLabel.h)) {
+      hoveringLabel = endGameExit;
+      
+      if(borderRect.y != endGameExitLabel.y-buffer)
+        borderRect = endGameBorder;
+    }
+    
+    else hoveringLabel = nothing;
+  }
+}
+
+void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
+  SDL_Point p = gs->clickLocation;
+  using namespace UiParameters;
+  
+  // Main Menu
+  if(mainMenuFlag) {
+    if((p.x > startGameLabel.x) && (p.x < startGameLabel.x + startGameLabel.w)
+       && (p.y > startGameLabel.y) && (p.y < startGameLabel.y + startGameLabel.h)) {
+      hoveringLabel = nothing;
+      mainMenuFlag = false;
+    }
+  
+  // Future score board
+   /* else if((p.x > scoreboardLabel.x) && (p.x < scoreboardLabel.x + scoreboardLabel.w)
+            && (p.y > scoreboardLabel.y) && (p.y < scoreboardLabel.y + scoreboardLabel.h))
+    */
+  
+    else if((p.x > exitGameLabel.x) && (p.x < exitGameLabel.x + exitGameLabel.w)
+       && (p.y > exitGameLabel.y) && (p.y < exitGameLabel.y + exitGameLabel.h)) {
+      hoveringLabel = nothing;
+      mainMenuFlag = false;
+      gs->endgame = Game::State::quit;
+    }
+  }
+  
+  // End Screen
+  else if(gs->endgame != Game::State::none && gs->endgame != Game::State::quit) {
+    if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
+       && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
+      hoveringLabel = nothing;
+      mainMenuFlag = true;
+      gs->endgame = Game::State::none;
+      gs->restartGame = true;
+      gs->mouseDown = false;
+    }
+    
+    else if((p.x > endGameExitLabel.x) && (p.x < endGameExitLabel.x + endGameExitLabel.w)
+            && (p.y > endGameExitLabel.y) && (p.y < endGameExitLabel.y + endGameExitLabel.h)) {
+      hoveringLabel = nothing;
+      mainMenuFlag = false;
+      gs->endgame = Game::State::quit;
+    }
+  }
 }

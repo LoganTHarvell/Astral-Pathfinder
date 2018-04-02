@@ -45,10 +45,10 @@ public:
   struct State {
     // Flags
     bool isRunning = false;
-    bool mainMenu = false;
+    bool restartGame = false;
     
     enum {
-      none, allDiscovered, fuel
+      none, allDiscovered, noFuel, quit
     } endgame = none;
     
     enum {
@@ -77,8 +77,10 @@ public:
   void render();
   
   // MARK: - Game Methods
-  bool running() { return gameState.isRunning; };
+  bool running() { return gameState.isRunning; }
+  bool restart() { return gameState.restartGame; }
   void clean();
+  void restartGame();
 
   // Global renderer
   static SDL_Renderer *renderer;
@@ -87,9 +89,6 @@ private:
   // MARK: - Game Fields
   SDL_Window *window;
   State gameState;
-
-  SDL_Texture *gameScreen;
-  SDL_Rect screenRect;
 
   PlanetManager *planetManager;
   ShipManager *shipManager;
