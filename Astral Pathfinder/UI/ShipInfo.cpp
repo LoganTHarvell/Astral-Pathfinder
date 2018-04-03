@@ -41,11 +41,8 @@ void ShipInfo::render(Game::State *gs) {
 
 void ShipInfo::clean() {
   location.clean();
-  //crewLabel.clean();
   fuel.clean();
-  //crewNum.clean();
   curPlanet.clean();
-  //bar.clean();
 }
 
 // MARK: - ShipInfo Methods
