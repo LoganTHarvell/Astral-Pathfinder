@@ -62,9 +62,11 @@ void PlanetManager::initGalaxy() {
 void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
   // Updates each planet, also refreshes count of discovered planets
   discoveryCount = 0;
+  totalPopulation = 0;
   for (Planet& p : planets) {
     if (p.getStatus() != Planet::undiscovered) discoveryCount++;
     p.update(gameState);
+    totalPopulation += p.getPopulation();
   }
   
   // Checks all planets discovered endgame condition

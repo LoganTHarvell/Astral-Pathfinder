@@ -49,6 +49,7 @@ public:
   void setPlanetReservePercent(int p, int flag);
   
   int fuelDockedShip();
+  int getTotalPopulation() { return totalPopulation; }
   
 private:
   // MARK: - Helper Methods
@@ -68,6 +69,7 @@ private:
   int dockedPlanetIndex;
   int selectedPlanetIndex;
   int discoveryCount;
+  int totalPopulation;
 
 };
 

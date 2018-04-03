@@ -21,6 +21,7 @@ void UIManager::init() {
   using namespace UiParameters;
 
   time.init(timeRect);
+  totalScore.init(totalScoreRect);
   selectedPlanetInfo.init(selectedPlanetRect);
   DockedPlanetInfo.init(currentPlanetRect);
   shipInfo.init(shipInfoRect);
@@ -60,6 +61,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
   }
   
   updateTime(gameState->elapsedTime);
+  updateTotalScore(planetManager);
   
   Ship player = shipManager->getPlayerShip();
   if(player.getVelocity().x != 0 || player.getVelocity().y != 0
@@ -118,6 +120,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
     SDL_RenderCopy(Game::renderer, gameScreen, NULL, &screenRect);
   
   time.render(gameState);
+  totalScore.render(gameState);
   shipInfo.render(gameState);
   
   if(gameState->planetSelected) {
@@ -137,6 +140,12 @@ void UIManager::updateTime(Uint32 elapsedTime) {
   std::string mins = std::to_string(elapsedTime / 60);
   
   time.setMessage("Time " + mins + ":" + secs);
+}
+
+void UIManager::updateTotalScore(PlanetManager *pm) {
+  std::string population = std::to_string(pm->getTotalPopulation());
+  
+  totalScore.setMessage("Score: " + population);
 }
 
 void UIManager::setSelectedPlanet(Planet p) {
