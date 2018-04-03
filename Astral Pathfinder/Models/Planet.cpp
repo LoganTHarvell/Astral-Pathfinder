@@ -15,7 +15,7 @@
 #include "TextureManager.hpp"
 #include "Map.hpp"
 #include "Ship.hpp"
-
+#include <iostream>
 
 // MARK: - Initialization Methods
 
@@ -190,6 +190,11 @@ void Planet::updatePopulation(Uint32 frame) {
   
   // Resets births and deaths rates for growth period
   if (frame%growthPeriod == 0) {
+    if(populationCheck == 0)
+      populationCheck = population;
+    else if(population < populationCheck)
+      SDL_SetTextureColorMod(texture, 255, 255, 0);
+    populationCheck = population;
     birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
     deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
     births = (population) * (birthMult+(surplus/(population*foodRqmt)));
