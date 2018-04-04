@@ -58,6 +58,7 @@ public:
   int getFuel() { return fuel; };
   int getPopulation() { return population; };
   int getRotation() { return rotation; };
+  SDL_Point getVelocity() { return velocity; }
   SDL_Point getUIPosition() { return getCenter(); };
   SDL_Point getMapPosition(SDL_Point uiPosition);
   

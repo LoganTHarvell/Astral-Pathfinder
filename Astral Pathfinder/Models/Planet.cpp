@@ -16,7 +16,6 @@
 #include "Map.hpp"
 #include "Ship.hpp"
 
-
 // MARK: - Initialization Methods
 
 void Planet::initHomeworld() {
@@ -163,6 +162,7 @@ int Planet::makeFuel(int amount) {
 
 // MARK: - Helper Methods
 
+// TODO: Remove color mods to their own method utilizing color and state parameters
 void Planet::updateStatus() {
   if (status == undiscovered && playerDocked) {
     status = discovered;
@@ -170,9 +170,11 @@ void Planet::updateStatus() {
   }
   else if (status == discovered && population > 0) {
     status = colonized;
+    SDL_SetTextureColorMod(texture, 255, 255, 255);
   }
   else if (status == colonized && population == 0) {
     status = discovered;
+    SDL_SetTextureColorMod(texture, 50, 50, 50);
   }
 }
 
@@ -188,6 +190,11 @@ void Planet::updatePopulation(Uint32 frame) {
   
   // Resets births and deaths rates for growth period
   if (frame%growthPeriod == 0) {
+    if(populationCheck == 0)
+      populationCheck = population;
+    else if(population < populationCheck)
+      SDL_SetTextureColorMod(texture, 255, 255, 0);
+    populationCheck = population;
     birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
     deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
     births = (population) * (birthMult+(surplus/(population*foodRqmt)));

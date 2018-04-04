@@ -32,8 +32,6 @@ namespace Map {
                                  mapOrigin.y + (gridOffset/2) };
   const int gridWidth = (width - gridOffset)/numberOfPlanets;
   const int gridHeight = (height - gridOffset)/numberOfPlanets;
-  const SDL_Point planetTexOffset = { (gridWidth-planetTexSize)/2,
-                                      (gridHeight-planetTexSize)/2 };
 
 
   // MARK: - Map Methods
@@ -41,7 +39,7 @@ namespace Map {
   SDL_Point uiPosition(SDL_Point coordinates);
   SDL_Point mapPosition(SDL_Point uiPosition);
   bool checkBounds(SDL_Point min, SDL_Point max);
-
 }
+
 
 #endif /* Map_hpp */

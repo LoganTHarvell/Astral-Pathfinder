@@ -19,6 +19,12 @@
 // MARK: - Map Methods
 
 SDL_Point Map::uiPosition(SDL_Point coordinates) {
+  SDL_Point planetTexOffset = { (gridWidth-planetTexSize)/2,
+    (gridHeight-planetTexSize)/2};
+  
+  planetTexOffset.x += (rand()%planetTexOffset.x - planetTexOffset.x/2);
+  planetTexOffset.y += (rand()%planetTexOffset.y - planetTexOffset.y/2);
+  
   int x = gridOrigin.x + (coordinates.x * gridWidth) + planetTexOffset.x;
   int y = gridOrigin.y + (coordinates.y * gridHeight) + planetTexOffset.y;
   return { x, y };

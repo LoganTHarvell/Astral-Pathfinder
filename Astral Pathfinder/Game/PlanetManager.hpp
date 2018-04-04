@@ -39,10 +39,13 @@ public:
   void render(Game::State *gameState);
   
   // MARK: - PlanetManager Methods
+  int getTotalPopulation();
+  
   Planet getPlanet(int n);
   Planet getSelectedPlanet();
   bool planetIsDocked();
   Planet getDockedPlanet();
+  
   void setPlanetMiningPercent(int p, int flag);
   void setPlanetFarmingPercent(int p, int flag);
   void setPlanetInfraPercent(int p, int flag);
@@ -64,7 +67,8 @@ private:
   
   // MARK: - PlanetManager Fields
   std::vector<Planet> planets;
-  
+  int totalPopulation;
+
   int dockedPlanetIndex;
   int selectedPlanetIndex;
   int discoveryCount;

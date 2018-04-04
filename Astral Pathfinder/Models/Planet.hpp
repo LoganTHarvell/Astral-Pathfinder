@@ -118,7 +118,7 @@ private:
   SDL_Point coordinates;
 
   // Resources
-  float population;
+  float population, populationCheck;
   float deposits, fertility;
   int miningPercent, farmingPercent, infraPercent, reservePercent;
   float minerals, infrastructure, food;
