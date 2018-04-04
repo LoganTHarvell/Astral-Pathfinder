@@ -61,12 +61,12 @@ void PlanetManager::initGalaxy() {
 
 void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
   // Updates each planet, also refreshes count of discovered planets
-  discoveryCount = 0;
   totalPopulation = 0;
+  discoveryCount = 0;
   for (Planet& p : planets) {
+    totalPopulation += p.getPopulation();
     if (p.getStatus() != Planet::undiscovered) discoveryCount++;
     p.update(gameState);
-    totalPopulation += p.getPopulation();
   }
   
   // Checks all planets discovered endgame condition
@@ -100,6 +100,10 @@ void PlanetManager::render(Game::State *gameState) {
 
 // MARK: - PlanetManager Methods
 
+int PlanetManager::getTotalPopulation() {
+  return totalPopulation;
+}
+
 Planet PlanetManager::getPlanet(int n) {
   return planets[n];
 }
@@ -117,6 +121,7 @@ Planet PlanetManager::getDockedPlanet() {
   return planets[dockedPlanetIndex];
 }
 
+// TODO: Use enum for readability of flags
 void PlanetManager::setPlanetMiningPercent(int p, int flag) {
   if(flag == 1)
     planets[dockedPlanetIndex].setMiningPercent(p);

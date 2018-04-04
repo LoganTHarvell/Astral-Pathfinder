@@ -162,6 +162,7 @@ int Planet::makeFuel(int amount) {
 
 // MARK: - Helper Methods
 
+// TODO: Remove color mods to their own method utilizing color and state parameters
 void Planet::updateStatus() {
   if (status == undiscovered && playerDocked) {
     status = discovered;
