@@ -154,11 +154,10 @@
 		020012A620759ED60087CED9 = {
 			isa = PBXGroup;
 			children = (
-				02307CFE2075BE1B00B46A3E /* Assets.xcassets */,
-				02307CFF2075BE1B00B46A3E /* Info.plist */,
 				0200131E2075BCD30087CED9 /* Documentation */,
 				020013302075BCD30087CED9 /* Astral Pathfinder */,
 				020013532075BCD30087CED9 /* Resources */,
+				02307CFE2075BE1B00B46A3E /* Assets.xcassets */,
 				020013012075A5D90087CED9 /* Frameworks */,
 				020012B020759ED60087CED9 /* Products */,
 			);
@@ -216,6 +215,7 @@
 		020013302075BCD30087CED9 /* Astral Pathfinder */ = {
 			isa = PBXGroup;
 			children = (
+				02307CFF2075BE1B00B46A3E /* Info.plist */,
 				020013522075BCD30087CED9 /* main.cpp */,
 				020013312075BCD30087CED9 /* UI */,
 				0200133E2075BCD30087CED9 /* Models */,
