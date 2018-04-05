@@ -114,6 +114,10 @@ public:
   
 private:
   // MARK: - Planet Fields
+  enum colorStatus {
+    
+  } colorStatus;
+  
   Status status;
   SDL_Point coordinates;
 
@@ -142,6 +146,7 @@ private:
   void updatePopulation(Uint32 frame);
   void updateMining();
   void updateFarming();
+  void updateColors();
   
   SDL_Point uiPosition(SDL_Point p);
 };

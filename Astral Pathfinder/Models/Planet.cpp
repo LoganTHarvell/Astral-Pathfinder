@@ -113,6 +113,7 @@ void Planet::update(Game::State *gs) {
   updatePopulation(gs->frame);
   updateMining();
   updateFarming();
+  updateColors();
 }
 
 void Planet::render(Game::State *gs) {
@@ -300,6 +301,10 @@ void Planet::updateFarming() {
       markedOverProd = true;
     }
   }
+}
+
+void Planet::updateColors() {
+  
 }
 
 SDL_Point Planet::uiPosition(SDL_Point p) {
