@@ -3,312 +3,448 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0208D44B2034B13A009C8181 /* ShipManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0208D4492034B13A009C8181 /* ShipManager.cpp */; };
-		020C4921203DFCF100C4A41B /* UIManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020C491F203DFCF100C4A41B /* UIManager.cpp */; };
-		020CF625200DCEE10095E611 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020CF624200DCEE10095E611 /* main.cpp */; };
-		0210E9E1201F011B00F5E497 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0210E9DF201F011A00F5E497 /* Map.cpp */; };
-		02AA853E2030ECA6009F5DA1 /* PlanetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02AA85382030ECA6009F5DA1 /* PlanetManager.cpp */; };
-		02AA853F2030ECA6009F5DA1 /* Planet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02AA85392030ECA6009F5DA1 /* Planet.cpp */; };
-		02AA85402030ECA6009F5DA1 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02AA853A2030ECA6009F5DA1 /* Ship.cpp */; };
-		02AC9C00204669DC00907514 /* ColliderComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02AC9BFE204669DC00907514 /* ColliderComponent.cpp */; };
-		02DA48C720426A8400EF7EBB /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02DA48C620426A8300EF7EBB /* SDL2_ttf.framework */; };
-		02DFDC4E200DD09E00A136AF /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02DFDC4D200DD09E00A136AF /* SDL2.framework */; };
-		02DFDC50200DD0A900A136AF /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02DFDC4F200DD0A900A136AF /* SDL2_image.framework */; };
-		02DFDC5A200DD16000A136AF /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DFDC53200DD16000A136AF /* Game.cpp */; };
-		02DFDC5B200DD16000A136AF /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DFDC55200DD16000A136AF /* GameObject.cpp */; };
-		02DFDC5C200DD16000A136AF /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DFDC57200DD16000A136AF /* TextureManager.cpp */; };
-		9138E32320433371009C3D6D /* PlanetInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9138E32120433371009C3D6D /* PlanetInfo.cpp */; };
-		917590AB204B95A200783AA6 /* Slider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 917590A9204B95A200783AA6 /* Slider.cpp */; };
-		9175F95320421E6A008D9828 /* TextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9175F95120421E6A008D9828 /* TextBox.cpp */; };
-		91B54CA42055C2CD009838B5 /* ShipInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 91B54CA22055C2CD009838B5 /* ShipInfo.cpp */; };
+		020012FE2075A5AA0087CED9 /* SDL2.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 020012FB2075A5AA0087CED9 /* SDL2.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		020012FF2075A5AA0087CED9 /* SDL2_image.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 020012FC2075A5AA0087CED9 /* SDL2_image.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		020013002075A5AA0087CED9 /* SDL2_ttf.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 020012FD2075A5AA0087CED9 /* SDL2_ttf.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		020013612075BCD30087CED9 /* Classes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0200131F2075BCD30087CED9 /* Classes.txt */; };
+		020013622075BCD30087CED9 /* UI Layout.txt in Resources */ = {isa = PBXBuildFile; fileRef = 020013202075BCD30087CED9 /* UI Layout.txt */; };
+		020013632075BCD30087CED9 /* Screen Shot 2018-03-20 at 2.12.07 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013222075BCD30087CED9 /* Screen Shot 2018-03-20 at 2.12.07 PM.png */; };
+		020013642075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.35 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013232075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.35 AM.png */; };
+		020013652075BCD30087CED9 /* Screen Shot 2018-03-20 at 10.01.55 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013242075BCD30087CED9 /* Screen Shot 2018-03-20 at 10.01.55 PM.png */; };
+		020013662075BCD30087CED9 /* Screen Shot 2018-03-26 at 9.18.21 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013252075BCD30087CED9 /* Screen Shot 2018-03-26 at 9.18.21 PM.png */; };
+		020013672075BCD30087CED9 /* Screen Shot 2018-03-20 at 3.05.14 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013262075BCD30087CED9 /* Screen Shot 2018-03-20 at 3.05.14 PM.png */; };
+		020013682075BCD30087CED9 /* Screen Shot 2018-03-19 at 11.36.22 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013272075BCD30087CED9 /* Screen Shot 2018-03-19 at 11.36.22 PM.png */; };
+		020013692075BCD30087CED9 /* Screen Shot 2018-01-25 at 9.15.15 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013282075BCD30087CED9 /* Screen Shot 2018-01-25 at 9.15.15 PM.png */; };
+		0200136A2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.31.54 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013292075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.31.54 PM.png */; };
+		0200136B2075BCD30087CED9 /* Screen Shot 2018-02-24 at 11.00.31 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200132A2075BCD30087CED9 /* Screen Shot 2018-02-24 at 11.00.31 PM.png */; };
+		0200136C2075BCD30087CED9 /* Screen Shot 2018-03-20 at 9.08.05 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200132B2075BCD30087CED9 /* Screen Shot 2018-03-20 at 9.08.05 PM.png */; };
+		0200136D2075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.02 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200132C2075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.02 AM.png */; };
+		0200136E2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.32.47 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200132D2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.32.47 PM.png */; };
+		0200136F2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.29.37 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200132E2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.29.37 PM.png */; };
+		020013702075BCD30087CED9 /* Game Design.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0200132F2075BCD30087CED9 /* Game Design.txt */; };
+		020013712075BCD30087CED9 /* ShipInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020013352075BCD30087CED9 /* ShipInfo.cpp */; };
+		020013722075BCD30087CED9 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020013392075BCD30087CED9 /* Map.cpp */; };
+		020013732075BCD30087CED9 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0200133A2075BCD30087CED9 /* TextureManager.cpp */; };
+		020013742075BCD30087CED9 /* TextBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0200133B2075BCD30087CED9 /* TextBox.cpp */; };
+		020013752075BCD30087CED9 /* Slider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0200133C2075BCD30087CED9 /* Slider.cpp */; };
+		020013762075BCD30087CED9 /* PlanetInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0200133D2075BCD30087CED9 /* PlanetInfo.cpp */; };
+		020013772075BCD30087CED9 /* ColliderComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020013422075BCD30087CED9 /* ColliderComponent.cpp */; };
+		020013782075BCD30087CED9 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020013432075BCD30087CED9 /* GameObject.cpp */; };
+		020013792075BCD30087CED9 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020013462075BCD30087CED9 /* Ship.cpp */; };
+		0200137A2075BCD30087CED9 /* Planet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020013472075BCD30087CED9 /* Planet.cpp */; };
+		0200137B2075BCD30087CED9 /* PlanetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0200134D2075BCD30087CED9 /* PlanetManager.cpp */; };
+		0200137C2075BCD30087CED9 /* ShipManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0200134F2075BCD30087CED9 /* ShipManager.cpp */; };
+		0200137D2075BCD30087CED9 /* UIManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020013502075BCD30087CED9 /* UIManager.cpp */; };
+		0200137E2075BCD30087CED9 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020013512075BCD30087CED9 /* Game.cpp */; };
+		0200137F2075BCD30087CED9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020013522075BCD30087CED9 /* main.cpp */; };
+		020013802075BCD30087CED9 /* slider.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013552075BCD30087CED9 /* slider.png */; };
+		020013812075BCD30087CED9 /* border.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013562075BCD30087CED9 /* border.png */; };
+		020013822075BCD30087CED9 /* planet.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013572075BCD30087CED9 /* planet.png */; };
+		020013832075BCD30087CED9 /* playerShip.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013582075BCD30087CED9 /* playerShip.png */; };
+		020013842075BCD30087CED9 /* loseScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013592075BCD30087CED9 /* loseScreen.png */; };
+		020013852075BCD30087CED9 /* movingPlayerShip.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200135A2075BCD30087CED9 /* movingPlayerShip.png */; };
+		020013862075BCD30087CED9 /* gameScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200135B2075BCD30087CED9 /* gameScreen.png */; };
+		020013872075BCD30087CED9 /* Arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0200135C2075BCD30087CED9 /* Arial.ttf */; };
+		020013882075BCD30087CED9 /* base.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200135D2075BCD30087CED9 /* base.png */; };
+		020013892075BCD30087CED9 /* MODENINE.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 0200135E2075BCD30087CED9 /* MODENINE.TTF */; };
+		0200138A2075BCD30087CED9 /* mainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200135F2075BCD30087CED9 /* mainMenu.png */; };
+		0200138B2075BCD30087CED9 /* winScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013602075BCD30087CED9 /* winScreen.png */; };
+		02307D002075BE1B00B46A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02307CFE2075BE1B00B46A3E /* Assets.xcassets */; };
+		02307D012075BE1B00B46A3E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02307CFF2075BE1B00B46A3E /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		020CF61F200DCEE10095E611 /* CopyFiles */ = {
+		020012F42075A43A0087CED9 /* Copy Bundle Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			dstPath = "";
+			dstSubfolderSpec = 10;
 			files = (
+				020012FE2075A5AA0087CED9 /* SDL2.framework in Copy Bundle Frameworks */,
+				020012FF2075A5AA0087CED9 /* SDL2_image.framework in Copy Bundle Frameworks */,
+				020013002075A5AA0087CED9 /* SDL2_ttf.framework in Copy Bundle Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			name = "Copy Bundle Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0208D4492034B13A009C8181 /* ShipManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShipManager.cpp; sourceTree = "<group>"; };
-		0208D44A2034B13A009C8181 /* ShipManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShipManager.hpp; sourceTree = "<group>"; };
-		020C491F203DFCF100C4A41B /* UIManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UIManager.cpp; sourceTree = "<group>"; };
-		020C4920203DFCF100C4A41B /* UIManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIManager.hpp; sourceTree = "<group>"; };
-		020C4922203E61E400C4A41B /* playerShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playerShip.png; sourceTree = "<group>"; };
-		020C4923203E61E400C4A41B /* movingPlayerShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movingPlayerShip.png; sourceTree = "<group>"; };
-		020CF621200DCEE10095E611 /* Astral Pathfinder */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Astral Pathfinder"; sourceTree = BUILT_PRODUCTS_DIR; };
-		020CF624200DCEE10095E611 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		021006092060B903001A0E90 /* MODENINE.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = MODENINE.TTF; sourceTree = "<group>"; };
-		0210E9DF201F011A00F5E497 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
-		0210E9E0201F011A00F5E497 /* Map.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
-		02674CB820194C7300A4B6F0 /* Documentation */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Documentation; sourceTree = "<group>"; };
-		0279AC2D201AC0A700ECE4AE /* gameScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameScreen.png; sourceTree = "<group>"; };
-		02AA85382030ECA6009F5DA1 /* PlanetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlanetManager.cpp; sourceTree = "<group>"; };
-		02AA85392030ECA6009F5DA1 /* Planet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planet.cpp; sourceTree = "<group>"; };
-		02AA853A2030ECA6009F5DA1 /* Ship.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ship.cpp; sourceTree = "<group>"; };
-		02AA853B2030ECA6009F5DA1 /* Ship.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ship.hpp; sourceTree = "<group>"; };
-		02AA853C2030ECA6009F5DA1 /* Planet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Planet.hpp; sourceTree = "<group>"; };
-		02AA853D2030ECA6009F5DA1 /* PlanetManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlanetManager.hpp; sourceTree = "<group>"; };
-		02AC9BFE204669DC00907514 /* ColliderComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ColliderComponent.cpp; sourceTree = "<group>"; };
-		02AC9BFF204669DC00907514 /* ColliderComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ColliderComponent.hpp; sourceTree = "<group>"; };
-		02DA48C620426A8300EF7EBB /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
-		02DFDC4D200DD09E00A136AF /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
-		02DFDC4F200DD0A900A136AF /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
-		02DFDC51200DD16000A136AF /* TextureManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextureManager.hpp; sourceTree = "<group>"; };
-		02DFDC53200DD16000A136AF /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
-		02DFDC54200DD16000A136AF /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
-		02DFDC55200DD16000A136AF /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
-		02DFDC56200DD16000A136AF /* parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parameters.h; sourceTree = "<group>"; };
-		02DFDC57200DD16000A136AF /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
-		02DFDC58200DD16000A136AF /* GameObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameObject.hpp; sourceTree = "<group>"; };
-		02DFDC5E200DD34700A136AF /* planet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = planet.png; path = Resources/Assets/planet.png; sourceTree = SOURCE_ROOT; };
-		9123A0092061E868009EA3DB /* border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = border.png; sourceTree = "<group>"; };
-		9130A86C2057029F009F6C9B /* slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slider.png; sourceTree = "<group>"; };
-		9130A86D2057029F009F6C9B /* base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base.png; sourceTree = "<group>"; };
-		9138E32120433371009C3D6D /* PlanetInfo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlanetInfo.cpp; sourceTree = "<group>"; };
-		9138E32220433371009C3D6D /* PlanetInfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlanetInfo.hpp; sourceTree = "<group>"; };
-		9150685B20618D1F00EB1CCB /* mainMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMenu.png; sourceTree = "<group>"; };
-		917590A9204B95A200783AA6 /* Slider.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Slider.cpp; sourceTree = "<group>"; };
-		917590AA204B95A200783AA6 /* Slider.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Slider.hpp; sourceTree = "<group>"; };
-		9175F94F20421777008D9828 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
-		9175F95120421E6A008D9828 /* TextBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextBox.cpp; sourceTree = "<group>"; };
-		9175F954204227A8008D9828 /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arial.ttf; sourceTree = "<group>"; };
-		91B54CA22055C2CD009838B5 /* ShipInfo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShipInfo.cpp; sourceTree = "<group>"; };
-		91B54CA32055C2CD009838B5 /* ShipInfo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShipInfo.hpp; sourceTree = "<group>"; };
-		91B97D642064246300701841 /* loseScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loseScreen.png; sourceTree = "<group>"; };
-		91B97D652064246300701841 /* winScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = winScreen.png; sourceTree = "<group>"; };
-		91EC30BD20425BE20068D2F4 /* TextBox.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextBox.hpp; sourceTree = "<group>"; };
+		020012AF20759ED60087CED9 /* Astral Pathfinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Astral Pathfinder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		020012FB2075A5AA0087CED9 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = SDL2/SDL2.framework; sourceTree = "<group>"; };
+		020012FC2075A5AA0087CED9 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = SDL2/SDL2_image.framework; sourceTree = "<group>"; };
+		020012FD2075A5AA0087CED9 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = SDL2/SDL2_ttf.framework; sourceTree = "<group>"; };
+		0200131F2075BCD30087CED9 /* Classes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Classes.txt; sourceTree = "<group>"; };
+		020013202075BCD30087CED9 /* UI Layout.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "UI Layout.txt"; sourceTree = "<group>"; };
+		020013222075BCD30087CED9 /* Screen Shot 2018-03-20 at 2.12.07 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2018-03-20 at 2.12.07 PM.png"; sourceTree = "<group>"; };
+		020013232075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.35 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2018-03-24 at 1.00.35 AM.png"; sourceTree = "<group>"; };
+		020013242075BCD30087CED9 /* Screen Shot 2018-03-20 at 10.01.55 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2018-03-20 at 10.01.55 PM.png"; sourceTree = "<group>"; };
+		020013252075BCD30087CED9 /* Screen Shot 2018-03-26 at 9.18.21 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2018-03-26 at 9.18.21 PM.png"; sourceTree = "<group>"; };
+		020013262075BCD30087CED9 /* Screen Shot 2018-03-20 at 3.05.14 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2018-03-20 at 3.05.14 PM.png"; sourceTree = "<group>"; };
+		020013272075BCD30087CED9 /* Screen Shot 2018-03-19 at 11.36.22 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2018-03-19 at 11.36.22 PM.png"; sourceTree = "<group>"; };
+		020013282075BCD30087CED9 /* Screen Shot 2018-01-25 at 9.15.15 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2018-01-25 at 9.15.15 PM.png"; sourceTree = "<group>"; };
+		020013292075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.31.54 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2018-01-24 at 6.31.54 PM.png"; sourceTree = "<group>"; };
+		0200132A2075BCD30087CED9 /* Screen Shot 2018-02-24 at 11.00.31 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2018-02-24 at 11.00.31 PM.png"; sourceTree = "<group>"; };
+		0200132B2075BCD30087CED9 /* Screen Shot 2018-03-20 at 9.08.05 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2018-03-20 at 9.08.05 PM.png"; sourceTree = "<group>"; };
+		0200132C2075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.02 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2018-03-24 at 1.00.02 AM.png"; sourceTree = "<group>"; };
+		0200132D2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.32.47 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2018-01-24 at 6.32.47 PM.png"; sourceTree = "<group>"; };
+		0200132E2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.29.37 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2018-01-24 at 6.29.37 PM.png"; sourceTree = "<group>"; };
+		0200132F2075BCD30087CED9 /* Game Design.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Game Design.txt"; sourceTree = "<group>"; };
+		020013322075BCD30087CED9 /* TextBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextBox.hpp; sourceTree = "<group>"; };
+		020013332075BCD30087CED9 /* Slider.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Slider.hpp; sourceTree = "<group>"; };
+		020013342075BCD30087CED9 /* PlanetInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlanetInfo.hpp; sourceTree = "<group>"; };
+		020013352075BCD30087CED9 /* ShipInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShipInfo.cpp; sourceTree = "<group>"; };
+		020013362075BCD30087CED9 /* Map.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Map.hpp; sourceTree = "<group>"; };
+		020013372075BCD30087CED9 /* TextureManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TextureManager.hpp; sourceTree = "<group>"; };
+		020013382075BCD30087CED9 /* ShipInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShipInfo.hpp; sourceTree = "<group>"; };
+		020013392075BCD30087CED9 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		0200133A2075BCD30087CED9 /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
+		0200133B2075BCD30087CED9 /* TextBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextBox.cpp; sourceTree = "<group>"; };
+		0200133C2075BCD30087CED9 /* Slider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Slider.cpp; sourceTree = "<group>"; };
+		0200133D2075BCD30087CED9 /* PlanetInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlanetInfo.cpp; sourceTree = "<group>"; };
+		0200133F2075BCD30087CED9 /* Ship.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ship.hpp; sourceTree = "<group>"; };
+		020013402075BCD30087CED9 /* Planet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Planet.hpp; sourceTree = "<group>"; };
+		020013422075BCD30087CED9 /* ColliderComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColliderComponent.cpp; sourceTree = "<group>"; };
+		020013432075BCD30087CED9 /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
+		020013442075BCD30087CED9 /* GameObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameObject.hpp; sourceTree = "<group>"; };
+		020013452075BCD30087CED9 /* ColliderComponent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ColliderComponent.hpp; sourceTree = "<group>"; };
+		020013462075BCD30087CED9 /* Ship.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ship.cpp; sourceTree = "<group>"; };
+		020013472075BCD30087CED9 /* Planet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planet.cpp; sourceTree = "<group>"; };
+		020013492075BCD30087CED9 /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
+		0200134A2075BCD30087CED9 /* PlanetManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlanetManager.hpp; sourceTree = "<group>"; };
+		0200134B2075BCD30087CED9 /* ShipManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShipManager.hpp; sourceTree = "<group>"; };
+		0200134C2075BCD30087CED9 /* UIManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UIManager.hpp; sourceTree = "<group>"; };
+		0200134D2075BCD30087CED9 /* PlanetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlanetManager.cpp; sourceTree = "<group>"; };
+		0200134E2075BCD30087CED9 /* parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parameters.h; sourceTree = "<group>"; };
+		0200134F2075BCD30087CED9 /* ShipManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShipManager.cpp; sourceTree = "<group>"; };
+		020013502075BCD30087CED9 /* UIManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIManager.cpp; sourceTree = "<group>"; };
+		020013512075BCD30087CED9 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		020013522075BCD30087CED9 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		020013552075BCD30087CED9 /* slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slider.png; sourceTree = "<group>"; };
+		020013562075BCD30087CED9 /* border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = border.png; sourceTree = "<group>"; };
+		020013572075BCD30087CED9 /* planet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planet.png; sourceTree = "<group>"; };
+		020013582075BCD30087CED9 /* playerShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playerShip.png; sourceTree = "<group>"; };
+		020013592075BCD30087CED9 /* loseScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loseScreen.png; sourceTree = "<group>"; };
+		0200135A2075BCD30087CED9 /* movingPlayerShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movingPlayerShip.png; sourceTree = "<group>"; };
+		0200135B2075BCD30087CED9 /* gameScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameScreen.png; sourceTree = "<group>"; };
+		0200135C2075BCD30087CED9 /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arial.ttf; sourceTree = "<group>"; };
+		0200135D2075BCD30087CED9 /* base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base.png; sourceTree = "<group>"; };
+		0200135E2075BCD30087CED9 /* MODENINE.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = MODENINE.TTF; sourceTree = "<group>"; };
+		0200135F2075BCD30087CED9 /* mainMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMenu.png; sourceTree = "<group>"; };
+		020013602075BCD30087CED9 /* winScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = winScreen.png; sourceTree = "<group>"; };
+		02307CFE2075BE1B00B46A3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		02307CFF2075BE1B00B46A3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		020CF61E200DCEE10095E611 /* Frameworks */ = {
+		020012AC20759ED60087CED9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02DA48C720426A8400EF7EBB /* SDL2_ttf.framework in Frameworks */,
-				02DFDC50200DD0A900A136AF /* SDL2_image.framework in Frameworks */,
-				02DFDC4E200DD09E00A136AF /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		020CF618200DCEE10095E611 = {
+		020012A620759ED60087CED9 = {
 			isa = PBXGroup;
 			children = (
-				02674CB820194C7300A4B6F0 /* Documentation */,
-				020CF623200DCEE10095E611 /* Astral Pathfinder */,
-				02DFDC49200DD02700A136AF /* Resources */,
-				020CF622200DCEE10095E611 /* Products */,
-				02DFDC4C200DD09E00A136AF /* Frameworks */,
+				0200131E2075BCD30087CED9 /* Documentation */,
+				020013302075BCD30087CED9 /* Astral Pathfinder */,
+				020013532075BCD30087CED9 /* Resources */,
+				02307CFE2075BE1B00B46A3E /* Assets.xcassets */,
+				020013012075A5D90087CED9 /* Frameworks */,
+				020012B020759ED60087CED9 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		020CF622200DCEE10095E611 /* Products */ = {
+		020012B020759ED60087CED9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				020CF621200DCEE10095E611 /* Astral Pathfinder */,
+				020012AF20759ED60087CED9 /* Astral Pathfinder.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		020CF623200DCEE10095E611 /* Astral Pathfinder */ = {
+		020013012075A5D90087CED9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				020CF624200DCEE10095E611 /* main.cpp */,
-				0210E9E4201F023D00F5E497 /* Game */,
-				0210E9E3201F022800F5E497 /* Models */,
-				0210E9E2201F013300F5E497 /* UI */,
+				020012FC2075A5AA0087CED9 /* SDL2_image.framework */,
+				020012FD2075A5AA0087CED9 /* SDL2_ttf.framework */,
+				020012FB2075A5AA0087CED9 /* SDL2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0200131E2075BCD30087CED9 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				0200131F2075BCD30087CED9 /* Classes.txt */,
+				020013202075BCD30087CED9 /* UI Layout.txt */,
+				020013212075BCD30087CED9 /* Screenshots */,
+				0200132F2075BCD30087CED9 /* Game Design.txt */,
+			);
+			path = Documentation;
+			sourceTree = "<group>";
+		};
+		020013212075BCD30087CED9 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				020013222075BCD30087CED9 /* Screen Shot 2018-03-20 at 2.12.07 PM.png */,
+				020013232075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.35 AM.png */,
+				020013242075BCD30087CED9 /* Screen Shot 2018-03-20 at 10.01.55 PM.png */,
+				020013252075BCD30087CED9 /* Screen Shot 2018-03-26 at 9.18.21 PM.png */,
+				020013262075BCD30087CED9 /* Screen Shot 2018-03-20 at 3.05.14 PM.png */,
+				020013272075BCD30087CED9 /* Screen Shot 2018-03-19 at 11.36.22 PM.png */,
+				020013282075BCD30087CED9 /* Screen Shot 2018-01-25 at 9.15.15 PM.png */,
+				020013292075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.31.54 PM.png */,
+				0200132A2075BCD30087CED9 /* Screen Shot 2018-02-24 at 11.00.31 PM.png */,
+				0200132B2075BCD30087CED9 /* Screen Shot 2018-03-20 at 9.08.05 PM.png */,
+				0200132C2075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.02 AM.png */,
+				0200132D2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.32.47 PM.png */,
+				0200132E2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.29.37 PM.png */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
+		020013302075BCD30087CED9 /* Astral Pathfinder */ = {
+			isa = PBXGroup;
+			children = (
+				02307CFF2075BE1B00B46A3E /* Info.plist */,
+				020013522075BCD30087CED9 /* main.cpp */,
+				020013482075BCD30087CED9 /* Game */,
+				0200133E2075BCD30087CED9 /* Models */,
+				020013312075BCD30087CED9 /* UI */,
 			);
 			path = "Astral Pathfinder";
 			sourceTree = "<group>";
 		};
-		0210E9E2201F013300F5E497 /* UI */ = {
+		020013312075BCD30087CED9 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				0210E9DF201F011A00F5E497 /* Map.cpp */,
-				0210E9E0201F011A00F5E497 /* Map.hpp */,
-				9138E32120433371009C3D6D /* PlanetInfo.cpp */,
-				9138E32220433371009C3D6D /* PlanetInfo.hpp */,
-				9175F95120421E6A008D9828 /* TextBox.cpp */,
-				91EC30BD20425BE20068D2F4 /* TextBox.hpp */,
-				02DFDC57200DD16000A136AF /* TextureManager.cpp */,
-				02DFDC51200DD16000A136AF /* TextureManager.hpp */,
-				917590A9204B95A200783AA6 /* Slider.cpp */,
-				917590AA204B95A200783AA6 /* Slider.hpp */,
-				91B54CA22055C2CD009838B5 /* ShipInfo.cpp */,
-				91B54CA32055C2CD009838B5 /* ShipInfo.hpp */,
+				020013342075BCD30087CED9 /* PlanetInfo.hpp */,
+				0200133D2075BCD30087CED9 /* PlanetInfo.cpp */,
+				020013382075BCD30087CED9 /* ShipInfo.hpp */,
+				020013352075BCD30087CED9 /* ShipInfo.cpp */,
+				020013362075BCD30087CED9 /* Map.hpp */,
+				020013392075BCD30087CED9 /* Map.cpp */,
+				020013322075BCD30087CED9 /* TextBox.hpp */,
+				0200133B2075BCD30087CED9 /* TextBox.cpp */,
+				020013332075BCD30087CED9 /* Slider.hpp */,
+				0200133C2075BCD30087CED9 /* Slider.cpp */,
+				020013372075BCD30087CED9 /* TextureManager.hpp */,
+				0200133A2075BCD30087CED9 /* TextureManager.cpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
 		};
-		0210E9E3201F022800F5E497 /* Models */ = {
+		0200133E2075BCD30087CED9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				02AC9C01204669F800907514 /* Game Object */,
-				02AA85392030ECA6009F5DA1 /* Planet.cpp */,
-				02AA853C2030ECA6009F5DA1 /* Planet.hpp */,
-				02AA853A2030ECA6009F5DA1 /* Ship.cpp */,
-				02AA853B2030ECA6009F5DA1 /* Ship.hpp */,
+				020013412075BCD30087CED9 /* Game Object */,
+				020013402075BCD30087CED9 /* Planet.hpp */,
+				020013472075BCD30087CED9 /* Planet.cpp */,
+				0200133F2075BCD30087CED9 /* Ship.hpp */,
+				020013462075BCD30087CED9 /* Ship.cpp */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		0210E9E4201F023D00F5E497 /* Game */ = {
+		020013412075BCD30087CED9 /* Game Object */ = {
 			isa = PBXGroup;
 			children = (
-				02DFDC56200DD16000A136AF /* parameters.h */,
-				02DFDC53200DD16000A136AF /* Game.cpp */,
-				02DFDC54200DD16000A136AF /* Game.hpp */,
-				02AA85382030ECA6009F5DA1 /* PlanetManager.cpp */,
-				02AA853D2030ECA6009F5DA1 /* PlanetManager.hpp */,
-				0208D4492034B13A009C8181 /* ShipManager.cpp */,
-				0208D44A2034B13A009C8181 /* ShipManager.hpp */,
-				020C491F203DFCF100C4A41B /* UIManager.cpp */,
-				020C4920203DFCF100C4A41B /* UIManager.hpp */,
-			);
-			path = Game;
-			sourceTree = "<group>";
-		};
-		02AC9C01204669F800907514 /* Game Object */ = {
-			isa = PBXGroup;
-			children = (
-				02DFDC55200DD16000A136AF /* GameObject.cpp */,
-				02DFDC58200DD16000A136AF /* GameObject.hpp */,
-				02AC9BFE204669DC00907514 /* ColliderComponent.cpp */,
-				02AC9BFF204669DC00907514 /* ColliderComponent.hpp */,
+				020013422075BCD30087CED9 /* ColliderComponent.cpp */,
+				020013432075BCD30087CED9 /* GameObject.cpp */,
+				020013442075BCD30087CED9 /* GameObject.hpp */,
+				020013452075BCD30087CED9 /* ColliderComponent.hpp */,
 			);
 			path = "Game Object";
 			sourceTree = "<group>";
 		};
-		02DFDC49200DD02700A136AF /* Resources */ = {
+		020013482075BCD30087CED9 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				02DFDC4B200DD04F00A136AF /* Assets */,
+				0200134E2075BCD30087CED9 /* parameters.h */,
+				020013492075BCD30087CED9 /* Game.hpp */,
+				020013512075BCD30087CED9 /* Game.cpp */,
+				0200134A2075BCD30087CED9 /* PlanetManager.hpp */,
+				0200134D2075BCD30087CED9 /* PlanetManager.cpp */,
+				0200134B2075BCD30087CED9 /* ShipManager.hpp */,
+				0200134F2075BCD30087CED9 /* ShipManager.cpp */,
+				0200134C2075BCD30087CED9 /* UIManager.hpp */,
+				020013502075BCD30087CED9 /* UIManager.cpp */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		020013532075BCD30087CED9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				02307CFC2075BDB700B46A3E /* Screens */,
+				020013542075BCD30087CED9 /* Textures */,
+				02307CFD2075BDDC00B46A3E /* Fonts */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		02DFDC4B200DD04F00A136AF /* Assets */ = {
+		020013542075BCD30087CED9 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
-				91B97D642064246300701841 /* loseScreen.png */,
-				91B97D652064246300701841 /* winScreen.png */,
-				9123A0092061E868009EA3DB /* border.png */,
-				021006092060B903001A0E90 /* MODENINE.TTF */,
-				9150685B20618D1F00EB1CCB /* mainMenu.png */,
-				9130A86D2057029F009F6C9B /* base.png */,
-				9130A86C2057029F009F6C9B /* slider.png */,
-				9175F954204227A8008D9828 /* Arial.ttf */,
-				020C4923203E61E400C4A41B /* movingPlayerShip.png */,
-				020C4922203E61E400C4A41B /* playerShip.png */,
-				0279AC2D201AC0A700ECE4AE /* gameScreen.png */,
-				02DFDC5E200DD34700A136AF /* planet.png */,
+				020013552075BCD30087CED9 /* slider.png */,
+				020013562075BCD30087CED9 /* border.png */,
+				020013572075BCD30087CED9 /* planet.png */,
+				020013582075BCD30087CED9 /* playerShip.png */,
+				0200135A2075BCD30087CED9 /* movingPlayerShip.png */,
+				0200135D2075BCD30087CED9 /* base.png */,
 			);
-			path = Assets;
+			path = Textures;
 			sourceTree = "<group>";
 		};
-		02DFDC4C200DD09E00A136AF /* Frameworks */ = {
+		02307CFC2075BDB700B46A3E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				9175F94F20421777008D9828 /* SDL2_ttf.framework */,
-				02DA48C620426A8300EF7EBB /* SDL2_ttf.framework */,
-				02DFDC4F200DD0A900A136AF /* SDL2_image.framework */,
-				02DFDC4D200DD09E00A136AF /* SDL2.framework */,
+				020013592075BCD30087CED9 /* loseScreen.png */,
+				0200135B2075BCD30087CED9 /* gameScreen.png */,
+				0200135F2075BCD30087CED9 /* mainMenu.png */,
+				020013602075BCD30087CED9 /* winScreen.png */,
 			);
-			name = Frameworks;
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		02307CFD2075BDDC00B46A3E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0200135C2075BCD30087CED9 /* Arial.ttf */,
+				0200135E2075BCD30087CED9 /* MODENINE.TTF */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		020CF620200DCEE10095E611 /* Astral Pathfinder */ = {
+		020012AE20759ED60087CED9 /* Astral Pathfinder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 020CF628200DCEE10095E611 /* Build configuration list for PBXNativeTarget "Astral Pathfinder" */;
+			buildConfigurationList = 020012C020759ED70087CED9 /* Build configuration list for PBXNativeTarget "Astral Pathfinder" */;
 			buildPhases = (
-				020CF61D200DCEE10095E611 /* Sources */,
-				020CF61E200DCEE10095E611 /* Frameworks */,
-				020CF61F200DCEE10095E611 /* CopyFiles */,
+				020012AB20759ED60087CED9 /* Sources */,
+				020012AC20759ED60087CED9 /* Frameworks */,
+				020012AD20759ED60087CED9 /* Resources */,
+				020012F42075A43A0087CED9 /* Copy Bundle Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Astral Pathfinder";
-			productName = "Astral Pathfinder";
-			productReference = 020CF621200DCEE10095E611 /* Astral Pathfinder */;
-			productType = "com.apple.product-type.tool";
+			productName = "Astral Pathfinder for Mac Test";
+			productReference = 020012AF20759ED60087CED9 /* Astral Pathfinder.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		020CF619200DCEE10095E611 /* Project object */ = {
+		020012A720759ED60087CED9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0930;
-				ORGANIZATIONNAME = "Logan Harvell, Ian Holdeman";
+				ORGANIZATIONNAME = "Logan Harvell";
 				TargetAttributes = {
-					020CF620200DCEE10095E611 = {
-						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+					020012AE20759ED60087CED9 = {
+						CreatedOnToolsVersion = 9.3;
 					};
 				};
 			};
-			buildConfigurationList = 020CF61C200DCEE10095E611 /* Build configuration list for PBXProject "Astral Pathfinder" */;
-			compatibilityVersion = "Xcode 8.0";
+			buildConfigurationList = 020012AA20759ED60087CED9 /* Build configuration list for PBXProject "Astral Pathfinder" */;
+			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
-			mainGroup = 020CF618200DCEE10095E611;
-			productRefGroup = 020CF622200DCEE10095E611 /* Products */;
+			mainGroup = 020012A620759ED60087CED9;
+			productRefGroup = 020012B020759ED60087CED9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				020CF620200DCEE10095E611 /* Astral Pathfinder */,
+				020012AE20759ED60087CED9 /* Astral Pathfinder */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		020012AD20759ED60087CED9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				020013862075BCD30087CED9 /* gameScreen.png in Resources */,
+				0200136A2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.31.54 PM.png in Resources */,
+				020013702075BCD30087CED9 /* Game Design.txt in Resources */,
+				020013832075BCD30087CED9 /* playerShip.png in Resources */,
+				020013672075BCD30087CED9 /* Screen Shot 2018-03-20 at 3.05.14 PM.png in Resources */,
+				020013692075BCD30087CED9 /* Screen Shot 2018-01-25 at 9.15.15 PM.png in Resources */,
+				0200136D2075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.02 AM.png in Resources */,
+				020013892075BCD30087CED9 /* MODENINE.TTF in Resources */,
+				02307D012075BE1B00B46A3E /* Info.plist in Resources */,
+				0200136C2075BCD30087CED9 /* Screen Shot 2018-03-20 at 9.08.05 PM.png in Resources */,
+				020013682075BCD30087CED9 /* Screen Shot 2018-03-19 at 11.36.22 PM.png in Resources */,
+				020013822075BCD30087CED9 /* planet.png in Resources */,
+				020013612075BCD30087CED9 /* Classes.txt in Resources */,
+				0200136E2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.32.47 PM.png in Resources */,
+				020013632075BCD30087CED9 /* Screen Shot 2018-03-20 at 2.12.07 PM.png in Resources */,
+				020013842075BCD30087CED9 /* loseScreen.png in Resources */,
+				020013872075BCD30087CED9 /* Arial.ttf in Resources */,
+				020013662075BCD30087CED9 /* Screen Shot 2018-03-26 at 9.18.21 PM.png in Resources */,
+				020013852075BCD30087CED9 /* movingPlayerShip.png in Resources */,
+				0200138B2075BCD30087CED9 /* winScreen.png in Resources */,
+				0200136B2075BCD30087CED9 /* Screen Shot 2018-02-24 at 11.00.31 PM.png in Resources */,
+				020013802075BCD30087CED9 /* slider.png in Resources */,
+				020013812075BCD30087CED9 /* border.png in Resources */,
+				020013622075BCD30087CED9 /* UI Layout.txt in Resources */,
+				020013882075BCD30087CED9 /* base.png in Resources */,
+				0200138A2075BCD30087CED9 /* mainMenu.png in Resources */,
+				0200136F2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.29.37 PM.png in Resources */,
+				02307D002075BE1B00B46A3E /* Assets.xcassets in Resources */,
+				020013642075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.35 AM.png in Resources */,
+				020013652075BCD30087CED9 /* Screen Shot 2018-03-20 at 10.01.55 PM.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		020CF61D200DCEE10095E611 /* Sources */ = {
+		020012AB20759ED60087CED9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				91B54CA42055C2CD009838B5 /* ShipInfo.cpp in Sources */,
-				0210E9E1201F011B00F5E497 /* Map.cpp in Sources */,
-				020CF625200DCEE10095E611 /* main.cpp in Sources */,
-				02DFDC5A200DD16000A136AF /* Game.cpp in Sources */,
-				9138E32320433371009C3D6D /* PlanetInfo.cpp in Sources */,
-				020C4921203DFCF100C4A41B /* UIManager.cpp in Sources */,
-				9175F95320421E6A008D9828 /* TextBox.cpp in Sources */,
-				02AA853E2030ECA6009F5DA1 /* PlanetManager.cpp in Sources */,
-				02AA853F2030ECA6009F5DA1 /* Planet.cpp in Sources */,
-				02AA85402030ECA6009F5DA1 /* Ship.cpp in Sources */,
-				02DFDC5B200DD16000A136AF /* GameObject.cpp in Sources */,
-				02AC9C00204669DC00907514 /* ColliderComponent.cpp in Sources */,
-				02DFDC5C200DD16000A136AF /* TextureManager.cpp in Sources */,
-				917590AB204B95A200783AA6 /* Slider.cpp in Sources */,
-				0208D44B2034B13A009C8181 /* ShipManager.cpp in Sources */,
+				020013792075BCD30087CED9 /* Ship.cpp in Sources */,
+				020013782075BCD30087CED9 /* GameObject.cpp in Sources */,
+				020013722075BCD30087CED9 /* Map.cpp in Sources */,
+				020013772075BCD30087CED9 /* ColliderComponent.cpp in Sources */,
+				0200137D2075BCD30087CED9 /* UIManager.cpp in Sources */,
+				020013712075BCD30087CED9 /* ShipInfo.cpp in Sources */,
+				020013742075BCD30087CED9 /* TextBox.cpp in Sources */,
+				020013762075BCD30087CED9 /* PlanetInfo.cpp in Sources */,
+				0200137F2075BCD30087CED9 /* main.cpp in Sources */,
+				020013752075BCD30087CED9 /* Slider.cpp in Sources */,
+				020013732075BCD30087CED9 /* TextureManager.cpp in Sources */,
+				0200137B2075BCD30087CED9 /* PlanetManager.cpp in Sources */,
+				0200137A2075BCD30087CED9 /* Planet.cpp in Sources */,
+				0200137C2075BCD30087CED9 /* ShipManager.cpp in Sources */,
+				0200137E2075BCD30087CED9 /* Game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		020CF626200DCEE10095E611 /* Debug */ = {
+		020012BE20759ED70087CED9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -318,6 +454,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -365,7 +502,7 @@
 			};
 			name = Debug;
 		};
-		020CF627200DCEE10095E611 /* Release */ = {
+		020012BF20759ED70087CED9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -375,6 +512,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
@@ -415,62 +553,82 @@
 			};
 			name = Release;
 		};
-		020CF629200DCEE10095E611 /* Debug */ = {
+		020012C120759ED70087CED9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = WUP28GH2WB;
-				FRAMEWORK_SEARCH_PATHS = (
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/SDL2/";
+				INFOPLIST_FILE = "$(SRCROOT)/Astral Pathfinder/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SDL2,
+					"-framework",
+					SDL2_image,
+					"-framework",
+					SDL2_ttf,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "HxH.Astral-Pathfinder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
-		020CF62A200DCEE10095E611 /* Release */ = {
+		020012C220759ED70087CED9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = WUP28GH2WB;
-				FRAMEWORK_SEARCH_PATHS = (
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/SDL2/";
+				INFOPLIST_FILE = "$(SRCROOT)/Astral Pathfinder/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SDL2,
+					"-framework",
+					SDL2_image,
+					"-framework",
+					SDL2_ttf,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "HxH.Astral-Pathfinder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		020CF61C200DCEE10095E611 /* Build configuration list for PBXProject "Astral Pathfinder" */ = {
+		020012AA20759ED60087CED9 /* Build configuration list for PBXProject "Astral Pathfinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				020CF626200DCEE10095E611 /* Debug */,
-				020CF627200DCEE10095E611 /* Release */,
+				020012BE20759ED70087CED9 /* Debug */,
+				020012BF20759ED70087CED9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		020CF628200DCEE10095E611 /* Build configuration list for PBXNativeTarget "Astral Pathfinder" */ = {
+		020012C020759ED70087CED9 /* Build configuration list for PBXNativeTarget "Astral Pathfinder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				020CF629200DCEE10095E611 /* Debug */,
-				020CF62A200DCEE10095E611 /* Release */,
+				020012C120759ED70087CED9 /* Debug */,
+				020012C220759ED70087CED9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 020CF619200DCEE10095E611 /* Project object */;
+	rootObject = 020012A720759ED60087CED9 /* Project object */;
 }

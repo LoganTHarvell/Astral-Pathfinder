@@ -22,7 +22,7 @@
 namespace PlanetParameters {
   
   // Planet texture information
-  const std::string planetTextureFile = "Resources/Assets/planet.png";
+  const std::string planetTextureFile = "../Resources//planet.png";
   const int planetTexSize = 16;
   
   // Planet initial attribute information
