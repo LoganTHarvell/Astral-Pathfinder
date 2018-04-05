@@ -54,7 +54,6 @@
 		0200138A2075BCD30087CED9 /* mainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200135F2075BCD30087CED9 /* mainMenu.png */; };
 		0200138B2075BCD30087CED9 /* winScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013602075BCD30087CED9 /* winScreen.png */; };
 		02307D002075BE1B00B46A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02307CFE2075BE1B00B46A3E /* Assets.xcassets */; };
-		02307D012075BE1B00B46A3E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02307CFF2075BE1B00B46A3E /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -391,7 +390,6 @@
 				020013692075BCD30087CED9 /* Screen Shot 2018-01-25 at 9.15.15 PM.png in Resources */,
 				0200136D2075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.02 AM.png in Resources */,
 				020013892075BCD30087CED9 /* MODENINE.TTF in Resources */,
-				02307D012075BE1B00B46A3E /* Info.plist in Resources */,
 				0200136C2075BCD30087CED9 /* Screen Shot 2018-03-20 at 9.08.05 PM.png in Resources */,
 				020013682075BCD30087CED9 /* Screen Shot 2018-03-19 at 11.36.22 PM.png in Resources */,
 				020013822075BCD30087CED9 /* planet.png in Resources */,

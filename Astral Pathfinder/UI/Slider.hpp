@@ -22,8 +22,8 @@
 
 namespace SliderParameters {
   
-  const std::string barFilename = "../Resources//base.png";
-  const std::string circFilename = "../Resources//slider.png";
+  const std::string barFilename = "../Resources/base.png";
+  const std::string circFilename = "../Resources/slider.png";
   const SDL_Color baseColor = { 150, 150, 150 };
   const SDL_Color sliderColor = { 0, 128, 0 };
   

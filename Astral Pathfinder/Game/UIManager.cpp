@@ -25,12 +25,12 @@ void UIManager::init() {
   selectedPlanetInfo.init(selectedPlanetRect);
   DockedPlanetInfo.init(currentPlanetRect);
   shipInfo.init(shipInfoRect);
-  hoverBorder = TextureManager::loadTexture("../Resources//border.png");
+  hoverBorder = TextureManager::loadTexture("../Resources/border.png");
   
-  mainMenu = TextureManager::loadTexture("../Resources//mainMenu.png");
-  gameScreen = TextureManager::loadTexture("../Resources//gameScreen.png");
-  winScreen = TextureManager::loadTexture("../Resources//winScreen.png");
-  loseScreen = TextureManager::loadTexture("../Resources//loseScreen.png");
+  mainMenu = TextureManager::loadTexture("../Resources/mainMenu.png");
+  gameScreen = TextureManager::loadTexture("../Resources/gameScreen.png");
+  winScreen = TextureManager::loadTexture("../Resources/winScreen.png");
+  loseScreen = TextureManager::loadTexture("../Resources/loseScreen.png");
   screenRect = { 0, 0, GameParameters::windowRect.w, GameParameters::windowRect.h };
   
   mainMenuFlag = true;

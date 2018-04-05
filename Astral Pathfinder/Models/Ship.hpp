@@ -26,7 +26,7 @@ namespace ShipParameters {
     alienWarship
   };
   
-  const std::string movingPlayerTex = "../Resources//movingPlayerShip.png";
+  const std::string movingPlayerTex = "../Resources/movingPlayerShip.png";
   
   const struct {
     int w = 48, h = 24;
