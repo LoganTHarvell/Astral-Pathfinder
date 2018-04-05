@@ -48,7 +48,7 @@ void Planet::initHomeworld() {
   
   // Sets homeworld status
   status = colonized;
-  playerDocked = true;
+  toggleDockedShip(ShipParameters::ShipType::playerShip);
   
   SDL_SetTextureAlphaMod(texture, 255);
 }
@@ -135,6 +135,7 @@ void Planet::toggleDockedShip(int tag) {
   switch (tag) {
     case ShipType::playerShip:
       playerDocked = !playerDocked;
+      infrastructure += playerDocked ? shipPopulation : -(shipPopulation);
       population += playerDocked ? shipPopulation : -(shipPopulation);
       break;
     case ShipType::alienWarship:

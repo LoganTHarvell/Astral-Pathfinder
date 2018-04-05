@@ -39,7 +39,7 @@ namespace PlanetParameters {
   const int homeStartPopulation = 5000;
   const int homeStartFertility = 100;
   const int homeStartDeposits = 250;
-  const int homeStartMiningPercent = 50;
+  const int homeStartMiningPercent = 58;
   const int homeStartFarmingPercent = 100 - homeStartMiningPercent;
   const int homeStartInfraPercent = 0;
   const int homeStartReservePercent = 100 - homeStartInfraPercent;
