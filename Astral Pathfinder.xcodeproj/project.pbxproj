@@ -217,9 +217,9 @@
 			children = (
 				02307CFF2075BE1B00B46A3E /* Info.plist */,
 				020013522075BCD30087CED9 /* main.cpp */,
-				020013312075BCD30087CED9 /* UI */,
-				0200133E2075BCD30087CED9 /* Models */,
 				020013482075BCD30087CED9 /* Game */,
+				0200133E2075BCD30087CED9 /* Models */,
+				020013312075BCD30087CED9 /* UI */,
 			);
 			path = "Astral Pathfinder";
 			sourceTree = "<group>";
@@ -227,18 +227,18 @@
 		020013312075BCD30087CED9 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				020013322075BCD30087CED9 /* TextBox.hpp */,
-				020013332075BCD30087CED9 /* Slider.hpp */,
 				020013342075BCD30087CED9 /* PlanetInfo.hpp */,
+				0200133D2075BCD30087CED9 /* PlanetInfo.cpp */,
+				020013382075BCD30087CED9 /* ShipInfo.hpp */,
 				020013352075BCD30087CED9 /* ShipInfo.cpp */,
 				020013362075BCD30087CED9 /* Map.hpp */,
-				020013372075BCD30087CED9 /* TextureManager.hpp */,
-				020013382075BCD30087CED9 /* ShipInfo.hpp */,
 				020013392075BCD30087CED9 /* Map.cpp */,
-				0200133A2075BCD30087CED9 /* TextureManager.cpp */,
+				020013322075BCD30087CED9 /* TextBox.hpp */,
 				0200133B2075BCD30087CED9 /* TextBox.cpp */,
+				020013332075BCD30087CED9 /* Slider.hpp */,
 				0200133C2075BCD30087CED9 /* Slider.cpp */,
-				0200133D2075BCD30087CED9 /* PlanetInfo.cpp */,
+				020013372075BCD30087CED9 /* TextureManager.hpp */,
+				0200133A2075BCD30087CED9 /* TextureManager.cpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -246,11 +246,11 @@
 		0200133E2075BCD30087CED9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0200133F2075BCD30087CED9 /* Ship.hpp */,
-				020013402075BCD30087CED9 /* Planet.hpp */,
 				020013412075BCD30087CED9 /* Game Object */,
-				020013462075BCD30087CED9 /* Ship.cpp */,
+				020013402075BCD30087CED9 /* Planet.hpp */,
 				020013472075BCD30087CED9 /* Planet.cpp */,
+				0200133F2075BCD30087CED9 /* Ship.hpp */,
+				020013462075BCD30087CED9 /* Ship.cpp */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -269,15 +269,15 @@
 		020013482075BCD30087CED9 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				020013492075BCD30087CED9 /* Game.hpp */,
-				0200134A2075BCD30087CED9 /* PlanetManager.hpp */,
-				0200134B2075BCD30087CED9 /* ShipManager.hpp */,
-				0200134C2075BCD30087CED9 /* UIManager.hpp */,
-				0200134D2075BCD30087CED9 /* PlanetManager.cpp */,
 				0200134E2075BCD30087CED9 /* parameters.h */,
-				0200134F2075BCD30087CED9 /* ShipManager.cpp */,
-				020013502075BCD30087CED9 /* UIManager.cpp */,
+				020013492075BCD30087CED9 /* Game.hpp */,
 				020013512075BCD30087CED9 /* Game.cpp */,
+				0200134A2075BCD30087CED9 /* PlanetManager.hpp */,
+				0200134D2075BCD30087CED9 /* PlanetManager.cpp */,
+				0200134B2075BCD30087CED9 /* ShipManager.hpp */,
+				0200134F2075BCD30087CED9 /* ShipManager.cpp */,
+				0200134C2075BCD30087CED9 /* UIManager.hpp */,
+				020013502075BCD30087CED9 /* UIManager.cpp */,
 			);
 			path = Game;
 			sourceTree = "<group>";
