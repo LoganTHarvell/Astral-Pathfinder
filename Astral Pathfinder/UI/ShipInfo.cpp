@@ -11,7 +11,7 @@
 
 // MARK: Libraries and Frameworks
 #include <string>
-
+#include <iostream>
 
 // MARK: - ShipInfo Initialization
 
@@ -72,13 +72,13 @@ void ShipInfo::setUiRects() {
   SDL_Point temp = {static_cast<int>(origin.w/4.57), origin.h/4};
   int crewNumW = static_cast<int>(origin.w/6.4);
   int curPlanetW = static_cast<int>(origin.w/1.88);
-  int oneQuarter = origin.x+((midW-origin.x)/2);
+  int crewNumX = (temp.x-crewNumW)/2;
   
   
-  crewLabelRect = {oneQuarter-(temp.x/2), origin.y+(buffer*2), temp.x, temp.y};
-  locationRect = {midW+(buffer*2), crewLabelRect.y, static_cast<int>(origin.w/2.28), temp.y};
-  fuelRect = {locationRect.x+(temp.x/2), locationRect.y+gapH, temp.x, temp.y};
-  crewNumRect = {oneQuarter-(crewNumW/2), fuelRect.y, crewNumW, temp.y};
+  crewLabelRect = {origin.x+temp.y, origin.y+(buffer*2), temp.x, temp.y};
+  locationRect = {midW-(buffer*4), crewLabelRect.y, static_cast<int>(origin.w/2), temp.y};
+  fuelRect = {locationRect.x+(temp.x/2), locationRect.y+gapH, temp.x+(buffer*4), temp.y};
+  crewNumRect = {crewLabelRect.x+crewNumX, fuelRect.y, crewNumW, temp.y};
   curPlanetRect = {midW-(curPlanetW/2), fuelRect.y+gapH, curPlanetW, static_cast<int>(origin.h/4.8)};
-  barRect = {origin.x, curPlanetRect.y-buffer, origin.w, 4};
+  barRect = {origin.x, curPlanetRect.y-6, origin.w, 5};
 }
