@@ -9,11 +9,15 @@
 #ifndef UIManager_hpp
 #define UIManager_hpp
 
+// MARK: Libraries and Frameworks
+#include "SDL2_ttf/SDL_ttf.h"
+
 // MARK: Source Files
 #include "Game.hpp"
 #include "PlanetManager.hpp"
 #include "PlanetInfo.hpp"
 #include "ShipInfo.hpp"
+#include "TextBox.hpp"
 
 // MARK: - UIManager Parameters
 
@@ -33,6 +37,7 @@ namespace UiParameters {
   const SDL_Rect exitGameBorder = {582, 665, 460, 92};
   const SDL_Rect playAgainBorder = {270, 662, 460, 95};
   const SDL_Rect endGameBorder = {867, 665, 460, 92};
+  const SDL_Point endScoreCoords = {945, 400};
 }
 
 class UIManager {
@@ -51,12 +56,15 @@ public:
 private:
   // MARK: - UIManager Fields
   TextBox time;
-  TextBox totalScore;
+  TextBox totalScore, finalScore;
   PlanetInfo selectedPlanetInfo, DockedPlanetInfo;
   ShipInfo shipInfo;
   SDL_Texture *hoverBorder;
-  SDL_Rect borderRect, screenRect;
+  SDL_Rect borderRect, screenRect, finalScoreRect;
   SDL_Texture *mainMenu, *gameScreen, *winScreen, *loseScreen;
+  TTF_Font *font;
+  int score;
+  
   enum {
     none, currentPlanetWindow, selectedPlanetWindow
   } currentWindow = none;

@@ -53,6 +53,16 @@ void TextBox::setMessage(const std::string words) {
   SDL_FreeSurface(surface);
 }
 
+void TextBox::setFinalScore(TTF_Font *newFont, const std::string words) {
+  using TextParameters::color;
+  
+  if(texture != nullptr) clean();
+  
+  SDL_Surface *surface = TTF_RenderText_Blended(font, words.c_str(), color);
+  texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
+  SDL_FreeSurface(surface);
+}
+
 bool TextBox::checkNull() {
   if(texture == nullptr) return true;
   else return false;

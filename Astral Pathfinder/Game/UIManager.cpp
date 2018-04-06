@@ -11,6 +11,7 @@
 
 // MARK: Libraries and Frameworks
 #include <string>
+#include "SDL2_ttf/SDL_ttf.h"
 
 // MARK: Source Files
 #include "TextureManager.hpp"
@@ -32,6 +33,8 @@ void UIManager::init() {
   winScreen = TextureManager::loadTexture("../Resources/winScreen.png");
   loseScreen = TextureManager::loadTexture("../Resources/loseScreen.png");
   screenRect = { 0, 0, GameParameters::windowRect.w, GameParameters::windowRect.h };
+  finalScoreRect = {endScoreCoords.x, endScoreCoords.y, 0, 0};
+  font = TTF_OpenFont(TextParameters::fontFile.c_str(), 120);
   
   mainMenuFlag = true;
 }
@@ -109,7 +112,16 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
     else if(gameState->endgame == Game::State::noFuel)
       SDL_RenderCopy(Game::renderer, loseScreen, NULL, &screenRect);
     
-    // TODO: - Render score
+    if(finalScoreRect.w == 0) {
+      int w, h;
+      TTF_SizeText(font, std::to_string(score).c_str(), &w, &h);
+      finalScoreRect = {endScoreCoords.x, endScoreCoords.y, w, h};
+      finalScore.init(finalScoreRect);
+      finalScore.setFinalScore(font, std::to_string(score).c_str());
+    }
+    
+    finalScore.render(gameState);
+    
     if(hoveringLabel == playAgain)
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     else if(hoveringLabel == endGameExit)
@@ -143,7 +155,8 @@ void UIManager::updateTime(Uint32 elapsedTime) {
 }
 
 void UIManager::updateTotalScore(PlanetManager *pm) {
-  std::string population = std::to_string(pm->getTotalPopulation());
+  score = pm->getTotalPopulation();
+  std::string population = std::to_string(score);
   
   totalScore.setMessage("Score: " + population);
 }
