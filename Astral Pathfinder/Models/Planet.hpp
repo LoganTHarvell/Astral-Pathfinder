@@ -114,12 +114,14 @@ public:
   
 private:
   // MARK: - Planet Fields
-  enum colorStatus {
-    dead, populationDec, overproducing, doingWell
-  } colorStatus;
   
   Status status;
   SDL_Point coordinates;
+  
+  // Color states
+  enum colorState {
+    dead, populationDec, overproducing, doingWell
+  } colorState;
 
   // Resources
   float population, populationCheck;
@@ -141,6 +143,7 @@ private:
   bool playerDocked;
   bool alienDocked;
   
+  // Planet selected flag
   bool selected;
   
   // MARK: - Helper Methods

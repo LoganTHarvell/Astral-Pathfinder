@@ -168,7 +168,7 @@ void Planet::updateStatus() {
     status = colonized;
   else if (status == colonized && population == 0) {
     status = discovered;
-    colorStatus = dead;
+    colorState = dead;
   }
 }
 
@@ -186,10 +186,10 @@ void Planet::updatePopulation(Uint32 frame) {
   if (frame%growthPeriod == 0) {
     if(populationCheck == 0)
       populationCheck = population;
-    if(population < populationCheck && colorStatus != overproducing)
-      colorStatus = populationDec;
-    else if(colorStatus != overproducing)
-      colorStatus = doingWell;
+    if(population < populationCheck && colorState != overproducing)
+      colorState = populationDec;
+    else if(colorState != overproducing)
+      colorState = doingWell;
     populationCheck = population;
     birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
     deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
@@ -264,7 +264,7 @@ void Planet::updateFarming() {
   // Return if no food produced
   if (product < 0 ) {
     if (isOverproducing) isOverproducing = markedOverProd = false;
-    if (colorStatus != populationDec) colorStatus = doingWell;
+    if (colorState != populationDec) colorState = doingWell;
     return;
   }
   
@@ -272,7 +272,7 @@ void Planet::updateFarming() {
   if (product < fertility+1) {
     food = product;
     if (isOverproducing) isOverproducing = markedOverProd = false;
-    if (colorStatus != populationDec) colorStatus = doingWell;
+    if (colorState != populationDec) colorState = doingWell;
   }
   // Else food is overproduced
   else {
@@ -294,7 +294,7 @@ void Planet::updateFarming() {
     
     // Mark visually with color mod when overproducing, flag as marked
     if (isOverproducing && !markedOverProd) {
-      colorStatus = overproducing;
+      colorState = overproducing;
       markedOverProd = true;
     }
   }
@@ -305,7 +305,6 @@ void Planet::updateColors() {
     SDL_SetTextureAlphaMod(texture, 127); // undiscovered
     return;
   }
-  
   
   SDL_SetTextureAlphaMod(texture, 255);
   if(selected) {
@@ -318,7 +317,7 @@ void Planet::updateColors() {
     return;
   }
   
-  switch(colorStatus) {
+  switch(colorState) {
     case dead:
       SDL_SetTextureColorMod(texture, 255, 255, 255); // dead
       break;
