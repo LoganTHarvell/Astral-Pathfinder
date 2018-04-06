@@ -115,7 +115,7 @@ public:
 private:
   // MARK: - Planet Fields
   enum colorStatus {
-    
+    dead, populationDec, overproducing, doingWell
   } colorStatus;
   
   Status status;
@@ -140,6 +140,8 @@ private:
   // Docking flags
   bool playerDocked;
   bool alienDocked;
+  
+  bool selected;
   
   // MARK: - Helper Methods
   void updateStatus();

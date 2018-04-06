@@ -49,8 +49,6 @@ void Planet::initHomeworld() {
   // Sets homeworld status
   status = colonized;
   playerDocked = true;
-  
-  SDL_SetTextureAlphaMod(texture, 255);
 }
 
 void Planet::initPlanet() {
@@ -102,7 +100,6 @@ void Planet::initPlanet() {
   
   // Sets planet status
   status = undiscovered;
-  SDL_SetTextureAlphaMod(texture, 127);
 }
 
 
@@ -123,11 +120,11 @@ void Planet::render(Game::State *gs) {
 // MARK: - Planet Methods
 
 void Planet::clicked() {
-  SDL_SetTextureColorMod(texture, 0, 255, 0);
+  selected = true;
 }
 
 void Planet::revertClick() {
-  SDL_SetTextureColorMod(texture, 255, 255, 255);
+  selected = false;
 }
 
 void Planet::toggleDockedShip(int tag) {
@@ -165,17 +162,13 @@ int Planet::makeFuel(int amount) {
 
 // TODO: Remove color mods to their own method utilizing color and state parameters
 void Planet::updateStatus() {
-  if (status == undiscovered && playerDocked) {
+  if (status == undiscovered && playerDocked)
     status = discovered;
-    SDL_SetTextureAlphaMod(texture, 255);
-  }
-  else if (status == discovered && population > 0) {
+  else if (status == discovered && population > 0)
     status = colonized;
-    SDL_SetTextureColorMod(texture, 255, 255, 255);
-  }
   else if (status == colonized && population == 0) {
     status = discovered;
-    SDL_SetTextureColorMod(texture, 50, 50, 50);
+    colorStatus = dead;
   }
 }
 
@@ -193,8 +186,10 @@ void Planet::updatePopulation(Uint32 frame) {
   if (frame%growthPeriod == 0) {
     if(populationCheck == 0)
       populationCheck = population;
-    else if(population < populationCheck)
-      SDL_SetTextureColorMod(texture, 255, 255, 0);
+    if(population < populationCheck && colorStatus != overproducing)
+      colorStatus = populationDec;
+    else if(colorStatus != overproducing)
+      colorStatus = doingWell;
     populationCheck = population;
     birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
     deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
@@ -269,6 +264,7 @@ void Planet::updateFarming() {
   // Return if no food produced
   if (product < 0 ) {
     if (isOverproducing) isOverproducing = markedOverProd = false;
+    if (colorStatus != populationDec) colorStatus = doingWell;
     return;
   }
   
@@ -276,6 +272,7 @@ void Planet::updateFarming() {
   if (product < fertility+1) {
     food = product;
     if (isOverproducing) isOverproducing = markedOverProd = false;
+    if (colorStatus != populationDec) colorStatus = doingWell;
   }
   // Else food is overproduced
   else {
@@ -297,14 +294,49 @@ void Planet::updateFarming() {
     
     // Mark visually with color mod when overproducing, flag as marked
     if (isOverproducing && !markedOverProd) {
-      SDL_SetTextureColorMod(texture, 200, 0, 0);
+      colorStatus = overproducing;
       markedOverProd = true;
     }
   }
 }
 
 void Planet::updateColors() {
+  if(status == undiscovered) {
+    SDL_SetTextureAlphaMod(texture, 127); // undiscovered
+    return;
+  }
   
+  
+  SDL_SetTextureAlphaMod(texture, 255);
+  if(selected) {
+    SDL_SetTextureColorMod(texture, 0, 255, 0); // clicked
+    return;
+  }
+  
+  if(status == discovered) {
+    SDL_SetTextureColorMod(texture, 255, 255, 255); // discovered
+    return;
+  }
+  
+  switch(colorStatus) {
+    case dead:
+      SDL_SetTextureColorMod(texture, 255, 255, 255); // dead
+      break;
+    
+    case populationDec:
+      SDL_SetTextureColorMod(texture, 255, 255, 0); // popDec
+      break;
+      
+    case overproducing:
+      SDL_SetTextureColorMod(texture, 200, 0, 0); // overProd
+      break;
+      
+    default:
+      SDL_SetTextureAlphaMod(texture, 150);
+      SDL_SetTextureColorMod(texture, 0, 175, 0); // doing well
+      break;
+      
+  }
 }
 
 SDL_Point Planet::uiPosition(SDL_Point p) {
