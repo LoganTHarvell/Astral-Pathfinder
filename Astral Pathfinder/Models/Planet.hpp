@@ -114,6 +114,7 @@ public:
   
 private:
   // MARK: - Planet Fields
+  
   Status status;
   SDL_Point coordinates;
 
@@ -130,18 +131,24 @@ private:
   
   // Food production flags
   bool isOverproducing;
-  bool markedOverProd;
   Uint32 overproductionStartTime;
   
   // Docking flags
   bool playerDocked;
   bool alienDocked;
   
+  // Planet selected flag
+  bool selected;
+  
+  // Decreasing population flag
+  bool populationDec;
+  
   // MARK: - Helper Methods
   void updateStatus();
   void updatePopulation(Uint32 frame);
   void updateMining();
   void updateFarming();
+  void updateColors();
   
   SDL_Point uiPosition(SDL_Point p);
 };
