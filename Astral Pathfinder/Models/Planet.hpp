@@ -117,10 +117,6 @@ private:
   
   Status status;
   SDL_Point coordinates;
-  
-  enum colorState {
-    populationDec, overproducing, doingWell
-  } colorState;
 
   // Resources
   float population, populationCheck;
@@ -144,6 +140,9 @@ private:
   
   // Planet selected flag
   bool selected;
+  
+  // Decreasing population flag
+  bool populationDec;
   
   // MARK: - Helper Methods
   void updateStatus();

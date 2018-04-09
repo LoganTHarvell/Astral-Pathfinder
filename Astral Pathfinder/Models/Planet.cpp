@@ -15,6 +15,7 @@
 #include "TextureManager.hpp"
 #include "Map.hpp"
 #include "Ship.hpp"
+#include <iostream>
 
 // MARK: - Initialization Methods
 
@@ -49,6 +50,7 @@ void Planet::initHomeworld() {
   // Sets homeworld status
   status = colonized;
   playerDocked = true;
+  selected = false;
 }
 
 void Planet::initPlanet() {
@@ -95,6 +97,9 @@ void Planet::initPlanet() {
   isOverproducing = false;
   markedOverProd = false;
   overproductionStartTime = 0;
+  populationDec = false;
+  populationCheck = 0;
+  selected = false;
   
   playerDocked = alienDocked = false;
   
@@ -182,12 +187,7 @@ void Planet::updatePopulation(Uint32 frame) {
   
   // Resets births and deaths rates for growth period
   if (frame%growthPeriod == 0) {
-    if(populationCheck == 0)
-      populationCheck = population;
-    if(population < populationCheck && colorState != overproducing)
-      colorState = populationDec;
-    else if(colorState != overproducing)
-      colorState = doingWell;
+    populationDec = (population < populationCheck) ? true : false;
     populationCheck = population;
     birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
     deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
@@ -262,7 +262,6 @@ void Planet::updateFarming() {
   // Return if no food produced
   if (product < 0 ) {
     if (isOverproducing) isOverproducing = markedOverProd = false;
-    if (colorState != populationDec) colorState = doingWell;
     return;
   }
   
@@ -270,7 +269,6 @@ void Planet::updateFarming() {
   if (product < fertility+1) {
     food = product;
     if (isOverproducing) isOverproducing = markedOverProd = false;
-    if (colorState != populationDec) colorState = doingWell;
   }
   // Else food is overproduced
   else {
@@ -292,7 +290,6 @@ void Planet::updateFarming() {
     
     // Mark visually with color mod when overproducing, flag as marked
     if (isOverproducing && !markedOverProd) {
-      colorState = overproducing;
       markedOverProd = true;
     }
   }
@@ -315,20 +312,15 @@ void Planet::updateColors() {
     return;
   }
   
-  switch(colorState) {
-    case populationDec:
-      SDL_SetTextureColorMod(texture, 255, 255, 0);
-      break;
-      
-    case overproducing:
-      SDL_SetTextureColorMod(texture, 200, 0, 0);
-      break;
-      
-    default:
-      SDL_SetTextureAlphaMod(texture, 150);
-      SDL_SetTextureColorMod(texture, 0, 175, 0);
-      break;
-      
+  if(isOverproducing)
+    SDL_SetTextureColorMod(texture, 200, 0, 0);
+  
+  else if(populationDec)
+    SDL_SetTextureColorMod(texture, 255, 255, 0);
+  
+  else {
+    SDL_SetTextureAlphaMod(texture, 150);
+    SDL_SetTextureColorMod(texture, 0, 175, 0);
   }
 }
 
