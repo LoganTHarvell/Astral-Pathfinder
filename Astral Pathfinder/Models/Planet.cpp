@@ -302,37 +302,37 @@ void Planet::updateFarming() {
 
 void Planet::updateColors() {
   if(status == undiscovered) {
-    SDL_SetTextureAlphaMod(texture, 127); // undiscovered
+    SDL_SetTextureAlphaMod(texture, 127);
     return;
   }
   
   SDL_SetTextureAlphaMod(texture, 255);
   if(selected) {
-    SDL_SetTextureColorMod(texture, 0, 255, 0); // clicked
+    SDL_SetTextureColorMod(texture, 0, 255, 0);
     return;
   }
   
   if(status == discovered) {
-    SDL_SetTextureColorMod(texture, 255, 255, 255); // discovered
+    SDL_SetTextureColorMod(texture, 255, 255, 255);
     return;
   }
   
   switch(colorState) {
     case dead:
-      SDL_SetTextureColorMod(texture, 255, 255, 255); // dead
+      SDL_SetTextureColorMod(texture, 255, 255, 255);
       break;
     
     case populationDec:
-      SDL_SetTextureColorMod(texture, 255, 255, 0); // popDec
+      SDL_SetTextureColorMod(texture, 255, 255, 0);
       break;
       
     case overproducing:
-      SDL_SetTextureColorMod(texture, 200, 0, 0); // overProd
+      SDL_SetTextureColorMod(texture, 200, 0, 0);
       break;
       
     default:
       SDL_SetTextureAlphaMod(texture, 150);
-      SDL_SetTextureColorMod(texture, 0, 175, 0); // doing well
+      SDL_SetTextureColorMod(texture, 0, 175, 0);
       break;
       
   }
