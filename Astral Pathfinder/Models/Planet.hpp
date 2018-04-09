@@ -131,7 +131,6 @@ private:
   
   // Food production flags
   bool isOverproducing;
-  bool markedOverProd;
   Uint32 overproductionStartTime;
   
   // Docking flags

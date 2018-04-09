@@ -95,7 +95,6 @@ void Planet::initPlanet() {
   
   // Set flags
   isOverproducing = false;
-  markedOverProd = false;
   overproductionStartTime = 0;
   populationDec = false;
   populationCheck = 0;
@@ -261,14 +260,14 @@ void Planet::updateFarming() {
   
   // Return if no food produced
   if (product < 0 ) {
-    if (isOverproducing) isOverproducing = markedOverProd = false;
+    if (isOverproducing) isOverproducing = false;
     return;
   }
   
   // If food produced is less than max fertility, return produced amount
   if (product < fertility+1) {
     food = product;
-    if (isOverproducing) isOverproducing = markedOverProd = false;
+    if (isOverproducing) isOverproducing = false;
   }
   // Else food is overproduced
   else {
@@ -286,11 +285,6 @@ void Planet::updateFarming() {
     if (overprodTime >= fertDecayDelay) {
       fertility -= sqrt(food-fertility) * fertDecay * overprodTime;
       if (fertility < 0) fertility = 0;
-    }
-    
-    // Mark visually with color mod when overproducing, flag as marked
-    if (isOverproducing && !markedOverProd) {
-      markedOverProd = true;
     }
   }
 }
