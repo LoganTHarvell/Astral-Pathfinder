@@ -177,21 +177,25 @@ void Planet::updateStatus() {
 void Planet::updatePopulation(Uint32 frame) {
   using namespace PlanetParameters;
   
+  // Adjusts working population
+  int workingPop = this->population;
+  workingPop += playerDocked ? 1000 : 0;
+  
   // If no people to populate, return immediately
-  if (population <= 0) return;
+  if (workingPop <= 0) return;
   
   // Calculates surplus food produced
-  int surplus = food-(population*foodRqmt);
+  int surplus = food-(workingPop*foodRqmt);
   if (0 > surplus) surplus = 0;
   
   // Resets births and deaths rates for growth period
   if (frame%growthPeriod == 0) {
-    populationDec = (population < populationCheck) ? true : false;
-    populationCheck = population;
+    populationDec = (workingPop < populationCheck) ? true : false;
+    populationCheck = workingPop;
     birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
     deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
-    births = (population) * (birthMult+(surplus/(population*foodRqmt)));
-    deaths = population * deathMult;
+    births = (workingPop) * (birthMult+(surplus/(workingPop*foodRqmt)));
+    deaths = workingPop * deathMult;
     growthRate = (births - deaths)/static_cast<float>(growthPeriod);
   }
   
@@ -209,10 +213,6 @@ void Planet::updatePopulation(Uint32 frame) {
     population = infrastructure;
   }
   
-  // Guards against ship crew "dying"
-//  if (playerDocked && population < ShipParameters::shipPopulation) {
-//    population = ShipParameters::shipPopulation;
-//  }
   // Guards against negative population values
   if (population < 0) {
     population = 0;
@@ -222,14 +222,17 @@ void Planet::updatePopulation(Uint32 frame) {
 void Planet::updateMining() {
   using namespace PlanetParameters;
   
+  // Adjusts working population
+  int workingPop = this->population;
+  workingPop += playerDocked ? 1000 : 0;
+  
   // If there is no one or nothing to mine, then return right away
-  if (population <= 0 || deposits <= 0) return;
+  if (workingPop <= 0 || deposits <= 0) return;
   
   // Calculates amount of population dedicated to mining
-  int workers = population;
-  workers *= (miningPercent/100.0f);
+  int miners = workingPop * (miningPercent/100.0f);
   
-  float product = workers*miningRate;
+  float product = miners*miningRate;
   
   if (product < 0 ) return;
   
@@ -249,14 +252,17 @@ void Planet::updateFarming() {
   
   food = 0; // Resets food
   
+  // Adjusts working population
+  int workingPop = this->population;
+  workingPop += playerDocked ? 1000 : 0;
+  
   // If there is no one or nothing to farm, then return right away
-  if (population <= 0 || fertility <= 0) return;
+  if (workingPop <= 0 || fertility <= 0) return;
   
   // Calculates amount of population dedicated to farming
-  int workers = population;
-  workers *= (farmingPercent/100.0f);
+  int farmers = workingPop * (farmingPercent/100.0f);
   
-  float product = workers*farmingRate;  // Food produced
+  float product = farmers*farmingRate;  // Food produced
   
   // Return if no food produced
   if (product < 0 ) {
