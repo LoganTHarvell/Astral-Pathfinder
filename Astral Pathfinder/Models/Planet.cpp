@@ -49,8 +49,7 @@ void Planet::initHomeworld() {
   // Sets homeworld status
   status = colonized;
   toggleDockedShip(ShipParameters::ShipType::playerShip);
-  
-  SDL_SetTextureAlphaMod(texture, 255);
+  populationCheck = homeStartPopulation;
 }
 
 void Planet::initPlanet() {
