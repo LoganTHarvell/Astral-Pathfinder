@@ -119,7 +119,7 @@ private:
   SDL_Point coordinates;
   
   enum colorState {
-    dead, populationDec, overproducing, doingWell
+    populationDec, overproducing, doingWell
   } colorState;
 
   // Resources

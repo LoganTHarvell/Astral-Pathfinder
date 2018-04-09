@@ -166,10 +166,8 @@ void Planet::updateStatus() {
     status = discovered;
   else if (status == discovered && population > 0)
     status = colonized;
-  else if (status == colonized && population == 0) {
+  else if (status == colonized && population == 0)
     status = discovered;
-    colorState = dead;
-  }
 }
 
 void Planet::updatePopulation(Uint32 frame) {
@@ -318,10 +316,6 @@ void Planet::updateColors() {
   }
   
   switch(colorState) {
-    case dead:
-      SDL_SetTextureColorMod(texture, 255, 255, 255);
-      break;
-    
     case populationDec:
       SDL_SetTextureColorMod(texture, 255, 255, 0);
       break;
