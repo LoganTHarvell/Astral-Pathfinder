@@ -50,7 +50,7 @@ void Planet::initHomeworld() {
   // Sets homeworld status
   status = colonized;
   playerDocked = true;
-  selected = false;
+  populationCheck = homeStartPopulation;
 }
 
 void Planet::initPlanet() {
@@ -96,9 +96,9 @@ void Planet::initPlanet() {
   // Set flags
   isOverproducing = false;
   overproductionStartTime = 0;
+  selected = false;
   populationDec = false;
   populationCheck = 0;
-  selected = false;
   
   playerDocked = alienDocked = false;
   
