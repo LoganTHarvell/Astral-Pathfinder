@@ -136,8 +136,8 @@ void Planet::toggleDockedShip(int tag) {
   switch (tag) {
     case ShipType::playerShip:
       playerDocked = !playerDocked;
-      infrastructure += playerDocked ? shipPopulation : -(shipPopulation);
-      population += playerDocked ? shipPopulation : -(shipPopulation);
+//      infrastructure += playerDocked ? shipPopulation : -(shipPopulation);
+//      population += playerDocked ? shipPopulation : -(shipPopulation);
       break;
     case ShipType::alienWarship:
       alienDocked = !alienDocked;
@@ -210,11 +210,11 @@ void Planet::updatePopulation(Uint32 frame) {
   }
   
   // Guards against ship crew "dying"
-  if (playerDocked && population < ShipParameters::shipPopulation) {
-    population = ShipParameters::shipPopulation;
-  }
+//  if (playerDocked && population < ShipParameters::shipPopulation) {
+//    population = ShipParameters::shipPopulation;
+//  }
   // Guards against negative population values
-  else if (population < 0) {
+  if (population < 0) {
     population = 0;
   }
 }
