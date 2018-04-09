@@ -49,6 +49,7 @@ void Planet::initHomeworld() {
   // Sets homeworld status
   status = colonized;
   playerDocked = true;
+  populationCheck = homeStartPopulation;
 }
 
 void Planet::initPlanet() {
@@ -93,8 +94,10 @@ void Planet::initPlanet() {
   
   // Set flags
   isOverproducing = false;
-  markedOverProd = false;
   overproductionStartTime = 0;
+  selected = false;
+  populationDec = false;
+  populationCheck = 0;
   
   playerDocked = alienDocked = false;
   
@@ -166,10 +169,8 @@ void Planet::updateStatus() {
     status = discovered;
   else if (status == discovered && population > 0)
     status = colonized;
-  else if (status == colonized && population == 0) {
+  else if (status == colonized && population == 0)
     status = discovered;
-    colorState = dead;
-  }
 }
 
 void Planet::updatePopulation(Uint32 frame) {
@@ -184,12 +185,7 @@ void Planet::updatePopulation(Uint32 frame) {
   
   // Resets births and deaths rates for growth period
   if (frame%growthPeriod == 0) {
-    if(populationCheck == 0)
-      populationCheck = population;
-    if(population < populationCheck && colorState != overproducing)
-      colorState = populationDec;
-    else if(colorState != overproducing)
-      colorState = doingWell;
+    populationDec = (population < populationCheck) ? true : false;
     populationCheck = population;
     birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
     deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
@@ -263,16 +259,14 @@ void Planet::updateFarming() {
   
   // Return if no food produced
   if (product < 0 ) {
-    if (isOverproducing) isOverproducing = markedOverProd = false;
-    if (colorState != populationDec) colorState = doingWell;
+    if (isOverproducing) isOverproducing = false;
     return;
   }
   
   // If food produced is less than max fertility, return produced amount
   if (product < fertility+1) {
     food = product;
-    if (isOverproducing) isOverproducing = markedOverProd = false;
-    if (colorState != populationDec) colorState = doingWell;
+    if (isOverproducing) isOverproducing = false;
   }
   // Else food is overproduced
   else {
@@ -291,50 +285,35 @@ void Planet::updateFarming() {
       fertility -= sqrt(food-fertility) * fertDecay * overprodTime;
       if (fertility < 0) fertility = 0;
     }
-    
-    // Mark visually with color mod when overproducing, flag as marked
-    if (isOverproducing && !markedOverProd) {
-      colorState = overproducing;
-      markedOverProd = true;
-    }
   }
 }
 
 void Planet::updateColors() {
   if(status == undiscovered) {
-    SDL_SetTextureAlphaMod(texture, 127); // undiscovered
+    SDL_SetTextureAlphaMod(texture, 127);
     return;
   }
   
   SDL_SetTextureAlphaMod(texture, 255);
   if(selected) {
-    SDL_SetTextureColorMod(texture, 0, 255, 0); // clicked
+    SDL_SetTextureColorMod(texture, 0, 255, 0);
     return;
   }
   
   if(status == discovered) {
-    SDL_SetTextureColorMod(texture, 255, 255, 255); // discovered
+    SDL_SetTextureColorMod(texture, 255, 255, 255);
     return;
   }
   
-  switch(colorState) {
-    case dead:
-      SDL_SetTextureColorMod(texture, 255, 255, 255); // dead
-      break;
-    
-    case populationDec:
-      SDL_SetTextureColorMod(texture, 255, 255, 0); // popDec
-      break;
-      
-    case overproducing:
-      SDL_SetTextureColorMod(texture, 200, 0, 0); // overProd
-      break;
-      
-    default:
-      SDL_SetTextureAlphaMod(texture, 150);
-      SDL_SetTextureColorMod(texture, 0, 175, 0); // doing well
-      break;
-      
+  if(isOverproducing)
+    SDL_SetTextureColorMod(texture, 200, 0, 0);
+  
+  else if(populationDec)
+    SDL_SetTextureColorMod(texture, 255, 255, 0);
+  
+  else {
+    SDL_SetTextureAlphaMod(texture, 150);
+    SDL_SetTextureColorMod(texture, 0, 175, 0);
   }
 }
 
