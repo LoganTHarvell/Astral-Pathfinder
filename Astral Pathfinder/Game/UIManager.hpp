@@ -18,8 +18,8 @@
 // MARK: - UIManager Parameters
 
 namespace UiParameters {
-  const SDL_Rect timeRect = {400, 8, 75, 36};
-  const SDL_Rect totalScoreRect = {1125, 8, 75, 36};
+  const SDL_Rect timeRect = {115, 82, 90, 36};
+  const SDL_Rect totalScoreRect = {245, 82, 90, 36};
   const SDL_Rect shipInfoRect = {1215, 100, 320, 121};
   const SDL_Rect currentPlanetRect = {1215, 210, 320, 240};
   const SDL_Rect selectedPlanetRect = {1215, 500, 320, 300};
