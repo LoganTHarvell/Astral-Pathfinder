@@ -109,7 +109,7 @@ public:
   
   bool playerIsDocked() { return playerDocked; };
   bool alienIsDocked() { return alienDocked; };
-  void toggleDockedShip(int tag);
+  void toggleDockedShip(int tag, Uint32 frame);
   int makeFuel(int amount);
   
 private:
@@ -129,13 +129,14 @@ private:
   int births, deaths;           // Total Birth/Deaths in a period
   float growthRate;             // Population change per frame
   
-  // Food production flags
+  // Food production flags/vars
   bool isOverproducing;
   Uint32 overproductionStartTime;
   
-  // Docking flags
+  // Docking flags/vars
   bool playerDocked;
   bool alienDocked;
+  Uint32 frameDocked;
   
   // Planet selected flag
   bool selected;

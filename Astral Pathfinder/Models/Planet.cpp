@@ -48,7 +48,7 @@ void Planet::initHomeworld() {
   
   // Sets homeworld status
   status = colonized;
-  toggleDockedShip(ShipParameters::ShipType::playerShip);
+  playerDocked = true;
   populationCheck = homeStartPopulation;
 }
 
@@ -98,8 +98,8 @@ void Planet::initPlanet() {
   selected = false;
   populationDec = false;
   populationCheck = 0;
-  
   playerDocked = alienDocked = false;
+  frameDocked = 0;
   
   // Sets planet status
   status = undiscovered;
@@ -130,12 +130,14 @@ void Planet::revertClick() {
   selected = false;
 }
 
-void Planet::toggleDockedShip(int tag) {
-  using namespace ShipParameters;
+void Planet::toggleDockedShip(int tag, Uint32 frame) {
+  using namespace PlanetParameters;
+  using ShipType = ShipParameters::ShipType;
   
   switch (tag) {
     case ShipType::playerShip:
       playerDocked = !playerDocked;
+      if (frameDocked + growthPeriod < frame) frameDocked = frame;
       break;
     case ShipType::alienWarship:
       alienDocked = !alienDocked;
@@ -189,7 +191,7 @@ void Planet::updatePopulation(Uint32 frame) {
   else surplus = 0;
   
   // Resets births and deaths rates for growth period
-  if (frame%growthPeriod == 0) {
+  if ((frame-frameDocked)%growthPeriod == 0) {
     populationDec = (population < populationCheck) ? true : false;
     populationCheck = population;
     birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;

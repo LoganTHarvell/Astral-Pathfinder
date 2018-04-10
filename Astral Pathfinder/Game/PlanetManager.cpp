@@ -60,6 +60,10 @@ void PlanetManager::initGalaxy() {
 // Mark: - Game Loop Methods
 
 void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
+  // Checks for any collisions first
+  handleCollisions(shipManager, gameState->frame);
+  gameState->planetCollided = planetIsDocked();
+  
   // Updates each planet, also refreshes count of discovered planets
   totalPopulation = 0;
   discoveryCount = 0;
@@ -82,9 +86,6 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
     handleClickEvent(gameState->clickLocation, gameState);
     gameState->clickFlag = false;
   }
-  
-  handleCollisions(shipManager);
-  gameState->planetCollided = planetIsDocked();
 }
 
 void PlanetManager::render(Game::State *gameState) {
@@ -216,7 +217,7 @@ void PlanetManager::deselectPlanet(bool *planetSelected) {
   *planetSelected = false;
 }
 
-void PlanetManager::handleCollisions(ShipManager *sm) {
+void PlanetManager::handleCollisions(ShipManager *sm, Uint32 frame) {
   Ship player = sm->getPlayerShip();
   std::vector<SDL_Point> playerVertices = player.getCollider().getVertices();
   int playerAngle = player.getRotation();
@@ -225,7 +226,7 @@ void PlanetManager::handleCollisions(ShipManager *sm) {
   if (dockedPlanetIndex < 0) {
     for (int i = 0; i < planets.size(); i++) {
       if (planets[i].getCollider().collisionOBB(playerVertices, playerAngle)) {
-        planets[i].toggleDockedShip(player.getTag());
+        planets[i].toggleDockedShip(player.getTag(), frame);
         dockedPlanetIndex = i;
         std::cout << "Collision at: "
                   << planets[i].getCoordinates().x << ","
@@ -237,7 +238,7 @@ void PlanetManager::handleCollisions(ShipManager *sm) {
   else {
     ColliderComponent collider = planets[dockedPlanetIndex].getCollider();
     if (!collider.collisionOBB(playerVertices, playerAngle)) {
-      planets[dockedPlanetIndex].toggleDockedShip(player.getTag());
+      planets[dockedPlanetIndex].toggleDockedShip(player.getTag(), frame);
       dockedPlanetIndex = -1;
     }
   }
