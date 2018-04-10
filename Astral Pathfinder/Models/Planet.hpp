@@ -45,7 +45,7 @@ namespace PlanetParameters {
   const int homeStartReservePercent = 100 - homeStartInfraPercent;
   
   // Defines population growth information
-  const int growthPeriod = 900;      // Frames per growth period
+  const int growthPeriod = 1200;      // Frames per growth period
   const float starveRate = 0.0008;    // Starvation deaths per frame
   const float minBirthMultiplier = 0.1;
   const float birthMultiplierRange = (0.4-minBirthMultiplier);

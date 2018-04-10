@@ -136,8 +136,6 @@ void Planet::toggleDockedShip(int tag) {
   switch (tag) {
     case ShipType::playerShip:
       playerDocked = !playerDocked;
-//      infrastructure += playerDocked ? shipPopulation : -(shipPopulation);
-//      population += playerDocked ? shipPopulation : -(shipPopulation);
       break;
     case ShipType::alienWarship:
       alienDocked = !alienDocked;
@@ -185,16 +183,18 @@ void Planet::updatePopulation(Uint32 frame) {
   if (workingPop <= 0) return;
   
   // Calculates surplus food produced
-  int surplus = food-(workingPop*foodRqmt);
-  if (0 > surplus) surplus = 0;
+  float surplus = 0;
+  float foodNeeded = population*foodRqmt;
+  if (population > 0) surplus = (food-foodNeeded)/foodNeeded;
+  else surplus = 0;
   
   // Resets births and deaths rates for growth period
   if (frame%growthPeriod == 0) {
-    populationDec = (workingPop < populationCheck) ? true : false;
-    populationCheck = workingPop;
+    populationDec = (population < populationCheck) ? true : false;
+    populationCheck = population;
     birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
     deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
-    births = (workingPop) * (birthMult+(surplus/(workingPop*foodRqmt)));
+    births = (workingPop) * (birthMult+surplus);
     deaths = workingPop * deathMult;
     growthRate = (births - deaths)/static_cast<float>(growthPeriod);
   }
@@ -202,9 +202,12 @@ void Planet::updatePopulation(Uint32 frame) {
   // Updates population with growth rate (people per frame)
   population += growthRate;
   
-  // Calculates deaths due to starvation
+  // Calculates deaths due to starvation, prevents growth with no food
   int fedPopulation = (food/foodRqmt);
-  if (population > (fedPopulation)) {
+  if (fedPopulation <= 0 && growthRate > 0) {
+    population -= growthRate;
+  }
+  else if (population > (fedPopulation)) {
     population -= (population-fedPopulation)*starveRate;
   }
   
