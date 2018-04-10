@@ -124,12 +124,14 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
   shipInfo.render(gameState);
   
   if(gameState->planetSelected) {
-    int selectedPop = pm->getSelectedPlanet().getPopulation();
-    selectedPlanetInfo.render(gameState, selectedPop);
+    Planet selectedP = pm->getSelectedPlanet();
+    selectedPlanetInfo.render(gameState, selectedP.getPopulation(),
+                              selectedP.playerIsDocked());
   }
   if(gameState->planetCollided) {
-    int dockedPop = pm->getDockedPlanet().getPopulation();
-    DockedPlanetInfo.render(gameState, dockedPop);
+    Planet dockedP = pm->getDockedPlanet();
+    DockedPlanetInfo.render(gameState, dockedP.getPopulation(),
+                            dockedP.playerIsDocked());
   }
 }
 
@@ -138,14 +140,12 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
 void UIManager::updateTime(Uint32 elapsedTime) {
   std::string secs = std::to_string(elapsedTime % 60);
   std::string mins = std::to_string(elapsedTime / 60);
-  
-  time.setMessage("Time " + mins + ":" + secs);
+  time.setMessage(mins + ":" + secs);
 }
 
 void UIManager::updateTotalScore(PlanetManager *pm) {
   std::string population = std::to_string(pm->getTotalPopulation());
-  
-  totalScore.setMessage("Score: " + population);
+  totalScore.setMessage(population);
 }
 
 void UIManager::setSelectedPlanet(Planet p) {

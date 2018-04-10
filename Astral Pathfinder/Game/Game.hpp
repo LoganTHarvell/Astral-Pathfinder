@@ -57,7 +57,7 @@ public:
     
     bool clickFlag = false;
     bool planetSelected = false;
-    bool planetCollided = false;
+    bool planetCollided = false;  // TODO: Verify that this is necessary, since there planetIsDocked() performs the same function
     bool mouseDown = false;
     bool debugMode = false;
     

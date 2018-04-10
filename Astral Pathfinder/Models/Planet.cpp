@@ -98,8 +98,8 @@ void Planet::initPlanet() {
   selected = false;
   populationDec = false;
   populationCheck = 0;
-  
   playerDocked = alienDocked = false;
+  frameDocked = 0;
   
   // Sets planet status
   status = undiscovered;
@@ -130,13 +130,14 @@ void Planet::revertClick() {
   selected = false;
 }
 
-void Planet::toggleDockedShip(int tag) {
-  using namespace ShipParameters;
+void Planet::toggleDockedShip(int tag, Uint32 frame) {
+  using namespace PlanetParameters;
+  using ShipType = ShipParameters::ShipType;
   
   switch (tag) {
     case ShipType::playerShip:
       playerDocked = !playerDocked;
-      population += playerDocked ? shipPopulation : -(shipPopulation);
+      if (frameDocked + growthPeriod < frame) frameDocked = frame;
       break;
     case ShipType::alienWarship:
       alienDocked = !alienDocked;
@@ -176,30 +177,39 @@ void Planet::updateStatus() {
 void Planet::updatePopulation(Uint32 frame) {
   using namespace PlanetParameters;
   
+  // Adjusts working population
+  int workingPop = this->population;
+  workingPop += playerDocked ? 1000 : 0;
+  
   // If no people to populate, return immediately
-  if (population <= 0) return;
+  if (workingPop <= 0) return;
   
   // Calculates surplus food produced
-  int surplus = food-(population*foodRqmt);
-  if (0 > surplus) surplus = 0;
+  float surplus = 0;
+  float foodNeeded = population*foodRqmt;
+  if (population > 0) surplus = (food-foodNeeded)/foodNeeded;
+  else surplus = 0;
   
   // Resets births and deaths rates for growth period
-  if (frame%growthPeriod == 0) {
+  if ((frame-frameDocked)%growthPeriod == 0) {
     populationDec = (population < populationCheck) ? true : false;
     populationCheck = population;
     birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
     deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
-    births = (population) * (birthMult+(surplus/(population*foodRqmt)));
-    deaths = population * deathMult;
+    births = (workingPop) * (birthMult+surplus);
+    deaths = workingPop * deathMult;
     growthRate = (births - deaths)/static_cast<float>(growthPeriod);
   }
   
   // Updates population with growth rate (people per frame)
   population += growthRate;
   
-  // Calculates deaths due to starvation
+  // Calculates deaths due to starvation, prevents growth with no food
   int fedPopulation = (food/foodRqmt);
-  if (population > (fedPopulation)) {
+  if (fedPopulation <= 0 && growthRate > 0) {
+    population -= growthRate;
+  }
+  else if (population > (fedPopulation)) {
     population -= (population-fedPopulation)*starveRate;
   }
   
@@ -208,12 +218,8 @@ void Planet::updatePopulation(Uint32 frame) {
     population = infrastructure;
   }
   
-  // Guards against ship crew "dying"
-  if (playerDocked && population < ShipParameters::shipPopulation) {
-    population = ShipParameters::shipPopulation;
-  }
   // Guards against negative population values
-  else if (population < 0) {
+  if (population < 0) {
     population = 0;
   }
 }
@@ -221,14 +227,17 @@ void Planet::updatePopulation(Uint32 frame) {
 void Planet::updateMining() {
   using namespace PlanetParameters;
   
+  // Adjusts working population
+  int workingPop = this->population;
+  workingPop += playerDocked ? 1000 : 0;
+  
   // If there is no one or nothing to mine, then return right away
-  if (population <= 0 || deposits <= 0) return;
+  if (workingPop <= 0 || deposits <= 0) return;
   
   // Calculates amount of population dedicated to mining
-  int workers = population;
-  workers *= (miningPercent/100.0f);
+  int miners = workingPop * (miningPercent/100.0f);
   
-  float product = workers*miningRate;
+  float product = miners*miningRate;
   
   if (product < 0 ) return;
   
@@ -248,14 +257,17 @@ void Planet::updateFarming() {
   
   food = 0; // Resets food
   
+  // Adjusts working population
+  int workingPop = this->population;
+  workingPop += playerDocked ? 1000 : 0;
+  
   // If there is no one or nothing to farm, then return right away
-  if (population <= 0 || fertility <= 0) return;
+  if (workingPop <= 0 || fertility <= 0) return;
   
   // Calculates amount of population dedicated to farming
-  int workers = population;
-  workers *= (farmingPercent/100.0f);
+  int farmers = workingPop * (farmingPercent/100.0f);
   
-  float product = workers*farmingRate;  // Food produced
+  float product = farmers*farmingRate;  // Food produced
   
   // Return if no food produced
   if (product < 0 ) {
