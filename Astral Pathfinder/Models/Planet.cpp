@@ -180,10 +180,12 @@ void Planet::updateRandomEvents(Uint32 frame) {
   using namespace PlanetParameters;
   
   // Updates random event flags for growth period
-  if (frame-frameDocked%growthPeriod == 0) {
-    events.plague = (plagueRate > rand()/static_cast<float>(RAND_MAX));
-    events.blight = (blightRate > rand()/static_cast<float>(RAND_MAX));
-    events.mineCollapse = (mineCollapseRate > rand()/static_cast<float>(RAND_MAX));
+  if ((frame-frameDocked)%growthPeriod == 0) {
+    float randMax = static_cast<float>(RAND_MAX);
+
+    events.plague = (plagueRate > rand()/randMax);
+    events.blight = (blightRate > rand()/randMax);
+    events.mineCollapse = (mineCollapseRate > rand()/randMax);
   }
   
 }
