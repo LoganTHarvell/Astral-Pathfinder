@@ -220,12 +220,11 @@ void PlanetManager::deselectPlanet(bool *planetSelected) {
 void PlanetManager::handleCollisions(ShipManager *sm, Uint32 frame) {
   Ship player = sm->getPlayerShip();
   std::vector<SDL_Point> playerVertices = player.getCollider().getVertices();
-  int playerAngle = player.getRotation();
   
   // Checks all planets for collisions if player ship hasn't docked
   if (dockedPlanetIndex < 0) {
     for (int i = 0; i < planets.size(); i++) {
-      if (planets[i].getCollider().collisionOBB(playerVertices, playerAngle)) {
+      if (planets[i].getCollider().collisionOBB(playerVertices)) {
         planets[i].toggleDockedShip(player.getTag(), frame);
         dockedPlanetIndex = i;
         std::cout << "Collision at: "
@@ -237,7 +236,7 @@ void PlanetManager::handleCollisions(ShipManager *sm, Uint32 frame) {
   // If player has docked checks docked planet for continued collision
   else {
     ColliderComponent collider = planets[dockedPlanetIndex].getCollider();
-    if (!collider.collisionOBB(playerVertices, playerAngle)) {
+    if (!collider.collisionOBB(playerVertices)) {
       planets[dockedPlanetIndex].toggleDockedShip(player.getTag(), frame);
       dockedPlanetIndex = -1;
     }
