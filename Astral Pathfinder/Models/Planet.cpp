@@ -198,10 +198,10 @@ void Planet::updatePopulation(Uint32 frame) {
   // If no people to populate, return immediately
   if (workingPop <= 0) return;
   
-  // Calculates surplus food produced
-  float surplus = 0;
+  // Calculates surplus food percentage
   float foodNeeded = population*foodRqmt;
-  if (population > 0) surplus = (food-foodNeeded)/foodNeeded;
+  float surplus = food-foodNeeded;
+  if (population > 0 && surplus > 0) surplus = surplus/foodNeeded;
   else surplus = 0;
   
   // Resets births and deaths rates for growth period
