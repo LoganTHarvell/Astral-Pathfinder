@@ -179,6 +179,9 @@ void Planet::updateStatus() {
 void Planet::updateRandomEvents(Uint32 frame) {
   using namespace PlanetParameters;
   
+  // Exits immediately if planet has no population
+  if (population <= 0) return;
+  
   // Updates random event flags for growth period
   if ((frame-frameDocked)%growthPeriod == 0) {
     float randMax = static_cast<float>(RAND_MAX);
@@ -187,7 +190,6 @@ void Planet::updateRandomEvents(Uint32 frame) {
     events.blight = (blightRate > rand()/randMax);
     events.mineCollapse = (mineCollapseRate > rand()/randMax);
   }
-  
 }
 
 void Planet::updatePopulation(Uint32 frame) {
