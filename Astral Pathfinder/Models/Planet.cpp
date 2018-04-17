@@ -95,11 +95,13 @@ void Planet::initPlanet() {
   // Set flags
   isOverproducing = false;
   overproductionStartTime = 0;
-  selected = false;
-  populationDec = false;
-  populationCheck = 0;
+
   playerDocked = alienDocked = false;
   frameDocked = 0;
+  selected = false;
+
+  populationDec = false;
+  populationCheck = 0;
   
   // Sets planet status
   status = undiscovered;
@@ -110,6 +112,7 @@ void Planet::initPlanet() {
 
 void Planet::update(Game::State *gs) {
   updateStatus();
+  updateRandomEvents(gs->frame);
   updatePopulation(gs->frame);
   updateMining();
   updateFarming();
@@ -164,7 +167,6 @@ int Planet::makeFuel(int amount) {
 
 // MARK: - Helper Methods
 
-// TODO: Remove color mods to their own method utilizing color and state parameters
 void Planet::updateStatus() {
   if (status == undiscovered && playerDocked)
     status = discovered;
@@ -172,6 +174,22 @@ void Planet::updateStatus() {
     status = colonized;
   else if (status == colonized && population == 0)
     status = discovered;
+}
+
+void Planet::updateRandomEvents(Uint32 frame) {
+  using namespace PlanetParameters;
+  
+  // Exits immediately if planet has no population
+  if (population <= 0) return;
+  
+  // Updates random event flags for growth period
+  if ((frame-frameDocked)%growthPeriod == 0) {
+    float randMax = static_cast<float>(RAND_MAX);
+
+    events.plague = (plagueRate > rand()/randMax);
+    events.blight = (blightRate > rand()/randMax);
+    events.mineCollapse = (mineCollapseRate > rand()/randMax);
+  }
 }
 
 void Planet::updatePopulation(Uint32 frame) {
@@ -184,20 +202,27 @@ void Planet::updatePopulation(Uint32 frame) {
   // If no people to populate, return immediately
   if (workingPop <= 0) return;
   
-  // Calculates surplus food produced
-  float surplus = 0;
+  // Calculates surplus food percentage
   float foodNeeded = population*foodRqmt;
-  if (population > 0) surplus = (food-foodNeeded)/foodNeeded;
+  float surplus = food-foodNeeded;
+  if (population > 0 && surplus > 0) surplus = surplus/foodNeeded;
   else surplus = 0;
   
   // Resets births and deaths rates for growth period
   if ((frame-frameDocked)%growthPeriod == 0) {
     populationDec = (population < populationCheck) ? true : false;
     populationCheck = population;
+    
     birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
-    deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
+    
+    if (events.plague)
+      deathMult = plagueMultiplier;
+    else
+      deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
+    
     births = (workingPop) * (birthMult+surplus);
     deaths = workingPop * deathMult;
+
     growthRate = (births - deaths)/static_cast<float>(growthPeriod);
   }
   
@@ -237,8 +262,10 @@ void Planet::updateMining() {
   // Calculates amount of population dedicated to mining
   int miners = workingPop * (miningPercent/100.0f);
   
-  float product = miners*miningRate;
+  float rate = miningRate;
+  if (events.mineCollapse) rate *= mineCollapseMultiplier;
   
+  float product = miners*rate;
   if (product < 0 ) return;
   
   if (product <= deposits) {
@@ -266,6 +293,11 @@ void Planet::updateFarming() {
   
   // Calculates amount of population dedicated to farming
   int farmers = workingPop * (farmingPercent/100.0f);
+  
+  float rate = farmingRate;
+  if (events.blight) {
+    rate *= blightMultiplier;
+  }
   
   float product = farmers*farmingRate;  // Food produced
   

@@ -57,7 +57,7 @@ bool ColliderComponent::collisionAABB(SDL_Rect r) {
   return true;
 }
 
-bool ColliderComponent::collisionOBB(PointVector vertices, int angle) {
+bool ColliderComponent::collisionOBB(PointVector vertices) {
   // Gets axes of self and test boxes
   PointVector axes = getNormals(this->vertices);
   std::vector<SDL_Point> tmp = getNormals(vertices);

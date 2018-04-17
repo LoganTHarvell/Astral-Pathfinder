@@ -30,7 +30,7 @@ public:
   
   //MARK: - Collider Methods
   bool collisionAABB(SDL_Rect r);
-  bool collisionOBB(PointVector vertices, int angle);
+  bool collisionOBB(PointVector vertices);
   
   PointVector getVertices() { return vertices; };
   static PointVector computeVertices(SDL_Point center, PointVector verticesV,

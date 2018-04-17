@@ -59,6 +59,16 @@ namespace PlanetParameters {
   const float fertDecay = 0.0001;
   const int fertDecayDelay = 10;
   const float infrastructureCost = 20;    // Infrastructure per mineral
+
+  // Random event chances
+  const float plagueRate = 0.05;
+  const float blightRate = 0.1;
+  const float mineCollapseRate = 0.3;
+  
+  // Random event multipliers
+  const float plagueMultiplier = (deathMultiplierRange+minDeathMultiplier)*1.33;
+  const float blightMultiplier = 0.75;
+  const float mineCollapseMultiplier = 0.5;
 }
 
 
@@ -144,13 +154,21 @@ private:
   // Decreasing population flag
   bool populationDec;
   
+  // Random event flags
+  struct {
+    bool plague;
+    bool blight;
+    bool mineCollapse;
+  } events;
+  
   // MARK: - Helper Methods
   void updateStatus();
+  void updateRandomEvents(Uint32 frame);
   void updatePopulation(Uint32 frame);
   void updateMining();
   void updateFarming();
   void updateColors();
-  
+
   SDL_Point uiPosition(SDL_Point p);
 };
 
