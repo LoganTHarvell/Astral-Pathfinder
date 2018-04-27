@@ -39,13 +39,13 @@ namespace PlanetParameters {
   const int homeStartPopulation = 5000;
   const int homeStartFertility = 100;
   const int homeStartDeposits = 250;
-  const int homeStartMiningPercent = 50;
+  const int homeStartMiningPercent = 58;
   const int homeStartFarmingPercent = 100 - homeStartMiningPercent;
   const int homeStartInfraPercent = 0;
   const int homeStartReservePercent = 100 - homeStartInfraPercent;
   
   // Defines population growth information
-  const int growthPeriod = 900;      // Frames per growth period
+  const int growthPeriod = 1200;      // Frames per growth period
   const float starveRate = 0.0008;    // Starvation deaths per frame
   const float minBirthMultiplier = 0.1;
   const float birthMultiplierRange = (0.4-minBirthMultiplier);
@@ -59,6 +59,16 @@ namespace PlanetParameters {
   const float fertDecay = 0.0001;
   const int fertDecayDelay = 10;
   const float infrastructureCost = 20;    // Infrastructure per mineral
+
+  // Random event chances
+  const float plagueRate = 0.05;
+  const float blightRate = 0.1;
+  const float mineCollapseRate = 0.3;
+  
+  // Random event multipliers
+  const float plagueMultiplier = (deathMultiplierRange+minDeathMultiplier)*1.33;
+  const float blightMultiplier = 0.75;
+  const float mineCollapseMultiplier = 0.5;
 }
 
 
@@ -109,7 +119,7 @@ public:
   
   bool playerIsDocked() { return playerDocked; };
   bool alienIsDocked() { return alienDocked; };
-  void toggleDockedShip(int tag);
+  void toggleDockedShip(int tag, Uint32 frame);
   int makeFuel(int amount);
   
 private:
@@ -129,13 +139,14 @@ private:
   int births, deaths;           // Total Birth/Deaths in a period
   float growthRate;             // Population change per frame
   
-  // Food production flags
+  // Food production flags/vars
   bool isOverproducing;
   Uint32 overproductionStartTime;
   
-  // Docking flags
+  // Docking flags/vars
   bool playerDocked;
   bool alienDocked;
+  Uint32 frameDocked;
   
   // Planet selected flag
   bool selected;
@@ -143,13 +154,21 @@ private:
   // Decreasing population flag
   bool populationDec;
   
+  // Random event flags
+  struct {
+    bool plague;
+    bool blight;
+    bool mineCollapse;
+  } events;
+  
   // MARK: - Helper Methods
   void updateStatus();
+  void updateRandomEvents(Uint32 frame);
   void updatePopulation(Uint32 frame);
   void updateMining();
   void updateFarming();
   void updateColors();
-  
+
   SDL_Point uiPosition(SDL_Point p);
 };
 

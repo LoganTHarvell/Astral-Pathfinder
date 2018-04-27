@@ -96,11 +96,13 @@ void Planet::initPlanet() {
   // Set flags
   isOverproducing = false;
   overproductionStartTime = 0;
+
+  playerDocked = alienDocked = false;
+  frameDocked = 0;
   selected = false;
+
   populationDec = false;
   populationCheck = 0;
-  
-  playerDocked = alienDocked = false;
   
   // Sets planet status
   status = undiscovered;
@@ -111,6 +113,7 @@ void Planet::initPlanet() {
 
 void Planet::update(Game::State *gs) {
   updateStatus();
+  updateRandomEvents(gs->frame);
   updatePopulation(gs->frame);
   updateMining();
   updateFarming();
@@ -131,13 +134,14 @@ void Planet::revertClick() {
   selected = false;
 }
 
-void Planet::toggleDockedShip(int tag) {
-  using namespace ShipParameters;
+void Planet::toggleDockedShip(int tag, Uint32 frame) {
+  using namespace PlanetParameters;
+  using ShipType = ShipParameters::ShipType;
   
   switch (tag) {
     case ShipType::playerShip:
       playerDocked = !playerDocked;
-      population += playerDocked ? shipPopulation : -(shipPopulation);
+      if (frameDocked + growthPeriod < frame) frameDocked = frame;
       break;
     case ShipType::alienWarship:
       alienDocked = !alienDocked;
@@ -164,7 +168,6 @@ int Planet::makeFuel(int amount) {
 
 // MARK: - Helper Methods
 
-// TODO: Remove color mods to their own method utilizing color and state parameters
 void Planet::updateStatus() {
   if (status == undiscovered && playerDocked)
     status = discovered;
@@ -174,33 +177,65 @@ void Planet::updateStatus() {
     status = discovered;
 }
 
+void Planet::updateRandomEvents(Uint32 frame) {
+  using namespace PlanetParameters;
+  
+  // Exits immediately if planet has no population
+  if (population <= 0) return;
+  
+  // Updates random event flags for growth period
+  if ((frame-frameDocked)%growthPeriod == 0) {
+    float randMax = static_cast<float>(RAND_MAX);
+
+    events.plague = (plagueRate > rand()/randMax);
+    events.blight = (blightRate > rand()/randMax);
+    events.mineCollapse = (mineCollapseRate > rand()/randMax);
+  }
+}
+
 void Planet::updatePopulation(Uint32 frame) {
   using namespace PlanetParameters;
   
-  // If no people to populate, return immediately
-  if (population <= 0) return;
+  // Adjusts working population
+  int workingPop = this->population;
+  workingPop += playerDocked ? 1000 : 0;
   
-  // Calculates surplus food produced
-  int surplus = food-(population*foodRqmt);
-  if (0 > surplus) surplus = 0;
+  // If no people to populate, return immediately
+  if (workingPop <= 0) return;
+  
+  // Calculates surplus food percentage
+  float foodNeeded = population*foodRqmt;
+  float surplus = food-foodNeeded;
+  if (population > 0 && surplus > 0) surplus = surplus/foodNeeded;
+  else surplus = 0;
   
   // Resets births and deaths rates for growth period
-  if (frame%growthPeriod == 0) {
+  if ((frame-frameDocked)%growthPeriod == 0) {
     populationDec = (population < populationCheck) ? true : false;
     populationCheck = population;
+    
     birthMult = (rand()/(RAND_MAX/birthMultiplierRange)) + minBirthMultiplier;
-    deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
-    births = (population) * (birthMult+(surplus/(population*foodRqmt)));
-    deaths = population * deathMult;
+    
+    if (events.plague)
+      deathMult = plagueMultiplier;
+    else
+      deathMult = (rand()/(RAND_MAX/deathMultiplierRange)) + minDeathMultiplier;
+    
+    births = (workingPop) * (birthMult+surplus);
+    deaths = workingPop * deathMult;
+
     growthRate = (births - deaths)/static_cast<float>(growthPeriod);
   }
   
   // Updates population with growth rate (people per frame)
   population += growthRate;
   
-  // Calculates deaths due to starvation
+  // Calculates deaths due to starvation, prevents growth with no food
   int fedPopulation = (food/foodRqmt);
-  if (population > (fedPopulation)) {
+  if (fedPopulation <= 0 && growthRate > 0) {
+    population -= growthRate;
+  }
+  else if (population > (fedPopulation)) {
     population -= (population-fedPopulation)*starveRate;
   }
   
@@ -209,12 +244,8 @@ void Planet::updatePopulation(Uint32 frame) {
     population = infrastructure;
   }
   
-  // Guards against ship crew "dying"
-  if (playerDocked && population < ShipParameters::shipPopulation) {
-    population = ShipParameters::shipPopulation;
-  }
   // Guards against negative population values
-  else if (population < 0) {
+  if (population < 0) {
     population = 0;
   }
 }
@@ -222,15 +253,20 @@ void Planet::updatePopulation(Uint32 frame) {
 void Planet::updateMining() {
   using namespace PlanetParameters;
   
+  // Adjusts working population
+  int workingPop = this->population;
+  workingPop += playerDocked ? 1000 : 0;
+  
   // If there is no one or nothing to mine, then return right away
-  if (population <= 0 || deposits <= 0) return;
+  if (workingPop <= 0 || deposits <= 0) return;
   
   // Calculates amount of population dedicated to mining
-  int workers = population;
-  workers *= (miningPercent/100.0f);
+  int miners = workingPop * (miningPercent/100.0f);
   
-  float product = workers*miningRate;
+  float rate = miningRate;
+  if (events.mineCollapse) rate *= mineCollapseMultiplier;
   
+  float product = miners*rate;
   if (product < 0 ) return;
   
   if (product <= deposits) {
@@ -249,14 +285,22 @@ void Planet::updateFarming() {
   
   food = 0; // Resets food
   
+  // Adjusts working population
+  int workingPop = this->population;
+  workingPop += playerDocked ? 1000 : 0;
+  
   // If there is no one or nothing to farm, then return right away
-  if (population <= 0 || fertility <= 0) return;
+  if (workingPop <= 0 || fertility <= 0) return;
   
   // Calculates amount of population dedicated to farming
-  int workers = population;
-  workers *= (farmingPercent/100.0f);
+  int farmers = workingPop * (farmingPercent/100.0f);
   
-  float product = workers*farmingRate;  // Food produced
+  float rate = farmingRate;
+  if (events.blight) {
+    rate *= blightMultiplier;
+  }
+  
+  float product = farmers*farmingRate;  // Food produced
   
   // Return if no food produced
   if (product < 0 ) {

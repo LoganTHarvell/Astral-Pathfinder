@@ -63,7 +63,7 @@ private:
   void selectPlanet(bool *planetSelected);
   void deselectPlanet(bool *planetSelected);
   
-  void handleCollisions(ShipManager *sm);
+  void handleCollisions(ShipManager *sm, Uint32 frame);
   
   // MARK: - PlanetManager Fields
   std::vector<Planet> planets;

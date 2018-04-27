@@ -257,10 +257,10 @@
 		020013412075BCD30087CED9 /* Game Object */ = {
 			isa = PBXGroup;
 			children = (
-				020013422075BCD30087CED9 /* ColliderComponent.cpp */,
-				020013432075BCD30087CED9 /* GameObject.cpp */,
 				020013442075BCD30087CED9 /* GameObject.hpp */,
+				020013432075BCD30087CED9 /* GameObject.cpp */,
 				020013452075BCD30087CED9 /* ColliderComponent.hpp */,
+				020013422075BCD30087CED9 /* ColliderComponent.cpp */,
 			);
 			path = "Game Object";
 			sourceTree = "<group>";
@@ -558,7 +558,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = MXYX4524CL;
+				DEVELOPMENT_TEAM = WUP28GH2WB;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/SDL2/";
 				INFOPLIST_FILE = "$(SRCROOT)/Astral Pathfinder/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -585,7 +585,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = MXYX4524CL;
+				DEVELOPMENT_TEAM = WUP28GH2WB;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/SDL2/";
 				INFOPLIST_FILE = "$(SRCROOT)/Astral Pathfinder/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

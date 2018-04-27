@@ -38,13 +38,14 @@ void PlanetInfo::init(SDL_Rect src) {
 
 // MARK: - Game Loop Methods
 
-void PlanetInfo::render(Game::State *gs, int population) {
+void PlanetInfo::render(Game::State *gs, int population,
+                        bool playerDocked) {
   locationText.render(gs);
   popText.render(gs);
   miningText.render(gs);
   farmingText.render(gs);
   
-  if(population > 0) {
+  if(population > 0 || playerDocked) {
     dpText.render(gs);
     fpText.render(gs);
     miningLabel.render(gs);
@@ -84,7 +85,7 @@ void PlanetInfo::setUiTextures(Planet p) {
   setBoxes(p);
   
   if (!sliderOne.isInitialized() && !sliderTwo.isInitialized()
-      && (p.getPopulation() > 0)) {
+      && (p.getPopulation() > 0 || p.playerIsDocked())) {
     sliderOne.setTextures(p.getFarmingPercent());
     sliderOne.colorMod(baseColor, sliderColor);
     sliderTwo.setTextures(p.getReservePercent());
@@ -167,7 +168,7 @@ void PlanetInfo::setBoxes(Planet p) {
   location = "Location: " + setStringSpaces(mapLocation.x) + std::to_string(mapLocation.x)
   + "," + std::to_string(mapLocation.y);
   
-  if(populationAmount == 0) {
+  if(populationAmount == 0 && !p.playerIsDocked()) {
     if (p.getStatus() == Planet::undiscovered) population = "Undiscovered";
     else if (p.getStatus() == Planet::discovered) population = "Discovered";
     
@@ -179,7 +180,7 @@ void PlanetInfo::setBoxes(Planet p) {
     locationText.setRect(origin.x+5, (origin.w/2)-40);
   }
   
-  if (populationAmount > 0) {
+  if (populationAmount > 0 || p.playerIsDocked()) {
     population = "Population: " + setStringSpaces(p.getPopulation())
                   + std::to_string(p.getPopulation()) + "/"
                   + std::to_string(p.getInfrastructure());
