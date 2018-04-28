@@ -67,7 +67,7 @@ private:
   
   // MARK: - PlanetManager Fields
   enum {
-    dockedPlanet=1, collidedPlanet
+    dockedPlanet=1, selectedPlanet
   };
   
   std::vector<Planet> planets;

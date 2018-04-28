@@ -126,28 +126,28 @@ Planet PlanetManager::getDockedPlanet() {
 void PlanetManager::setPlanetMiningPercent(int p, int flag) {
   if(flag == dockedPlanet)
     planets[dockedPlanetIndex].setMiningPercent(p);
-  if(flag == collidedPlanet)
+  if(flag == selectedPlanet)
     planets[selectedPlanetIndex].setMiningPercent(p);
 }
 
 void PlanetManager::setPlanetFarmingPercent(int p, int flag) {
   if(flag == dockedPlanet)
     planets[dockedPlanetIndex].setFarmingPercent(p);
-  if(flag == collidedPlanet)
+  if(flag == selectedPlanet)
     planets[selectedPlanetIndex].setFarmingPercent(p);
 }
 
 void PlanetManager::setPlanetInfraPercent(int p, int flag) {
   if(flag == dockedPlanet)
     planets.at(dockedPlanetIndex).setInfraPercent(p);
-  if(flag == collidedPlanet)
+  if(flag == selectedPlanet)
     planets.at(selectedPlanetIndex).setInfraPercent(p);
 }
 
 void PlanetManager::setPlanetReservePercent(int p, int flag) {
   if(flag == dockedPlanet)
     planets.at(dockedPlanetIndex).setReservePercent(p);
-  if(flag == collidedPlanet)
+  if(flag == selectedPlanet)
     planets.at(selectedPlanetIndex).setReservePercent(p);
 }
 

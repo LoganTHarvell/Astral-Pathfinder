@@ -24,6 +24,8 @@
 namespace TextParameters {
   const SDL_Color color = {0,128,0};
   const std::string fontFile = "../Resources/MODENINE.TTF";
+  const int regFontSize = 36;
+  const int finalScoreFontSize = 120;
 }
 
 

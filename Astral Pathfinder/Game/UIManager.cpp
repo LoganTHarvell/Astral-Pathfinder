@@ -154,8 +154,8 @@ void UIManager::updateTime(Uint32 elapsedTime) {
 
 SDL_Color UIManager::checkTime(int minutes) {
   if(minutes < 15) return UiParameters::green;
-  else if(minutes >= 20) return UiParameters::red;
-  else return UiParameters::yellow;
+  else if(minutes < 20) return UiParameters::yellow;
+  else return UiParameters::red;
 }
 
 void UIManager::updateTotalScore(PlanetManager *pm) {

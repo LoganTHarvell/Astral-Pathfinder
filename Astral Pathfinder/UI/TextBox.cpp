@@ -17,7 +17,7 @@
 // MARK: - TextBox Initialization
 
 void TextBox::init(SDL_Rect rectangle) {
-  font = TTF_OpenFont(TextParameters::fontFile.c_str(), 36);
+  font = TTF_OpenFont(TextParameters::fontFile.c_str(), TextParameters::regFontSize);
   
   rect = rectangle;
 }
@@ -56,7 +56,7 @@ void TextBox::setFinalScore(const std::string words) {
   int w, h;
   if(texture != nullptr) clean();
   
-  font = TTF_OpenFont(TextParameters::fontFile.c_str(), 120);
+  font = TTF_OpenFont(TextParameters::fontFile.c_str(), TextParameters::finalScoreFontSize);
   
   TTF_SizeText(font, words.c_str(), &w, &h);
   rect.w = w;
