@@ -101,6 +101,8 @@ int PlanetInfo::checkClick(SDL_Point click) {
   SDL_Rect temp;
   
   temp = sliderOne.getBaseRect();
+  temp.y = sliderOne.getSliderRect().y;
+  temp.h = sliderOne.getSliderRect().h;
   if((click.x > temp.x) && (click.x < temp.x + temp.w)
      && (click.y > temp.y) && (click.y < temp.y + temp.h)) {
     slider = fertilitySlider;
@@ -108,6 +110,8 @@ int PlanetInfo::checkClick(SDL_Point click) {
   }
   
   temp = sliderTwo.getBaseRect();
+  temp.y = sliderTwo.getSliderRect().y;
+  temp.h = sliderTwo.getSliderRect().h;
   if((click.x > temp.x) && (click.x < temp.x + temp.w)
      && (click.y > temp.y) && (click.y < temp.y + temp.h)) {
     slider = reserveSlider;
