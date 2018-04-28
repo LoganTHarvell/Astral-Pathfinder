@@ -41,7 +41,7 @@ public:
   
   // MARK: - TextBox Methods
   void setMessage(const std::string words, SDL_Color color = TextParameters::color);
-  void setFinalScore(TTF_Font *newFont, const std::string words);
+  void setFinalScore(const std::string words);
   bool checkNull();
   void setRect(int x, int w);
   

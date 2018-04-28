@@ -26,6 +26,7 @@ void UIManager::init() {
   selectedPlanetInfo.init(selectedPlanetRect);
   DockedPlanetInfo.init(currentPlanetRect);
   shipInfo.init(shipInfoRect);
+  finalScore.init({endScoreCoords.x, endScoreCoords.y, 0, 0});
   hoverBorder = TextureManager::loadTexture("../Resources/border.png");
   
   mainMenu = TextureManager::loadTexture("../Resources/mainMenu.png");
@@ -33,8 +34,6 @@ void UIManager::init() {
   winScreen = TextureManager::loadTexture("../Resources/winScreen.png");
   loseScreen = TextureManager::loadTexture("../Resources/loseScreen.png");
   screenRect = { 0, 0, GameParameters::windowRect.w, GameParameters::windowRect.h };
-  finalScoreRect = {endScoreCoords.x, endScoreCoords.y, 0, 0};
-  font = TTF_OpenFont(TextParameters::fontFile.c_str(), 120);
   
   mainMenuFlag = true;
   prevScore = 0;
@@ -113,13 +112,8 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
     else if(gameState->endgame == Game::State::noFuel)
       SDL_RenderCopy(Game::renderer, loseScreen, NULL, &screenRect);
     
-    if(finalScoreRect.w == 0) {
-      int w, h;
-      TTF_SizeText(font, std::to_string(score).c_str(), &w, &h);
-      finalScoreRect = {endScoreCoords.x, endScoreCoords.y, w, h};
-      finalScore.init(finalScoreRect);
-      finalScore.setFinalScore(font, std::to_string(score).c_str());
-    }
+    if(finalScore.checkNull())
+      finalScore.setFinalScore(std::to_string(score).c_str());
     
     finalScore.render(gameState);
     

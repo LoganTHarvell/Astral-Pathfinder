@@ -37,7 +37,7 @@ namespace UiParameters {
   const SDL_Rect exitGameBorder = {582, 665, 460, 92};
   const SDL_Rect playAgainBorder = {270, 662, 460, 95};
   const SDL_Rect endGameBorder = {867, 665, 460, 92};
-  const SDL_Point endScoreCoords = {945, 400};
+  const SDL_Point endScoreCoords = {945, 390};
   const SDL_Color red = {128,0,0};
   const SDL_Color green = {0,128,0};
   const SDL_Color yellow = {255, 255, 0};
@@ -63,9 +63,8 @@ private:
   PlanetInfo selectedPlanetInfo, DockedPlanetInfo;
   ShipInfo shipInfo;
   SDL_Texture *hoverBorder;
-  SDL_Rect borderRect, screenRect, finalScoreRect;
+  SDL_Rect borderRect, screenRect;
   SDL_Texture *mainMenu, *gameScreen, *winScreen, *loseScreen;
-  TTF_Font *font;
   int score, prevScore;
   SDL_Color prevColor, timeColor;
   
