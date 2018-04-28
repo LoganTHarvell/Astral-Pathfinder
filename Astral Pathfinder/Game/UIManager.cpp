@@ -108,7 +108,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
-  else if (gameState->endgame != Game::State::none) {
+  else if (gameState->endgame != Game::State::none && gameState->endgame != Game::State::quit) {
     if(gameState->endgame == Game::State::allDiscovered)
       SDL_RenderCopy(Game::renderer, winScreen, NULL, &screenRect);
     else if(gameState->endgame == Game::State::noFuel)
