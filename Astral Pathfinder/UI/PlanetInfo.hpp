@@ -37,7 +37,7 @@ private:
   TextBox dpText, fpText, miningLabel, farmingLabel,
           infraText, reserveText, ipText, rpText, locationText,
           popText, miningText, farmingText;
-  Slider sliderOne, sliderTwo;
+  Slider resourceSlider, depositSlider;
   SDL_Rect origin, miningLabelRect, farmingLabelRect,
            depositsPercentRect, fertilityPercentRect, slideBaseOne, circleOne,
            slideBaseTwo, circleTwo, infraRect, reserveRect, ipRect, rpRect,

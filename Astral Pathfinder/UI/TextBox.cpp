@@ -17,7 +17,7 @@
 // MARK: - TextBox Initialization
 
 void TextBox::init(SDL_Rect rectangle) {
-  font = TTF_OpenFont(TextParameters::fontFile.c_str(), 36);
+  font = TTF_OpenFont(TextParameters::fontFile.c_str(), TextParameters::regFontSize);
   
   rect = rectangle;
 }
@@ -43,12 +43,26 @@ void TextBox::clean() {
 
 // MARK: - TextBox Methods
 
-void TextBox::setMessage(const std::string words) {
-  using TextParameters::color;
-  
+void TextBox::setMessage(const std::string words, SDL_Color color) {
   if(texture != nullptr) clean();
   
   SDL_Surface *surface = TTF_RenderText_Solid(font, words.c_str(), color);
+  texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
+  SDL_FreeSurface(surface);
+}
+
+void TextBox::setFinalScore(const std::string words) {
+  using TextParameters::color;
+  int w, h;
+  if(texture != nullptr) clean();
+  
+  font = TTF_OpenFont(TextParameters::fontFile.c_str(), TextParameters::finalScoreFontSize);
+  
+  TTF_SizeText(font, words.c_str(), &w, &h);
+  rect.w = w;
+  rect.h = h;
+  
+  SDL_Surface *surface = TTF_RenderText_Blended(font, words.c_str(), color);
   texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
   SDL_FreeSurface(surface);
 }

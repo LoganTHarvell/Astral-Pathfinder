@@ -11,6 +11,7 @@
 
 // MARK: Libraries and Frameworks
 #include <string>
+#include "SDL2_ttf/SDL_ttf.h"
 
 // MARK: Source Files
 #include "TextureManager.hpp"
@@ -25,6 +26,7 @@ void UIManager::init() {
   selectedPlanetInfo.init(selectedPlanetRect);
   DockedPlanetInfo.init(currentPlanetRect);
   shipInfo.init(shipInfoRect);
+  finalScore.init({endScoreCoords.x, endScoreCoords.y, 0, 0});
   hoverBorder = TextureManager::loadTexture("../Resources/border.png");
   
   mainMenu = TextureManager::loadTexture("../Resources/mainMenu.png");
@@ -34,6 +36,7 @@ void UIManager::init() {
   screenRect = { 0, 0, GameParameters::windowRect.w, GameParameters::windowRect.h };
   
   mainMenuFlag = true;
+  prevScore = 0;
 }
 
 // MARK: - Game Loop Methods
@@ -103,49 +106,77 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
-  else if (gameState->endgame != Game::State::none) {
+  else if (gameState->endgame != Game::State::none && gameState->endgame != Game::State::quit) {
     if(gameState->endgame == Game::State::allDiscovered)
       SDL_RenderCopy(Game::renderer, winScreen, NULL, &screenRect);
     else if(gameState->endgame == Game::State::noFuel)
       SDL_RenderCopy(Game::renderer, loseScreen, NULL, &screenRect);
     
-    // TODO: - Render score
+    if(finalScore.checkNull())
+      finalScore.setFinalScore(std::to_string(score).c_str());
+    
+    finalScore.render(gameState);
+    
     if(hoveringLabel == playAgain)
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     else if(hoveringLabel == endGameExit)
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
-  else if(gameState->endgame == Game::State::none)
+  else if(gameState->endgame == Game::State::none) {
     SDL_RenderCopy(Game::renderer, gameScreen, NULL, &screenRect);
   
-  time.render(gameState);
-  totalScore.render(gameState);
-  shipInfo.render(gameState);
-  
-  if(gameState->planetSelected) {
-    Planet selectedP = pm->getSelectedPlanet();
-    selectedPlanetInfo.render(gameState, selectedP.getPopulation(),
-                              selectedP.playerIsDocked());
-  }
-  if(gameState->planetCollided) {
-    Planet dockedP = pm->getDockedPlanet();
-    DockedPlanetInfo.render(gameState, dockedP.getPopulation(),
-                            dockedP.playerIsDocked());
+    time.render(gameState);
+    totalScore.render(gameState);
+    shipInfo.render(gameState);
+    
+    if(gameState->planetSelected) {
+      Planet selectedP = pm->getSelectedPlanet();
+      selectedPlanetInfo.render(gameState, selectedP.getPopulation(),
+                                selectedP.playerIsDocked());
+    }
+    if(gameState->planetCollided) {
+      Planet dockedP = pm->getDockedPlanet();
+      DockedPlanetInfo.render(gameState, dockedP.getPopulation(),
+                              dockedP.playerIsDocked());
+    }
   }
 }
 
 // MARK: - UIManager Methods
 
 void UIManager::updateTime(Uint32 elapsedTime) {
+  int minutes = elapsedTime / 60;
   std::string secs = std::to_string(elapsedTime % 60);
-  std::string mins = std::to_string(elapsedTime / 60);
-  time.setMessage(mins + ":" + secs);
+  std::string mins = std::to_string(minutes);
+  time.setMessage(mins + ":" + secs, checkTime(minutes));
+}
+
+SDL_Color UIManager::checkTime(int minutes) {
+  if(minutes < 15) return UiParameters::green;
+  else if(minutes < 20) return UiParameters::yellow;
+  else return UiParameters::red;
 }
 
 void UIManager::updateTotalScore(PlanetManager *pm) {
-  std::string population = std::to_string(pm->getTotalPopulation());
-  totalScore.setMessage(population);
+  score = pm->getTotalPopulation();
+  std::string population = std::to_string(score);
+  totalScore.setMessage(population, setTotalScoreColor());
+
+  prevScore = score;
+}
+
+SDL_Color UIManager::setTotalScoreColor() {
+  if(prevScore == score)
+    return prevColor;
+  else if(prevScore < score) {
+    prevColor = UiParameters::green;
+    return UiParameters::green;
+  }
+  else {
+    prevColor = UiParameters::red;
+    return UiParameters::red;
+  }
 }
 
 void UIManager::setSelectedPlanet(Planet p) {

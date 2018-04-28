@@ -23,12 +23,12 @@ void PlanetInfo::init(SDL_Rect src) {
   fpText.init(fertilityPercentRect);
   miningLabel.init(miningLabelRect);
   farmingLabel.init(farmingLabelRect);
-  sliderOne.init(slideBaseOne, circleOne);
+  resourceSlider.init(slideBaseOne, circleOne);
   infraText.init(infraRect);
   reserveText.init(reserveRect);
   ipText.init(ipRect);
   rpText.init(rpRect);
-  sliderTwo.init(slideBaseTwo, circleTwo);
+  depositSlider.init(slideBaseTwo, circleTwo);
   locationText.init(locationRect);
   popText.init(popRect);
   miningText.init(miningRect);
@@ -50,12 +50,12 @@ void PlanetInfo::render(Game::State *gs, int population,
     fpText.render(gs);
     miningLabel.render(gs);
     farmingLabel.render(gs);
-    sliderOne.render();
+    resourceSlider.render();
     infraText.render(gs);
     reserveText.render(gs);
     ipText.render(gs);
     rpText.render(gs);
-    sliderTwo.render();
+    depositSlider.render();
   }
 }
 
@@ -64,12 +64,12 @@ void PlanetInfo::clean() {
   fpText.clean();
   miningLabel.clean();
   farmingLabel.clean();
-  sliderOne.clean();
+  resourceSlider.clean();
   infraText.clean();
   reserveText.clean();
   ipText.clean();
   rpText.clean();
-  sliderTwo.clean();
+  depositSlider.clean();
   locationText.clean();
   popText.clean();
   miningText.clean();
@@ -84,30 +84,34 @@ void PlanetInfo::setUiTextures(Planet p) {
   
   setBoxes(p);
   
-  if (!sliderOne.isInitialized() && !sliderTwo.isInitialized()
+  if (!resourceSlider.isInitialized() && !depositSlider.isInitialized()
       && (p.getPopulation() > 0 || p.playerIsDocked())) {
-    sliderOne.setTextures(p.getFarmingPercent());
-    sliderOne.colorMod(baseColor, sliderColor);
-    sliderTwo.setTextures(p.getReservePercent());
-    sliderTwo.colorMod(baseColor, sliderColor);
+    resourceSlider.setTextures(p.getFarmingPercent());
+    resourceSlider.colorMod(baseColor, sliderColor);
+    depositSlider.setTextures(p.getReservePercent());
+    depositSlider.colorMod(baseColor, sliderColor);
   }
   else {
-    sliderOne.updateSliderPosition(p.getFarmingPercent());
-    sliderTwo.updateSliderPosition(p.getReservePercent());
+    resourceSlider.updateSliderPosition(p.getFarmingPercent());
+    depositSlider.updateSliderPosition(p.getReservePercent());
   }
 }
 
 int PlanetInfo::checkClick(SDL_Point click) {
   SDL_Rect temp;
   
-  temp = sliderOne.getSliderRect();
+  temp = resourceSlider.getBaseRect();
+  temp.y = resourceSlider.getSliderRect().y;
+  temp.h = resourceSlider.getSliderRect().h;
   if((click.x > temp.x) && (click.x < temp.x + temp.w)
      && (click.y > temp.y) && (click.y < temp.y + temp.h)) {
     slider = fertilitySlider;
     return fertilitySlider;
   }
   
-  temp = sliderTwo.getSliderRect();
+  temp = depositSlider.getBaseRect();
+  temp.y = depositSlider.getSliderRect().y;
+  temp.h = depositSlider.getSliderRect().h;
   if((click.x > temp.x) && (click.x < temp.x + temp.w)
      && (click.y > temp.y) && (click.y < temp.y + temp.h)) {
     slider = reserveSlider;
@@ -122,21 +126,21 @@ bool PlanetInfo::moveSlider(Game::State *gameState) {
   SDL_Rect temp;
   
   if(slider == fertilitySlider)
-    temp = sliderOne.getBaseRect();
+    temp = resourceSlider.getBaseRect();
   
   else
-    temp = sliderTwo.getBaseRect();
+    temp = depositSlider.getBaseRect();
   
   int x = gameState->dragLocation.x - temp.x;
   
   if(slider == fertilitySlider && (x > 0) && (x < temp.w + 2)) {
-    sliderOne.setSliderPosition(x);
+    resourceSlider.setSliderPosition(x);
     setNewPercentText();
     return true;
   }
   
   if(slider == reserveSlider && (x > 0) && (x < temp.w + 2)) {
-    sliderTwo.setSliderPosition(x);
+    depositSlider.setSliderPosition(x);
     setNewPercentText();
     return true;
   }
@@ -146,10 +150,10 @@ bool PlanetInfo::moveSlider(Game::State *gameState) {
 
 int PlanetInfo::getSliderPercent() {
   if(slider == fertilitySlider)
-    return sliderOne.getPercent();
+    return resourceSlider.getPercent();
   
   if(slider == reserveSlider)
-    return sliderTwo.getPercent();
+    return depositSlider.getPercent();
   
   return NULL;
 }
@@ -250,6 +254,7 @@ std::string PlanetInfo::setStringSpaces(int p) {
 }
 
 void PlanetInfo::setUiRects() {
+  // TODO: clean this up
   int buffer = 5; // Small buffer from borders or other elements
   int midW = origin.x+(origin.w/2); // Midpoint of width
   int gapH = origin.h/30; // Spaces between elements
