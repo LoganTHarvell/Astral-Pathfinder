@@ -15,7 +15,6 @@
 
 // MARK: Source Files
 #include "TextureManager.hpp"
-#include <iostream>
 
 // MARK: - UIManager Initialization
 
@@ -130,22 +129,23 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
-  else if(gameState->endgame == Game::State::none)
+  else if(gameState->endgame == Game::State::none) {
     SDL_RenderCopy(Game::renderer, gameScreen, NULL, &screenRect);
   
-  time.render(gameState);
-  totalScore.render(gameState);
-  shipInfo.render(gameState);
-  
-  if(gameState->planetSelected) {
-    Planet selectedP = pm->getSelectedPlanet();
-    selectedPlanetInfo.render(gameState, selectedP.getPopulation(),
-                              selectedP.playerIsDocked());
-  }
-  if(gameState->planetCollided) {
-    Planet dockedP = pm->getDockedPlanet();
-    DockedPlanetInfo.render(gameState, dockedP.getPopulation(),
-                            dockedP.playerIsDocked());
+    time.render(gameState);
+    totalScore.render(gameState);
+    shipInfo.render(gameState);
+    
+    if(gameState->planetSelected) {
+      Planet selectedP = pm->getSelectedPlanet();
+      selectedPlanetInfo.render(gameState, selectedP.getPopulation(),
+                                selectedP.playerIsDocked());
+    }
+    if(gameState->planetCollided) {
+      Planet dockedP = pm->getDockedPlanet();
+      DockedPlanetInfo.render(gameState, dockedP.getPopulation(),
+                              dockedP.playerIsDocked());
+    }
   }
 }
 
