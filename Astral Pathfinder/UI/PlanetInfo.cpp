@@ -100,14 +100,14 @@ void PlanetInfo::setUiTextures(Planet p) {
 int PlanetInfo::checkClick(SDL_Point click) {
   SDL_Rect temp;
   
-  temp = sliderOne.getSliderRect();
+  temp = sliderOne.getBaseRect();
   if((click.x > temp.x) && (click.x < temp.x + temp.w)
      && (click.y > temp.y) && (click.y < temp.y + temp.h)) {
     slider = fertilitySlider;
     return fertilitySlider;
   }
   
-  temp = sliderTwo.getSliderRect();
+  temp = sliderTwo.getBaseRect();
   if((click.x > temp.x) && (click.x < temp.x + temp.w)
      && (click.y > temp.y) && (click.y < temp.y + temp.h)) {
     slider = reserveSlider;
