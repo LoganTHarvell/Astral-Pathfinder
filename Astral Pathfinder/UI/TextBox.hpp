@@ -22,8 +22,7 @@
 // MARK: - TextBox Parameters
 
 namespace TextParameters {
-  const SDL_Color color = {0, 128, 0};
-  const SDL_Color bg = {0, 0, 0};
+  const SDL_Color color = {0,128,0};
   const std::string fontFile = "../Resources/MODENINE.TTF";
 }
 
@@ -41,11 +40,10 @@ public:
   void clean();
   
   // MARK: - TextBox Methods
-  void setMessage(const std::string words);
+  void setMessage(const std::string words, SDL_Color color = TextParameters::color);
   void setFinalScore(TTF_Font *newFont, const std::string words);
   bool checkNull();
   void setRect(int x, int w);
-  void setNewColor(SDL_Color color);
   
   
 private:

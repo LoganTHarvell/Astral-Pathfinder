@@ -15,6 +15,7 @@
 
 // MARK: Source Files
 #include "TextureManager.hpp"
+#include <iostream>
 
 // MARK: - UIManager Initialization
 
@@ -157,19 +158,24 @@ void UIManager::updateTime(Uint32 elapsedTime) {
 }
 
 void UIManager::updateTotalScore(PlanetManager *pm) {
-  std::string population = std::to_string(pm->getTotalPopulation());
-  totalScore.setMessage(population);
+  score = pm->getTotalPopulation();
+  std::string population = std::to_string(score);
+  totalScore.setMessage(population, setTotalScoreColor());
 
-  setTotalScoreColor();
+  prevScore = score;
 }
 
-void UIManager::setTotalScoreColor() {
-  if(prevScore < score)
-    totalScore.setNewColor({0, 128, 0});
-  else
-    totalScore.setNewColor({128, 0, 0});
-  
-  prevScore = score;
+SDL_Color UIManager::setTotalScoreColor() {
+  if(prevScore == score)
+    return prevColor;
+  else if(prevScore < score) {
+    prevColor = UiParameters::green;
+    return UiParameters::green;
+  }
+  else {
+    prevColor = UiParameters::red;
+    return UiParameters::red;
+  }
 }
 
 void UIManager::setSelectedPlanet(Planet p) {

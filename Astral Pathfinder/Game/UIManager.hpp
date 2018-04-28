@@ -66,6 +66,7 @@ private:
   SDL_Texture *mainMenu, *gameScreen, *winScreen, *loseScreen;
   TTF_Font *font;
   int score, prevScore;
+  SDL_Color prevColor;
   
   enum {
     none, currentPlanetWindow, selectedPlanetWindow
@@ -81,7 +82,7 @@ private:
   // MARK: - Helper Methods
   void updateTime(Uint32);
   void updateTotalScore(PlanetManager *pm);
-  void setTotalScoreColor();
+  SDL_Color setTotalScoreColor();
   void setSelectedPlanet(Planet p);
   void setDockedPlanet(Planet p);
   void handleMouseDown(Game::State *gs, PlanetManager *pm);

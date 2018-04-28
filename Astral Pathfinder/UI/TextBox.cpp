@@ -43,9 +43,7 @@ void TextBox::clean() {
 
 // MARK: - TextBox Methods
 
-void TextBox::setMessage(const std::string words) {
-  using TextParameters::color;
-  
+void TextBox::setMessage(const std::string words, SDL_Color color) {
   if(texture != nullptr) clean();
   
   SDL_Surface *surface = TTF_RenderText_Solid(font, words.c_str(), color);
@@ -71,8 +69,4 @@ bool TextBox::checkNull() {
 void TextBox::setRect(int x, int w) {
   rect.x = x;
   rect.w = w;
-}
-
-void TextBox::setNewColor(SDL_Color color) {
-  SDL_SetTextureColorMod(texture, color.r, color.g, color.b);
 }
