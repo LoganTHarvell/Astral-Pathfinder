@@ -23,6 +23,7 @@ void UIManager::init() {
 
   time.init(timeRect);
   totalScore.init(totalScoreRect);
+  eventsPanel.init(events);
   selectedPlanetInfo.init(selectedPlanetRect);
   DockedPlanetInfo.init(currentPlanetRect);
   shipInfo.init(shipInfoRect);
@@ -128,6 +129,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
   
     time.render(gameState);
     totalScore.render(gameState);
+    eventsPanel.render(gameState);
     shipInfo.render(gameState);
     
     if(gameState->planetSelected) {

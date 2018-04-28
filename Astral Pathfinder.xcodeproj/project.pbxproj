@@ -53,6 +53,7 @@
 		020013892075BCD30087CED9 /* MODENINE.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 0200135E2075BCD30087CED9 /* MODENINE.TTF */; };
 		0200138A2075BCD30087CED9 /* mainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200135F2075BCD30087CED9 /* mainMenu.png */; };
 		02307D002075BE1B00B46A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02307CFE2075BE1B00B46A3E /* Assets.xcassets */; };
+		9117BE722094FD34003FE954 /* EventsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE702094FD34003FE954 /* EventsPanel.cpp */; };
 		91E9F7AF2094051D000FDDB6 /* winScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 91E9F7AE2094051D000FDDB6 /* winScreen.png */; };
 /* End PBXBuildFile section */
 
@@ -136,6 +137,8 @@
 		0200135F2075BCD30087CED9 /* mainMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMenu.png; sourceTree = "<group>"; };
 		02307CFE2075BE1B00B46A3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02307CFF2075BE1B00B46A3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9117BE702094FD34003FE954 /* EventsPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsPanel.cpp; sourceTree = "<group>"; };
+		9117BE712094FD34003FE954 /* EventsPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventsPanel.hpp; sourceTree = "<group>"; };
 		91E9F7AE2094051D000FDDB6 /* winScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = winScreen.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -238,6 +241,8 @@
 				0200133C2075BCD30087CED9 /* Slider.cpp */,
 				020013372075BCD30087CED9 /* TextureManager.hpp */,
 				0200133A2075BCD30087CED9 /* TextureManager.cpp */,
+				9117BE702094FD34003FE954 /* EventsPanel.cpp */,
+				9117BE712094FD34003FE954 /* EventsPanel.hpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -352,7 +357,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0930;
-				ORGANIZATIONNAME = "Logan Harvell";
+				ORGANIZATIONNAME = "Logan Harvell, Ian Holdeman";
 				TargetAttributes = {
 					020012AE20759ED60087CED9 = {
 						CreatedOnToolsVersion = 9.3;
@@ -426,6 +431,7 @@
 				020013722075BCD30087CED9 /* Map.cpp in Sources */,
 				020013772075BCD30087CED9 /* ColliderComponent.cpp in Sources */,
 				0200137D2075BCD30087CED9 /* UIManager.cpp in Sources */,
+				9117BE722094FD34003FE954 /* EventsPanel.cpp in Sources */,
 				020013712075BCD30087CED9 /* ShipInfo.cpp in Sources */,
 				020013742075BCD30087CED9 /* TextBox.cpp in Sources */,
 				020013762075BCD30087CED9 /* PlanetInfo.cpp in Sources */,

@@ -18,6 +18,7 @@
 #include "PlanetInfo.hpp"
 #include "ShipInfo.hpp"
 #include "TextBox.hpp"
+#include "EventsPanel.hpp"
 
 // MARK: - UIManager Parameters
 
@@ -41,6 +42,7 @@ namespace UiParameters {
   const SDL_Color red = {128,0,0};
   const SDL_Color green = {0,128,0};
   const SDL_Color yellow = {255, 255, 0};
+  const SDL_Rect events = {65, 175, 320, 700};
 }
 
 class UIManager {
@@ -60,6 +62,7 @@ private:
   // MARK: - UIManager Fields
   TextBox time;
   TextBox totalScore, finalScore;
+  EventsPanel eventsPanel;
   PlanetInfo selectedPlanetInfo, DockedPlanetInfo;
   ShipInfo shipInfo;
   SDL_Texture *hoverBorder;
