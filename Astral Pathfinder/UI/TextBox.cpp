@@ -72,3 +72,7 @@ void TextBox::setRect(int x, int w) {
   rect.x = x;
   rect.w = w;
 }
+
+void TextBox::setNewColor(SDL_Color color) {
+  SDL_SetTextureColorMod(texture, color.r, color.g, color.b);
+}

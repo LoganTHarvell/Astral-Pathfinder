@@ -38,6 +38,8 @@ namespace UiParameters {
   const SDL_Rect playAgainBorder = {270, 662, 460, 95};
   const SDL_Rect endGameBorder = {867, 665, 460, 92};
   const SDL_Point endScoreCoords = {945, 400};
+  const SDL_Color red = {128,0,0};
+  const SDL_Color green = {0,128,0};
 }
 
 class UIManager {
@@ -63,7 +65,7 @@ private:
   SDL_Rect borderRect, screenRect, finalScoreRect;
   SDL_Texture *mainMenu, *gameScreen, *winScreen, *loseScreen;
   TTF_Font *font;
-  int score;
+  int score, prevScore;
   
   enum {
     none, currentPlanetWindow, selectedPlanetWindow
@@ -79,6 +81,7 @@ private:
   // MARK: - Helper Methods
   void updateTime(Uint32);
   void updateTotalScore(PlanetManager *pm);
+  void setTotalScoreColor();
   void setSelectedPlanet(Planet p);
   void setDockedPlanet(Planet p);
   void handleMouseDown(Game::State *gs, PlanetManager *pm);

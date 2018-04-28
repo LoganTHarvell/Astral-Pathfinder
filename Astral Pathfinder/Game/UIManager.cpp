@@ -37,6 +37,7 @@ void UIManager::init() {
   font = TTF_OpenFont(TextParameters::fontFile.c_str(), 120);
   
   mainMenuFlag = true;
+  prevScore = 0;
 }
 
 // MARK: - Game Loop Methods
@@ -158,6 +159,17 @@ void UIManager::updateTime(Uint32 elapsedTime) {
 void UIManager::updateTotalScore(PlanetManager *pm) {
   std::string population = std::to_string(pm->getTotalPopulation());
   totalScore.setMessage(population);
+
+  setTotalScoreColor();
+}
+
+void UIManager::setTotalScoreColor() {
+  if(prevScore < score)
+    totalScore.setNewColor({0, 128, 0});
+  else
+    totalScore.setNewColor({128, 0, 0});
+  
+  prevScore = score;
 }
 
 void UIManager::setSelectedPlanet(Planet p) {

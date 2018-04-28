@@ -45,6 +45,7 @@ public:
   void setFinalScore(TTF_Font *newFont, const std::string words);
   bool checkNull();
   void setRect(int x, int w);
+  void setNewColor(SDL_Color color);
   
   
 private:
