@@ -66,6 +66,10 @@ private:
   void handleCollisions(ShipManager *sm, Uint32 frame);
   
   // MARK: - PlanetManager Fields
+  enum {
+    dockedPlanet=1, collidedPlanet
+  };
+  
   std::vector<Planet> planets;
   int totalPopulation;
 
