@@ -49,12 +49,14 @@ void ShipInfo::clean() {
 
 void ShipInfo::setText(Ship ship) {
   SDL_Point pos = ship.getCenter();
+  int fuelAmount = ship.getFuel();
   std::string loc = "Location: " + std::to_string(pos.x) + "," + std::to_string(pos.y);
-  std::string fuelNum = "Fuel: " + std::to_string(ship.getFuel());
+  std::string fuelNum = "Fuel: " + std::to_string(fuelAmount);
   
+  if(fuelAmount < 75) fuel.setMessage(fuelNum.c_str(), {128,0,0});
+  else fuel.setMessage(fuelNum.c_str());
   location.setMessage(loc.c_str());
-  fuel.setMessage(fuelNum.c_str());
-  curPlanet.setMessage("Current Planet: Hoth");
+  curPlanet.setMessage("Current Planet");
   if(crewLabel.checkNull()) {
     crewLabel.setMessage("Crew");
     crewNum.setMessage(std::to_string(ShipParameters::shipPopulation));
