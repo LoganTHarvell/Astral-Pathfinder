@@ -254,6 +254,7 @@ std::string PlanetInfo::setStringSpaces(int p) {
 }
 
 void PlanetInfo::setUiRects() {
+  // TODO: clean this up
   int buffer = 5; // Small buffer from borders or other elements
   int midW = origin.x+(origin.w/2); // Midpoint of width
   int gapH = origin.h/30; // Spaces between elements

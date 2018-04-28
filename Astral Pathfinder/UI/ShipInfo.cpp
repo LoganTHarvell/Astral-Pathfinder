@@ -66,6 +66,7 @@ void ShipInfo::setText(Ship ship) {
 // MARK: - Helper Methods
 
 void ShipInfo::setUiRects() {
+  // TODO: clean this up
   int buffer = 5; // Small buffer from borders or other elements
   int gapH = 40; // Space between elements
   int midW = origin.x+(origin.w/2); // Midpoint of width
