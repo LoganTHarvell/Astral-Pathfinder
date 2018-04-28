@@ -40,6 +40,7 @@ namespace UiParameters {
   const SDL_Point endScoreCoords = {945, 400};
   const SDL_Color red = {128,0,0};
   const SDL_Color green = {0,128,0};
+  const SDL_Color yellow = {255, 255, 0};
 }
 
 class UIManager {
@@ -66,7 +67,7 @@ private:
   SDL_Texture *mainMenu, *gameScreen, *winScreen, *loseScreen;
   TTF_Font *font;
   int score, prevScore;
-  SDL_Color prevColor;
+  SDL_Color prevColor, timeColor;
   
   enum {
     none, currentPlanetWindow, selectedPlanetWindow
@@ -81,6 +82,7 @@ private:
   
   // MARK: - Helper Methods
   void updateTime(Uint32);
+  SDL_Color checkTime(int minutes);
   void updateTotalScore(PlanetManager *pm);
   SDL_Color setTotalScoreColor();
   void setSelectedPlanet(Planet p);

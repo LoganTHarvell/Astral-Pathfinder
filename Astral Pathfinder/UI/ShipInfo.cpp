@@ -53,7 +53,7 @@ void ShipInfo::setText(Ship ship) {
   std::string loc = "Location: " + std::to_string(pos.x) + "," + std::to_string(pos.y);
   std::string fuelNum = "Fuel: " + std::to_string(fuelAmount);
   
-  if(fuelAmount < 75) fuel.setMessage(fuelNum.c_str(), {128,0,0});
+  if(fuelAmount < 250) fuel.setMessage(fuelNum.c_str(), {128,0,0});
   else fuel.setMessage(fuelNum.c_str());
   location.setMessage(loc.c_str());
   curPlanet.setMessage("Current Planet");

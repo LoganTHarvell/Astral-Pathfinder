@@ -152,9 +152,16 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
 // MARK: - UIManager Methods
 
 void UIManager::updateTime(Uint32 elapsedTime) {
+  int minutes = elapsedTime / 60;
   std::string secs = std::to_string(elapsedTime % 60);
-  std::string mins = std::to_string(elapsedTime / 60);
-  time.setMessage(mins + ":" + secs);
+  std::string mins = std::to_string(minutes);
+  time.setMessage(mins + ":" + secs, checkTime(minutes));
+}
+
+SDL_Color UIManager::checkTime(int minutes) {
+  if(minutes < 15) return UiParameters::green;
+  else if(minutes >= 20) return UiParameters::red;
+  else return UiParameters::yellow;
 }
 
 void UIManager::updateTotalScore(PlanetManager *pm) {
