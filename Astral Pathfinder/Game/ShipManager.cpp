@@ -27,6 +27,11 @@ void ShipManager::init(SDL_Point homeworldPos) {
 void ShipManager::update(Game::State *gameState, PlanetManager *pm) {
   playerShip.update(gameState);
   if (pm->playerIsDocked()) playerShip.updateFuel(pm->fuelDockedShip());
+  
+  // Endgame check for if player ran out of fuel
+  if (playerShip.getFuel() <= 0 && !pm->playerIsDocked()) {
+    gameState->endgame = Game::State::noFuel;
+  }
 }
 
 void ShipManager::render(Game::State *gameState) {
