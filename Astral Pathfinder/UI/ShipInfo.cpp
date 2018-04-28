@@ -11,7 +11,6 @@
 
 // MARK: Libraries and Frameworks
 #include <string>
-#include <iostream>
 
 // MARK: - ShipInfo Initialization
 

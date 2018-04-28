@@ -15,7 +15,6 @@
 #include "TextureManager.hpp"
 #include "Map.hpp"
 #include "Ship.hpp"
-#include <iostream>
 
 // MARK: - Initialization Methods
 
