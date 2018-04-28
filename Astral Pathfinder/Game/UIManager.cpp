@@ -68,7 +68,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
   
   Ship player = shipManager->getPlayerShip();
   if(player.getVelocity().x != 0 || player.getVelocity().y != 0
-     || planetManager->planetIsDocked()) {
+     || planetManager->playerIsDocked()) {
     shipInfo.clean();
     shipInfo.setText(player);
   }
@@ -82,8 +82,8 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     selectedPlanetWindowCleaned = true;
   }
   
-  if(planetManager->planetIsDocked()) {
-    setDockedPlanet(planetManager->getDockedPlanet());
+  if(planetManager->playerIsDocked()) {
+    setDockedPlanet(planetManager->getPlayerDockedPlanet());
     currentPlanetWindowCleaned = false;
   }
   else if(!currentPlanetWindowCleaned) {
@@ -136,7 +136,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
                                 selectedP.playerIsDocked());
     }
     if(gameState->planetCollided) {
-      Planet dockedP = pm->getDockedPlanet();
+      Planet dockedP = pm->getPlayerDockedPlanet();
       DockedPlanetInfo.render(gameState, dockedP.getPopulation(),
                               dockedP.playerIsDocked());
     }

@@ -50,7 +50,7 @@ void PlanetManager::initGalaxy() {
     hasPlanet[coordinates.x][coordinates.y] = true;
   }
   
-  dockedPlanetIndex = 0;      // Start with homeworld docked
+  playerDockedPlanetIndex = 0;      // Start with homeworld docked
   selectedPlanetIndex = -1;   // Start with no planet selected
   discoveryCount = 1;         // Start with 1 colonized planet
 
@@ -62,7 +62,7 @@ void PlanetManager::initGalaxy() {
 void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
   // Checks for any collisions first
   handleCollisions(shipManager, gameState->frame);
-  gameState->planetCollided = planetIsDocked();
+  gameState->planetCollided = playerIsDocked();
   
   // Updates each planet, also refreshes count of discovered planets
   totalPopulation = 0;
@@ -113,40 +113,40 @@ Planet PlanetManager::getSelectedPlanet() {
   return planets[selectedPlanetIndex];
 }
 
-bool PlanetManager::planetIsDocked() {
-  if (dockedPlanetIndex >= 0) return true;
+bool PlanetManager::playerIsDocked() {
+  if (playerDockedPlanetIndex >= 0) return true;
   return false;
 }
 
-Planet PlanetManager::getDockedPlanet() {
-  return planets[dockedPlanetIndex];
+Planet PlanetManager::getPlayerDockedPlanet() {
+  return planets[playerDockedPlanetIndex];
 }
 
 // TODO: Use enum for readability of flags
 void PlanetManager::setPlanetMiningPercent(int p, int flag) {
   if(flag == dockedPlanet)
-    planets[dockedPlanetIndex].setMiningPercent(p);
+    planets[playerDockedPlanetIndex].setMiningPercent(p);
   if(flag == selectedPlanet)
     planets[selectedPlanetIndex].setMiningPercent(p);
 }
 
 void PlanetManager::setPlanetFarmingPercent(int p, int flag) {
   if(flag == dockedPlanet)
-    planets[dockedPlanetIndex].setFarmingPercent(p);
+    planets[playerDockedPlanetIndex].setFarmingPercent(p);
   if(flag == selectedPlanet)
     planets[selectedPlanetIndex].setFarmingPercent(p);
 }
 
 void PlanetManager::setPlanetInfraPercent(int p, int flag) {
   if(flag == dockedPlanet)
-    planets.at(dockedPlanetIndex).setInfraPercent(p);
+    planets.at(playerDockedPlanetIndex).setInfraPercent(p);
   if(flag == selectedPlanet)
     planets.at(selectedPlanetIndex).setInfraPercent(p);
 }
 
 void PlanetManager::setPlanetReservePercent(int p, int flag) {
   if(flag == dockedPlanet)
-    planets.at(dockedPlanetIndex).setReservePercent(p);
+    planets.at(playerDockedPlanetIndex).setReservePercent(p);
   if(flag == selectedPlanet)
     planets.at(selectedPlanetIndex).setReservePercent(p);
 }
@@ -155,8 +155,8 @@ void PlanetManager::setPlanetReservePercent(int p, int flag) {
 int PlanetManager::fuelDockedShip() {
   int fuel = 0;
   
-  int amount = planets[dockedPlanetIndex].getMinerals();
-  fuel = planets[dockedPlanetIndex].makeFuel(amount);
+  int amount = planets[playerDockedPlanetIndex].getMinerals();
+  fuel = planets[playerDockedPlanetIndex].makeFuel(amount);
   
   return fuel;
 }
@@ -222,11 +222,11 @@ void PlanetManager::handleCollisions(ShipManager *sm, Uint32 frame) {
   std::vector<SDL_Point> playerVertices = player.getCollider().getVertices();
   
   // Checks all planets for collisions if player ship hasn't docked
-  if (dockedPlanetIndex < 0) {
+  if (playerDockedPlanetIndex < 0) {
     for (int i = 0; i < planets.size(); i++) {
       if (planets[i].getCollider().collisionOBB(playerVertices)) {
         planets[i].toggleDockedShip(player.getTag(), frame);
-        dockedPlanetIndex = i;
+        playerDockedPlanetIndex = i;
         std::cout << "Collision at: "
                   << planets[i].getCoordinates().x << ","
                   << planets[i].getCoordinates().y << std::endl;
@@ -235,10 +235,10 @@ void PlanetManager::handleCollisions(ShipManager *sm, Uint32 frame) {
   }
   // If player has docked checks docked planet for continued collision
   else {
-    ColliderComponent collider = planets[dockedPlanetIndex].getCollider();
+    ColliderComponent collider = planets[playerDockedPlanetIndex].getCollider();
     if (!collider.collisionOBB(playerVertices)) {
-      planets[dockedPlanetIndex].toggleDockedShip(player.getTag(), frame);
-      dockedPlanetIndex = -1;
+      planets[playerDockedPlanetIndex].toggleDockedShip(player.getTag(), frame);
+      playerDockedPlanetIndex = -1;
     }
   }
 }

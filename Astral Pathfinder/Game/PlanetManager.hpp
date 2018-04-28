@@ -43,8 +43,8 @@ public:
   
   Planet getPlanet(int n);
   Planet getSelectedPlanet();
-  bool planetIsDocked();
-  Planet getDockedPlanet();
+  bool playerIsDocked();
+  Planet getPlayerDockedPlanet();
   
   void setPlanetMiningPercent(int p, int flag);
   void setPlanetFarmingPercent(int p, int flag);
@@ -73,8 +73,8 @@ private:
   std::vector<Planet> planets;
   int totalPopulation;
 
-  int dockedPlanetIndex;
   int selectedPlanetIndex;
+  int playerDockedPlanetIndex;
   int discoveryCount;
 
 };
