@@ -114,7 +114,7 @@ std::string EventsPanel::createMessage(SDL_Point p, int event) {
   
   switch(event) {
     case BLIGHT:
-      message = "A bligh occured at ";
+      message = "A blight occured at ";
       break;
     case PLAGUE:
       message = "A plague is spreading at ";
