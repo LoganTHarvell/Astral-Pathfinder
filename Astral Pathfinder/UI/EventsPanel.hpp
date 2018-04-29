@@ -12,6 +12,8 @@
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 #include "SDL2_image/SDL_image.h"
+#include <vector>
+#include <unordered_map>
 
 // MARK: Source Files
 #include "TextBox.hpp"
@@ -19,11 +21,8 @@
 #include "EventsComponent.hpp"
 #include "PlanetManager.hpp"
 
-#include <vector>
-#include <unordered_map>
 
-
-// MARK: - TextBox Parameters
+// MARK: - EventPanel Parameters
 
 namespace EventPanelParameters {
   const SDL_Rect panelRect = {65, 175, 320, 10000};
@@ -45,18 +44,18 @@ public:
   void render(Game::State *gameState);
   
 private:
+  // MARK: - EventsPanel Fields
   enum {
     BLIGHT=1, PLAGUE, MINECOLLAPSE, POPDEC, OVERPROD, TEST
   };
   
   SDL_Texture *texture;
-  TextBox sample, sample2, sample3, sample4, sample5;
   std::unordered_map<long, TextBox> map;
   std::vector<TextBox> eventOrder;
-  bool changedFlag;
   SDL_Rect src;
   int totalHeight;
   
+  // MARK: - Helper Methods
   void scrollPanel(int scroll);
   void checkStatus(std::vector<EventsComponent> events);
   void updateMap(SDL_Point p, bool flag, int event, SDL_Color color);

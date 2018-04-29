@@ -7,7 +7,9 @@
 //
 
 #include "EventsPanel.hpp"
-#include <iostream>
+
+
+// MARK: - PlanetInfo Initialization
 
 void EventsPanel::init() {
   using namespace EventPanelParameters;
@@ -15,6 +17,9 @@ void EventsPanel::init() {
   src = {0, 0, 310, 700};
   totalHeight = 0;
 }
+
+
+// MARK: - Game Loop Methods
 
 void EventsPanel::update(Game::State *gameState, PlanetManager *pm) {
   checkStatus(pm->getEventsList());
@@ -36,6 +41,9 @@ void EventsPanel::render(Game::State *gameState) {
   SDL_RenderCopy(Game::renderer, texture, &src, &renderRect);
 }
 
+
+// MARK: - EventsPanel Methods
+
 void EventsPanel::scrollPanel(int scroll) {
   int newY;
   if(scroll < 0) {
@@ -55,7 +63,6 @@ void EventsPanel::scrollPanel(int scroll) {
 
 void EventsPanel::checkStatus(std::vector<EventsComponent> events) {
   using namespace EventPanelParameters;
-  changedFlag = false;
   
   for(int i = 0; i < events.size(); i++) {
     SDL_Point p = events[i].getLocation();
