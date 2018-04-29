@@ -11,6 +11,7 @@
 
 // MARK: Libraries and Frameworks
 #include <string>
+#include <fstream>
 #include "SDL2_ttf/SDL_ttf.h"
 
 // MARK: Source Files
@@ -378,6 +379,8 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
       gs->restartGame = true;
       gs->skipMainMenu = true;
       gs->mouseDown = false;
+      SDL_StopTextInput();
+      writeScore(gs);
     }
     
     else if((p.x > mainMenuLabel.x) && (p.x < mainMenuLabel.x + mainMenuLabel.w)
@@ -386,6 +389,17 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
       gs->endgame = Game::State::none;
       gs->restartGame = true;
       gs->mouseDown = false;
+      SDL_StopTextInput();
+      writeScore(gs);
     }
   }
+}
+
+void UIManager::writeScore(Game::State *gs) {
+  std::ofstream file;
+  file.open(UiParameters::filePath);
+  if(gs->playerName.length() == 0)
+    gs->playerName = "CPU";
+  file << gs->playerName + " " + std::to_string(score) + "\n";
+  file.close();
 }

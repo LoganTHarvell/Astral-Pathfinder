@@ -43,6 +43,7 @@ namespace UiParameters {
   const SDL_Color red = {128,0,0};
   const SDL_Color green = {0,128,0};
   const SDL_Color yellow = {255, 255, 0};
+  const std::string filePath = "../Resources/Scores/scoreboard.txt";
 }
 
 class UIManager {
@@ -94,6 +95,7 @@ private:
   void checkClickedArea(SDL_Point p);
   void checkForHovering(Game::State *gs);
   void checkClickedAreaOtherScreen(Game::State *gs);
+  void writeScore(Game::State *gs);
 };
 
 #endif /* UIManager_hpp */

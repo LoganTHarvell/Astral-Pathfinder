@@ -57,6 +57,7 @@
 		9117BE90209606D6003FE954 /* EventsComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE8E209606D6003FE954 /* EventsComponent.cpp */; };
 		9117BE922096577D003FE954 /* planetOutline.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE912096577D003FE954 /* planetOutline.png */; };
 		9117BE942096775A003FE954 /* scoreboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE932096775A003FE954 /* scoreboard.png */; };
+		9117BE9620968976003FE954 /* Scores in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE9520968976003FE954 /* Scores */; };
 		91E9F7AF2094051D000FDDB6 /* winScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 91E9F7AE2094051D000FDDB6 /* winScreen.png */; };
 /* End PBXBuildFile section */
 
@@ -146,6 +147,7 @@
 		9117BE8F209606D6003FE954 /* EventsComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventsComponent.hpp; sourceTree = "<group>"; };
 		9117BE912096577D003FE954 /* planetOutline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planetOutline.png; sourceTree = "<group>"; };
 		9117BE932096775A003FE954 /* scoreboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreboard.png; sourceTree = "<group>"; };
+		9117BE9520968976003FE954 /* Scores */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Scores; sourceTree = "<group>"; };
 		91E9F7AE2094051D000FDDB6 /* winScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = winScreen.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -298,6 +300,7 @@
 		020013532075BCD30087CED9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9117BE9520968976003FE954 /* Scores */,
 				02307CFC2075BDB700B46A3E /* Screens */,
 				020013542075BCD30087CED9 /* Textures */,
 				02307CFD2075BDDC00B46A3E /* Fonts */,
@@ -419,6 +422,7 @@
 				020013872075BCD30087CED9 /* Arial.ttf in Resources */,
 				020013662075BCD30087CED9 /* Screen Shot 2018-03-26 at 9.18.21 PM.png in Resources */,
 				020013852075BCD30087CED9 /* movingPlayerShip.png in Resources */,
+				9117BE9620968976003FE954 /* Scores in Resources */,
 				0200136B2075BCD30087CED9 /* Screen Shot 2018-02-24 at 11.00.31 PM.png in Resources */,
 				020013802075BCD30087CED9 /* slider.png in Resources */,
 				020013812075BCD30087CED9 /* border.png in Resources */,

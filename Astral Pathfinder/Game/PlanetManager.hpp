@@ -22,7 +22,7 @@
 
 namespace PlanetManagerParameters {
   
-  const int numberOfPlanets = 25;
+  const int numberOfPlanets = 3;
   
 }
 

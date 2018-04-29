@@ -175,15 +175,15 @@ void Ship::updateRotation() {
 void Ship::updatePosition(Uint32 ticks) {
   if (fuel <= 0) return;
   
-  rect.x += (velocity.x * (ticks/10));
-  rect.y += (velocity.y * (ticks/10));
+  rect.x += (velocity.x * (ticks/3));
+  rect.y += (velocity.y * (ticks/3));
   
   if (boundaryCollision()) {
-    rect.x -= (velocity.x * (ticks/10));
-    rect.y -= (velocity.y * (ticks/10));
+    rect.x -= (velocity.x * (ticks/3));
+    rect.y -= (velocity.y * (ticks/3));
   }
   
-  if (velocity.x != 0 || velocity.y != 0) fuel -=1;
+  //if (velocity.x != 0 || velocity.y != 0) fuel -=1;
 }
 
 void Ship::updateFuel(int minerals) {
