@@ -20,13 +20,13 @@
 #include "PlanetManager.hpp"
 
 #include <vector>
-#include <map>
+#include <unordered_map>
 
 
 // MARK: - TextBox Parameters
 
 namespace EventPanelParameters {
-  const SDL_Rect panelRect = {65, 175, 320, 7000};
+  const SDL_Rect panelRect = {65, 175, 320, 10000};
   const SDL_Rect renderRect = {70, 180, 310, 590};
   const SDL_Rect textBoxesRect = {0,0,300,0};
   const SDL_Color red = {200, 0, 0};
@@ -51,7 +51,8 @@ private:
   
   SDL_Texture *texture;
   TextBox sample, sample2, sample3, sample4, sample5;
-  std::map<long, TextBox> map;
+  std::unordered_map<long, TextBox> map;
+  std::vector<TextBox> eventOrder;
   bool changedFlag;
   SDL_Rect src;
   int totalHeight;
@@ -59,6 +60,7 @@ private:
   void scrollPanel(int scroll);
   void checkStatus(std::vector<EventsComponent> events);
   void updateMap(SDL_Point p, bool flag, int event, SDL_Color color);
+  void removeFromList(long key);
   std::string createMessage(SDL_Point p, int event);
   void updateBoxCoords();
 };

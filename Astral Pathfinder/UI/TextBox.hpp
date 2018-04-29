@@ -50,11 +50,14 @@ public:
   void setRect(int x, int w);
   SDL_Rect getRect() { return rect; }
   void setYCoord(int y) { rect.y = y; }
+  void setKey(long k) { key = k; }
+  long getKey() { return key; }
   
   
 private:
   // MARK: - Textbox Fields
   TTF_Font *font;
+  long key;
 };
 
 #endif /* Text_hpp */

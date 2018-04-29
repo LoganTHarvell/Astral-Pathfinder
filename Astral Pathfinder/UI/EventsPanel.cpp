@@ -29,9 +29,9 @@ void EventsPanel::render(Game::State *gameState) {
   using namespace EventPanelParameters;
   SDL_SetRenderTarget(Game::renderer, texture);
   SDL_RenderClear(Game::renderer);
-  if(!map.empty())
-    for(auto& p : map)
-      p.second.render(gameState);
+  for(std::vector<TextBox>::reverse_iterator it = eventOrder.rbegin();
+      it != eventOrder.rend(); ++it)
+    it->render(gameState);
   SDL_SetRenderTarget(Game::renderer, NULL);
   SDL_RenderCopy(Game::renderer, texture, &src, &renderRect);
 }
@@ -65,8 +65,6 @@ void EventsPanel::checkStatus(std::vector<EventsComponent> events) {
     updateMap(p, events[i].getPopulationDec(), POPDEC, yellow);
     updateMap(p, events[i].getOverProducing(), OVERPROD, red);
   }
-  
-  if(changedFlag) updateBoxCoords();
 }
 
 void EventsPanel::updateMap(SDL_Point p, bool flag, int event, SDL_Color color) {
@@ -77,50 +75,65 @@ void EventsPanel::updateMap(SDL_Point p, bool flag, int event, SDL_Color color) 
       TextBox box;
       box.init(EventPanelParameters::textBoxesRect);
       box.setEventMessage(createMessage(p, event).c_str(), color);
+      box.setKey(key);
       map[key] = box;
-      changedFlag = true;
+      eventOrder.push_back(box);
+      updateBoxCoords();
     }
   }
   
   else if(!map.empty()) {
     if(map.find(key) != map.end()) {
+      removeFromList(key);
       map[key].clean();
       map.erase(key);
-      changedFlag = true;
+      updateBoxCoords();
+    }
+  }
+}
+
+void EventsPanel::removeFromList(long key) {
+  for(int i = 0; i < eventOrder.size(); i++) {
+    if(eventOrder[i].getKey() == key) {
+      eventOrder[i].clean();
+      eventOrder.erase(eventOrder.begin()+i);
+      break;
     }
   }
 }
 
 std::string EventsPanel::createMessage(SDL_Point p, int event) {
   std::string message;
-  message = "Planet at: " + std::to_string(p.x) + "," + std::to_string(p.y);
   
   switch(event) {
     case BLIGHT:
-      message += " undergoing a blight";
+      message = "A bligh occured at ";
       break;
     case PLAGUE:
-      message += " is spreading a plague";
+      message = "A plague is spreading at ";
       break;
     case MINECOLLAPSE:
-      message += " had its mines collapse";
+      message = "The mines collapsed at ";
       break;
     case POPDEC:
-      message += " has population decreasing";
+      message = "Population is decreasing at ";
       break;
     case OVERPROD:
-      message += " is overproducing";
+      message = "Farmers are overproducing at ";
       break;
   }
+  
+  message += std::to_string(p.x) + "," + std::to_string(p.y);
   
   return message;
 }
 
 void EventsPanel::updateBoxCoords() {
   SDL_Rect prev = {0,0,0,0};
-  for(auto& p : map) {
-    p.second.setYCoord(prev.y + prev.h + 10);
-    prev = p.second.getRect();
+  for(std::vector<TextBox>::reverse_iterator it = eventOrder.rbegin();
+      it != eventOrder.rend(); ++it) {
+    it->setYCoord(prev.y + prev.h + 10);
+    prev = it->getRect();
   }
   totalHeight = prev.y + prev.h;
 }
