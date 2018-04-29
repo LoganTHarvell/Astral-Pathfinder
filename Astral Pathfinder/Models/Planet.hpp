@@ -163,7 +163,7 @@ private:
   bool populationDec;
   
   // Random event flags
-  struct RandomEvents {
+  struct {
     bool plague;
     bool blight;
     bool mineCollapse;
