@@ -26,6 +26,8 @@ namespace GameParameters {
   // FPS constants
   const int fps = 60;
   const int frameDelay = 1000/fps;
+  
+  const int endgameDelay = 600;
 
 }
 
@@ -51,6 +53,8 @@ public:
       none, allDiscovered, noFuel, quit
     } endgame = none;
     
+    bool gameOver = false;
+    
     enum {
       inactive, currentOne, currentTwo, selectOne, selectTwo
     } activeSlider = inactive;
@@ -63,10 +67,12 @@ public:
     
     // Fields
     Uint32 frame;
+    Uint32 startTime;
     Uint32 elapsedTime;
     Uint32 ticks;
     SDL_Point clickLocation;
     SDL_Point dragLocation;
+    Uint32 endgameFrame;
   };
   
   void init(const std::string title, SDL_Rect rect, bool fullscreen);

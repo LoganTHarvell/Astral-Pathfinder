@@ -74,8 +74,9 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
   }
   
   // Checks all planets discovered endgame condition
-  if (discoveryCount == PlanetManagerParameters::numberOfPlanets)
+  if (discoveryCount == PlanetManagerParameters::numberOfPlanets) {
     gameState->endgame = Game::State::allDiscovered;
+  }
   
   // Deselects a previously selected planet when selection ends
   if (!gameState->planetSelected && selectedPlanetIndex >= 0) {

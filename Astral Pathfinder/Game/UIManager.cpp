@@ -54,11 +54,10 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     gameState->isRunning = false;
     return;
   }
-  else if (gameState->endgame != Game::State::none){
+  else if (gameState->gameOver){
     mainMenuFlag = false;
     checkForHovering(gameState);
-    if(gameState->mouseDown)
-      checkClickedAreaOtherScreen(gameState);
+    if(gameState->mouseDown) checkClickedAreaOtherScreen(gameState);
 
     return;
   }
@@ -106,7 +105,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
-  else if (gameState->endgame != Game::State::none && gameState->endgame != Game::State::quit) {
+  else if (gameState->gameOver && gameState->endgame != Game::State::quit) {
     if(gameState->endgame == Game::State::allDiscovered)
       SDL_RenderCopy(Game::renderer, winScreen, NULL, &screenRect);
     else if(gameState->endgame == Game::State::noFuel)
@@ -123,7 +122,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
-  else if(gameState->endgame == Game::State::none) {
+  else if(!gameState->gameOver) {
     SDL_RenderCopy(Game::renderer, gameScreen, NULL, &screenRect);
   
     time.render(gameState);
@@ -313,7 +312,7 @@ void UIManager::checkForHovering(Game::State *gs) {
   }
   
   // End Screen
-  else if(gs->endgame != Game::State::none && gs->endgame != Game::State::quit) {
+  else if(gs->gameOver && gs->endgame != Game::State::quit) {
     if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
        && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
       hoveringLabel = playAgain;
@@ -360,9 +359,12 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
   }
   
   // End Screen
-  else if(gs->endgame != Game::State::none && gs->endgame != Game::State::quit) {
+  else if(gs->gameOver && gs->endgame != Game::State::quit) {
     if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
        && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
+      gs->frame = 0;
+      gs->gameOver = false;
+      gs->endgameFrame = 0;
       hoveringLabel = nothing;
       mainMenuFlag = true;
       gs->endgame = Game::State::none;

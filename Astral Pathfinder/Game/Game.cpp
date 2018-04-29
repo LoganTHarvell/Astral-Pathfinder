@@ -65,6 +65,7 @@ void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
     
     gameState.isRunning = true;
     gameState.frame = 0;
+    gameState.endgameFrame = 0;
     
     planetManager = new PlanetManager;
     planetManager->initGalaxy();
@@ -114,6 +115,7 @@ void Game::handleEvents() {
         gameState.clickLocation = { event.button.x, event.button.y };
         break;
       case SDL_MOUSEMOTION:
+        // TODO: Verify this doesn't need to be changes to gameState.gameOver
         if(uiManager->checkMainMenu() || (gameState.endgame != State::none && gameState.endgame != State::quit))
           gameState.dragLocation = { event.motion.x, event.motion.y };
         
@@ -134,9 +136,20 @@ void Game::handleEvents() {
 }
 
 void Game::update(Uint32 ticks) {
-  if (!uiManager->checkMainMenu() && gameState.endgame == State::none) {
+  if (gameState.endgame != State::none) {
+    if (gameState.endgameFrame == 0) {
+      gameState.endgameFrame = gameState.frame + GameParameters::endgameDelay;
+    }
+    else if (gameState.frame > gameState.endgameFrame) {
+      gameState.gameOver = true;
+    }
+  }
+  
+  if (!uiManager->checkMainMenu() && !gameState.gameOver) {
+    if (gameState.frame == 0) gameState.startTime = SDL_GetTicks()/1000;
+    
     gameState.frame++;
-    gameState.elapsedTime = SDL_GetTicks()/1000;
+    gameState.elapsedTime = (SDL_GetTicks()/1000) - gameState.startTime;
     gameState.ticks = ticks;
   
     planetManager->update(&gameState, shipManager);
@@ -157,7 +170,7 @@ void Game::render() {
   // Render stuff
   uiManager->render(&gameState, planetManager);
   
-  if(!uiManager->checkMainMenu() && gameState.endgame == State::none) {
+  if(!uiManager->checkMainMenu() && !gameState.gameOver) {
     planetManager->render(&gameState);
     shipManager->render(&gameState);
   }
