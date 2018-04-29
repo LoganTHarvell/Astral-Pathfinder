@@ -164,7 +164,7 @@ int PlanetInfo::getSliderPercent() {
 // split long lines into multiple like this, assign long stuff to temp variables
 
 void PlanetInfo::setBoxes(Planet p) {
-  SDL_Point mapLocation = p.getCenter();
+  SDL_Point mapLocation = p.mapPosition();
   std::string location, population, food, minerals,
               depoPercent, fertPercent, infPercent, resPercent;
   int populationAmount = p.getPopulation();

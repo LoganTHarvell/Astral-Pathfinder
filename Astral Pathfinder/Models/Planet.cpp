@@ -165,6 +165,11 @@ int Planet::makeFuel(int amount) {
   }
 }
 
+SDL_Point Planet::mapPosition() {
+  return Map::mapPosition(getCenter());
+}
+
+
 // MARK: - Helper Methods
 
 void Planet::updateStatus() {
