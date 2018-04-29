@@ -44,8 +44,6 @@ void EventsPanel::scrollPanel(int scroll) {
       if(newY + src.h > totalHeight) src.y = totalHeight - src.h;
       else src.y = newY;
     }
-    else
-      std::cout << "ignored" << std::endl;
   }
     
   else {
@@ -56,29 +54,29 @@ void EventsPanel::scrollPanel(int scroll) {
 }
 
 void EventsPanel::checkStatus(std::vector<EventsComponent> events) {
+  using namespace EventPanelParameters;
   changedFlag = false;
   
   for(int i = 0; i < events.size(); i++) {
     SDL_Point p = events[i].getLocation();
-    updateMap(p, events[i].getBlight(), BLIGHT);
-    updateMap(p, events[i].getPlague(), PLAGUE);
-    updateMap(p, events[i].getMineCollapse(), MINECOLLAPSE);
-    updateMap(p, events[i].getPopulationDec(), POPDEC);
-    updateMap(p, events[i].getOverProducing(), OVERPROD);
-    updateMap(p, events[i].getTest(), TEST);
+    updateMap(p, events[i].getBlight(), BLIGHT, outline);
+    updateMap(p, events[i].getPlague(), PLAGUE, outline);
+    updateMap(p, events[i].getMineCollapse(), MINECOLLAPSE, outline);
+    updateMap(p, events[i].getPopulationDec(), POPDEC, yellow);
+    updateMap(p, events[i].getOverProducing(), OVERPROD, red);
   }
   
   if(changedFlag) updateBoxCoords();
 }
 
-void EventsPanel::updateMap(SDL_Point p, bool flag, int event) {
+void EventsPanel::updateMap(SDL_Point p, bool flag, int event, SDL_Color color) {
   long key = (static_cast<long>(p.x + event) | (static_cast<long>(p.y + event) << 32));
   
   if(flag) {
     if(map.find(key) == map.end()) {
       TextBox box;
       box.init(EventPanelParameters::textBoxesRect);
-      box.setEventMessage(createMessage(p, event).c_str());
+      box.setEventMessage(createMessage(p, event).c_str(), color);
       map[key] = box;
       changedFlag = true;
     }
@@ -102,7 +100,7 @@ std::string EventsPanel::createMessage(SDL_Point p, int event) {
       message += " undergoing a blight";
       break;
     case PLAGUE:
-      message += " spreading a plague";
+      message += " is spreading a plague";
       break;
     case MINECOLLAPSE:
       message += " had its mines collapse";
@@ -113,8 +111,6 @@ std::string EventsPanel::createMessage(SDL_Point p, int event) {
     case OVERPROD:
       message += " is overproducing";
       break;
-    default:
-      message += " is doing a test";
   }
   
   return message;

@@ -29,6 +29,9 @@ namespace EventPanelParameters {
   const SDL_Rect panelRect = {65, 175, 320, 7000};
   const SDL_Rect renderRect = {70, 180, 310, 590};
   const SDL_Rect textBoxesRect = {0,0,300,0};
+  const SDL_Color red = {200, 0, 0};
+  const SDL_Color yellow = {200, 200, 0};
+  const SDL_Color outline = {177, 115, 6};
 }
 
 
@@ -55,7 +58,7 @@ private:
   
   void scrollPanel(int scroll);
   void checkStatus(std::vector<EventsComponent> events);
-  void updateMap(SDL_Point p, bool flag, int event);
+  void updateMap(SDL_Point p, bool flag, int event, SDL_Color color);
   std::string createMessage(SDL_Point p, int event);
   void updateBoxCoords();
 };
