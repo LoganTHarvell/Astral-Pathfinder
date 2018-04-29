@@ -93,9 +93,18 @@ void Game::handleEvents() {
       case SDL_QUIT:
         gameState.isRunning = false;
         break;
+      case SDL_TEXTINPUT:
+        if(gameState.endgame != State::none && gameState.endgame != State::quit
+           && SDL_IsTextInputActive()) {
+          if(gameState.playerName.length() < 8) {
+            gameState.playerName += event.text.text;
+            gameState.renderPlayerName = true;
+          }
+        }
+        break;
       case SDL_KEYDOWN:
       {
-        if(!uiManager->checkMainMenu()) {
+        if(!uiManager->checkMainMenu() && gameState.endgame == State::none) {
           // Gets pressed key
           SDL_Keycode key = event.key.keysym.sym;
           
@@ -105,6 +114,14 @@ void Game::handleEvents() {
           }
           else if (key == SDLK_d) {
             gameState.debugMode = !gameState.debugMode;
+          }
+        }
+        else if(gameState.endgame != State::none && gameState.endgame != State::quit
+                && SDL_IsTextInputActive()) {
+          SDL_Keycode key = event.key.keysym.sym;
+          if(key == SDLK_BACKSPACE && gameState.playerName.length() > 0) {
+            gameState.playerName.pop_back();
+            gameState.renderPlayerName = true;
           }
         }
         break;

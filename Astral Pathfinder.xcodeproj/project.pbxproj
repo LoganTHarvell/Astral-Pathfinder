@@ -56,6 +56,7 @@
 		9117BE722094FD34003FE954 /* EventsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE702094FD34003FE954 /* EventsPanel.cpp */; };
 		9117BE90209606D6003FE954 /* EventsComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE8E209606D6003FE954 /* EventsComponent.cpp */; };
 		9117BE922096577D003FE954 /* planetOutline.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE912096577D003FE954 /* planetOutline.png */; };
+		9117BE942096775A003FE954 /* scoreboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE932096775A003FE954 /* scoreboard.png */; };
 		91E9F7AF2094051D000FDDB6 /* winScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 91E9F7AE2094051D000FDDB6 /* winScreen.png */; };
 /* End PBXBuildFile section */
 
@@ -144,6 +145,7 @@
 		9117BE8E209606D6003FE954 /* EventsComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsComponent.cpp; sourceTree = "<group>"; };
 		9117BE8F209606D6003FE954 /* EventsComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventsComponent.hpp; sourceTree = "<group>"; };
 		9117BE912096577D003FE954 /* planetOutline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planetOutline.png; sourceTree = "<group>"; };
+		9117BE932096775A003FE954 /* scoreboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreboard.png; sourceTree = "<group>"; };
 		91E9F7AE2094051D000FDDB6 /* winScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = winScreen.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -320,6 +322,7 @@
 		02307CFC2075BDB700B46A3E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				9117BE932096775A003FE954 /* scoreboard.png */,
 				91E9F7AE2094051D000FDDB6 /* winScreen.png */,
 				020013592075BCD30087CED9 /* loseScreen.png */,
 				0200135B2075BCD30087CED9 /* gameScreen.png */,
@@ -395,6 +398,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9117BE942096775A003FE954 /* scoreboard.png in Resources */,
 				020013862075BCD30087CED9 /* gameScreen.png in Resources */,
 				0200136A2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.31.54 PM.png in Resources */,
 				020013702075BCD30087CED9 /* Game Design.txt in Resources */,

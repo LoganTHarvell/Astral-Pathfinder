@@ -68,6 +68,8 @@ public:
     SDL_Point clickLocation;
     SDL_Point dragLocation;
     int mouseScroll = 0;
+    std::string playerName;
+    bool renderPlayerName = false;
   };
   
   void init(const std::string title, SDL_Rect rect, bool fullscreen);
@@ -94,7 +96,6 @@ private:
   PlanetManager *planetManager;
   ShipManager *shipManager;
   UIManager *uiManager;
-  
 };
 
 #endif /* Game_hpp */

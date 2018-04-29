@@ -28,6 +28,7 @@ void UIManager::init() {
   DockedPlanetInfo.init(currentPlanetRect);
   shipInfo.init(shipInfoRect);
   finalScore.init({endScoreCoords.x, endScoreCoords.y, 0, 0});
+  playerName.init({endScoreName.x, endScoreName.y, 0, 0});
   hoverBorder = TextureManager::loadTexture("../Resources/border.png");
   
   mainMenu = TextureManager::loadTexture("../Resources/mainMenu.png");
@@ -57,6 +58,8 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
   }
   else if (gameState->endgame != Game::State::none){
     mainMenuFlag = false;
+    if(!SDL_IsTextInputActive())
+      SDL_StartTextInput();
     checkForHovering(gameState);
     if(gameState->mouseDown)
       checkClickedAreaOtherScreen(gameState);
@@ -116,8 +119,12 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
     
     if(finalScore.checkNull())
       finalScore.setFinalScore(std::to_string(score).c_str());
-    
     finalScore.render(gameState);
+    
+    if(gameState->renderPlayerName) {
+      playerName.setFinalScore(gameState->playerName.c_str());
+      playerName.render(gameState);
+    }
     
     if(hoveringLabel == playAgain)
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
@@ -325,12 +332,12 @@ void UIManager::checkForHovering(Game::State *gs) {
         borderRect = playAgainBorder;
     }
     
-    else if((p.x > endGameExitLabel.x) && (p.x < endGameExitLabel.x + endGameExitLabel.w)
-            && (p.y > endGameExitLabel.y) && (p.y < endGameExitLabel.y + endGameExitLabel.h)) {
+    else if((p.x > mainMenuLabel.x) && (p.x < mainMenuLabel.x + mainMenuLabel.w)
+            && (p.y > mainMenuLabel.y) && (p.y < mainMenuLabel.y + mainMenuLabel.h)) {
       hoveringLabel = endGameExit;
       
-      if(borderRect.y != endGameExitLabel.y-buffer)
-        borderRect = endGameBorder;
+      if(borderRect.y != mainMenuLabel.y-buffer)
+        borderRect = mainMenuBorder;
     }
     
     else hoveringLabel = nothing;
@@ -373,8 +380,8 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
       gs->mouseDown = false;
     }
     
-    else if((p.x > endGameExitLabel.x) && (p.x < endGameExitLabel.x + endGameExitLabel.w)
-            && (p.y > endGameExitLabel.y) && (p.y < endGameExitLabel.y + endGameExitLabel.h)) {
+    else if((p.x > mainMenuLabel.x) && (p.x < mainMenuLabel.x + mainMenuLabel.w)
+            && (p.y > mainMenuLabel.y) && (p.y < mainMenuLabel.y + mainMenuLabel.h)) {
       hoveringLabel = nothing;
       mainMenuFlag = false;
       gs->endgame = Game::State::quit;

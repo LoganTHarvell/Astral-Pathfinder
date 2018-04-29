@@ -50,9 +50,6 @@ void Planet::initHomeworld() {
   status = colonized;
   playerDocked = true;
   populationCheck = homeStartPopulation;
-  events.plague = false;
-  events.blight = false;
-  events.mineCollapse = false;
 }
 
 void Planet::initPlanet() {
@@ -115,6 +112,10 @@ void Planet::initPlanet() {
   
   // Sets planet status
   status = undiscovered;
+  
+  events.plague = false;
+  events.blight = false;
+  events.mineCollapse = false;
 }
 
 

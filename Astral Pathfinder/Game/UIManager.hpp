@@ -32,13 +32,14 @@ namespace UiParameters {
   const SDL_Rect scoreboardLabel = {600, 538, 424, 58};
   const SDL_Rect exitGameLabel = {600, 676, 424, 54};
   const SDL_Rect playAgainLabel = {288, 673, 424, 57};
-  const SDL_Rect endGameExitLabel = {885, 676, 424, 54};
+  const SDL_Rect mainMenuLabel = {885, 676, 424, 54};
   const SDL_Rect startGameBorder = {582, 390, 460, 95};
   const SDL_Rect scoreboardBorder = {582, 527, 460, 96};
   const SDL_Rect exitGameBorder = {582, 665, 460, 92};
   const SDL_Rect playAgainBorder = {270, 662, 460, 95};
-  const SDL_Rect endGameBorder = {867, 665, 460, 92};
-  const SDL_Point endScoreCoords = {945, 390};
+  const SDL_Rect mainMenuBorder = {867, 665, 460, 92};
+  const SDL_Point endScoreCoords = {945, 335};
+  const SDL_Point endScoreName = {940, 480};
   const SDL_Color red = {128,0,0};
   const SDL_Color green = {0,128,0};
   const SDL_Color yellow = {255, 255, 0};
@@ -60,7 +61,7 @@ public:
 private:
   // MARK: - UIManager Fields
   TextBox time;
-  TextBox totalScore, finalScore;
+  TextBox totalScore, finalScore, playerName;
   EventsPanel eventsPanel;
   PlanetInfo selectedPlanetInfo, DockedPlanetInfo;
   ShipInfo shipInfo;
