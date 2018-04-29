@@ -25,7 +25,7 @@ void Ship::init(SDL_Point startPosition, ShipParameters::ShipType type) {
   using namespace ShipParameters;
   
   tag = type;
-  population = shipPopulation;
+  crewPopulation = totalCrew;
   fuel = 0;
 
   velocity.x = 0;
@@ -111,6 +111,11 @@ PointVector Ship::computeShipVertices() {
 void Ship::updateVelocity() {
   using namespace ShipParameters;
   
+  if (fuel <= 0) {
+    velocity.x = velocity.y = 0;
+    return;
+  }
+  
   auto *keyState = SDL_GetKeyboardState(NULL);
   
   if (keyState[SDL_SCANCODE_UP]) velocity.y = (-speed);
@@ -173,8 +178,6 @@ void Ship::updateRotation() {
 }
 
 void Ship::updatePosition(Uint32 ticks) {
-  if (fuel <= 0) return;
-  
   rect.x += (velocity.x * (ticks/10));
   rect.y += (velocity.y * (ticks/10));
   

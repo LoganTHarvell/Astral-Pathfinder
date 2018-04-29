@@ -32,7 +32,7 @@ namespace ShipParameters {
     int w = 48, h = 24;
   } shipSize;
   
-  const int shipPopulation = 1000;
+  const int totalCrew = 1000;
   
   // TODO: figure out real velocity/ticks formula
   const int speed = 1;
@@ -56,7 +56,7 @@ public:
   // MARK: - Ship Methods
   ShipParameters::ShipType getTag() { return tag; };
   int getFuel() { return fuel; };
-  int getPopulation() { return population; };
+  int getCrewPopulation() { return crewPopulation; };
   int getRotation() { return rotation; };
   SDL_Point getVelocity() { return velocity; }
   SDL_Point getUIPosition() { return getCenter(); };
@@ -67,7 +67,7 @@ public:
 private:
   // MARK: - Ship Fields
   ShipParameters::ShipType tag;
-  int population;
+  int crewPopulation;
   int fuel;
   
   SDL_Point velocity;

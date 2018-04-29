@@ -58,7 +58,7 @@ void ShipInfo::setText(Ship ship) {
   curPlanet.setMessage("Current Planet");
   if(crewLabel.checkNull()) {
     crewLabel.setMessage("Crew");
-    crewNum.setMessage(std::to_string(ShipParameters::shipPopulation));
+    crewNum.setMessage(std::to_string(ShipParameters::totalCrew));
     bar.setMessage("----------------------------------------------------");
   }
 }
