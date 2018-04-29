@@ -215,4 +215,8 @@ void Game::restartGame() {
   uiManager->init();
   
   gameState.restartGame = false;
+  if(gameState.skipMainMenu) {
+    uiManager->setMainMenuFlag(false);
+    gameState.skipMainMenu = false;
+  }
 }

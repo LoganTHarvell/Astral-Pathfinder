@@ -356,10 +356,10 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
       mainMenuFlag = false;
     }
   
-  // Future score board
-   /* else if((p.x > scoreboardLabel.x) && (p.x < scoreboardLabel.x + scoreboardLabel.w)
-            && (p.y > scoreboardLabel.y) && (p.y < scoreboardLabel.y + scoreboardLabel.h))
-    */
+   else if((p.x > scoreboardLabel.x) && (p.x < scoreboardLabel.x + scoreboardLabel.w)
+           && (p.y > scoreboardLabel.y) && (p.y < scoreboardLabel.y + scoreboardLabel.h)) {
+     hoveringLabel = nothing;
+   }
   
     else if((p.x > exitGameLabel.x) && (p.x < exitGameLabel.x + exitGameLabel.w)
        && (p.y > exitGameLabel.y) && (p.y < exitGameLabel.y + exitGameLabel.h)) {
@@ -374,17 +374,18 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
     if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
        && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
       hoveringLabel = nothing;
-      mainMenuFlag = true;
       gs->endgame = Game::State::none;
       gs->restartGame = true;
+      gs->skipMainMenu = true;
       gs->mouseDown = false;
     }
     
     else if((p.x > mainMenuLabel.x) && (p.x < mainMenuLabel.x + mainMenuLabel.w)
             && (p.y > mainMenuLabel.y) && (p.y < mainMenuLabel.y + mainMenuLabel.h)) {
       hoveringLabel = nothing;
-      mainMenuFlag = false;
-      gs->endgame = Game::State::quit;
+      gs->endgame = Game::State::none;
+      gs->restartGame = true;
+      gs->mouseDown = false;
     }
   }
 }

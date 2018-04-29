@@ -57,6 +57,7 @@ public:
   
   // MARK: - Helper Methods
   bool checkMainMenu() { return mainMenuFlag; }
+  void setMainMenuFlag(bool flag) { mainMenuFlag = flag; }
   
 private:
   // MARK: - UIManager Fields
