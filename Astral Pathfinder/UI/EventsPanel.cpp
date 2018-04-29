@@ -7,38 +7,124 @@
 //
 
 #include "EventsPanel.hpp"
+#include <iostream>
 
-void EventsPanel::init(SDL_Rect src) {
+void EventsPanel::init() {
   using namespace EventPanelParameters;
-  texture = SDL_CreateTexture(Game::renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_TARGET, src.w, src.h);
-  sample.init({0, 0, 200, 100}); // In reference to texture's coords
-  sample.setEventMessage("Hola");
-  sample2.init({0, 110, 200, 100}); // In reference to texture's coords
-  sample2.setEventMessage("Hi");
-  sample3.init({0, 220, 200, 100}); // In reference to texture's coords
-  sample3.setEventMessage("Yo");
-  sample4.init({0, 330, 200, 100}); // In reference to texture's coords
-  sample4.setEventMessage("Sup");
-  sample5.init({0, 440, 300, 300}); // In reference to texture's coords
-  sample5.setEventMessage("There once was a man named Troy. He lived with his wife Becky... fucking bitch");
+  texture = SDL_CreateTexture(Game::renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_TARGET, panelRect.w, panelRect.h);
+  src = {0, 0, 310, 700};
+  totalHeight = 0;
 }
 
-void EventsPanel::update() {
+void EventsPanel::update(Game::State *gameState, PlanetManager *pm) {
+  checkStatus(pm->getEventsList());
   
+  if(gameState->mouseScroll != 0) {
+    scrollPanel(gameState->mouseScroll*5);
+    gameState->mouseScroll = 0;
+  }
 }
 
-void EventsPanel::render(Game::State *gameState) {
+void EventsPanel::render(Game::State *gameState) {  
+  using namespace EventPanelParameters;
   SDL_SetRenderTarget(Game::renderer, texture);
-  sample.render(gameState);
-  sample2.render(gameState);
-  sample3.render(gameState);
-  sample4.render(gameState);
-  sample5.render(gameState);
+  SDL_RenderClear(Game::renderer);
+  if(!map.empty())
+    for(auto& p : map)
+      p.second.render(gameState);
   SDL_SetRenderTarget(Game::renderer, NULL);
-  SDL_Rect rect = {70, 180, 310, 685};
-  SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
+  SDL_RenderCopy(Game::renderer, texture, &src, &renderRect);
 }
 
-void EventsPanel::clean() {
+void EventsPanel::scrollPanel(int scroll) {
+  int newY;
+  if(scroll < 0) {
+    if(totalHeight > EventPanelParameters::renderRect.h) {
+      newY = src.y + (-scroll);
+      if(newY + src.h > totalHeight) src.y = totalHeight - src.h;
+      else src.y = newY;
+    }
+    else
+      std::cout << "ignored" << std::endl;
+  }
+    
+  else {
+    newY = src.y - scroll;
+    if(newY < 0) src.y = 0;
+    else src.y = newY;
+  }
+}
+
+void EventsPanel::checkStatus(std::vector<EventsComponent> events) {
+  changedFlag = false;
   
+  for(int i = 0; i < events.size(); i++) {
+    SDL_Point p = events[i].getLocation();
+    updateMap(p, events[i].getBlight(), BLIGHT);
+    updateMap(p, events[i].getPlague(), PLAGUE);
+    updateMap(p, events[i].getMineCollapse(), MINECOLLAPSE);
+    updateMap(p, events[i].getPopulationDec(), POPDEC);
+    updateMap(p, events[i].getOverProducing(), OVERPROD);
+    updateMap(p, events[i].getTest(), TEST);
+  }
+  
+  if(changedFlag) updateBoxCoords();
+}
+
+void EventsPanel::updateMap(SDL_Point p, bool flag, int event) {
+  long key = (static_cast<long>(p.x + event) | (static_cast<long>(p.y + event) << 32));
+  
+  if(flag) {
+    if(map.find(key) == map.end()) {
+      TextBox box;
+      box.init(EventPanelParameters::textBoxesRect);
+      box.setEventMessage(createMessage(p, event).c_str());
+      map[key] = box;
+      changedFlag = true;
+    }
+  }
+  
+  else if(!map.empty()) {
+    if(map.find(key) != map.end()) {
+      map[key].clean();
+      map.erase(key);
+      changedFlag = true;
+    }
+  }
+}
+
+std::string EventsPanel::createMessage(SDL_Point p, int event) {
+  std::string message;
+  message = "Planet at: " + std::to_string(p.x) + "," + std::to_string(p.y);
+  
+  switch(event) {
+    case BLIGHT:
+      message += " undergoing a blight";
+      break;
+    case PLAGUE:
+      message += " spreading a plague";
+      break;
+    case MINECOLLAPSE:
+      message += " had its mines collapse";
+      break;
+    case POPDEC:
+      message += " has population decreasing";
+      break;
+    case OVERPROD:
+      message += " is overproducing";
+      break;
+    default:
+      message += " is doing a test";
+  }
+  
+  return message;
+}
+
+void EventsPanel::updateBoxCoords() {
+  SDL_Rect prev = {0,0,0,0};
+  for(auto& p : map) {
+    p.second.setYCoord(prev.y + prev.h + 10);
+    prev = p.second.getRect();
+  }
+  totalHeight = prev.y + prev.h;
 }

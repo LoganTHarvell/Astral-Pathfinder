@@ -15,6 +15,7 @@
 // MARK: Source Files
 #include "Game.hpp"
 #include "Planet.hpp"
+#include "EventsComponent.hpp"
 
 
 // MARK: - PlanetManager Parameters
@@ -45,6 +46,7 @@ public:
   Planet getSelectedPlanet();
   bool planetIsDocked();
   Planet getDockedPlanet();
+  std::vector<EventsComponent> getEventsList() { return planetEvents; }
   
   void setPlanetMiningPercent(int p, int flag);
   void setPlanetFarmingPercent(int p, int flag);
@@ -71,6 +73,7 @@ private:
   };
   
   std::vector<Planet> planets;
+  std::vector<EventsComponent> planetEvents;
   int totalPopulation;
 
   int dockedPlanetIndex;

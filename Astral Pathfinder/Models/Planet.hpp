@@ -15,6 +15,7 @@
 
 // MARK: Source Files
 #include "GameObject.hpp"
+#include "EventsComponent.hpp"
 
 
 // MARK: - Planet Parameters
@@ -104,6 +105,7 @@ public:
   int getMinerals() { return minerals; };
   int getInfrastructure() { return infrastructure; };
   int getFood() { return food; };
+  EventsComponent getEvents() { return *eventManager; }
   
   int getMiningPercent() { return miningPercent; };
   int getFarmingPercent() { return farmingPercent; };
@@ -127,6 +129,7 @@ private:
   
   Status status;
   SDL_Point coordinates;
+  EventsComponent *eventManager = nullptr;
 
   // Resources
   float population, populationCheck;
@@ -155,7 +158,7 @@ private:
   bool populationDec;
   
   // Random event flags
-  struct {
+  struct RandomEvents {
     bool plague;
     bool blight;
     bool mineCollapse;
@@ -167,6 +170,7 @@ private:
   void updatePopulation(Uint32 frame);
   void updateMining();
   void updateFarming();
+  void updateEventComponent();
   void updateColors();
 
   SDL_Point uiPosition(SDL_Point p);

@@ -42,7 +42,6 @@ namespace UiParameters {
   const SDL_Color red = {128,0,0};
   const SDL_Color green = {0,128,0};
   const SDL_Color yellow = {255, 255, 0};
-  const SDL_Rect events = {65, 175, 320, 700};
 }
 
 class UIManager {

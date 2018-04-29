@@ -54,6 +54,7 @@
 		0200138A2075BCD30087CED9 /* mainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200135F2075BCD30087CED9 /* mainMenu.png */; };
 		02307D002075BE1B00B46A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02307CFE2075BE1B00B46A3E /* Assets.xcassets */; };
 		9117BE722094FD34003FE954 /* EventsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE702094FD34003FE954 /* EventsPanel.cpp */; };
+		9117BE90209606D6003FE954 /* EventsComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE8E209606D6003FE954 /* EventsComponent.cpp */; };
 		91E9F7AF2094051D000FDDB6 /* winScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 91E9F7AE2094051D000FDDB6 /* winScreen.png */; };
 /* End PBXBuildFile section */
 
@@ -139,6 +140,8 @@
 		02307CFF2075BE1B00B46A3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9117BE702094FD34003FE954 /* EventsPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsPanel.cpp; sourceTree = "<group>"; };
 		9117BE712094FD34003FE954 /* EventsPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventsPanel.hpp; sourceTree = "<group>"; };
+		9117BE8E209606D6003FE954 /* EventsComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsComponent.cpp; sourceTree = "<group>"; };
+		9117BE8F209606D6003FE954 /* EventsComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventsComponent.hpp; sourceTree = "<group>"; };
 		91E9F7AE2094051D000FDDB6 /* winScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = winScreen.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -266,6 +269,8 @@
 				020013432075BCD30087CED9 /* GameObject.cpp */,
 				020013452075BCD30087CED9 /* ColliderComponent.hpp */,
 				020013422075BCD30087CED9 /* ColliderComponent.cpp */,
+				9117BE8E209606D6003FE954 /* EventsComponent.cpp */,
+				9117BE8F209606D6003FE954 /* EventsComponent.hpp */,
 			);
 			path = "Game Object";
 			sourceTree = "<group>";
@@ -428,6 +433,7 @@
 			files = (
 				020013792075BCD30087CED9 /* Ship.cpp in Sources */,
 				020013782075BCD30087CED9 /* GameObject.cpp in Sources */,
+				9117BE90209606D6003FE954 /* EventsComponent.cpp in Sources */,
 				020013722075BCD30087CED9 /* Map.cpp in Sources */,
 				020013772075BCD30087CED9 /* ColliderComponent.cpp in Sources */,
 				0200137D2075BCD30087CED9 /* UIManager.cpp in Sources */,

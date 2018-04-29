@@ -15,6 +15,7 @@
 #include "TextureManager.hpp"
 #include "Map.hpp"
 #include "Ship.hpp"
+#include <iostream>
 
 // MARK: - Initialization Methods
 
@@ -50,6 +51,9 @@ void Planet::initHomeworld() {
   status = colonized;
   playerDocked = true;
   populationCheck = homeStartPopulation;
+  events.plague = false;
+  events.blight = false;
+  events.mineCollapse = false;
 }
 
 void Planet::initPlanet() {
@@ -68,6 +72,7 @@ void Planet::initPlanet() {
   
   texture = TextureManager::loadTexture(planetTextureFile);
   collider = new ColliderComponent(rect);
+  eventManager = new EventsComponent(getCenter());
   
   population = 0;
   
@@ -116,6 +121,7 @@ void Planet::update(Game::State *gs) {
   updatePopulation(gs->frame);
   updateMining();
   updateFarming();
+  updateEventComponent();
   updateColors();
 }
 
@@ -330,6 +336,10 @@ void Planet::updateFarming() {
       if (fertility < 0) fertility = 0;
     }
   }
+}
+
+void Planet::updateEventComponent() {
+  eventManager->update(events.blight, events.plague, events.mineCollapse, populationDec, isOverproducing);
 }
 
 void Planet::updateColors() {

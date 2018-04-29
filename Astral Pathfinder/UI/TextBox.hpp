@@ -48,6 +48,8 @@ public:
   void setFinalScore(const std::string words);
   bool checkNull();
   void setRect(int x, int w);
+  SDL_Rect getRect() { return rect; }
+  void setYCoord(int y) { rect.y = y; }
   
   
 private:

@@ -16,29 +16,48 @@
 // MARK: Source Files
 #include "TextBox.hpp"
 #include "Game.hpp"
+#include "EventsComponent.hpp"
+#include "PlanetManager.hpp"
+
+#include <vector>
+#include <map>
 
 
 // MARK: - TextBox Parameters
 
 namespace EventPanelParameters {
-
+  const SDL_Rect panelRect = {65, 175, 320, 7000};
+  const SDL_Rect renderRect = {70, 180, 310, 590};
+  const SDL_Rect textBoxesRect = {0,0,300,0};
 }
 
 
 class EventsPanel {
 public:
   // MARK: - EventsPanel Initialization
-  void init(SDL_Rect src);
+  void init();
   
   // MARK: - Game Loop Methods
-  void update();
+  void update(Game::State *gameState, PlanetManager *pm);
   void render(Game::State *gameState);
-  void clean();
   
 private:
-  SDL_Rect rect = {320, 320, 350, 500};
+  enum {
+    BLIGHT=1, PLAGUE, MINECOLLAPSE, POPDEC, OVERPROD, TEST
+  };
+  
   SDL_Texture *texture;
   TextBox sample, sample2, sample3, sample4, sample5;
+  std::map<long, TextBox> map;
+  bool changedFlag;
+  SDL_Rect src;
+  int totalHeight;
+  
+  void scrollPanel(int scroll);
+  void checkStatus(std::vector<EventsComponent> events);
+  void updateMap(SDL_Point p, bool flag, int event);
+  std::string createMessage(SDL_Point p, int event);
+  void updateBoxCoords();
 };
 
 #endif /* EventsPanel_hpp */
