@@ -16,7 +16,12 @@ class AlienShip : public Ship {
 public:
   void init(SDL_Point startPosition);
   
+  void setTarget(SDL_Point p);
+  
 private:
+  
+  SDL_Point target;
+  
   // MARK: - Helper Methods
   PointVector shipVertexVectors();
 

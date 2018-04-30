@@ -32,6 +32,7 @@ void AlienShip::init(SDL_Point startPosition) {
   
   collider = new ColliderComponent(getCenter(), computeShipVertices());
   texture = TextureManager::loadTexture(movingPlayerTex);
+  SDL_SetTextureColorMod(texture, 200, 0, 0);
 }
 
 
@@ -55,13 +56,14 @@ PointVector AlienShip::shipVertexVectors() {
 void AlienShip::updateVelocity() {
   using namespace ShipParameters;
  
-  auto *keyState = SDL_GetKeyboardState(NULL);
+  int xdir = target.x - rect.x ;
+  int ydir = target.y - rect.y;
   
-  if (keyState[SDL_SCANCODE_UP]) velocity.y = (-speed);
-  else if (keyState[SDL_SCANCODE_DOWN]) velocity.y = speed;
-  else velocity.y = 0;
-  
-  if (keyState[SDL_SCANCODE_RIGHT]) velocity.x = speed;
-  else if (keyState[SDL_SCANCODE_LEFT]) velocity.x = (-speed);
+  if (xdir > 0) velocity.x = speed;
+  else if (xdir < 0) velocity.x = -speed;
   else velocity.x = 0;
+  
+  if (ydir > 0) velocity.y = speed;
+  else if (ydir < 0) velocity.y = -speed;
+  else velocity.y = 0;
 }
