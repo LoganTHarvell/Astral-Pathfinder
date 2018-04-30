@@ -194,7 +194,7 @@ void Game::render() {
   uiManager->render(&gameState, planetManager);
   
   if(!uiManager->checkMainMenu() && !uiManager->checkScoreboardScreen()
-     && gameState.endgame == State::none) {
+     && (gameState.endgame == State::none || !gameState.gameOver)) {
     planetManager->render(&gameState);
     shipManager->render(&gameState);
   }
