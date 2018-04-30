@@ -204,8 +204,17 @@ void Planet::updateRandomEvents(Uint32 frame) {
     float randMax = static_cast<float>(RAND_MAX);
 
     events.plague = (plagueRate > rand()/randMax);
-    events.blight = (blightRate > rand()/randMax);
-    events.mineCollapse = (mineCollapseRate > rand()/randMax);
+    
+    if (fertility > 0) {
+      events.blight = (blightRate > rand()/randMax);
+    }
+    else events.blight = false;
+    
+    if (deposits > 0) {
+      events.mineCollapse = (mineCollapseRate > rand()/randMax);
+    }
+    else events.mineCollapse = false;
+    
   }
 }
 
