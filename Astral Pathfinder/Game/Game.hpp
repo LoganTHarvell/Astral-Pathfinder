@@ -27,7 +27,7 @@ namespace GameParameters {
   const int fps = 60;
   const int frameDelay = 1000/fps;
 
-  const int endgameDelay = 600;
+  const int endgameDelay = 120;
 
 }
 

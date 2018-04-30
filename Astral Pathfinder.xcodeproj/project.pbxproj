@@ -280,10 +280,10 @@
 		0200133E2075BCD30087CED9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				9117BEA62096D1E8003FE954 /* Ship */,
 				020013412075BCD30087CED9 /* Game Object */,
 				020013402075BCD30087CED9 /* Planet.hpp */,
 				020013472075BCD30087CED9 /* Planet.cpp */,
+				9117BEA62096D1E8003FE954 /* Ship */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -377,12 +377,12 @@
 		9117BEA62096D1E8003FE954 /* Ship */ = {
 			isa = PBXGroup;
 			children = (
-				9117BEA72096D1E8003FE954 /* AlienShip.hpp */,
 				9117BEA82096D1E8003FE954 /* Ship.hpp */,
-				9117BEA92096D1E8003FE954 /* PlayerShip.hpp */,
-				9117BEAA2096D1E8003FE954 /* AlienShip.cpp */,
 				9117BEAB2096D1E8003FE954 /* Ship.cpp */,
+				9117BEA92096D1E8003FE954 /* PlayerShip.hpp */,
 				9117BEAC2096D1E8003FE954 /* PlayerShip.cpp */,
+				9117BEA72096D1E8003FE954 /* AlienShip.hpp */,
+				9117BEAA2096D1E8003FE954 /* AlienShip.cpp */,
 			);
 			path = Ship;
 			sourceTree = "<group>";
