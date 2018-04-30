@@ -28,7 +28,9 @@ namespace GameParameters {
   const int frameDelay = 1000/fps;
 
   const int endgameDelay = 120;
-
+  const int timeLimit = (20*60);
+  const int overtimeScaleFactor = 100;
+  
 }
 
 

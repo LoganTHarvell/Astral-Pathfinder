@@ -86,7 +86,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
   }
   
   updateTime(gameState->elapsedTime);
-  updateTotalScore(planetManager);
+  updateTotalScore(planetManager, gameState->elapsedTime);
   eventsPanel.update(gameState, planetManager);
   
   PlayerShip player = shipManager->getPlayerShip();
@@ -202,8 +202,19 @@ SDL_Color UIManager::checkTime(int minutes) {
   else return UiParameters::red;
 }
 
-void UIManager::updateTotalScore(PlanetManager *pm) {
-  score = pm->getTotalPopulation();
+void UIManager::updateTotalScore(PlanetManager *pm, Uint32 elapsedTime) {
+  int overtime = elapsedTime - (GameParameters::timeLimit);
+  if (overtime > 0) {
+    overtime *= GameParameters::overtimeScaleFactor;
+  }
+  else {
+    overtime = 0;
+  }
+  
+  score = pm->getTotalPopulation() - overtime;
+  if (score < 0) score = 0;
+  
+  
   std::string population = std::to_string(score);
   totalScore.setMessage(population, setTotalScoreColor());
 

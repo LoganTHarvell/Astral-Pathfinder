@@ -96,7 +96,7 @@ private:
   // MARK: - Helper Methods
   void updateTime(Uint32);
   SDL_Color checkTime(int minutes);
-  void updateTotalScore(PlanetManager *pm);
+  void updateTotalScore(PlanetManager *pm, Uint32 elapsedTime);
   SDL_Color setTotalScoreColor();
   void setSelectedPlanet(Planet p);
   void setDockedPlanet(Planet p);
