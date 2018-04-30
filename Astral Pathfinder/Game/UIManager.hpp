@@ -48,6 +48,7 @@ namespace UiParameters {
   const SDL_Color green = {0,128,0};
   const SDL_Color yellow = {255, 255, 0};
   const std::string filePath = "Resources/Scores/scoreboard.txt";
+  const int scoreboardMax = 10;
 }
 
 class UIManager {

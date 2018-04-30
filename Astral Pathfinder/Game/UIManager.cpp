@@ -46,7 +46,7 @@ void UIManager::init() {
   
   TextBox box;
   SDL_Rect temp;
-  for(int i = 0; i < 10; i++) {
+  for(int i = 0; i < UiParameters::scoreboardMax; i++) {
     scoreList[i*2] = box;
     scoreList[i*2+1] = box;
     temp = {startingNameBox.x, startingNameBox.y+(53*i),
@@ -133,7 +133,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
     if(hoveringLabel == mainMenuScoreboard)
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     
-    for(int i = 0; i < 10; i++) {
+    for(int i = 0; i < UiParameters::scoreboardMax; i++) {
       if(scores[i] > -1) {
         scoreList[i*2].render(gameState);
         scoreList[(i*2)+1].render(gameState);
@@ -490,7 +490,7 @@ void UIManager::compareScores(std::string name, int score) {
   std::string tempName;
   TextBox tempBox;
   
-  for(int i = 0; i < 10; i++) {
+  for(int i = 0; i < UiParameters::scoreboardMax; i++) {
     if (score > scores[i]) {
       tempScore = scores[i];
       scores[i] = score;
