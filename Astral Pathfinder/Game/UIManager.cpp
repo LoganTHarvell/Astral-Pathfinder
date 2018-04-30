@@ -163,7 +163,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
-  else if(!gameState->gameOver) {
+  else if(!gameState->gameOver && gameState->endgame != Game::State::quit) {
     SDL_RenderCopy(Game::renderer, gameScreen, NULL, &screenRect);
   
     time.render(gameState);
@@ -470,6 +470,8 @@ void UIManager::readScores() {
   string line;
   ifstream file;
   file.open(UiParameters::filePath.c_str());
+  if(file.is_open())
+    cout << "sup" << endl;
   while(static_cast<void>(file >> ws), getline(file, line, lineBreak)) {
     // Player Name
     string name = line;
