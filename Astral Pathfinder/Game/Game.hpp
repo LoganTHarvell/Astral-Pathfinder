@@ -50,7 +50,7 @@ public:
     bool restartGame = false;
     bool skipMainMenu = false;
     enum {
-      none, allDiscovered, noFuel, quit
+      none, allDiscovered, noFuel, alienAttack, quit
     } endgame = none;
 
     bool gameOver = false;

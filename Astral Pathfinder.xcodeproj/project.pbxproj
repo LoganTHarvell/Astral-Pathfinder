@@ -55,6 +55,10 @@
 		02DDC15620971D6000704F70 /* PlayerShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15120971D6000704F70 /* PlayerShip.cpp */; };
 		02DDC15720971D6000704F70 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15420971D6000704F70 /* Ship.cpp */; };
 		02DDC15820971D6000704F70 /* AlienShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15520971D6000704F70 /* AlienShip.cpp */; };
+		02DDC15B20971DA900704F70 /* planet2.png in Resources */ = {isa = PBXBuildFile; fileRef = 02DDC15920971DA900704F70 /* planet2.png */; };
+		02DDC15C20971DA900704F70 /* movingPlayerShip2.png in Resources */ = {isa = PBXBuildFile; fileRef = 02DDC15A20971DA900704F70 /* movingPlayerShip2.png */; };
+		02DDC15F20971DB500704F70 /* scoreboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 02DDC15D20971DB500704F70 /* scoreboard.png */; };
+		02DDC16020971DB500704F70 /* gameScreen2.png in Resources */ = {isa = PBXBuildFile; fileRef = 02DDC15E20971DB500704F70 /* gameScreen2.png */; };
 		9117BE722094FD34003FE954 /* EventsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE702094FD34003FE954 /* EventsPanel.cpp */; };
 		9117BE90209606D6003FE954 /* EventsComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE8E209606D6003FE954 /* EventsComponent.cpp */; };
 		9117BE922096577D003FE954 /* planetOutline.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE912096577D003FE954 /* planetOutline.png */; };
@@ -154,6 +158,10 @@
 		02DDC15320971D6000704F70 /* Ship.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ship.hpp; sourceTree = "<group>"; };
 		02DDC15420971D6000704F70 /* Ship.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ship.cpp; sourceTree = "<group>"; };
 		02DDC15520971D6000704F70 /* AlienShip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlienShip.cpp; sourceTree = "<group>"; };
+		02DDC15920971DA900704F70 /* planet2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planet2.png; sourceTree = "<group>"; };
+		02DDC15A20971DA900704F70 /* movingPlayerShip2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movingPlayerShip2.png; sourceTree = "<group>"; };
+		02DDC15D20971DB500704F70 /* scoreboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreboard.png; sourceTree = "<group>"; };
+		02DDC15E20971DB500704F70 /* gameScreen2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameScreen2.png; sourceTree = "<group>"; };
 		9117BE702094FD34003FE954 /* EventsPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsPanel.cpp; sourceTree = "<group>"; };
 		9117BE712094FD34003FE954 /* EventsPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventsPanel.hpp; sourceTree = "<group>"; };
 		9117BE8E209606D6003FE954 /* EventsComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsComponent.cpp; sourceTree = "<group>"; };
@@ -321,6 +329,8 @@
 		020013542075BCD30087CED9 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				02DDC15A20971DA900704F70 /* movingPlayerShip2.png */,
+				02DDC15920971DA900704F70 /* planet2.png */,
 				9117BE912096577D003FE954 /* planetOutline.png */,
 				020013552075BCD30087CED9 /* slider.png */,
 				020013562075BCD30087CED9 /* border.png */,
@@ -335,6 +345,8 @@
 		02307CFC2075BDB700B46A3E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				02DDC15E20971DB500704F70 /* gameScreen2.png */,
+				02DDC15D20971DB500704F70 /* scoreboard.png */,
 				91E9F7AE2094051D000FDDB6 /* winScreen.png */,
 				020013592075BCD30087CED9 /* loseScreen.png */,
 				0200135B2075BCD30087CED9 /* gameScreen.png */,
@@ -435,12 +447,16 @@
 				0200136A2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.31.54 PM.png in Resources */,
 				020013702075BCD30087CED9 /* Game Design.txt in Resources */,
 				020013832075BCD30087CED9 /* playerShip.png in Resources */,
+				02DDC16020971DB500704F70 /* gameScreen2.png in Resources */,
 				020013672075BCD30087CED9 /* Screen Shot 2018-03-20 at 3.05.14 PM.png in Resources */,
 				020013692075BCD30087CED9 /* Screen Shot 2018-01-25 at 9.15.15 PM.png in Resources */,
 				0200136D2075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.02 AM.png in Resources */,
+				02DDC15B20971DA900704F70 /* planet2.png in Resources */,
 				020013892075BCD30087CED9 /* MODENINE.TTF in Resources */,
+				02DDC15F20971DB500704F70 /* scoreboard.png in Resources */,
 				0200136C2075BCD30087CED9 /* Screen Shot 2018-03-20 at 9.08.05 PM.png in Resources */,
 				020013682075BCD30087CED9 /* Screen Shot 2018-03-19 at 11.36.22 PM.png in Resources */,
+				02DDC15C20971DA900704F70 /* movingPlayerShip2.png in Resources */,
 				020013822075BCD30087CED9 /* planet.png in Resources */,
 				020013612075BCD30087CED9 /* Classes.txt in Resources */,
 				0200136E2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.32.47 PM.png in Resources */,

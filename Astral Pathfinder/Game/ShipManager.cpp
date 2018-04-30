@@ -39,9 +39,15 @@ void ShipManager::update(Game::State *gameState, PlanetManager *pm) {
   
   if (pm->playerIsDocked()) playerShip.updateFuel(pm->fuelDockedShip());
   
-  // Endgame check for if player ran out of fuel
+  // Endgame checks
+  ColliderComponent pCollider = playerShip.getCollider();
+  ColliderComponent aCollider = alienShip.getCollider();
+  
   if (playerShip.getFuel() <= 0 && !pm->playerIsDocked()) {
     gameState->endgame = Game::State::noFuel;
+  }
+  else if (pCollider.collisionOBB(aCollider.getVertices())) {
+    gameState->endgame = Game::State::alienAttack;
   }
 }
 
