@@ -32,7 +32,7 @@ namespace ShipParameters {
     int w = 48, h = 24;
   } shipSize;
   
-  const int shipPopulation = 1000;
+  const int totalCrew = 1000;
   
   // TODO: figure out real velocity/ticks formula
   const int speed = 1;
@@ -43,42 +43,37 @@ namespace ShipParameters {
 // MARK: - Ship Class
 
 class Ship: public GameObject {
-  using PointVector = std::vector<SDL_Point>;
   
 public:
   // MARK: - Initialization Methods
-  void init(SDL_Point startPosition, ShipParameters::ShipType type);
+  virtual void init(SDL_Point startPosition) = 0;
   
   // MARK: - Game Loop Methods
   void update(Game::State *gs);
   void render(Game::State *gs);
   
   // MARK: - Ship Methods
-  ShipParameters::ShipType getTag() { return tag; };
-  int getFuel() { return fuel; };
-  int getPopulation() { return population; };
   int getRotation() { return rotation; };
   SDL_Point getVelocity() { return velocity; }
   SDL_Point getUIPosition() { return getCenter(); };
-  SDL_Point getMapPosition(SDL_Point uiPosition);
-  
-  void updateFuel(int minerals);
-  
-private:
+  SDL_Point mapPosition();
+    
+protected:
+  using PointVector = std::vector<SDL_Point>;
+
   // MARK: - Ship Fields
   ShipParameters::ShipType tag;
-  int population;
-  int fuel;
-  
   SDL_Point velocity;
   int rotation;
   
   // MARK: - Helper Methods
   bool boundaryCollision();
-  PointVector shipVertexVectors();
+  
+  virtual PointVector shipVertexVectors() = 0;
   PointVector computeShipVertices();
   
-  void updateVelocity();
+  virtual void updateVelocity() = 0;
+  
   void updateRotation();
   void updatePosition(Uint32 ticks);
 

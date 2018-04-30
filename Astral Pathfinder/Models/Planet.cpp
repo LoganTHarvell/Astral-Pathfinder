@@ -14,7 +14,7 @@
 #include "PlanetManager.hpp"
 #include "TextureManager.hpp"
 #include "Map.hpp"
-#include "Ship.hpp"
+#include "PlayerShip.hpp"
 
 // MARK: - Initialization Methods
 
@@ -50,9 +50,6 @@ void Planet::initHomeworld() {
   status = colonized;
   playerDocked = true;
   populationCheck = homeStartPopulation;
-  events.plague = false;
-  events.blight = false;
-  events.mineCollapse = false;
 }
 
 void Planet::initPlanet() {
@@ -77,7 +74,7 @@ void Planet::initPlanet() {
   texture = TextureManager::loadTexture(planetTextureFile);
   outlineTexture = TextureManager::loadTexture(planetOutlineFile);
   collider = new ColliderComponent(rect);
-  eventManager = new EventsComponent(getCenter());
+  eventManager = new EventsComponent(mapPosition());
   
   population = 0;
   
@@ -115,6 +112,10 @@ void Planet::initPlanet() {
   
   // Sets planet status
   status = undiscovered;
+  
+  events.plague = false;
+  events.blight = false;
+  events.mineCollapse = false;
 }
 
 
@@ -177,6 +178,11 @@ int Planet::makeFuel(int amount) {
   }
 }
 
+SDL_Point Planet::mapPosition() {
+  return Map::mapPosition(getCenter());
+}
+
+
 // MARK: - Helper Methods
 
 void Planet::updateStatus() {
@@ -199,8 +205,17 @@ void Planet::updateRandomEvents(Uint32 frame) {
     float randMax = static_cast<float>(RAND_MAX);
 
     events.plague = (plagueRate > rand()/randMax);
-    events.blight = (blightRate > rand()/randMax);
-    events.mineCollapse = (mineCollapseRate > rand()/randMax);
+    
+    if (fertility > 0) {
+      events.blight = (blightRate > rand()/randMax);
+    }
+    else events.blight = false;
+    
+    if (deposits > 0) {
+      events.mineCollapse = (mineCollapseRate > rand()/randMax);
+    }
+    else events.mineCollapse = false;
+    
   }
 }
 

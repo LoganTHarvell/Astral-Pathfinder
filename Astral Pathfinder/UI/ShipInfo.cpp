@@ -46,8 +46,8 @@ void ShipInfo::clean() {
 
 // MARK: - ShipInfo Methods
 
-void ShipInfo::setText(Ship ship) {
-  SDL_Point pos = ship.getCenter();
+void ShipInfo::setText(PlayerShip ship) {
+  SDL_Point pos = ship.mapPosition();
   int fuelAmount = ship.getFuel();
   std::string loc = "Location: " + std::to_string(pos.x) + "," + std::to_string(pos.y);
   std::string fuelNum = "Fuel: " + std::to_string(fuelAmount);
@@ -58,7 +58,7 @@ void ShipInfo::setText(Ship ship) {
   curPlanet.setMessage("Current Planet");
   if(crewLabel.checkNull()) {
     crewLabel.setMessage("Crew");
-    crewNum.setMessage(std::to_string(ShipParameters::shipPopulation));
+    crewNum.setMessage(std::to_string(ShipParameters::totalCrew));
     bar.setMessage("----------------------------------------------------");
   }
 }

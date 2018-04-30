@@ -13,7 +13,7 @@
 #include "TextBox.hpp"
 #include "ShipManager.hpp"
 #include "Planet.hpp"
-#include "Ship.hpp"
+#include "PlayerShip.hpp"
 
 class ShipInfo {
 public:
@@ -25,7 +25,7 @@ public:
   void clean();
   
   // MARK: - ShipInfo Methods
-  void setText(Ship ship);
+  void setText(PlayerShip ship);
   
 private:
   // MARK: - ShipInfo Fields
