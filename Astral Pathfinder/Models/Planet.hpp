@@ -68,6 +68,7 @@ namespace PlanetParameters {
   const float plagueRate = 0.05;
   const float blightRate = 0.1;
   const float mineCollapseRate = 0.3;
+  const float alienInvasionRate = 0.01;
   
   // Random event multipliers
   const float plagueMultiplier = (deathMultiplierRange+minDeathMultiplier)*1.33;
