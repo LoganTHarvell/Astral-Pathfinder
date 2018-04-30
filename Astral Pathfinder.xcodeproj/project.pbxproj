@@ -59,6 +59,7 @@
 		02DDC15C20971DA900704F70 /* movingPlayerShip2.png in Resources */ = {isa = PBXBuildFile; fileRef = 02DDC15A20971DA900704F70 /* movingPlayerShip2.png */; };
 		02DDC15F20971DB500704F70 /* scoreboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 02DDC15D20971DB500704F70 /* scoreboard.png */; };
 		02DDC16020971DB500704F70 /* gameScreen2.png in Resources */ = {isa = PBXBuildFile; fileRef = 02DDC15E20971DB500704F70 /* gameScreen2.png */; };
+		02DDC1622097247600704F70 /* scoreboard.txt in Resources */ = {isa = PBXBuildFile; fileRef = 02DDC1612097247600704F70 /* scoreboard.txt */; };
 		9117BE722094FD34003FE954 /* EventsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE702094FD34003FE954 /* EventsPanel.cpp */; };
 		9117BE90209606D6003FE954 /* EventsComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE8E209606D6003FE954 /* EventsComponent.cpp */; };
 		9117BE922096577D003FE954 /* planetOutline.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE912096577D003FE954 /* planetOutline.png */; };
@@ -162,6 +163,7 @@
 		02DDC15A20971DA900704F70 /* movingPlayerShip2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movingPlayerShip2.png; sourceTree = "<group>"; };
 		02DDC15D20971DB500704F70 /* scoreboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreboard.png; sourceTree = "<group>"; };
 		02DDC15E20971DB500704F70 /* gameScreen2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameScreen2.png; sourceTree = "<group>"; };
+		02DDC1612097247600704F70 /* scoreboard.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scoreboard.txt; sourceTree = "<group>"; };
 		9117BE702094FD34003FE954 /* EventsPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsPanel.cpp; sourceTree = "<group>"; };
 		9117BE712094FD34003FE954 /* EventsPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventsPanel.hpp; sourceTree = "<group>"; };
 		9117BE8E209606D6003FE954 /* EventsComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsComponent.cpp; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 		9117BEA22096C528003FE954 /* Scores */ = {
 			isa = PBXGroup;
 			children = (
+				02DDC1612097247600704F70 /* scoreboard.txt */,
 			);
 			path = Scores;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				0200136E2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.32.47 PM.png in Resources */,
 				020013632075BCD30087CED9 /* Screen Shot 2018-03-20 at 2.12.07 PM.png in Resources */,
 				91E9F7AF2094051D000FDDB6 /* winScreen.png in Resources */,
+				02DDC1622097247600704F70 /* scoreboard.txt in Resources */,
 				020013842075BCD30087CED9 /* loseScreen.png in Resources */,
 				9117BE922096577D003FE954 /* planetOutline.png in Resources */,
 				020013872075BCD30087CED9 /* Arial.ttf in Resources */,
