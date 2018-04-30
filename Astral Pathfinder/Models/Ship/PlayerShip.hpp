@@ -26,7 +26,6 @@ public:
   
 private:
   // MARK: - PlayerShip Fields
-  ShipParameters::ShipType tag;
   int crewPopulation;
   int fuel;
   

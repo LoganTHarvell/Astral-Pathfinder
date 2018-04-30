@@ -61,7 +61,8 @@ public:
 protected:
   using PointVector = std::vector<SDL_Point>;
 
-  // MARK: - Ship Fields  
+  // MARK: - Ship Fields
+  ShipParameters::ShipType tag;
   SDL_Point velocity;
   int rotation;
   
