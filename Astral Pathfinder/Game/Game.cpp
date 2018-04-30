@@ -168,7 +168,7 @@ void Game::update(Uint32 ticks) {
     }
   }
   
-  if (!uiManager->checkMainMenu() && !gameState.gameOver) {
+  if (!uiManager->checkMainMenu() && !uiManager->checkScoreboardScreen() && !gameState.gameOver) {
     if (gameState.frame == 0) gameState.startTime = SDL_GetTicks()/1000;
     
     gameState.frame++;

@@ -400,6 +400,7 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
        && (p.y > startGameLabel.y) && (p.y < startGameLabel.y + startGameLabel.h)) {
       hoveringLabel = nothing;
       mainMenuFlag = false;
+      scoreboardFlag = false;
     }
   
    else if((p.x > scoreboardLabel.x) && (p.x < scoreboardLabel.x + scoreboardLabel.w)
@@ -413,6 +414,7 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
        && (p.y > exitGameLabel.y) && (p.y < exitGameLabel.y + exitGameLabel.h)) {
       hoveringLabel = nothing;
       mainMenuFlag = false;
+      scoreboardFlag = false;
       gs->endgame = Game::State::quit;
     }
   }
@@ -439,6 +441,7 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
       gs->restartGame = true;
       gs->skipMainMenu = true;
       gs->mouseDown = false;
+      scoreboardFlag = false;
       SDL_StopTextInput();
       writeScore(gs);
     }
@@ -452,6 +455,7 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
       gs->endgame = Game::State::none;
       gs->restartGame = true;
       gs->mouseDown = false;
+      scoreboardFlag = false;
       SDL_StopTextInput();
       writeScore(gs);
     }
