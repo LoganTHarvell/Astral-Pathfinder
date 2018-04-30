@@ -50,9 +50,6 @@ void Planet::initHomeworld() {
   status = colonized;
   playerDocked = true;
   populationCheck = homeStartPopulation;
-  events.plague = false;
-  events.blight = false;
-  events.mineCollapse = false;
 }
 
 void Planet::initPlanet() {
@@ -77,7 +74,7 @@ void Planet::initPlanet() {
   texture = TextureManager::loadTexture(planetTextureFile);
   outlineTexture = TextureManager::loadTexture(planetOutlineFile);
   collider = new ColliderComponent(rect);
-  eventManager = new EventsComponent(getCenter());
+  eventManager = new EventsComponent(mapPosition());
   
   population = 0;
   
@@ -115,6 +112,10 @@ void Planet::initPlanet() {
   
   // Sets planet status
   status = undiscovered;
+  
+  events.plague = false;
+  events.blight = false;
+  events.mineCollapse = false;
 }
 
 
@@ -325,7 +326,7 @@ void Planet::updateFarming() {
     rate *= blightMultiplier;
   }
   
-  float product = farmers*farmingRate;  // Food produced
+  float product = farmers*rate;  // Food produced
   
   // Return if no food produced
   if (product < 0 ) {

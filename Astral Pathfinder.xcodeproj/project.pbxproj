@@ -34,7 +34,6 @@
 		020013762075BCD30087CED9 /* PlanetInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0200133D2075BCD30087CED9 /* PlanetInfo.cpp */; };
 		020013772075BCD30087CED9 /* ColliderComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020013422075BCD30087CED9 /* ColliderComponent.cpp */; };
 		020013782075BCD30087CED9 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020013432075BCD30087CED9 /* GameObject.cpp */; };
-		020013792075BCD30087CED9 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020013462075BCD30087CED9 /* Ship.cpp */; };
 		0200137A2075BCD30087CED9 /* Planet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 020013472075BCD30087CED9 /* Planet.cpp */; };
 		0200137B2075BCD30087CED9 /* PlanetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0200134D2075BCD30087CED9 /* PlanetManager.cpp */; };
 		0200137C2075BCD30087CED9 /* ShipManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0200134F2075BCD30087CED9 /* ShipManager.cpp */; };
@@ -75,6 +74,15 @@
 			name = "Copy Bundle Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9117BEA52096C554003FE954 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -110,13 +118,11 @@
 		0200133B2075BCD30087CED9 /* TextBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextBox.cpp; sourceTree = "<group>"; };
 		0200133C2075BCD30087CED9 /* Slider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Slider.cpp; sourceTree = "<group>"; };
 		0200133D2075BCD30087CED9 /* PlanetInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlanetInfo.cpp; sourceTree = "<group>"; };
-		0200133F2075BCD30087CED9 /* Ship.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ship.hpp; sourceTree = "<group>"; };
 		020013402075BCD30087CED9 /* Planet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Planet.hpp; sourceTree = "<group>"; };
 		020013422075BCD30087CED9 /* ColliderComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColliderComponent.cpp; sourceTree = "<group>"; };
 		020013432075BCD30087CED9 /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
 		020013442075BCD30087CED9 /* GameObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameObject.hpp; sourceTree = "<group>"; };
 		020013452075BCD30087CED9 /* ColliderComponent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ColliderComponent.hpp; sourceTree = "<group>"; };
-		020013462075BCD30087CED9 /* Ship.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ship.cpp; sourceTree = "<group>"; };
 		020013472075BCD30087CED9 /* Planet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Planet.cpp; sourceTree = "<group>"; };
 		020013492075BCD30087CED9 /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		0200134A2075BCD30087CED9 /* PlanetManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlanetManager.hpp; sourceTree = "<group>"; };
@@ -264,7 +270,7 @@
 				020013412075BCD30087CED9 /* Game Object */,
 				020013402075BCD30087CED9 /* Planet.hpp */,
 				020013472075BCD30087CED9 /* Planet.cpp */,
-				027CBAB12096B0A800255BF1 /* Ship */,
+				9117BEA62096D1E8003FE954 /* Ship */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -301,6 +307,7 @@
 		020013532075BCD30087CED9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9117BEA22096C528003FE954 /* Scores */,
 				02307CFC2075BDB700B46A3E /* Screens */,
 				020013542075BCD30087CED9 /* Textures */,
 				02307CFD2075BDDC00B46A3E /* Fonts */,
@@ -311,6 +318,8 @@
 		020013542075BCD30087CED9 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				9117BEB62096E9D0003FE954 /* planet2.png */,
+				9117BEB42096E91D003FE954 /* movingPlayerShip2.png */,
 				9117BE912096577D003FE954 /* planetOutline.png */,
 				020013552075BCD30087CED9 /* slider.png */,
 				020013562075BCD30087CED9 /* border.png */,
@@ -325,6 +334,8 @@
 		02307CFC2075BDB700B46A3E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				9117BEB22096E075003FE954 /* gameScreen2.png */,
+				9117BE932096775A003FE954 /* scoreboard.png */,
 				91E9F7AE2094051D000FDDB6 /* winScreen.png */,
 				020013592075BCD30087CED9 /* loseScreen.png */,
 				0200135B2075BCD30087CED9 /* gameScreen.png */,
@@ -342,15 +353,23 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		027CBAB12096B0A800255BF1 /* Ship */ = {
+		9117BEA22096C528003FE954 /* Scores */ = {
 			isa = PBXGroup;
 			children = (
-				0200133F2075BCD30087CED9 /* Ship.hpp */,
-				020013462075BCD30087CED9 /* Ship.cpp */,
-				027CBAAF20964AA000255BF1 /* PlayerShip.hpp */,
-				027CBAAE20964AA000255BF1 /* PlayerShip.cpp */,
-				027CBAAC2096496100255BF1 /* AlienShip.hpp */,
-				027CBAAB2096496100255BF1 /* AlienShip.cpp */,
+				9117BEA32096C528003FE954 /* scoreboard.txt */,
+			);
+			path = Scores;
+			sourceTree = "<group>";
+		};
+		9117BEA62096D1E8003FE954 /* Ship */ = {
+			isa = PBXGroup;
+			children = (
+				9117BEA82096D1E8003FE954 /* Ship.hpp */,
+				9117BEAB2096D1E8003FE954 /* Ship.cpp */,
+				9117BEA92096D1E8003FE954 /* PlayerShip.hpp */,
+				9117BEAC2096D1E8003FE954 /* PlayerShip.cpp */,
+				9117BEA72096D1E8003FE954 /* AlienShip.hpp */,
+				9117BEAA2096D1E8003FE954 /* AlienShip.cpp */,
 			);
 			path = Ship;
 			sourceTree = "<group>";
@@ -366,6 +385,7 @@
 				020012AC20759ED60087CED9 /* Frameworks */,
 				020012AD20759ED60087CED9 /* Resources */,
 				020012F42075A43A0087CED9 /* Copy Bundle Frameworks */,
+				9117BEA52096C554003FE954 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -413,8 +433,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9117BEA42096C528003FE954 /* scoreboard.txt in Resources */,
+				9117BE942096775A003FE954 /* scoreboard.png in Resources */,
 				020013862075BCD30087CED9 /* gameScreen.png in Resources */,
+				9117BEB52096E91E003FE954 /* movingPlayerShip2.png in Resources */,
 				0200136A2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.31.54 PM.png in Resources */,
+				9117BEB32096E075003FE954 /* gameScreen2.png in Resources */,
 				020013702075BCD30087CED9 /* Game Design.txt in Resources */,
 				020013832075BCD30087CED9 /* playerShip.png in Resources */,
 				020013672075BCD30087CED9 /* Screen Shot 2018-03-20 at 3.05.14 PM.png in Resources */,
@@ -424,6 +448,7 @@
 				0200136C2075BCD30087CED9 /* Screen Shot 2018-03-20 at 9.08.05 PM.png in Resources */,
 				020013682075BCD30087CED9 /* Screen Shot 2018-03-19 at 11.36.22 PM.png in Resources */,
 				020013822075BCD30087CED9 /* planet.png in Resources */,
+				9117BEB72096E9D0003FE954 /* planet2.png in Resources */,
 				020013612075BCD30087CED9 /* Classes.txt in Resources */,
 				0200136E2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.32.47 PM.png in Resources */,
 				020013632075BCD30087CED9 /* Screen Shot 2018-03-20 at 2.12.07 PM.png in Resources */,
@@ -453,9 +478,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				020013792075BCD30087CED9 /* Ship.cpp in Sources */,
 				020013782075BCD30087CED9 /* GameObject.cpp in Sources */,
 				9117BE90209606D6003FE954 /* EventsComponent.cpp in Sources */,
+				9117BEAD2096D1F8003FE954 /* AlienShip.cpp in Sources */,
 				020013722075BCD30087CED9 /* Map.cpp in Sources */,
 				020013772075BCD30087CED9 /* ColliderComponent.cpp in Sources */,
 				0200137D2075BCD30087CED9 /* UIManager.cpp in Sources */,
@@ -463,11 +488,11 @@
 				020013712075BCD30087CED9 /* ShipInfo.cpp in Sources */,
 				020013742075BCD30087CED9 /* TextBox.cpp in Sources */,
 				020013762075BCD30087CED9 /* PlanetInfo.cpp in Sources */,
+				9117BEAE2096D1F8003FE954 /* Ship.cpp in Sources */,
+				9117BEAF2096D1F8003FE954 /* PlayerShip.cpp in Sources */,
 				0200137F2075BCD30087CED9 /* main.cpp in Sources */,
 				020013752075BCD30087CED9 /* Slider.cpp in Sources */,
 				020013732075BCD30087CED9 /* TextureManager.cpp in Sources */,
-				027CBAAD2096496100255BF1 /* AlienShip.cpp in Sources */,
-				027CBAB020964AA000255BF1 /* PlayerShip.cpp in Sources */,
 				0200137B2075BCD30087CED9 /* PlanetManager.cpp in Sources */,
 				0200137A2075BCD30087CED9 /* Planet.cpp in Sources */,
 				0200137C2075BCD30087CED9 /* ShipManager.cpp in Sources */,

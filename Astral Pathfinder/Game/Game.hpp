@@ -48,7 +48,7 @@ public:
     // Flags
     bool isRunning = false;
     bool restartGame = false;
-
+    bool skipMainMenu = false;
     enum {
       none, allDiscovered, noFuel, quit
     } endgame = none;
@@ -74,6 +74,8 @@ public:
     SDL_Point clickLocation;
     SDL_Point dragLocation;
     int mouseScroll = 0;
+    std::string playerName;
+    bool renderPlayerName = false;
     Uint32 endgameFrame;
   };
 
@@ -101,7 +103,6 @@ private:
   PlanetManager *planetManager;
   ShipManager *shipManager;
   UIManager *uiManager;
-
 };
 
 #endif /* Game_hpp */

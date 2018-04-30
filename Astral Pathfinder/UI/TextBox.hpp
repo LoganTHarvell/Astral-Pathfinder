@@ -25,8 +25,10 @@ namespace TextParameters {
   const SDL_Color color = {0,128,0};
   const std::string fontFile = "../Resources/MODENINE.TTF";
   const int regFontSize = 36;
+  const int eventFontSize = 18;
   const int finalScoreFontSize = 120;
   const Uint32 wrapLength = 300;
+  const int scoreboardLine = 880;
 }
 
 
@@ -44,6 +46,8 @@ public:
   
   // MARK: - TextBox Methods
   void setMessage(const std::string words, SDL_Color color = TextParameters::color);
+  void setFuelMessage(const std::string words, SDL_Color color = TextParameters::color);
+  void setScoreboardMessage(const std::string words, SDL_Color color = TextParameters::color);
   void setEventMessage(const std::string words, SDL_Color color);
   void setFinalScore(const std::string words);
   bool checkNull();
