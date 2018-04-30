@@ -18,6 +18,7 @@
 #include "PlanetInfo.hpp"
 #include "ShipInfo.hpp"
 #include "TextBox.hpp"
+#include "EventsPanel.hpp"
 
 // MARK: - UIManager Parameters
 
@@ -60,6 +61,7 @@ private:
   // MARK: - UIManager Fields
   TextBox time;
   TextBox totalScore, finalScore;
+  EventsPanel eventsPanel;
   PlanetInfo selectedPlanetInfo, DockedPlanetInfo;
   ShipInfo shipInfo;
   SDL_Texture *hoverBorder;

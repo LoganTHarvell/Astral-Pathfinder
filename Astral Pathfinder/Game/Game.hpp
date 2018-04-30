@@ -67,6 +67,7 @@ public:
     Uint32 ticks;
     SDL_Point clickLocation;
     SDL_Point dragLocation;
+    int mouseScroll = 0;
   };
   
   void init(const std::string title, SDL_Rect rect, bool fullscreen);

@@ -26,6 +26,7 @@ namespace TextParameters {
   const std::string fontFile = "../Resources/MODENINE.TTF";
   const int regFontSize = 36;
   const int finalScoreFontSize = 120;
+  const Uint32 wrapLength = 300;
 }
 
 
@@ -43,14 +44,20 @@ public:
   
   // MARK: - TextBox Methods
   void setMessage(const std::string words, SDL_Color color = TextParameters::color);
+  void setEventMessage(const std::string words, SDL_Color color);
   void setFinalScore(const std::string words);
   bool checkNull();
   void setRect(int x, int w);
+  SDL_Rect getRect() { return rect; }
+  void setYCoord(int y) { rect.y = y; }
+  void setKey(long k) { key = k; }
+  long getKey() { return key; }
   
   
 private:
   // MARK: - Textbox Fields
   TTF_Font *font;
+  long key;
 };
 
 #endif /* Text_hpp */
