@@ -12,6 +12,7 @@
 // MARK: Libraries and Frameworks
 #include <string>
 #include <fstream>
+#include <iostream>
 #include "SDL2_ttf/SDL_ttf.h"
 
 // MARK: Source Files
@@ -33,6 +34,7 @@ void UIManager::init() {
   hoverBorder = TextureManager::loadTexture("../Resources/border.png");
   
   mainMenu = TextureManager::loadTexture("../Resources/mainMenu.png");
+  scoreboardTex = TextureManager::loadTexture("../Resources/scoreboard.png");
   gameScreen = TextureManager::loadTexture("../Resources/gameScreen.png");
   winScreen = TextureManager::loadTexture("../Resources/winScreen.png");
   loseScreen = TextureManager::loadTexture("../Resources/loseScreen.png");
@@ -45,7 +47,7 @@ void UIManager::init() {
 // MARK: - Game Loop Methods
 
 void UIManager::update(Game::State *gameState, PlanetManager *planetManager, ShipManager *shipManager) {
-  if (mainMenuFlag) {
+  if (mainMenuFlag || scoreboardFlag) {
     checkForHovering(gameState);
     if(gameState->mouseDown)
       checkClickedAreaOtherScreen(gameState);
@@ -110,7 +112,12 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     else if(hoveringLabel == exitGame)
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
-    return;
+  }
+  else if(scoreboardFlag) {
+    SDL_RenderCopy(Game::renderer, scoreboardTex, NULL, &screenRect);
+    
+    if(hoveringLabel == mainMenuScoreboard)
+      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
   }
   else if (gameState->endgame != Game::State::none && gameState->endgame != Game::State::quit) {
     if(gameState->endgame == Game::State::allDiscovered)
@@ -129,7 +136,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
     
     if(hoveringLabel == playAgain)
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
-    else if(hoveringLabel == endGameExit)
+    else if(hoveringLabel == mainMenuExit)
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
@@ -323,6 +330,19 @@ void UIManager::checkForHovering(Game::State *gs) {
     else hoveringLabel = nothing;
   }
   
+  // Scoreboard Screen
+  else if(scoreboardFlag) {
+    if((p.x > mainMenuScoreboardLabel.x) && (p.x < mainMenuScoreboardLabel.x + mainMenuScoreboardLabel.w)
+       && (p.y > mainMenuScoreboardLabel.y) && (p.y < mainMenuScoreboardLabel.y + mainMenuScoreboardLabel.h)) {
+      hoveringLabel = mainMenuScoreboard;
+      
+      if(borderRect.y != mainMenuScoreboardLabel.y-buffer)
+        borderRect = mainMenuScoreboardBorder;
+      
+      else hoveringLabel = nothing;
+    }
+  }
+  
   // End Screen
   else if(gs->endgame != Game::State::none && gs->endgame != Game::State::quit) {
     if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
@@ -335,7 +355,7 @@ void UIManager::checkForHovering(Game::State *gs) {
     
     else if((p.x > mainMenuLabel.x) && (p.x < mainMenuLabel.x + mainMenuLabel.w)
             && (p.y > mainMenuLabel.y) && (p.y < mainMenuLabel.y + mainMenuLabel.h)) {
-      hoveringLabel = endGameExit;
+      hoveringLabel = mainMenuExit;
       
       if(borderRect.y != mainMenuLabel.y-buffer)
         borderRect = mainMenuBorder;
@@ -360,6 +380,8 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
    else if((p.x > scoreboardLabel.x) && (p.x < scoreboardLabel.x + scoreboardLabel.w)
            && (p.y > scoreboardLabel.y) && (p.y < scoreboardLabel.y + scoreboardLabel.h)) {
      hoveringLabel = nothing;
+     scoreboardFlag = true;
+     mainMenuFlag = false;
    }
   
     else if((p.x > exitGameLabel.x) && (p.x < exitGameLabel.x + exitGameLabel.w)
@@ -367,6 +389,16 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
       hoveringLabel = nothing;
       mainMenuFlag = false;
       gs->endgame = Game::State::quit;
+    }
+  }
+  
+  // Scoreboard Screen
+  else if(scoreboardFlag) {
+    if((p.x > mainMenuScoreboardLabel.x) && (p.x < mainMenuScoreboardLabel.x + mainMenuScoreboardLabel.w)
+       && (p.y > mainMenuScoreboardLabel.y) && (p.y < mainMenuScoreboardLabel.y + mainMenuScoreboardLabel.h)) {
+      hoveringLabel = nothing;
+      mainMenuFlag = true;
+      scoreboardFlag = false;
     }
   }
   
@@ -396,10 +428,12 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
 }
 
 void UIManager::writeScore(Game::State *gs) {
-  std::ofstream file;
-  file.open(UiParameters::filePath);
+  using namespace std;
+  ofstream file;
+  file.open(UiParameters::filePath.c_str(), ios::app);
   if(gs->playerName.length() == 0)
     gs->playerName = "CPU";
-  file << gs->playerName + " " + std::to_string(score) + "\n";
+  string message = gs->playerName + " " + to_string(score);
+  file << message << endl;
   file.close();
 }

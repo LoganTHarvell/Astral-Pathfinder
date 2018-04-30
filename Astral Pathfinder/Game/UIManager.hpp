@@ -32,18 +32,20 @@ namespace UiParameters {
   const SDL_Rect scoreboardLabel = {600, 538, 424, 58};
   const SDL_Rect exitGameLabel = {600, 676, 424, 54};
   const SDL_Rect playAgainLabel = {288, 673, 424, 57};
-  const SDL_Rect mainMenuLabel = {885, 676, 424, 54};
+  const SDL_Rect mainMenuLabel = {885, 677, 424, 54};
+  const SDL_Rect mainMenuScoreboardLabel = {628, 754, 376, 67};
   const SDL_Rect startGameBorder = {582, 390, 460, 95};
   const SDL_Rect scoreboardBorder = {582, 527, 460, 96};
   const SDL_Rect exitGameBorder = {582, 665, 460, 92};
   const SDL_Rect playAgainBorder = {270, 662, 460, 95};
-  const SDL_Rect mainMenuBorder = {867, 665, 460, 92};
+  const SDL_Rect mainMenuBorder = {867, 666, 460, 92};
+  const SDL_Rect mainMenuScoreboardBorder = {609, 742, 412, 90};
   const SDL_Point endScoreCoords = {945, 335};
   const SDL_Point endScoreName = {940, 480};
   const SDL_Color red = {128,0,0};
   const SDL_Color green = {0,128,0};
   const SDL_Color yellow = {255, 255, 0};
-  const std::string filePath = "../Resources/Scores/scoreboard.txt";
+  const std::string filePath = "Resources/Scores/scoreboard.txt";
 }
 
 class UIManager {
@@ -58,6 +60,7 @@ public:
   
   // MARK: - Helper Methods
   bool checkMainMenu() { return mainMenuFlag; }
+  bool checkScoreboardScreen() { return scoreboardFlag; }
   void setMainMenuFlag(bool flag) { mainMenuFlag = flag; }
   
 private:
@@ -69,7 +72,7 @@ private:
   ShipInfo shipInfo;
   SDL_Texture *hoverBorder;
   SDL_Rect borderRect, screenRect;
-  SDL_Texture *mainMenu, *gameScreen, *winScreen, *loseScreen;
+  SDL_Texture *mainMenu, *scoreboardTex, *gameScreen, *winScreen, *loseScreen;
   int score, prevScore;
   SDL_Color prevColor, timeColor;
   
@@ -78,11 +81,11 @@ private:
   } currentWindow = none;
   
   enum {
-    nothing, startGame, scoreboard, exitGame, playAgain, endGameExit
+    nothing, startGame, scoreboard, exitGame, playAgain, mainMenuExit, mainMenuScoreboard
   } hoveringLabel = nothing;
   
   bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true;
-  bool mainMenuFlag;
+  bool mainMenuFlag, scoreboardFlag;
   
   // MARK: - Helper Methods
   void updateTime(Uint32);

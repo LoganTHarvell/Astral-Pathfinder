@@ -131,7 +131,8 @@ void Game::handleEvents() {
         gameState.clickLocation = { event.button.x, event.button.y };
         break;
       case SDL_MOUSEMOTION:
-        if(uiManager->checkMainMenu() || (gameState.endgame != State::none && gameState.endgame != State::quit))
+        if(uiManager->checkMainMenu() || uiManager->checkScoreboardScreen() ||
+           (gameState.endgame != State::none && gameState.endgame != State::quit))
           gameState.dragLocation = { event.motion.x, event.motion.y };
         
         else if(gameState.planetSelected || gameState.planetCollided)
@@ -178,7 +179,8 @@ void Game::render() {
   // Render stuff
   uiManager->render(&gameState, planetManager);
   
-  if(!uiManager->checkMainMenu() && gameState.endgame == State::none) {
+  if(!uiManager->checkMainMenu() && !uiManager->checkScoreboardScreen()
+     && gameState.endgame == State::none) {
     planetManager->render(&gameState);
     shipManager->render(&gameState);
   }
