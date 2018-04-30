@@ -36,7 +36,7 @@ void UIManager::init() {
   
   mainMenu = TextureManager::loadTexture("../Resources/mainMenu.png");
   scoreboardTex = TextureManager::loadTexture("../Resources/scoreboard.png");
-  gameScreen = TextureManager::loadTexture("../Resources/gameScreen.png");
+  gameScreen = TextureManager::loadTexture("../Resources/gameScreen2.png");
   winScreen = TextureManager::loadTexture("../Resources/winScreen.png");
   loseScreen = TextureManager::loadTexture("../Resources/loseScreen.png");
   screenRect = { 0, 0, GameParameters::windowRect.w, GameParameters::windowRect.h };
@@ -442,6 +442,9 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
     
     else if((p.x > mainMenuLabel.x) && (p.x < mainMenuLabel.x + mainMenuLabel.w)
             && (p.y > mainMenuLabel.y) && (p.y < mainMenuLabel.y + mainMenuLabel.h)) {
+      gs->frame = 0;
+      gs->gameOver = false;
+      gs->endgameFrame = 0;
       hoveringLabel = nothing;
       gs->endgame = Game::State::none;
       gs->restartGame = true;

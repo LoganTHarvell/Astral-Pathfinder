@@ -326,7 +326,7 @@ void Planet::updateFarming() {
     rate *= blightMultiplier;
   }
   
-  float product = farmers*farmingRate;  // Food produced
+  float product = farmers*rate;  // Food produced
   
   // Return if no food produced
   if (product < 0 ) {

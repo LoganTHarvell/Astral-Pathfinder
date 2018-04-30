@@ -51,6 +51,14 @@ void TextBox::setMessage(const std::string words, SDL_Color color) {
   SDL_FreeSurface(surface);
 }
 
+void TextBox::setFuelMessage(const std::string words, SDL_Color color) {
+  if(texture != nullptr) clean();
+  
+  SDL_Surface *surface = TTF_RenderText_Blended(font, words.c_str(), color);
+  texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
+  SDL_FreeSurface(surface);
+}
+
 void TextBox::setScoreboardMessage(const std::string words, SDL_Color color) {
   if(texture != nullptr) clean();
   
