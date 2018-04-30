@@ -43,6 +43,7 @@ void UIManager::init() {
   screenRect = { 0, 0, GameParameters::windowRect.w, GameParameters::windowRect.h };
   
   mainMenuFlag = true;
+  scoreboardFlag = false;
   prevScore = 0;
   
   TextBox box;
