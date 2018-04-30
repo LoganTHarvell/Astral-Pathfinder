@@ -63,6 +63,7 @@
 		9117BE722094FD34003FE954 /* EventsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE702094FD34003FE954 /* EventsPanel.cpp */; };
 		9117BE90209606D6003FE954 /* EventsComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE8E209606D6003FE954 /* EventsComponent.cpp */; };
 		9117BE922096577D003FE954 /* planetOutline.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE912096577D003FE954 /* planetOutline.png */; };
+		91499BB8209763B800DC6DB3 /* alienScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 91499BB7209763B800DC6DB3 /* alienScreen.png */; };
 		91E9F7AF2094051D000FDDB6 /* winScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 91E9F7AE2094051D000FDDB6 /* winScreen.png */; };
 /* End PBXBuildFile section */
 
@@ -169,6 +170,7 @@
 		9117BE8E209606D6003FE954 /* EventsComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsComponent.cpp; sourceTree = "<group>"; };
 		9117BE8F209606D6003FE954 /* EventsComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventsComponent.hpp; sourceTree = "<group>"; };
 		9117BE912096577D003FE954 /* planetOutline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planetOutline.png; sourceTree = "<group>"; };
+		91499BB7209763B800DC6DB3 /* alienScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alienScreen.png; sourceTree = "<group>"; };
 		91E9F7AE2094051D000FDDB6 /* winScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = winScreen.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -347,6 +349,7 @@
 		02307CFC2075BDB700B46A3E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				91499BB7209763B800DC6DB3 /* alienScreen.png */,
 				02DDC15E20971DB500704F70 /* gameScreen2.png */,
 				02DDC15D20971DB500704F70 /* scoreboard.png */,
 				91E9F7AE2094051D000FDDB6 /* winScreen.png */,
@@ -477,6 +480,7 @@
 				020013622075BCD30087CED9 /* UI Layout.txt in Resources */,
 				020013882075BCD30087CED9 /* base.png in Resources */,
 				0200138A2075BCD30087CED9 /* mainMenu.png in Resources */,
+				91499BB8209763B800DC6DB3 /* alienScreen.png in Resources */,
 				0200136F2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.29.37 PM.png in Resources */,
 				02307D002075BE1B00B46A3E /* Assets.xcassets in Resources */,
 				020013642075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.35 AM.png in Resources */,
@@ -632,7 +636,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = WUP28GH2WB;
+				DEVELOPMENT_TEAM = MXYX4524CL;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/SDL2/";
 				INFOPLIST_FILE = "$(SRCROOT)/Astral Pathfinder/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -659,7 +663,7 @@
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = WUP28GH2WB;
+				DEVELOPMENT_TEAM = MXYX4524CL;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/SDL2/";
 				INFOPLIST_FILE = "$(SRCROOT)/Astral Pathfinder/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

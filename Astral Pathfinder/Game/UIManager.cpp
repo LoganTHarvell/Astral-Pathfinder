@@ -39,6 +39,7 @@ void UIManager::init() {
   gameScreen = TextureManager::loadTexture("../Resources/gameScreen2.png");
   winScreen = TextureManager::loadTexture("../Resources/winScreen.png");
   loseScreen = TextureManager::loadTexture("../Resources/loseScreen.png");
+  alienScreen = TextureManager::loadTexture("../Resources/alienScreen.png");
   screenRect = { 0, 0, GameParameters::windowRect.w, GameParameters::windowRect.h };
   
   mainMenuFlag = true;
@@ -145,6 +146,8 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
       SDL_RenderCopy(Game::renderer, winScreen, NULL, &screenRect);
     else if(gameState->endgame == Game::State::noFuel)
       SDL_RenderCopy(Game::renderer, loseScreen, NULL, &screenRect);
+    else if(gameState->endgame == Game::State::alienAttack)
+      SDL_RenderCopy(Game::renderer, alienScreen, NULL, &screenRect);
     
     if(finalScore.checkNull())
       finalScore.setFinalScore(std::to_string(score).c_str());

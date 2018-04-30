@@ -75,7 +75,7 @@ private:
   ShipInfo shipInfo;
   SDL_Texture *hoverBorder;
   SDL_Rect borderRect, screenRect;
-  SDL_Texture *mainMenu, *scoreboardTex, *gameScreen, *winScreen, *loseScreen;
+  SDL_Texture *mainMenu, *scoreboardTex, *gameScreen, *winScreen, *loseScreen, *alienScreen;
   int score, prevScore;
   SDL_Color prevColor, timeColor;
   
