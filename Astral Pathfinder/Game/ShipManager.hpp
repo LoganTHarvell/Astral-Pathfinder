@@ -44,8 +44,6 @@ private:
   PlayerShip playerShip;
   AlienShip alienShip;
   
-//  SDL_Point oldTarget;
-  
   void setAlienTarget(Game::State *gs, PlanetManager *pm);
 };
 

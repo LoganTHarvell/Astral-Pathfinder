@@ -26,7 +26,6 @@ void ShipManager::init(SDL_Point homeworldPos, SDL_Point alienPos) {
   p.y = alienPos.y - (shipSize.h/2);
   
   alienShip.init(p);
-//  oldTarget = p;
 }
 
 // MARK: - Game Loop Methods
@@ -65,7 +64,6 @@ void ShipManager::setAlienTarget(Game::State *gs, PlanetManager *pm) {
   
   SDL_Point dockedPos = alienShip.getCenter();
   SDL_Point mainTargetPos = alienShip.getMainTarget();
-//  SDL_Point targetPos = alienShip.getTarget();
   
   if (dockedPos.x == mainTargetPos.x && dockedPos.y == mainTargetPos.y) {
     int randPlanetIndex = rand()%PlanetManagerParameters::numberOfPlanets;
@@ -73,44 +71,6 @@ void ShipManager::setAlienTarget(Game::State *gs, PlanetManager *pm) {
     alienShip.setMainTarget(randPlanet.getCenter());
     alienShip.resetTarget();
   }
-//  else if (dockedPos.x == targetPos.x && dockedPos.y == targetPos.y) {
-//    oldTarget = targetPos;
-//    alienShip.resetTarget();
-//  }
-//  else {
-//    double minDistance = 60;
-//    Planet targetP;
-//    bool targetPInit = false;
-//
-//    for (int i=0; i < PlanetManagerParameters::numberOfPlanets; i++) {
-//      Planet p = pm->getPlanet(i);
-//      SDL_Point pCenter = p.getCenter();
-//      ColliderComponent alienCollider = alienShip.getCollider();
-//
-//      if (p.getCenter().x == oldTarget.x && p.getCenter().y == oldTarget.y) {
-//        continue;
-//      }
-  
-//      if (gs->frame%ShipManagerParameters::alienTargetingDelay != 0) {
-//        continue;
-//      }
-      
-//      if (alienCollider.collisionCircle(30, p.getCollider().getVertices())) {
-//        double d = sqrt((pCenter.x-dockedPos.x)^2 + (pCenter.y-dockedPos.y)^2);
-//        if (d < minDistance) {
-//          minDistance = d;
-//          targetP = p;
-//          targetPInit = true;
-//        }
-      
-//        alienShip.updateTarget(p.getCenter());
-//        oldTarget = p.getCenter();
-//      }
-//    }
-//
-//    if (targetPInit) {
-//      alienShip.updateTarget(targetP.getCenter());
-//    }
-//  }
+
   
 }
