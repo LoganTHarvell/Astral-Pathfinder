@@ -53,6 +53,9 @@
 		020013892075BCD30087CED9 /* MODENINE.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 0200135E2075BCD30087CED9 /* MODENINE.TTF */; };
 		0200138A2075BCD30087CED9 /* mainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200135F2075BCD30087CED9 /* mainMenu.png */; };
 		02307D002075BE1B00B46A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02307CFE2075BE1B00B46A3E /* Assets.xcassets */; };
+		9117BE722094FD34003FE954 /* EventsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE702094FD34003FE954 /* EventsPanel.cpp */; };
+		9117BE90209606D6003FE954 /* EventsComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE8E209606D6003FE954 /* EventsComponent.cpp */; };
+		9117BE922096577D003FE954 /* planetOutline.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE912096577D003FE954 /* planetOutline.png */; };
 		027CBAAD2096496100255BF1 /* AlienShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027CBAAB2096496100255BF1 /* AlienShip.cpp */; };
 		027CBAB020964AA000255BF1 /* PlayerShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027CBAAE20964AA000255BF1 /* PlayerShip.cpp */; };
 		91E9F7AF2094051D000FDDB6 /* winScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 91E9F7AE2094051D000FDDB6 /* winScreen.png */; };
@@ -138,6 +141,11 @@
 		0200135F2075BCD30087CED9 /* mainMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMenu.png; sourceTree = "<group>"; };
 		02307CFE2075BE1B00B46A3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02307CFF2075BE1B00B46A3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9117BE702094FD34003FE954 /* EventsPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsPanel.cpp; sourceTree = "<group>"; };
+		9117BE712094FD34003FE954 /* EventsPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventsPanel.hpp; sourceTree = "<group>"; };
+		9117BE8E209606D6003FE954 /* EventsComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsComponent.cpp; sourceTree = "<group>"; };
+		9117BE8F209606D6003FE954 /* EventsComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventsComponent.hpp; sourceTree = "<group>"; };
+		9117BE912096577D003FE954 /* planetOutline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planetOutline.png; sourceTree = "<group>"; };
 		027CBAAB2096496100255BF1 /* AlienShip.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AlienShip.cpp; sourceTree = "<group>"; };
 		027CBAAC2096496100255BF1 /* AlienShip.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AlienShip.hpp; sourceTree = "<group>"; };
 		027CBAAE20964AA000255BF1 /* PlayerShip.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerShip.cpp; sourceTree = "<group>"; };
@@ -244,6 +252,8 @@
 				0200133C2075BCD30087CED9 /* Slider.cpp */,
 				020013372075BCD30087CED9 /* TextureManager.hpp */,
 				0200133A2075BCD30087CED9 /* TextureManager.cpp */,
+				9117BE702094FD34003FE954 /* EventsPanel.cpp */,
+				9117BE712094FD34003FE954 /* EventsPanel.hpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -266,6 +276,8 @@
 				020013432075BCD30087CED9 /* GameObject.cpp */,
 				020013452075BCD30087CED9 /* ColliderComponent.hpp */,
 				020013422075BCD30087CED9 /* ColliderComponent.cpp */,
+				9117BE8E209606D6003FE954 /* EventsComponent.cpp */,
+				9117BE8F209606D6003FE954 /* EventsComponent.hpp */,
 			);
 			path = "Game Object";
 			sourceTree = "<group>";
@@ -299,6 +311,7 @@
 		020013542075BCD30087CED9 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				9117BE912096577D003FE954 /* planetOutline.png */,
 				020013552075BCD30087CED9 /* slider.png */,
 				020013562075BCD30087CED9 /* border.png */,
 				020013572075BCD30087CED9 /* planet.png */,
@@ -370,7 +383,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0930;
-				ORGANIZATIONNAME = "Logan Harvell";
+				ORGANIZATIONNAME = "Logan Harvell, Ian Holdeman";
 				TargetAttributes = {
 					020012AE20759ED60087CED9 = {
 						CreatedOnToolsVersion = 9.3;
@@ -416,6 +429,7 @@
 				020013632075BCD30087CED9 /* Screen Shot 2018-03-20 at 2.12.07 PM.png in Resources */,
 				91E9F7AF2094051D000FDDB6 /* winScreen.png in Resources */,
 				020013842075BCD30087CED9 /* loseScreen.png in Resources */,
+				9117BE922096577D003FE954 /* planetOutline.png in Resources */,
 				020013872075BCD30087CED9 /* Arial.ttf in Resources */,
 				020013662075BCD30087CED9 /* Screen Shot 2018-03-26 at 9.18.21 PM.png in Resources */,
 				020013852075BCD30087CED9 /* movingPlayerShip.png in Resources */,
@@ -441,9 +455,11 @@
 			files = (
 				020013792075BCD30087CED9 /* Ship.cpp in Sources */,
 				020013782075BCD30087CED9 /* GameObject.cpp in Sources */,
+				9117BE90209606D6003FE954 /* EventsComponent.cpp in Sources */,
 				020013722075BCD30087CED9 /* Map.cpp in Sources */,
 				020013772075BCD30087CED9 /* ColliderComponent.cpp in Sources */,
 				0200137D2075BCD30087CED9 /* UIManager.cpp in Sources */,
+				9117BE722094FD34003FE954 /* EventsPanel.cpp in Sources */,
 				020013712075BCD30087CED9 /* ShipInfo.cpp in Sources */,
 				020013742075BCD30087CED9 /* TextBox.cpp in Sources */,
 				020013762075BCD30087CED9 /* PlanetInfo.cpp in Sources */,

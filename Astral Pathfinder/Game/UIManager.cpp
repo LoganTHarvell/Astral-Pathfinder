@@ -23,6 +23,7 @@ void UIManager::init() {
 
   time.init(timeRect);
   totalScore.init(totalScoreRect);
+  eventsPanel.init();
   selectedPlanetInfo.init(selectedPlanetRect);
   DockedPlanetInfo.init(currentPlanetRect);
   shipInfo.init(shipInfoRect);
@@ -64,6 +65,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
   
   updateTime(gameState->elapsedTime);
   updateTotalScore(planetManager);
+  eventsPanel.update(gameState, planetManager);
   
   PlayerShip player = shipManager->getPlayerShip();
   if(player.getVelocity().x != 0 || player.getVelocity().y != 0
@@ -127,6 +129,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
   
     time.render(gameState);
     totalScore.render(gameState);
+    eventsPanel.render(gameState);
     shipInfo.render(gameState);
     
     if(gameState->planetSelected) {

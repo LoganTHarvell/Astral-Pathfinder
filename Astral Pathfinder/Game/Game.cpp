@@ -128,6 +128,10 @@ void Game::handleEvents() {
         gameState.mouseDown = false;
         gameState.activeSlider = State::inactive;
         break;
+      case SDL_MOUSEWHEEL:
+        if(event.wheel.y > 0 || event.wheel.y < 0) {
+          gameState.mouseScroll = event.wheel.y;
+        }
       default:
         break;
     }

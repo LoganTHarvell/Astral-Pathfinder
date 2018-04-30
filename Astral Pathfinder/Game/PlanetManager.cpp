@@ -54,6 +54,8 @@ void PlanetManager::initGalaxy() {
   selectedPlanetIndex = -1;   // Start with no planet selected
   discoveryCount = 1;         // Start with 1 colonized planet
 
+  for(std::vector<Planet>::iterator it = planets.begin(); it != planets.end(); ++it)
+    planetEvents.push_back(it->getEvents());
 };
 
 
@@ -67,12 +69,15 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
   // Updates each planet, also refreshes count of discovered planets
   totalPopulation = 0;
   discoveryCount = 0;
+  int count = 0;
   for (Planet& p : planets) {
     totalPopulation += p.getPopulation();
     if (p.getStatus() != Planet::undiscovered) discoveryCount++;
     p.update(gameState);
+    planetEvents[count] = p.getEvents();
+    count++;
   }
-  
+
   // Checks all planets discovered endgame condition
   if (discoveryCount == PlanetManagerParameters::numberOfPlanets) {
     gameState->endgame = Game::State::allDiscovered;

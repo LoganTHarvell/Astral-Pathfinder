@@ -50,6 +50,9 @@ void Planet::initHomeworld() {
   status = colonized;
   playerDocked = true;
   populationCheck = homeStartPopulation;
+  events.plague = false;
+  events.blight = false;
+  events.mineCollapse = false;
 }
 
 void Planet::initPlanet() {
@@ -66,8 +69,15 @@ void Planet::initPlanet() {
   rect.w = planetTexSize;
   rect.h = planetTexSize;
   
+  outlineRect.x = rect.x-(planetOutlineSize-rect.w)/2;
+  outlineRect.y = rect.y-(planetOutlineSize-rect.h)/2;
+  outlineRect.w = planetOutlineSize;
+  outlineRect.h = planetOutlineSize;
+  
   texture = TextureManager::loadTexture(planetTextureFile);
+  outlineTexture = TextureManager::loadTexture(planetOutlineFile);
   collider = new ColliderComponent(rect);
+  eventManager = new EventsComponent(getCenter());
   
   population = 0;
   
@@ -116,10 +126,12 @@ void Planet::update(Game::State *gs) {
   updatePopulation(gs->frame);
   updateMining();
   updateFarming();
+  updateEventComponent();
   updateColors();
 }
 
 void Planet::render(Game::State *gs) {
+  renderEvents();
   SDL_RenderCopy(Game::renderer, texture, NULL, &rect);
 }
 
@@ -337,6 +349,10 @@ void Planet::updateFarming() {
   }
 }
 
+void Planet::updateEventComponent() {
+  eventManager->update(events.blight, events.plague, events.mineCollapse, populationDec, isOverproducing);
+}
+
 void Planet::updateColors() {
   if(status == undiscovered) {
     SDL_SetTextureAlphaMod(texture, 127);
@@ -358,7 +374,7 @@ void Planet::updateColors() {
     SDL_SetTextureColorMod(texture, 200, 0, 0);
   
   else if(populationDec)
-    SDL_SetTextureColorMod(texture, 255, 255, 0);
+    SDL_SetTextureColorMod(texture, 200, 200, 0);
   
   else {
     SDL_SetTextureAlphaMod(texture, 150);
@@ -368,4 +384,9 @@ void Planet::updateColors() {
 
 SDL_Point Planet::uiPosition(SDL_Point p) {
   return Map::uiPosition(p);
+}
+
+void Planet::renderEvents() {
+  if(events.blight || events.plague || events.mineCollapse)
+    SDL_RenderCopy(Game::renderer, outlineTexture, NULL, &outlineRect);
 }

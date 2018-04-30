@@ -15,6 +15,7 @@
 
 // MARK: Source Files
 #include "GameObject.hpp"
+#include "EventsComponent.hpp"
 
 
 // MARK: - Planet Parameters
@@ -24,6 +25,9 @@ namespace PlanetParameters {
   // Planet texture information
   const std::string planetTextureFile = "../Resources/planet.png";
   const int planetTexSize = 16;
+  
+  const std::string planetOutlineFile = "../Resources/planetOutline.png";
+  const int planetOutlineSize = 24;
   
   // Planet initial attribute information
   const int minFertility = 20;
@@ -104,6 +108,7 @@ public:
   int getMinerals() { return minerals; };
   int getInfrastructure() { return infrastructure; };
   int getFood() { return food; };
+  EventsComponent getEvents() { return *eventManager; }
   
   int getMiningPercent() { return miningPercent; };
   int getFarmingPercent() { return farmingPercent; };
@@ -128,6 +133,9 @@ private:
   
   Status status;
   SDL_Point coordinates;
+  EventsComponent *eventManager = nullptr;
+  SDL_Texture *outlineTexture;
+  SDL_Rect outlineRect;
 
   // Resources
   float population, populationCheck;
@@ -168,9 +176,11 @@ private:
   void updatePopulation(Uint32 frame);
   void updateMining();
   void updateFarming();
+  void updateEventComponent();
   void updateColors();
 
   SDL_Point uiPosition(SDL_Point p);
+  void renderEvents();
 };
 
 #endif /* Planet_hpp */
