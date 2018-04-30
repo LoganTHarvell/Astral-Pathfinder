@@ -74,13 +74,12 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     gameState->isRunning = false;
     return;
   }
-  else if (gameState->endgame != Game::State::none){
+  else if (gameState->gameOver){
     mainMenuFlag = false;
     if(!SDL_IsTextInputActive())
       SDL_StartTextInput();
     checkForHovering(gameState);
-    if(gameState->mouseDown)
-      checkClickedAreaOtherScreen(gameState);
+    if(gameState->mouseDown) checkClickedAreaOtherScreen(gameState);
 
     return;
   }
@@ -89,9 +88,9 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
   updateTotalScore(planetManager);
   eventsPanel.update(gameState, planetManager);
   
-  Ship player = shipManager->getPlayerShip();
+  PlayerShip player = shipManager->getPlayerShip();
   if(player.getVelocity().x != 0 || player.getVelocity().y != 0
-     || planetManager->planetIsDocked()) {
+     || planetManager->playerIsDocked()) {
     shipInfo.clean();
     shipInfo.setText(player);
   }
@@ -105,8 +104,8 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     selectedPlanetWindowCleaned = true;
   }
   
-  if(planetManager->planetIsDocked()) {
-    setDockedPlanet(planetManager->getDockedPlanet());
+  if(planetManager->playerIsDocked()) {
+    setDockedPlanet(planetManager->getPlayerDockedPlanet());
     currentPlanetWindowCleaned = false;
   }
   else if(!currentPlanetWindowCleaned) {
@@ -141,7 +140,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
       }
     }
   }
-  else if (gameState->endgame != Game::State::none && gameState->endgame != Game::State::quit) {
+  else if (gameState->gameOver && gameState->endgame != Game::State::quit) {
     if(gameState->endgame == Game::State::allDiscovered)
       SDL_RenderCopy(Game::renderer, winScreen, NULL, &screenRect);
     else if(gameState->endgame == Game::State::noFuel)
@@ -164,7 +163,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
     return;
   }
-  else if(gameState->endgame == Game::State::none) {
+  else if(!gameState->gameOver) {
     SDL_RenderCopy(Game::renderer, gameScreen, NULL, &screenRect);
   
     time.render(gameState);
@@ -178,7 +177,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
                                 selectedP.playerIsDocked());
     }
     if(gameState->planetCollided) {
-      Planet dockedP = pm->getDockedPlanet();
+      Planet dockedP = pm->getPlayerDockedPlanet();
       DockedPlanetInfo.render(gameState, dockedP.getPopulation(),
                               dockedP.playerIsDocked());
     }
@@ -367,7 +366,7 @@ void UIManager::checkForHovering(Game::State *gs) {
   }
   
   // End Screen
-  else if(gs->endgame != Game::State::none && gs->endgame != Game::State::quit) {
+  else if(gs->gameOver && gs->endgame != Game::State::quit) {
     if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
        && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
       hoveringLabel = playAgain;
@@ -426,9 +425,12 @@ void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
   }
   
   // End Screen
-  else if(gs->endgame != Game::State::none && gs->endgame != Game::State::quit) {
+  else if(gs->gameOver && gs->endgame != Game::State::quit) {
     if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
        && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
+      gs->frame = 0;
+      gs->gameOver = false;
+      gs->endgameFrame = 0;
       hoveringLabel = nothing;
       gs->endgame = Game::State::none;
       gs->restartGame = true;

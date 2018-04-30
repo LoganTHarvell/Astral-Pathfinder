@@ -32,7 +32,7 @@ SDL_Point Map::uiPosition(SDL_Point coordinates) {
 
 SDL_Point Map::mapPosition(SDL_Point uiPosition) {
   int x = uiPosition.x - mapOrigin.x;
-  int y = uiPosition.x - mapOrigin.y;
+  int y = height - (uiPosition.y - mapOrigin.y);
   return { x, y };
 }
 

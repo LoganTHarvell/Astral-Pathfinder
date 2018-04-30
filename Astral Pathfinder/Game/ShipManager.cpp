@@ -19,14 +19,19 @@ void ShipManager::init(SDL_Point homeworldPos) {
   SDL_Point p = { homeworldPos.x - (shipSize.w/2),
                   homeworldPos.y - (shipSize.h/2) };
   
-  playerShip.init(p, ShipType::playerShip);
+  playerShip.init(p);
 }
 
 // MARK: - Game Loop Methods
 
 void ShipManager::update(Game::State *gameState, PlanetManager *pm) {
   playerShip.update(gameState);
-  if (pm->planetIsDocked()) playerShip.updateFuel(pm->fuelDockedShip());
+  if (pm->playerIsDocked()) playerShip.updateFuel(pm->fuelDockedShip());
+  
+  // Endgame check for if player ran out of fuel
+  if (playerShip.getFuel() <= 0 && !pm->playerIsDocked()) {
+    gameState->endgame = Game::State::noFuel;
+  }
 }
 
 void ShipManager::render(Game::State *gameState) {

@@ -27,6 +27,8 @@ namespace GameParameters {
   const int fps = 60;
   const int frameDelay = 1000/fps;
 
+  const int endgameDelay = 600;
+
 }
 
 
@@ -39,7 +41,7 @@ class ShipManager;
 class UIManager;
 
 class Game {
-  
+
 public:
   // Data structure for keeping track of the game state
   struct State {
@@ -47,39 +49,42 @@ public:
     bool isRunning = false;
     bool restartGame = false;
     bool skipMainMenu = false;
-    
     enum {
       none, allDiscovered, noFuel, quit
     } endgame = none;
-    
+
+    bool gameOver = false;
+
     enum {
       inactive, currentOne, currentTwo, selectOne, selectTwo
     } activeSlider = inactive;
-    
+
     bool clickFlag = false;
     bool planetSelected = false;
     bool planetCollided = false;  // TODO: Verify that this is necessary, since there planetIsDocked() performs the same function
     bool mouseDown = false;
     bool debugMode = false;
-    
+
     // Fields
     Uint32 frame;
+    Uint32 startTime;
     Uint32 elapsedTime;
-    Uint32 ticks, tickCheckMark;
+    Uint32 ticks;
     SDL_Point clickLocation;
     SDL_Point dragLocation;
     int mouseScroll = 0;
     std::string playerName;
     bool renderPlayerName = false;
+    Uint32 endgameFrame;
   };
-  
+
   void init(const std::string title, SDL_Rect rect, bool fullscreen);
-  
+
   // MARK: - Game Loop Methods
   void handleEvents();
   void update(Uint32 ticks);
   void render();
-  
+
   // MARK: - Game Methods
   bool running() { return gameState.isRunning; }
   bool restart() { return gameState.restartGame; }
@@ -88,7 +93,7 @@ public:
 
   // Global renderer
   static SDL_Renderer *renderer;
-  
+
 private:
   // MARK: - Game Fields
   SDL_Window *window;

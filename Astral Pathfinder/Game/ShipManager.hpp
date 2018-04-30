@@ -15,7 +15,7 @@
 // MARK: Source Files
 #include "Game.hpp"
 #include "PlanetManager.hpp"
-#include "Ship.hpp"
+#include "PlayerShip.hpp"
 
 class ShipManager {
   
@@ -28,11 +28,11 @@ public:
   void render(Game::State *gameState);
   
   // MARK: - ShipManager Methods
-  Ship getPlayerShip() { return playerShip; };
+  PlayerShip getPlayerShip() { return playerShip; };
   
 private:
   // MARK: - ShipManager Fields
-  Ship playerShip;
+  PlayerShip playerShip;
 };
 
 #endif /* ShipManager_hpp */

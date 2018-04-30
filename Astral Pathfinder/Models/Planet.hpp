@@ -126,6 +126,7 @@ public:
   bool alienIsDocked() { return alienDocked; };
   void toggleDockedShip(int tag, Uint32 frame);
   int makeFuel(int amount);
+  SDL_Point mapPosition();
   
 private:
   // MARK: - Planet Fields

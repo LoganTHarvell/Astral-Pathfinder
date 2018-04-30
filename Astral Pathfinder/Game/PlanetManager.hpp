@@ -21,63 +21,64 @@
 // MARK: - PlanetManager Parameters
 
 namespace PlanetManagerParameters {
-  
+
   const int numberOfPlanets = 25;
-  
+
 }
 
 
 // MARK: - PlanetManager Class
 
 class PlanetManager {
-  
+
 public:
   // MARK: - Galaxy Initialization
   void initGalaxy();
-  
+
   // MARK: - Game Loop Methods
   void update(Game::State *gameState, ShipManager *shipManager);
   void render(Game::State *gameState);
-  
+
   // MARK: - PlanetManager Methods
   int getTotalPopulation();
-  
+
   Planet getPlanet(int n);
   Planet getSelectedPlanet();
   bool planetIsDocked();
-  Planet getDockedPlanet();
+  bool playerIsDocked();
+  Planet getPlayerDockedPlanet();
   std::vector<EventsComponent> getEventsList() { return planetEvents; }
-  
+
   void setPlanetMiningPercent(int p, int flag);
   void setPlanetFarmingPercent(int p, int flag);
   void setPlanetInfraPercent(int p, int flag);
   void setPlanetReservePercent(int p, int flag);
-  
+
   int fuelDockedShip();
-  
+
 private:
   // MARK: - Helper Methods
   // Initialiation helper methods
   static Planet initHomeworld();
   static Planet initPlanet();
-  
+
   void handleClickEvent(SDL_Point p, Game::State *gs);
   void selectPlanet(bool *planetSelected);
   void deselectPlanet(bool *planetSelected);
-  
+
   void handleCollisions(ShipManager *sm, Uint32 frame);
-  
+
   // MARK: - PlanetManager Fields
   enum {
     dockedPlanet=1, selectedPlanet
   };
-  
+
   std::vector<Planet> planets;
   std::vector<EventsComponent> planetEvents;
   int totalPopulation;
 
-  int dockedPlanetIndex;
   int selectedPlanetIndex;
+  int playerDockedPlanetIndex;
   int discoveryCount;
 
 };
