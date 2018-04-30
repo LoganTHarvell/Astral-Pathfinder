@@ -42,6 +42,17 @@ void ColliderComponent::update(SDL_Point center, PointVector vertices) {
 
 // MARK: - Collider Methods
 
+bool ColliderComponent::collisionCircle(int radius, PointVector vertices) {
+  
+  double d = 0;
+  for (auto v : vertices) {
+    d = sqrt((v.x-center.x)^2 + (v.y-center.y)^2);
+    if (d < radius) return true;
+  }
+  
+  return false;
+}
+
 bool ColliderComponent::collisionAABB(SDL_Rect r) {
   
   int topBound = vertices[0].y;
