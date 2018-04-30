@@ -53,11 +53,11 @@
 		020013892075BCD30087CED9 /* MODENINE.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 0200135E2075BCD30087CED9 /* MODENINE.TTF */; };
 		0200138A2075BCD30087CED9 /* mainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200135F2075BCD30087CED9 /* mainMenu.png */; };
 		02307D002075BE1B00B46A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02307CFE2075BE1B00B46A3E /* Assets.xcassets */; };
+		027CBAAD2096496100255BF1 /* AlienShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027CBAAB2096496100255BF1 /* AlienShip.cpp */; };
+		027CBAB020964AA000255BF1 /* PlayerShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027CBAAE20964AA000255BF1 /* PlayerShip.cpp */; };
 		9117BE722094FD34003FE954 /* EventsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE702094FD34003FE954 /* EventsPanel.cpp */; };
 		9117BE90209606D6003FE954 /* EventsComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE8E209606D6003FE954 /* EventsComponent.cpp */; };
 		9117BE922096577D003FE954 /* planetOutline.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE912096577D003FE954 /* planetOutline.png */; };
-		027CBAAD2096496100255BF1 /* AlienShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027CBAAB2096496100255BF1 /* AlienShip.cpp */; };
-		027CBAB020964AA000255BF1 /* PlayerShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 027CBAAE20964AA000255BF1 /* PlayerShip.cpp */; };
 		91E9F7AF2094051D000FDDB6 /* winScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 91E9F7AE2094051D000FDDB6 /* winScreen.png */; };
 /* End PBXBuildFile section */
 
@@ -141,15 +141,15 @@
 		0200135F2075BCD30087CED9 /* mainMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMenu.png; sourceTree = "<group>"; };
 		02307CFE2075BE1B00B46A3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02307CFF2075BE1B00B46A3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		027CBAAB2096496100255BF1 /* AlienShip.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AlienShip.cpp; sourceTree = "<group>"; };
+		027CBAAC2096496100255BF1 /* AlienShip.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AlienShip.hpp; sourceTree = "<group>"; };
+		027CBAAE20964AA000255BF1 /* PlayerShip.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerShip.cpp; sourceTree = "<group>"; };
+		027CBAAF20964AA000255BF1 /* PlayerShip.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerShip.hpp; sourceTree = "<group>"; };
 		9117BE702094FD34003FE954 /* EventsPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsPanel.cpp; sourceTree = "<group>"; };
 		9117BE712094FD34003FE954 /* EventsPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventsPanel.hpp; sourceTree = "<group>"; };
 		9117BE8E209606D6003FE954 /* EventsComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsComponent.cpp; sourceTree = "<group>"; };
 		9117BE8F209606D6003FE954 /* EventsComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventsComponent.hpp; sourceTree = "<group>"; };
 		9117BE912096577D003FE954 /* planetOutline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planetOutline.png; sourceTree = "<group>"; };
-		027CBAAB2096496100255BF1 /* AlienShip.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AlienShip.cpp; sourceTree = "<group>"; };
-		027CBAAC2096496100255BF1 /* AlienShip.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AlienShip.hpp; sourceTree = "<group>"; };
-		027CBAAE20964AA000255BF1 /* PlayerShip.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerShip.cpp; sourceTree = "<group>"; };
-		027CBAAF20964AA000255BF1 /* PlayerShip.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerShip.hpp; sourceTree = "<group>"; };
 		91E9F7AE2094051D000FDDB6 /* winScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = winScreen.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

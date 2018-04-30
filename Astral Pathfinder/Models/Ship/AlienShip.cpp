@@ -8,6 +8,8 @@
 
 #include "AlienShip.hpp"
 
+#include <cmath>
+
 #include "TextureManager.hpp"
 
 using PointVector = std::vector<SDL_Point>;
@@ -18,7 +20,7 @@ using PointVector = std::vector<SDL_Point>;
 void AlienShip::init(SDL_Point startPosition) {
   using namespace ShipParameters;
   
-  tag = playerShip;
+  tag = alienWarship;
   
   velocity.x = 0;
   velocity.y = 0;
@@ -30,11 +32,43 @@ void AlienShip::init(SDL_Point startPosition) {
   rect.w = shipSize.w;
   rect.h = shipSize.h;
   
+  setMainTarget(getCenter());
+  resetTarget();
+  
   collider = new ColliderComponent(getCenter(), computeShipVertices());
   texture = TextureManager::loadTexture(movingPlayerTex);
   SDL_SetTextureColorMod(texture, 200, 0, 0);
 }
 
+
+void AlienShip::update(Game::State * gs) {
+  updateVelocity();
+  updateRotation();
+  
+  if (gs->frame%2 == 0) {
+    updatePosition(gs->ticks);
+  }
+  
+  collider->update(getCenter(), computeShipVertices());
+}
+
+void AlienShip::setMainTarget(SDL_Point p) {
+  mainTarget = p;
+}
+
+void AlienShip::resetTarget() {
+  target = mainTarget;
+}
+
+void AlienShip::updateTarget(SDL_Point p) {
+  target = mainTarget;
+  
+  SDL_Point center = getCenter();
+  double dMain = sqrt((target.x-center.x)^2 + (target.y-center.y)^2);
+  double dTest = sqrt((p.x-center.x)^2 + (p.y-center.y)^2);
+  
+  if (dTest < dMain) target = p;
+}
 
 PointVector AlienShip::shipVertexVectors() {
   PointVector cornerVectors;
@@ -56,8 +90,10 @@ PointVector AlienShip::shipVertexVectors() {
 void AlienShip::updateVelocity() {
   using namespace ShipParameters;
  
-  int xdir = target.x - rect.x ;
-  int ydir = target.y - rect.y;
+  SDL_Point center = getCenter();
+  
+  int xdir = target.x - center.x ;
+  int ydir = target.y - center.y;
   
   if (xdir > 0) velocity.x = speed;
   else if (xdir < 0) velocity.x = -speed;

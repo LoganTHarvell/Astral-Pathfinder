@@ -16,15 +16,24 @@ class AlienShip : public Ship {
 public:
   void init(SDL_Point startPosition);
   
-  void setTarget(SDL_Point p);
+  void update(Game::State *gs);
+
+  void setMainTarget(SDL_Point p);
+  SDL_Point getMainTarget() { return mainTarget; };
+  SDL_Point getTarget() { return target; };
+  
+  void resetTarget();
+  void updateTarget(SDL_Point p);
   
 private:
-  
+
+  SDL_Point mainTarget;
   SDL_Point target;
+  
   
   // MARK: - Helper Methods
   PointVector shipVertexVectors();
-
+  
   void updateVelocity();
 };
 

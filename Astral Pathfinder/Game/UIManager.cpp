@@ -137,7 +137,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
       selectedPlanetInfo.render(gameState, selectedP.getPopulation(),
                                 selectedP.playerIsDocked());
     }
-    if(gameState->planetCollided) {
+    if(gameState->playerCollision) {
       Planet dockedP = pm->getPlayerDockedPlanet();
       DockedPlanetInfo.render(gameState, dockedP.getPopulation(),
                               dockedP.playerIsDocked());

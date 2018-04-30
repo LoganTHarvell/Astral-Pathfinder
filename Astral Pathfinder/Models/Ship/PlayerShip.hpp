@@ -17,8 +17,9 @@ public:
   // MARK: - Initiallization Methods
   void init(SDL_Point startPostion);
 
+  void update(Game::State *gs);
+  
   // MARK: - PlayerShip Methods
-  ShipParameters::ShipType getTag() { return tag; };
   int getFuel() { return fuel; };
   int getCrewPopulation() { return crewPopulation; };
   

@@ -71,7 +71,8 @@ void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
     planetManager->initGalaxy();
     
     shipManager = new ShipManager;
-    shipManager->init(planetManager->getPlanet(0).getCenter());
+    shipManager->init(planetManager->getPlanet(0).getCenter(),
+                      planetManager->getPlanet(1).getCenter());
     
     uiManager = new UIManager;
     uiManager->init();
@@ -119,7 +120,7 @@ void Game::handleEvents() {
         if(uiManager->checkMainMenu() || (gameState.endgame != State::none && gameState.endgame != State::quit))
           gameState.dragLocation = { event.motion.x, event.motion.y };
         
-        else if(gameState.planetSelected || gameState.planetCollided)
+        else if(gameState.planetSelected || gameState.playerCollision)
           gameState.dragLocation = { event.motion.x, event.motion.y };
         break;
       case SDL_MOUSEBUTTONUP:
@@ -205,7 +206,8 @@ void Game::restartGame() {
   planetManager->initGalaxy();
   
   shipManager = new ShipManager;
-  shipManager->init(planetManager->getPlanet(0).getCenter());
+  shipManager->init(planetManager->getPlanet(0).getCenter(),
+                    planetManager->getPlanet(1).getCenter());
   
   uiManager = new UIManager;
   uiManager->init();

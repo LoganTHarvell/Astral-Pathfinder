@@ -36,6 +36,15 @@ void PlayerShip::init(SDL_Point startPosition) {
 }
 
 
+void PlayerShip::update(Game::State * gs) {
+  updateVelocity();
+  updateRotation();
+  updatePosition(gs->ticks);
+  
+  collider->update(getCenter(), computeShipVertices());
+}
+
+
 PointVector PlayerShip::shipVertexVectors() {
   PointVector cornerVectors;
   

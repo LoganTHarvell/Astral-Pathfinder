@@ -61,7 +61,8 @@ public:
 
     bool clickFlag = false;
     bool planetSelected = false;
-    bool planetCollided = false;  // TODO: Verify that this is necessary, since there planetIsDocked() performs the same function
+    bool playerCollision = false;
+    bool alienCollision = false;
     bool mouseDown = false;
     bool debugMode = false;
 
