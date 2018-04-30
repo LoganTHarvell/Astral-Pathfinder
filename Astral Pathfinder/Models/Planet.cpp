@@ -74,7 +74,7 @@ void Planet::initPlanet() {
   texture = TextureManager::loadTexture(planetTextureFile);
   outlineTexture = TextureManager::loadTexture(planetOutlineFile);
   collider = new ColliderComponent(rect);
-  eventManager = new EventsComponent(getCenter());
+  eventManager = new EventsComponent(mapPosition());
   
   population = 0;
   

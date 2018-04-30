@@ -470,8 +470,6 @@ void UIManager::readScores() {
   string line;
   ifstream file;
   file.open(UiParameters::filePath.c_str());
-  if(file.is_open())
-    cout << "sup" << endl;
   while(static_cast<void>(file >> ws), getline(file, line, lineBreak)) {
     // Player Name
     string name = line;
