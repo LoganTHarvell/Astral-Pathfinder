@@ -65,6 +65,7 @@ void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
     
     gameState.isRunning = true;
     gameState.frame = 0;
+    gameState.tickCheckMark = 0;
     
     planetManager = new PlanetManager;
     planetManager->initGalaxy();
@@ -156,14 +157,17 @@ void Game::handleEvents() {
 }
 
 void Game::update(Uint32 ticks) {
-  if (!uiManager->checkMainMenu() && gameState.endgame == State::none) {
+  if (!uiManager->checkMainMenu() && !uiManager->checkScoreboardScreen()
+      && gameState.endgame == State::none) {
     gameState.frame++;
-    gameState.elapsedTime = SDL_GetTicks()/1000;
     gameState.ticks = ticks;
+    gameState.elapsedTime = (SDL_GetTicks()/1000)-gameState.tickCheckMark;
   
     planetManager->update(&gameState, shipManager);
     shipManager->update(&gameState, planetManager);
   }
+  else gameState.tickCheckMark = SDL_GetTicks()/1000;
+    
   
   uiManager->update(&gameState, planetManager, shipManager);
   
@@ -222,4 +226,5 @@ void Game::restartGame() {
     gameState.skipMainMenu = false;
   }
   gameState.playerName = "";
+  gameState.tickCheckMark = SDL_GetTicks()/1000;
 }

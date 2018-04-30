@@ -65,7 +65,7 @@ public:
     // Fields
     Uint32 frame;
     Uint32 elapsedTime;
-    Uint32 ticks;
+    Uint32 ticks, tickCheckMark;
     SDL_Point clickLocation;
     SDL_Point dragLocation;
     int mouseScroll = 0;
