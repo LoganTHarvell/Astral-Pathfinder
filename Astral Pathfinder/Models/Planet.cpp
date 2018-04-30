@@ -241,7 +241,7 @@ void Planet::updatePopulation(Uint32 frame) {
   // Calculates surplus food percentage
   float foodNeeded = population*foodRqmt;
   float surplus = food-foodNeeded;
-  if (population > 0 && surplus > 0) surplus = surplus/foodNeeded;
+  if (population > 0 && surplus > 0) surplus = (surplus/foodNeeded)*0.1;
   else surplus = 0;
   
   // Resets births and deaths rates for growth period
