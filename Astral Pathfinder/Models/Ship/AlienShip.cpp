@@ -36,8 +36,7 @@ void AlienShip::init(SDL_Point startPosition) {
   resetTarget();
   
   collider = new ColliderComponent(getCenter(), computeShipVertices());
-  texture = TextureManager::loadTexture(movingPlayerTex);
-  SDL_SetTextureColorMod(texture, 200, 0, 0);
+  texture = TextureManager::loadTexture(alienTex);
 }
 
 
