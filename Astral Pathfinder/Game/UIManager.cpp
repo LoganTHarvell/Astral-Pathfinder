@@ -13,6 +13,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include "SDL2_ttf/SDL_ttf.h"
 
 // MARK: Source Files
@@ -42,6 +43,20 @@ void UIManager::init() {
   
   mainMenuFlag = true;
   prevScore = 0;
+  
+  TextBox box;
+  SDL_Rect temp;
+  for(int i = 0; i < 10; i++) {
+    scoreList[i*2] = box;
+    scoreList[i*2+1] = box;
+    temp = {startingNameBox.x, startingNameBox.y+(53*i),
+      startingNameBox.w, startingNameBox.h};
+    scoreList[i*2].init(temp);
+    temp = {startingScoreBox.x, startingScoreBox.y+(53*i),
+      startingScoreBox.w, startingScoreBox.h};
+    scoreList[(i*2)+1].init(temp);
+  }
+  readScores();
 }
 
 // MARK: - Game Loop Methods
@@ -118,6 +133,13 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
     
     if(hoveringLabel == mainMenuScoreboard)
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
+    
+    for(int i = 0; i < 10; i++) {
+      if(scores[i] > -1) {
+        scoreList[i*2].render(gameState);
+        scoreList[(i*2)+1].render(gameState);
+      }
+    }
   }
   else if (gameState->endgame != Game::State::none && gameState->endgame != Game::State::quit) {
     if(gameState->endgame == Game::State::allDiscovered)
@@ -131,8 +153,10 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
     
     if(gameState->renderPlayerName) {
       playerName.setFinalScore(gameState->playerName.c_str());
-      playerName.render(gameState);
+      gameState->renderPlayerName = false;
     }
+    
+    playerName.render(gameState);
     
     if(hoveringLabel == playAgain)
       SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
@@ -338,9 +362,8 @@ void UIManager::checkForHovering(Game::State *gs) {
       
       if(borderRect.y != mainMenuScoreboardLabel.y-buffer)
         borderRect = mainMenuScoreboardBorder;
-      
-      else hoveringLabel = nothing;
     }
+    else hoveringLabel = nothing;
   }
   
   // End Screen
@@ -431,9 +454,52 @@ void UIManager::writeScore(Game::State *gs) {
   using namespace std;
   ofstream file;
   file.open(UiParameters::filePath.c_str(), ios::app);
-  if(gs->playerName.length() == 0)
-    gs->playerName = "CPU";
-  string message = gs->playerName + " " + to_string(score);
+  while(gs->playerName.length() < 3)
+    gs->playerName += '-';
+  string message = gs->playerName + ";" + to_string(score) + ";";
   file << message << endl;
   file.close();
+}
+
+void UIManager::readScores() {
+  using namespace std;
+  
+  const char lineBreak = ';';
+  string line;
+  ifstream file;
+  file.open(UiParameters::filePath.c_str());
+  while(static_cast<void>(file >> ws), getline(file, line, lineBreak)) {
+    // Player Name
+    string name = line;
+    // Player Score
+    getline(file, line, lineBreak);
+    stringstream s(line);
+    int score;
+    s >> score;
+    
+    compareScores(name, score);
+  }
+
+  file.close();
+}
+
+void UIManager::compareScores(std::string name, int score) {
+  int tempScore;
+  std::string tempName;
+  TextBox tempBox;
+  
+  for(int i = 0; i < 10; i++) {
+    if (score > scores[i]) {
+      tempScore = scores[i];
+      scores[i] = score;
+      score = tempScore;
+      
+      tempName = names[i];
+      names[i] = name;
+      name = tempName;
+      
+      scoreList[i*2].setScoreboardMessage(names[i] + ": ");
+      scoreList[(i*2)+1].setScoreboardMessage(std::to_string(scores[i]).c_str());
+    }
+  }
 }

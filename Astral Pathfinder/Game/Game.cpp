@@ -96,7 +96,7 @@ void Game::handleEvents() {
       case SDL_TEXTINPUT:
         if(gameState.endgame != State::none && gameState.endgame != State::quit
            && SDL_IsTextInputActive()) {
-          if(gameState.playerName.length() < 8) {
+          if(gameState.playerName.length() < 3) {
             gameState.playerName += event.text.text;
             gameState.renderPlayerName = true;
           }
@@ -221,4 +221,5 @@ void Game::restartGame() {
     uiManager->setMainMenuFlag(false);
     gameState.skipMainMenu = false;
   }
+  gameState.playerName = "";
 }

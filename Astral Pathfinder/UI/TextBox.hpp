@@ -27,6 +27,7 @@ namespace TextParameters {
   const int regFontSize = 36;
   const int finalScoreFontSize = 120;
   const Uint32 wrapLength = 300;
+  const int scoreboardLine = 880;
 }
 
 
@@ -44,6 +45,7 @@ public:
   
   // MARK: - TextBox Methods
   void setMessage(const std::string words, SDL_Color color = TextParameters::color);
+  void setScoreboardMessage(const std::string words, SDL_Color color = TextParameters::color);
   void setEventMessage(const std::string words, SDL_Color color);
   void setFinalScore(const std::string words);
   bool checkNull();

@@ -40,6 +40,8 @@ namespace UiParameters {
   const SDL_Rect playAgainBorder = {270, 662, 460, 95};
   const SDL_Rect mainMenuBorder = {867, 666, 460, 92};
   const SDL_Rect mainMenuScoreboardBorder = {609, 742, 412, 90};
+  const SDL_Rect startingNameBox = {760, 203, 300, 42};
+  const SDL_Rect startingScoreBox = {880, 203, 300, 42};
   const SDL_Point endScoreCoords = {945, 335};
   const SDL_Point endScoreName = {940, 480};
   const SDL_Color red = {128,0,0};
@@ -86,6 +88,9 @@ private:
   
   bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true;
   bool mainMenuFlag, scoreboardFlag;
+  TextBox scoreList[20];
+  int scores[10] = {-1};
+  std::string names[10] = {""};
   
   // MARK: - Helper Methods
   void updateTime(Uint32);
@@ -99,6 +104,8 @@ private:
   void checkForHovering(Game::State *gs);
   void checkClickedAreaOtherScreen(Game::State *gs);
   void writeScore(Game::State *gs);
+  void readScores();
+  void compareScores(std::string name, int score);
 };
 
 #endif /* UIManager_hpp */

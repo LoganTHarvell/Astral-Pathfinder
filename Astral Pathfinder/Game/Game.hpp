@@ -71,8 +71,6 @@ public:
     int mouseScroll = 0;
     std::string playerName;
     bool renderPlayerName = false;
-    std::string names[10] = {""};
-    int scores[10] = {0};
   };
   
   void init(const std::string title, SDL_Rect rect, bool fullscreen);
