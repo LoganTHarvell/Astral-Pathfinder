@@ -46,7 +46,7 @@ void ShipInfo::clean() {
 
 // MARK: - ShipInfo Methods
 
-void ShipInfo::setText(Ship ship) {
+void ShipInfo::setText(PlayerShip ship) {
   SDL_Point pos = ship.getCenter();
   int fuelAmount = ship.getFuel();
   std::string loc = "Location: " + std::to_string(pos.x) + "," + std::to_string(pos.y);

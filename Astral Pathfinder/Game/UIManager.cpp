@@ -65,7 +65,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
   updateTime(gameState->elapsedTime);
   updateTotalScore(planetManager);
   
-  Ship player = shipManager->getPlayerShip();
+  PlayerShip player = shipManager->getPlayerShip();
   if(player.getVelocity().x != 0 || player.getVelocity().y != 0
      || planetManager->playerIsDocked()) {
     shipInfo.clean();

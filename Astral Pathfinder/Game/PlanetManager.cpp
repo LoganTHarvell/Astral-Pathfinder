@@ -219,7 +219,7 @@ void PlanetManager::deselectPlanet(bool *planetSelected) {
 }
 
 void PlanetManager::handleCollisions(ShipManager *sm, Uint32 frame) {
-  Ship player = sm->getPlayerShip();
+  PlayerShip player = sm->getPlayerShip();
   std::vector<SDL_Point> playerVertices = player.getCollider().getVertices();
   
   // Checks all planets for collisions if player ship hasn't docked

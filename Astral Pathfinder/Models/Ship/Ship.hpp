@@ -43,42 +43,36 @@ namespace ShipParameters {
 // MARK: - Ship Class
 
 class Ship: public GameObject {
-  using PointVector = std::vector<SDL_Point>;
   
 public:
   // MARK: - Initialization Methods
-  void init(SDL_Point startPosition, ShipParameters::ShipType type);
+  virtual void init(SDL_Point startPosition) = 0;
   
   // MARK: - Game Loop Methods
   void update(Game::State *gs);
   void render(Game::State *gs);
   
   // MARK: - Ship Methods
-  ShipParameters::ShipType getTag() { return tag; };
-  int getFuel() { return fuel; };
-  int getCrewPopulation() { return crewPopulation; };
   int getRotation() { return rotation; };
   SDL_Point getVelocity() { return velocity; }
   SDL_Point getUIPosition() { return getCenter(); };
-  SDL_Point getMapPosition(SDL_Point uiPosition);
-  
-  void updateFuel(int minerals);
-  
-private:
-  // MARK: - Ship Fields
-  ShipParameters::ShipType tag;
-  int crewPopulation;
-  int fuel;
-  
+  SDL_Point mapPosition();
+    
+protected:
+  using PointVector = std::vector<SDL_Point>;
+
+  // MARK: - Ship Fields  
   SDL_Point velocity;
   int rotation;
   
   // MARK: - Helper Methods
   bool boundaryCollision();
-  PointVector shipVertexVectors();
+  
+  virtual PointVector shipVertexVectors() = 0;
   PointVector computeShipVertices();
   
-  void updateVelocity();
+  virtual void updateVelocity() = 0;
+  
   void updateRotation();
   void updatePosition(Uint32 ticks);
 

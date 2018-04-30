@@ -14,7 +14,7 @@
 #include "PlanetManager.hpp"
 #include "TextureManager.hpp"
 #include "Map.hpp"
-#include "Ship.hpp"
+#include "PlayerShip.hpp"
 
 // MARK: - Initialization Methods
 
