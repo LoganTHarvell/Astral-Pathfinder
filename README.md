@@ -7,4 +7,4 @@ The Astral Pathfinder project initially began as a text-based game inspired by o
 
 By Spring 2018, the project was reinvented as a real-time application developed in C++ using SDL2 and associated frameworks as the semester project for AI for Game Programming. The game evolved into a space conquest space sim game.
 
-Currently it is still in development for MacOS as an Xcode project, but by utilizing non-platform specfic code, the project is easily adaptible for other platforms.
+Currently it is still in development for MacOS as an Xcode project, but by utilizing non-platform specific code, the project is easily adaptable for other platforms.
