@@ -89,7 +89,7 @@ private:
   void setDockedPlanet(Planet p);
   void handleMouseDown(Game::State *gs, PlanetManager *pm);
   void checkClickedArea(SDL_Point p);
-  void checkClickedAreaOtherScreen(Game::State *gs);
+  void checkSliderMovement(PlanetInfo *pi, Game::State *gs, PlanetManager *pm);
   void setActiveScreen(int screen);
 };
 

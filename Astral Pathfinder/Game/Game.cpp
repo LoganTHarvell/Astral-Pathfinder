@@ -236,4 +236,5 @@ void Game::restartGame() {
   gameState.restartGame = false;
   gameState.skipMainMenu = false;
   gameState.playerName = "";
+  gameState.planetSelected = false;
 }

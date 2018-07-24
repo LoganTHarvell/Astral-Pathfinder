@@ -242,76 +242,46 @@ void UIManager::setDockedPlanet(Planet p) {
 }
 
 void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
+  // If mouse button not pressed down, don't check for slider movement
+  if(!gs->mouseDown) return;
+  
+  if(gs->mouseDown) {
+    checkClickedArea(gs->clickLocation);
+    
+    if(currentWindow == currentPlanetWindow)
+      checkSliderMovement(&DockedPlanetInfo, gs, pm);
+    
+    else if(currentWindow == selectedPlanetWindow)
+      checkSliderMovement(&selectedPlanetInfo, gs, pm);
+  }
+}
+
+void UIManager::checkSliderMovement(PlanetInfo *pi, Game::State *gs, PlanetManager *pm) {
   enum {
     neither, fertilitySlider, reserveSlider
   };
   
-  // If mouse button not pressed down, don't check for slider movement
-  if(!gs->mouseDown) return;
-  
-  if(gs->mouseDown)
-    checkClickedArea(gs->clickLocation);
-  
-  // Current Planet Window
-  if(currentWindow == currentPlanetWindow) {
-    // If down, but not dragging, check if slider was clicked
-    if(gs->mouseDown && gs->activeSlider == gs->State::inactive) {
-      if(DockedPlanetInfo.checkClick(gs->clickLocation) == fertilitySlider)
-        gs->activeSlider = gs->State::currentOne;
-      
-      if(DockedPlanetInfo.checkClick(gs->clickLocation) == reserveSlider)
-        gs->activeSlider = gs->State::currentTwo;
-    }
-  
-    // If so, check mouse movement and adjust slider appropriately
-    if(gs->activeSlider == gs->State::currentOne) {
-      bool movement = DockedPlanetInfo.moveSlider(gs);
-      int percent = DockedPlanetInfo.getSliderPercent();
-      
-      if(movement) {
-        pm->setPlanetMiningPercent(100-percent, currentWindow);
-        pm->setPlanetFarmingPercent(percent, currentWindow);
-      }
-    }
-  
-    if(gs->activeSlider == gs->State::currentTwo) {
-      bool movement = DockedPlanetInfo.moveSlider(gs);
-      int percent = DockedPlanetInfo.getSliderPercent();
-      
-      if(movement) {
-        pm->setPlanetInfraPercent(100-percent, currentWindow);
-        pm->setPlanetReservePercent(percent, currentWindow);
-      }
-    }
+  // If down, but not dragging, check if slider was clicked
+  if(gs->mouseDown && gs->activeSlider == gs->State::inactive) {
+    if(pi->checkClick(gs->clickLocation) == fertilitySlider)
+      gs->activeSlider = gs->State::resourceSlider;
+    
+    if(pi->checkClick(gs->clickLocation) == reserveSlider)
+      gs->activeSlider = gs->State::depositSlider;
   }
   
-  // Selected Planet Window
-  if(currentWindow == selectedPlanetWindow) {
-    // If down, but not dragging, check if slider was clicked
-    if(gs->mouseDown && gs->activeSlider == gs->State::inactive) {
-      if(selectedPlanetInfo.checkClick(gs->clickLocation) == fertilitySlider)
-        gs->activeSlider = gs->State::selectOne;
-      
-      if(selectedPlanetInfo.checkClick(gs->clickLocation) == reserveSlider)
-        gs->activeSlider = gs->State::selectTwo;
-    }
+  // If so, check mouse movement and adjust slider appropriately
+  if(gs->activeSlider != gs->State::inactive) {
+    bool movement = pi->moveSlider(gs);
+    int percent = pi->getSliderPercent();
     
-    // If so, check mouse movement and adjust slider appropriately
-    if(gs->activeSlider == gs->State::selectOne) {
-      bool movement = selectedPlanetInfo.moveSlider(gs);
-      int percent = selectedPlanetInfo.getSliderPercent();
-      
-      if(movement) {
+    if(movement) {
+      if(gs->activeSlider == gs->State::resourceSlider) {
         pm->setPlanetMiningPercent(100-percent, currentWindow);
         pm->setPlanetFarmingPercent(percent, currentWindow);
       }
-    }
-    
-    if(gs->activeSlider == gs->State::selectTwo) {
-      bool movement = selectedPlanetInfo.moveSlider(gs);
-      int percent = selectedPlanetInfo.getSliderPercent();
       
-      if(movement) {
+      else if(gs->activeSlider == gs->State::depositSlider) {
         pm->setPlanetInfraPercent(100-percent, currentWindow);
         pm->setPlanetReservePercent(percent, currentWindow);
       }

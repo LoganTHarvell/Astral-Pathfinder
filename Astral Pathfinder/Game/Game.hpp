@@ -58,7 +58,7 @@ public:
     bool gameOver = false;
 
     enum {
-      inactive, currentOne, currentTwo, selectOne, selectTwo
+      inactive, resourceSlider, depositSlider
     } activeSlider = inactive;
 
     bool clickFlag = false;

@@ -49,8 +49,10 @@ int MainMenu::checkClick(Game::State *gs) {
   borderRect = {};
   
   if((p.x > startGameButton.x) && (p.x < startGameButton.x + startGameButton.w)
-     && (p.y > startGameButton.y) && (p.y < startGameButton.y + startGameButton.h))
+     && (p.y > startGameButton.y) && (p.y < startGameButton.y + startGameButton.h)) {
+    gs->planetSelected = false;
     return activeScreen::game;
+  }
   
   else if((p.x > scoreboardButton.x) && (p.x < scoreboardButton.x + scoreboardButton.w)
           && (p.y > scoreboardButton.y) && (p.y < scoreboardButton.y + scoreboardButton.h))
