@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		020012FE2075A5AA0087CED9 /* SDL2.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 020012FB2075A5AA0087CED9 /* SDL2.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		020012FF2075A5AA0087CED9 /* SDL2_image.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 020012FC2075A5AA0087CED9 /* SDL2_image.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		020013002075A5AA0087CED9 /* SDL2_ttf.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 020012FD2075A5AA0087CED9 /* SDL2_ttf.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		020012FE2075A5AA0087CED9 /* SDL2.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 020012FB2075A5AA0087CED9 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		020012FF2075A5AA0087CED9 /* SDL2_image.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 020012FC2075A5AA0087CED9 /* SDL2_image.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		020013002075A5AA0087CED9 /* SDL2_ttf.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 020012FD2075A5AA0087CED9 /* SDL2_ttf.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		020013612075BCD30087CED9 /* Classes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0200131F2075BCD30087CED9 /* Classes.txt */; };
 		020013622075BCD30087CED9 /* UI Layout.txt in Resources */ = {isa = PBXBuildFile; fileRef = 020013202075BCD30087CED9 /* UI Layout.txt */; };
 		020013632075BCD30087CED9 /* Screen Shot 2018-03-20 at 2.12.07 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013222075BCD30087CED9 /* Screen Shot 2018-03-20 at 2.12.07 PM.png */; };
@@ -415,7 +415,7 @@
 		020012A720759ED60087CED9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Logan Harvell, Ian Holdeman";
 				TargetAttributes = {
 					020012AE20759ED60087CED9 = {
