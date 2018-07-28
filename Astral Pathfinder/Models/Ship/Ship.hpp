@@ -36,6 +36,7 @@ namespace ShipParameters {
   
   // TODO: figure out real velocity/ticks formula
   const int speed = 1;
+  const float alienSpeed = 0.5;
   const int turnSpeed = 5;
 }
 
@@ -49,10 +50,11 @@ public:
   virtual void init(SDL_Point startPosition) = 0;
   
   // MARK: - Game Loop Methods
-  void update(Game::State *gs);
+  virtual void update(Game::State *gs) = 0;
   void render(Game::State *gs);
   
   // MARK: - Ship Methods
+  ShipParameters::ShipType getTag() { return tag; };
   int getRotation() { return rotation; };
   SDL_Point getVelocity() { return velocity; }
   SDL_Point getUIPosition() { return getCenter(); };

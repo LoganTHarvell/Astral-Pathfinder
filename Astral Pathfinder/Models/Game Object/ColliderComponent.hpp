@@ -29,6 +29,7 @@ public:
   void update(SDL_Point center, PointVector vertices);
   
   //MARK: - Collider Methods
+  bool collisionCircle(int radius, PointVector vertices);
   bool collisionAABB(SDL_Rect r);
   bool collisionOBB(PointVector vertices);
   

@@ -16,10 +16,26 @@ class AlienShip : public Ship {
 public:
   void init(SDL_Point startPosition);
   
+  void update(Game::State *gs);
+
+  void setMainTarget(SDL_Point p);
+  SDL_Point getMainTarget() { return mainTarget; };
+  SDL_Point getTarget() { return target; };
+  
+  void resetTarget();
+  void updateTarget(SDL_Point p);
+  
 private:
+
+  SDL_Point mainTarget;
+  SDL_Point target;
+  
+  const std::string alienTex = "../Resources/alienShip.png";
+  
+  
   // MARK: - Helper Methods
   PointVector shipVertexVectors();
-
+  
   void updateVelocity();
 };
 

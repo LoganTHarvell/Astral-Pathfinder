@@ -46,7 +46,9 @@ public:
   Planet getSelectedPlanet();
   bool planetIsDocked();
   bool playerIsDocked();
+  bool alienIsDocked();
   Planet getPlayerDockedPlanet();
+  Planet getAlienDockedPlanet();
   std::vector<EventsComponent> getEventsList() { return planetEvents; }
 
   void setPlanetMiningPercent(int p, int flag);
@@ -79,6 +81,7 @@ private:
 
   int selectedPlanetIndex;
   int playerDockedPlanetIndex;
+  int alienDockedPlanetIndex;
   int discoveryCount;
 
 };

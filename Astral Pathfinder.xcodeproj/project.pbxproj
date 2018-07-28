@@ -52,17 +52,23 @@
 		020013892075BCD30087CED9 /* MODENINE.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 0200135E2075BCD30087CED9 /* MODENINE.TTF */; };
 		0200138A2075BCD30087CED9 /* mainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200135F2075BCD30087CED9 /* mainMenu.png */; };
 		02307D002075BE1B00B46A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02307CFE2075BE1B00B46A3E /* Assets.xcassets */; };
+		02DDC15620971D6000704F70 /* PlayerShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15120971D6000704F70 /* PlayerShip.cpp */; };
+		02DDC15720971D6000704F70 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15420971D6000704F70 /* Ship.cpp */; };
+		02DDC15820971D6000704F70 /* AlienShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15520971D6000704F70 /* AlienShip.cpp */; };
+		02DDC15B20971DA900704F70 /* planet2.png in Resources */ = {isa = PBXBuildFile; fileRef = 02DDC15920971DA900704F70 /* planet2.png */; };
+		02DDC15C20971DA900704F70 /* movingPlayerShip2.png in Resources */ = {isa = PBXBuildFile; fileRef = 02DDC15A20971DA900704F70 /* movingPlayerShip2.png */; };
+		02DDC15F20971DB500704F70 /* scoreboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 02DDC15D20971DB500704F70 /* scoreboard.png */; };
+		02DDC16020971DB500704F70 /* gameScreen2.png in Resources */ = {isa = PBXBuildFile; fileRef = 02DDC15E20971DB500704F70 /* gameScreen2.png */; };
+		02DDC1622097247600704F70 /* scoreboard.txt in Resources */ = {isa = PBXBuildFile; fileRef = 02DDC1612097247600704F70 /* scoreboard.txt */; };
 		9117BE722094FD34003FE954 /* EventsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE702094FD34003FE954 /* EventsPanel.cpp */; };
 		9117BE90209606D6003FE954 /* EventsComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE8E209606D6003FE954 /* EventsComponent.cpp */; };
 		9117BE922096577D003FE954 /* planetOutline.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE912096577D003FE954 /* planetOutline.png */; };
-		9117BE942096775A003FE954 /* scoreboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE932096775A003FE954 /* scoreboard.png */; };
-		9117BEA42096C528003FE954 /* scoreboard.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9117BEA32096C528003FE954 /* scoreboard.txt */; };
-		9117BEAD2096D1F8003FE954 /* AlienShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BEAA2096D1E8003FE954 /* AlienShip.cpp */; };
-		9117BEAE2096D1F8003FE954 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BEAB2096D1E8003FE954 /* Ship.cpp */; };
-		9117BEAF2096D1F8003FE954 /* PlayerShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BEAC2096D1E8003FE954 /* PlayerShip.cpp */; };
-		9117BEB32096E075003FE954 /* gameScreen2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BEB22096E075003FE954 /* gameScreen2.png */; };
-		9117BEB52096E91E003FE954 /* movingPlayerShip2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BEB42096E91D003FE954 /* movingPlayerShip2.png */; };
-		9117BEB72096E9D0003FE954 /* planet2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BEB62096E9D0003FE954 /* planet2.png */; };
+		91499BB8209763B800DC6DB3 /* alienScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 91499BB7209763B800DC6DB3 /* alienScreen.png */; };
+		91731FCE20977758009F6FC5 /* alienShip.png in Resources */ = {isa = PBXBuildFile; fileRef = 91731FCD20977758009F6FC5 /* alienShip.png */; };
+		9192D8C620FA9BCF0053F989 /* Screen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9192D8C420FA9BCF0053F989 /* Screen.cpp */; };
+		9192D8CA20FACF940053F989 /* MainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9192D8C820FACF940053F989 /* MainMenu.cpp */; };
+		9192D8CD20FACFA40053F989 /* Scoreboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9192D8CB20FACFA40053F989 /* Scoreboard.cpp */; };
+		9192D8D020FACFBB0053F989 /* EndScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9192D8CE20FACFBB0053F989 /* EndScreen.cpp */; };
 		91E9F7AF2094051D000FDDB6 /* winScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 91E9F7AE2094051D000FDDB6 /* winScreen.png */; };
 /* End PBXBuildFile section */
 
@@ -153,22 +159,32 @@
 		0200135F2075BCD30087CED9 /* mainMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMenu.png; sourceTree = "<group>"; };
 		02307CFE2075BE1B00B46A3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02307CFF2075BE1B00B46A3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02DDC15020971D6000704F70 /* AlienShip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AlienShip.hpp; sourceTree = "<group>"; };
+		02DDC15120971D6000704F70 /* PlayerShip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerShip.cpp; sourceTree = "<group>"; };
+		02DDC15220971D6000704F70 /* PlayerShip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerShip.hpp; sourceTree = "<group>"; };
+		02DDC15320971D6000704F70 /* Ship.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ship.hpp; sourceTree = "<group>"; };
+		02DDC15420971D6000704F70 /* Ship.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ship.cpp; sourceTree = "<group>"; };
+		02DDC15520971D6000704F70 /* AlienShip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlienShip.cpp; sourceTree = "<group>"; };
+		02DDC15920971DA900704F70 /* planet2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planet2.png; sourceTree = "<group>"; };
+		02DDC15A20971DA900704F70 /* movingPlayerShip2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movingPlayerShip2.png; sourceTree = "<group>"; };
+		02DDC15D20971DB500704F70 /* scoreboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreboard.png; sourceTree = "<group>"; };
+		02DDC15E20971DB500704F70 /* gameScreen2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameScreen2.png; sourceTree = "<group>"; };
+		02DDC1612097247600704F70 /* scoreboard.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scoreboard.txt; sourceTree = "<group>"; };
 		9117BE702094FD34003FE954 /* EventsPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsPanel.cpp; sourceTree = "<group>"; };
 		9117BE712094FD34003FE954 /* EventsPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventsPanel.hpp; sourceTree = "<group>"; };
 		9117BE8E209606D6003FE954 /* EventsComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsComponent.cpp; sourceTree = "<group>"; };
 		9117BE8F209606D6003FE954 /* EventsComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventsComponent.hpp; sourceTree = "<group>"; };
 		9117BE912096577D003FE954 /* planetOutline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planetOutline.png; sourceTree = "<group>"; };
-		9117BE932096775A003FE954 /* scoreboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoreboard.png; sourceTree = "<group>"; };
-		9117BEA32096C528003FE954 /* scoreboard.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scoreboard.txt; sourceTree = "<group>"; };
-		9117BEA72096D1E8003FE954 /* AlienShip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AlienShip.hpp; sourceTree = "<group>"; };
-		9117BEA82096D1E8003FE954 /* Ship.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ship.hpp; sourceTree = "<group>"; };
-		9117BEA92096D1E8003FE954 /* PlayerShip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerShip.hpp; sourceTree = "<group>"; };
-		9117BEAA2096D1E8003FE954 /* AlienShip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AlienShip.cpp; sourceTree = "<group>"; };
-		9117BEAB2096D1E8003FE954 /* Ship.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ship.cpp; sourceTree = "<group>"; };
-		9117BEAC2096D1E8003FE954 /* PlayerShip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerShip.cpp; sourceTree = "<group>"; };
-		9117BEB22096E075003FE954 /* gameScreen2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameScreen2.png; sourceTree = "<group>"; };
-		9117BEB42096E91D003FE954 /* movingPlayerShip2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movingPlayerShip2.png; sourceTree = "<group>"; };
-		9117BEB62096E9D0003FE954 /* planet2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planet2.png; sourceTree = "<group>"; };
+		91499BB7209763B800DC6DB3 /* alienScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alienScreen.png; sourceTree = "<group>"; };
+		91731FCD20977758009F6FC5 /* alienShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alienShip.png; sourceTree = "<group>"; };
+		9192D8C420FA9BCF0053F989 /* Screen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Screen.cpp; sourceTree = "<group>"; };
+		9192D8C520FA9BCF0053F989 /* Screen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Screen.hpp; sourceTree = "<group>"; };
+		9192D8C820FACF940053F989 /* MainMenu.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenu.cpp; sourceTree = "<group>"; };
+		9192D8C920FACF940053F989 /* MainMenu.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MainMenu.hpp; sourceTree = "<group>"; };
+		9192D8CB20FACFA40053F989 /* Scoreboard.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scoreboard.cpp; sourceTree = "<group>"; };
+		9192D8CC20FACFA40053F989 /* Scoreboard.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scoreboard.hpp; sourceTree = "<group>"; };
+		9192D8CE20FACFBB0053F989 /* EndScreen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EndScreen.cpp; sourceTree = "<group>"; };
+		9192D8CF20FACFBB0053F989 /* EndScreen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EndScreen.hpp; sourceTree = "<group>"; };
 		91E9F7AE2094051D000FDDB6 /* winScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = winScreen.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -259,6 +275,7 @@
 		020013312075BCD30087CED9 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				9192D8C720FA9D940053F989 /* Screens */,
 				020013342075BCD30087CED9 /* PlanetInfo.hpp */,
 				0200133D2075BCD30087CED9 /* PlanetInfo.cpp */,
 				020013382075BCD30087CED9 /* ShipInfo.hpp */,
@@ -331,8 +348,9 @@
 		020013542075BCD30087CED9 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
-				9117BEB62096E9D0003FE954 /* planet2.png */,
-				9117BEB42096E91D003FE954 /* movingPlayerShip2.png */,
+				91731FCD20977758009F6FC5 /* alienShip.png */,
+				02DDC15A20971DA900704F70 /* movingPlayerShip2.png */,
+				02DDC15920971DA900704F70 /* planet2.png */,
 				9117BE912096577D003FE954 /* planetOutline.png */,
 				020013552075BCD30087CED9 /* slider.png */,
 				020013562075BCD30087CED9 /* border.png */,
@@ -347,8 +365,9 @@
 		02307CFC2075BDB700B46A3E /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				9117BEB22096E075003FE954 /* gameScreen2.png */,
-				9117BE932096775A003FE954 /* scoreboard.png */,
+				91499BB7209763B800DC6DB3 /* alienScreen.png */,
+				02DDC15E20971DB500704F70 /* gameScreen2.png */,
+				02DDC15D20971DB500704F70 /* scoreboard.png */,
 				91E9F7AE2094051D000FDDB6 /* winScreen.png */,
 				020013592075BCD30087CED9 /* loseScreen.png */,
 				0200135B2075BCD30087CED9 /* gameScreen.png */,
@@ -369,7 +388,7 @@
 		9117BEA22096C528003FE954 /* Scores */ = {
 			isa = PBXGroup;
 			children = (
-				9117BEA32096C528003FE954 /* scoreboard.txt */,
+				02DDC1612097247600704F70 /* scoreboard.txt */,
 			);
 			path = Scores;
 			sourceTree = "<group>";
@@ -377,14 +396,29 @@
 		9117BEA62096D1E8003FE954 /* Ship */ = {
 			isa = PBXGroup;
 			children = (
-				9117BEA82096D1E8003FE954 /* Ship.hpp */,
-				9117BEAB2096D1E8003FE954 /* Ship.cpp */,
-				9117BEA92096D1E8003FE954 /* PlayerShip.hpp */,
-				9117BEAC2096D1E8003FE954 /* PlayerShip.cpp */,
-				9117BEA72096D1E8003FE954 /* AlienShip.hpp */,
-				9117BEAA2096D1E8003FE954 /* AlienShip.cpp */,
+				02DDC15320971D6000704F70 /* Ship.hpp */,
+				02DDC15420971D6000704F70 /* Ship.cpp */,
+				02DDC15220971D6000704F70 /* PlayerShip.hpp */,
+				02DDC15120971D6000704F70 /* PlayerShip.cpp */,
+				02DDC15020971D6000704F70 /* AlienShip.hpp */,
+				02DDC15520971D6000704F70 /* AlienShip.cpp */,
 			);
 			path = Ship;
+			sourceTree = "<group>";
+		};
+		9192D8C720FA9D940053F989 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				9192D8C420FA9BCF0053F989 /* Screen.cpp */,
+				9192D8C520FA9BCF0053F989 /* Screen.hpp */,
+				9192D8C820FACF940053F989 /* MainMenu.cpp */,
+				9192D8C920FACF940053F989 /* MainMenu.hpp */,
+				9192D8CB20FACFA40053F989 /* Scoreboard.cpp */,
+				9192D8CC20FACFA40053F989 /* Scoreboard.hpp */,
+				9192D8CE20FACFBB0053F989 /* EndScreen.cpp */,
+				9192D8CF20FACFBB0053F989 /* EndScreen.hpp */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -446,26 +480,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9117BEA42096C528003FE954 /* scoreboard.txt in Resources */,
-				9117BE942096775A003FE954 /* scoreboard.png in Resources */,
 				020013862075BCD30087CED9 /* gameScreen.png in Resources */,
-				9117BEB52096E91E003FE954 /* movingPlayerShip2.png in Resources */,
 				0200136A2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.31.54 PM.png in Resources */,
-				9117BEB32096E075003FE954 /* gameScreen2.png in Resources */,
 				020013702075BCD30087CED9 /* Game Design.txt in Resources */,
 				020013832075BCD30087CED9 /* playerShip.png in Resources */,
+				02DDC16020971DB500704F70 /* gameScreen2.png in Resources */,
 				020013672075BCD30087CED9 /* Screen Shot 2018-03-20 at 3.05.14 PM.png in Resources */,
 				020013692075BCD30087CED9 /* Screen Shot 2018-01-25 at 9.15.15 PM.png in Resources */,
 				0200136D2075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.02 AM.png in Resources */,
+				02DDC15B20971DA900704F70 /* planet2.png in Resources */,
+				91731FCE20977758009F6FC5 /* alienShip.png in Resources */,
 				020013892075BCD30087CED9 /* MODENINE.TTF in Resources */,
+				02DDC15F20971DB500704F70 /* scoreboard.png in Resources */,
 				0200136C2075BCD30087CED9 /* Screen Shot 2018-03-20 at 9.08.05 PM.png in Resources */,
 				020013682075BCD30087CED9 /* Screen Shot 2018-03-19 at 11.36.22 PM.png in Resources */,
+				02DDC15C20971DA900704F70 /* movingPlayerShip2.png in Resources */,
 				020013822075BCD30087CED9 /* planet.png in Resources */,
-				9117BEB72096E9D0003FE954 /* planet2.png in Resources */,
 				020013612075BCD30087CED9 /* Classes.txt in Resources */,
 				0200136E2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.32.47 PM.png in Resources */,
 				020013632075BCD30087CED9 /* Screen Shot 2018-03-20 at 2.12.07 PM.png in Resources */,
 				91E9F7AF2094051D000FDDB6 /* winScreen.png in Resources */,
+				02DDC1622097247600704F70 /* scoreboard.txt in Resources */,
 				020013842075BCD30087CED9 /* loseScreen.png in Resources */,
 				9117BE922096577D003FE954 /* planetOutline.png in Resources */,
 				020013872075BCD30087CED9 /* Arial.ttf in Resources */,
@@ -477,6 +512,7 @@
 				020013622075BCD30087CED9 /* UI Layout.txt in Resources */,
 				020013882075BCD30087CED9 /* base.png in Resources */,
 				0200138A2075BCD30087CED9 /* mainMenu.png in Resources */,
+				91499BB8209763B800DC6DB3 /* alienScreen.png in Resources */,
 				0200136F2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.29.37 PM.png in Resources */,
 				02307D002075BE1B00B46A3E /* Assets.xcassets in Resources */,
 				020013642075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.35 AM.png in Resources */,
@@ -493,7 +529,6 @@
 			files = (
 				020013782075BCD30087CED9 /* GameObject.cpp in Sources */,
 				9117BE90209606D6003FE954 /* EventsComponent.cpp in Sources */,
-				9117BEAD2096D1F8003FE954 /* AlienShip.cpp in Sources */,
 				020013722075BCD30087CED9 /* Map.cpp in Sources */,
 				020013772075BCD30087CED9 /* ColliderComponent.cpp in Sources */,
 				0200137D2075BCD30087CED9 /* UIManager.cpp in Sources */,
@@ -501,15 +536,20 @@
 				020013712075BCD30087CED9 /* ShipInfo.cpp in Sources */,
 				020013742075BCD30087CED9 /* TextBox.cpp in Sources */,
 				020013762075BCD30087CED9 /* PlanetInfo.cpp in Sources */,
-				9117BEAE2096D1F8003FE954 /* Ship.cpp in Sources */,
-				9117BEAF2096D1F8003FE954 /* PlayerShip.cpp in Sources */,
+				02DDC15720971D6000704F70 /* Ship.cpp in Sources */,
+				02DDC15820971D6000704F70 /* AlienShip.cpp in Sources */,
 				0200137F2075BCD30087CED9 /* main.cpp in Sources */,
 				020013752075BCD30087CED9 /* Slider.cpp in Sources */,
 				020013732075BCD30087CED9 /* TextureManager.cpp in Sources */,
+				02DDC15620971D6000704F70 /* PlayerShip.cpp in Sources */,
+				9192D8D020FACFBB0053F989 /* EndScreen.cpp in Sources */,
+				9192D8C620FA9BCF0053F989 /* Screen.cpp in Sources */,
 				0200137B2075BCD30087CED9 /* PlanetManager.cpp in Sources */,
 				0200137A2075BCD30087CED9 /* Planet.cpp in Sources */,
 				0200137C2075BCD30087CED9 /* ShipManager.cpp in Sources */,
+				9192D8CA20FACF940053F989 /* MainMenu.cpp in Sources */,
 				0200137E2075BCD30087CED9 /* Game.cpp in Sources */,
+				9192D8CD20FACFA40053F989 /* Scoreboard.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,7 +28,9 @@ namespace GameParameters {
   const int frameDelay = 1000/fps;
 
   const int endgameDelay = 120;
-
+  const int timeLimit = (20*60);
+  const int overtimeScaleFactor = 100;
+  
 }
 
 
@@ -50,18 +52,19 @@ public:
     bool restartGame = false;
     bool skipMainMenu = false;
     enum {
-      none, allDiscovered, noFuel, quit
+      none, allDiscovered, noFuel, alienAttack, quit
     } endgame = none;
 
     bool gameOver = false;
 
     enum {
-      inactive, currentOne, currentTwo, selectOne, selectTwo
+      inactive, resourceSlider, depositSlider
     } activeSlider = inactive;
 
     bool clickFlag = false;
     bool planetSelected = false;
-    bool planetCollided = false;  // TODO: Verify that this is necessary, since there planetIsDocked() performs the same function
+    bool playerCollision = false;
+    bool alienCollision = false;
     bool mouseDown = false;
     bool debugMode = false;
 

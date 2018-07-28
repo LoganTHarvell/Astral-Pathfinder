@@ -51,8 +51,9 @@ void PlanetManager::initGalaxy() {
   }
   
   playerDockedPlanetIndex = 0;      // Start with homeworld docked
-  selectedPlanetIndex = -1;   // Start with no planet selected
-  discoveryCount = 1;         // Start with 1 colonized planet
+  alienDockedPlanetIndex = 1;       // Start with second planet docked
+  selectedPlanetIndex = -1;         // Start with no planet selected
+  discoveryCount = 1;               // Start with 1 colonized planet
 
   for(std::vector<Planet>::iterator it = planets.begin(); it != planets.end(); ++it)
     planetEvents.push_back(it->getEvents());
@@ -64,7 +65,8 @@ void PlanetManager::initGalaxy() {
 void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
   // Checks for any collisions first
   handleCollisions(shipManager, gameState->frame);
-  gameState->planetCollided = playerIsDocked();
+  gameState->playerCollision = playerIsDocked();
+  gameState->alienCollision = alienIsDocked();
   
   // Updates each planet, also refreshes count of discovered planets
   totalPopulation = 0;
@@ -124,8 +126,17 @@ bool PlanetManager::playerIsDocked() {
   return false;
 }
 
+bool PlanetManager::alienIsDocked() {
+  if (alienDockedPlanetIndex >= 0) return true;
+  return false;
+}
+
 Planet PlanetManager::getPlayerDockedPlanet() {
   return planets[playerDockedPlanetIndex];
+}
+
+Planet PlanetManager::getAlienDockedPlanet() {
+  return planets[alienDockedPlanetIndex];
 }
 
 // TODO: Use enum for readability of flags
@@ -225,7 +236,10 @@ void PlanetManager::deselectPlanet(bool *planetSelected) {
 
 void PlanetManager::handleCollisions(ShipManager *sm, Uint32 frame) {
   PlayerShip player = sm->getPlayerShip();
+  AlienShip alien = sm->getAlienShip();
   std::vector<SDL_Point> playerVertices = player.getCollider().getVertices();
+  std::vector<SDL_Point> alienVertices = alien.getCollider().getVertices();
+
   
   // Checks all planets for collisions if player ship hasn't docked
   if (playerDockedPlanetIndex < 0) {
@@ -245,6 +259,27 @@ void PlanetManager::handleCollisions(ShipManager *sm, Uint32 frame) {
     if (!collider.collisionOBB(playerVertices)) {
       planets[playerDockedPlanetIndex].toggleDockedShip(player.getTag(), frame);
       playerDockedPlanetIndex = -1;
+    }
+  }
+  
+  // Checks all planets for collisions if alien ship hasn't docked
+  if (alienDockedPlanetIndex < 0) {
+    for (int i = 0; i < planets.size(); i++) {
+      if (planets[i].getCollider().collisionOBB(alienVertices)) {
+        planets[i].toggleDockedShip(alien.getTag(), frame);
+        alienDockedPlanetIndex = i;
+        std::cout << "Alien collision at: "
+        << planets[i].getCoordinates().x << ","
+        << planets[i].getCoordinates().y << std::endl;
+      }
+    }
+  }
+  // If alien has docked checks docked planet for continued collision
+  else {
+    ColliderComponent collider = planets[alienDockedPlanetIndex].getCollider();
+    if (!collider.collisionOBB(alienVertices)) {
+      planets[alienDockedPlanetIndex].toggleDockedShip(alien.getTag(), frame);
+      alienDockedPlanetIndex = -1;
     }
   }
 }

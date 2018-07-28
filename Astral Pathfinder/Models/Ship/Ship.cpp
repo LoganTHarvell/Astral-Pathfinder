@@ -22,14 +22,6 @@ using PointVector = std::vector<SDL_Point>;
 
 // MARK: - Game Loop Methods
 
-void Ship::update(Game::State * gs) {
-  updateVelocity();
-  updateRotation();
-  updatePosition(gs->ticks);
-  
-  collider->update(getCenter(), computeShipVertices());
-}
-
 void Ship::render(Game::State *gs) {
   SDL_RenderCopyEx(Game::renderer, texture, NULL, &rect,
                    rotation, NULL, SDL_FLIP_NONE);

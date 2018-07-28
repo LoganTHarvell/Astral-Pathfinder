@@ -71,10 +71,11 @@ void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
     planetManager->initGalaxy();
     
     shipManager = new ShipManager;
-    shipManager->init(planetManager->getPlanet(0).getCenter());
+    shipManager->init(planetManager->getPlanet(0).getCenter(),
+                      planetManager->getPlanet(1).getCenter());
     
     uiManager = new UIManager;
-    uiManager->init();
+    uiManager->init(&gameState);
     
   }
   else {
@@ -105,7 +106,7 @@ void Game::handleEvents() {
         break;
       case SDL_KEYDOWN:
       {
-        if(!uiManager->checkMainMenu() && gameState.endgame == State::none) {
+        if(!uiManager->checkStartScreens() && gameState.endgame == State::none) {
           // Gets pressed key
           SDL_Keycode key = event.key.keysym.sym;
           
@@ -133,11 +134,11 @@ void Game::handleEvents() {
         break;
       case SDL_MOUSEMOTION:
         // TODO: Verify this doesn't need to be changes to gameState.gameOver
-        if(uiManager->checkMainMenu() || uiManager->checkScoreboardScreen() ||
+        if(uiManager->checkStartScreens() ||
            (gameState.endgame != State::none && gameState.endgame != State::quit))
           gameState.dragLocation = { event.motion.x, event.motion.y };
         
-        else if(gameState.planetSelected || gameState.planetCollided)
+        else if(gameState.planetSelected || gameState.playerCollision)
           gameState.dragLocation = { event.motion.x, event.motion.y };
         break;
       case SDL_MOUSEBUTTONUP:
@@ -167,7 +168,7 @@ void Game::update(Uint32 ticks) {
     }
   }
   
-  if (!uiManager->checkMainMenu() && !gameState.gameOver) {
+  if (!uiManager->checkStartScreens() && !gameState.gameOver) {
     if (gameState.frame == 0) gameState.startTime = SDL_GetTicks()/1000;
     
     gameState.frame++;
@@ -193,8 +194,9 @@ void Game::render() {
   // Render stuff
   uiManager->render(&gameState, planetManager);
   
-  if(!uiManager->checkMainMenu() && !uiManager->checkScoreboardScreen()
-     && (gameState.endgame == State::none || !gameState.gameOver)) {
+  if(!uiManager->checkStartScreens()
+     && (gameState.endgame == State::none || !gameState.gameOver) &&
+     gameState.endgame != State::quit) {
     planetManager->render(&gameState);
     shipManager->render(&gameState);
   }
@@ -225,15 +227,14 @@ void Game::restartGame() {
   planetManager->initGalaxy();
   
   shipManager = new ShipManager;
-  shipManager->init(planetManager->getPlanet(0).getCenter());
+  shipManager->init(planetManager->getPlanet(0).getCenter(),
+                    planetManager->getPlanet(1).getCenter());
   
   uiManager = new UIManager;
-  uiManager->init();
+  uiManager->init(&gameState);
   
   gameState.restartGame = false;
-  if(gameState.skipMainMenu) {
-    uiManager->setMainMenuFlag(false);
-    gameState.skipMainMenu = false;
-  }
+  gameState.skipMainMenu = false;
   gameState.playerName = "";
+  gameState.planetSelected = false;
 }

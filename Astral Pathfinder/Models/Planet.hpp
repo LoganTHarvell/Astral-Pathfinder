@@ -51,10 +51,10 @@ namespace PlanetParameters {
   // Defines population growth information
   const int growthPeriod = 1200;      // Frames per growth period
   const float starveRate = 0.0008;    // Starvation deaths per frame
-  const float minBirthMultiplier = 0.1;
-  const float birthMultiplierRange = (0.4-minBirthMultiplier);
-  const float minDeathMultiplier = 0.05;
-  const float deathMultiplierRange = (0.15-minDeathMultiplier);
+  const float minBirthMultiplier = 0.05;
+  const float birthMultiplierRange = (0.2-minBirthMultiplier);
+  const float minDeathMultiplier = 0.025;
+  const float deathMultiplierRange = (0.075-minDeathMultiplier);
  
   // Defines resource information
   const float foodRqmt = 0.02;      // Food required per person
@@ -68,6 +68,7 @@ namespace PlanetParameters {
   const float plagueRate = 0.05;
   const float blightRate = 0.1;
   const float mineCollapseRate = 0.3;
+  const float alienInvasionRate = 0.01;
   
   // Random event multipliers
   const float plagueMultiplier = (deathMultiplierRange+minDeathMultiplier)*1.33;

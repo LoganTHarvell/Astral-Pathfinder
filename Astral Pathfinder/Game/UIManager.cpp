@@ -21,7 +21,7 @@
 
 // MARK: - UIManager Initialization
 
-void UIManager::init() {
+void UIManager::init(Game::State *gameState) {
   using namespace UiParameters;
 
   time.init(timeRect);
@@ -32,60 +32,65 @@ void UIManager::init() {
   shipInfo.init(shipInfoRect);
   finalScore.init({endScoreCoords.x, endScoreCoords.y, 0, 0});
   playerName.init({endScoreName.x, endScoreName.y, 0, 0});
-  hoverBorder = TextureManager::loadTexture("../Resources/border.png");
   
-  mainMenu = TextureManager::loadTexture("../Resources/mainMenu.png");
-  scoreboardTex = TextureManager::loadTexture("../Resources/scoreboard.png");
   gameScreen = TextureManager::loadTexture("../Resources/gameScreen2.png");
-  winScreen = TextureManager::loadTexture("../Resources/winScreen.png");
-  loseScreen = TextureManager::loadTexture("../Resources/loseScreen.png");
-  screenRect = { 0, 0, GameParameters::windowRect.w, GameParameters::windowRect.h };
   
-  mainMenuFlag = true;
   prevScore = 0;
   
-  TextBox box;
-  SDL_Rect temp;
-  for(int i = 0; i < UiParameters::scoreboardMax; i++) {
-    scoreList[i*2] = box;
-    scoreList[i*2+1] = box;
-    temp = {startingNameBox.x, startingNameBox.y+(53*i),
-      startingNameBox.w, startingNameBox.h};
-    scoreList[i*2].init(temp);
-    temp = {startingScoreBox.x, startingScoreBox.y+(53*i),
-      startingScoreBox.w, startingScoreBox.h};
-    scoreList[(i*2)+1].init(temp);
-  }
-  readScores();
+  mainMenu.init();
+  scoreboard.init();
+  endScreen.init();
+  
+  if(gameState->skipMainMenu)
+    activeScreen = game;
 }
 
 // MARK: - Game Loop Methods
 
 void UIManager::update(Game::State *gameState, PlanetManager *planetManager, ShipManager *shipManager) {
-  if (mainMenuFlag || scoreboardFlag) {
-    checkForHovering(gameState);
-    if(gameState->mouseDown)
-      checkClickedAreaOtherScreen(gameState);
-    
-    return;
-  }
-  else if (gameState->endgame == Game::State::quit) {
-    mainMenuFlag = false;
+  
+  if (gameState->endgame == Game::State::quit) {
     gameState->isRunning = false;
     return;
   }
-  else if (gameState->gameOver){
-    mainMenuFlag = false;
+  
+  else if(activeScreen == menu) {
+    mainMenu.checkForHovering(gameState);
+    if(gameState->mouseDown) {
+      int newScreen = mainMenu.checkClick(gameState);
+      if(newScreen != -1)
+        setActiveScreen(newScreen);
+    }
+    return;
+  }
+  
+  else if(activeScreen == scores) {
+    scoreboard.checkForHovering(gameState);
+    if(gameState->mouseDown) {
+      int newScreen = scoreboard.checkClick(gameState);
+      if(newScreen != -1)
+        setActiveScreen(newScreen);
+    }
+    return;
+  }
+  
+  else if(gameState->gameOver) {
     if(!SDL_IsTextInputActive())
       SDL_StartTextInput();
-    checkForHovering(gameState);
-    if(gameState->mouseDown) checkClickedAreaOtherScreen(gameState);
-
+    endScreen.update(gameState);
+    endScreen.checkForHovering(gameState);
+    if(gameState->mouseDown) {
+      int newScreen = endScreen.checkClick(gameState);
+      if(newScreen != -1)
+        setActiveScreen(newScreen);
+        SDL_StopTextInput();
+        scoreboard.writeScore(gameState, score);
+    }
     return;
   }
   
   updateTime(gameState->elapsedTime);
-  updateTotalScore(planetManager);
+  updateTotalScore(planetManager, gameState->elapsedTime);
   eventsPanel.update(gameState, planetManager);
   
   PlayerShip player = shipManager->getPlayerShip();
@@ -118,33 +123,20 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
 
 void UIManager::render(Game::State *gameState, PlanetManager *pm) {
   using namespace UiParameters;
-  if (mainMenuFlag) {
-    SDL_RenderCopy(Game::renderer, mainMenu, NULL, &screenRect);
-    if(hoveringLabel == startGame)
-      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
-    else if(hoveringLabel == scoreboard)
-      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
-    else if(hoveringLabel == exitGame)
-      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
+  
+  // Main Menu
+  if(activeScreen == menu) {
+    mainMenu.render(gameState);
   }
-  else if(scoreboardFlag) {
-    SDL_RenderCopy(Game::renderer, scoreboardTex, NULL, &screenRect);
-    
-    if(hoveringLabel == mainMenuScoreboard)
-      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
-    
-    for(int i = 0; i < UiParameters::scoreboardMax; i++) {
-      if(scores[i] > -1) {
-        scoreList[i*2].render(gameState);
-        scoreList[(i*2)+1].render(gameState);
-      }
-    }
+  
+  // Scoreboard
+  else if(activeScreen == scores) {
+    scoreboard.render(gameState);
   }
+  
+  // Game Over
   else if (gameState->gameOver && gameState->endgame != Game::State::quit) {
-    if(gameState->endgame == Game::State::allDiscovered)
-      SDL_RenderCopy(Game::renderer, winScreen, NULL, &screenRect);
-    else if(gameState->endgame == Game::State::noFuel)
-      SDL_RenderCopy(Game::renderer, loseScreen, NULL, &screenRect);
+    endScreen.render(gameState);
     
     if(finalScore.checkNull())
       finalScore.setFinalScore(std::to_string(score).c_str());
@@ -156,15 +148,11 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
     }
     
     playerName.render(gameState);
-    
-    if(hoveringLabel == playAgain)
-      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
-    else if(hoveringLabel == mainMenuExit)
-      SDL_RenderCopy(Game::renderer, hoverBorder, NULL, &borderRect);
-    return;
   }
+  
+  // Game
   else if(!gameState->gameOver && gameState->endgame != Game::State::quit) {
-    SDL_RenderCopy(Game::renderer, gameScreen, NULL, &screenRect);
+    SDL_RenderCopy(Game::renderer, gameScreen, NULL, &ScreenParameters::screenRect);
   
     time.render(gameState);
     totalScore.render(gameState);
@@ -176,7 +164,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
       selectedPlanetInfo.render(gameState, selectedP.getPopulation(),
                                 selectedP.playerIsDocked());
     }
-    if(gameState->planetCollided) {
+    if(gameState->playerCollision) {
       Planet dockedP = pm->getPlayerDockedPlanet();
       DockedPlanetInfo.render(gameState, dockedP.getPopulation(),
                               dockedP.playerIsDocked());
@@ -185,6 +173,20 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
 }
 
 // MARK: - UIManager Methods
+
+bool UIManager::checkGameScreen() {
+  if(activeScreen == game)
+    return true;
+  
+  return false;
+}
+
+bool UIManager::checkStartScreens() {
+  if(activeScreen == menu || activeScreen == scores)
+    return true;
+  
+  return false;
+}
 
 void UIManager::updateTime(Uint32 elapsedTime) {
   int minutes = elapsedTime / 60;
@@ -199,8 +201,19 @@ SDL_Color UIManager::checkTime(int minutes) {
   else return UiParameters::red;
 }
 
-void UIManager::updateTotalScore(PlanetManager *pm) {
-  score = pm->getTotalPopulation();
+void UIManager::updateTotalScore(PlanetManager *pm, Uint32 elapsedTime) {
+  int overtime = elapsedTime - (GameParameters::timeLimit);
+  if (overtime > 0) {
+    overtime *= GameParameters::overtimeScaleFactor;
+  }
+  else {
+    overtime = 0;
+  }
+  
+  score = pm->getTotalPopulation() - overtime;
+  if (score < 0) score = 0;
+  
+  
   std::string population = std::to_string(score);
   totalScore.setMessage(population, setTotalScoreColor());
 
@@ -229,76 +242,46 @@ void UIManager::setDockedPlanet(Planet p) {
 }
 
 void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
+  // If mouse button not pressed down, don't check for slider movement
+  if(!gs->mouseDown) return;
+  
+  if(gs->mouseDown) {
+    checkClickedArea(gs->clickLocation);
+    
+    if(currentWindow == currentPlanetWindow)
+      checkSliderMovement(&DockedPlanetInfo, gs, pm);
+    
+    else if(currentWindow == selectedPlanetWindow)
+      checkSliderMovement(&selectedPlanetInfo, gs, pm);
+  }
+}
+
+void UIManager::checkSliderMovement(PlanetInfo *pi, Game::State *gs, PlanetManager *pm) {
   enum {
     neither, fertilitySlider, reserveSlider
   };
   
-  // If mouse button not pressed down, don't check for slider movement
-  if(!gs->mouseDown) return;
-  
-  if(gs->mouseDown)
-    checkClickedArea(gs->clickLocation);
-  
-  // Current Planet Window
-  if(currentWindow == currentPlanetWindow) {
-    // If down, but not dragging, check if slider was clicked
-    if(gs->mouseDown && gs->activeSlider == gs->State::inactive) {
-      if(DockedPlanetInfo.checkClick(gs->clickLocation) == fertilitySlider)
-        gs->activeSlider = gs->State::currentOne;
-      
-      if(DockedPlanetInfo.checkClick(gs->clickLocation) == reserveSlider)
-        gs->activeSlider = gs->State::currentTwo;
-    }
-  
-    // If so, check mouse movement and adjust slider appropriately
-    if(gs->activeSlider == gs->State::currentOne) {
-      bool movement = DockedPlanetInfo.moveSlider(gs);
-      int percent = DockedPlanetInfo.getSliderPercent();
-      
-      if(movement) {
-        pm->setPlanetMiningPercent(100-percent, currentWindow);
-        pm->setPlanetFarmingPercent(percent, currentWindow);
-      }
-    }
-  
-    if(gs->activeSlider == gs->State::currentTwo) {
-      bool movement = DockedPlanetInfo.moveSlider(gs);
-      int percent = DockedPlanetInfo.getSliderPercent();
-      
-      if(movement) {
-        pm->setPlanetInfraPercent(100-percent, currentWindow);
-        pm->setPlanetReservePercent(percent, currentWindow);
-      }
-    }
+  // If down, but not dragging, check if slider was clicked
+  if(gs->mouseDown && gs->activeSlider == gs->State::inactive) {
+    if(pi->checkClick(gs->clickLocation) == fertilitySlider)
+      gs->activeSlider = gs->State::resourceSlider;
+    
+    if(pi->checkClick(gs->clickLocation) == reserveSlider)
+      gs->activeSlider = gs->State::depositSlider;
   }
   
-  // Selected Planet Window
-  if(currentWindow == selectedPlanetWindow) {
-    // If down, but not dragging, check if slider was clicked
-    if(gs->mouseDown && gs->activeSlider == gs->State::inactive) {
-      if(selectedPlanetInfo.checkClick(gs->clickLocation) == fertilitySlider)
-        gs->activeSlider = gs->State::selectOne;
-      
-      if(selectedPlanetInfo.checkClick(gs->clickLocation) == reserveSlider)
-        gs->activeSlider = gs->State::selectTwo;
-    }
+  // If so, check mouse movement and adjust slider appropriately
+  if(gs->activeSlider != gs->State::inactive) {
+    bool movement = pi->moveSlider(gs);
+    int percent = pi->getSliderPercent();
     
-    // If so, check mouse movement and adjust slider appropriately
-    if(gs->activeSlider == gs->State::selectOne) {
-      bool movement = selectedPlanetInfo.moveSlider(gs);
-      int percent = selectedPlanetInfo.getSliderPercent();
-      
-      if(movement) {
+    if(movement) {
+      if(gs->activeSlider == gs->State::resourceSlider) {
         pm->setPlanetMiningPercent(100-percent, currentWindow);
         pm->setPlanetFarmingPercent(percent, currentWindow);
       }
-    }
-    
-    if(gs->activeSlider == gs->State::selectTwo) {
-      bool movement = selectedPlanetInfo.moveSlider(gs);
-      int percent = selectedPlanetInfo.getSliderPercent();
       
-      if(movement) {
+      else if(gs->activeSlider == gs->State::depositSlider) {
         pm->setPlanetInfraPercent(100-percent, currentWindow);
         pm->setPlanetReservePercent(percent, currentWindow);
       }
@@ -319,192 +302,25 @@ void UIManager::checkClickedArea(SDL_Point p) {
   else currentWindow = none;
 }
 
-void UIManager::checkForHovering(Game::State *gs) {
-  using namespace UiParameters;
-  SDL_Point p = gs->dragLocation;
-  int buffer = 11;
-  
-  // Main Menu
-  if(mainMenuFlag) {
-    if((p.x > startGameLabel.x) && (p.x < startGameLabel.x + startGameLabel.w)
-       && (p.y > startGameLabel.y) && (p.y < startGameLabel.y + startGameLabel.h)) {
-      hoveringLabel = startGame;
+void UIManager::setActiveScreen(int screen) {
+  switch(screen) {
+    case menu:
+      activeScreen = menu;
+      break;
       
-      if(borderRect.y != startGameLabel.y-buffer)
-        borderRect = startGameBorder;
-    }
-  
-    else if((p.x > scoreboardLabel.x) && (p.x < scoreboardLabel.x + scoreboardLabel.w)
-            && (p.y > scoreboardLabel.y) && (p.y < scoreboardLabel.y + scoreboardLabel.h)) {
-      hoveringLabel = scoreboard;
+    case scores:
+      activeScreen = scores;
+      break;
       
-      if(borderRect.y != scoreboardLabel.y-buffer)
-        borderRect = scoreboardBorder;
-    }
-  
-    else if((p.x > exitGameLabel.x) && (p.x < exitGameLabel.x + exitGameLabel.w)
-            && (p.y > exitGameLabel.y) && (p.y < exitGameLabel.y + exitGameLabel.h)) {
-      hoveringLabel = exitGame;
+    case game:
+      activeScreen = game;
+      break;
       
-      if(borderRect.y != exitGameLabel.y-buffer)
-        borderRect = exitGameBorder;
-    }
-  
-    else hoveringLabel = nothing;
-  }
-  
-  // Scoreboard Screen
-  else if(scoreboardFlag) {
-    if((p.x > mainMenuScoreboardLabel.x) && (p.x < mainMenuScoreboardLabel.x + mainMenuScoreboardLabel.w)
-       && (p.y > mainMenuScoreboardLabel.y) && (p.y < mainMenuScoreboardLabel.y + mainMenuScoreboardLabel.h)) {
-      hoveringLabel = mainMenuScoreboard;
+    case over:
+      activeScreen = over;
+      break;
       
-      if(borderRect.y != mainMenuScoreboardLabel.y-buffer)
-        borderRect = mainMenuScoreboardBorder;
-    }
-    else hoveringLabel = nothing;
-  }
-  
-  // End Screen
-  else if(gs->gameOver && gs->endgame != Game::State::quit) {
-    if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
-       && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
-      hoveringLabel = playAgain;
-      
-      if(borderRect.y != playAgainLabel.y-buffer)
-        borderRect = playAgainBorder;
-    }
-    
-    else if((p.x > mainMenuLabel.x) && (p.x < mainMenuLabel.x + mainMenuLabel.w)
-            && (p.y > mainMenuLabel.y) && (p.y < mainMenuLabel.y + mainMenuLabel.h)) {
-      hoveringLabel = mainMenuExit;
-      
-      if(borderRect.y != mainMenuLabel.y-buffer)
-        borderRect = mainMenuBorder;
-    }
-    
-    else hoveringLabel = nothing;
-  }
-}
-
-void UIManager::checkClickedAreaOtherScreen(Game::State *gs) {
-  SDL_Point p = gs->clickLocation;
-  using namespace UiParameters;
-  
-  // Main Menu
-  if(mainMenuFlag) {
-    if((p.x > startGameLabel.x) && (p.x < startGameLabel.x + startGameLabel.w)
-       && (p.y > startGameLabel.y) && (p.y < startGameLabel.y + startGameLabel.h)) {
-      hoveringLabel = nothing;
-      mainMenuFlag = false;
-    }
-  
-   else if((p.x > scoreboardLabel.x) && (p.x < scoreboardLabel.x + scoreboardLabel.w)
-           && (p.y > scoreboardLabel.y) && (p.y < scoreboardLabel.y + scoreboardLabel.h)) {
-     hoveringLabel = nothing;
-     scoreboardFlag = true;
-     mainMenuFlag = false;
-   }
-  
-    else if((p.x > exitGameLabel.x) && (p.x < exitGameLabel.x + exitGameLabel.w)
-       && (p.y > exitGameLabel.y) && (p.y < exitGameLabel.y + exitGameLabel.h)) {
-      hoveringLabel = nothing;
-      mainMenuFlag = false;
-      gs->endgame = Game::State::quit;
-    }
-  }
-  
-  // Scoreboard Screen
-  else if(scoreboardFlag) {
-    if((p.x > mainMenuScoreboardLabel.x) && (p.x < mainMenuScoreboardLabel.x + mainMenuScoreboardLabel.w)
-       && (p.y > mainMenuScoreboardLabel.y) && (p.y < mainMenuScoreboardLabel.y + mainMenuScoreboardLabel.h)) {
-      hoveringLabel = nothing;
-      mainMenuFlag = true;
-      scoreboardFlag = false;
-    }
-  }
-  
-  // End Screen
-  else if(gs->gameOver && gs->endgame != Game::State::quit) {
-    if((p.x > playAgainLabel.x) && (p.x < playAgainLabel.x + playAgainLabel.w)
-       && (p.y > playAgainLabel.y) && (p.y < playAgainLabel.y + playAgainLabel.h)) {
-      gs->frame = 0;
-      gs->gameOver = false;
-      gs->endgameFrame = 0;
-      hoveringLabel = nothing;
-      gs->endgame = Game::State::none;
-      gs->restartGame = true;
-      gs->skipMainMenu = true;
-      gs->mouseDown = false;
-      SDL_StopTextInput();
-      writeScore(gs);
-    }
-    
-    else if((p.x > mainMenuLabel.x) && (p.x < mainMenuLabel.x + mainMenuLabel.w)
-            && (p.y > mainMenuLabel.y) && (p.y < mainMenuLabel.y + mainMenuLabel.h)) {
-      gs->frame = 0;
-      gs->gameOver = false;
-      gs->endgameFrame = 0;
-      hoveringLabel = nothing;
-      gs->endgame = Game::State::none;
-      gs->restartGame = true;
-      gs->mouseDown = false;
-      SDL_StopTextInput();
-      writeScore(gs);
-    }
-  }
-}
-
-void UIManager::writeScore(Game::State *gs) {
-  using namespace std;
-  ofstream file;
-  file.open(UiParameters::filePath.c_str(), ios::app);
-  while(gs->playerName.length() < 3)
-    gs->playerName += '-';
-  string message = gs->playerName + ";" + to_string(score) + ";";
-  file << message << endl;
-  file.close();
-}
-
-void UIManager::readScores() {
-  using namespace std;
-  
-  const char lineBreak = ';';
-  string line;
-  ifstream file;
-  file.open(UiParameters::filePath.c_str());
-  while(static_cast<void>(file >> ws), getline(file, line, lineBreak)) {
-    // Player Name
-    string name = line;
-    // Player Score
-    getline(file, line, lineBreak);
-    stringstream s(line);
-    int score;
-    s >> score;
-    
-    compareScores(name, score);
-  }
-
-  file.close();
-}
-
-void UIManager::compareScores(std::string name, int score) {
-  int tempScore;
-  std::string tempName;
-  TextBox tempBox;
-  
-  for(int i = 0; i < UiParameters::scoreboardMax; i++) {
-    if (score > scores[i]) {
-      tempScore = scores[i];
-      scores[i] = score;
-      score = tempScore;
-      
-      tempName = names[i];
-      names[i] = name;
-      name = tempName;
-      
-      scoreList[i*2].setScoreboardMessage(names[i] + ": ");
-      scoreList[(i*2)+1].setScoreboardMessage(std::to_string(scores[i]).c_str());
-    }
+    default:
+      break;
   }
 }
