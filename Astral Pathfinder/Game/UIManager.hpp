@@ -74,7 +74,7 @@ private:
   } currentWindow = none;
   
   enum {
-    menu, scores, game, over
+    menu, scores, game, over, quit
   } activeScreen = menu;
   
   bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true;
@@ -91,6 +91,7 @@ private:
   void checkClickedArea(SDL_Point p);
   void checkSliderMovement(PlanetInfo *pi, Game::State *gs, PlanetManager *pm);
   void setActiveScreen(int screen);
+  void setEndGameFlags(int nextScreen, Game::State *gs);
 };
 
 #endif /* UIManager_hpp */

@@ -134,8 +134,8 @@ void Game::handleEvents() {
         break;
       case SDL_MOUSEMOTION:
         // TODO: Verify this doesn't need to be changes to gameState.gameOver
-        if(uiManager->checkStartScreens() ||
-           (gameState.endgame != State::none && gameState.endgame != State::quit))
+        if(uiManager->checkStartScreens() || (gameState.endgame != State::none
+                                              && gameState.endgame != State::quit))
           gameState.dragLocation = { event.motion.x, event.motion.y };
         
         else if(gameState.planetSelected || gameState.playerCollision)

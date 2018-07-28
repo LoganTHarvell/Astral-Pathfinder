@@ -63,6 +63,7 @@
 		9117BE722094FD34003FE954 /* EventsPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE702094FD34003FE954 /* EventsPanel.cpp */; };
 		9117BE90209606D6003FE954 /* EventsComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9117BE8E209606D6003FE954 /* EventsComponent.cpp */; };
 		9117BE922096577D003FE954 /* planetOutline.png in Resources */ = {isa = PBXBuildFile; fileRef = 9117BE912096577D003FE954 /* planetOutline.png */; };
+		913C4B4B210BD5C200B0D519 /* Button.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 913C4B49210BD5C200B0D519 /* Button.cpp */; };
 		91499BB8209763B800DC6DB3 /* alienScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 91499BB7209763B800DC6DB3 /* alienScreen.png */; };
 		91731FCE20977758009F6FC5 /* alienShip.png in Resources */ = {isa = PBXBuildFile; fileRef = 91731FCD20977758009F6FC5 /* alienShip.png */; };
 		9192D8C620FA9BCF0053F989 /* Screen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9192D8C420FA9BCF0053F989 /* Screen.cpp */; };
@@ -175,6 +176,8 @@
 		9117BE8E209606D6003FE954 /* EventsComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EventsComponent.cpp; sourceTree = "<group>"; };
 		9117BE8F209606D6003FE954 /* EventsComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EventsComponent.hpp; sourceTree = "<group>"; };
 		9117BE912096577D003FE954 /* planetOutline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = planetOutline.png; sourceTree = "<group>"; };
+		913C4B49210BD5C200B0D519 /* Button.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Button.cpp; sourceTree = "<group>"; };
+		913C4B4A210BD5C200B0D519 /* Button.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Button.hpp; sourceTree = "<group>"; };
 		91499BB7209763B800DC6DB3 /* alienScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alienScreen.png; sourceTree = "<group>"; };
 		91731FCD20977758009F6FC5 /* alienShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alienShip.png; sourceTree = "<group>"; };
 		9192D8C420FA9BCF0053F989 /* Screen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Screen.cpp; sourceTree = "<group>"; };
@@ -290,6 +293,8 @@
 				0200133A2075BCD30087CED9 /* TextureManager.cpp */,
 				9117BE702094FD34003FE954 /* EventsPanel.cpp */,
 				9117BE712094FD34003FE954 /* EventsPanel.hpp */,
+				913C4B49210BD5C200B0D519 /* Button.cpp */,
+				913C4B4A210BD5C200B0D519 /* Button.hpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -550,6 +555,7 @@
 				9192D8CA20FACF940053F989 /* MainMenu.cpp in Sources */,
 				0200137E2075BCD30087CED9 /* Game.cpp in Sources */,
 				9192D8CD20FACFA40053F989 /* Scoreboard.cpp in Sources */,
+				913C4B4B210BD5C200B0D519 /* Button.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
