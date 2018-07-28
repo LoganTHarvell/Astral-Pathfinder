@@ -51,74 +51,77 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
   
   if (gameState->endgame == Game::State::quit) {
     gameState->isRunning = false;
-    return;
   }
   
   else if(activeScreen == menu) {
-    mainMenu.checkForHovering(gameState);
+    mainMenu.checkForHovering(gameState, activeScreen);
     if(gameState->mouseDown) {
-      int newScreen = mainMenu.checkClick(gameState);
+      int newScreen = mainMenu.checkClick(gameState, activeScreen);
       if(newScreen != -1)
         setActiveScreen(newScreen);
     }
-    return;
   }
   
   else if(activeScreen == scores) {
-    scoreboard.checkForHovering(gameState);
+    scoreboard.checkForHovering(gameState, activeScreen);
     if(gameState->mouseDown) {
-      int newScreen = scoreboard.checkClick(gameState);
+      int newScreen = scoreboard.checkClick(gameState, activeScreen);
       if(newScreen != -1)
         setActiveScreen(newScreen);
     }
-    return;
   }
   
   else if(gameState->gameOver) {
     if(!SDL_IsTextInputActive())
       SDL_StartTextInput();
     endScreen.update(gameState);
-    endScreen.checkForHovering(gameState);
+    endScreen.checkForHovering(gameState, over);
     if(gameState->mouseDown) {
-      int newScreen = endScreen.checkClick(gameState);
-      if(newScreen != -1)
+      int newScreen = endScreen.checkClick(gameState, over);
+      if(newScreen != -1) {
         setActiveScreen(newScreen);
         SDL_StopTextInput();
         scoreboard.writeScore(gameState, score);
+        setEndGameFlags(newScreen, gameState);
+      }
     }
-    return;
   }
   
-  updateTime(gameState->elapsedTime);
-  updateTotalScore(planetManager, gameState->elapsedTime);
-  eventsPanel.update(gameState, planetManager);
-  
-  PlayerShip player = shipManager->getPlayerShip();
-  if(player.getVelocity().x != 0 || player.getVelocity().y != 0
-     || planetManager->playerIsDocked()) {
-    shipInfo.clean();
-    shipInfo.setText(player);
+  else {
+    updateTime(gameState->elapsedTime);
+    updateTotalScore(planetManager, gameState->elapsedTime);
+    eventsPanel.update(gameState, planetManager);
+    
+    PlayerShip player = shipManager->getPlayerShip();
+    if(player.getVelocity().x != 0 || player.getVelocity().y != 0
+       || planetManager->playerIsDocked()) {
+      shipInfo.clean();
+      shipInfo.setText(player);
+    }
+    
+    if (gameState->planetSelected) {
+      setSelectedPlanet(planetManager->getSelectedPlanet());
+      selectedPlanetWindowCleaned = false;
+    }
+    else if(!selectedPlanetWindowCleaned) {
+      selectedPlanetInfo.clean();
+      selectedPlanetWindowCleaned = true;
+    }
+    
+    if(planetManager->playerIsDocked()) {
+      setDockedPlanet(planetManager->getPlayerDockedPlanet());
+      currentPlanetWindowCleaned = false;
+    }
+    else if(!currentPlanetWindowCleaned) {
+      DockedPlanetInfo.clean();
+      currentPlanetWindowCleaned = true;
+    }
+    
+    handleMouseDown(gameState, planetManager);
   }
   
-  if (gameState->planetSelected) {
-    setSelectedPlanet(planetManager->getSelectedPlanet());
-    selectedPlanetWindowCleaned = false;
-  }
-  else if(!selectedPlanetWindowCleaned) {
-    selectedPlanetInfo.clean();
-    selectedPlanetWindowCleaned = true;
-  }
-  
-  if(planetManager->playerIsDocked()) {
-    setDockedPlanet(planetManager->getPlayerDockedPlanet());
-    currentPlanetWindowCleaned = false;
-  }
-  else if(!currentPlanetWindowCleaned) {
-    DockedPlanetInfo.clean();
-    currentPlanetWindowCleaned = true;
-  }
-  
-  handleMouseDown(gameState, planetManager);
+  if(activeScreen == quit)
+    gameState->endgame = Game::State::quit;
 }
 
 void UIManager::render(Game::State *gameState, PlanetManager *pm) {
@@ -320,7 +323,31 @@ void UIManager::setActiveScreen(int screen) {
       activeScreen = over;
       break;
       
+    case quit:
+      activeScreen = quit;
+      
     default:
       break;
+  }
+}
+
+void UIManager::setEndGameFlags(int nextScreen, Game::State *gs) {
+  if(activeScreen == game) {
+    gs->frame = 0;
+    gs->gameOver = false;
+    gs->endgameFrame = 0;
+    gs->endgame = Game::State::none;
+    gs->restartGame = true;
+    gs->skipMainMenu = true;
+    gs->mouseDown = false;
+  }
+  
+  else if(activeScreen == menu) {
+    gs->frame = 0;
+    gs->gameOver = false;
+    gs->endgameFrame = 0;
+    gs->endgame = Game::State::none;
+    gs->restartGame = true;
+    gs->mouseDown = false;
   }
 }

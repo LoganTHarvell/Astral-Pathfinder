@@ -13,10 +13,15 @@
 #include <iostream>
 #include <sstream>
 
+
+// MARK: - Scoreboard Initialization
+
 void Scoreboard::init() {
   using namespace ScoreboardParameters;
   
   texture = TextureManager::loadTexture("../Resources/scoreboard.png");
+  
+  addButton(scores, mainMenuButton, mainMenuBorder, menu);
   
   TextBox box;
   SDL_Rect temp;
@@ -33,8 +38,10 @@ void Scoreboard::init() {
   readScores();
 }
 
+
+// MARK: - Game Loop Methods
+
 void Scoreboard::update(Game::State *gs) {
-  
 }
 
 void Scoreboard::render(Game::State *gs) {
@@ -42,39 +49,18 @@ void Scoreboard::render(Game::State *gs) {
   
   SDL_RenderCopy(Game::renderer, texture, NULL, &ScreenParameters::screenRect);
   
-  if(borderRect.y != 0)
-    SDL_RenderCopy(Game::renderer, hoveringBorder, NULL, &borderRect);
+  renderButtons(scores);
   
   for(int i = 0; i < scoreboardMax; i++) {
-    if(scores[i] > -1) {
+    if(boardScores[i] > -1) {
       scoreList[i*2].render(gs);
       scoreList[(i*2)+1].render(gs);
     }
   }
 }
 
-void Scoreboard::checkForHovering(Game::State *gs) {
-  using namespace ScoreboardParameters;
-  SDL_Point p = gs->dragLocation;
-  
-  if((p.x > mainMenuButton.x) && (p.x < mainMenuButton.x + mainMenuButton.w)
-     && (p.y > mainMenuButton.y) && (p.y < mainMenuButton.y + mainMenuButton.h))
-      borderRect = mainMenuBorder;
 
-  else borderRect = {};
-}
-
-int Scoreboard::checkClick(Game::State *gs) {
-  using namespace ScoreboardParameters;
-  SDL_Point p = gs->clickLocation;
-  borderRect = {};
-  
-  if((p.x > mainMenuButton.x) && (p.x < mainMenuButton.x + mainMenuButton.w)
-     && (p.y > mainMenuButton.y) && (p.y < mainMenuButton.y + mainMenuButton.h))
-    return activeScreen::menu;
-  
-  else return activeScreen::none;
-}
+// MARK: - Scoreboard Methods
 
 void Scoreboard::writeScore(Game::State *gs, int score) {
   using namespace std;
@@ -115,9 +101,9 @@ void Scoreboard::compareScores(std::string name, int score) {
   TextBox tempBox;
   
   for(int i = 0; i < ScoreboardParameters::scoreboardMax; i++) {
-    if (score > scores[i]) {
-      tempScore = scores[i];
-      scores[i] = score;
+    if (score > boardScores[i]) {
+      tempScore = boardScores[i];
+      boardScores[i] = score;
       score = tempScore;
       
       tempName = names[i];
@@ -125,7 +111,7 @@ void Scoreboard::compareScores(std::string name, int score) {
       name = tempName;
       
       scoreList[i*2].setScoreboardMessage(names[i] + ": ");
-      scoreList[(i*2)+1].setScoreboardMessage(std::to_string(scores[i]).c_str());
+      scoreList[(i*2)+1].setScoreboardMessage(std::to_string(boardScores[i]).c_str());
     }
   }
 }

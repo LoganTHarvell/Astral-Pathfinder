@@ -37,13 +37,11 @@ public:
   void render(Game::State *gs);
   
   // MARK: - Scoreboard Methods
-  void checkForHovering(Game::State *gs);
-  int checkClick(Game::State *gs);
   void writeScore(Game::State *gs, int score);
   
 private:
   TextBox scoreList[20];
-  int scores[10] = {-1};
+  int boardScores[10] = {-1};
   std::string names[10] = {""};
   
   void readScores();

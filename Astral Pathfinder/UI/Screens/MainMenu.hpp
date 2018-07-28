@@ -31,10 +31,6 @@ public:
   // MARK: - Game Loop Methods
   void update(Game::State *gs);
   void render(Game::State *gs);
-  
-  // MARK: - MainMenu Methods
-  void checkForHovering(Game::State *gs);
-  int checkClick(Game::State *gs);
 };
 
 #endif /* MainMenu_hpp */

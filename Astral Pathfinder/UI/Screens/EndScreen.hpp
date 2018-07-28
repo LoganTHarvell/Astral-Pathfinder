@@ -29,10 +29,6 @@ public:
   // MARK: - Game Loop Methods
   void update(Game::State *gs);
   void render(Game::State *gs);
-  
-  // MARK: - EndScreen Methods
-  void checkForHovering(Game::State *gs);
-  int checkClick(Game::State *gs);
 };
 
 
