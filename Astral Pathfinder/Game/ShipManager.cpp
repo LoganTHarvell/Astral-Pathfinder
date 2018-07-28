@@ -42,8 +42,13 @@ void ShipManager::update(Game::State *gameState, PlanetManager *pm) {
   ColliderComponent pCollider = playerShip.getCollider();
   ColliderComponent aCollider = alienShip.getCollider();
   
-  if (playerShip.getFuel() <= 0 && pm->playerIsDocked()) {
-    gameState->endgame = Game::State::noFuel;
+  if (playerShip.getFuel() <= 0) {
+    if (!pm->playerIsDocked()) {
+      gameState->endgame = Game::State::noFuel;
+    }
+    else if (pm->getPlayerDockedPlanet().getDeposits() <= 0) {
+      gameState->endgame = Game::State::noFuel;
+    }
   }
   else if (pCollider.collisionOBB(aCollider.getVertices())) {
     gameState->endgame = Game::State::alienAttack;
