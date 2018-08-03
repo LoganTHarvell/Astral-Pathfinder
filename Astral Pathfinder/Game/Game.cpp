@@ -90,15 +90,15 @@ void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
 void Game::handleEvents() {
   SDL_Event event;
   
-  while(SDL_PollEvent(&event)) {
+  while (SDL_PollEvent(&event)) {
     switch (event.type) {
       case SDL_QUIT:
         gameState.isRunning = false;
         break;
       case SDL_TEXTINPUT:
-        if(gameState.endgame != State::none && gameState.endgame != State::quit
+        if (gameState.endgame != State::none && gameState.endgame != State::quit
            && SDL_IsTextInputActive()) {
-          if(gameState.playerName.length() < 3) {
+          if (gameState.playerName.length() < 3) {
             gameState.playerName += event.text.text;
             gameState.renderPlayerName = true;
           }
@@ -106,22 +106,22 @@ void Game::handleEvents() {
         break;
       case SDL_KEYDOWN:
       {
-        if(!uiManager->checkStartScreens() && gameState.endgame == State::none) {
+        if (!uiManager->checkStartScreens() && gameState.endgame == State::none) {
           // Gets pressed key
           SDL_Keycode key = event.key.keysym.sym;
           
           // GameState logic
-          if(key == SDLK_ESCAPE && gameState.planetSelected) {
+          if (key == SDLK_ESCAPE && gameState.planetSelected) {
             gameState.planetSelected = false;
           }
           else if (key == SDLK_d) {
             gameState.debugMode = !gameState.debugMode;
           }
         }
-        else if(gameState.endgame != State::none && gameState.endgame != State::quit
+        else if (gameState.endgame != State::none && gameState.endgame != State::quit
                 && SDL_IsTextInputActive()) {
           SDL_Keycode key = event.key.keysym.sym;
-          if(key == SDLK_BACKSPACE && gameState.playerName.length() > 0) {
+          if (key == SDLK_BACKSPACE && gameState.playerName.length() > 0) {
             gameState.playerName.pop_back();
             gameState.renderPlayerName = true;
           }
@@ -134,11 +134,11 @@ void Game::handleEvents() {
         break;
       case SDL_MOUSEMOTION:
         // TODO: Verify this doesn't need to be changes to gameState.gameOver
-        if(uiManager->checkStartScreens() || (gameState.endgame != State::none
+        if (uiManager->checkStartScreens() || (gameState.endgame != State::none
                                               && gameState.endgame != State::quit))
           gameState.dragLocation = { event.motion.x, event.motion.y };
         
-        else if(gameState.planetSelected || gameState.playerCollision)
+        else if (gameState.planetSelected || gameState.playerCollision)
           gameState.dragLocation = { event.motion.x, event.motion.y };
         break;
       case SDL_MOUSEBUTTONUP:
@@ -148,7 +148,7 @@ void Game::handleEvents() {
         gameState.activeSlider = State::inactive;
         break;
       case SDL_MOUSEWHEEL:
-        if(event.wheel.y > 0 || event.wheel.y < 0) {
+        if (event.wheel.y > 0 || event.wheel.y < 0) {
           gameState.mouseScroll = event.wheel.y;
         }
       default:
@@ -182,7 +182,7 @@ void Game::update(Uint32 ticks) {
   
   uiManager->update(&gameState, planetManager, shipManager);
   
-  if(gameState.restartGame)
+  if (gameState.restartGame)
     restartGame();
 }
 
@@ -194,7 +194,7 @@ void Game::render() {
   // Render stuff
   uiManager->render(&gameState, planetManager);
   
-  if(!uiManager->checkStartScreens()
+  if (!uiManager->checkStartScreens()
      && (gameState.endgame == State::none || !gameState.gameOver) &&
      gameState.endgame != State::quit) {
     planetManager->render(&gameState);

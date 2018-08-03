@@ -23,14 +23,14 @@ void EndScreen::init() {
 
 void EndScreen::update(Game::State *gs) {
   // TODO: put clean function in case someone spams endless restarts
-  if(texture == nullptr) {
-    if(gs->endgame == Game::State::allDiscovered)
+  if (texture == nullptr) {
+    if (gs->endgame == Game::State::allDiscovered)
       texture = TextureManager::loadTexture("../Resources/winScreen.png");
     
-    else if(gs->endgame == Game::State::noFuel)
+    else if (gs->endgame == Game::State::noFuel)
       texture = TextureManager::loadTexture("../Resources/loseScreen.png");
     
-    else if(gs->endgame == Game::State::alienAttack)
+    else if (gs->endgame == Game::State::alienAttack)
       texture = TextureManager::loadTexture("../Resources/alienScreen.png");
   }
 }

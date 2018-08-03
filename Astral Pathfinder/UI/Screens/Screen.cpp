@@ -9,13 +9,13 @@
 #include "Screen.hpp"
 
 void Screen::checkForHovering(Game::State *gs, int screen) {
-  for(Button& b : *getActiveScreenButtons(screen))
+  for (Button& b : *getActiveScreenButtons(screen))
     b.checkIfHovering(gs);
 }
 
 int Screen::checkClick(Game::State *gs, int screen) {
-  for(Button& b : *getActiveScreenButtons(screen))
-    if(b.checkClick(gs->clickLocation))
+  for (Button& b : *getActiveScreenButtons(screen))
+    if (b.checkClick(gs->clickLocation))
       return b.getNextScreen();
   
   return -1;
@@ -29,13 +29,13 @@ void Screen::addButton(int currentScreen, SDL_Rect bounds, SDL_Rect border, int 
 }
 
 void Screen::renderButtons(int screen) {
-  for(Button b : *getActiveScreenButtons(screen)) b.render();
+  for (Button b : *getActiveScreenButtons(screen)) b.render();
 }
 
 std::vector<Button> *Screen::getActiveScreenButtons(int screen) {
   using namespace ScreenParameters;
   
-  switch(screen) {
+  switch (screen) {
     case menu:
       return &mainMenuButtons;
       break;

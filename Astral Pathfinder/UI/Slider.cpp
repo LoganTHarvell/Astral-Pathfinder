@@ -40,12 +40,12 @@ void Slider::render() {
 void Slider::clean() {
   if (baseTexture == nullptr && sliderTexture == nullptr) return;
   
-  if(baseTexture != nullptr) {
+  if (baseTexture != nullptr) {
     SDL_DestroyTexture(baseTexture);
     baseTexture = nullptr;
   }
   
-  if(sliderTexture != nullptr) {
+  if (sliderTexture != nullptr) {
     SDL_DestroyTexture(sliderTexture);
     sliderTexture = nullptr;
   }

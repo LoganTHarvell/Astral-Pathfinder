@@ -13,6 +13,7 @@
 #include "SDL2/SDL.h"
 #include <string>
 
+#include "Parameters.hpp"
 
 // MARK: - Game Parameters
 

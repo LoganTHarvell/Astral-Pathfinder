@@ -27,7 +27,7 @@ void Button::update() {
 }
 
 void Button::render() {
-  if(isActive)
+  if (isActive)
     SDL_RenderCopy(Game::renderer, texture, NULL, &border);
 }
 
@@ -35,7 +35,7 @@ void Button::render() {
 // MARK: - Button Methods
 
 bool Button::checkInBounds(SDL_Point p) {
-  if((p.x > bounds.x) && (p.x < bounds.x + bounds.w)
+  if ((p.x > bounds.x) && (p.x < bounds.x + bounds.w)
      && (p.y > bounds.y) && (p.y < bounds.y + bounds.h))
     return true;
   
@@ -43,14 +43,14 @@ bool Button::checkInBounds(SDL_Point p) {
 }
 
 void Button::checkIfHovering(Game::State *gs) {
-  if(checkInBounds(gs->dragLocation))
+  if (checkInBounds(gs->dragLocation))
     isActive = true;
   else
     isActive = false;
 }
 
 bool Button::checkClick(SDL_Point p) {
-  if(checkInBounds(p)) {
+  if (checkInBounds(p)) {
     isActive = false;
     return true;
   }

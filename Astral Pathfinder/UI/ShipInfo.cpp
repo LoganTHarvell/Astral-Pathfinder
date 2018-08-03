@@ -52,11 +52,11 @@ void ShipInfo::setText(PlayerShip ship) {
   std::string loc = "Location: " + std::to_string(pos.x) + "," + std::to_string(pos.y);
   std::string fuelNum = "Fuel: " + std::to_string(fuelAmount);
   
-  if(fuelAmount < 250) fuel.setFuelMessage(fuelNum.c_str(), {128,0,0});
+  if (fuelAmount < 250) fuel.setFuelMessage(fuelNum.c_str(), {128,0,0});
   else fuel.setFuelMessage(fuelNum.c_str());
   location.setMessage(loc.c_str());
   curPlanet.setMessage("Current Planet");
-  if(crewLabel.checkNull()) {
+  if (crewLabel.checkNull()) {
     crewLabel.setMessage("Crew");
     crewNum.setMessage(std::to_string(ShipParameters::totalCrew));
     bar.setMessage("----------------------------------------------------");

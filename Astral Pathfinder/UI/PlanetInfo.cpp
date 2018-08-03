@@ -45,7 +45,7 @@ void PlanetInfo::render(Game::State *gs, int population,
   miningText.render(gs);
   farmingText.render(gs);
   
-  if(population > 0 || playerDocked) {
+  if (population > 0 || playerDocked) {
     dpText.render(gs);
     fpText.render(gs);
     miningLabel.render(gs);
@@ -103,7 +103,7 @@ int PlanetInfo::checkClick(SDL_Point click) {
   temp = resourceSlider.getBaseRect();
   temp.y = resourceSlider.getSliderRect().y;
   temp.h = resourceSlider.getSliderRect().h;
-  if((click.x > temp.x) && (click.x < temp.x + temp.w)
+  if ((click.x > temp.x) && (click.x < temp.x + temp.w)
      && (click.y > temp.y) && (click.y < temp.y + temp.h)) {
     slider = fertilitySlider;
     return fertilitySlider;
@@ -112,7 +112,7 @@ int PlanetInfo::checkClick(SDL_Point click) {
   temp = depositSlider.getBaseRect();
   temp.y = depositSlider.getSliderRect().y;
   temp.h = depositSlider.getSliderRect().h;
-  if((click.x > temp.x) && (click.x < temp.x + temp.w)
+  if ((click.x > temp.x) && (click.x < temp.x + temp.w)
      && (click.y > temp.y) && (click.y < temp.y + temp.h)) {
     slider = reserveSlider;
     return reserveSlider;
@@ -125,7 +125,7 @@ int PlanetInfo::checkClick(SDL_Point click) {
 bool PlanetInfo::moveSlider(Game::State *gameState) {
   SDL_Rect temp;
   
-  if(slider == fertilitySlider)
+  if (slider == fertilitySlider)
     temp = resourceSlider.getBaseRect();
   
   else
@@ -133,13 +133,13 @@ bool PlanetInfo::moveSlider(Game::State *gameState) {
   
   int x = gameState->dragLocation.x - temp.x;
   
-  if(slider == fertilitySlider && (x > 0) && (x < temp.w + 2)) {
+  if (slider == fertilitySlider && (x > 0) && (x < temp.w + 2)) {
     resourceSlider.setSliderPosition(x);
     setNewPercentText();
     return true;
   }
   
-  if(slider == reserveSlider && (x > 0) && (x < temp.w + 2)) {
+  if (slider == reserveSlider && (x > 0) && (x < temp.w + 2)) {
     depositSlider.setSliderPosition(x);
     setNewPercentText();
     return true;
@@ -149,10 +149,10 @@ bool PlanetInfo::moveSlider(Game::State *gameState) {
 }
 
 int PlanetInfo::getSliderPercent() {
-  if(slider == fertilitySlider)
+  if (slider == fertilitySlider)
     return resourceSlider.getPercent();
   
-  if(slider == reserveSlider)
+  if (slider == reserveSlider)
     return depositSlider.getPercent();
   
   return NULL;
@@ -172,7 +172,7 @@ void PlanetInfo::setBoxes(Planet p) {
   location = "Location: " + setStringSpaces(mapLocation.x) + std::to_string(mapLocation.x)
   + "," + std::to_string(mapLocation.y);
   
-  if(populationAmount == 0 && !p.playerIsDocked()) {
+  if (populationAmount == 0 && !p.playerIsDocked()) {
     if (p.getStatus() == Planet::undiscovered) population = "Undiscovered";
     else if (p.getStatus() == Planet::discovered) population = "Discovered";
     
@@ -206,7 +206,7 @@ void PlanetInfo::setBoxes(Planet p) {
     ipText.setMessage(infPercent.c_str());
     rpText.setMessage(resPercent.c_str());
     
-    if(miningLabel.checkNull()) {
+    if (miningLabel.checkNull()) {
       miningLabel.setMessage("Mining");
       farmingLabel.setMessage("Farming");
       infraText.setMessage("Infrastructure");
@@ -224,7 +224,7 @@ void PlanetInfo::setBoxes(Planet p) {
 void PlanetInfo::setNewPercentText() {
   int p = getSliderPercent();
   
-  if(slider == fertilitySlider) {
+  if (slider == fertilitySlider) {
     std::string depoPercent = setStringSpaces(100-p) + std::to_string(100-p) + "%";
     dpText.setMessage(depoPercent.c_str());
     
@@ -232,7 +232,7 @@ void PlanetInfo::setNewPercentText() {
     fpText.setMessage(fertPercent.c_str());
   }
   
-  if(slider == reserveSlider) {
+  if (slider == reserveSlider) {
     std::string infPercent = setStringSpaces(100-p) + std::to_string(100-p) + "%";
     ipText.setMessage(infPercent.c_str());
     
@@ -245,9 +245,9 @@ void PlanetInfo::setNewPercentText() {
 std::string PlanetInfo::setStringSpaces(int p) {
   std::string s;
   
-  if(p >= 0 && p < 10)
+  if (p >= 0 && p < 10)
     s = s + " " + " ";
-  else if(p >= 10 && p < 100)
+  else if (p >= 10 && p < 100)
     s = s + " ";
   
   return s;

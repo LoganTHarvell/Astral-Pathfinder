@@ -203,6 +203,7 @@ void Planet::updateStatus() {
     status = discovered;
 }
 
+// TODO: Move to events component maybe?
 void Planet::updateRandomEvents(Uint32 frame) {
   using namespace PlanetParameters;
   
@@ -373,26 +374,26 @@ void Planet::updateEventComponent() {
 }
 
 void Planet::updateColors() {
-  if(status == undiscovered) {
+  if (status == undiscovered) {
     SDL_SetTextureAlphaMod(texture, 127);
     return;
   }
   
   SDL_SetTextureAlphaMod(texture, 255);
-  if(selected) {
+  if (selected) {
     SDL_SetTextureColorMod(texture, 0, 255, 0);
     return;
   }
   
-  if(status == discovered) {
+  if (status == discovered) {
     SDL_SetTextureColorMod(texture, 255, 255, 255);
     return;
   }
   
-  if(isOverproducing)
+  if (isOverproducing)
     SDL_SetTextureColorMod(texture, 200, 0, 0);
   
-  else if(populationDec)
+  else if (populationDec)
     SDL_SetTextureColorMod(texture, 200, 200, 0);
   
   else {
@@ -406,6 +407,6 @@ SDL_Point Planet::uiPosition(SDL_Point p) {
 }
 
 void Planet::renderEvents() {
-  if(events.blight || events.plague || events.mineCollapse)
+  if (events.blight || events.plague || events.mineCollapse)
     SDL_RenderCopy(Game::renderer, outlineTexture, NULL, &outlineRect);
 }

@@ -44,7 +44,7 @@ void TextBox::clean() {
 // MARK: - TextBox Methods
 
 void TextBox::setMessage(const std::string words, SDL_Color color) {
-  if(texture != nullptr) clean();
+  if (texture != nullptr) clean();
   
   SDL_Surface *surface = TTF_RenderText_Solid(font, words.c_str(), color);
   texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
@@ -52,7 +52,7 @@ void TextBox::setMessage(const std::string words, SDL_Color color) {
 }
 
 void TextBox::setFuelMessage(const std::string words, SDL_Color color) {
-  if(texture != nullptr) clean();
+  if (texture != nullptr) clean();
   
   SDL_Surface *surface = TTF_RenderText_Blended(font, words.c_str(), color);
   texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
@@ -60,12 +60,12 @@ void TextBox::setFuelMessage(const std::string words, SDL_Color color) {
 }
 
 void TextBox::setScoreboardMessage(const std::string words, SDL_Color color) {
-  if(texture != nullptr) clean();
+  if (texture != nullptr) clean();
   
   int w, h;
   TTF_SizeText(font, words.c_str(), &w, &h);
   
-  if(rect.x < TextParameters::scoreboardLine)
+  if (rect.x < TextParameters::scoreboardLine)
     rect.x = TextParameters::scoreboardLine - w;
   rect.w = w;
   
@@ -75,7 +75,7 @@ void TextBox::setScoreboardMessage(const std::string words, SDL_Color color) {
 }
 
 void TextBox::setEventMessage(const std::string words, SDL_Color color) {
-  if(texture != nullptr) clean();
+  if (texture != nullptr) clean();
   font = TTF_OpenFont(TextParameters::fontFile.c_str(), TextParameters::eventFontSize);
   
   int w, h;
@@ -91,7 +91,7 @@ void TextBox::setEventMessage(const std::string words, SDL_Color color) {
 void TextBox::setFinalScore(const std::string words) {
   using TextParameters::color;
   int w, h;
-  if(texture != nullptr) clean();
+  if (texture != nullptr) clean();
   
   font = TTF_OpenFont(TextParameters::fontFile.c_str(), TextParameters::finalScoreFontSize);
   
@@ -106,7 +106,7 @@ void TextBox::setFinalScore(const std::string words) {
 }
 
 bool TextBox::checkNull() {
-  if(texture == nullptr) return true;
+  if (texture == nullptr) return true;
   else return false;
 }
 

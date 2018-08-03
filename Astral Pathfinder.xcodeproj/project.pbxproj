@@ -52,6 +52,8 @@
 		020013892075BCD30087CED9 /* MODENINE.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 0200135E2075BCD30087CED9 /* MODENINE.TTF */; };
 		0200138A2075BCD30087CED9 /* mainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200135F2075BCD30087CED9 /* mainMenu.png */; };
 		02307D002075BE1B00B46A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02307CFE2075BE1B00B46A3E /* Assets.xcassets */; };
+		0243D28A2112ED5600B36BEC /* Parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0243D2892112ED5600B36BEC /* Parameters.cpp */; };
+		0243D2912113858E00B36BEC /* AstralPathfinderConfig.csv in Resources */ = {isa = PBXBuildFile; fileRef = 0243D2902113858E00B36BEC /* AstralPathfinderConfig.csv */; };
 		02DDC15620971D6000704F70 /* PlayerShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15120971D6000704F70 /* PlayerShip.cpp */; };
 		02DDC15720971D6000704F70 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15420971D6000704F70 /* Ship.cpp */; };
 		02DDC15820971D6000704F70 /* AlienShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15520971D6000704F70 /* AlienShip.cpp */; };
@@ -142,7 +144,7 @@
 		0200134B2075BCD30087CED9 /* ShipManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShipManager.hpp; sourceTree = "<group>"; };
 		0200134C2075BCD30087CED9 /* UIManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UIManager.hpp; sourceTree = "<group>"; };
 		0200134D2075BCD30087CED9 /* PlanetManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlanetManager.cpp; sourceTree = "<group>"; };
-		0200134E2075BCD30087CED9 /* parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parameters.h; sourceTree = "<group>"; };
+		0200134E2075BCD30087CED9 /* Parameters.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = Parameters.hpp; sourceTree = "<group>"; };
 		0200134F2075BCD30087CED9 /* ShipManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShipManager.cpp; sourceTree = "<group>"; };
 		020013502075BCD30087CED9 /* UIManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIManager.cpp; sourceTree = "<group>"; };
 		020013512075BCD30087CED9 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
@@ -160,6 +162,8 @@
 		0200135F2075BCD30087CED9 /* mainMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMenu.png; sourceTree = "<group>"; };
 		02307CFE2075BE1B00B46A3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02307CFF2075BE1B00B46A3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0243D2892112ED5600B36BEC /* Parameters.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parameters.cpp; sourceTree = "<group>"; };
+		0243D2902113858E00B36BEC /* AstralPathfinderConfig.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AstralPathfinderConfig.csv; sourceTree = "<group>"; };
 		02DDC15020971D6000704F70 /* AlienShip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AlienShip.hpp; sourceTree = "<group>"; };
 		02DDC15120971D6000704F70 /* PlayerShip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerShip.cpp; sourceTree = "<group>"; };
 		02DDC15220971D6000704F70 /* PlayerShip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerShip.hpp; sourceTree = "<group>"; };
@@ -291,10 +295,10 @@
 				0200133C2075BCD30087CED9 /* Slider.cpp */,
 				020013372075BCD30087CED9 /* TextureManager.hpp */,
 				0200133A2075BCD30087CED9 /* TextureManager.cpp */,
-				9117BE702094FD34003FE954 /* EventsPanel.cpp */,
 				9117BE712094FD34003FE954 /* EventsPanel.hpp */,
-				913C4B49210BD5C200B0D519 /* Button.cpp */,
+				9117BE702094FD34003FE954 /* EventsPanel.cpp */,
 				913C4B4A210BD5C200B0D519 /* Button.hpp */,
+				913C4B49210BD5C200B0D519 /* Button.cpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -317,8 +321,8 @@
 				020013432075BCD30087CED9 /* GameObject.cpp */,
 				020013452075BCD30087CED9 /* ColliderComponent.hpp */,
 				020013422075BCD30087CED9 /* ColliderComponent.cpp */,
-				9117BE8E209606D6003FE954 /* EventsComponent.cpp */,
 				9117BE8F209606D6003FE954 /* EventsComponent.hpp */,
+				9117BE8E209606D6003FE954 /* EventsComponent.cpp */,
 			);
 			path = "Game Object";
 			sourceTree = "<group>";
@@ -326,7 +330,8 @@
 		020013482075BCD30087CED9 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				0200134E2075BCD30087CED9 /* parameters.h */,
+				0200134E2075BCD30087CED9 /* Parameters.hpp */,
+				0243D2892112ED5600B36BEC /* Parameters.cpp */,
 				020013492075BCD30087CED9 /* Game.hpp */,
 				020013512075BCD30087CED9 /* Game.cpp */,
 				0200134A2075BCD30087CED9 /* PlanetManager.hpp */,
@@ -342,6 +347,7 @@
 		020013532075BCD30087CED9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0243D2902113858E00B36BEC /* AstralPathfinderConfig.csv */,
 				9117BEA22096C528003FE954 /* Scores */,
 				02307CFC2075BDB700B46A3E /* Screens */,
 				020013542075BCD30087CED9 /* Textures */,
@@ -414,14 +420,14 @@
 		9192D8C720FA9D940053F989 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				9192D8C420FA9BCF0053F989 /* Screen.cpp */,
 				9192D8C520FA9BCF0053F989 /* Screen.hpp */,
-				9192D8C820FACF940053F989 /* MainMenu.cpp */,
+				9192D8C420FA9BCF0053F989 /* Screen.cpp */,
 				9192D8C920FACF940053F989 /* MainMenu.hpp */,
-				9192D8CB20FACFA40053F989 /* Scoreboard.cpp */,
+				9192D8C820FACF940053F989 /* MainMenu.cpp */,
 				9192D8CC20FACFA40053F989 /* Scoreboard.hpp */,
-				9192D8CE20FACFBB0053F989 /* EndScreen.cpp */,
+				9192D8CB20FACFA40053F989 /* Scoreboard.cpp */,
 				9192D8CF20FACFBB0053F989 /* EndScreen.hpp */,
+				9192D8CE20FACFBB0053F989 /* EndScreen.cpp */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -499,6 +505,7 @@
 				02DDC15F20971DB500704F70 /* scoreboard.png in Resources */,
 				0200136C2075BCD30087CED9 /* Screen Shot 2018-03-20 at 9.08.05 PM.png in Resources */,
 				020013682075BCD30087CED9 /* Screen Shot 2018-03-19 at 11.36.22 PM.png in Resources */,
+				0243D2912113858E00B36BEC /* AstralPathfinderConfig.csv in Resources */,
 				02DDC15C20971DA900704F70 /* movingPlayerShip2.png in Resources */,
 				020013822075BCD30087CED9 /* planet.png in Resources */,
 				020013612075BCD30087CED9 /* Classes.txt in Resources */,
@@ -547,6 +554,7 @@
 				020013752075BCD30087CED9 /* Slider.cpp in Sources */,
 				020013732075BCD30087CED9 /* TextureManager.cpp in Sources */,
 				02DDC15620971D6000704F70 /* PlayerShip.cpp in Sources */,
+				0243D28A2112ED5600B36BEC /* Parameters.cpp in Sources */,
 				9192D8D020FACFBB0053F989 /* EndScreen.cpp in Sources */,
 				9192D8C620FA9BCF0053F989 /* Screen.cpp in Sources */,
 				0200137B2075BCD30087CED9 /* PlanetManager.cpp in Sources */,

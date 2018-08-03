@@ -58,7 +58,7 @@ namespace PlanetParameters {
  
   // Defines resource information
   const float foodRqmt = 0.02;      // Food required per person
-  const float miningRate = 0.0001; // Minerals produced per person per frame
+  const float miningRate = 0.0001;  // Minerals produced per person per frame
   const float farmingRate = 0.04;   // Food produced per person per frame
   const float fertDecay = 0.0001;
   const int fertDecayDelay = 10;

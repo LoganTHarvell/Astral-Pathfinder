@@ -25,7 +25,7 @@ void Scoreboard::init() {
   
   TextBox box;
   SDL_Rect temp;
-  for(int i = 0; i < scoreboardMax; i++) {
+  for (int i = 0; i < scoreboardMax; i++) {
     scoreList[i*2] = box;
     scoreList[i*2+1] = box;
     temp = {startingNameBox.x, startingNameBox.y+(53*i),
@@ -51,8 +51,8 @@ void Scoreboard::render(Game::State *gs) {
   
   renderButtons(scores);
   
-  for(int i = 0; i < scoreboardMax; i++) {
-    if(boardScores[i] > -1) {
+  for (int i = 0; i < scoreboardMax; i++) {
+    if (boardScores[i] > -1) {
       scoreList[i*2].render(gs);
       scoreList[(i*2)+1].render(gs);
     }
@@ -66,7 +66,7 @@ void Scoreboard::writeScore(Game::State *gs, int score) {
   using namespace std;
   ofstream file;
   file.open(ScoreboardParameters::filePath.c_str(), ios::app);
-  while(gs->playerName.length() < 3)
+  while (gs->playerName.length() < 3)
     gs->playerName += '-';
   string message = gs->playerName + ";" + to_string(score) + ";";
   file << message << endl;
@@ -80,7 +80,7 @@ void Scoreboard::readScores() {
   string line;
   ifstream file;
   file.open(ScoreboardParameters::filePath.c_str());
-  while(static_cast<void>(file >> ws), getline(file, line, lineBreak)) {
+  while (static_cast<void>(file >> ws), getline(file, line, lineBreak)) {
     // Player Name
     string name = line;
     // Player Score
@@ -100,7 +100,7 @@ void Scoreboard::compareScores(std::string name, int score) {
   std::string tempName;
   TextBox tempBox;
   
-  for(int i = 0; i < ScoreboardParameters::scoreboardMax; i++) {
+  for (int i = 0; i < ScoreboardParameters::scoreboardMax; i++) {
     if (score > boardScores[i]) {
       tempScore = boardScores[i];
       boardScores[i] = score;

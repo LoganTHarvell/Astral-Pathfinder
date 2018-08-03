@@ -24,7 +24,7 @@ void EventsPanel::init() {
 void EventsPanel::update(Game::State *gameState, PlanetManager *pm) {
   checkStatus(pm->getEventsList());
   
-  if(gameState->mouseScroll != 0) {
+  if (gameState->mouseScroll != 0) {
     scrollPanel(gameState->mouseScroll*5);
     gameState->mouseScroll = 0;
   }
@@ -34,7 +34,7 @@ void EventsPanel::render(Game::State *gameState) {
   using namespace EventPanelParameters;
   SDL_SetRenderTarget(Game::renderer, texture);
   SDL_RenderClear(Game::renderer);
-  for(std::vector<TextBox>::reverse_iterator it = eventOrder.rbegin();
+  for (std::vector<TextBox>::reverse_iterator it = eventOrder.rbegin();
       it != eventOrder.rend(); ++it)
     it->render(gameState);
   SDL_SetRenderTarget(Game::renderer, NULL);
@@ -46,17 +46,17 @@ void EventsPanel::render(Game::State *gameState) {
 
 void EventsPanel::scrollPanel(int scroll) {
   int newY;
-  if(scroll < 0) {
-    if(totalHeight > EventPanelParameters::renderRect.h) {
+  if (scroll < 0) {
+    if (totalHeight > EventPanelParameters::renderRect.h) {
       newY = src.y + (-scroll);
-      if(newY + src.h > totalHeight) src.y = totalHeight - src.h;
+      if (newY + src.h > totalHeight) src.y = totalHeight - src.h;
       else src.y = newY;
     }
   }
     
   else {
     newY = src.y - scroll;
-    if(newY < 0) src.y = 0;
+    if (newY < 0) src.y = 0;
     else src.y = newY;
   }
 }
@@ -64,7 +64,7 @@ void EventsPanel::scrollPanel(int scroll) {
 void EventsPanel::checkStatus(std::vector<EventsComponent> events) {
   using namespace EventPanelParameters;
   
-  for(int i = 0; i < events.size(); i++) {
+  for (int i = 0; i < events.size(); i++) {
     SDL_Point p = events[i].getLocation();
     updateMap(p, events[i].getBlight(), BLIGHT, outline);
     updateMap(p, events[i].getPlague(), PLAGUE, outline);
@@ -77,8 +77,8 @@ void EventsPanel::checkStatus(std::vector<EventsComponent> events) {
 void EventsPanel::updateMap(SDL_Point p, bool flag, int event, SDL_Color color) {
   long key = (static_cast<long>(p.x + event) | (static_cast<long>(p.y + event) << 32));
   
-  if(flag) {
-    if(map.find(key) == map.end()) {
+  if (flag) {
+    if (map.find(key) == map.end()) {
       TextBox box;
       box.init(EventPanelParameters::textBoxesRect);
       box.setEventMessage(createMessage(p, event).c_str(), color);
@@ -89,8 +89,8 @@ void EventsPanel::updateMap(SDL_Point p, bool flag, int event, SDL_Color color) 
     }
   }
   
-  else if(!map.empty()) {
-    if(map.find(key) != map.end()) {
+  else if (!map.empty()) {
+    if (map.find(key) != map.end()) {
       removeFromList(key);
       map[key].clean();
       map.erase(key);
@@ -100,8 +100,8 @@ void EventsPanel::updateMap(SDL_Point p, bool flag, int event, SDL_Color color) 
 }
 
 void EventsPanel::removeFromList(long key) {
-  for(int i = 0; i < eventOrder.size(); i++) {
-    if(eventOrder[i].getKey() == key) {
+  for (int i = 0; i < eventOrder.size(); i++) {
+    if (eventOrder[i].getKey() == key) {
       eventOrder[i].clean();
       eventOrder.erase(eventOrder.begin()+i);
       break;
@@ -112,7 +112,7 @@ void EventsPanel::removeFromList(long key) {
 std::string EventsPanel::createMessage(SDL_Point p, int event) {
   std::string message;
   
-  switch(event) {
+  switch (event) {
     case BLIGHT:
       message = "A blight has occured at ";
       break;
@@ -137,7 +137,7 @@ std::string EventsPanel::createMessage(SDL_Point p, int event) {
 
 void EventsPanel::updateBoxCoords() {
   SDL_Rect prev = {0,0,0,0};
-  for(std::vector<TextBox>::reverse_iterator it = eventOrder.rbegin();
+  for (std::vector<TextBox>::reverse_iterator it = eventOrder.rbegin();
       it != eventOrder.rend(); ++it) {
     it->setYCoord(prev.y + prev.h + 10);
     prev = it->getRect();
