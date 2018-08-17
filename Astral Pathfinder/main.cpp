@@ -7,10 +7,13 @@
 //
 
 // MARK: Source Files
+#include "Parameters.hpp"
 #include "Game.hpp"
 
 int main(int argc, const char *argv[]) {
-  using namespace GameParameters;
+  using namespace Parameters::Game;
+  
+  Parameters::loadParameters();
   
   Game game;
   game.init("Astral Pathfinder ©", windowRect, false);

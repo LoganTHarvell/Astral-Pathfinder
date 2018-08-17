@@ -53,7 +53,8 @@
 		0200138A2075BCD30087CED9 /* mainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200135F2075BCD30087CED9 /* mainMenu.png */; };
 		02307D002075BE1B00B46A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02307CFE2075BE1B00B46A3E /* Assets.xcassets */; };
 		0243D28A2112ED5600B36BEC /* Parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0243D2892112ED5600B36BEC /* Parameters.cpp */; };
-		0243D2912113858E00B36BEC /* AstralPathfinderConfig.csv in Resources */ = {isa = PBXBuildFile; fileRef = 0243D2902113858E00B36BEC /* AstralPathfinderConfig.csv */; };
+		0243D2992114210500B36BEC /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0243D2972114210500B36BEC /* liblua.a */; };
+		0243D29B211424E500B36BEC /* config.lua in Resources */ = {isa = PBXBuildFile; fileRef = 0243D29A211424E500B36BEC /* config.lua */; };
 		02DDC15620971D6000704F70 /* PlayerShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15120971D6000704F70 /* PlayerShip.cpp */; };
 		02DDC15720971D6000704F70 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15420971D6000704F70 /* Ship.cpp */; };
 		02DDC15820971D6000704F70 /* AlienShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15520971D6000704F70 /* AlienShip.cpp */; };
@@ -163,7 +164,13 @@
 		02307CFE2075BE1B00B46A3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02307CFF2075BE1B00B46A3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0243D2892112ED5600B36BEC /* Parameters.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parameters.cpp; sourceTree = "<group>"; };
-		0243D2902113858E00B36BEC /* AstralPathfinderConfig.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AstralPathfinderConfig.csv; sourceTree = "<group>"; };
+		0243D2932114210500B36BEC /* luaconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = luaconf.h; sourceTree = "<group>"; };
+		0243D2942114210500B36BEC /* lua.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lua.h; sourceTree = "<group>"; };
+		0243D2952114210500B36BEC /* lauxlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lauxlib.h; sourceTree = "<group>"; };
+		0243D2962114210500B36BEC /* lua.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua.hpp; sourceTree = "<group>"; };
+		0243D2972114210500B36BEC /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblua.a; sourceTree = "<group>"; };
+		0243D2982114210500B36BEC /* lualib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lualib.h; sourceTree = "<group>"; };
+		0243D29A211424E500B36BEC /* config.lua */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.lua; sourceTree = "<group>"; };
 		02DDC15020971D6000704F70 /* AlienShip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AlienShip.hpp; sourceTree = "<group>"; };
 		02DDC15120971D6000704F70 /* PlayerShip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerShip.cpp; sourceTree = "<group>"; };
 		02DDC15220971D6000704F70 /* PlayerShip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerShip.hpp; sourceTree = "<group>"; };
@@ -200,6 +207,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0243D2992114210500B36BEC /* liblua.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +221,7 @@
 				020013302075BCD30087CED9 /* Astral Pathfinder */,
 				020013532075BCD30087CED9 /* Resources */,
 				02307CFE2075BE1B00B46A3E /* Assets.xcassets */,
+				0243D2922114206E00B36BEC /* Lua */,
 				020013012075A5D90087CED9 /* Frameworks */,
 				020012B020759ED60087CED9 /* Products */,
 			);
@@ -347,11 +356,11 @@
 		020013532075BCD30087CED9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0243D2902113858E00B36BEC /* AstralPathfinderConfig.csv */,
 				9117BEA22096C528003FE954 /* Scores */,
 				02307CFC2075BDB700B46A3E /* Screens */,
 				020013542075BCD30087CED9 /* Textures */,
 				02307CFD2075BDDC00B46A3E /* Fonts */,
+				0243D29A211424E500B36BEC /* config.lua */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -394,6 +403,19 @@
 				0200135E2075BCD30087CED9 /* MODENINE.TTF */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		0243D2922114206E00B36BEC /* Lua */ = {
+			isa = PBXGroup;
+			children = (
+				0243D2952114210500B36BEC /* lauxlib.h */,
+				0243D2972114210500B36BEC /* liblua.a */,
+				0243D2942114210500B36BEC /* lua.h */,
+				0243D2962114210500B36BEC /* lua.hpp */,
+				0243D2932114210500B36BEC /* luaconf.h */,
+				0243D2982114210500B36BEC /* lualib.h */,
+			);
+			path = Lua;
 			sourceTree = "<group>";
 		};
 		9117BEA22096C528003FE954 /* Scores */ = {
@@ -504,8 +526,8 @@
 				020013892075BCD30087CED9 /* MODENINE.TTF in Resources */,
 				02DDC15F20971DB500704F70 /* scoreboard.png in Resources */,
 				0200136C2075BCD30087CED9 /* Screen Shot 2018-03-20 at 9.08.05 PM.png in Resources */,
+				0243D29B211424E500B36BEC /* config.lua in Resources */,
 				020013682075BCD30087CED9 /* Screen Shot 2018-03-19 at 11.36.22 PM.png in Resources */,
-				0243D2912113858E00B36BEC /* AstralPathfinderConfig.csv in Resources */,
 				02DDC15C20971DA900704F70 /* movingPlayerShip2.png in Resources */,
 				020013822075BCD30087CED9 /* planet.png in Resources */,
 				020013612075BCD30087CED9 /* Classes.txt in Resources */,
@@ -693,6 +715,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lua",
+				);
 				OTHER_LDFLAGS = (
 					"-framework",
 					SDL2,
@@ -719,6 +745,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lua",
 				);
 				OTHER_LDFLAGS = (
 					"-framework",
