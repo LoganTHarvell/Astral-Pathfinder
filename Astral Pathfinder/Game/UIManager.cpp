@@ -22,7 +22,7 @@
 // MARK: - UIManager Initialization
 
 void UIManager::init(Game::State *gameState) {
-  using namespace UiParameters;
+  using namespace Parameters::UIManager;
 
   time.init(timeRect);
   totalScore.init(totalScoreRect);
@@ -125,7 +125,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
 }
 
 void UIManager::render(Game::State *gameState, PlanetManager *pm) {
-  using namespace UiParameters;
+  using namespace Parameters::UIManager;
   
   // Main Menu
   if (activeScreen == menu) {
@@ -155,7 +155,8 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
   
   // Game
   else if (!gameState->gameOver && gameState->endgame != Game::State::quit) {
-    SDL_RenderCopy(Game::renderer, gameScreen, NULL, &ScreenParameters::screenRect);
+    SDL_RenderCopy(Game::renderer, gameScreen, NULL,
+                   &Parameters::UIManager::screenRect);
   
     time.render(gameState);
     totalScore.render(gameState);
@@ -199,15 +200,15 @@ void UIManager::updateTime(Uint32 elapsedTime) {
 }
 
 SDL_Color UIManager::checkTime(int minutes) {
-  if (minutes < 15) return UiParameters::green;
-  else if (minutes < 20) return UiParameters::yellow;
-  else return UiParameters::red;
+  if (minutes < 15) return Parameters::UIManager::green;
+  else if (minutes < 20) return Parameters::UIManager::yellow;
+  else return Parameters::UIManager::red;
 }
 
 void UIManager::updateTotalScore(PlanetManager *pm, Uint32 elapsedTime) {
-  int overtime = elapsedTime - (GameParameters::timeLimit);
+  int overtime = elapsedTime - (Parameters::Game::timeLimit);
   if (overtime > 0) {
-    overtime *= GameParameters::overtimeScaleFactor;
+    overtime *= Parameters::Game::overtimeScaleFactor;
   }
   else {
     overtime = 0;
@@ -227,12 +228,12 @@ SDL_Color UIManager::setTotalScoreColor() {
   if (prevScore == score)
     return prevColor;
   else if (prevScore < score) {
-    prevColor = UiParameters::green;
-    return UiParameters::green;
+    prevColor = Parameters::UIManager::green;
+    return Parameters::UIManager::green;
   }
   else {
-    prevColor = UiParameters::red;
-    return UiParameters::red;
+    prevColor = Parameters::UIManager::red;
+    return Parameters::UIManager::red;
   }
 }
 
@@ -293,7 +294,7 @@ void UIManager::checkSliderMovement(PlanetInfo *pi, Game::State *gs, PlanetManag
 }
 
 void UIManager::checkClickedArea(SDL_Point p) {
-  using namespace UiParameters;
+  using namespace Parameters::UIManager;
   if ((p.x > currentPlanetRect.x) && (p.x < currentPlanetRect.x + currentPlanetRect.w)
      && (p.y > currentPlanetRect.y) && (p.y < currentPlanetRect.y + currentPlanetRect.h))
     currentWindow = currentPlanetWindow;

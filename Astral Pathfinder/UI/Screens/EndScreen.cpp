@@ -36,7 +36,8 @@ void EndScreen::update(Game::State *gs) {
 }
 
 void EndScreen::render(Game::State *gs) {
-  SDL_RenderCopy(Game::renderer, texture, NULL, &ScreenParameters::screenRect);
+  SDL_RenderCopy(Game::renderer, texture, NULL,
+                 &Parameters::UIManager::screenRect);
   
   renderButtons(over);
 }

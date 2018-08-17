@@ -9,6 +9,9 @@
 #ifndef Planet_hpp
 #define Planet_hpp
 
+// MARK: Parameter File
+#include "Parameters.hpp"
+
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 #include <string>
@@ -16,65 +19,6 @@
 // MARK: Source Files
 #include "GameObject.hpp"
 #include "EventsComponent.hpp"
-
-
-// MARK: - Planet Parameters
-
-namespace PlanetParameters {
-  
-  // Planet texture information
-  const std::string planetTextureFile = "../Resources/planet2.png";
-  const int planetTexSize = 16;
-  
-  const std::string planetOutlineFile = "../Resources/planetOutline.png";
-  const int planetOutlineSize = 24;
-  
-  // Planet initial attribute information
-  const int minFertility = 20;
-  const int fertilityRange = (200-minFertility);
-  const int minDeposits = 200;
-  const int depositsRange = (1000-minDeposits);
-  const int startInfraPercent = 50;
-  const int startReservePercent = 100 - startInfraPercent;
-  const int startMiningPercent = 100;
-  const int startFarmingPercent = 100 - startMiningPercent;
-  
-  // Homeworld initial attribute values
-  const int homeStartPopulation = 5000;
-  const int homeStartFertility = 100;
-  const int homeStartDeposits = 250;
-  const int homeStartMiningPercent = 58;
-  const int homeStartFarmingPercent = 100 - homeStartMiningPercent;
-  const int homeStartInfraPercent = 0;
-  const int homeStartReservePercent = 100 - homeStartInfraPercent;
-  
-  // Defines population growth information
-  const int growthPeriod = 1200;      // Frames per growth period
-  const float starveRate = 0.0008;    // Starvation deaths per frame
-  const float minBirthMultiplier = 0.05;
-  const float birthMultiplierRange = (0.2-minBirthMultiplier);
-  const float minDeathMultiplier = 0.025;
-  const float deathMultiplierRange = (0.075-minDeathMultiplier);
- 
-  // Defines resource information
-  const float foodRqmt = 0.02;      // Food required per person
-  const float miningRate = 0.0001;  // Minerals produced per person per frame
-  const float farmingRate = 0.04;   // Food produced per person per frame
-  const float fertDecay = 0.0001;
-  const int fertDecayDelay = 10;
-  const float infrastructureCost = 20;    // Infrastructure per mineral
-
-  // Random event chances
-  const float plagueRate = 0.05;
-  const float blightRate = 0.1;
-  const float mineCollapseRate = 0.3;
-  const float alienInvasionRate = 0.01;
-  
-  // Random event multipliers
-  const float plagueMultiplier = (deathMultiplierRange+minDeathMultiplier)*1.33;
-  const float blightMultiplier = 0.75;
-  const float mineCollapseMultiplier = 0.5;
-}
 
 
 // MARK: - Planet Class

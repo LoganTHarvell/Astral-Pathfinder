@@ -19,6 +19,7 @@
 
 
 // MARK: - Slider Parameters
+// TODO: - Move parameters to parameters file
 
 namespace SliderParameters {
   

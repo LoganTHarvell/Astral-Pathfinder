@@ -9,6 +9,9 @@
 #ifndef Screen_hpp
 #define Screen_hpp
 
+// MARK: - Parameter File
+#include "Parameters.hpp"
+
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 #include <vector>
@@ -18,12 +21,6 @@
 #include "Game.hpp"
 #include "TextureManager.hpp"
 #include "Button.hpp"
-
-// MARK: - Screen Parameters
-
-namespace ScreenParameters {
-  const SDL_Rect screenRect = {0, 0, GameParameters::windowRect.w, GameParameters::windowRect.h};
-}
 
 
 // MARK: - Scren Class

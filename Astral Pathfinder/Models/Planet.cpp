@@ -19,7 +19,7 @@
 // MARK: - Initialization Methods
 
 void Planet::initHomeworld() {
-  using namespace PlanetParameters;
+  using namespace Parameters::Planet;
   // initializes random planet
   initPlanet();
   
@@ -53,11 +53,11 @@ void Planet::initHomeworld() {
 }
 
 void Planet::initPlanet() {
-  using namespace PlanetParameters;
+  using namespace Parameters::Planet;
   
   // Set planet coordinates
-  coordinates.x = rand()%PlanetManagerParameters::numberOfPlanets;
-  coordinates.y = rand()%PlanetManagerParameters::numberOfPlanets;
+  coordinates.x = rand()%Parameters::PlanetManager::numberOfPlanets;
+  coordinates.y = rand()%Parameters::PlanetManager::numberOfPlanets;
   
   // Set planet rect
   SDL_Point tmp = uiPosition(coordinates);
@@ -147,8 +147,8 @@ void Planet::revertClick() {
 }
 
 void Planet::toggleDockedShip(int tag, Uint32 frame) {
-  using namespace PlanetParameters;
-  using ShipType = ShipParameters::ShipType;
+  using namespace Parameters::Planet;
+  using ShipType = Parameters::Ship::ShipType;
   
   switch (tag) {
     case ShipType::playerShip:
@@ -205,7 +205,7 @@ void Planet::updateStatus() {
 
 // TODO: Move to events component maybe?
 void Planet::updateRandomEvents(Uint32 frame) {
-  using namespace PlanetParameters;
+  using namespace Parameters::Planet;
   
   // Exits immediately if planet has no population
   if (population <= 0) return;
@@ -230,7 +230,7 @@ void Planet::updateRandomEvents(Uint32 frame) {
 }
 
 void Planet::updatePopulation(Uint32 frame) {
-  using namespace PlanetParameters;
+  using namespace Parameters::Planet;
   
   // Adjusts working population
   int workingPop = this->population;
@@ -287,7 +287,7 @@ void Planet::updatePopulation(Uint32 frame) {
 }
 
 void Planet::updateMining() {
-  using namespace PlanetParameters;
+  using namespace Parameters::Planet;
   
   // Adjusts working population
   int workingPop = this->population;
@@ -317,7 +317,7 @@ void Planet::updateMining() {
 }
 
 void Planet::updateFarming() {
-  using namespace PlanetParameters;
+  using namespace Parameters::Planet;
   
   food = 0; // Resets food
   

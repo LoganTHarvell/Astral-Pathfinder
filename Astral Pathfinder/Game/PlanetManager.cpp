@@ -10,6 +10,7 @@
 #include "PlanetManager.hpp"
 
 // MARK: Libraries and Frameworks
+#include <map>
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -20,18 +21,19 @@
 // MARK: - Galaxy Initialization
 
 void PlanetManager::initGalaxy() {
-  using PlanetManagerParameters::numberOfPlanets;
+  using Parameters::PlanetManager::numberOfPlanets;
   
   planets.reserve(sizeof(Planet) * numberOfPlanets);
   
-  bool hasPlanet[numberOfPlanets][numberOfPlanets] = { false };
+  std::map<std::pair<int, int>, bool> hasPlanet;
   
   // Initializes first element in planets array as homeworld
   planets.insert(planets.begin(), initHomeworld());
   
   // Marks planet coordinates as occupied
-  SDL_Point coordinates = planets.front().getCoordinates();
-  hasPlanet[coordinates.x][coordinates.y] = true;
+  SDL_Point tmp = planets.front().getCoordinates();
+  std::pair<int, int> coordinates = { tmp.x, tmp.y };
+  hasPlanet.emplace(coordinates, true);
 
   // Initializes galaxy with number of planets
   while (planets.size() < numberOfPlanets) {
@@ -39,15 +41,17 @@ void PlanetManager::initGalaxy() {
     auto i = planets.end();
     do {
       i = planets.insert(i, initPlanet());
-      coordinates = i->getCoordinates();
+      
+      tmp = i->getCoordinates();
+      coordinates = { tmp.x, tmp.y };
       
       // Clears index for new planet
-      if (hasPlanet[coordinates.x][coordinates.y]) planets.erase(i);
+      if (hasPlanet[coordinates]) planets.erase(i);
       
-    } while (hasPlanet[coordinates.x][coordinates.y]);
+    } while (hasPlanet[coordinates]);
 
     // Marks planet coordinates as occupied
-    hasPlanet[coordinates.x][coordinates.y] = true;
+    hasPlanet[coordinates] = true;
   }
   
   playerDockedPlanetIndex = 0;      // Start with homeworld docked
@@ -81,7 +85,7 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
   }
 
   // Checks all planets discovered endgame condition
-  if (discoveryCount == PlanetManagerParameters::numberOfPlanets) {
+  if (discoveryCount == Parameters::PlanetManager::numberOfPlanets) {
     gameState->endgame = Game::State::allDiscovered;
   }
   

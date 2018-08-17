@@ -9,6 +9,9 @@
 #ifndef PlanetManager_hpp
 #define PlanetManager_hpp
 
+// MARK: Parameter File
+#include "Parameters.hpp"
+
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 
@@ -16,15 +19,6 @@
 #include "Game.hpp"
 #include "Planet.hpp"
 #include "EventsComponent.hpp"
-
-
-// MARK: - PlanetManager Parameters
-
-namespace PlanetManagerParameters {
-
-  const int numberOfPlanets = 25;
-
-}
 
 
 // MARK: - PlanetManager Class

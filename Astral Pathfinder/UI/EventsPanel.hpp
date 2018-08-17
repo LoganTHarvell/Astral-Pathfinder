@@ -23,6 +23,7 @@
 
 
 // MARK: - EventPanel Parameters
+// TODO: - Move parameters to parameters file
 
 namespace EventPanelParameters {
   const SDL_Rect panelRect = {65, 175, 320, 10000};

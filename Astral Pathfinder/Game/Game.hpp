@@ -9,30 +9,12 @@
 #ifndef Game_hpp
 #define Game_hpp
 
+// MARK: Parameter File
+#include "Parameters.hpp"
+
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 #include <string>
-
-#include "Parameters.hpp"
-
-// MARK: - Game Parameters
-
-namespace GameParameters {
-
-  // Window parameters x, y, w, h
-  const SDL_Rect windowRect = { SDL_WINDOWPOS_CENTERED,
-                                SDL_WINDOWPOS_CENTERED,
-                                1600, 900 };
-
-  // FPS constants
-  const int fps = 60;
-  const int frameDelay = 1000/fps;
-
-  const int endgameDelay = 120;
-  const int timeLimit = (20*60);
-  const int overtimeScaleFactor = 100;
-  
-}
 
 
 // MARK: - Game Class

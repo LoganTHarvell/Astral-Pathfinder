@@ -11,6 +11,7 @@
 
 #include "Screen.hpp"
 
+// TODO: - Move parameters to parameters file
 
 namespace EndScreenParameters {
   const SDL_Rect playAgainButton = {288, 673, 424, 57};

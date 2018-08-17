@@ -47,7 +47,8 @@ void Scoreboard::update(Game::State *gs) {
 void Scoreboard::render(Game::State *gs) {
   using namespace ScoreboardParameters;
   
-  SDL_RenderCopy(Game::renderer, texture, NULL, &ScreenParameters::screenRect);
+  SDL_RenderCopy(Game::renderer, texture, NULL,
+                 &Parameters::UIManager::screenRect);
   
   renderButtons(scores);
   

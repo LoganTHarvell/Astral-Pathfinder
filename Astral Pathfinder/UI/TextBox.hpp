@@ -20,6 +20,7 @@
 
 
 // MARK: - TextBox Parameters
+// TODO: - Move parameters to parameters file
 
 namespace TextParameters {
   const SDL_Color color = {0,128,0};

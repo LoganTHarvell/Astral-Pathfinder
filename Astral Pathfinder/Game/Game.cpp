@@ -28,7 +28,7 @@ SDL_Renderer *Game::renderer = nullptr;
 // MARK: - Game Initialization
 
 void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
-  using namespace GameParameters;
+  using namespace Parameters::Game;
   
   // Seeds random number generator
   srand((unsigned)time(NULL));
@@ -161,7 +161,7 @@ void Game::handleEvents() {
 void Game::update(Uint32 ticks) {
   if (gameState.endgame != State::none) {
     if (gameState.endgameFrame == 0) {
-      gameState.endgameFrame = gameState.frame + GameParameters::endgameDelay;
+      gameState.endgameFrame = gameState.frame + Parameters::Game::endgameDelay;
     }
     else if (gameState.frame > gameState.endgameFrame) {
       gameState.gameOver = true;
@@ -187,7 +187,7 @@ void Game::update(Uint32 ticks) {
 }
 
 void Game::render() {
-  using GameParameters::windowRect;
+  using Parameters::Game::windowRect;
 
   SDL_RenderClear(renderer);
   

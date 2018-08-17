@@ -9,6 +9,9 @@
 #ifndef UIManager_hpp
 #define UIManager_hpp
 
+// MARK: Parameter File
+#include "Parameters.hpp"
+
 // MARK: Libraries and Frameworks
 #include "SDL2_ttf/SDL_ttf.h"
 
@@ -23,20 +26,8 @@
 #include "Scoreboard.hpp"
 #include "EndScreen.hpp"
 
-// MARK: - UIManager Parameters
 
-namespace UiParameters {
-  const SDL_Rect timeRect = {115, 82, 90, 36};
-  const SDL_Rect totalScoreRect = {245, 82, 90, 36};
-  const SDL_Rect shipInfoRect = {1215, 100, 320, 121};
-  const SDL_Rect currentPlanetRect = {1215, 210, 320, 240};
-  const SDL_Rect selectedPlanetRect = {1215, 500, 320, 300};
-  const SDL_Point endScoreCoords = {945, 335};
-  const SDL_Point endScoreName = {940, 480};
-  const SDL_Color red = {128,0,0};
-  const SDL_Color green = {0,128,0};
-  const SDL_Color yellow = {255, 255, 0};
-}
+// MARK: - UIManager Class
 
 class UIManager {
 

@@ -18,9 +18,8 @@ using PointVector = std::vector<SDL_Point>;
 // MARK: - Initialization Methods
 
 void AlienShip::init(SDL_Point startPosition) {
-  using namespace ShipParameters;
   
-  tag = alienWarship;
+  tag = Parameters::Ship::alienWarship;
   
   velocity.x = 0;
   velocity.y = 0;
@@ -29,8 +28,8 @@ void AlienShip::init(SDL_Point startPosition) {
   
   rect.x = startPosition.x;
   rect.y = startPosition.y;
-  rect.w = shipSize.w;
-  rect.h = shipSize.h;
+  rect.w = Parameters::Ship::shipRect.w;
+  rect.h = Parameters::Ship::shipRect.h;
   
   setMainTarget(getCenter());
   resetTarget();
@@ -87,7 +86,7 @@ PointVector AlienShip::shipVertexVectors() {
 }
 
 void AlienShip::updateVelocity() {
-  using namespace ShipParameters;
+  using namespace Parameters::Ship;
  
   SDL_Point center = getCenter();
   

@@ -11,7 +11,7 @@
 
 #include "Screen.hpp"
 
-
+// TODO: - Move parameters to parameters file
 namespace MainMenuParameters {
   const SDL_Rect startGameButton = {600, 401, 424, 57};
   const SDL_Rect scoreboardButton = {600, 538, 424, 58};

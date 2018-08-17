@@ -28,6 +28,8 @@ void MainMenu::update(Game::State *gs) {
 }
 
 void MainMenu::render(Game::State *gs) {
-  SDL_RenderCopy(Game::renderer, texture, NULL, &ScreenParameters::screenRect);
+  SDL_RenderCopy(Game::renderer, texture, NULL,
+                 &Parameters::UIManager::screenRect);
+  
   renderButtons(menu);
 }

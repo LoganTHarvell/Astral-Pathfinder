@@ -18,12 +18,12 @@
 
 
 namespace Map {
-  using PlanetManagerParameters::numberOfPlanets;
-  using PlanetParameters::planetTexSize;
+  using Parameters::PlanetManager::numberOfPlanets;
+  using Parameters::Planet::planetTexSize;
   
   
   // MARK: - Map Parameters
-  
+  // TODO: - Move parameters to parameters file
   const int width = 800;
   const int height = 800;
   const SDL_Point mapOrigin = { 400, 50 };

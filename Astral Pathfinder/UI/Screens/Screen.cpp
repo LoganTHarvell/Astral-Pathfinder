@@ -32,9 +32,7 @@ void Screen::renderButtons(int screen) {
   for (Button b : *getActiveScreenButtons(screen)) b.render();
 }
 
-std::vector<Button> *Screen::getActiveScreenButtons(int screen) {
-  using namespace ScreenParameters;
-  
+std::vector<Button> *Screen::getActiveScreenButtons(int screen) {  
   switch (screen) {
     case menu:
       return &mainMenuButtons;

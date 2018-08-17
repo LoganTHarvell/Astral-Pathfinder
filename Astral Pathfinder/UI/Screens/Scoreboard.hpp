@@ -13,7 +13,7 @@
 
 
 // MARK: - Scoreboard Parameters
-
+// TODO: - Move parameters to parameters file
 namespace ScoreboardParameters {
   const std::string filePath = "Resources/Scores/scoreboard.txt";
   const int scoreboardMax = 10;

@@ -13,17 +13,16 @@
 // MARK: - ShipManager Initialization
 
 void ShipManager::init(SDL_Point homeworldPos, SDL_Point alienPos) {
-  using namespace ShipParameters;
   
   // Centers ship on homeworld
   SDL_Point p;
-  p.x = homeworldPos.x - (shipSize.w/2);
-  p.y = homeworldPos.y - (shipSize.h/2);
+  p.x = homeworldPos.x - (Parameters::Ship::shipRect.w/2);
+  p.y = homeworldPos.y - (Parameters::Ship::shipRect.h/2);
 
   playerShip.init(p);
 
-  p.x = alienPos.x - (shipSize.w/2);
-  p.y = alienPos.y - (shipSize.h/2);
+  p.x = alienPos.x - (Parameters::Ship::shipRect.w/2);
+  p.y = alienPos.y - (Parameters::Ship::shipRect.h/2);
   
   alienShip.init(p);
 }
@@ -71,7 +70,7 @@ void ShipManager::setAlienTarget(Game::State *gs, PlanetManager *pm) {
   SDL_Point mainTargetPos = alienShip.getMainTarget();
   
   if (dockedPos.x == mainTargetPos.x && dockedPos.y == mainTargetPos.y) {
-    int randPlanetIndex = rand()%PlanetManagerParameters::numberOfPlanets;
+    int randPlanetIndex = rand()%Parameters::PlanetManager::numberOfPlanets;
     Planet randPlanet = pm->getPlanet(randPlanetIndex);
     alienShip.setMainTarget(randPlanet.getCenter());
     alienShip.resetTarget();
