@@ -42,22 +42,3 @@ SDL_Point GameObject::getCenter() {
   c.y = rect.y + (rect.h/2);
   return c;
 }
-
-bool GameObject::collisionAABB(SDL_Rect r) {
-  
-  if (rect.x > r.x + r.w) {
-    return false;
-  }
-  if (rect.x + rect.w < r.x) {
-    return false;
-  }
-  if (rect.y > r.y + r.h) {
-    return false;
-  }
-  if (rect.y + rect.h < r.y) {
-    return false;
-  }
-  
-  std::cout << "Collision" << std::endl;
-  return true;
-}

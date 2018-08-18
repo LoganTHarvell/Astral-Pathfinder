@@ -30,8 +30,6 @@ public:
   void scale(float x);
   SDL_Point getCenter();
   
-  bool collisionAABB(SDL_Rect r);
-
 protected:
   // MARK: - GameObject Fields
   SDL_Rect rect;
