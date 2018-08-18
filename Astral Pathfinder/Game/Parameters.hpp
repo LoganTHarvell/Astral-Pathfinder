@@ -15,7 +15,6 @@
 #include "lauxlib.h"
 #include "lualib.h"
 
-#include <map>
 #include <string>
 
 // MARK: Parameter Constants
@@ -46,9 +45,7 @@ namespace Parameters {
   "\n"
   "You are the Astral Pathfinder.";
   
-  namespace {
-    using map = std::map<std::string, std::string>;
-    
+  namespace {    
     const std::string luaConfigFile = "Resources/config.lua";
   
     struct {

@@ -34,6 +34,7 @@ namespace TextParameters {
 
 
 // MARK: - TextBox Class
+// TODO: - Needs reworking as a general use class and moved into Engine
 
 class TextBox : public GameObject {
 public:

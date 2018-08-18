@@ -38,6 +38,7 @@ public:
 private:
   SDL_Rect bounds, border;
   bool isActive;
+  // TODO: Texture should not be loaded here, filename should be in parameters
   SDL_Texture *texture = TextureManager::loadTexture("../Resources/border.png");
   int nextScreen;
 };

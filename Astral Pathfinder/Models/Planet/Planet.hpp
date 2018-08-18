@@ -22,6 +22,7 @@
 
 
 // MARK: - Planet Class
+// TODO: - Rework class to utilize more modular components
 
 class Planet: public GameObject {
 

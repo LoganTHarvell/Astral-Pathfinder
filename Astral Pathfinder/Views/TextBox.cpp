@@ -17,7 +17,8 @@
 // MARK: - TextBox Initialization
 
 void TextBox::init(SDL_Rect rectangle) {
-  font = TTF_OpenFont(TextParameters::fontFile.c_str(), TextParameters::regFontSize);
+  font = TTF_OpenFont(TextParameters::fontFile.c_str(),
+                      TextParameters::regFontSize);
   
   rect = rectangle;
 }

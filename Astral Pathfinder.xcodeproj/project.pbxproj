@@ -55,6 +55,7 @@
 		0243D28A2112ED5600B36BEC /* Parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0243D2892112ED5600B36BEC /* Parameters.cpp */; };
 		0243D2992114210500B36BEC /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0243D2972114210500B36BEC /* liblua.a */; };
 		0243D29B211424E500B36BEC /* config.lua in Resources */ = {isa = PBXBuildFile; fileRef = 0243D29A211424E500B36BEC /* config.lua */; };
+		02CD938B21275C4000647547 /* LuaInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02CD938921275C4000647547 /* LuaInterface.cpp */; };
 		02DDC15620971D6000704F70 /* PlayerShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15120971D6000704F70 /* PlayerShip.cpp */; };
 		02DDC15720971D6000704F70 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15420971D6000704F70 /* Ship.cpp */; };
 		02DDC15820971D6000704F70 /* AlienShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15520971D6000704F70 /* AlienShip.cpp */; };
@@ -171,6 +172,8 @@
 		0243D2972114210500B36BEC /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblua.a; sourceTree = "<group>"; };
 		0243D2982114210500B36BEC /* lualib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lualib.h; sourceTree = "<group>"; };
 		0243D29A211424E500B36BEC /* config.lua */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.lua; sourceTree = "<group>"; };
+		02CD938921275C4000647547 /* LuaInterface.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LuaInterface.cpp; sourceTree = "<group>"; };
+		02CD938A21275C4000647547 /* LuaInterface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LuaInterface.hpp; sourceTree = "<group>"; };
 		02DDC15020971D6000704F70 /* AlienShip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AlienShip.hpp; sourceTree = "<group>"; };
 		02DDC15120971D6000704F70 /* PlayerShip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerShip.cpp; sourceTree = "<group>"; };
 		02DDC15220971D6000704F70 /* PlayerShip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerShip.hpp; sourceTree = "<group>"; };
@@ -219,6 +222,7 @@
 			children = (
 				0200131E2075BCD30087CED9 /* Documentation */,
 				020013302075BCD30087CED9 /* Astral Pathfinder */,
+				02CD938821275B2000647547 /* Engine */,
 				020013532075BCD30087CED9 /* Resources */,
 				02307CFE2075BE1B00B46A3E /* Assets.xcassets */,
 				0243D2922114206E00B36BEC /* Lua */,
@@ -283,12 +287,12 @@
 				020013522075BCD30087CED9 /* main.cpp */,
 				020013482075BCD30087CED9 /* Game */,
 				0200133E2075BCD30087CED9 /* Models */,
-				020013312075BCD30087CED9 /* UI */,
+				020013312075BCD30087CED9 /* Views */,
 			);
 			path = "Astral Pathfinder";
 			sourceTree = "<group>";
 		};
-		020013312075BCD30087CED9 /* UI */ = {
+		020013312075BCD30087CED9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				9192D8C720FA9D940053F989 /* Screens */,
@@ -300,24 +304,16 @@
 				020013392075BCD30087CED9 /* Map.cpp */,
 				020013322075BCD30087CED9 /* TextBox.hpp */,
 				0200133B2075BCD30087CED9 /* TextBox.cpp */,
-				020013332075BCD30087CED9 /* Slider.hpp */,
-				0200133C2075BCD30087CED9 /* Slider.cpp */,
-				020013372075BCD30087CED9 /* TextureManager.hpp */,
-				0200133A2075BCD30087CED9 /* TextureManager.cpp */,
 				9117BE712094FD34003FE954 /* EventsPanel.hpp */,
 				9117BE702094FD34003FE954 /* EventsPanel.cpp */,
-				913C4B4A210BD5C200B0D519 /* Button.hpp */,
-				913C4B49210BD5C200B0D519 /* Button.cpp */,
 			);
-			path = UI;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		0200133E2075BCD30087CED9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				020013412075BCD30087CED9 /* Game Object */,
-				020013402075BCD30087CED9 /* Planet.hpp */,
-				020013472075BCD30087CED9 /* Planet.cpp */,
+				02CD938C2127EAE800647547 /* Planet */,
 				9117BEA62096D1E8003FE954 /* Ship */,
 			);
 			path = Models;
@@ -330,8 +326,6 @@
 				020013432075BCD30087CED9 /* GameObject.cpp */,
 				020013452075BCD30087CED9 /* ColliderComponent.hpp */,
 				020013422075BCD30087CED9 /* ColliderComponent.cpp */,
-				9117BE8F209606D6003FE954 /* EventsComponent.hpp */,
-				9117BE8E209606D6003FE954 /* EventsComponent.cpp */,
 			);
 			path = "Game Object";
 			sourceTree = "<group>";
@@ -356,11 +350,11 @@
 		020013532075BCD30087CED9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0243D29A211424E500B36BEC /* config.lua */,
 				9117BEA22096C528003FE954 /* Scores */,
 				02307CFC2075BDB700B46A3E /* Screens */,
 				020013542075BCD30087CED9 /* Textures */,
 				02307CFD2075BDDC00B46A3E /* Fonts */,
-				0243D29A211424E500B36BEC /* config.lua */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -416,6 +410,41 @@
 				0243D2982114210500B36BEC /* lualib.h */,
 			);
 			path = Lua;
+			sourceTree = "<group>";
+		};
+		02CD938821275B2000647547 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				02CD938921275C4000647547 /* LuaInterface.cpp */,
+				02CD938A21275C4000647547 /* LuaInterface.hpp */,
+				020013372075BCD30087CED9 /* TextureManager.hpp */,
+				0200133A2075BCD30087CED9 /* TextureManager.cpp */,
+				020013412075BCD30087CED9 /* Game Object */,
+				02CD938D2127EBBF00647547 /* UI */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
+		02CD938C2127EAE800647547 /* Planet */ = {
+			isa = PBXGroup;
+			children = (
+				020013402075BCD30087CED9 /* Planet.hpp */,
+				020013472075BCD30087CED9 /* Planet.cpp */,
+				9117BE8F209606D6003FE954 /* EventsComponent.hpp */,
+				9117BE8E209606D6003FE954 /* EventsComponent.cpp */,
+			);
+			path = Planet;
+			sourceTree = "<group>";
+		};
+		02CD938D2127EBBF00647547 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				020013332075BCD30087CED9 /* Slider.hpp */,
+				0200133C2075BCD30087CED9 /* Slider.cpp */,
+				913C4B4A210BD5C200B0D519 /* Button.hpp */,
+				913C4B49210BD5C200B0D519 /* Button.cpp */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		9117BEA22096C528003FE954 /* Scores */ = {
@@ -585,6 +614,7 @@
 				9192D8CA20FACF940053F989 /* MainMenu.cpp in Sources */,
 				0200137E2075BCD30087CED9 /* Game.cpp in Sources */,
 				9192D8CD20FACFA40053F989 /* Scoreboard.cpp in Sources */,
+				02CD938B21275C4000647547 /* LuaInterface.cpp in Sources */,
 				913C4B4B210BD5C200B0D519 /* Button.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

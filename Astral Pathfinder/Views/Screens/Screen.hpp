@@ -23,7 +23,9 @@
 #include "Button.hpp"
 
 
-// MARK: - Scren Class
+// MARK: - Screen Class
+// TODO: - Make a generic class without game specific attributes
+// Use entity component system for buttons
 
 class Screen {
   
@@ -43,6 +45,7 @@ public:
   
 protected:
   SDL_Texture *texture = nullptr;
+  // TODO: - Hovering border should not be initialized here
   SDL_Texture *hoveringBorder = TextureManager::loadTexture("../Resources/border.png");
   SDL_Rect borderRect;
   
