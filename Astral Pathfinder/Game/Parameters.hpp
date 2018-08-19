@@ -9,13 +9,10 @@
 #ifndef Parameters_hpp
 #define Parameters_hpp
 
+
 #include "SDL2/SDL.h"
-
-#include "lua.hpp"
-#include "lauxlib.h"
-#include "lualib.h"
-
 #include <string>
+
 
 // MARK: Parameter Constants
 namespace Parameters {

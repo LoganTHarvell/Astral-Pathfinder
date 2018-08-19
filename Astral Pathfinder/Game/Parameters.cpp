@@ -8,10 +8,8 @@
 
 #include "Parameters.hpp"
 
-#include <fstream>
+#include "LuaInterface.hpp"
 #include <iostream>
-
-using namespace std;
 
 
 // MARK: - Parameter Default Values
@@ -130,6 +128,14 @@ namespace Parameters {
 
 // Loads Parameters from Lua config file
 bool Parameters::loadParameters() {
+  bool flag = true;
   
-  return true;
+  LuaInterface luaInterface = LuaInterface();
+  
+  flag = luaInterface.init(luaConfigFile);
+  flag = luaInterface.loadTable(groups.gameParameters);
+  
+  if (flag) Game::fps = luaInterface.getValue<int>("fps");
+    
+  return flag;
 }
