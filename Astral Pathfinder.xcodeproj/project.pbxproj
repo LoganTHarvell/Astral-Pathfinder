@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		020012FE2075A5AA0087CED9 /* SDL2.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 020012FB2075A5AA0087CED9 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		020012FF2075A5AA0087CED9 /* SDL2_image.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 020012FC2075A5AA0087CED9 /* SDL2_image.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		020013002075A5AA0087CED9 /* SDL2_ttf.framework in Copy Bundle Frameworks */ = {isa = PBXBuildFile; fileRef = 020012FD2075A5AA0087CED9 /* SDL2_ttf.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		020013612075BCD30087CED9 /* Classes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0200131F2075BCD30087CED9 /* Classes.txt */; };
 		020013622075BCD30087CED9 /* UI Layout.txt in Resources */ = {isa = PBXBuildFile; fileRef = 020013202075BCD30087CED9 /* UI Layout.txt */; };
 		020013632075BCD30087CED9 /* Screen Shot 2018-03-20 at 2.12.07 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = 020013222075BCD30087CED9 /* Screen Shot 2018-03-20 at 2.12.07 PM.png */; };
@@ -53,8 +50,16 @@
 		0200138A2075BCD30087CED9 /* mainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200135F2075BCD30087CED9 /* mainMenu.png */; };
 		02307D002075BE1B00B46A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02307CFE2075BE1B00B46A3E /* Assets.xcassets */; };
 		0243D28A2112ED5600B36BEC /* Parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0243D2892112ED5600B36BEC /* Parameters.cpp */; };
-		0243D2992114210500B36BEC /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0243D2972114210500B36BEC /* liblua.a */; };
 		0243D29B211424E500B36BEC /* config.lua in Resources */ = {isa = PBXBuildFile; fileRef = 0243D29A211424E500B36BEC /* config.lua */; };
+		02C12CA32129442B005C885C /* ReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = 02C12C9E2129442B005C885C /* ReadMe.txt */; };
+		02C12CA42129442B005C885C /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 02C12C9F2129442B005C885C /* License.txt */; };
+		02C12CA621294BCF005C885C /* SDL2_ttf.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02C12C9B2129442B005C885C /* SDL2_ttf.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		02C12CA821294BCF005C885C /* SDL2_image.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02C12C9C2129442B005C885C /* SDL2_image.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		02C12CAA21294BCF005C885C /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 02C12C9D2129442B005C885C /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		02C12CAD21294C0D005C885C /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02C12C9D2129442B005C885C /* SDL2.framework */; };
+		02C12CAE21294C0D005C885C /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02C12C9B2129442B005C885C /* SDL2_ttf.framework */; };
+		02C12CAF21294C0D005C885C /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02C12C9C2129442B005C885C /* SDL2_image.framework */; };
+		02C12CB021294C32005C885C /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0243D2972114210500B36BEC /* liblua.a */; };
 		02CD938B21275C4000647547 /* LuaInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02CD938921275C4000647547 /* LuaInterface.cpp */; };
 		02DDC15620971D6000704F70 /* PlayerShip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15120971D6000704F70 /* PlayerShip.cpp */; };
 		02DDC15720971D6000704F70 /* Ship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02DDC15420971D6000704F70 /* Ship.cpp */; };
@@ -78,17 +83,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		020012F42075A43A0087CED9 /* Copy Bundle Frameworks */ = {
+		02C12CAB21294BCF005C885C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				020012FE2075A5AA0087CED9 /* SDL2.framework in Copy Bundle Frameworks */,
-				020012FF2075A5AA0087CED9 /* SDL2_image.framework in Copy Bundle Frameworks */,
-				020013002075A5AA0087CED9 /* SDL2_ttf.framework in Copy Bundle Frameworks */,
+				02C12CAA21294BCF005C885C /* SDL2.framework in Embed Frameworks */,
+				02C12CA621294BCF005C885C /* SDL2_ttf.framework in Embed Frameworks */,
+				02C12CA821294BCF005C885C /* SDL2_image.framework in Embed Frameworks */,
 			);
-			name = "Copy Bundle Frameworks";
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9117BEA52096C554003FE954 /* CopyFiles */ = {
@@ -104,9 +109,6 @@
 
 /* Begin PBXFileReference section */
 		020012AF20759ED60087CED9 /* Astral Pathfinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Astral Pathfinder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		020012FB2075A5AA0087CED9 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = SDL2/SDL2.framework; sourceTree = "<group>"; };
-		020012FC2075A5AA0087CED9 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = SDL2/SDL2_image.framework; sourceTree = "<group>"; };
-		020012FD2075A5AA0087CED9 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = SDL2/SDL2_ttf.framework; sourceTree = "<group>"; };
 		0200131F2075BCD30087CED9 /* Classes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Classes.txt; sourceTree = "<group>"; };
 		020013202075BCD30087CED9 /* UI Layout.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "UI Layout.txt"; sourceTree = "<group>"; };
 		020013222075BCD30087CED9 /* Screen Shot 2018-03-20 at 2.12.07 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2018-03-20 at 2.12.07 PM.png"; sourceTree = "<group>"; };
@@ -172,8 +174,13 @@
 		0243D2972114210500B36BEC /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblua.a; sourceTree = "<group>"; };
 		0243D2982114210500B36BEC /* lualib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lualib.h; sourceTree = "<group>"; };
 		0243D29A211424E500B36BEC /* config.lua */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.lua; sourceTree = "<group>"; };
-		02CD938921275C4000647547 /* LuaInterface.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LuaInterface.cpp; sourceTree = "<group>"; };
-		02CD938A21275C4000647547 /* LuaInterface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LuaInterface.hpp; sourceTree = "<group>"; };
+		02C12C9B2129442B005C885C /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_ttf.framework; sourceTree = "<group>"; };
+		02C12C9C2129442B005C885C /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_image.framework; sourceTree = "<group>"; };
+		02C12C9D2129442B005C885C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
+		02C12C9E2129442B005C885C /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
+		02C12C9F2129442B005C885C /* License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
+		02CD938921275C4000647547 /* LuaInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaInterface.cpp; sourceTree = "<group>"; };
+		02CD938A21275C4000647547 /* LuaInterface.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LuaInterface.hpp; sourceTree = "<group>"; };
 		02DDC15020971D6000704F70 /* AlienShip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AlienShip.hpp; sourceTree = "<group>"; };
 		02DDC15120971D6000704F70 /* PlayerShip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerShip.cpp; sourceTree = "<group>"; };
 		02DDC15220971D6000704F70 /* PlayerShip.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PlayerShip.hpp; sourceTree = "<group>"; };
@@ -210,7 +217,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0243D2992114210500B36BEC /* liblua.a in Frameworks */,
+				02C12CB021294C32005C885C /* liblua.a in Frameworks */,
+				02C12CAD21294C0D005C885C /* SDL2.framework in Frameworks */,
+				02C12CAE21294C0D005C885C /* SDL2_ttf.framework in Frameworks */,
+				02C12CAF21294C0D005C885C /* SDL2_image.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,9 +235,8 @@
 				02CD938821275B2000647547 /* Engine */,
 				020013532075BCD30087CED9 /* Resources */,
 				02307CFE2075BE1B00B46A3E /* Assets.xcassets */,
-				0243D2922114206E00B36BEC /* Lua */,
-				020013012075A5D90087CED9 /* Frameworks */,
 				020012B020759ED60087CED9 /* Products */,
+				02C12CAC21294C0D005C885C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -237,16 +246,6 @@
 				020012AF20759ED60087CED9 /* Astral Pathfinder.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		020013012075A5D90087CED9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				020012FC2075A5AA0087CED9 /* SDL2_image.framework */,
-				020012FD2075A5AA0087CED9 /* SDL2_ttf.framework */,
-				020012FB2075A5AA0087CED9 /* SDL2.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		0200131E2075BCD30087CED9 /* Documentation */ = {
@@ -402,6 +401,16 @@
 		0243D2922114206E00B36BEC /* Lua */ = {
 			isa = PBXGroup;
 			children = (
+				02CD938A21275C4000647547 /* LuaInterface.hpp */,
+				02CD938921275C4000647547 /* LuaInterface.cpp */,
+				02C12C98212941E4005C885C /* Library */,
+			);
+			path = Lua;
+			sourceTree = "<group>";
+		};
+		02C12C98212941E4005C885C /* Library */ = {
+			isa = PBXGroup;
+			children = (
 				0243D2952114210500B36BEC /* lauxlib.h */,
 				0243D2972114210500B36BEC /* liblua.a */,
 				0243D2942114210500B36BEC /* lua.h */,
@@ -409,18 +418,45 @@
 				0243D2932114210500B36BEC /* luaconf.h */,
 				0243D2982114210500B36BEC /* lualib.h */,
 			);
-			path = Lua;
+			path = Library;
+			sourceTree = "<group>";
+		};
+		02C12C99212942E8005C885C /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				020013372075BCD30087CED9 /* TextureManager.hpp */,
+				0200133A2075BCD30087CED9 /* TextureManager.cpp */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		02C12C9A2129442B005C885C /* SDL2 */ = {
+			isa = PBXGroup;
+			children = (
+				02C12C9B2129442B005C885C /* SDL2_ttf.framework */,
+				02C12C9C2129442B005C885C /* SDL2_image.framework */,
+				02C12C9D2129442B005C885C /* SDL2.framework */,
+				02C12C9E2129442B005C885C /* ReadMe.txt */,
+				02C12C9F2129442B005C885C /* License.txt */,
+			);
+			path = SDL2;
+			sourceTree = "<group>";
+		};
+		02C12CAC21294C0D005C885C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		02CD938821275B2000647547 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				02CD938921275C4000647547 /* LuaInterface.cpp */,
-				02CD938A21275C4000647547 /* LuaInterface.hpp */,
-				020013372075BCD30087CED9 /* TextureManager.hpp */,
-				0200133A2075BCD30087CED9 /* TextureManager.cpp */,
 				020013412075BCD30087CED9 /* Game Object */,
 				02CD938D2127EBBF00647547 /* UI */,
+				02C12C99212942E8005C885C /* Utility */,
+				0243D2922114206E00B36BEC /* Lua */,
+				02C12C9A2129442B005C885C /* SDL2 */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -493,8 +529,8 @@
 				020012AB20759ED60087CED9 /* Sources */,
 				020012AC20759ED60087CED9 /* Frameworks */,
 				020012AD20759ED60087CED9 /* Resources */,
-				020012F42075A43A0087CED9 /* Copy Bundle Frameworks */,
 				9117BEA52096C554003FE954 /* CopyFiles */,
+				02C12CAB21294BCF005C885C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -555,6 +591,7 @@
 				020013892075BCD30087CED9 /* MODENINE.TTF in Resources */,
 				02DDC15F20971DB500704F70 /* scoreboard.png in Resources */,
 				0200136C2075BCD30087CED9 /* Screen Shot 2018-03-20 at 9.08.05 PM.png in Resources */,
+				02C12CA32129442B005C885C /* ReadMe.txt in Resources */,
 				0243D29B211424E500B36BEC /* config.lua in Resources */,
 				020013682075BCD30087CED9 /* Screen Shot 2018-03-19 at 11.36.22 PM.png in Resources */,
 				02DDC15C20971DA900704F70 /* movingPlayerShip2.png in Resources */,
@@ -577,6 +614,7 @@
 				0200138A2075BCD30087CED9 /* mainMenu.png in Resources */,
 				91499BB8209763B800DC6DB3 /* alienScreen.png in Resources */,
 				0200136F2075BCD30087CED9 /* Screen Shot 2018-01-24 at 6.29.37 PM.png in Resources */,
+				02C12CA42129442B005C885C /* License.txt in Resources */,
 				02307D002075BE1B00B46A3E /* Assets.xcassets in Resources */,
 				020013642075BCD30087CED9 /* Screen Shot 2018-03-24 at 1.00.35 AM.png in Resources */,
 				020013652075BCD30087CED9 /* Screen Shot 2018-03-20 at 10.01.55 PM.png in Resources */,
@@ -739,16 +777,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = WUP28GH2WB;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/SDL2/";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Engine/SDL2";
 				INFOPLIST_FILE = "$(SRCROOT)/Astral Pathfinder/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Lua",
-				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/Engine/Lua/Library";
 				OTHER_LDFLAGS = (
 					"-framework",
 					SDL2,
@@ -770,16 +805,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = WUP28GH2WB;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/SDL2/";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Engine/SDL2";
 				INFOPLIST_FILE = "$(SRCROOT)/Astral Pathfinder/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Lua",
-				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/Engine/Lua/Library";
 				OTHER_LDFLAGS = (
 					"-framework",
 					SDL2,
