@@ -15,7 +15,7 @@ using PointVector = std::vector<SDL_Point>;
 // MARK: - Initialization Methods
 
 void PlayerShip::init(SDL_Point startPosition) {
-  tag = Parameters::Ship::playerShip;
+  tag = Ship::playerShip;
   crewPopulation = Parameters::Ship::totalCrew;
   fuel = 0;
   

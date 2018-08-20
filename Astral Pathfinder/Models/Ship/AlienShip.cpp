@@ -19,7 +19,7 @@ using PointVector = std::vector<SDL_Point>;
 
 void AlienShip::init(SDL_Point startPosition) {
   
-  tag = Parameters::Ship::alienWarship;
+  tag = Ship::alienWarship;
   
   velocity.x = 0;
   velocity.y = 0;

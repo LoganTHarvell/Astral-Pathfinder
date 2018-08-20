@@ -155,12 +155,6 @@ namespace Parameters {
   
   // MARK: - Ship Parameters
   namespace Ship {
-    // Ship Tags
-    enum ShipType {
-      playerShip,
-      alienWarship
-    };
-    
     // Filename for player textures
     extern std::string movingPlayerTex;
     

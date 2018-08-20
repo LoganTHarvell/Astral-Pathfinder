@@ -148,7 +148,7 @@ void Planet::revertClick() {
 
 void Planet::toggleDockedShip(int tag, Uint32 frame) {
   using namespace Parameters::Planet;
-  using ShipType = Parameters::Ship::ShipType;
+  using ShipType = Ship::ShipType;
   
   switch (tag) {
     case ShipType::playerShip:

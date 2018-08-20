@@ -22,6 +22,12 @@
 class Ship: public GameObject {
   
 public:
+  // Ship Tags
+  enum ShipType {
+    playerShip,
+    alienWarship
+  };
+  
   // MARK: - Initialization Methods
   virtual void init(SDL_Point startPosition) = 0;
   
@@ -30,8 +36,7 @@ public:
   void render(Game::State *gs);
   
   // MARK: - Ship Methods
-  // TODO: Make ship tags a class owned enum
-  Parameters::Ship::ShipType getTag() { return tag; };
+  ShipType getTag() { return tag; };
   int getRotation() { return rotation; };
   SDL_Point getVelocity() { return velocity; }
   SDL_Point getUIPosition() { return getCenter(); };
@@ -41,7 +46,7 @@ protected:
   using PointVector = std::vector<SDL_Point>;
 
   // MARK: - Ship Fields
-  Parameters::Ship::ShipType tag;
+  ShipType tag;
   SDL_Point velocity;
   int rotation;
   
