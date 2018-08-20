@@ -9,10 +9,13 @@
 #include "LuaInterface.hpp"
 
 
+// MARK: - Initialization Methods
+
 bool LuaInterface::init(const std::string filename) {
   
   if (L) lua_close(L);    // Closes any existing lua state
   L = luaL_newstate();    // Creates new lua state
+  numRetVals = 0;         // Initializes return value count to 0
   
   if (!L) return false;   // Exits if lua state allocation failed
   
@@ -25,46 +28,64 @@ bool LuaInterface::init(const std::string filename) {
     return false;
   }
   
+  numRetVals = lua_gettop(L);   // Sets a count of values returned by Lua file
+  
   return true;
 }
 
 
+// MARK: - Utility Methods
+
 bool LuaInterface::loadTable(const std::string key) {
   
-  lua_pushstring(L, key.c_str());
-  lua_gettable(L, -2);
+  lua_getfield(L, -1, key.c_str());     // Pushes table with key to stack
   
+  // Verifies top of stack is table
   if (!lua_istable(L, -1)) {
-    std::cerr << "Error: failed to load table \"" << key << "\"" << std::endl;
+    std::cerr << "Error: \"" << key << "\" not a table" << std::endl;
+    lua_pop(L, 1);
     return false;
   }
   
   return true;
 }
 
+void LuaInterface::clean() {
+  // Pops all elements added to stack since initialization
+  int n = lua_gettop(L) - numRetVals;
+  lua_pop(L, n);
+}
 
-// MARK: - Template Definitions
+
+// MARK: Template Definitions
 
 template <typename T>
 T LuaInterface::getValue(const std::string key) {
   
+  // Verifies a file is loaded
   if(!L) {
-    std::cerr << "No file loaded" << std::endl;
+    std::cerr << "Error: no file loaded" << std::endl;
     return luaDefault<T>();
   }
   
-  lua_getfield(L, -1, key.c_str());
+  // Pushes value with given key to top of stack, else throws error
+  if (!lua_getfield(L, -1, key.c_str())) {
+    std::cerr << "Error: value for \"" << key << "\" not found" << std::endl;
+    lua_pop(L, 1);
+    return luaDefault<T>();
+  }
   
   T value;
   value = convertLua<T>(key);
-  
   lua_pop(L, 1);
   
   return value;
 }
 
 
-// MARK: - Template Specializations
+// MARK: - Helper Methods
+
+// MARK: Template Specializations
 
 template <typename T>
 T LuaInterface::convertLua(const std::string key) {
@@ -74,7 +95,8 @@ T LuaInterface::convertLua(const std::string key) {
 template <>
 bool LuaInterface::convertLua<bool>(const std::string key) {
   if (!lua_isboolean(L, -1)) {
-    std::cerr << "Error converting \"" << key << "\" to a bool" << std::endl;
+    std::cerr << "Error: cannot convert \"" << key
+              << "\" to a bool" << std::endl;
   }
   
   return static_cast<bool>(lua_toboolean(L, -1));
@@ -83,7 +105,8 @@ bool LuaInterface::convertLua<bool>(const std::string key) {
 template <>
 int LuaInterface::convertLua<int>(const std::string key) {
   if (!lua_isnumber(L, -1)) {
-    std::cerr << "Error converting \"" << key << "\" to an int" << std::endl;
+    std::cerr << "Error: cannot convert \"" << key
+              << "\" to an int" << std::endl;
   }
   
   return static_cast<int>(lua_tointeger(L, -1));
@@ -92,7 +115,8 @@ int LuaInterface::convertLua<int>(const std::string key) {
 template <>
 double LuaInterface::convertLua<double>(const std::string key) {
   if (!lua_isnumber(L, -1)) {
-    std::cerr << "Error converting \"" << key << "\" to a double" << std::endl;
+    std::cerr << "Error: cannot convert \"" << key
+              << "\" to a double" << std::endl;
   }
   
   return static_cast<double>(lua_tonumber(L, -1));
@@ -101,12 +125,12 @@ double LuaInterface::convertLua<double>(const std::string key) {
 template <>
 std::string LuaInterface::convertLua<std::string>(const std::string key) {
   if (!lua_isstring(L, -1)) {
-    std::cerr << "Error converting \"" << key << "\" to a string" << std::endl;
+    std::cerr << "Error: cannot convert \"" << key
+              << "\" to an string" << std::endl;
   }
   
   return static_cast<std::string>(lua_tostring(L, -1));
 }
-
 
 template <typename T>
 T LuaInterface::luaDefault() {

@@ -14,7 +14,7 @@
 #include <string>
 
 
-// MARK: Parameter Constants
+// MARK: - Parameter Constants
 namespace Parameters {
   
   const std::string title =
@@ -31,7 +31,6 @@ namespace Parameters {
   R"(|                                                   v1.0|)" "\n"
   R"(=========================================================)";
   
-  // Defines game introduction
   const std::string intro =
   "Your homeworld is in trouble!\n"
   "The planet is no longer able to support a growing population.\n"
@@ -42,7 +41,8 @@ namespace Parameters {
   "\n"
   "You are the Astral Pathfinder.";
   
-  namespace {    
+  // Constants for parameter initialization
+  namespace {
     const std::string luaConfigFile = "Resources/config.lua";
   
     struct {
@@ -53,9 +53,9 @@ namespace Parameters {
       std::string planetParameters = "planet";
       std::string shipParameters = "ship";
     } groups;
-    
   }
   
+  // MARK: - Game Parameters
   namespace Game {
     // Window parameters x, y, w, h
     extern SDL_Rect windowRect;
@@ -69,14 +69,17 @@ namespace Parameters {
     extern int overtimeScaleFactor;
   }
   
+  // MARK: - PlanetManager Parameters
   namespace PlanetManager {
     extern int numberOfPlanets;         // Number of planets in the game
   }
   
+  // MARK: - ShipManager Parameters
   namespace ShipManager {
     extern Uint32 alienTargetingDelay;  // Alien ship seeking delay in frames
   }
   
+  // MARK: - UIManager Parameters
   namespace UIManager {
     extern SDL_Rect screenRect;
     
@@ -94,6 +97,7 @@ namespace Parameters {
     extern SDL_Color yellow;
   }
   
+  // MARK: - Planet Parameters
   namespace Planet {
     // Planet texture information
     extern std::string planetTextureFile;
@@ -149,6 +153,7 @@ namespace Parameters {
     extern float mineCollapseMultiplier;
   }
   
+  // MARK: - Ship Parameters
   namespace Ship {
     // Ship Tags
     enum ShipType {
