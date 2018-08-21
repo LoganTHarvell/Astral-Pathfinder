@@ -9,13 +9,11 @@
 #ifndef LuaInterface_hpp
 #define LuaInterface_hpp
 
-
-#include <string>
-#include <iostream>
-
+// MARK: Libraries and Frameworks
 #include "lua.hpp"
 #include "lauxlib.h"
 #include "lualib.h"
+#include <string>
 
 
 // MARK: - LuaInterface Class
@@ -24,33 +22,21 @@ class LuaInterface {
   
 public:
   // MARK: - Initialization Methods
-  
-  // Initilizes a Lua file with the given filename
   bool init(const std::string filename);
   
   // MARK: - LuaInterface Methods
-  
-  // Loads a table with given key to the top of the virtual stack
   bool loadTable(const std::string key);
-  // Returns a key associated value from the table at the top of the stack
-  template <typename T>
-  T getValue(const std::string key);
-  // Clears virtual stack, leaving only the Lua file's return value
+  template <typename T> T getValue(const std::string key);
   void clean();
   
-private:
+protected:
   // MARK: - LuaInterface Fields
-  
   lua_State *L;
-  int numRetVals;
+  int luaReturnValCount;
   
   // MARK: - Helper Methods
-  
-  // Template methods for converting Lua types from the top of the stack
-  template <typename T>
-  T convertLua(const std::string key);
-  template <typename T>
-  T luaDefault();
+  template <typename T> T convertLua(const std::string key);
+  template <typename T> T luaDefault();
   
 };
 

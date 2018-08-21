@@ -9,7 +9,7 @@
 #ifndef Parameters_hpp
 #define Parameters_hpp
 
-
+// MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 #include <string>
 

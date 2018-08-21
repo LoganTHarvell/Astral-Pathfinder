@@ -48,6 +48,7 @@
 		020013882075BCD30087CED9 /* base.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200135D2075BCD30087CED9 /* base.png */; };
 		020013892075BCD30087CED9 /* MODENINE.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 0200135E2075BCD30087CED9 /* MODENINE.TTF */; };
 		0200138A2075BCD30087CED9 /* mainMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 0200135F2075BCD30087CED9 /* mainMenu.png */; };
+		021431DE212B3D6A00B0814C /* LuaInterfaceSDL2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 021431DC212B3D6A00B0814C /* LuaInterfaceSDL2.cpp */; };
 		02307D002075BE1B00B46A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02307CFE2075BE1B00B46A3E /* Assets.xcassets */; };
 		0243D28A2112ED5600B36BEC /* Parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0243D2892112ED5600B36BEC /* Parameters.cpp */; };
 		0243D29B211424E500B36BEC /* config.lua in Resources */ = {isa = PBXBuildFile; fileRef = 0243D29A211424E500B36BEC /* config.lua */; };
@@ -164,6 +165,7 @@
 		0200135D2075BCD30087CED9 /* base.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = base.png; sourceTree = "<group>"; };
 		0200135E2075BCD30087CED9 /* MODENINE.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = MODENINE.TTF; sourceTree = "<group>"; };
 		0200135F2075BCD30087CED9 /* mainMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMenu.png; sourceTree = "<group>"; };
+		021431DC212B3D6A00B0814C /* LuaInterfaceSDL2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LuaInterfaceSDL2.cpp; sourceTree = "<group>"; };
 		02307CFE2075BE1B00B46A3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02307CFF2075BE1B00B46A3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0243D2892112ED5600B36BEC /* Parameters.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parameters.cpp; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		0243D2972114210500B36BEC /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblua.a; sourceTree = "<group>"; };
 		0243D2982114210500B36BEC /* lualib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lualib.h; sourceTree = "<group>"; };
 		0243D29A211424E500B36BEC /* config.lua */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.lua; sourceTree = "<group>"; };
+		02AA8306212BB24B008D4A4B /* LuaInterfaceSDL2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LuaInterfaceSDL2.hpp; sourceTree = "<group>"; };
 		02C12C9B2129442B005C885C /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_ttf.framework; sourceTree = "<group>"; };
 		02C12C9C2129442B005C885C /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2_image.framework; sourceTree = "<group>"; };
 		02C12C9D2129442B005C885C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL2.framework; sourceTree = "<group>"; };
@@ -403,6 +406,8 @@
 			children = (
 				02CD938A21275C4000647547 /* LuaInterface.hpp */,
 				02CD938921275C4000647547 /* LuaInterface.cpp */,
+				02AA8306212BB24B008D4A4B /* LuaInterfaceSDL2.hpp */,
+				021431DC212B3D6A00B0814C /* LuaInterfaceSDL2.cpp */,
 				02C12C98212941E4005C885C /* Library */,
 			);
 			path = Lua;
@@ -654,6 +659,7 @@
 				9192D8CD20FACFA40053F989 /* Scoreboard.cpp in Sources */,
 				02CD938B21275C4000647547 /* LuaInterface.cpp in Sources */,
 				913C4B4B210BD5C200B0D519 /* Button.cpp in Sources */,
+				021431DE212B3D6A00B0814C /* LuaInterfaceSDL2.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,16 +6,19 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
+// MARK: Header File
 #include "LuaInterface.hpp"
 
+// MARK: Libraries and Frameworks
+#include <iostream>
 
 // MARK: - Initialization Methods
 
 bool LuaInterface::init(const std::string filename) {
   
   if (L) lua_close(L);    // Closes any existing lua state
-  L = luaL_newstate();    // Creates new lua state
-  numRetVals = 0;         // Initializes return value count to 0
+  L = luaL_newstate();
+  luaReturnValCount = 0;
   
   if (!L) return false;   // Exits if lua state allocation failed
   
@@ -28,17 +31,17 @@ bool LuaInterface::init(const std::string filename) {
     return false;
   }
   
-  numRetVals = lua_gettop(L);   // Sets a count of values returned by Lua file
+  luaReturnValCount = lua_gettop(L);   // Sets a count of values returned by Lua file
   
   return true;
 }
 
 
-// MARK: - Utility Methods
+// MARK: - LuaInterface Methods
 
 bool LuaInterface::loadTable(const std::string key) {
   
-  lua_getfield(L, -1, key.c_str());     // Pushes table with key to stack
+  lua_getfield(L, -1, key.c_str());   // Pushes table with key to top of stack
   
   // Verifies top of stack is table
   if (!lua_istable(L, -1)) {
@@ -52,10 +55,9 @@ bool LuaInterface::loadTable(const std::string key) {
 
 void LuaInterface::clean() {
   // Pops all elements added to stack since initialization
-  int n = lua_gettop(L) - numRetVals;
+  int n = lua_gettop(L) - luaReturnValCount;
   lua_pop(L, n);
 }
-
 
 // MARK: Template Definitions
 
@@ -77,7 +79,7 @@ T LuaInterface::getValue(const std::string key) {
   
   T value;
   value = convertLua<T>(key);
-  lua_pop(L, 1);
+  lua_pop(L, 1);                  // Pops retrieved value from top of stack
   
   return value;
 }
@@ -85,12 +87,19 @@ T LuaInterface::getValue(const std::string key) {
 
 // MARK: - Helper Methods
 
-// MARK: Template Specializations
+// MARK: Template Definitions
 
 template <typename T>
 T LuaInterface::convertLua(const std::string key) {
   return 0;
 }
+
+template <typename T>
+T LuaInterface::luaDefault() {
+  return T();
+}
+
+// MARK: Template Specializations
 
 template <>
 bool LuaInterface::convertLua<bool>(const std::string key) {
@@ -130,11 +139,6 @@ std::string LuaInterface::convertLua<std::string>(const std::string key) {
   }
   
   return static_cast<std::string>(lua_tostring(L, -1));
-}
-
-template <typename T>
-T LuaInterface::luaDefault() {
-  return 0;
 }
 
 

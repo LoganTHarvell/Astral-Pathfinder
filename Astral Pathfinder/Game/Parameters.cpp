@@ -6,9 +6,11 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
+// MARK: Header File
 #include "Parameters.hpp"
 
-#include "LuaInterface.hpp"
+// MARK: Libraries and Frameworks
+#include "LuaInterfaceSDL2.hpp"
 #include <iostream>
 
 
@@ -130,12 +132,15 @@ namespace Parameters {
 bool Parameters::loadParameters() {
   bool flag = true;
   
-  LuaInterface luaInterface = LuaInterface();
+  LuaInterfaceSDL2 luaInterface = LuaInterfaceSDL2();
   
   flag = luaInterface.init(luaConfigFile);
   flag = luaInterface.loadTable(groups.gameParameters);
   
-  if (flag) Game::fps = luaInterface.getValue<int>("fps");
+  if (flag) {
+    Game::windowRect = luaInterface.getValueSDL<SDL_Rect>("windowRect");
+    Game::fps = luaInterface.getValue<int>("fps");
+  }
     
   return flag;
 }
