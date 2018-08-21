@@ -176,14 +176,8 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
   }
 }
 
-// MARK: - UIManager Methods
 
-bool UIManager::checkGameScreen() {
-  if (activeScreen == game)
-    return true;
-  
-  return false;
-}
+// MARK: - UIManager Methods
 
 bool UIManager::checkStartScreens() {
   if (activeScreen == menu || activeScreen == scores)

@@ -9,6 +9,9 @@
 // MARK: Header File
 #include "Game.hpp"
 
+// MARK: Parameter File
+#include "Parameters.hpp"
+
 // MARK: Libraries and Frameworks
 #include <iostream>
 #include "SDL2_image/SDL_image.h"
@@ -20,15 +23,16 @@
 #include "TextureManager.hpp"
 #include "UIManager.hpp"
 
+// MARK: Namespaces
+using namespace Parameters::Game;
 
-// MARK: - Game Globals
+// MARK: Game Globals
 SDL_Renderer *Game::renderer = nullptr;
 
 
 // MARK: - Game Initialization
-
+// TODO: Remove parameters and move them to parameters file
 void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
-  using namespace Parameters::Game;
   
   // Seeds random number generator
   srand((unsigned)time(NULL));
@@ -106,10 +110,18 @@ void Game::handleEvents() {
         break;
       case SDL_KEYDOWN:
       {
+        // Gets pressed key
+        SDL_Keycode key = event.key.keysym.sym;
+  
+        // Enables hot reloading of parameters
+        // TODO: Create a hot reload method for appropriate values
+        if (uiManager->getActiveScreen() != UIManager::ScreenType::scores
+            && SDLK_h) {
+          Parameters::loadParameters();
+          SDL_SetWindowPosition(window, windowRect.x, windowRect.y);
+        }
+        
         if (!uiManager->checkStartScreens() && gameState.endgame == State::none) {
-          // Gets pressed key
-          SDL_Keycode key = event.key.keysym.sym;
-          
           // GameState logic
           if (key == SDLK_ESCAPE && gameState.planetSelected) {
             gameState.planetSelected = false;
@@ -118,9 +130,9 @@ void Game::handleEvents() {
             gameState.debugMode = !gameState.debugMode;
           }
         }
-        else if (gameState.endgame != State::none && gameState.endgame != State::quit
-                && SDL_IsTextInputActive()) {
-          SDL_Keycode key = event.key.keysym.sym;
+        else if (gameState.endgame != State::none
+                 && gameState.endgame != State::quit
+                 && SDL_IsTextInputActive()) {
           if (key == SDLK_BACKSPACE && gameState.playerName.length() > 0) {
             gameState.playerName.pop_back();
             gameState.renderPlayerName = true;
@@ -133,7 +145,6 @@ void Game::handleEvents() {
         gameState.clickLocation = { event.button.x, event.button.y };
         break;
       case SDL_MOUSEMOTION:
-        // TODO: Verify this doesn't need to be changes to gameState.gameOver
         if (uiManager->checkStartScreens() || (gameState.endgame != State::none
                                               && gameState.endgame != State::quit))
           gameState.dragLocation = { event.motion.x, event.motion.y };

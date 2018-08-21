@@ -6,11 +6,15 @@
 //  Copyright © 2018 Logan Harvell. All rights reserved.
 //
 
+// MARK: Header File
 #include "AlienShip.hpp"
 
-#include <cmath>
+// MARK: Parameter File
+#include "Parameters.hpp"
 
+// MARK: Libraries and Frameworks
 #include "TextureManager.hpp"
+#include <cmath>
 
 using PointVector = std::vector<SDL_Point>;
 

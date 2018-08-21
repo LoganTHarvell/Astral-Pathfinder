@@ -6,11 +6,17 @@
 //  Copyright © 2018 Logan Harvell. All rights reserved.
 //
 
+// MARK: Header File
 #include "PlayerShip.hpp"
 
+// MARK: Parameter File
+#include "Parameters.hpp"
+
+// MARK: Libraries and Frameworks
 #include "TextureManager.hpp"
 
 using PointVector = std::vector<SDL_Point>;
+
 
 // MARK: - Initialization Methods
 

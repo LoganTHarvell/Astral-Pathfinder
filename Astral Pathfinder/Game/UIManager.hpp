@@ -32,6 +32,10 @@
 class UIManager {
 
 public:
+  enum ScreenType {
+    menu, scores, game, over, quit
+  };
+  
   // MARK: - UIManager Initialization
   void init(Game::State *gameState);
   
@@ -39,8 +43,8 @@ public:
   void update(Game::State *gameState, PlanetManager *planetManager, ShipManager *shipManager);
   void render(Game::State *gameState, PlanetManager *pm);
   
-  // MARK: - Helper Methods
-  bool checkGameScreen();
+  // MARK: - Getter Methods
+  ScreenType getActiveScreen() { return activeScreen; };
   bool checkStartScreens();
   
 private:
@@ -64,9 +68,7 @@ private:
     none, currentPlanetWindow, selectedPlanetWindow
   } currentWindow = none;
   
-  enum {
-    menu, scores, game, over, quit
-  } activeScreen = menu;
+  ScreenType activeScreen = menu;
   
   bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true;
   bool mainMenuFlag, scoreboardFlag;

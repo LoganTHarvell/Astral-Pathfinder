@@ -9,9 +9,6 @@
 #ifndef Game_hpp
 #define Game_hpp
 
-// MARK: Parameter File
-#include "Parameters.hpp"
-
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 #include <string>
