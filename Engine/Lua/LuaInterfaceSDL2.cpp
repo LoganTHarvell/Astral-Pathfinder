@@ -91,6 +91,25 @@ SDL_Rect LuaInterfaceSDL2::convertLuaSDL<SDL_Rect>(const std::string key) {
   
 }
 
+template <>
+SDL_Color LuaInterfaceSDL2::convertLuaSDL<SDL_Color>(const std::string key) {
+  
+  // Reports error if value with given key is not a table
+  if (!lua_istable(L, -1)) {
+    std::cerr << "Error: cannot convert\"" << key
+    <<  "\" to SDL_Color" << std::endl;
+  }
+  
+  Uint8 r = getValue<int>("r");
+  Uint8 g = getValue<int>("g");
+  Uint8 b = getValue<int>("b");
+  
+  SDL_Color c = { r, g, b };
+  
+  return c;
+  
+}
+
 // MARK: - Explicit Instantions for Template Methods
 
 template SDL_Rect LuaInterfaceSDL2::getValueSDL<SDL_Rect>(const std::string key);
