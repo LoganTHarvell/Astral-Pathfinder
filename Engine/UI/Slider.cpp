@@ -32,9 +32,9 @@ void Slider::update() {
   
 }
 
-void Slider::render() {
-  SDL_RenderCopy(Game::renderer, baseTexture, NULL, &base);
-  SDL_RenderCopy(Game::renderer, sliderTexture, NULL, &slider);
+void Slider::render(SDL_Renderer *renderer) {
+  SDL_RenderCopy(renderer, baseTexture, NULL, &base);
+  SDL_RenderCopy(renderer, sliderTexture, NULL, &slider);
 }
 
 void Slider::clean() {

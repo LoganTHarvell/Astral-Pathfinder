@@ -23,12 +23,11 @@
 class Slider {
 public:
   // MARK: - Initialization Methods
-  // TODO: init with renderer parameter
   void init(SDL_Rect base, SDL_Rect circ);
   
   // MARK: - Game Loop Methods
   void update();
-  void render();
+  void render(SDL_Renderer *renderer);
   void clean();
   
   // MARK: - Slider Methods
@@ -46,7 +45,6 @@ private:
   // MARK: - Slider Fields
   SDL_Rect base, slider;
   SDL_Texture *baseTexture, *sliderTexture;
-  bool setPos = false;
 };
 
 

@@ -22,12 +22,12 @@
 class Button {
 public:
   // MARK: - Initialization Methods
-  // TODO: init with renderer parameter
-  void init(SDL_Rect text, SDL_Rect outline, int screen);
+  void init(SDL_Rect text, SDL_Rect outline,
+            int screen, std::string textureFile);
   
   // MARK: - Game Loop Methods
   void update();
-  void render();
+  void render(SDL_Renderer *renderer);
   
   // Mark: - Button Methods
   bool checkInBounds(SDL_Point p);
@@ -39,8 +39,7 @@ public:
 private:
   SDL_Rect bounds, border;
   bool isActive;
-  // TODO: Texture should not be loaded here, filename should be in parameters
-  SDL_Texture *texture = TextureManager::loadTexture("../Resources/border.png");
+  SDL_Texture *texture = nullptr;
   int nextScreen;
 };
 

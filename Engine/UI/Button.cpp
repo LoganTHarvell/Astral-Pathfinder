@@ -12,11 +12,13 @@
 
 // MARK: - Button Initialization
 
-void Button::init(SDL_Rect text, SDL_Rect outline, int screen) {
+void Button::init(SDL_Rect text, SDL_Rect outline,
+                  int screen, std::string textureFile) {
   bounds = text;
   border = outline;
   isActive = false;
   nextScreen = screen;
+  texture = TextureManager::loadTexture(textureFile);
 }
 
 
@@ -26,9 +28,9 @@ void Button::update() {
   
 }
 
-void Button::render() {
+void Button::render(SDL_Renderer * renderer) {
   if (isActive)
-    SDL_RenderCopy(Game::renderer, texture, NULL, &border);
+    SDL_RenderCopy(renderer, texture, NULL, &border);
 }
 
 
