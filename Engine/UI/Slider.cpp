@@ -63,8 +63,8 @@ bool Slider::isInitialized() {
 void Slider::setTextures(int percent) {
   clean();
   
-  baseTexture = TextureManager::loadTexture(SliderParameters::barFilename);
-  sliderTexture = TextureManager::loadTexture(SliderParameters::circFilename);
+  baseTexture = TextureManager::loadTexture(Parameters::UI::Slider::baseFilename);
+  sliderTexture = TextureManager::loadTexture(Parameters::UI::Slider::knobFilename);
 
   updateSliderPosition(percent);
 }

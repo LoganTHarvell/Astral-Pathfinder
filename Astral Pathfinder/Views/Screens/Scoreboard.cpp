@@ -6,8 +6,13 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
+// MARK: Header File
 #include "Scoreboard.hpp"
 
+// MARK: Parameter File
+#include "Parameters.hpp"
+
+// MARK: Libraries and Frameworks
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -17,8 +22,9 @@
 // MARK: - Scoreboard Initialization
 
 void Scoreboard::init() {
-  using namespace ScoreboardParameters;
+  using namespace Parameters::UI::Scoreboard;
   
+  // TODO: Pass in filename or use parameter
   texture = TextureManager::loadTexture("../Resources/scoreboard.png");
   
   addButton(scores, mainMenuButton, mainMenuBorder, menu);
@@ -45,7 +51,7 @@ void Scoreboard::update(Game::State *gs) {
 }
 
 void Scoreboard::render(Game::State *gs) {
-  using namespace ScoreboardParameters;
+  using namespace Parameters::UI::Scoreboard;
   
   SDL_RenderCopy(Game::renderer, texture, NULL,
                  &Parameters::UIManager::screenRect);
@@ -66,7 +72,7 @@ void Scoreboard::render(Game::State *gs) {
 void Scoreboard::writeScore(Game::State *gs, int score) {
   using namespace std;
   ofstream file;
-  file.open(ScoreboardParameters::filePath.c_str(), ios::app);
+  file.open(Parameters::UI::Scoreboard::filePath.c_str(), ios::app);
   while (gs->playerName.length() < 3)
     gs->playerName += '-';
   string message = gs->playerName + ";" + to_string(score) + ";";
@@ -80,7 +86,7 @@ void Scoreboard::readScores() {
   const char lineBreak = ';';
   string line;
   ifstream file;
-  file.open(ScoreboardParameters::filePath.c_str());
+  file.open(Parameters::UI::Scoreboard::filePath.c_str());
   while (static_cast<void>(file >> ws), getline(file, line, lineBreak)) {
     // Player Name
     string name = line;
@@ -101,7 +107,7 @@ void Scoreboard::compareScores(std::string name, int score) {
   std::string tempName;
   TextBox tempBox;
   
-  for (int i = 0; i < ScoreboardParameters::scoreboardMax; i++) {
+  for (int i = 0; i < Parameters::UI::Scoreboard::scoreboardMax; i++) {
     if (score > boardScores[i]) {
       tempScore = boardScores[i];
       boardScores[i] = score;

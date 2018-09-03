@@ -9,19 +9,8 @@
 #ifndef Scoreboard_hpp
 #define Scoreboard_hpp
 
+// MARK: Source Files
 #include "Screen.hpp"
-
-
-// MARK: - Scoreboard Parameters
-// TODO: - Move parameters to parameters file
-namespace ScoreboardParameters {
-  const std::string filePath = "Resources/Scores/scoreboard.txt";
-  const int scoreboardMax = 10;
-  const SDL_Rect startingNameBox = {760, 203, 300, 42};
-  const SDL_Rect startingScoreBox = {880, 203, 300, 42};
-  const SDL_Rect mainMenuButton = {628, 754, 376, 67};
-  const SDL_Rect mainMenuBorder = {609, 742, 412, 90};
-}
 
 
 // MARK: - Scoreboard Class

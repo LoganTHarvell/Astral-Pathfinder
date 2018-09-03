@@ -297,17 +297,17 @@
 		020013312075BCD30087CED9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				9192D8C720FA9D940053F989 /* Screens */,
+				020013362075BCD30087CED9 /* Map.hpp */,
+				020013392075BCD30087CED9 /* Map.cpp */,
 				020013342075BCD30087CED9 /* PlanetInfo.hpp */,
 				0200133D2075BCD30087CED9 /* PlanetInfo.cpp */,
 				020013382075BCD30087CED9 /* ShipInfo.hpp */,
 				020013352075BCD30087CED9 /* ShipInfo.cpp */,
-				020013362075BCD30087CED9 /* Map.hpp */,
-				020013392075BCD30087CED9 /* Map.cpp */,
-				020013322075BCD30087CED9 /* TextBox.hpp */,
-				0200133B2075BCD30087CED9 /* TextBox.cpp */,
 				9117BE712094FD34003FE954 /* EventsPanel.hpp */,
 				9117BE702094FD34003FE954 /* EventsPanel.cpp */,
+				9192D8C720FA9D940053F989 /* Screens */,
+				020013322075BCD30087CED9 /* TextBox.hpp */,
+				0200133B2075BCD30087CED9 /* TextBox.cpp */,
 			);
 			path = Views;
 			sourceTree = "<group>";

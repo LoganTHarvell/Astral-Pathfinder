@@ -11,14 +11,6 @@
 
 #include "Screen.hpp"
 
-// TODO: - Move parameters to parameters file
-
-namespace EndScreenParameters {
-  const SDL_Rect playAgainButton = {288, 673, 424, 57};
-  const SDL_Rect mainMenuButton = {885, 677, 424, 54};
-  const SDL_Rect playAgainBorder = {270, 662, 460, 95};
-  const SDL_Rect mainMenuBorder = {867, 666, 460, 92};
-}
 
 // MARK: - EndScreen Class
 

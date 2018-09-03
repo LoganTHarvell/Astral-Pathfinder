@@ -6,13 +6,16 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
+// MARK: Header File
 #include "EndScreen.hpp"
 
+// MARK: Parameter File
+#include "Parameters.hpp"
 
 // MARK: - EndScreen Initialization
 
 void EndScreen::init() {
-  using namespace EndScreenParameters;
+  using namespace Parameters::UI::EndScreen;
   
   addButton(over, playAgainButton, playAgainBorder, game);
   addButton(over, mainMenuButton, mainMenuBorder, menu);

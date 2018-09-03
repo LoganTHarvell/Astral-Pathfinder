@@ -15,6 +15,7 @@
 
 
 // MARK: - Parameter Constants
+// TODO: - Make a Sinngleton Class
 namespace Parameters {
   
   const std::string title =
@@ -52,7 +53,8 @@ namespace Parameters {
       std::string uiManagerParameters = "uiManager";
       std::string planetParameters = "planet";
       std::string shipParameters = "ship";
-    } groups;
+      std::string uiParameters = "ui";
+    } tables;
   }
   
   // MARK: - Game Parameters
@@ -167,6 +169,65 @@ namespace Parameters {
     extern int turnSpeed;
   }
   
+  // MARK: - UI Parameters
+  namespace UI {
+    // EventsPanelParameters
+    namespace EventPanel {
+      extern SDL_Rect panelRect;
+      extern SDL_Rect renderRect;
+      extern SDL_Rect textBoxesRect;
+      extern SDL_Color red;
+      extern SDL_Color yellow;
+      extern SDL_Color outline;
+    }
+    
+    // Main Menu Parameters
+    namespace MainMenu {
+      extern SDL_Rect startGameButton;
+      extern SDL_Rect scoreboardButton;
+      extern SDL_Rect exitGameButton;
+      extern SDL_Rect startGameBorder;
+      extern SDL_Rect scoreboardBorder;
+      extern SDL_Rect exitGameBorder;
+    }
+    
+    // Scoreboard Parameters
+    namespace Scoreboard {
+      extern std::string filePath;
+      extern int scoreboardMax;
+      extern SDL_Rect startingNameBox;
+      extern SDL_Rect startingScoreBox;
+      extern SDL_Rect mainMenuButton;
+      extern SDL_Rect mainMenuBorder;
+    }
+    
+    // End Screen Parameters
+    namespace EndScreen {
+      extern SDL_Rect playAgainButton;
+      extern SDL_Rect mainMenuButton;
+      extern SDL_Rect playAgainBorder;
+      extern SDL_Rect mainMenuBorder;
+    }
+    
+    // TextBox Parameters
+    namespace TextBox {
+      extern SDL_Color color;
+      extern std::string fontFile;
+      extern int regFontSize;
+      extern int eventFontSize;
+      extern int finalScoreFontSize;
+      extern Uint32 wrapLength;
+      extern int scoreboardLine;
+    }
+    
+    // Slider Parameters
+    namespace Slider {
+      extern std::string baseFilename;
+      extern std::string knobFilename;
+      extern SDL_Color baseColor;
+      extern SDL_Color knobColor;
+    }
+  }
 
   // MARK: - Parameter Loading Function
   bool loadParameters();

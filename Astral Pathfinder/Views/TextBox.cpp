@@ -17,8 +17,8 @@
 // MARK: - TextBox Initialization
 
 void TextBox::init(SDL_Rect rectangle) {
-  font = TTF_OpenFont(TextParameters::fontFile.c_str(),
-                      TextParameters::regFontSize);
+  font = TTF_OpenFont(Parameters::UI::TextBox::fontFile.c_str(),
+                      Parameters::UI::TextBox::regFontSize);
   
   rect = rectangle;
 }
@@ -66,8 +66,8 @@ void TextBox::setScoreboardMessage(const std::string words, SDL_Color color) {
   int w, h;
   TTF_SizeText(font, words.c_str(), &w, &h);
   
-  if (rect.x < TextParameters::scoreboardLine)
-    rect.x = TextParameters::scoreboardLine - w;
+  if (rect.x < Parameters::UI::TextBox::scoreboardLine)
+    rect.x = Parameters::UI::TextBox::scoreboardLine - w;
   rect.w = w;
   
   SDL_Surface *surface = TTF_RenderText_Blended(font, words.c_str(), color);
@@ -77,24 +77,24 @@ void TextBox::setScoreboardMessage(const std::string words, SDL_Color color) {
 
 void TextBox::setEventMessage(const std::string words, SDL_Color color) {
   if (texture != nullptr) clean();
-  font = TTF_OpenFont(TextParameters::fontFile.c_str(), TextParameters::eventFontSize);
+  font = TTF_OpenFont(Parameters::UI::TextBox::fontFile.c_str(), Parameters::UI::TextBox::eventFontSize);
   
   int w, h;
   TTF_SizeText(font, words.c_str(), &w, &h);
   rect.h = static_cast<int>(h*2.25);
   
-  SDL_Surface *surface = TTF_RenderText_Blended_Wrapped(font, words.c_str(), color, TextParameters::wrapLength);
+  SDL_Surface *surface = TTF_RenderText_Blended_Wrapped(font, words.c_str(), color, Parameters::UI::TextBox::wrapLength);
   texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
   SDL_FreeSurface(surface);
   TTF_CloseFont(font);
 }
 
 void TextBox::setFinalScore(const std::string words) {
-  using TextParameters::color;
+  using Parameters::UI::TextBox::color;
   int w, h;
   if (texture != nullptr) clean();
   
-  font = TTF_OpenFont(TextParameters::fontFile.c_str(), TextParameters::finalScoreFontSize);
+  font = TTF_OpenFont(Parameters::UI::TextBox::fontFile.c_str(), Parameters::UI::TextBox::finalScoreFontSize);
   
   TTF_SizeText(font, words.c_str(), &w, &h);
   rect.w = w;

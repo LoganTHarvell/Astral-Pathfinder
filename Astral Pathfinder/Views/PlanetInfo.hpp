@@ -15,6 +15,9 @@
 #include "PlanetManager.hpp"
 #include "Planet.hpp"
 
+
+// MARK: - PlanetInfo Class
+
 class PlanetInfo {
 public:
   // MARK: - PlanetInfo Initialization

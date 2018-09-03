@@ -12,7 +12,7 @@
 // MARK: - PlanetInfo Initialization
 
 void EventsPanel::init() {
-  using namespace EventPanelParameters;
+  using namespace Parameters::UI::EventPanel;
   texture = SDL_CreateTexture(Game::renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_TARGET, panelRect.w, panelRect.h);
   src = {0, 0, 310, 700};
   totalHeight = 0;
@@ -31,7 +31,7 @@ void EventsPanel::update(Game::State *gameState, PlanetManager *pm) {
 }
 
 void EventsPanel::render(Game::State *gameState) {  
-  using namespace EventPanelParameters;
+  using namespace Parameters::UI::EventPanel;
   SDL_SetRenderTarget(Game::renderer, texture);
   SDL_RenderClear(Game::renderer);
   for (std::vector<TextBox>::reverse_iterator it = eventOrder.rbegin();
@@ -47,7 +47,7 @@ void EventsPanel::render(Game::State *gameState) {
 void EventsPanel::scrollPanel(int scroll) {
   int newY;
   if (scroll < 0) {
-    if (totalHeight > EventPanelParameters::renderRect.h) {
+    if (totalHeight > Parameters::UI::EventPanel::renderRect.h) {
       newY = src.y + (-scroll);
       if (newY + src.h > totalHeight) src.y = totalHeight - src.h;
       else src.y = newY;
@@ -62,7 +62,7 @@ void EventsPanel::scrollPanel(int scroll) {
 }
 
 void EventsPanel::checkStatus(std::vector<EventsComponent> events) {
-  using namespace EventPanelParameters;
+  using namespace Parameters::UI::EventPanel;
   
   for (int i = 0; i < events.size(); i++) {
     SDL_Point p = events[i].getLocation();
@@ -80,7 +80,7 @@ void EventsPanel::updateMap(SDL_Point p, bool flag, int event, SDL_Color color) 
   if (flag) {
     if (map.find(key) == map.end()) {
       TextBox box;
-      box.init(EventPanelParameters::textBoxesRect);
+      box.init(Parameters::UI::EventPanel::textBoxesRect);
       box.setEventMessage(createMessage(p, event).c_str(), color);
       box.setKey(key);
       map[key] = box;

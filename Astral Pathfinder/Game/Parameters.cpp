@@ -123,6 +123,60 @@ namespace Parameters {
     int turnSpeed = 5;
   }
   
+  namespace UI {
+    namespace EventPanel {
+      SDL_Rect panelRect = { 65, 175, 320, 10000 };
+      SDL_Rect renderRect = { 70, 180, 310, 590 };
+      SDL_Rect textBoxesRect = { 0, 0, 300, 0 };
+      SDL_Color red = { 200, 0, 0 };
+      SDL_Color yellow = { 200, 200, 0 };
+      SDL_Color outline = { 177, 115, 6 };
+    }
+    
+    namespace MainMenu {
+      SDL_Rect startGameButton = { 600, 401, 424, 57 };
+      SDL_Rect scoreboardButton = { 600, 538, 424, 58 };
+      SDL_Rect exitGameButton = { 600, 676, 424, 54 };
+      SDL_Rect startGameBorder = { 582, 390, 460, 95 };
+      SDL_Rect scoreboardBorder = { 582, 527, 460, 96 };
+      SDL_Rect exitGameBorder = { 582, 665, 460, 92 };
+    }
+    
+    namespace Scoreboard {
+      std::string filePath = "Resources/Scores/scoreboard.txt";
+      int scoreboardMax = 10;
+      SDL_Rect startingNameBox = {760, 203, 300, 42};
+      SDL_Rect startingScoreBox = {880, 203, 300, 42};
+      SDL_Rect mainMenuButton = {628, 754, 376, 67};
+      SDL_Rect mainMenuBorder = {609, 742, 412, 90};
+    }
+    
+    namespace EndScreen {
+      SDL_Rect playAgainButton = { 288, 673, 424, 57 };
+      SDL_Rect mainMenuButton = { 885, 677, 424, 54 };
+      SDL_Rect playAgainBorder = { 270, 662, 460, 95 };
+      SDL_Rect mainMenuBorder = { 867, 666, 460, 92 };
+    }
+    
+    namespace TextBox {
+      SDL_Color color = { 0, 128, 0 };
+      std::string fontFile = "../Resources/MODENINE.TTF";
+      int regFontSize = 36;
+      int eventFontSize = 18;
+      int finalScoreFontSize = 120;
+      Uint32 wrapLength = 300;
+      int scoreboardLine = 880;
+    }
+  
+    namespace Slider {
+      std::string baseFilename = "../Resources/base.png";
+      std::string knobFilename = "../Resources/slider.png";
+      SDL_Color baseColor = { 150, 150, 150 };
+      SDL_Color knobColor = { 0, 128, 0 };
+    }
+      
+  }
+  
 }
 
 
@@ -135,7 +189,7 @@ bool Parameters::loadParameters() {
   LuaInterfaceSDL2 luaInterface = LuaInterfaceSDL2();
   
   flag = luaInterface.init(luaConfigFile);
-  flag = luaInterface.loadTable(groups.gameParameters);
+  flag = luaInterface.loadTable(tables.gameParameters);
   
   if (flag) {
     Game::windowRect = luaInterface.getValueSDL<SDL_Rect>("windowRect");

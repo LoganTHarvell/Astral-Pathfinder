@@ -18,24 +18,12 @@
 #include "Planet.hpp"
 
 
-// MARK: - Slider Parameters
-// TODO: - Move parameters to parameters file
-
-namespace SliderParameters {
-  
-  const std::string barFilename = "../Resources/base.png";
-  const std::string circFilename = "../Resources/slider.png";
-  const SDL_Color baseColor = { 150, 150, 150 };
-  const SDL_Color sliderColor = { 0, 128, 0 };
-  
-}
-
-
 // MARK: - Slider Class
 
 class Slider {
 public:
   // MARK: - Initialization Methods
+  // TODO: init with renderer parameter
   void init(SDL_Rect base, SDL_Rect circ);
   
   // MARK: - Game Loop Methods

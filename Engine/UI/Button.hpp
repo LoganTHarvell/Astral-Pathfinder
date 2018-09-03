@@ -22,6 +22,7 @@
 class Button {
 public:
   // MARK: - Initialization Methods
+  // TODO: init with renderer parameter
   void init(SDL_Rect text, SDL_Rect outline, int screen);
   
   // MARK: - Game Loop Methods

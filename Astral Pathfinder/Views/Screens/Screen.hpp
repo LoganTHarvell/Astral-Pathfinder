@@ -9,8 +9,6 @@
 #ifndef Screen_hpp
 #define Screen_hpp
 
-// MARK: - Parameter File
-#include "Parameters.hpp"
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"

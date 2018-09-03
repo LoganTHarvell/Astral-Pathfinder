@@ -6,13 +6,16 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
+// MARK: Header File
 #include "MainMenu.hpp"
 
+// MARK: Parameter File
+#include "Parameters.hpp"
 
 // MARK: - MainMenu Initialization
 
 void MainMenu::init() {
-  using namespace MainMenuParameters;
+  using namespace Parameters::UI::MainMenu;
   
   texture = TextureManager::loadTexture("../Resources/mainMenu.png");
   

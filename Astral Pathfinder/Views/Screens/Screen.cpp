@@ -6,7 +6,11 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
+// MARK: Header File
 #include "Screen.hpp"
+
+// MARK: Parameter File
+#include "Parameters.hpp"
 
 void Screen::checkForHovering(Game::State *gs, int screen) {
   for (Button& b : *getActiveScreenButtons(screen))

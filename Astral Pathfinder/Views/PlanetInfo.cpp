@@ -80,16 +80,16 @@ void PlanetInfo::clean() {
 // MARK: - PlanetInfo Methods
 
 void PlanetInfo::setUiTextures(Planet p) {
-  using namespace SliderParameters;
+  using namespace Parameters::UI::Slider;
   
   setBoxes(p);
   
   if (!resourceSlider.isInitialized() && !depositSlider.isInitialized()
       && (p.getPopulation() > 0 || p.playerIsDocked())) {
     resourceSlider.setTextures(p.getFarmingPercent());
-    resourceSlider.colorMod(baseColor, sliderColor);
+    resourceSlider.colorMod(baseColor, knobColor);
     depositSlider.setTextures(p.getReservePercent());
-    depositSlider.colorMod(baseColor, sliderColor);
+    depositSlider.colorMod(baseColor, knobColor);
   }
   else {
     resourceSlider.updateSliderPosition(p.getFarmingPercent());

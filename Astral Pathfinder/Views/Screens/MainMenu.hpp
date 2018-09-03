@@ -9,17 +9,8 @@
 #ifndef MainMenu_hpp
 #define MainMenu_hpp
 
+// MARK: Source Files
 #include "Screen.hpp"
-
-// TODO: - Move parameters to parameters file
-namespace MainMenuParameters {
-  const SDL_Rect startGameButton = {600, 401, 424, 57};
-  const SDL_Rect scoreboardButton = {600, 538, 424, 58};
-  const SDL_Rect exitGameButton = {600, 676, 424, 54};
-  const SDL_Rect startGameBorder = {582, 390, 460, 95};
-  const SDL_Rect scoreboardBorder = {582, 527, 460, 96};
-  const SDL_Rect exitGameBorder = {582, 665, 460, 92};
-}
 
 // MARK: - MainMenu Class
 

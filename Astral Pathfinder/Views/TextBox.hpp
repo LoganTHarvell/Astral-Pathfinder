@@ -6,8 +6,11 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
-#ifndef Text_hpp
-#define Text_hpp
+#ifndef TextBox_hpp
+#define TextBox_hpp
+
+// MARK: Parameter File
+#include "Parameters.hpp"
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
@@ -17,20 +20,6 @@
 // MARK: Source Files
 #include "Game.hpp"
 #include "GameObject.hpp"
-
-
-// MARK: - TextBox Parameters
-// TODO: - Move parameters to parameters file
-
-namespace TextParameters {
-  const SDL_Color color = {0,128,0};
-  const std::string fontFile = "../Resources/MODENINE.TTF";
-  const int regFontSize = 36;
-  const int eventFontSize = 18;
-  const int finalScoreFontSize = 120;
-  const Uint32 wrapLength = 300;
-  const int scoreboardLine = 880;
-}
 
 
 // MARK: - TextBox Class
@@ -47,9 +36,9 @@ public:
   void clean();
   
   // MARK: - TextBox Methods
-  void setMessage(const std::string words, SDL_Color color = TextParameters::color);
-  void setFuelMessage(const std::string words, SDL_Color color = TextParameters::color);
-  void setScoreboardMessage(const std::string words, SDL_Color color = TextParameters::color);
+  void setMessage(const std::string words, SDL_Color color = Parameters::UI::TextBox::color);
+  void setFuelMessage(const std::string words, SDL_Color color = Parameters::UI::TextBox::color);
+  void setScoreboardMessage(const std::string words, SDL_Color color = Parameters::UI::TextBox::color);
   void setEventMessage(const std::string words, SDL_Color color);
   void setFinalScore(const std::string words);
   bool checkNull();
@@ -66,4 +55,4 @@ private:
   long key;
 };
 
-#endif /* Text_hpp */
+#endif /* TextBox_hpp */

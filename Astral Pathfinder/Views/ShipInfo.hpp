@@ -15,6 +15,9 @@
 #include "Planet.hpp"
 #include "PlayerShip.hpp"
 
+
+// MARK: - ShipInfo Class
+
 class ShipInfo {
 public:
   // MARK: - ShipInfo Initialization

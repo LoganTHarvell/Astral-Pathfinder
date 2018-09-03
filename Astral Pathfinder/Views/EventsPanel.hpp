@@ -22,18 +22,7 @@
 #include "PlanetManager.hpp"
 
 
-// MARK: - EventPanel Parameters
-// TODO: - Move parameters to parameters file
-
-namespace EventPanelParameters {
-  const SDL_Rect panelRect = {65, 175, 320, 10000};
-  const SDL_Rect renderRect = {70, 180, 310, 590};
-  const SDL_Rect textBoxesRect = {0,0,300,0};
-  const SDL_Color red = {200, 0, 0};
-  const SDL_Color yellow = {200, 200, 0};
-  const SDL_Color outline = {177, 115, 6};
-}
-
+// MARK: - Events Panel Class
 
 class EventsPanel {
 public:
