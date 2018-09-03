@@ -31,9 +31,12 @@ local parameters = {
     endScoreCoords = { x = 945, y = 335 },
     endScoreName = { x = 940, y = 480 },
 
+    -- RGB values should be within the range 0 - 255
     red = { r = 128, g = 0, b = 0 },
     green = { r = 0, g = 128, b = 0 },
     yellow = { r = 255, g = 255, b = 0 }
+    
+    gameScreenFile = "../Resources/gameScreen2.png"
   },
 
   planet = {
@@ -95,13 +98,77 @@ local parameters = {
     shipRect = { x = 0, y = 0, w = 48, h = 24 },       -- Ship texture info
     totalCrew = 1000,                                  -- Ship Population
 
-    -- TODO: figure out real velocity/ticks formula
     speed = 1,
     alienSpeed = 0.5,
     turnSpeed = 5
   }
 
-  
+  ui = {
+    eventPanel = {
+      panelRect = { x = 65, y = 175, w = 320, h = 10000 }
+      renderRect = { x = 70, y = 180, w = 310, h = 590 }
+      textBoxesRect = { x = 0, y = 0, w = 300, h = 0 }
+      
+      -- RGB values should be within the range 0 - 255
+      red = { r = 200, g = 0, b = 0 }
+      yellow = { r = 200, g = 200, b = 0 }
+      outline = { r = 177, g = 115, b = 6 }
+    }
+    
+    mainMenu = {
+      std::string textureFile = "../Resources/mainMenu.png"
+      startGameButton = { x = 600, y = 401, w = 424, h = 57 }
+      scoreboardButton = { x = 600, y = 538, w = 424, h = 58 }
+      exitGameButton = { x = 600, y = 676, w = 424, h = 54 }
+      startGameBorder = { x = 582, y = 390, w = 460, h = 95 }
+      scoreboardBorder = { x = 582, y = 527, w = 460, h = 96 }
+      exitGameBorder = { x = 582, y = 665, w = 460, h = 92 }
+    }
+    
+    scoreboard = {
+      std::string textureFile = "../Resources/scoreboard.png"
+      std::string scoresFile = "Resources/Scores/scoreboard.txt"
+      int scoreboardMax = 10
+      startingNameBox = { x = 760, y = 203, w = 300, h = 42 }
+      startingScoreBox = { x = 880, y = 203, w = 300, h = 42 }
+      mainMenuButton = { x = 628, y = 754, w = 376, h = 67 }
+      mainMenuBorder = { x = 609, y = 742, w = 412, h = 90 }
+    }
+    
+    endScreen = {
+      playAgainButton = { x = 288, y = 673, w = 424, h = 57 }
+      mainMenuButton = { x = 885, y = 677, w = 424, h = 54 }
+      playAgainBorder = { x = 270, y = 662, w = 460, h = 95 }
+      mainMenuBorder = { x = 867, y = 666, w = 460, h = 92 }
+      
+      winTextureFile = "../Resources/winScreen.png"
+      loseTextureFile = "../Resources/loseScreen.png"
+      alienCrashTextureFile = "../Resources/alienScreen.png"
+    }
+    
+    textBox = {
+      color = { r = 0, g = 128, b = 0 }
+      fontFile = "../Resources/MODENINE.TTF"
+      regFontSize = 36
+      eventFontSize = 18
+      finalScoreFontSize = 120
+      wrapLength = 300
+      scoreboardLine = 880
+    }
+    
+    slider = {
+      baseFilename = "../Resources/base.png"
+      knobFilename = "../Resources/slider.png"
+      
+      -- RGB values should be within the range 0 - 255
+      baseColor = { r = 150, g = 150, b = 150 }
+      knobColor = { r = 0, g = 128, b = 0 }
+    }
+    
+    button = {
+      textureFile = "../Resources/border.png"
+    }
+  }
 
 }
 
