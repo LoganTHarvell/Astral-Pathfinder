@@ -42,16 +42,22 @@ namespace Parameters {
   
   namespace UIManager {
     SDL_Rect screenRect = { 0, 0, Game::windowRect.w, Game::windowRect.h };
+    
     SDL_Rect timeRect = { 115, 82, 90, 36 };
     SDL_Rect totalScoreRect = { 245, 82, 90, 36 };
     SDL_Rect shipInfoRect = { 1215, 100, 320, 121 };
     SDL_Rect currentPlanetRect = { 1215, 210, 320, 240 };
     SDL_Rect selectedPlanetRect = { 1215, 500, 320, 300 };
+    
     SDL_Point endScoreCoords = { 945, 335 };
     SDL_Point endScoreName = { 940, 480 };
+    
     SDL_Color red = { 128, 0, 0 };
     SDL_Color green = { 0, 128, 0 };
     SDL_Color yellow = { 255, 255, 0 };
+    
+    std::string gameScreenFile = "../Resources/gameScreen2.png";
+
   }
  
   namespace Planet {
@@ -134,6 +140,7 @@ namespace Parameters {
     }
     
     namespace MainMenu {
+      std::string textureFile = "../Resources/mainMenu.png";
       SDL_Rect startGameButton = { 600, 401, 424, 57 };
       SDL_Rect scoreboardButton = { 600, 538, 424, 58 };
       SDL_Rect exitGameButton = { 600, 676, 424, 54 };
@@ -143,7 +150,8 @@ namespace Parameters {
     }
     
     namespace Scoreboard {
-      std::string filePath = "Resources/Scores/scoreboard.txt";
+      std::string textureFile = "../Resources/scoreboard.png";
+      std::string scoresFile = "Resources/Scores/scoreboard.txt";
       int scoreboardMax = 10;
       SDL_Rect startingNameBox = {760, 203, 300, 42};
       SDL_Rect startingScoreBox = {880, 203, 300, 42};
@@ -156,6 +164,10 @@ namespace Parameters {
       SDL_Rect mainMenuButton = { 885, 677, 424, 54 };
       SDL_Rect playAgainBorder = { 270, 662, 460, 95 };
       SDL_Rect mainMenuBorder = { 867, 666, 460, 92 };
+      
+      std::string winTextureFile = "../Resources/winScreen.png";
+      std::string loseTextureFile = "../Resources/loseScreen.png";
+      std::string alienCrashTextureFile = "../Resources/alienScreen.png";
     }
     
     namespace TextBox {
@@ -173,6 +185,10 @@ namespace Parameters {
       std::string knobFilename = "../Resources/slider.png";
       SDL_Color baseColor = { 150, 150, 150 };
       SDL_Color knobColor = { 0, 128, 0 };
+    }
+    
+    namespace Button {
+      std::string textureFile = "../Resources/border.png";
     }
       
   }

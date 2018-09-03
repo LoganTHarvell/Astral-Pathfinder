@@ -26,14 +26,17 @@ int Screen::checkClick(Game::State *gs, int screen) {
 }
 
 void Screen::addButton(int currentScreen, SDL_Rect bounds, SDL_Rect border, int nextScreen) {
+  using namespace Parameters::UI::Button;
   Button newButton;
-  newButton.init(bounds, border, nextScreen);
+  newButton.init(bounds, border, nextScreen, textureFile);
   
   getActiveScreenButtons(currentScreen)->push_back(newButton);
 }
 
 void Screen::renderButtons(int screen) {
-  for (Button b : *getActiveScreenButtons(screen)) b.render();
+  for (Button b : *getActiveScreenButtons(screen)) {
+    b.render(Game::renderer);
+  }
 }
 
 std::vector<Button> *Screen::getActiveScreenButtons(int screen) {  

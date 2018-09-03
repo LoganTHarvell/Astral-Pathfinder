@@ -97,6 +97,8 @@ namespace Parameters {
     extern SDL_Color red;
     extern SDL_Color green;
     extern SDL_Color yellow;
+    
+    extern std::string gameScreenFile;
   }
   
   // MARK: - Planet Parameters
@@ -183,6 +185,7 @@ namespace Parameters {
     
     // Main Menu Parameters
     namespace MainMenu {
+      extern std::string textureFile;
       extern SDL_Rect startGameButton;
       extern SDL_Rect scoreboardButton;
       extern SDL_Rect exitGameButton;
@@ -193,7 +196,8 @@ namespace Parameters {
     
     // Scoreboard Parameters
     namespace Scoreboard {
-      extern std::string filePath;
+      extern std::string textureFile;
+      extern std::string scoresFile;
       extern int scoreboardMax;
       extern SDL_Rect startingNameBox;
       extern SDL_Rect startingScoreBox;
@@ -207,6 +211,10 @@ namespace Parameters {
       extern SDL_Rect mainMenuButton;
       extern SDL_Rect playAgainBorder;
       extern SDL_Rect mainMenuBorder;
+      
+      extern std::string winTextureFile;
+      extern std::string loseTextureFile;
+      extern std::string alienCrashTextureFile;
     }
     
     // TextBox Parameters
@@ -226,6 +234,10 @@ namespace Parameters {
       extern std::string knobFilename;
       extern SDL_Color baseColor;
       extern SDL_Color knobColor;
+    }
+    
+    namespace Button {
+      extern std::string textureFile;
     }
   }
 

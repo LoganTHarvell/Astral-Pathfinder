@@ -33,7 +33,7 @@ void UIManager::init(Game::State *gameState) {
   finalScore.init({endScoreCoords.x, endScoreCoords.y, 0, 0});
   playerName.init({endScoreName.x, endScoreName.y, 0, 0});
   
-  gameScreen = TextureManager::loadTexture("../Resources/gameScreen2.png");
+  gameScreen = TextureManager::loadTexture(gameScreenFile);
   
   prevScore = 0;
   

@@ -50,12 +50,12 @@ void PlanetInfo::render(Game::State *gs, int population,
     fpText.render(gs);
     miningLabel.render(gs);
     farmingLabel.render(gs);
-    resourceSlider.render();
+    resourceSlider.render(Game::renderer);
     infraText.render(gs);
     reserveText.render(gs);
     ipText.render(gs);
     rpText.render(gs);
-    depositSlider.render();
+    depositSlider.render(Game::renderer);
   }
 }
 

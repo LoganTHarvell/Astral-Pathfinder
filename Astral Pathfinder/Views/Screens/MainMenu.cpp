@@ -17,7 +17,7 @@
 void MainMenu::init() {
   using namespace Parameters::UI::MainMenu;
   
-  texture = TextureManager::loadTexture("../Resources/mainMenu.png");
+  texture = TextureManager::loadTexture(textureFile);
   
   addButton(menu, startGameButton, startGameBorder, game);
   addButton(menu, scoreboardButton, scoreboardBorder, scores);

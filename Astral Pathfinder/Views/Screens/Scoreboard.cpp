@@ -25,7 +25,7 @@ void Scoreboard::init() {
   using namespace Parameters::UI::Scoreboard;
   
   // TODO: Pass in filename or use parameter
-  texture = TextureManager::loadTexture("../Resources/scoreboard.png");
+  texture = TextureManager::loadTexture(textureFile);
   
   addButton(scores, mainMenuButton, mainMenuBorder, menu);
   
@@ -72,7 +72,7 @@ void Scoreboard::render(Game::State *gs) {
 void Scoreboard::writeScore(Game::State *gs, int score) {
   using namespace std;
   ofstream file;
-  file.open(Parameters::UI::Scoreboard::filePath.c_str(), ios::app);
+  file.open(Parameters::UI::Scoreboard::scoresFile.c_str(), ios::app);
   while (gs->playerName.length() < 3)
     gs->playerName += '-';
   string message = gs->playerName + ";" + to_string(score) + ";";
@@ -86,7 +86,7 @@ void Scoreboard::readScores() {
   const char lineBreak = ';';
   string line;
   ifstream file;
-  file.open(Parameters::UI::Scoreboard::filePath.c_str());
+  file.open(Parameters::UI::Scoreboard::scoresFile.c_str());
   while (static_cast<void>(file >> ws), getline(file, line, lineBreak)) {
     // Player Name
     string name = line;

@@ -25,16 +25,18 @@ void EndScreen::init() {
 // MARK: - Game Loop Methods
 
 void EndScreen::update(Game::State *gs) {
+  using namespace Parameters::UI::EndScreen;
+  
   // TODO: put clean function in case someone spams endless restarts
   if (texture == nullptr) {
     if (gs->endgame == Game::State::allDiscovered)
-      texture = TextureManager::loadTexture("../Resources/winScreen.png");
+      texture = TextureManager::loadTexture(winTextureFile);
     
     else if (gs->endgame == Game::State::noFuel)
-      texture = TextureManager::loadTexture("../Resources/loseScreen.png");
+      texture = TextureManager::loadTexture(loseTextureFile);
     
     else if (gs->endgame == Game::State::alienAttack)
-      texture = TextureManager::loadTexture("../Resources/alienScreen.png");
+      texture = TextureManager::loadTexture(alienCrashTextureFile);
   }
 }
 
