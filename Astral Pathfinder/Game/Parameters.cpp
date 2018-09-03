@@ -153,10 +153,10 @@ namespace Parameters {
       std::string textureFile = "../Resources/scoreboard.png";
       std::string scoresFile = "Resources/Scores/scoreboard.txt";
       int scoreboardMax = 10;
-      SDL_Rect startingNameBox = {760, 203, 300, 42};
-      SDL_Rect startingScoreBox = {880, 203, 300, 42};
-      SDL_Rect mainMenuButton = {628, 754, 376, 67};
-      SDL_Rect mainMenuBorder = {609, 742, 412, 90};
+      SDL_Rect startingNameBox = { 760, 203, 300, 42 };
+      SDL_Rect startingScoreBox = { 880, 203, 300, 42 };
+      SDL_Rect mainMenuButton = { 628, 754, 376, 67 };
+      SDL_Rect mainMenuBorder = { 609, 742, 412, 90 };
     }
     
     namespace EndScreen {
