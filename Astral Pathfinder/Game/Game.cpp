@@ -33,7 +33,7 @@ SDL_Renderer *Game::renderer = nullptr;
 // MARK: - Game Initialization
 // TODO: Remove parameters and move them to parameters file
 void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
-  
+    
   // Seeds random number generator
   srand((unsigned)time(NULL));
   
@@ -116,7 +116,7 @@ void Game::handleEvents() {
         // Enables hot reloading of parameters
         // TODO: Create a hot reload method for appropriate values
         if (uiManager->getActiveScreen() != UIManager::ScreenType::scores
-            && SDLK_h) {
+            && key == SDLK_h) {
           Parameters::loadParameters();
           SDL_SetWindowPosition(window, windowRect.x, windowRect.y);
         }

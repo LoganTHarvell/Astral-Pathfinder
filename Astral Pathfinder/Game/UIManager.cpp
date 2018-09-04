@@ -31,7 +31,7 @@ void UIManager::init(Game::State *gameState) {
   DockedPlanetInfo.init(currentPlanetRect);
   shipInfo.init(shipInfoRect);
   finalScore.init({endScoreCoords.x, endScoreCoords.y, 0, 0});
-  playerName.init({endScoreName.x, endScoreName.y, 0, 0});
+  playerName.init({endNameCoords.x, endNameCoords.y, 0, 0});
   
   gameScreen = TextureManager::loadTexture(gameScreenFile);
   
@@ -194,15 +194,15 @@ void UIManager::updateTime(Uint32 elapsedTime) {
 }
 
 SDL_Color UIManager::checkTime(int minutes) {
-  if (minutes < 15) return Parameters::UIManager::green;
-  else if (minutes < 20) return Parameters::UIManager::yellow;
-  else return Parameters::UIManager::red;
+  if (minutes < 15) return Parameters::UIManager::goodColor;
+  else if (minutes < 20) return Parameters::UIManager::warningColor;
+  else return Parameters::UIManager::badColor;
 }
 
 void UIManager::updateTotalScore(PlanetManager *pm, Uint32 elapsedTime) {
   int overtime = elapsedTime - (Parameters::Game::timeLimit);
   if (overtime > 0) {
-    overtime *= Parameters::Game::overtimeScaleFactor;
+    overtime *= Parameters::Game::overtimeFactor;
   }
   else {
     overtime = 0;
@@ -222,12 +222,12 @@ SDL_Color UIManager::setTotalScoreColor() {
   if (prevScore == score)
     return prevColor;
   else if (prevScore < score) {
-    prevColor = Parameters::UIManager::green;
-    return Parameters::UIManager::green;
+    prevColor = Parameters::UIManager::goodColor;
+    return Parameters::UIManager::goodColor;
   }
   else {
-    prevColor = Parameters::UIManager::red;
-    return Parameters::UIManager::red;
+    prevColor = Parameters::UIManager::badColor;
+    return Parameters::UIManager::badColor;
   }
 }
 

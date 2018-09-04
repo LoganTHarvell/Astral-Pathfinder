@@ -66,11 +66,11 @@ void EventsPanel::checkStatus(std::vector<EventsComponent> events) {
   
   for (int i = 0; i < events.size(); i++) {
     SDL_Point p = events[i].getLocation();
-    updateMap(p, events[i].getBlight(), BLIGHT, outline);
-    updateMap(p, events[i].getPlague(), PLAGUE, outline);
-    updateMap(p, events[i].getMineCollapse(), MINECOLLAPSE, outline);
-    updateMap(p, events[i].getPopulationDec(), POPDEC, yellow);
-    updateMap(p, events[i].getOverProducing(), OVERPROD, red);
+    updateMap(p, events[i].getBlight(), BLIGHT, outlineColor);
+    updateMap(p, events[i].getPlague(), PLAGUE, outlineColor);
+    updateMap(p, events[i].getMineCollapse(), MINECOLLAPSE, outlineColor);
+    updateMap(p, events[i].getPopulationDec(), POPDEC, popDeclineColor);
+    updateMap(p, events[i].getOverProducing(), OVERPROD, overprodColor);
   }
 }
 

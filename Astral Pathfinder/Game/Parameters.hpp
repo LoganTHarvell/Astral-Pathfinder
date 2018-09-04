@@ -68,7 +68,7 @@ namespace Parameters {
     
     extern int endgameDelay;            // In number of frames
     extern int timeLimit;               // In number of seconds (x min * 60 sec)
-    extern int overtimeScaleFactor;
+    extern int overtimeFactor;
   }
   
   // MARK: - PlanetManager Parameters
@@ -92,11 +92,11 @@ namespace Parameters {
     extern SDL_Rect selectedPlanetRect;
     
     extern SDL_Point endScoreCoords;
-    extern SDL_Point endScoreName;
+    extern SDL_Point endNameCoords;
     
-    extern SDL_Color red;
-    extern SDL_Color green;
-    extern SDL_Color yellow;
+    extern SDL_Color badColor;
+    extern SDL_Color goodColor;
+    extern SDL_Color warningColor;
     
     extern std::string gameScreenFile;
   }
@@ -178,17 +178,20 @@ namespace Parameters {
       extern SDL_Rect panelRect;
       extern SDL_Rect renderRect;
       extern SDL_Rect textBoxesRect;
-      extern SDL_Color red;
-      extern SDL_Color yellow;
-      extern SDL_Color outline;
+      
+      extern SDL_Color overprodColor;
+      extern SDL_Color popDeclineColor;
+      extern SDL_Color outlineColor;
     }
     
     // Main Menu Parameters
     namespace MainMenu {
       extern std::string textureFile;
+      
       extern SDL_Rect startGameButton;
       extern SDL_Rect scoreboardButton;
       extern SDL_Rect exitGameButton;
+      
       extern SDL_Rect startGameBorder;
       extern SDL_Rect scoreboardBorder;
       extern SDL_Rect exitGameBorder;
@@ -198,9 +201,12 @@ namespace Parameters {
     namespace Scoreboard {
       extern std::string textureFile;
       extern std::string scoresFile;
+      
       extern int scoreboardMax;
+      
       extern SDL_Rect startingNameBox;
       extern SDL_Rect startingScoreBox;
+      
       extern SDL_Rect mainMenuButton;
       extern SDL_Rect mainMenuBorder;
     }
@@ -209,6 +215,7 @@ namespace Parameters {
     namespace EndScreen {
       extern SDL_Rect playAgainButton;
       extern SDL_Rect mainMenuButton;
+      
       extern SDL_Rect playAgainBorder;
       extern SDL_Rect mainMenuBorder;
       
@@ -221,9 +228,11 @@ namespace Parameters {
     namespace TextBox {
       extern SDL_Color color;
       extern std::string fontFile;
+      
       extern int regFontSize;
       extern int eventFontSize;
       extern int finalScoreFontSize;
+      
       extern Uint32 wrapLength;
       extern int scoreboardLine;
     }
@@ -232,6 +241,7 @@ namespace Parameters {
     namespace Slider {
       extern std::string baseFilename;
       extern std::string knobFilename;
+      
       extern SDL_Color baseColor;
       extern SDL_Color knobColor;
     }
@@ -241,7 +251,7 @@ namespace Parameters {
     }
   }
 
-  // MARK: - Parameter Loading Function
+  // MARK: - Parameter Loading Functions
   bool loadParameters();
   
 }

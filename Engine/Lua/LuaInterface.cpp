@@ -31,7 +31,8 @@ bool LuaInterface::init(const std::string filename) {
     return false;
   }
   
-  luaReturnValCount = lua_gettop(L);   // Sets a count of values returned by Lua file
+  // Sets a count of values returned by Lua file
+  luaReturnValCount = lua_gettop(L);
   
   return true;
 }
@@ -51,6 +52,15 @@ bool LuaInterface::loadTable(const std::string key) {
   }
   
   return true;
+}
+
+void LuaInterface::unloadTable() {
+  // Pops any non-table elements
+  while (!lua_istable(L, -1)) lua_pop(L, 1);
+  
+  // If the table is not a script return value, pops the table from the stack
+  if (lua_gettop(L) > luaReturnValCount) lua_pop(L, 1);
+  else std::cerr << "Error: no table to unload" << std::endl;
 }
 
 void LuaInterface::clean() {

@@ -29,7 +29,7 @@ namespace Parameters {
 
     int endgameDelay = 120;           // In number of frames
     int timeLimit = (20*60);          // In number of seconds (x min * 60 sec)
-    int overtimeScaleFactor = 100;
+    int overtimeFactor = 100;
   }
   
   namespace PlanetManager {
@@ -50,11 +50,11 @@ namespace Parameters {
     SDL_Rect selectedPlanetRect = { 1215, 500, 320, 300 };
     
     SDL_Point endScoreCoords = { 945, 335 };
-    SDL_Point endScoreName = { 940, 480 };
+    SDL_Point endNameCoords = { 940, 480 };
     
-    SDL_Color red = { 128, 0, 0 };
-    SDL_Color green = { 0, 128, 0 };
-    SDL_Color yellow = { 255, 255, 0 };
+    SDL_Color badColor = { 128, 0, 0 };
+    SDL_Color goodColor = { 0, 128, 0 };
+    SDL_Color warningColor = { 255, 255, 0 };
     
     std::string gameScreenFile = "../Resources/gameScreen2.png";
 
@@ -134,16 +134,19 @@ namespace Parameters {
       SDL_Rect panelRect = { 65, 175, 320, 10000 };
       SDL_Rect renderRect = { 70, 180, 310, 590 };
       SDL_Rect textBoxesRect = { 0, 0, 300, 0 };
-      SDL_Color red = { 200, 0, 0 };
-      SDL_Color yellow = { 200, 200, 0 };
-      SDL_Color outline = { 177, 115, 6 };
+      
+      SDL_Color overprodColor = { 200, 0, 0 };
+      SDL_Color popDeclineColor = { 200, 200, 0 };
+      SDL_Color outlineColor = { 177, 115, 6 };
     }
     
     namespace MainMenu {
       std::string textureFile = "../Resources/mainMenu.png";
+      
       SDL_Rect startGameButton = { 600, 401, 424, 57 };
       SDL_Rect scoreboardButton = { 600, 538, 424, 58 };
       SDL_Rect exitGameButton = { 600, 676, 424, 54 };
+      
       SDL_Rect startGameBorder = { 582, 390, 460, 95 };
       SDL_Rect scoreboardBorder = { 582, 527, 460, 96 };
       SDL_Rect exitGameBorder = { 582, 665, 460, 92 };
@@ -152,9 +155,12 @@ namespace Parameters {
     namespace Scoreboard {
       std::string textureFile = "../Resources/scoreboard.png";
       std::string scoresFile = "Resources/Scores/scoreboard.txt";
+      
       int scoreboardMax = 10;
+      
       SDL_Rect startingNameBox = { 760, 203, 300, 42 };
       SDL_Rect startingScoreBox = { 880, 203, 300, 42 };
+      
       SDL_Rect mainMenuButton = { 628, 754, 376, 67 };
       SDL_Rect mainMenuBorder = { 609, 742, 412, 90 };
     }
@@ -162,6 +168,7 @@ namespace Parameters {
     namespace EndScreen {
       SDL_Rect playAgainButton = { 288, 673, 424, 57 };
       SDL_Rect mainMenuButton = { 885, 677, 424, 54 };
+      
       SDL_Rect playAgainBorder = { 270, 662, 460, 95 };
       SDL_Rect mainMenuBorder = { 867, 666, 460, 92 };
       
@@ -173,9 +180,11 @@ namespace Parameters {
     namespace TextBox {
       SDL_Color color = { 0, 128, 0 };
       std::string fontFile = "../Resources/MODENINE.TTF";
+      
       int regFontSize = 36;
       int eventFontSize = 18;
       int finalScoreFontSize = 120;
+      
       Uint32 wrapLength = 300;
       int scoreboardLine = 880;
     }
@@ -183,6 +192,7 @@ namespace Parameters {
     namespace Slider {
       std::string baseFilename = "../Resources/base.png";
       std::string knobFilename = "../Resources/slider.png";
+      
       SDL_Color baseColor = { 150, 150, 150 };
       SDL_Color knobColor = { 0, 128, 0 };
     }
@@ -200,17 +210,240 @@ namespace Parameters {
 
 // Loads Parameters from Lua config file
 bool Parameters::loadParameters() {
-  bool flag = true;
-  
   LuaInterfaceSDL2 luaInterface = LuaInterfaceSDL2();
   
-  flag = luaInterface.init(luaConfigFile);
-  flag = luaInterface.loadTable(tables.gameParameters);
+  // Initializes Lua config file
+  if (!luaInterface.init(luaConfigFile)) return false;
   
-  if (flag) {
-    Game::windowRect = luaInterface.getValueSDL<SDL_Rect>("windowRect");
-    Game::fps = luaInterface.getValue<int>("fps");
-  }
+  // Loads and reads Game table
+  if (luaInterface.loadTable(tables.gameParameters)) {
+    using namespace Game;
     
-  return flag;
+    windowRect = luaInterface.getValueSDL<SDL_Rect>("windowRect");
+    fps = luaInterface.getValue<int>("fps");
+    frameDelay = 1000 / Game::fps;
+    endgameDelay = luaInterface.getValue<int>("endgameDelay");
+    timeLimit = luaInterface.getValue<int>("timeLimit");
+    overtimeFactor = luaInterface.getValue<int>("overtimeFactor");
+    
+    luaInterface.unloadTable();
+  }
+
+  // Loads and reads PlanetManager table
+  if (luaInterface.loadTable(tables.planetManagerParameters)) {
+    using namespace PlanetManager;
+    
+    numberOfPlanets = luaInterface.getValue<int>("numberOfPlanets");
+ 
+    luaInterface.unloadTable();
+  }
+  
+  // Loads and reads Ship Manager table
+  if (luaInterface.loadTable(tables.shipManagerParameters)) {
+    using namespace ShipManager;
+    
+    alienTargetingDelay = luaInterface.getValue<int>("alienTargetingDelay");
+  
+    luaInterface.unloadTable();
+  }
+  
+  
+  // Loads and reads UIManager table
+  if (luaInterface.loadTable(tables.uiManagerParameters)) {
+    using namespace UIManager;
+    
+    timeRect = luaInterface.getValueSDL<SDL_Rect>("timeRect");
+    totalScoreRect = luaInterface.getValueSDL<SDL_Rect>("totalScoreRect");
+    shipInfoRect = luaInterface.getValueSDL<SDL_Rect>("shipInfoRect");
+    currentPlanetRect = luaInterface.getValueSDL<SDL_Rect>("currentPlanetRect");
+    selectedPlanetRect = luaInterface.getValueSDL<SDL_Rect>("selectedPlanetRect");
+    
+    endScoreCoords = luaInterface.getValueSDL<SDL_Point>("endScoreCoords");
+    endNameCoords = luaInterface.getValueSDL<SDL_Point>("endNameCoords");
+    
+    badColor = luaInterface.getValueSDL<SDL_Color>("badColor");
+    goodColor = luaInterface.getValueSDL<SDL_Color>("goodColor");
+    warningColor = luaInterface.getValueSDL<SDL_Color>("warningColor");
+    
+    gameScreenFile = luaInterface.getValue<std::string>("gameScreenFile");
+    
+    luaInterface.unloadTable();
+  }
+  
+  // Loads and reads Planet table
+  if (luaInterface.loadTable(tables.planetParameters)) {
+    using namespace Planet;
+    
+    planetTextureFile = luaInterface.getValue<std::string>("planetTextureFile");
+    planetTexSize = luaInterface.getValue<int>("planetTexSize");
+    
+    planetOutlineFile = luaInterface.getValue<std::string>("planetOutlineFile");
+    planetOutlineSize = luaInterface.getValue<int>("planetOutlineSize");
+    
+    minFertility = luaInterface.getValue<int>("minFertility");
+    fertilityRange = luaInterface.getValue<int>("maxFertility") - minFertility;
+    minDeposits = luaInterface.getValue<int>("minDeposits");
+    depositsRange = luaInterface.getValue<int>("maxDeposits") - minDeposits;
+    startInfraPercent = luaInterface.getValue<int>("startInfraPercent");
+    startReservePercent = 100 - startInfraPercent;
+    startMiningPercent = luaInterface.getValue<int>("startMiningPercent");
+    startFarmingPercent = 100 - startMiningPercent;
+    
+    homeStartPopulation = luaInterface.getValue<int>("homeStartPopulation");
+    homeStartFertility = luaInterface.getValue<int>("homeStartFertility");
+    homeStartDeposits = luaInterface.getValue<int>("homeStartDeposits");
+    homeStartMiningPercent = luaInterface.getValue<int>("homeStartMiningPercent");
+    homeStartFarmingPercent = 100 - homeStartMiningPercent;
+    homeStartInfraPercent = luaInterface.getValue<int>("homeStartInfraPercent");
+    homeStartReservePercent = 100 - homeStartInfraPercent;
+    
+    growthPeriod = luaInterface.getValue<int>("growthPeriod");
+    starveRate = luaInterface.getValue<double>("starveRate");
+    minBirthMultiplier = luaInterface.getValue<double>("minBirthMultiplier");
+    birthMultiplierRange = luaInterface.getValue<double>("maxBirthMultiplier") - minBirthMultiplier;
+    minDeathMultiplier = luaInterface.getValue<double>("minDeathMultiplier");
+    birthMultiplierRange = luaInterface.getValue<double>("maxDeathMultiplier") - minDeathMultiplier;
+    
+    foodRqmt = luaInterface.getValue<double>("foodRqmt");
+    miningRate = luaInterface.getValue<double>("miningRate");
+    farmingRate = luaInterface.getValue<double>("farmingRate");
+    fertDecay = luaInterface.getValue<double>("fertDecay");
+    fertDecayDelay = luaInterface.getValue<int>("fertDecayDelay");
+    infrastructureCost = luaInterface.getValue<double>("infrastructureCost");
+    
+    plagueRate = luaInterface.getValue<double>("plagueRate");
+    blightRate = luaInterface.getValue<double>("blightRate");
+    mineCollapseRate = luaInterface.getValue<double>("mineCollapseRate");
+    alienInvasionRate = luaInterface.getValue<double>("alienInvasionRate");
+    
+    plagueMultiplier = luaInterface.getValue<double>("plagueMultiplier");
+    blightMultiplier = luaInterface.getValue<double>("blightMultiplier");
+    mineCollapseMultiplier = luaInterface.getValue<double>("mineCollapseMultiplier");
+    
+    luaInterface.unloadTable();
+  }
+
+  
+  // Loads and reads Ship table
+  if (luaInterface.loadTable(tables.shipParameters)) {
+    using namespace Ship;
+    
+    movingPlayerTex = luaInterface.getValue<std::string>("movingPlayerTex");
+    
+    shipRect = luaInterface.getValueSDL<SDL_Rect>("shipRect");
+    totalCrew = luaInterface.getValue<int>("totalCrew");
+    
+    speed = luaInterface.getValue<int>("speed");
+    alienSpeed = luaInterface.getValue<double>("alienSpeed");
+    turnSpeed = luaInterface.getValue<int>("turnSpeed");
+  
+    luaInterface.unloadTable();
+  }
+  
+  // Loads and reads UI table
+  if (luaInterface.loadTable("ui")) {
+    using namespace UI;
+    
+    if (luaInterface.loadTable("eventPanel")) {
+      using namespace EventPanel;
+      
+      panelRect = luaInterface.getValueSDL<SDL_Rect>("panelRect");
+      renderRect = luaInterface.getValueSDL<SDL_Rect>("renderRect");
+      textBoxesRect = luaInterface.getValueSDL<SDL_Rect>("textBoxesRect");
+      
+      overprodColor = luaInterface.getValueSDL<SDL_Color>("overprodColor");
+      popDeclineColor = luaInterface.getValueSDL<SDL_Color>("popDeclineColor");
+      outlineColor = luaInterface.getValueSDL<SDL_Color>("outlineColor");
+      
+      luaInterface.unloadTable();
+    }
+    
+    if (luaInterface.loadTable("mainMenu")) {
+      using namespace MainMenu;
+      
+      textureFile = luaInterface.getValue<std::string>("textureFile");
+      
+      startGameButton = luaInterface.getValueSDL<SDL_Rect>("startGameButton");
+      scoreboardButton = luaInterface.getValueSDL<SDL_Rect>("scoreboardButton");
+      exitGameButton = luaInterface.getValueSDL<SDL_Rect>("exitGameButton");
+      
+      startGameBorder = luaInterface.getValueSDL<SDL_Rect>("startGameBorder");
+      scoreboardBorder = luaInterface.getValueSDL<SDL_Rect>("scoreboardBorder");
+      exitGameBorder = luaInterface.getValueSDL<SDL_Rect>("exitGameBorder");
+      
+      luaInterface.unloadTable();
+    }
+    
+    if (luaInterface.loadTable("scoreboard")) {
+      using namespace Scoreboard;
+      
+      textureFile = luaInterface.getValue<std::string>("textureFile");
+      scoresFile = luaInterface.getValue<std::string>("scoresFile");
+      
+      scoreboardMax = luaInterface.getValue<int>("scoreboardMax");
+      
+      startingNameBox = luaInterface.getValueSDL<SDL_Rect>("startingNameBox");
+      startingScoreBox = luaInterface.getValueSDL<SDL_Rect>("startingScoreBox");
+      
+      mainMenuButton = luaInterface.getValueSDL<SDL_Rect>("mainMenuButton");
+      mainMenuBorder = luaInterface.getValueSDL<SDL_Rect>("mainMenuBorder");
+      
+      luaInterface.unloadTable();
+    }
+    
+    if (luaInterface.loadTable("endScreen")) {
+      using namespace EndScreen;
+      
+      playAgainButton = luaInterface.getValueSDL<SDL_Rect>("playAgainButton");
+      mainMenuButton = luaInterface.getValueSDL<SDL_Rect>("mainMenuButton");
+      
+      playAgainBorder = luaInterface.getValueSDL<SDL_Rect>("playAgainBorder");
+      mainMenuBorder = luaInterface.getValueSDL<SDL_Rect>("mainMenuBorder");
+      
+      winTextureFile = luaInterface.getValue<std::string>("winTextureFile");
+      loseTextureFile = luaInterface.getValue<std::string>("loseTextureFile");
+      alienCrashTextureFile = luaInterface.getValue<std::string>("alienCrashTextureFile");
+      
+      luaInterface.unloadTable();
+    }
+    
+    if (luaInterface.loadTable("textBox")) {
+      using namespace TextBox;
+      
+      color = luaInterface.getValueSDL<SDL_Color>("color");
+      fontFile = luaInterface.getValue<std::string>("fontFile");
+      regFontSize = luaInterface.getValue<int>("regFontSize");
+      eventFontSize = luaInterface.getValue<int>("eventFontSize");
+      finalScoreFontSize = luaInterface.getValue<int>("finalScoreFontSize");
+      
+      wrapLength = luaInterface.getValue<int>("wrapLength");
+      scoreboardLine = luaInterface.getValue<int>("scoreboardLine");
+      
+      luaInterface.unloadTable();
+    }
+    
+    if (luaInterface.loadTable("slider")) {
+      using namespace Slider;
+      
+      baseFilename = luaInterface.getValue<std::string>("baseFilename");
+      knobFilename = luaInterface.getValue<std::string>("knobFilename");
+      
+      baseColor = luaInterface.getValueSDL<SDL_Color>("baseColor");
+      knobColor = luaInterface.getValueSDL<SDL_Color>("knobColor");
+      
+      luaInterface.unloadTable();
+    }
+    
+    if (luaInterface.loadTable("button")) {
+      using namespace Button;
+      
+      textureFile = luaInterface.getValue<std::string>("textureFile");
+      
+      luaInterface.unloadTable();
+    }
+    
+    luaInterface.unloadTable();
+  }
+
+  return true;
 }

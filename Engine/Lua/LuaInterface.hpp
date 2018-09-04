@@ -26,6 +26,8 @@ public:
   
   // MARK: - LuaInterface Methods
   bool loadTable(const std::string key);
+  void unloadTable();
+  
   template <typename T> T getValue(const std::string key);
   void clean();
   

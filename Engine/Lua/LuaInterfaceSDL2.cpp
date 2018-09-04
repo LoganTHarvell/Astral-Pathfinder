@@ -72,6 +72,23 @@ int LuaInterfaceSDL2::getSDL_RectCoordinate(const std::string key) {
 // MARK: Template Specializations for SDL2 Types
 
 template <>
+SDL_Point LuaInterfaceSDL2::convertLuaSDL<SDL_Point>(const std::string key) {
+  
+  // Reports error if value with given key is not a table
+  if (!lua_istable(L, -1)) {
+    std::cerr << "Error: cannot convert\"" << key
+    <<  "\" to SDL_Point" << std::endl;
+  }
+  
+  int x = getSDL_RectCoordinate("x");
+  int y = getSDL_RectCoordinate("y");
+  
+  SDL_Point p = { x, y };
+  
+  return p;
+}
+
+template <>
 SDL_Rect LuaInterfaceSDL2::convertLuaSDL<SDL_Rect>(const std::string key) {
 
   // Reports error if value with given key is not a table
@@ -112,4 +129,6 @@ SDL_Color LuaInterfaceSDL2::convertLuaSDL<SDL_Color>(const std::string key) {
 
 // MARK: - Explicit Instantions for Template Methods
 
+template SDL_Point LuaInterfaceSDL2::getValueSDL<SDL_Point>(const std::string key);
 template SDL_Rect LuaInterfaceSDL2::getValueSDL<SDL_Rect>(const std::string key);
+template SDL_Color LuaInterfaceSDL2::getValueSDL<SDL_Color>(const std::string key);
