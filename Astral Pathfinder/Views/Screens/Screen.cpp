@@ -14,7 +14,7 @@
 
 void Screen::checkForHovering(Game::State *gs, int screen) {
   for (Button& b : *getActiveScreenButtons(screen))
-    b.checkIfHovering(gs);
+    b.checkIfHovering(gs->dragLocation);
 }
 
 int Screen::checkClick(Game::State *gs, int screen) {
@@ -28,7 +28,7 @@ int Screen::checkClick(Game::State *gs, int screen) {
 void Screen::addButton(int currentScreen, SDL_Rect bounds, SDL_Rect border, int nextScreen) {
   using namespace Parameters::UI::Button;
   Button newButton;
-  newButton.init(bounds, border, nextScreen, textureFile);
+  newButton.init(bounds, border, nextScreen, textureFile, Game::renderer);
   
   getActiveScreenButtons(currentScreen)->push_back(newButton);
 }

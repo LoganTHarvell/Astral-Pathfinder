@@ -33,7 +33,7 @@ void UIManager::init(Game::State *gameState) {
   finalScore.init({endScoreCoords.x, endScoreCoords.y, 0, 0});
   playerName.init({endNameCoords.x, endNameCoords.y, 0, 0});
   
-  gameScreen = TextureManager::loadTexture(gameScreenFile);
+  TextureManager::loadTexture(gameScreenFile, &gameScreen, Game::renderer);
   
   prevScore = 0;
   
@@ -44,6 +44,27 @@ void UIManager::init(Game::State *gameState) {
   if (gameState->skipMainMenu)
     activeScreen = game;
 }
+
+// TODO: - Enable hotloading
+//void UIManager::hotload() {
+//  using namespace Parameters::UIManager;
+//
+//  time.init(timeRect);
+//  totalScore.init(totalScoreRect);
+//  eventsPanel.init();
+//  selectedPlanetInfo.init(selectedPlanetRect);
+//  DockedPlanetInfo.init(currentPlanetRect);
+//  shipInfo.init(shipInfoRect);
+//  finalScore.init({endScoreCoords.x, endScoreCoords.y, 0, 0});
+//  playerName.init({endNameCoords.x, endNameCoords.y, 0, 0});
+//
+//  SDL_DestroyTexture(gameScreen);
+//  TextureManager::loadTexture(gameScreenFile, &gameScreen, Game::renderer);
+//
+//  mainMenu.init();
+//  scoreboard.init();
+//  endScreen.init();
+//}
 
 // MARK: - Game Loop Methods
 

@@ -20,19 +20,23 @@
 // MARK: - TextureManager Methods
 
 // Loads textures from image file
-SDL_Texture *TextureManager::loadTexture(const std::string textureFile) {
+void TextureManager::loadTexture(const std::string textureFile,
+                                 SDL_Texture **texture, SDL_Renderer *renderer) {
   
-  SDL_Texture *texture = NULL;
+  if (texture != nullptr) {
+    SDL_DestroyTexture(*texture);
+    *texture = nullptr;
+  }
+  
   SDL_Surface *tmpSurface = IMG_Load(textureFile.c_str());
   
-  if (tmpSurface == NULL) {
+  if (tmpSurface == nullptr) {
     std::cerr << "Error loading texture from image at " <<  textureFile
               << " error: " << IMG_GetError() << std::endl;
   }
   else {
-    texture = SDL_CreateTextureFromSurface(Game::renderer, tmpSurface);
+    *texture = SDL_CreateTextureFromSurface(Game::renderer, tmpSurface);
     SDL_FreeSurface(tmpSurface);
   }
   
-  return texture;
 }

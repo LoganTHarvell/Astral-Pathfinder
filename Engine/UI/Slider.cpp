@@ -60,11 +60,12 @@ bool Slider::isInitialized() {
 }
 
 
-void Slider::setTextures(int percent) {
+void Slider::setTextures(std::string baseFile, std::string knobFile,
+                         SDL_Renderer *renderer, int percent) {
   clean();
   
-  baseTexture = TextureManager::loadTexture(Parameters::UI::Slider::baseFilename);
-  sliderTexture = TextureManager::loadTexture(Parameters::UI::Slider::knobFilename);
+  TextureManager::loadTexture(baseFile, &baseTexture, renderer);
+  TextureManager::loadTexture(knobFile, &sliderTexture, renderer);
 
   updateSliderPosition(percent);
 }

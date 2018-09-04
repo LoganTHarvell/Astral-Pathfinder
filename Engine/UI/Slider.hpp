@@ -13,10 +13,6 @@
 #include "SDL2/SDL.h"
 #include <string>
 
-// MARK: Source Files
-#include "Game.hpp"
-#include "Planet.hpp"
-
 
 // MARK: - Slider Class
 
@@ -32,7 +28,8 @@ public:
   
   // MARK: - Slider Methods
   bool isInitialized();
-  void setTextures(int percent);
+  void setTextures(std::string baseFile, std::string knobFile,
+                   SDL_Renderer *renderer, int percent);
   void colorMod(SDL_Color base, SDL_Color slider);
   SDL_Rect getBaseRect() { return base; }
   SDL_Rect getSliderRect() { return slider; }
@@ -44,7 +41,7 @@ public:
 private:
   // MARK: - Slider Fields
   SDL_Rect base, slider;
-  SDL_Texture *baseTexture, *sliderTexture;
+  SDL_Texture *baseTexture = nullptr, *sliderTexture = nullptr;
 };
 
 

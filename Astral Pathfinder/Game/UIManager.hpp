@@ -38,6 +38,7 @@ public:
   
   // MARK: - UIManager Initialization
   void init(Game::State *gameState);
+  void hotload();
   
   // MARK: - Game Loop Methods
   void update(Game::State *gameState, PlanetManager *planetManager, ShipManager *shipManager);
@@ -54,9 +55,10 @@ private:
   EventsPanel eventsPanel;
   PlanetInfo selectedPlanetInfo, DockedPlanetInfo;
   ShipInfo shipInfo;
-  SDL_Texture *hoverBorder;
+  SDL_Texture *hoverBorder = nullptr;
   SDL_Rect borderRect, screenRect;
-  SDL_Texture *gameScreen, *winScreen, *loseScreen, *alienScreen;
+  SDL_Texture *gameScreen = nullptr, *winScreen = nullptr;
+  SDL_Texture *loseScreen = nullptr, *alienScreen = nullptr;
   int score, prevScore;
   SDL_Color prevColor, timeColor;
   MainMenu mainMenu;

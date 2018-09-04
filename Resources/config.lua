@@ -93,7 +93,8 @@ local parameters = {
 
   ship = {
     -- Filename for player textures
-    movingPlayerTex = "../Resources/movingPlayerShip2.png",
+    playerTexFile = "../Resources/movingPlayerShip2.png",
+    alienTexFile = "../Resources/alienShip.png";
 
     shipRect = { x = 0, y = 0, w = 48, h = 24 },       -- Ship texture info
     totalCrew = 1000,                                  -- Ship Population
@@ -146,7 +147,7 @@ local parameters = {
 
       winTextureFile = "../Resources/winScreen.png",
       loseTextureFile = "../Resources/loseScreen.png",
-      alienCrashTextureFile = "../Resources/alienScreen.png"
+      crashTextureFile = "../Resources/alienScreen.png"
     },
 
     textBox = {

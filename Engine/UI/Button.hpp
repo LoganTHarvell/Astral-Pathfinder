@@ -14,16 +14,14 @@
 
 // MARK: Source Files
 #include "TextureManager.hpp"
-#include "Game.hpp"
-
 
 // MARK - Button Class
 
 class Button {
 public:
   // MARK: - Initialization Methods
-  void init(SDL_Rect text, SDL_Rect outline,
-            int screen, std::string textureFile);
+  void init(SDL_Rect text, SDL_Rect outline, int screen,
+            std::string textureFile, SDL_Renderer *renderer);
   
   // MARK: - Game Loop Methods
   void update();
@@ -31,7 +29,7 @@ public:
   
   // Mark: - Button Methods
   bool checkInBounds(SDL_Point p);
-  void checkIfHovering(Game::State *gs);
+  void checkIfHovering(SDL_Point dragLocation);
   bool checkClick(SDL_Point p);
   int getNextScreen() { return nextScreen; }
   

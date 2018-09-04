@@ -22,6 +22,7 @@ using PointVector = std::vector<SDL_Point>;
 // MARK: - Initialization Methods
 
 void AlienShip::init(SDL_Point startPosition) {
+  using namespace Parameters::Ship;
   
   tag = Ship::alienWarship;
   
@@ -39,7 +40,7 @@ void AlienShip::init(SDL_Point startPosition) {
   resetTarget();
   
   collider = new ColliderComponent(getCenter(), computeShipVertices());
-  texture = TextureManager::loadTexture(alienTex);
+  TextureManager::loadTexture(alienTexFile, &texture, Game::renderer);
 }
 
 

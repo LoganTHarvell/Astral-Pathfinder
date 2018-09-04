@@ -39,7 +39,7 @@ private:
     BLIGHT=1, PLAGUE, MINECOLLAPSE, POPDEC, OVERPROD, TEST
   };
   
-  SDL_Texture *texture;
+  SDL_Texture *texture = nullptr;
   std::unordered_map<long, TextBox> map;
   std::vector<TextBox> eventOrder;
   SDL_Rect src;

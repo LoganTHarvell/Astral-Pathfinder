@@ -71,8 +71,8 @@ void Planet::initPlanet() {
   outlineRect.w = planetOutlineSize;
   outlineRect.h = planetOutlineSize;
   
-  texture = TextureManager::loadTexture(planetTextureFile);
-  outlineTexture = TextureManager::loadTexture(planetOutlineFile);
+  TextureManager::loadTexture(planetTextureFile, &texture, Game::renderer);
+  TextureManager::loadTexture(planetOutlineFile, &outlineTexture, Game::renderer);
   collider = new ColliderComponent(rect);
   eventManager = new EventsComponent(mapPosition());
   

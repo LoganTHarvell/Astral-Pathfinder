@@ -7,18 +7,16 @@
 //
 
 #include "Button.hpp"
-#include "Game.hpp"
-
 
 // MARK: - Button Initialization
 
-void Button::init(SDL_Rect text, SDL_Rect outline,
-                  int screen, std::string textureFile) {
+void Button::init(SDL_Rect text, SDL_Rect outline, int screen,
+                  std::string textureFile, SDL_Renderer *renderer) {
   bounds = text;
   border = outline;
   isActive = false;
   nextScreen = screen;
-  texture = TextureManager::loadTexture(textureFile);
+  TextureManager::loadTexture(textureFile, &texture, renderer);
 }
 
 
@@ -28,7 +26,7 @@ void Button::update() {
   
 }
 
-void Button::render(SDL_Renderer * renderer) {
+void Button::render(SDL_Renderer *renderer) {
   if (isActive)
     SDL_RenderCopy(renderer, texture, NULL, &border);
 }
@@ -44,8 +42,8 @@ bool Button::checkInBounds(SDL_Point p) {
   return false;
 }
 
-void Button::checkIfHovering(Game::State *gs) {
-  if (checkInBounds(gs->dragLocation))
+void Button::checkIfHovering(SDL_Point dragLocation) {
+  if (checkInBounds(dragLocation))
     isActive = true;
   else
     isActive = false;

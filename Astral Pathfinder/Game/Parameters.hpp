@@ -15,7 +15,7 @@
 
 
 // MARK: - Parameter Constants
-// TODO: - Make a Sinngleton Class
+// TODO: - Make a Singleton Class?
 namespace Parameters {
   
   const std::string title =
@@ -160,7 +160,9 @@ namespace Parameters {
   // MARK: - Ship Parameters
   namespace Ship {
     // Filename for player textures
-    extern std::string movingPlayerTex;
+    extern std::string playerTexFile;
+    extern std::string alienTexFile;
+
     
     extern SDL_Rect shipRect;           // Ship Size
     extern int totalCrew;               // Ship Population
@@ -221,7 +223,7 @@ namespace Parameters {
       
       extern std::string winTextureFile;
       extern std::string loseTextureFile;
-      extern std::string alienCrashTextureFile;
+      extern std::string crashTextureFile;
     }
     
     // TextBox Parameters

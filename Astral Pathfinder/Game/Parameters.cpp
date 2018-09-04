@@ -118,7 +118,8 @@ namespace Parameters {
   
   namespace Ship {
     // Filename for player textures
-    std::string movingPlayerTex = "../Resources/movingPlayerShip2.png";
+    std::string playerTexFile = "../Resources/movingPlayerShip2.png";
+    std::string alienTexFile = "../Resources/alienShip.png";
     
     SDL_Rect shipRect = { 0, 0, 48, 24 };     // Ship Rect
     int totalCrew = 1000;                     // Ship Population
@@ -174,7 +175,7 @@ namespace Parameters {
       
       std::string winTextureFile = "../Resources/winScreen.png";
       std::string loseTextureFile = "../Resources/loseScreen.png";
-      std::string alienCrashTextureFile = "../Resources/alienScreen.png";
+      std::string crashTextureFile = "../Resources/alienScreen.png";
     }
     
     namespace TextBox {
@@ -328,7 +329,8 @@ bool Parameters::loadParameters() {
   if (luaInterface.loadTable(tables.shipParameters)) {
     using namespace Ship;
     
-    movingPlayerTex = luaInterface.getValue<std::string>("movingPlayerTex");
+    playerTexFile = luaInterface.getValue<std::string>("playerTexFile");
+    alienTexFile = luaInterface.getValue<std::string>("alienTexFile");
     
     shipRect = luaInterface.getValueSDL<SDL_Rect>("shipRect");
     totalCrew = luaInterface.getValue<int>("totalCrew");
@@ -402,7 +404,7 @@ bool Parameters::loadParameters() {
       
       winTextureFile = luaInterface.getValue<std::string>("winTextureFile");
       loseTextureFile = luaInterface.getValue<std::string>("loseTextureFile");
-      alienCrashTextureFile = luaInterface.getValue<std::string>("alienCrashTextureFile");
+      crashTextureFile = luaInterface.getValue<std::string>("crashTextureFile");
       
       luaInterface.unloadTable();
     }

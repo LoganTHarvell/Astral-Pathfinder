@@ -80,7 +80,7 @@ private:
   Status status;
   SDL_Point coordinates;
   EventsComponent *eventManager = nullptr;
-  SDL_Texture *outlineTexture;
+  SDL_Texture *outlineTexture = nullptr;
   SDL_Rect outlineRect;
 
   // Resources

@@ -22,7 +22,8 @@ class TextureManager {
 public:
   // MARK: - TextureManager Methods
   // Loads textures from image file
-  static SDL_Texture *loadTexture(const std::string textureFile);
+  static void loadTexture(const std::string textureFile,
+                          SDL_Texture **texture, SDL_Renderer *renderer);
   
 };
 

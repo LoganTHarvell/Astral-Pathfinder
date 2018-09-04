@@ -30,9 +30,6 @@ private:
   SDL_Point mainTarget;
   SDL_Point target;
   
-  const std::string alienTex = "../Resources/alienShip.png";
-  
-  
   // MARK: - Helper Methods
   PointVector shipVertexVectors();
   

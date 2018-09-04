@@ -86,9 +86,11 @@ void PlanetInfo::setUiTextures(Planet p) {
   
   if (!resourceSlider.isInitialized() && !depositSlider.isInitialized()
       && (p.getPopulation() > 0 || p.playerIsDocked())) {
-    resourceSlider.setTextures(p.getFarmingPercent());
+    resourceSlider.setTextures(baseFilename, knobFilename,
+                               Game::renderer, p.getFarmingPercent());
     resourceSlider.colorMod(baseColor, knobColor);
-    depositSlider.setTextures(p.getReservePercent());
+    depositSlider.setTextures(baseFilename, knobFilename,
+                              Game::renderer, p.getReservePercent());
     depositSlider.colorMod(baseColor, knobColor);
   }
   else {

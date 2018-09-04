@@ -21,8 +21,10 @@ using PointVector = std::vector<SDL_Point>;
 // MARK: - Initialization Methods
 
 void PlayerShip::init(SDL_Point startPosition) {
+  using namespace Parameters::Ship;
+  
   tag = Ship::playerShip;
-  crewPopulation = Parameters::Ship::totalCrew;
+  crewPopulation = totalCrew;
   fuel = 0;
   
   velocity.x = 0;
@@ -36,7 +38,7 @@ void PlayerShip::init(SDL_Point startPosition) {
   rect.h = Parameters::Ship::shipRect.h;
   
   collider = new ColliderComponent(getCenter(), computeShipVertices());
-  texture = TextureManager::loadTexture(Parameters::Ship::movingPlayerTex);
+  TextureManager::loadTexture(playerTexFile, &texture, Game::renderer);
 }
 
 
