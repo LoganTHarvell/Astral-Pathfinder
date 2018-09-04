@@ -70,10 +70,12 @@ void UIManager::init(Game::State *gameState) {
 
 void UIManager::update(Game::State *gameState, PlanetManager *planetManager, ShipManager *shipManager) {
   
+  // If user quits, end the game
   if (gameState->endgame == Game::State::quit) {
     gameState->isRunning = false;
   }
   
+  // If on the main menu
   else if (activeScreen == menu) {
     mainMenu.checkForHovering(gameState, activeScreen);
     if (gameState->mouseDown) {
@@ -83,6 +85,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     }
   }
   
+  // If on scoreboard
   else if (activeScreen == scores) {
     scoreboard.checkForHovering(gameState, activeScreen);
     if (gameState->mouseDown) {
@@ -92,6 +95,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     }
   }
   
+  // End game screen
   else if (gameState->gameOver) {
     if (!SDL_IsTextInputActive())
       SDL_StartTextInput();
@@ -108,6 +112,7 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     }
   }
   
+  // Playing the game
   else {
     updateTime(gameState->elapsedTime);
     updateTotalScore(planetManager, gameState->elapsedTime);
@@ -200,6 +205,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
 
 // MARK: - UIManager Methods
 
+// Helper method to check for both screens in one call
 bool UIManager::checkStartScreens() {
   if (activeScreen == menu || activeScreen == scores)
     return true;
@@ -207,6 +213,7 @@ bool UIManager::checkStartScreens() {
   return false;
 }
 
+// Updates time spent playing
 void UIManager::updateTime(Uint32 elapsedTime) {
   int minutes = elapsedTime / 60;
   std::string secs = std::to_string(elapsedTime % 60);
@@ -214,12 +221,14 @@ void UIManager::updateTime(Uint32 elapsedTime) {
   time.setMessage(mins + ":" + secs, checkTime(minutes));
 }
 
+// Changes time text color based on time played
 SDL_Color UIManager::checkTime(int minutes) {
   if (minutes < 15) return Parameters::UIManager::goodColor;
   else if (minutes < 20) return Parameters::UIManager::warningColor;
   else return Parameters::UIManager::badColor;
 }
 
+// Updates the score based on population
 void UIManager::updateTotalScore(PlanetManager *pm, Uint32 elapsedTime) {
   int overtime = elapsedTime - (Parameters::Game::timeLimit);
   if (overtime > 0) {
@@ -239,6 +248,7 @@ void UIManager::updateTotalScore(PlanetManager *pm, Uint32 elapsedTime) {
   prevScore = score;
 }
 
+// Checks if population is decreasing and changes text color to red
 SDL_Color UIManager::setTotalScoreColor() {
   if (prevScore == score)
     return prevColor;
@@ -260,6 +270,7 @@ void UIManager::setDockedPlanet(Planet p) {
   DockedPlanetInfo.setUiTextures(p);
 }
 
+// Check if mouse click is inside any of the info windows
 void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
   // If mouse button not pressed down, don't check for slider movement
   if (!gs->mouseDown) return;
@@ -321,6 +332,7 @@ void UIManager::checkClickedArea(SDL_Point p) {
   else currentWindow = none;
 }
 
+// Changes screens during transitions
 void UIManager::setActiveScreen(int screen) {
   switch (screen) {
     case menu:
@@ -347,6 +359,7 @@ void UIManager::setActiveScreen(int screen) {
   }
 }
 
+// Special functions to handle ending the game from different screens
 void UIManager::setEndGameFlags(int nextScreen, Game::State *gs) {
   if (activeScreen == game) {
     gs->frame = 0;

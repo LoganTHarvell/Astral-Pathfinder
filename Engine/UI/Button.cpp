@@ -34,6 +34,7 @@ void Button::render(SDL_Renderer *renderer) {
 
 // MARK: - Button Methods
 
+// Modular method for button clicks
 bool Button::checkInBounds(SDL_Point p) {
   if ((p.x > bounds.x) && (p.x < bounds.x + bounds.w)
      && (p.y > bounds.y) && (p.y < bounds.y + bounds.h))
@@ -42,6 +43,7 @@ bool Button::checkInBounds(SDL_Point p) {
   return false;
 }
 
+// Check if mouse is hovering above button
 void Button::checkIfHovering(SDL_Point dragLocation) {
   if (checkInBounds(dragLocation))
     isActive = true;
@@ -49,6 +51,7 @@ void Button::checkIfHovering(SDL_Point dragLocation) {
     isActive = false;
 }
 
+// Checks if click is within the button bounds
 bool Button::checkClick(SDL_Point p) {
   if (checkInBounds(p)) {
     isActive = false;
