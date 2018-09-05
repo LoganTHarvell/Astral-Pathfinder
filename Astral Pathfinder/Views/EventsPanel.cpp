@@ -44,6 +44,8 @@ void EventsPanel::render(Game::State *gameState) {
 
 // MARK: - EventsPanel Methods
 
+// Handles the math involved with scrolling
+// I believe scroll is how many pixels you'll be moving
 void EventsPanel::scrollPanel(int scroll) {
   int newY;
   if (scroll < 0) {
@@ -61,6 +63,7 @@ void EventsPanel::scrollPanel(int scroll) {
   }
 }
 
+// Checks for planet events and creates/renders appropriate text
 void EventsPanel::checkStatus(std::vector<EventsComponent> events) {
   using namespace Parameters::UI::EventPanel;
   
@@ -74,6 +77,7 @@ void EventsPanel::checkStatus(std::vector<EventsComponent> events) {
   }
 }
 
+// Creates unique key based on planet coords and event happening and checks if in panel
 void EventsPanel::updateMap(SDL_Point p, bool flag, int event, SDL_Color color) {
   long key = (static_cast<long>(p.x + event) | (static_cast<long>(p.y + event) << 32));
   
@@ -99,6 +103,7 @@ void EventsPanel::updateMap(SDL_Point p, bool flag, int event, SDL_Color color) 
   }
 }
 
+// Remove event from the list
 void EventsPanel::removeFromList(long key) {
   for (int i = 0; i < eventOrder.size(); i++) {
     if (eventOrder[i].getKey() == key) {
@@ -109,6 +114,7 @@ void EventsPanel::removeFromList(long key) {
   }
 }
 
+// Creates message for each event
 std::string EventsPanel::createMessage(SDL_Point p, int event) {
   std::string message;
   
@@ -135,6 +141,7 @@ std::string EventsPanel::createMessage(SDL_Point p, int event) {
   return message;
 }
 
+// Updates the y value of all text boxes in the panel when a new one is added
 void EventsPanel::updateBoxCoords() {
   SDL_Rect prev = {0,0,0,0};
   for (std::vector<TextBox>::reverse_iterator it = eventOrder.rbegin();

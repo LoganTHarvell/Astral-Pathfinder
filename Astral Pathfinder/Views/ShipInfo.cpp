@@ -46,6 +46,7 @@ void ShipInfo::clean() {
 
 // MARK: - ShipInfo Methods
 
+// Sets the text for each item in the ShipInfo box
 void ShipInfo::setText(PlayerShip ship) {
   SDL_Point pos = ship.mapPosition();
   int fuelAmount = ship.getFuel();

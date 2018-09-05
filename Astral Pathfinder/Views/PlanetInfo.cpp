@@ -99,6 +99,7 @@ void PlanetInfo::setUiTextures(Planet p) {
   }
 }
 
+// Checks if a click is on a slider
 int PlanetInfo::checkClick(SDL_Point click) {
   SDL_Rect temp;
   
@@ -124,6 +125,7 @@ int PlanetInfo::checkClick(SDL_Point click) {
   return neither;
 }
 
+// Moves the slider if in bounds and mouse is clicked/dragged on a slider
 bool PlanetInfo::moveSlider(Game::State *gameState) {
   SDL_Rect temp;
   
@@ -165,6 +167,7 @@ int PlanetInfo::getSliderPercent() {
 // TODO: - Clean up all below code, add comments, whitespace
 // split long lines into multiple like this, assign long stuff to temp variables
 
+// Sets text to each textbox in PlanetInfo
 void PlanetInfo::setBoxes(Planet p) {
   SDL_Point mapLocation = p.mapPosition();
   std::string location, population, food, minerals,
@@ -223,6 +226,7 @@ void PlanetInfo::setBoxes(Planet p) {
   
 }
 
+// Updates the percent values for each slider amount
 void PlanetInfo::setNewPercentText() {
   int p = getSliderPercent();
   
@@ -255,6 +259,7 @@ std::string PlanetInfo::setStringSpaces(int p) {
   return s;
 }
 
+// Sets rects for each item in the PlanetInfo boxes
 void PlanetInfo::setUiRects() {
   // TODO: clean this up
   int buffer = 5; // Small buffer from borders or other elements

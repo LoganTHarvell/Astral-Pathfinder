@@ -44,6 +44,7 @@ void TextBox::clean() {
 
 // MARK: - TextBox Methods
 
+// Default function to give a textbox actual text
 void TextBox::setMessage(const std::string words, SDL_Color color) {
   if (texture != nullptr) clean();
   
@@ -52,6 +53,7 @@ void TextBox::setMessage(const std::string words, SDL_Color color) {
   SDL_FreeSurface(surface);
 }
 
+// Fuel textbox text -- calls different TTF render function
 void TextBox::setFuelMessage(const std::string words, SDL_Color color) {
   if (texture != nullptr) clean();
   
@@ -60,6 +62,7 @@ void TextBox::setFuelMessage(const std::string words, SDL_Color color) {
   SDL_FreeSurface(surface);
 }
 
+// Sets scores on scoreboard -- same render as fuel but sets rect width to text width
 void TextBox::setScoreboardMessage(const std::string words, SDL_Color color) {
   if (texture != nullptr) clean();
   
@@ -75,6 +78,7 @@ void TextBox::setScoreboardMessage(const std::string words, SDL_Color color) {
   SDL_FreeSurface(surface);
 }
 
+// Sets text for events -- calls wrapped text TTF render
 void TextBox::setEventMessage(const std::string words, SDL_Color color) {
   if (texture != nullptr) clean();
   font = TTF_OpenFont(Parameters::UI::TextBox::fontFile.c_str(), Parameters::UI::TextBox::eventFontSize);
@@ -89,6 +93,8 @@ void TextBox::setEventMessage(const std::string words, SDL_Color color) {
   TTF_CloseFont(font);
 }
 
+// Sets final score on end screen -- matches width and height of text
+// Heaviest render function for large but smooth text
 void TextBox::setFinalScore(const std::string words) {
   using Parameters::UI::TextBox::color;
   int w, h;
@@ -106,11 +112,13 @@ void TextBox::setFinalScore(const std::string words) {
   TTF_CloseFont(font);
 }
 
+// Helper function to check for nullptr
 bool TextBox::checkNull() {
   if (texture == nullptr) return true;
   else return false;
 }
 
+// Helper function to set x and w values -- cleaner this way
 void TextBox::setRect(int x, int w) {
   rect.x = x;
   rect.w = w;
