@@ -45,7 +45,7 @@ void UIManager::init(Game::State *gameState) {
     activeScreen = game;
 }
 
-// TODO: - Enable hotloading
+// TODO: Enable hotloading, delete and reinitialize ?
 //void UIManager::hotload() {
 //  using namespace Parameters::UIManager;
 //

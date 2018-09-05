@@ -119,6 +119,7 @@ void Game::handleEvents() {
             && key == SDLK_h) {
           Parameters::loadParameters();
           SDL_SetWindowPosition(window, windowRect.x, windowRect.y);
+//          uiManager->hotload();
         }
         
         if (!uiManager->checkStartScreens() && gameState.endgame == State::none) {

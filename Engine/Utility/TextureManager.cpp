@@ -10,11 +10,8 @@
 #include "TextureManager.hpp"
 
 // MARK: Libraries and Frameworks
-#include <iostream>
 #include "SDL2_image/SDL_image.h"
-
-// MARK: Source Files
-#include "Game.hpp"
+#include <iostream>
 
 
 // MARK: - TextureManager Methods
@@ -35,7 +32,7 @@ void TextureManager::loadTexture(const std::string textureFile,
               << " error: " << IMG_GetError() << std::endl;
   }
   else {
-    *texture = SDL_CreateTextureFromSurface(Game::renderer, tmpSurface);
+    *texture = SDL_CreateTextureFromSurface(renderer, tmpSurface);
     SDL_FreeSurface(tmpSurface);
   }
   

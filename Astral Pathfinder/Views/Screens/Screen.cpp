@@ -25,7 +25,8 @@ int Screen::checkClick(Game::State *gs, int screen) {
   return -1;
 }
 
-void Screen::addButton(int currentScreen, SDL_Rect bounds, SDL_Rect border, int nextScreen) {
+void Screen::addButton(int currentScreen, SDL_Rect bounds, SDL_Rect border,
+                       int nextScreen) {
   using namespace Parameters::UI::Button;
   Button newButton;
   newButton.init(bounds, border, nextScreen, textureFile, Game::renderer);

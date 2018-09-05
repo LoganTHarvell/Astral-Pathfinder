@@ -50,6 +50,9 @@ public:
   
 private:
   // MARK: - UIManager Fields
+  // TODO: move score and prevScore to game state
+  int score, prevScore;
+  
   TextBox time;
   TextBox totalScore, finalScore, playerName;
   EventsPanel eventsPanel;
@@ -59,7 +62,6 @@ private:
   SDL_Rect borderRect, screenRect;
   SDL_Texture *gameScreen = nullptr, *winScreen = nullptr;
   SDL_Texture *loseScreen = nullptr, *alienScreen = nullptr;
-  int score, prevScore;
   SDL_Color prevColor, timeColor;
   MainMenu mainMenu;
   Scoreboard scoreboard;
@@ -78,7 +80,10 @@ private:
   // MARK: - Helper Methods
   void updateTime(Uint32);
   SDL_Color checkTime(int minutes);
+  
+  // TODO: move update score to game class
   void updateTotalScore(PlanetManager *pm, Uint32 elapsedTime);
+  
   SDL_Color setTotalScoreColor();
   void setSelectedPlanet(Planet p);
   void setDockedPlanet(Planet p);

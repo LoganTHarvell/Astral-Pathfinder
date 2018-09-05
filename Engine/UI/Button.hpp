@@ -31,6 +31,8 @@ public:
   bool checkInBounds(SDL_Point p);
   void checkIfHovering(SDL_Point dragLocation);
   bool checkClick(SDL_Point p);
+  
+  // TODO: Remove next screen stuff, should just be standard on/off
   int getNextScreen() { return nextScreen; }
   
   

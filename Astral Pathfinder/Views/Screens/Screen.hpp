@@ -38,17 +38,20 @@ public:
   // MARK: - Screen Methods
   void checkForHovering(Game::State *gs, int screen);
   int checkClick(Game::State *gs, int screen);
-  void addButton(int currentScreen, SDL_Rect bounds, SDL_Rect border, int nextScreen);
+  
+  // TODO: Rework buttons without screen information, make buttons generic
+  void addButton(int currentScreen, SDL_Rect bounds, SDL_Rect border,
+                 int nextScreen);
   void renderButtons(int screen);
   
 protected:
-  SDL_Texture *texture = nullptr;
-  SDL_Rect borderRect;
-  
   enum activeScreen {
     none=-1, menu, scores, game, over, quit
   };
   
+  SDL_Texture *texture = nullptr;
+  SDL_Rect borderRect;
+    
 private:
   std::vector<Button> mainMenuButtons;
   std::vector<Button> scoreboardButtons;
