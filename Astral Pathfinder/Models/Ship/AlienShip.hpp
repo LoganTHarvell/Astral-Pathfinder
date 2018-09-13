@@ -9,7 +9,9 @@
 #ifndef AlienShip_hpp
 #define AlienShip_hpp
 
+// MARK: Parent Class
 #include "Ship.hpp"
+
 
 class AlienShip : public Ship {
 

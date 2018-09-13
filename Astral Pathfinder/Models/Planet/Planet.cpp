@@ -9,12 +9,16 @@
 // MARK: Header File
 #include "Planet.hpp"
 
+// MARK: Libraries and Frameworks
+#include "TextureManager.hpp"
+
 // MARK: Source Files
 #include "Game.hpp"
 #include "PlanetManager.hpp"
-#include "TextureManager.hpp"
 #include "Map.hpp"
 #include "PlayerShip.hpp"
+
+
 
 // MARK: - Initialization Methods
 

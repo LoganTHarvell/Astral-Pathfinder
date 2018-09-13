@@ -6,7 +6,9 @@
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
+// MARK: Header File
 #include "Button.hpp"
+
 
 // MARK: - Button Initialization
 
@@ -16,6 +18,7 @@ void Button::init(SDL_Rect text, SDL_Rect outline, int screen,
   border = outline;
   isActive = false;
   nextScreen = screen;
+  
   TextureManager::loadTexture(textureFile, &texture, renderer);
 }
 

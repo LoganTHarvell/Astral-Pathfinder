@@ -13,9 +13,7 @@
 #include <iostream>
 #include <cmath>
 
-// MARK: Source Files
-#include "Game.hpp"
-
+// MARK: Aliases
 using PointVector = std::vector<SDL_Point>;
 
 
@@ -174,10 +172,11 @@ PointVector ColliderComponent::getNormals(PointVector vertices) {
 
 // MARK: - Debug Tools
 
-void DebugTools::renderVertices(std::vector<SDL_Point> vertices) {
-  SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
+void DebugTools::renderVertices(std::vector<SDL_Point> vertices,
+                                SDL_Renderer *renderer) {
+  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
   for (auto v : vertices) {
-    SDL_RenderDrawPoint(Game::renderer, v.x, v.y);
+    SDL_RenderDrawPoint(renderer, v.x, v.y);
   }
-  SDL_SetRenderDrawColor(Game::renderer, 0, 0, 0, 255);
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }

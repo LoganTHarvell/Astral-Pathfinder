@@ -9,7 +9,7 @@
 // MARK: Header File
 #include "Slider.hpp"
 
-// MARK: Source Files
+// MARK: Libraries and FrameWorks
 #include "TextureManager.hpp"
 
 // MARK: - Slider Initialization
@@ -18,9 +18,6 @@ void Slider::init(SDL_Rect rectOne, SDL_Rect rectTwo) {
   
   base = rectOne;
   slider = rectTwo;
-  
-  baseTexture = nullptr;
-  sliderTexture = nullptr;
   
 }
 

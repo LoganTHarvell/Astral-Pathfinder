@@ -13,6 +13,7 @@
 #include "SDL2/SDL.h"
 #include <string>
 
+
 // TODO: - Implement a fully featured texture manager
 // URL to helpful resource:
 // https://codereview.stackexchange.com/questions/87367/texture-managing

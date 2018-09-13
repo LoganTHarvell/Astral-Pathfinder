@@ -58,10 +58,8 @@ private:
   EventsPanel eventsPanel;
   PlanetInfo selectedPlanetInfo, DockedPlanetInfo;
   ShipInfo shipInfo;
-  SDL_Texture *hoverBorder = nullptr;
   SDL_Rect borderRect, screenRect;
-  SDL_Texture *gameScreen = nullptr, *winScreen = nullptr;
-  SDL_Texture *loseScreen = nullptr, *alienScreen = nullptr;
+  SDL_Texture *gameScreen = nullptr;
   SDL_Color prevColor, timeColor;
   MainMenu mainMenu;
   Scoreboard scoreboard;

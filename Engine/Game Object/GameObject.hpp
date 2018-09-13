@@ -11,9 +11,10 @@
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
-
-#include "Game.hpp"
 #include "ColliderComponent.hpp"
+
+// TODO: Remove once Game is implemented as a singleton
+#include "Game.hpp"
 
 class GameObject {
   

@@ -9,9 +9,11 @@
 // MARK: Header File
 #include "TextBox.hpp"
 
+// MARK: Libraries and Frameworks
+#include "TextureManager.hpp"
+
 // MARK: Source Files
 #include "Game.hpp"
-#include "TextureManager.hpp"
 
 
 // MARK: - TextBox Initialization

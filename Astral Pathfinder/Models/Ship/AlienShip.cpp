@@ -16,6 +16,7 @@
 #include "TextureManager.hpp"
 #include <cmath>
 
+// MARK: Aliases
 using PointVector = std::vector<SDL_Point>;
 
 

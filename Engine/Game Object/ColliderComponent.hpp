@@ -44,8 +44,6 @@ private:
   // MARK: - Collider Fields
   SDL_Point center;
   PointVector vertices;
-  
-  // TODO: - Circle collisions?
   std::experimental::optional<int> radius;
   
   // MARK: - Helper Methods
@@ -58,7 +56,7 @@ private:
 
 namespace DebugTools {
   
-  void renderVertices(std::vector<SDL_Point> vertices);
+  void renderVertices(std::vector<SDL_Point> vertices, SDL_Renderer *renderer);
 
 }
 

@@ -124,7 +124,6 @@ namespace Parameters {
     SDL_Rect shipRect = { 0, 0, 48, 24 };     // Ship Rect
     int totalCrew = 1000;                     // Ship Population
     
-    // TODO: figure out real velocity/ticks formula
     int speed = 1;
     float alienSpeed = 0.5;
     int turnSpeed = 5;
@@ -271,7 +270,6 @@ bool Parameters::loadParameters() {
     luaInterface.unloadTable();
   }
   
-  // Loads and reads Planet table
   if (luaInterface.loadTable(tables.planetParameters)) {
     using namespace Planet;
     
@@ -325,7 +323,6 @@ bool Parameters::loadParameters() {
   }
 
   
-  // Loads and reads Ship table
   if (luaInterface.loadTable(tables.shipParameters)) {
     using namespace Ship;
     
@@ -342,7 +339,6 @@ bool Parameters::loadParameters() {
     luaInterface.unloadTable();
   }
   
-  // Loads and reads UI table
   if (luaInterface.loadTable("ui")) {
     using namespace UI;
     

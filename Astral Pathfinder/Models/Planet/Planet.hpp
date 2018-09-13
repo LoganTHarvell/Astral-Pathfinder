@@ -15,14 +15,13 @@
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 #include <string>
+#include "GameObject.hpp"
 
 // MARK: Source Files
-#include "GameObject.hpp"
 #include "EventsComponent.hpp"
 
 
 // MARK: - Planet Class
-// TODO: - Rework class to utilize more modular components
 
 class Planet: public GameObject {
 

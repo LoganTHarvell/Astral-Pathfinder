@@ -10,14 +10,13 @@
 #include "UIManager.hpp"
 
 // MARK: Libraries and Frameworks
+#include "SDL2_ttf/SDL_ttf.h"
 #include <string>
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include "SDL2_ttf/SDL_ttf.h"
-
-// MARK: Source Files
 #include "TextureManager.hpp"
+
 
 // MARK: - UIManager Initialization
 

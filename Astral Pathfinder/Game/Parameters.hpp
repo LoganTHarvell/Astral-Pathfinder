@@ -15,7 +15,7 @@
 
 
 // MARK: - Parameter Constants
-// TODO: - Make a Singleton Class?
+// TODO: Make a Singleton Class
 namespace Parameters {
   
   const std::string title =
@@ -167,7 +167,6 @@ namespace Parameters {
     extern SDL_Rect shipRect;           // Ship Size
     extern int totalCrew;               // Ship Population
     
-    // TODO: figure out real velocity/ticks formula
     extern int speed;
     extern float alienSpeed;
     extern int turnSpeed;

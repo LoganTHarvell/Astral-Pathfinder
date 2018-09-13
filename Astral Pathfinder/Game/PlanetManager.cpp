@@ -18,6 +18,7 @@
 // MARK: Source Files
 #include "ShipManager.hpp"
 
+
 // MARK: - Galaxy Initialization
 
 void PlanetManager::initGalaxy() {
@@ -105,7 +106,8 @@ void PlanetManager::render(Game::State *gameState) {
     p.render(gameState);
     
     if (gameState->debugMode) {
-      DebugTools::renderVertices(p.getCollider().getVertices());
+      DebugTools::renderVertices(p.getCollider().getVertices(),
+                                 Game::renderer);
     }
   }
 }
@@ -143,7 +145,6 @@ Planet PlanetManager::getAlienDockedPlanet() {
   return planets[alienDockedPlanetIndex];
 }
 
-// TODO: Use enum for readability of flags
 void PlanetManager::setPlanetMiningPercent(int p, int flag) {
   if (flag == dockedPlanet)
     planets[playerDockedPlanetIndex].setMiningPercent(p);
@@ -172,7 +173,6 @@ void PlanetManager::setPlanetReservePercent(int p, int flag) {
     planets.at(selectedPlanetIndex).setReservePercent(p);
 }
 
-// TODO: Implement actual fuel algorithm
 int PlanetManager::fuelDockedShip() {
   int fuel = 0;
   

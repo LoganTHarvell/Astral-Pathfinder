@@ -24,7 +24,6 @@
 void Scoreboard::init() {
   using namespace Parameters::UI::Scoreboard;
   
-  // TODO: Pass in filename or use parameter
   TextureManager::loadTexture(textureFile, &texture, Game::renderer);
   
   addButton(scores, mainMenuButton, mainMenuBorder, menu);

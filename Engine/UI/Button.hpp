@@ -11,9 +11,8 @@
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
-
-// MARK: Source Files
 #include "TextureManager.hpp"
+
 
 // MARK - Button Class
 

@@ -59,8 +59,10 @@ void ShipManager::render(Game::State *gameState) {
   alienShip.render(gameState);
   
   if (gameState->debugMode) {
-    DebugTools::renderVertices(playerShip.getCollider().getVertices());
-    DebugTools::renderVertices(alienShip.getCollider().getVertices());
+    DebugTools::renderVertices(playerShip.getCollider().getVertices(),
+                               Game::renderer);
+    DebugTools::renderVertices(alienShip.getCollider().getVertices(),
+                               Game::renderer);
   }
 }
 

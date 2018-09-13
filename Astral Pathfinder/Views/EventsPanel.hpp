@@ -16,8 +16,8 @@
 #include <unordered_map>
 
 // MARK: Source Files
-#include "TextBox.hpp"
 #include "Game.hpp"
+#include "TextBox.hpp"
 #include "EventsComponent.hpp"
 #include "PlanetManager.hpp"
 

@@ -13,14 +13,13 @@
 #include "Parameters.hpp"
 
 // MARK: Libraries and Frameworks
-#include <iostream>
 #include "SDL2_image/SDL_image.h"
+#include <iostream>
+#include "TextureManager.hpp"
 
 // MARK: Source Files
 #include "PlanetManager.hpp"
 #include "ShipManager.hpp"
-#include "Map.hpp"
-#include "TextureManager.hpp"
 #include "UIManager.hpp"
 
 // MARK: Namespaces

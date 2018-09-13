@@ -13,15 +13,15 @@
 #include "SDL2/SDL.h"
 #include <string>
 
-
-// MARK: - Game Class
-
 // Forwards classes in Game class
 class GameObject;
 class PlanetManager;
 class ShipManager;
 class UIManager;
 
+
+// MARK: - Game Class
+// TODO: Reimplement as a singleton
 class Game {
 
 public:

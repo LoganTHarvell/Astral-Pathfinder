@@ -9,8 +9,10 @@
 #ifndef PlanetInfo_hpp
 #define PlanetInfo_hpp
 
-// MARK: Source Files
+// MARK: Libraries and Frameworks
 #include "Slider.hpp"
+
+// MARK: Source Files
 #include "TextBox.hpp"
 #include "PlanetManager.hpp"
 #include "Planet.hpp"

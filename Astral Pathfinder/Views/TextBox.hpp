@@ -16,10 +16,10 @@
 #include "SDL2/SDL.h"
 #include "SDL2_ttf/SDL_ttf.h"
 #include <string>
+#include "GameObject.hpp"
 
 // MARK: Source Files
 #include "Game.hpp"
-#include "GameObject.hpp"
 
 
 // MARK: - TextBox Class
