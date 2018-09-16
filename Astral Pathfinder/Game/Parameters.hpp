@@ -1,5 +1,5 @@
 //
-//  Parameters.h
+//  Parameters.hpp
 //  Astral Pathfinder
 //
 //  Created by Logan Harvell on 8/2/18.
