@@ -2,9 +2,13 @@
 //  main.cpp
 //  Astral Pathfinder
 //
-//  Created by Logan Harvell, Ian Holdeman on 1/14/18.
+//  Created by Logan Harvell on 1/14/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Entry point for the Astral Pathfinder application.
+//  Simply loads parameters, creates and initializes an instance of the game,
+//  and then maintains the main game loop at a minimum framerate.
 
 // MARK: Source Files
 #include "Parameters.hpp"

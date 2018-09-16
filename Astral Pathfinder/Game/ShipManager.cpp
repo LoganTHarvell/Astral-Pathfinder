@@ -5,6 +5,10 @@
 //  Created by Logan Harvell on 2/14/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Manager class responsible for managing all ship gameObjects, specifically
+//  initializing, updating, and rendering. Also handles ship based endgame
+//  conditions.
 
 // MARK: Header File
 #include "ShipManager.hpp"
@@ -66,6 +70,7 @@ void ShipManager::render(Game::State *gameState) {
   }
 }
 
+// Sets Alien warship target by randomly selecting planet
 void ShipManager::setAlienTarget(Game::State *gs, PlanetManager *pm) {
   
   SDL_Point dockedPos = alienShip.getCenter();

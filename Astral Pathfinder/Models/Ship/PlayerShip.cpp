@@ -5,6 +5,10 @@
 //  Created by Logan Harvell on 4/29/18.
 //  Copyright © 2018 Logan Harvell. All rights reserved.
 //
+//  Description:
+//  Class extension of Ship base class for modeling the player. Handles input
+//  based movement to calculate velocity vectors, calculating vertex vectors.
+//  Also handles initializing and updating.
 
 // MARK: Header File
 #include "PlayerShip.hpp"
@@ -15,6 +19,7 @@
 // MARK: Libraries and Frameworks
 #include "TextureManager.hpp"
 
+// MARK: Aliases
 using PointVector = std::vector<SDL_Point>;
 
 
@@ -24,7 +29,7 @@ void PlayerShip::init(SDL_Point startPosition) {
   using namespace Parameters::Ship;
   
   tag = Ship::playerShip;
-  crewPopulation = totalCrew;
+  crewPopulation = shipPopulation;
   fuel = 0;
   
   velocity.x = 0;
@@ -43,14 +48,15 @@ void PlayerShip::init(SDL_Point startPosition) {
 
 
 void PlayerShip::update(Game::State * gs) {
+  
+  // Base class update methods
   updateVelocity();
   updateRotation();
   updatePosition(gs->ticks);
-  
   collider->update(getCenter(), computeShipVertices());
 }
 
-
+// Calculates vertex vectors, the vectors from the center to the vertices
 PointVector PlayerShip::shipVertexVectors() {
   PointVector cornerVectors;
   
@@ -70,7 +76,8 @@ PointVector PlayerShip::shipVertexVectors() {
 
 void PlayerShip::updateVelocity() {
   using namespace Parameters::Ship;
-  
+
+  // Prevents movement without fuel
   if (fuel <= 0) {
     velocity.x = velocity.y = 0;
     return;
@@ -78,6 +85,7 @@ void PlayerShip::updateVelocity() {
   
   auto *keyState = SDL_GetKeyboardState(NULL);
   
+  // Sets velocity components based on keyboard inputs
   if (keyState[SDL_SCANCODE_UP]) velocity.y = (-speed);
   else if (keyState[SDL_SCANCODE_DOWN]) velocity.y = speed;
   else velocity.y = 0;
@@ -86,9 +94,11 @@ void PlayerShip::updateVelocity() {
   else if (keyState[SDL_SCANCODE_LEFT]) velocity.x = (-speed);
   else velocity.x = 0;
   
+  // Decreases fuel during movement
   if (velocity.x != 0 || velocity.y != 0) fuel -=1;
 }
 
+// Refuels ship with given mineral amount
 void PlayerShip::updateFuel(int minerals) {
   fuel += minerals;
 }

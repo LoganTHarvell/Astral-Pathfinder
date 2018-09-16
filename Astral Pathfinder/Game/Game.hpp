@@ -5,6 +5,11 @@
 //  Created by Logan Harvell, Ian Holdeman on 1/14/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Highest level manager class responsible for managing the game state and
+//  all game elements through sub-level manager classes. Responsibilities
+//  include initialization and all game loop methods, specifically event
+//  handling, updating, and rendering.
 
 #ifndef Game_hpp
 #define Game_hpp
@@ -25,22 +30,23 @@ class UIManager;
 class Game {
 
 public:
-  // Data structure for keeping track of the game state
+  
+  // MARK: - Game State
+  
   struct State {
-    // Flags
+    
+    // Game loop flags
     bool isRunning = false;
-    bool restartGame = false;
     bool skipMainMenu = false;
+    bool gameOver = false;
+    bool restartGame = false;
+  
+    // Endgame states
     enum {
       none, allDiscovered, noFuel, alienAttack, quit
     } endgame = none;
 
-    bool gameOver = false;
-
-    enum {
-      inactive, resourceSlider, depositSlider
-    } activeSlider = inactive;
-
+    // Event Handling Flags
     bool clickFlag = false;
     bool planetSelected = false;
     bool playerCollision = false;
@@ -48,7 +54,12 @@ public:
     bool mouseDown = false;
     bool debugMode = false;
 
-    // Fields
+    // Slider states
+    enum {
+      inactive, resourceSlider, depositSlider
+    } activeSlider = inactive;
+    
+    // Game State Values
     Uint32 frame;
     Uint32 startTime;
     Uint32 elapsedTime;
@@ -61,14 +72,18 @@ public:
     Uint32 endgameFrame;
   };
 
+  // MARK: - Game Initialization Methods
+  
   void init(const std::string title, SDL_Rect rect, bool fullscreen);
 
   // MARK: - Game Loop Methods
+  
   void handleEvents();
   void update(Uint32 ticks);
   void render();
 
   // MARK: - Game Methods
+  
   bool running() { return gameState.isRunning; }
   bool restart() { return gameState.restartGame; }
   void clean();
@@ -78,13 +93,16 @@ public:
   static SDL_Renderer *renderer;
 
 private:
+
   // MARK: - Game Fields
+  
   SDL_Window *window;
   State gameState;
 
   PlanetManager *planetManager;
   ShipManager *shipManager;
   UIManager *uiManager;
+
 };
 
 #endif /* Game_hpp */

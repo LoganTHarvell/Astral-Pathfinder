@@ -5,6 +5,11 @@
 //  Created by Logan Harvell on 2/21/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Manager class responsible for managing all UI elements, specifically
+//  initializing, updating, and rendering. It handles UI elements as
+//  groupings by screen. Some sub-screens that handle their own individual
+//  initializing, updating, and rendering.
 
 #ifndef UIManager_hpp
 #define UIManager_hpp
@@ -18,6 +23,7 @@
 // MARK: Source Files
 #include "Game.hpp"
 #include "PlanetManager.hpp"
+#include "ShipManager.hpp"
 #include "PlanetInfo.hpp"
 #include "ShipInfo.hpp"
 #include "TextBox.hpp"
@@ -38,7 +44,6 @@ public:
   
   // MARK: - UIManager Initialization
   void init(Game::State *gameState);
-  void hotload();
   
   // MARK: - Game Loop Methods
   void update(Game::State *gameState, PlanetManager *planetManager, ShipManager *shipManager);
@@ -49,10 +54,13 @@ public:
   bool checkStartScreens();
   
 private:
-  // MARK: - UIManager Fields
+  
+  // MARK: - UIManager Screens
+  
   // TODO: move score and prevScore to game state
   int score, prevScore;
   
+  // TODO: Move all gameplay UI elements to a gameplayScreen
   TextBox time;
   TextBox totalScore, finalScore, playerName;
   EventsPanel eventsPanel;
@@ -61,10 +69,11 @@ private:
   SDL_Rect borderRect, screenRect;
   SDL_Texture *gameScreen = nullptr;
   SDL_Color prevColor, timeColor;
+  
+  // Screens
   MainMenu mainMenu;
   Scoreboard scoreboard;
   EndScreen endScreen;
-  
   
   enum {
     none, currentPlanetWindow, selectedPlanetWindow
@@ -76,8 +85,9 @@ private:
   bool mainMenuFlag, scoreboardFlag;
   
   // MARK: - Helper Methods
+  
   void updateTime(Uint32);
-  SDL_Color checkTime(int minutes);
+  SDL_Color checkTime(Uint32 elapsedTime);
   
   // TODO: move update score to game class
   void updateTotalScore(PlanetManager *pm, Uint32 elapsedTime);

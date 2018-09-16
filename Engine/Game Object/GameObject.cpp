@@ -2,7 +2,7 @@
 //  GameObject.cpp
 //  Astral Pathfinder
 //
-//  Created by Logan Harvell, Ian Holdeman on 1/15/18.
+//  Created by Logan Harvell on 1/15/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
 
@@ -11,6 +11,7 @@
 
 // MARK: Libraries and Frameworks
 #include <iostream>
+
 
 // MARK: - GameObject Methods
 

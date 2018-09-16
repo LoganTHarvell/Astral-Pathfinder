@@ -1,15 +1,15 @@
 Title: Astral Pathfinder
-Current Version: 0.1
-Repo: https://github.com/LoganTHarvell/Astral-Pathfinder
+Current Version: 0.8
+Private Repo: https://github.com/LoganTHarvell/Astral-Pathfinder
 
-Platform: MacOS Binary, developed in Xcode
-Language: C++
-Frameworks: SDL2, SDL2_Image
+Platform: MacOS Application, developed in Xcode
+Language: C++, Lua
+Frameworks: SDL2, SDL2_Image, Lua, Personal work-in-progress Engine
 
 Genre: Top-down 2D Space Sim
 Setting: Space/Future
 
-Description:
+Story Concept:
   A simple space colonization game inspired by the classic resource management game called Hammurabi. Set in a random galaxy of the universe, the player is an inhabitant of a world no longer able to support a growing population. In the efforts of the Hegemony to save society from collapse, the Hegemony used the last of its resources to create a vessel capable of traversing the stars. Named the Astral Pathfinder, the player has been called upon to serve as Captain, placing the responsibility of society's future in their hands. The Captain must discover new worlds, colonize them, and manage the resources of this new interplanetary civilization.
 
 UI:
@@ -70,23 +70,33 @@ Gameplay:
 
 AI:
   => Map generation
-    - homeworld vs planet, resources
+    - Homeworld vs planet, resources
 
   => Population Growth
+    - Modeled loosely on real world population cycles
+    - Equation based
 
   => Random events
-    - fair/balanced randomness
+    - Fair/balanced randomness
 
   => Alien Warship
-    - basic pathfinding, decision making
+    - Basic pathfinding, decision making
 
-Work Split (fluid):
-  => Logan
+Data:
+  => Lua Library
+    - Enables access to lua scripts and value conversion, self-made interface
+    - Enables data driven code that can be reloaded, hot-loading possible
+    - Used for the config file to load game parameters
+    - Can be adapted for scripting
+
+Work Split:
+  => Logan - Project Lead
+    - Documentation
+    - Planning
     - Data structures
     - Game logic
+    - AI
   => Ian
     - UI
     - Graphics/Rendering
     - Movement
-  => Both
-    - AI

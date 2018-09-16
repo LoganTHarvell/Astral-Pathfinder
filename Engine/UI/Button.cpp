@@ -5,6 +5,9 @@
 //  Created by Ian Holdeman on 7/27/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  A UI element that represents a on/off state through a clickable box. This
+//  class handles initializing, updating, and rendering the button.
 
 // MARK: Header File
 #include "Button.hpp"

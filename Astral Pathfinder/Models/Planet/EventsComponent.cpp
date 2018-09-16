@@ -5,6 +5,9 @@
 //  Created by Ian Holdeman on 4/29/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Component class for use in Planet class to manage random events that effect
+//  a planets resources.
 
 // MARK: Header File
 #include "EventsComponent.hpp"

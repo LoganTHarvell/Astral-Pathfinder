@@ -1,10 +1,13 @@
 //
-//  parameters.h
+//  Parameters.hpp
 //  Astral Pathfinder
 //
 //  Created by Logan Harvell on 8/2/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Namespace containing all game parameters. Organized into
+//  groups by class. Function declared for parameter loading from file.
 
 #ifndef Parameters_hpp
 #define Parameters_hpp
@@ -58,55 +61,71 @@ namespace Parameters {
   }
   
   // MARK: - Game Parameters
+  
   namespace Game {
     // Window parameters x, y, w, h
     extern SDL_Rect windowRect;
     
     // FPS constants
-    extern int fps;                     // Number of frames per second
-    extern int frameDelay;              // Frame min length in ms (1000 ms/fps)
+    extern int fps;
+    extern int frameDelay;
     
-    extern int endgameDelay;            // In number of frames
-    extern int timeLimit;               // In number of seconds (x min * 60 sec)
+    // Delay before game exits to endgame screen
+    extern int endgameDelay;
+    
+    // Time limit info
+    extern int timeLimit;
+    extern int timeLimitWarning;
+    
+    // Multiplier for decreasing score during overtime
     extern int overtimeFactor;
   }
   
   // MARK: - PlanetManager Parameters
+  
   namespace PlanetManager {
-    extern int numberOfPlanets;         // Number of planets in the game
+    extern int numberOfPlanets;
   }
   
   // MARK: - ShipManager Parameters
+  
   namespace ShipManager {
-    extern Uint32 alienTargetingDelay;  // Alien ship seeking delay in frames
+    // Delay before alien warship selects a new target
+    extern Uint32 alienTargetingDelay;
   }
   
   // MARK: - UIManager Parameters
+  
   namespace UIManager {
+    // Main screen rect geometry in { x, y, w, h }
     extern SDL_Rect screenRect;
     
+    // UI element rect geometry in { x, y, w, h }
     extern SDL_Rect timeRect;
     extern SDL_Rect totalScoreRect;
     extern SDL_Rect shipInfoRect;
     extern SDL_Rect currentPlanetRect;
     extern SDL_Rect selectedPlanetRect;
     
+    //  Score and name scoreboard position in { x, y }
     extern SDL_Point endScoreCoords;
     extern SDL_Point endNameCoords;
     
+    // Color values for UI color coding
     extern SDL_Color badColor;
     extern SDL_Color goodColor;
     extern SDL_Color warningColor;
     
+    // File path to main game screen background texture
     extern std::string gameScreenFile;
   }
   
   // MARK: - Planet Parameters
+  
   namespace Planet {
     // Planet texture information
     extern std::string planetTextureFile;
     extern int planetTexSize;
-    
     extern std::string planetOutlineFile;
     extern int planetOutlineSize;
     
@@ -129,23 +148,23 @@ namespace Parameters {
     extern int homeStartInfraPercent;
     extern int homeStartReservePercent;
     
-    // Defines population growth information
-    extern int growthPeriod;          // Frames per growth period
-    extern float starveRate;          // Starvation deaths per frame
+    // Population growth information
+    extern int growthPeriod;
+    extern float starveRate;
     extern float minBirthMultiplier;
     extern float birthMultiplierRange;
     extern float minDeathMultiplier;
     extern float deathMultiplierRange;
     
-    // Defines resource information
-    extern float foodRqmt;            // Food required per person
-    extern float miningRate;          // Minerals produced per person per frame
-    extern float farmingRate;         // Food produced per person per frame
+    // Resource information
+    extern float foodRqmt;
+    extern float miningRate;
+    extern float farmingRate;
     extern float fertDecay;
     extern int fertDecayDelay;
-    extern float infrastructureCost;  // Infrastructure per mineral
+    extern float infrastructureCost;
     
-    // Random event chances
+    // Random event chances in % chance per event cycle or event
     extern float plagueRate;
     extern float blightRate;
     extern float mineCollapseRate;
@@ -158,34 +177,47 @@ namespace Parameters {
   }
   
   // MARK: - Ship Parameters
+  
   namespace Ship {
-    // Filename for player textures
     extern std::string playerTexFile;
     extern std::string alienTexFile;
 
+    // Ship rect geometry in { x, y, w, h }
+    extern SDL_Rect shipRect;
+    extern int shipPopulation;
     
-    extern SDL_Rect shipRect;           // Ship Size
-    extern int totalCrew;               // Ship Population
-    
+    // Ship speeds
     extern int speed;
     extern float alienSpeed;
     extern int turnSpeed;
   }
   
   // MARK: - UI Parameters
+  
   namespace UI {
-    // EventsPanelParameters
+    // Map Parameters
+    
+    namespace Map {
+      extern SDL_Rect rect;
+      extern int gridOffset;
+    }
+    
+    // Events Panel Parameters
+    
     namespace EventPanel {
+      // UI element rect geometry in { x, y, w, h }
       extern SDL_Rect panelRect;
       extern SDL_Rect renderRect;
       extern SDL_Rect textBoxesRect;
       
+      // Event color coding in { r, g, b } (0-255)
       extern SDL_Color overprodColor;
       extern SDL_Color popDeclineColor;
       extern SDL_Color outlineColor;
     }
     
     // Main Menu Parameters
+    
     namespace MainMenu {
       extern std::string textureFile;
       
@@ -199,6 +231,7 @@ namespace Parameters {
     }
     
     // Scoreboard Parameters
+    
     namespace Scoreboard {
       extern std::string textureFile;
       extern std::string scoresFile;
@@ -213,6 +246,7 @@ namespace Parameters {
     }
     
     // End Screen Parameters
+    
     namespace EndScreen {
       extern SDL_Rect playAgainButton;
       extern SDL_Rect mainMenuButton;
@@ -226,6 +260,7 @@ namespace Parameters {
     }
     
     // TextBox Parameters
+    
     namespace TextBox {
       extern SDL_Color color;
       extern std::string fontFile;
@@ -239,13 +274,16 @@ namespace Parameters {
     }
     
     // Slider Parameters
+    
     namespace Slider {
-      extern std::string baseFilename;
-      extern std::string knobFilename;
+      extern std::string baseTexFile;
+      extern std::string sliderTexFile;
       
       extern SDL_Color baseColor;
-      extern SDL_Color knobColor;
+      extern SDL_Color sliderColor;
     }
+    
+    // Button Parameters
     
     namespace Button {
       extern std::string textureFile;
@@ -253,6 +291,7 @@ namespace Parameters {
   }
 
   // MARK: - Parameter Loading Functions
+  
   bool loadParameters();
   
 }

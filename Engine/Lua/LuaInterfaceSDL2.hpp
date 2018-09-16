@@ -5,6 +5,9 @@
 //  Created by Logan Harvell on 8/20/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  An extension of the LuaInterface class for use with SDL types. Enables
+//  retrieval of Lua tables and conversion to the corresponding SDL types.
 
 #ifndef LuaInterfaceSDL2_hpp
 #define LuaInterfaceSDL2_hpp
@@ -20,17 +23,20 @@
 class LuaInterfaceSDL2 : public LuaInterface {
   
 public:
+  
   // MARK: - LuaInterfaceSDL2 Methods
   
   // Alternate method for getting SDL types
   template <typename T> T getValueSDL(const std::string key);
   
 private:
+  
   // MARK: - Helper Methods
   int getSDL_RectCoordinate(const std::string key);
   
   // Alternate method for converting SDL_Types
   template <typename T> T convertLuaSDL(const std::string key);
+
 };
 
 #endif /* LuaInterfaceSDL2_hpp */

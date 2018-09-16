@@ -5,6 +5,9 @@
 //  Created by Ian Holdeman on 2/24/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  A class for a simple text box UI element that contains a message. Enables
+//  intialization, update, and renderering of a collection of text to a screen.
 
 // MARK: Header File
 #include "TextBox.hpp"
@@ -45,6 +48,7 @@ void TextBox::clean() {
 
 
 // MARK: - TextBox Methods
+// TODO: Take in parameters instead of having methods for each special case
 
 // Default function to give a textbox actual text
 void TextBox::setMessage(const std::string words, SDL_Color color) {

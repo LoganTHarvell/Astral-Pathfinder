@@ -6,19 +6,28 @@ local parameters = {
     -- Window x and y can be "centered" in display
     windowRect = { x = "centered", y = "centered", w = 1600, h = 900 },
 
-    fps = 60,                     -- Number of frames per second
+    -- Frames per second
+    fps = 60,
 
-    endgameDelay = 120,           -- In number of frames
-    timeLimit = (20*60),          -- In number of seconds (x min * 60 sec)
+    -- In number of frames
+    endgameDelay = 120,
+    
+    -- In number of seconds (x min * 60 sec)
+    -- timeLimitWarning should be less than timeLimit
+    timeLimit = (20*60),
+    timeLimitWarning = (15*60),
+    
+    -- Score decerease per second
     overtimeFactor = 100,
   },
 
   planetManager = {
-    numberOfPlanets = 25         -- Number of planets in the game
+    numberOfPlanets = 25
   },
 
   shipManager = {
-    alienTargetingDelay = 60     -- Alien ship seeking delay in frames
+    -- Alien ship seeking delay in frames
+    alienTargetingDelay = 60
   },
 
   uiManager = {
@@ -40,23 +49,22 @@ local parameters = {
   },
 
   planet = {
-    -- Planet texture information
     planetTextureFile = "../Resources/planet2.png",
     planetTexSize = 16,
 
     planetOutlineFile = "../Resources/planetOutline.png",
     planetOutlineSize = 24,
 
-    -- Planet initial attribute information
+    -- Planet initialization information
     -- Percents should be a value between 0 and 100
-    minFertility = 20,                -- Mininum value of fertility
-    maxFertility = 200,               -- Range = (Max - Min fertility)
-    minDeposits = 200,                -- Minium value of deposits
-    maxDeposits = 1000,               -- Range = (Max - Min deposits)
+    minFertility = 20,
+    maxFertility = 200,
+    minDeposits = 200,
+    maxDeposits = 1000,
     startInfraPercent = 50,
     startMiningPercent = 100,
 
-    -- Homeworld initial attribute values
+    -- Homeworld initialization information
     homeStartPopulation = 5000,
     homeStartFertility = 100,
     homeStartDeposits = 250,
@@ -64,22 +72,35 @@ local parameters = {
     homeStartInfraPercent = 0,
 
     -- Defines population growth information
-    growthPeriod = 1200,            -- Frames per growth period
-    starveRate = 0.0008,            -- Starvation deaths per frame
+    -- Frames per growth period
+    growthPeriod = 1200,
+    
+    -- Starvation deaths per frame
+    starveRate = 0.0008,
     minBirthMultiplier = 0.05,
     maxBirthMultiplier = 0.2,
     minDeathMultiplier = 0.025,
     maxDeathMultiplier = 0.075,
 
-    -- Defines resource information
-    foodRqmt = 0.02,              -- Food required per person
-    miningRate = 0.0001,          -- Minerals produced per person per frame
-    farmingRate = 0.04,           -- Food produced per person per frame
-    fertDecay = 0.0001,
-    fertDecayDelay = 10,
-    infrastructureCost = 20,      -- Infrastructure per mineral
+    -- Food required per person
+    foodRqmt = 0.02,
+    
+    -- Minerals produced per person per frame
+    miningRate = 0.0001,
+  
+    -- Food produced per person per frame
+    farmingRate = 0.04,
 
-    -- Random event chances
+    -- Amount of fertility decay per frame
+    fertDecay = 0.0001,
+    
+    -- Fertility decline delay in seconds
+    fertDecayDelay = 10,
+    
+    -- Max population increase per mineral
+    infrastructureCost = 20,
+
+    -- Random event chances in % chance per event cycle or event
     plagueRate = 0.05,
     blightRate = 0.1,
     mineCollapseRate = 0.3,
@@ -92,19 +113,26 @@ local parameters = {
   },
 
   ship = {
-    -- Filename for player textures
     playerTexFile = "../Resources/movingPlayerShip2.png",
     alienTexFile = "../Resources/alienShip.png";
 
-    shipRect = { x = 0, y = 0, w = 48, h = 24 },       -- Ship texture info
-    totalCrew = 1000,                                  -- Ship Population
+    shipRect = { x = 0, y = 0, w = 48, h = 24 },
+    shipPopulation = 1000,
 
+    -- Speed in position units per frame
     speed = 1,
     alienSpeed = 0.5,
+    
+    -- Turn speed in rotation degrees per frame
     turnSpeed = 5
   },
 
   ui = {
+    map = {
+      rect = { x = 400, y = 50, w = 800, h = 800 },
+      gridOffset = 50
+    },
+    
     eventPanel = {
       panelRect = { x = 65, y = 175, w = 320, h = 10000 },
       renderRect = { x = 70, y = 180, w = 310, h = 590 },
@@ -163,12 +191,12 @@ local parameters = {
     },
 
     slider = {
-      baseFilename = "../Resources/base.png",
-      knobFilename = "../Resources/slider.png",
+      baseTexFile = "../Resources/base.png",
+      sliderTexFile = "../Resources/slider.png",
 
       -- RGB values should be within the range 0 - 255
       baseColor = { r = 150, g = 150, b = 150 },
-      knobColor = { r = 0, g = 128, b = 0 }
+      sliderColor = { r = 0, g = 128, b = 0 }
     },
 
     button = {

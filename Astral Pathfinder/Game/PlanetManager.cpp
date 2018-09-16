@@ -5,6 +5,10 @@
 //  Created by Logan Harvell, Ian Holdeman on 1/15/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Manager class responsible for managing all planet gameObjects, specifically
+//  initializing, updating, and rendering. Also planet click interactions,
+//  planet-ship interactions, docking info, and planet based endgame conditions.
 
 // MARK: Header File
 #include "PlanetManager.hpp"
@@ -17,6 +21,9 @@
 
 // MARK: Source Files
 #include "ShipManager.hpp"
+
+// MARK: Aliases
+using PlanetList = std::vector<Planet>;
 
 
 // MARK: - Galaxy Initialization
@@ -60,14 +67,16 @@ void PlanetManager::initGalaxy() {
   selectedPlanetIndex = -1;         // Start with no planet selected
   discoveryCount = 1;               // Start with 1 colonized planet
 
-  for (std::vector<Planet>::iterator it = planets.begin(); it != planets.end(); ++it)
+  for (PlanetList::iterator it = planets.begin(); it != planets.end(); ++it) {
     planetEvents.push_back(it->getEvents());
+  }
 };
 
 
 // Mark: - Game Loop Methods
 
 void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
+  
   // Checks for any collisions first
   handleCollisions(shipManager, gameState->frame);
   gameState->playerCollision = playerIsDocked();
@@ -99,15 +108,15 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
     handleClickEvent(gameState->clickLocation, gameState);
     gameState->clickFlag = false;
   }
+
 }
 
 void PlanetManager::render(Game::State *gameState) {
   for (Planet p : planets) {
     p.render(gameState);
-    
+  
     if (gameState->debugMode) {
-      DebugTools::renderVertices(p.getCollider().getVertices(),
-                                 Game::renderer);
+      DebugTools::renderVertices(p.getCollider().getVertices(), Game::renderer);
     }
   }
 }
@@ -239,12 +248,12 @@ void PlanetManager::deselectPlanet(bool *planetSelected) {
 }
 
 void PlanetManager::handleCollisions(ShipManager *sm, Uint32 frame) {
+  
   PlayerShip player = sm->getPlayerShip();
   AlienShip alien = sm->getAlienShip();
   std::vector<SDL_Point> playerVertices = player.getCollider().getVertices();
   std::vector<SDL_Point> alienVertices = alien.getCollider().getVertices();
 
-  
   // Checks all planets for collisions if player ship hasn't docked
   if (playerDockedPlanetIndex < 0) {
     for (int i = 0; i < planets.size(); i++) {
@@ -280,10 +289,14 @@ void PlanetManager::handleCollisions(ShipManager *sm, Uint32 frame) {
   }
   // If alien has docked checks docked planet for continued collision
   else {
+    
     ColliderComponent collider = planets[alienDockedPlanetIndex].getCollider();
+    
     if (!collider.collisionOBB(alienVertices)) {
       planets[alienDockedPlanetIndex].toggleDockedShip(alien.getTag(), frame);
       alienDockedPlanetIndex = -1;
     }
+  
   }
+
 }

@@ -5,6 +5,10 @@
 //  Created by Logan Harvell on 2/14/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Manager class responsible for managing all ship gameObjects, specifically
+//  initializing, updating, and rendering. Also handles ship based endgame
+//  conditions.
 
 #ifndef ShipManager_hpp
 #define ShipManager_hpp

@@ -5,6 +5,9 @@
 //  Created by Ian Holdeman on 7/14/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Extension of the Screen class for the Scoreboard screen. Initializes
+//  appropriate UI elements and updates them accordingly.
 
 // MARK: Header File
 #include "Scoreboard.hpp"
