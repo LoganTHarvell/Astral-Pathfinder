@@ -17,35 +17,17 @@
 #include "GameObject.hpp"
 
 
-// MARK: - Ship Parameters
-
-namespace ShipParameters {
-  
-  enum ShipType {
-    playerShip,
-    alienWarship
-  };
-  
-  const std::string movingPlayerTex = "../Resources/movingPlayerShip2.png";
-  
-  const struct {
-    int w = 48, h = 24;
-  } shipSize;
-  
-  const int totalCrew = 1000;
-  
-  // TODO: figure out real velocity/ticks formula
-  const int speed = 1;
-  const float alienSpeed = 0.5;
-  const int turnSpeed = 5;
-}
-
-
 // MARK: - Ship Class
 
 class Ship: public GameObject {
   
 public:
+  // Ship Tags
+  enum ShipType {
+    playerShip,
+    alienWarship
+  };
+  
   // MARK: - Initialization Methods
   virtual void init(SDL_Point startPosition) = 0;
   
@@ -54,7 +36,7 @@ public:
   void render(Game::State *gs);
   
   // MARK: - Ship Methods
-  ShipParameters::ShipType getTag() { return tag; };
+  ShipType getTag() { return tag; };
   int getRotation() { return rotation; };
   SDL_Point getVelocity() { return velocity; }
   SDL_Point getUIPosition() { return getCenter(); };
@@ -64,7 +46,7 @@ protected:
   using PointVector = std::vector<SDL_Point>;
 
   // MARK: - Ship Fields
-  ShipParameters::ShipType tag;
+  ShipType tag;
   SDL_Point velocity;
   int rotation;
   

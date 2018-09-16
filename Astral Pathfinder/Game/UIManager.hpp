@@ -9,6 +9,9 @@
 #ifndef UIManager_hpp
 #define UIManager_hpp
 
+// MARK: Parameter File
+#include "Parameters.hpp"
+
 // MARK: Libraries and Frameworks
 #include "SDL2_ttf/SDL_ttf.h"
 
@@ -23,46 +26,40 @@
 #include "Scoreboard.hpp"
 #include "EndScreen.hpp"
 
-// MARK: - UIManager Parameters
 
-namespace UiParameters {
-  const SDL_Rect timeRect = {115, 82, 90, 36};
-  const SDL_Rect totalScoreRect = {245, 82, 90, 36};
-  const SDL_Rect shipInfoRect = {1215, 100, 320, 121};
-  const SDL_Rect currentPlanetRect = {1215, 210, 320, 240};
-  const SDL_Rect selectedPlanetRect = {1215, 500, 320, 300};
-  const SDL_Point endScoreCoords = {945, 335};
-  const SDL_Point endScoreName = {940, 480};
-  const SDL_Color red = {128,0,0};
-  const SDL_Color green = {0,128,0};
-  const SDL_Color yellow = {255, 255, 0};
-}
+// MARK: - UIManager Class
 
 class UIManager {
 
 public:
+  enum ScreenType {
+    menu, scores, game, over, quit
+  };
+  
   // MARK: - UIManager Initialization
   void init(Game::State *gameState);
+  void hotload();
   
   // MARK: - Game Loop Methods
   void update(Game::State *gameState, PlanetManager *planetManager, ShipManager *shipManager);
   void render(Game::State *gameState, PlanetManager *pm);
   
-  // MARK: - Helper Methods
-  bool checkGameScreen();
+  // MARK: - Getter Methods
+  ScreenType getActiveScreen() { return activeScreen; };
   bool checkStartScreens();
   
 private:
   // MARK: - UIManager Fields
+  // TODO: move score and prevScore to game state
+  int score, prevScore;
+  
   TextBox time;
   TextBox totalScore, finalScore, playerName;
   EventsPanel eventsPanel;
   PlanetInfo selectedPlanetInfo, DockedPlanetInfo;
   ShipInfo shipInfo;
-  SDL_Texture *hoverBorder;
   SDL_Rect borderRect, screenRect;
-  SDL_Texture *gameScreen, *winScreen, *loseScreen, *alienScreen;
-  int score, prevScore;
+  SDL_Texture *gameScreen = nullptr;
   SDL_Color prevColor, timeColor;
   MainMenu mainMenu;
   Scoreboard scoreboard;
@@ -73,9 +70,7 @@ private:
     none, currentPlanetWindow, selectedPlanetWindow
   } currentWindow = none;
   
-  enum {
-    menu, scores, game, over, quit
-  } activeScreen = menu;
+  ScreenType activeScreen = menu;
   
   bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true;
   bool mainMenuFlag, scoreboardFlag;
@@ -83,7 +78,10 @@ private:
   // MARK: - Helper Methods
   void updateTime(Uint32);
   SDL_Color checkTime(int minutes);
+  
+  // TODO: move update score to game class
   void updateTotalScore(PlanetManager *pm, Uint32 elapsedTime);
+  
   SDL_Color setTotalScoreColor();
   void setSelectedPlanet(Planet p);
   void setDockedPlanet(Planet p);

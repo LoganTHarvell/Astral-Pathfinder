@@ -61,7 +61,7 @@ PointVector Ship::computeShipVertices() {
 }
 
 void Ship::updateRotation() {
-  using ShipParameters:: turnSpeed;
+  using Parameters::Ship:: turnSpeed;
   
   int desiredRotation = 0;
   

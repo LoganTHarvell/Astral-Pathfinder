@@ -10,6 +10,7 @@
 #include "PlanetManager.hpp"
 
 // MARK: Libraries and Frameworks
+#include <map>
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -17,21 +18,23 @@
 // MARK: Source Files
 #include "ShipManager.hpp"
 
+
 // MARK: - Galaxy Initialization
 
 void PlanetManager::initGalaxy() {
-  using PlanetManagerParameters::numberOfPlanets;
+  using Parameters::PlanetManager::numberOfPlanets;
   
   planets.reserve(sizeof(Planet) * numberOfPlanets);
   
-  bool hasPlanet[numberOfPlanets][numberOfPlanets] = { false };
+  std::map<std::pair<int, int>, bool> hasPlanet;
   
   // Initializes first element in planets array as homeworld
   planets.insert(planets.begin(), initHomeworld());
   
   // Marks planet coordinates as occupied
-  SDL_Point coordinates = planets.front().getCoordinates();
-  hasPlanet[coordinates.x][coordinates.y] = true;
+  SDL_Point tmp = planets.front().getCoordinates();
+  std::pair<int, int> coordinates = { tmp.x, tmp.y };
+  hasPlanet.emplace(coordinates, true);
 
   // Initializes galaxy with number of planets
   while (planets.size() < numberOfPlanets) {
@@ -39,15 +42,17 @@ void PlanetManager::initGalaxy() {
     auto i = planets.end();
     do {
       i = planets.insert(i, initPlanet());
-      coordinates = i->getCoordinates();
+      
+      tmp = i->getCoordinates();
+      coordinates = { tmp.x, tmp.y };
       
       // Clears index for new planet
-      if (hasPlanet[coordinates.x][coordinates.y]) planets.erase(i);
+      if (hasPlanet[coordinates]) planets.erase(i);
       
-    } while (hasPlanet[coordinates.x][coordinates.y]);
+    } while (hasPlanet[coordinates]);
 
     // Marks planet coordinates as occupied
-    hasPlanet[coordinates.x][coordinates.y] = true;
+    hasPlanet[coordinates] = true;
   }
   
   playerDockedPlanetIndex = 0;      // Start with homeworld docked
@@ -55,7 +60,7 @@ void PlanetManager::initGalaxy() {
   selectedPlanetIndex = -1;         // Start with no planet selected
   discoveryCount = 1;               // Start with 1 colonized planet
 
-  for(std::vector<Planet>::iterator it = planets.begin(); it != planets.end(); ++it)
+  for (std::vector<Planet>::iterator it = planets.begin(); it != planets.end(); ++it)
     planetEvents.push_back(it->getEvents());
 };
 
@@ -81,7 +86,7 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
   }
 
   // Checks all planets discovered endgame condition
-  if (discoveryCount == PlanetManagerParameters::numberOfPlanets) {
+  if (discoveryCount == Parameters::PlanetManager::numberOfPlanets) {
     gameState->endgame = Game::State::allDiscovered;
   }
   
@@ -97,11 +102,12 @@ void PlanetManager::update(Game::State *gameState, ShipManager *shipManager) {
 }
 
 void PlanetManager::render(Game::State *gameState) {
-  for(Planet p : planets) {
+  for (Planet p : planets) {
     p.render(gameState);
     
     if (gameState->debugMode) {
-      DebugTools::renderVertices(p.getCollider().getVertices());
+      DebugTools::renderVertices(p.getCollider().getVertices(),
+                                 Game::renderer);
     }
   }
 }
@@ -139,36 +145,34 @@ Planet PlanetManager::getAlienDockedPlanet() {
   return planets[alienDockedPlanetIndex];
 }
 
-// TODO: Use enum for readability of flags
 void PlanetManager::setPlanetMiningPercent(int p, int flag) {
-  if(flag == dockedPlanet)
+  if (flag == dockedPlanet)
     planets[playerDockedPlanetIndex].setMiningPercent(p);
-  if(flag == selectedPlanet)
+  if (flag == selectedPlanet)
     planets[selectedPlanetIndex].setMiningPercent(p);
 }
 
 void PlanetManager::setPlanetFarmingPercent(int p, int flag) {
-  if(flag == dockedPlanet)
+  if (flag == dockedPlanet)
     planets[playerDockedPlanetIndex].setFarmingPercent(p);
-  if(flag == selectedPlanet)
+  if (flag == selectedPlanet)
     planets[selectedPlanetIndex].setFarmingPercent(p);
 }
 
 void PlanetManager::setPlanetInfraPercent(int p, int flag) {
-  if(flag == dockedPlanet)
+  if (flag == dockedPlanet)
     planets.at(playerDockedPlanetIndex).setInfraPercent(p);
-  if(flag == selectedPlanet)
+  if (flag == selectedPlanet)
     planets.at(selectedPlanetIndex).setInfraPercent(p);
 }
 
 void PlanetManager::setPlanetReservePercent(int p, int flag) {
-  if(flag == dockedPlanet)
+  if (flag == dockedPlanet)
     planets.at(playerDockedPlanetIndex).setReservePercent(p);
-  if(flag == selectedPlanet)
+  if (flag == selectedPlanet)
     planets.at(selectedPlanetIndex).setReservePercent(p);
 }
 
-// TODO: Implement actual fuel algorithm
 int PlanetManager::fuelDockedShip() {
   int fuel = 0;
   
@@ -203,10 +207,10 @@ Planet PlanetManager::initPlanet() {
 void PlanetManager::handleClickEvent(SDL_Point p, Game::State *gs) {
   // Checks for planet selection
   int i = 0;
-  for(Planet planet : planets) {
+  for (Planet planet : planets) {
     SDL_Rect temp = planet.getRect();
     
-    if((p.x > temp.x) && (p.x < temp.x + temp.w)
+    if ((p.x > temp.x) && (p.x < temp.x + temp.w)
        && (p.y > temp.y) && (p.y < temp.y + temp.h)) {
       
       if (selectedPlanetIndex >= 0) deselectPlanet(&gs->planetSelected);

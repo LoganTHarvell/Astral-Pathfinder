@@ -6,18 +6,24 @@
 //  Copyright © 2018 Logan Harvell. All rights reserved.
 //
 
+// MARK: Header File
 #include "PlayerShip.hpp"
 
+// MARK: Parameter File
+#include "Parameters.hpp"
+
+// MARK: Libraries and Frameworks
 #include "TextureManager.hpp"
 
 using PointVector = std::vector<SDL_Point>;
 
+
 // MARK: - Initialization Methods
 
 void PlayerShip::init(SDL_Point startPosition) {
-  using namespace ShipParameters;
+  using namespace Parameters::Ship;
   
-  tag = playerShip;
+  tag = Ship::playerShip;
   crewPopulation = totalCrew;
   fuel = 0;
   
@@ -28,11 +34,11 @@ void PlayerShip::init(SDL_Point startPosition) {
   
   rect.x = startPosition.x;
   rect.y = startPosition.y;
-  rect.w = shipSize.w;
-  rect.h = shipSize.h;
+  rect.w = Parameters::Ship::shipRect.w;
+  rect.h = Parameters::Ship::shipRect.h;
   
   collider = new ColliderComponent(getCenter(), computeShipVertices());
-  texture = TextureManager::loadTexture(movingPlayerTex);
+  TextureManager::loadTexture(playerTexFile, &texture, Game::renderer);
 }
 
 
@@ -63,7 +69,7 @@ PointVector PlayerShip::shipVertexVectors() {
 }
 
 void PlayerShip::updateVelocity() {
-  using namespace ShipParameters;
+  using namespace Parameters::Ship;
   
   if (fuel <= 0) {
     velocity.x = velocity.y = 0;

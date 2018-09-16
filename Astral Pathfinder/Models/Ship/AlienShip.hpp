@@ -9,7 +9,9 @@
 #ifndef AlienShip_hpp
 #define AlienShip_hpp
 
+// MARK: Parent Class
 #include "Ship.hpp"
+
 
 class AlienShip : public Ship {
 
@@ -29,9 +31,6 @@ private:
 
   SDL_Point mainTarget;
   SDL_Point target;
-  
-  const std::string alienTex = "../Resources/alienShip.png";
-  
   
   // MARK: - Helper Methods
   PointVector shipVertexVectors();

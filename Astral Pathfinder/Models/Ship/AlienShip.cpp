@@ -6,21 +6,26 @@
 //  Copyright © 2018 Logan Harvell. All rights reserved.
 //
 
+// MARK: Header File
 #include "AlienShip.hpp"
 
+// MARK: Parameter File
+#include "Parameters.hpp"
+
+// MARK: Libraries and Frameworks
+#include "TextureManager.hpp"
 #include <cmath>
 
-#include "TextureManager.hpp"
-
+// MARK: Aliases
 using PointVector = std::vector<SDL_Point>;
 
 
 // MARK: - Initialization Methods
 
 void AlienShip::init(SDL_Point startPosition) {
-  using namespace ShipParameters;
+  using namespace Parameters::Ship;
   
-  tag = alienWarship;
+  tag = Ship::alienWarship;
   
   velocity.x = 0;
   velocity.y = 0;
@@ -29,14 +34,14 @@ void AlienShip::init(SDL_Point startPosition) {
   
   rect.x = startPosition.x;
   rect.y = startPosition.y;
-  rect.w = shipSize.w;
-  rect.h = shipSize.h;
+  rect.w = Parameters::Ship::shipRect.w;
+  rect.h = Parameters::Ship::shipRect.h;
   
   setMainTarget(getCenter());
   resetTarget();
   
   collider = new ColliderComponent(getCenter(), computeShipVertices());
-  texture = TextureManager::loadTexture(alienTex);
+  TextureManager::loadTexture(alienTexFile, &texture, Game::renderer);
 }
 
 
@@ -87,7 +92,7 @@ PointVector AlienShip::shipVertexVectors() {
 }
 
 void AlienShip::updateVelocity() {
-  using namespace ShipParameters;
+  using namespace Parameters::Ship;
  
   SDL_Point center = getCenter();
   

@@ -9,6 +9,9 @@
 #ifndef ShipManager_hpp
 #define ShipManager_hpp
 
+// MARK: Parameter File
+#include "Parameters.hpp"
+
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 
@@ -18,11 +21,8 @@
 #include "PlayerShip.hpp"
 #include "AlienShip.hpp"
 
-namespace ShipManagerParameters {
-  
-  const Uint32 alienTargetingDelay = 60;
-  
-}
+
+// MARK: - ShipManager Class
 
 class ShipManager {
   
