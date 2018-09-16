@@ -5,6 +5,10 @@
 //  Created by Logan Harvell, Ian Holdeman on 1/15/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Manager class responsible for managing all planet gameObjects, specifically
+//  initializing, updating, and rendering. Also planet click interactions,
+//  planet-ship interactions, docking info, and planet based endgame conditions.
 
 #ifndef PlanetManager_hpp
 #define PlanetManager_hpp
@@ -26,6 +30,7 @@
 class PlanetManager {
 
 public:
+  
   // MARK: - Galaxy Initialization
   void initGalaxy();
 
@@ -53,7 +58,9 @@ public:
   int fuelDockedShip();
 
 private:
+  
   // MARK: - Helper Methods
+  
   // Initialiation helper methods
   static Planet initHomeworld();
   static Planet initPlanet();

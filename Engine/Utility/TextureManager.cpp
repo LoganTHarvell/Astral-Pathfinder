@@ -5,6 +5,9 @@
 //  Created by Logan Harvell, Ian Holdeman on 1/15/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  A utility class for managing textures objects. Handles loading a texture
+//  from a file.
 
 // MARK: Header File
 #include "TextureManager.hpp"

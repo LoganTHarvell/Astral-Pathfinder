@@ -5,6 +5,12 @@
 //  Created by Logan Harvell, Ian Holdeman on 2/10/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  A GameObject class extension for modeling the Planet game element. Contains
+//  and manages an individual planet's state and resources. Planet state
+//  includes ship-docking using collision information from collider componenet.
+//  Resources update according to a growth period cycle system over many frames.
+//  Also handles initializing, updating, and rendering.
 
 // MARK: Header File
 #include "Planet.hpp"
@@ -15,9 +21,8 @@
 // MARK: Source Files
 #include "Game.hpp"
 #include "PlanetManager.hpp"
-#include "Map.hpp"
 #include "PlayerShip.hpp"
-
+#include "Map.hpp"
 
 
 // MARK: - Initialization Methods
@@ -38,7 +43,7 @@ void Planet::initHomeworld() {
   infraPercent = homeStartInfraPercent;
   reservePercent = homeStartReservePercent;
 
-  infrastructure = 5000;
+  infrastructure = homeStartPopulation;
   food = homeStartFertility;
   
   // Initial birth and death rate multiplier
@@ -77,6 +82,7 @@ void Planet::initPlanet() {
   
   TextureManager::loadTexture(planetTextureFile, &texture, Game::renderer);
   TextureManager::loadTexture(planetOutlineFile, &outlineTexture, Game::renderer);
+  
   collider = new ColliderComponent(rect);
   eventManager = new EventsComponent(mapPosition());
   
@@ -84,6 +90,7 @@ void Planet::initPlanet() {
   
   // Sets planet fertility to random value
   fertility = (rand()%(fertilityRange+1) + minFertility);
+  
   // Sets planet deposits to random value
   deposits = (rand()%(depositsRange+1)) + minDeposits;
   
@@ -207,7 +214,7 @@ void Planet::updateStatus() {
     status = discovered;
 }
 
-// TODO: Move to events component maybe?
+// TODO: Move to events component
 void Planet::updateRandomEvents(Uint32 frame) {
   using namespace Parameters::Planet;
   
@@ -377,6 +384,8 @@ void Planet::updateEventComponent() {
   eventManager->update(events.blight, events.plague, events.mineCollapse, populationDec, isOverproducing);
 }
 
+// TODO: Move hard coded values to parameters
+// Updates a planet color code based on status
 void Planet::updateColors() {
   if (status == undiscovered) {
     SDL_SetTextureAlphaMod(texture, 127);

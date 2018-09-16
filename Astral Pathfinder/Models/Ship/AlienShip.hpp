@@ -5,6 +5,10 @@
 //  Created by Logan Harvell on 4/29/18.
 //  Copyright © 2018 Logan Harvell. All rights reserved.
 //
+//  Description:
+//  Class extension of Ship base class for modeling an AI enemy. Handles path
+//  planning and velocity calculations, as well as calculating vertex vectors.
+//  Also handles initializing and updating.
 
 #ifndef AlienShip_hpp
 #define AlienShip_hpp

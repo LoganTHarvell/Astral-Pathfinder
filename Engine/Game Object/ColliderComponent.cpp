@@ -5,6 +5,10 @@
 //  Created by Logan Harvell on 2/27/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Component class for extending a GameObject class. Manages bounding box
+//  attributes and enables various types of collision detection for different
+//  purposes.
 
 // MARK: Header File
 #include "ColliderComponent.hpp"
@@ -40,6 +44,7 @@ void ColliderComponent::update(SDL_Point center, PointVector vertices) {
 
 // MARK: - Collider Methods
 
+// Radial collision detection against given vertices with a given radius
 bool ColliderComponent::collisionCircle(int radius, PointVector vertices) {
   
   double d = 0;
@@ -51,6 +56,7 @@ bool ColliderComponent::collisionCircle(int radius, PointVector vertices) {
   return false;
 }
 
+// Axis Aligned Bounding Box collision detection against a given rect
 bool ColliderComponent::collisionAABB(SDL_Rect r) {
   
   int topBound = vertices[0].y;
@@ -66,7 +72,9 @@ bool ColliderComponent::collisionAABB(SDL_Rect r) {
   return true;
 }
 
+// Oriented Bounding Box collision detection against a given set of vertices
 bool ColliderComponent::collisionOBB(PointVector vertices) {
+  
   // Gets axes of self and test boxes
   PointVector axes = getNormals(this->vertices);
   std::vector<SDL_Point> tmp = getNormals(vertices);
@@ -87,6 +95,7 @@ bool ColliderComponent::collisionOBB(PointVector vertices) {
   return true;
 }
 
+// Calculates vertices given center point, vertex vectors, and orientation angle
 PointVector ColliderComponent::computeVertices(SDL_Point center,
                                                PointVector vertexV,
                                                int angle) {
@@ -107,7 +116,9 @@ PointVector ColliderComponent::computeVertices(SDL_Point center,
   return vertices;
 }
 
+// Calculates the minimum vector component of a list of vertices along an axis
 int ColliderComponent::minAlongAxis(PointVector vertices, SDL_Point axis) {
+  
   // Initializes min to first vertex projection along axis
   int min = (vertices[0].x * axis.x) + (vertices[0].y * axis.y);
   
@@ -120,7 +131,9 @@ int ColliderComponent::minAlongAxis(PointVector vertices, SDL_Point axis) {
   return min;
 }
 
+// Calculates the maximum vector component of a list of vertices along an axis
 int ColliderComponent::maxAlongAxis(PointVector vertices, SDL_Point axis) {
+  
   // Initializes max to first vertex projection along axis
   int max = (vertices[0].x * axis.x) + (vertices[0].y * axis.y);
   
@@ -136,6 +149,7 @@ int ColliderComponent::maxAlongAxis(PointVector vertices, SDL_Point axis) {
 
 // MARK: - Helper Methods
 
+// Calculates vertex vectors for a rectangle
 PointVector ColliderComponent::rectVertexVectors(SDL_Rect r) {
   PointVector vertexVectors;
   
@@ -155,6 +169,7 @@ PointVector ColliderComponent::rectVertexVectors(SDL_Rect r) {
   return vertexVectors;
 }
 
+// Calculates a list of normal vectors for a list of vertices
 PointVector ColliderComponent::getNormals(PointVector vertices) {
   PointVector normals;
   

@@ -5,6 +5,10 @@
 //  Created by Ian Holdeman on 7/14/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Abstract base class for all screens containing essential properties and
+//  methods for managing UI elements, and handling some events. Also contains
+//  virtual methods to ensure implementation of required game loop methods.
 
 #ifndef Screen_hpp
 #define Screen_hpp
@@ -53,6 +57,8 @@ protected:
   SDL_Rect borderRect;
     
 private:
+  
+  // TODO: Simplify to one list of buttons
   std::vector<Button> mainMenuButtons;
   std::vector<Button> scoreboardButtons;
   std::vector<Button> endScreenButtons;

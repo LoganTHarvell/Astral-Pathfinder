@@ -5,12 +5,18 @@
 //  Created by Logan Harvell on 8/17/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  An interface between C++ and Lua that uses the Lua C API to make function
+//  calls to the libraries enabling the loading and reading of Lua scripts.
+//  The interface also enables retrieving values from Lua tables and converting
+//  the values to native C++ types.
 
 // MARK: Header File
 #include "LuaInterface.hpp"
 
 // MARK: Libraries and Frameworks
 #include <iostream>
+
 
 // MARK: - Initialization Methods
 

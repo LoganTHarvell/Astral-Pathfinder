@@ -5,6 +5,9 @@
 //  Created by Logan Harvell on 8/20/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  An extension of the LuaInterface class for use with SDL types. Enables
+//  retrieval of Lua tables and conversion to the corresponding SDL types.
 
 // MARK: Header File
 #include "LuaInterfaceSDL2.hpp"

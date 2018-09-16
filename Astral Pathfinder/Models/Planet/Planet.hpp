@@ -5,6 +5,12 @@
 //  Created by Logan Harvell, Ian Holdeman on 2/10/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  A GameObject class extension for modeling the Planet game element. Contains
+//  and manages an individual planet's state and resources. Planet state
+//  includes ship-docking using collision information from collider componenet.
+//  Resources update according to a growth period cycle system over many frames.
+//  Also handles initializing, updating, and rendering.
 
 #ifndef Planet_hpp
 #define Planet_hpp
@@ -14,7 +20,6 @@
 
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
-#include <string>
 #include "GameObject.hpp"
 
 // MARK: Source Files
@@ -74,11 +79,18 @@ public:
   SDL_Point mapPosition();
   
 private:
+  
   // MARK: - Planet Fields
   
   Status status;
   SDL_Point coordinates;
+
+  // TODO: Chage to resource component system
+  // Possibly split into mining, farming, and population
+  
+  // TODO: Rework events component to reduce coupling
   EventsComponent *eventManager = nullptr;
+
   SDL_Texture *outlineTexture = nullptr;
   SDL_Rect outlineRect;
 
@@ -89,8 +101,8 @@ private:
   float minerals, infrastructure, food;
   
   // Population growth period attributes
-  float birthMult, deathMult;   // Births/Deaths per person in a period
-  int births, deaths;           // Total Birth/Deaths in a period
+  float birthMult, deathMult;   // Births and Deaths per person in a period
+  int births, deaths;           // Total Birth and Deaths in a period
   float growthRate;             // Population change per frame
   
   // Food production flags/vars
@@ -116,6 +128,7 @@ private:
   } events;
   
   // MARK: - Helper Methods
+  
   void updateStatus();
   void updateRandomEvents(Uint32 frame);
   void updatePopulation(Uint32 frame);

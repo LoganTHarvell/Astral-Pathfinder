@@ -5,6 +5,9 @@
 //  Created by Ian Holdeman on 4/29/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Component class for use in Planet class to manage random events that effect
+//  a planets resources.
 
 #ifndef EventsComponent_hpp
 #define EventsComponent_hpp
@@ -15,11 +18,14 @@
 
 class EventsComponent {
 public:
+  
   // MARK: - Constructors, Destructor
+  
   EventsComponent(SDL_Point p);
   ~EventsComponent() = default;
   
   // MARK: - Game Loop Methods
+  
   void update(bool blight, bool plague, bool minCollapse, bool popDec, bool overProd);
   
   SDL_Point getLocation() { return location; }
@@ -31,6 +37,7 @@ public:
   bool getTest() { return true; }
   
 private:
+  
   struct {
     bool isOverproducing;
     bool populationDec;
@@ -40,5 +47,8 @@ private:
   } events;
   
   SDL_Point location;
+
 };
+
+
 #endif /* EventsComponent_hpp */

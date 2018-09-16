@@ -5,36 +5,35 @@
 //  Created by Logan Harvell, Ian Holdeman on 1/28/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Namespace containing information about the map space where the planet and
+//  ship game elements are displayed. Functions are declared for calculating
+//  various contextual information between the map and the game elements.
 
 #ifndef Map_hpp
 #define Map_hpp
 
+// MARK: Parameter File
+#include "Parameters.hpp"
+
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 
-// MARK: Source Files
-#include "PlanetManager.hpp"
-#include "Planet.hpp"
-
+// MARK: - Map Namespace
 
 namespace Map {
+  using namespace Parameters::UI::Map;
   using Parameters::PlanetManager::numberOfPlanets;
   using Parameters::Planet::planetTexSize;
   
-  
   // MARK: - Map Parameters
-  // TODO: - Move parameters to parameters file
-  const int width = 800;
-  const int height = 800;
-  const SDL_Point mapOrigin = { 400, 50 };
-  const int gridOffset = 50;
-  const SDL_Point gridOrigin = { mapOrigin.x + (gridOffset/2),
-                                 mapOrigin.y + (gridOffset/2) };
-  const int gridWidth = (width - gridOffset)/numberOfPlanets;
-  const int gridHeight = (height - gridOffset)/numberOfPlanets;
+  
+  const SDL_Point gridOrigin = { rect.x + (gridOffset/2),
+                                 rect.y + (gridOffset/2) };
+  const int gridWidth = (rect.w - gridOffset)/numberOfPlanets;
+  const int gridHeight = (rect.h - gridOffset)/numberOfPlanets;
 
-
-  // MARK: - Map Methods
+  // MARK: - Map Functions
  
   SDL_Point uiPosition(SDL_Point coordinates);
   SDL_Point mapPosition(SDL_Point uiPosition);

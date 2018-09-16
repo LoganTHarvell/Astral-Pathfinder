@@ -5,12 +5,17 @@
 //  Created by Ian Holdeman on 3/11/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Sub-screen manager for displaying relevant and updated ship information.
+//  Contains all necessary UI elements and handles their initialization, events,
+//  update, and rendering.
 
 // MARK: Header File
 #include "ShipInfo.hpp"
 
 // MARK: Libraries and Frameworks
 #include <string>
+
 
 // MARK: - ShipInfo Initialization
 
@@ -44,6 +49,7 @@ void ShipInfo::clean() {
   curPlanet.clean();
 }
 
+
 // MARK: - ShipInfo Methods
 
 // Sets the text for each item in the ShipInfo box
@@ -59,7 +65,7 @@ void ShipInfo::setText(PlayerShip ship) {
   curPlanet.setMessage("Current Planet");
   if (crewLabel.checkNull()) {
     crewLabel.setMessage("Crew");
-    crewNum.setMessage(std::to_string(Parameters::Ship::totalCrew));
+    crewNum.setMessage(std::to_string(Parameters::Ship::shipPopulation));
     bar.setMessage("----------------------------------------------------");
   }
 }

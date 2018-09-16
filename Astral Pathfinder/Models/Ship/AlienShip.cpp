@@ -5,6 +5,10 @@
 //  Created by Logan Harvell on 4/29/18.
 //  Copyright © 2018 Logan Harvell. All rights reserved.
 //
+//  Description:
+//  Class extension of Ship base class for modeling an AI enemy. Handles path
+//  planning and velocity calculations, as well as calculating vertex vectors.
+//  Also handles initializing and updating.
 
 // MARK: Header File
 #include "AlienShip.hpp"
@@ -46,9 +50,12 @@ void AlienShip::init(SDL_Point startPosition) {
 
 
 void AlienShip::update(Game::State * gs) {
+  
+  // Base class update methods
   updateVelocity();
   updateRotation();
   
+  // Updates position every other frame
   if (gs->frame%2 == 0) {
     updatePosition(gs->ticks);
   }
@@ -64,6 +71,8 @@ void AlienShip::resetTarget() {
   target = mainTarget;
 }
 
+// TODO: work in progress
+// Sets a temporary target to point, if point is closer than main target
 void AlienShip::updateTarget(SDL_Point p) {
   target = mainTarget;
   
@@ -74,6 +83,7 @@ void AlienShip::updateTarget(SDL_Point p) {
   if (dTest < dMain) target = p;
 }
 
+// Calculates vertex vectors, the vectors from the center to the vertices
 PointVector AlienShip::shipVertexVectors() {
   PointVector cornerVectors;
   
@@ -91,6 +101,7 @@ PointVector AlienShip::shipVertexVectors() {
   return cornerVectors;
 }
 
+// Updates velocity components based on vector to target
 void AlienShip::updateVelocity() {
   using namespace Parameters::Ship;
  

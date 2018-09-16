@@ -5,6 +5,9 @@
 //  Created by Ian Holdeman on 2/24/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  A class for a simple text box UI element that contains a message. Enables
+//  intialization, update, and renderering of a collection of text to a screen.
 
 #ifndef TextBox_hpp
 #define TextBox_hpp
@@ -26,16 +29,22 @@
 // TODO: - Needs reworking as a general use class and moved into Engine
 
 class TextBox : public GameObject {
+
 public:
+  
   // MARK: - Initialization Methods
+  
   void init(SDL_Rect rect);
   
   // MARK: - Game Loop Methods
+  
   void update(Game::State *gs);
   void render(Game::State *gs);
   void clean();
   
   // MARK: - TextBox Methods
+  // TODO: Take in parameters instead of having methods for each special case
+  
   void setMessage(const std::string words, SDL_Color color = Parameters::UI::TextBox::color);
   void setFuelMessage(const std::string words, SDL_Color color = Parameters::UI::TextBox::color);
   void setScoreboardMessage(const std::string words, SDL_Color color = Parameters::UI::TextBox::color);
@@ -50,7 +59,9 @@ public:
   
   
 private:
+  
   // MARK: - Textbox Fields
+  
   TTF_Font *font;
   long key;
 };

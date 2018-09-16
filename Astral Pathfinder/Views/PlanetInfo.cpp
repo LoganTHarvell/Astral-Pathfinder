@@ -5,6 +5,10 @@
 //  Created by Ian Holdeman on 2/25/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Sub-screen manager for displaying relevant and updated planet information.
+//  Contains all necessary UI elements and handles their initialization, events,
+//  update, and rendering.
 
 // MARK: Header File
 #include "PlanetInfo.hpp"
@@ -86,12 +90,12 @@ void PlanetInfo::setUiTextures(Planet p) {
   
   if (!resourceSlider.isInitialized() && !depositSlider.isInitialized()
       && (p.getPopulation() > 0 || p.playerIsDocked())) {
-    resourceSlider.setTextures(baseFilename, knobFilename,
+    resourceSlider.setTextures(baseTexFile, sliderTexFile,
                                Game::renderer, p.getFarmingPercent());
-    resourceSlider.colorMod(baseColor, knobColor);
-    depositSlider.setTextures(baseFilename, knobFilename,
+    resourceSlider.colorMod(baseColor, sliderColor);
+    depositSlider.setTextures(baseTexFile, sliderTexFile,
                               Game::renderer, p.getReservePercent());
-    depositSlider.colorMod(baseColor, knobColor);
+    depositSlider.colorMod(baseColor, sliderColor);
   }
   else {
     resourceSlider.updateSliderPosition(p.getFarmingPercent());
@@ -162,9 +166,10 @@ int PlanetInfo::getSliderPercent() {
   return NULL;
 }
 
+
 // MARK: - Helper Methods
 
-// TODO: - Clean up all below code, add comments, whitespace
+// TODO: Clean up all below code, add comments, whitespace, hard coded values
 // split long lines into multiple like this, assign long stuff to temp variables
 
 // Sets text to each textbox in PlanetInfo
@@ -259,12 +264,12 @@ std::string PlanetInfo::setStringSpaces(int p) {
   return s;
 }
 
+// TODO: clean this code up, hard coded values must be moved to parameters
 // Sets rects for each item in the PlanetInfo boxes
 void PlanetInfo::setUiRects() {
-  // TODO: clean this up
-  int buffer = 5; // Small buffer from borders or other elements
+  int buffer = 5;                   // Buffer from borders or other elements
   int midW = origin.x+(origin.w/2); // Midpoint of width
-  int gapH = origin.h/30; // Spaces between elements
+  int gapH = origin.h/30;           // Spaces between elements
   int sliderW = static_cast<int>(origin.w/2.66);
   
   SDL_Point header = {(origin.w/2)-(buffer*3), origin.h/10};

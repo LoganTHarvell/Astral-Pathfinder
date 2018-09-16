@@ -5,6 +5,10 @@
 //  Created by Logan Harvell on 8/2/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Assigns default values for all game parameters in Parameter namespace.
+//  Organized into groups by class, which match tables in a Lua config file.
+//  Load function enables loading parameters from the lua config file.
 
 // MARK: Header File
 #include "Parameters.hpp"
@@ -18,64 +22,102 @@
 
 namespace Parameters {
   
+  // MARK: - Game Default Parameters
+  
   namespace Game {
+    
     // Window parameters x, y, w, h
     SDL_Rect windowRect = { SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                             1600, 900 };
 
-    // FPS constants
-    int fps = 60;                     // Number of frames per second
-    int frameDelay = 1000/fps;        // Frame min length in ms (1000 ms/fps)
+    // Frames per second
+    int fps = 60;
+    
+    // Frame minimum length in ms (1000 ms/fps)
+    int frameDelay = 1000/fps;
 
-    int endgameDelay = 120;           // In number of frames
-    int timeLimit = (20*60);          // In number of seconds (x min * 60 sec)
+    // Endgame delay in number of frames
+    int endgameDelay = 120;
+    
+    // Time Values in number of seconds (x min * 60 sec)
+    // timeLimitWarning should be less than timeLimit
+    int timeLimit = (20*60);
+    int timeLimitWarning = (15*60);
+   
+    // Score decrease per frame of overtime
     int overtimeFactor = 100;
+  
   }
+
+  // MARK: - PlanetManager Parameters
   
   namespace PlanetManager {
-    int numberOfPlanets = 25;         // Number of planets in the game
+    
+    // Number of planets in the game
+    int numberOfPlanets = 25;
+  
   }
 
+  // MARK: - ShipManager Parameters
+  
   namespace ShipManager {
-    Uint32 alienTargetingDelay = 60;  // Alien ship seeking delay in frames
+    
+    // Alien ship seeking delay in frames
+    Uint32 alienTargetingDelay = 60;
+  
   }
   
+  // MARK: - UIManager Default Parameters
+  
   namespace UIManager {
+    
+    // Rect values defining main screen position and size
     SDL_Rect screenRect = { 0, 0, Game::windowRect.w, Game::windowRect.h };
     
+    // UI element rect geometry in { x, y, w, h }
     SDL_Rect timeRect = { 115, 82, 90, 36 };
     SDL_Rect totalScoreRect = { 245, 82, 90, 36 };
     SDL_Rect shipInfoRect = { 1215, 100, 320, 121 };
     SDL_Rect currentPlanetRect = { 1215, 210, 320, 240 };
     SDL_Rect selectedPlanetRect = { 1215, 500, 320, 300 };
     
+    // Screen position for score and name on scoreboard
     SDL_Point endScoreCoords = { 945, 335 };
     SDL_Point endNameCoords = { 940, 480 };
     
+    // Color values for UI color coding in { r, g, b } (0 - 255)
     SDL_Color badColor = { 128, 0, 0 };
     SDL_Color goodColor = { 0, 128, 0 };
     SDL_Color warningColor = { 255, 255, 0 };
     
+    // File path to main game screen background texture
     std::string gameScreenFile = "../Resources/gameScreen2.png";
-
+  
   }
  
+  // MARK: - Planet Default Parameters
+  
   namespace Planet {
     
     // Planet texture information
     std::string planetTextureFile = "../Resources/planet2.png";
     int planetTexSize = 16;
-    
     std::string planetOutlineFile = "../Resources/planetOutline.png";
     int planetOutlineSize = 24;
     
-    // Planet initial attribute information
+    // Resource information, ranges expressed as (max - min)
     int minFertility = 20;
     int fertilityRange = (200 - minFertility);
     int minDeposits = 200;
     int depositsRange = (1000 - minDeposits);
+    
+    // Infrastructure and Reserve must sum to 100
+    // Set so only infrastructure needs to be assigned a value (0-100)
     int startInfraPercent = 50;
     int startReservePercent = (100 - startInfraPercent);
+    
+    // Mining and Farming must sum to 100
+    // Set so only mining needs to be assigned a value (0-100)
     int startMiningPercent = 100;
     int startFarmingPercent = (100 - startMiningPercent);
     
@@ -83,28 +125,43 @@ namespace Parameters {
     int homeStartPopulation = 5000;
     int homeStartFertility = 100;
     int homeStartDeposits = 250;
+    
+    // Mining and Farming must sum to 100, prefer only changing mining (0-100)
     int homeStartMiningPercent = 58;
     int homeStartFarmingPercent = (100 - homeStartMiningPercent);
     int homeStartInfraPercent = 0;
     int homeStartReservePercent = (100 - homeStartInfraPercent);
     
-    // Defines population growth information
-    int growthPeriod = 1200;          // Frames per growth period
-    float starveRate = 0.0008;        // Starvation deaths per frame
+    // Frames per growth period
+    int growthPeriod = 1200;
+    // Starvation deaths per frame
+    float starveRate = 0.0008;
+    
+    // Population multiplier info, ranges expressed as (max - min)
     float minBirthMultiplier = 0.05;
     float birthMultiplierRange = (0.2 - minBirthMultiplier);
     float minDeathMultiplier = 0.025;
     float deathMultiplierRange = (0.075 - minDeathMultiplier);
     
-    // Defines resource information
-    float foodRqmt = 0.02;            // Food required per person
-    float miningRate = 0.0001;        // Minerals produced per person per frame
-    float farmingRate = 0.04;         // Food produced per person per frame
-    float fertDecay = 0.0001;
-    int fertDecayDelay = 10;          // Defined in seconds
-    float infrastructureCost = 20;    // Max population increase per mineral
+    // Food required per person
+    float foodRqmt = 0.02;
     
-    // Random event chances in % chance per update
+    // Minerals produced per person per frame
+    float miningRate = 0.0001;
+    
+    // Food produced per person per frame
+    float farmingRate = 0.04;
+    
+    // Amount of fertility decay per frame
+    float fertDecay = 0.0001;
+    
+    // Fertility decline delay in seconds
+    int fertDecayDelay = 10;
+    
+    // Max population increase per mineral
+    float infrastructureCost = 20;
+    
+    // Random event chances in % chance per event cycle or event
     float plagueRate = 0.05;
     float blightRate = 0.1;
     float mineCollapseRate = 0.3;
@@ -116,43 +173,72 @@ namespace Parameters {
     float mineCollapseMultiplier = 0.5;
   }
   
+  // MARK: - Ship Default Parameters
+  
   namespace Ship {
-    // Filename for player textures
+    
     std::string playerTexFile = "../Resources/movingPlayerShip2.png";
     std::string alienTexFile = "../Resources/alienShip.png";
     
-    SDL_Rect shipRect = { 0, 0, 48, 24 };     // Ship Rect
-    int totalCrew = 1000;                     // Ship Population
+    // Ship rect geometry in { x, y, w, h }
+    SDL_Rect shipRect = { 0, 0, 48, 24 };
+    int shipPopulation = 1000;
     
+    // Speed in position units per frame
     int speed = 1;
     float alienSpeed = 0.5;
+    // Turn speed in rotation degrees per frame
     int turnSpeed = 5;
+  
   }
   
+  // MARK: - UI Default Parameters
+  
   namespace UI {
+    // Map Default Parameteres
+    namespace Map {
+      SDL_Rect rect = { 400, 50, 800, 800 };
+      int gridOffset = 50;
+    }
+    
+    // Events Panel Default Parameters
+    
     namespace EventPanel {
+      
+      // UI element rect geometry in { x, y, w, h }
       SDL_Rect panelRect = { 65, 175, 320, 10000 };
       SDL_Rect renderRect = { 70, 180, 310, 590 };
       SDL_Rect textBoxesRect = { 0, 0, 300, 0 };
       
+      // Event color coding in { r, g, b } (0-255)
       SDL_Color overprodColor = { 200, 0, 0 };
       SDL_Color popDeclineColor = { 200, 200, 0 };
       SDL_Color outlineColor = { 177, 115, 6 };
+    
     }
     
+    // Main Menu Defualt Parameters
+    
     namespace MainMenu {
+      
       std::string textureFile = "../Resources/mainMenu.png";
       
+      // Button selectable geometry in { x, y, w, h }
       SDL_Rect startGameButton = { 600, 401, 424, 57 };
       SDL_Rect scoreboardButton = { 600, 538, 424, 58 };
       SDL_Rect exitGameButton = { 600, 676, 424, 54 };
       
+      // Button border geometry in { x, y, w, h }
       SDL_Rect startGameBorder = { 582, 390, 460, 95 };
       SDL_Rect scoreboardBorder = { 582, 527, 460, 96 };
       SDL_Rect exitGameBorder = { 582, 665, 460, 92 };
+    
     }
     
+    // Scoreboard Default Parameters
+    
     namespace Scoreboard {
+     
       std::string textureFile = "../Resources/scoreboard.png";
       std::string scoresFile = "Resources/Scores/scoreboard.txt";
       
@@ -161,23 +247,37 @@ namespace Parameters {
       SDL_Rect startingNameBox = { 760, 203, 300, 42 };
       SDL_Rect startingScoreBox = { 880, 203, 300, 42 };
       
+      // Button selectable geometry in { x, y, w, h }
       SDL_Rect mainMenuButton = { 628, 754, 376, 67 };
+      
+      // Button border geometry in { x, y, w, h }
       SDL_Rect mainMenuBorder = { 609, 742, 412, 90 };
+    
     }
     
+    // End Screen Defualt Parameters
+    
     namespace EndScreen {
+      
+      // Button selectable geometry in { x, y, w, h }
       SDL_Rect playAgainButton = { 288, 673, 424, 57 };
       SDL_Rect mainMenuButton = { 885, 677, 424, 54 };
       
+      // Button border geometry in { x, y, w, h }
       SDL_Rect playAgainBorder = { 270, 662, 460, 95 };
       SDL_Rect mainMenuBorder = { 867, 666, 460, 92 };
       
       std::string winTextureFile = "../Resources/winScreen.png";
       std::string loseTextureFile = "../Resources/loseScreen.png";
       std::string crashTextureFile = "../Resources/alienScreen.png";
+    
     }
     
+    // TextBox Default Parameters
+    
     namespace TextBox {
+      
+      // Texture color in { r, g, b } (0-255)
       SDL_Color color = { 0, 128, 0 };
       std::string fontFile = "../Resources/MODENINE.TTF";
       
@@ -187,18 +287,28 @@ namespace Parameters {
       
       Uint32 wrapLength = 300;
       int scoreboardLine = 880;
+    
     }
   
+    // Slider Default Paramters
+    
     namespace Slider {
-      std::string baseFilename = "../Resources/base.png";
-      std::string knobFilename = "../Resources/slider.png";
       
+      std::string baseTexFile = "../Resources/base.png";
+      std::string sliderTexFile = "../Resources/slider.png";
+      
+      // Texture color in { r, g, b } (0-255)
       SDL_Color baseColor = { 150, 150, 150 };
-      SDL_Color knobColor = { 0, 128, 0 };
+      SDL_Color sliderColor = { 0, 128, 0 };
+    
     }
     
+    // Button Default Parameters
+    
     namespace Button {
+      
       std::string textureFile = "../Resources/border.png";
+    
     }
       
   }
@@ -208,14 +318,31 @@ namespace Parameters {
 
 // MARK: - Parameter Loading Functions
 
-// Loads Parameters from Lua config file
+/* Lua values are grouped into tables. The format for retrieving values is
+ * shown here. Errors are often due to improperly following these steps.
+ *
+ * 1. Create instance of LuaInterface, use instance for all remaining steps
+ * 2. Initialize the lua file with the values with init("filepath")
+ * 3. Load a table with loadTable("tablename")
+ * 4. Use getValue<type>("valueName") for all values in table (view note below)
+ * 5. Unload table by calling unloadTable()
+ * 6. Repeat steps 3-5 for all tables with values to be retrieved
+ *
+ * NOTE: If the file contains SDL types, LuaInterfaceSDL must be used, and
+ * to retrieve SDL types, use getValueSDL<type>("valueName")
+ *
+*/
+
+// Loads parameters from Lua config file
 bool Parameters::loadParameters() {
+  bool flag = true;
+  
   LuaInterfaceSDL2 luaInterface = LuaInterfaceSDL2();
   
   // Initializes Lua config file
   if (!luaInterface.init(luaConfigFile)) return false;
   
-  // Loads and reads Game table
+  // Load, read and converts lua values, then unload for each table
   if (luaInterface.loadTable(tables.gameParameters)) {
     using namespace Game;
     
@@ -224,12 +351,13 @@ bool Parameters::loadParameters() {
     frameDelay = 1000 / Game::fps;
     endgameDelay = luaInterface.getValue<int>("endgameDelay");
     timeLimit = luaInterface.getValue<int>("timeLimit");
+    timeLimitWarning = luaInterface.getValue<int>("timeLimitWarning");
     overtimeFactor = luaInterface.getValue<int>("overtimeFactor");
     
     luaInterface.unloadTable();
   }
+  else flag = false;
 
-  // Loads and reads PlanetManager table
   if (luaInterface.loadTable(tables.planetManagerParameters)) {
     using namespace PlanetManager;
     
@@ -237,8 +365,8 @@ bool Parameters::loadParameters() {
  
     luaInterface.unloadTable();
   }
+  else flag = false;
   
-  // Loads and reads Ship Manager table
   if (luaInterface.loadTable(tables.shipManagerParameters)) {
     using namespace ShipManager;
     
@@ -246,9 +374,8 @@ bool Parameters::loadParameters() {
   
     luaInterface.unloadTable();
   }
+  else flag = false;
   
-  
-  // Loads and reads UIManager table
   if (luaInterface.loadTable(tables.uiManagerParameters)) {
     using namespace UIManager;
     
@@ -269,7 +396,8 @@ bool Parameters::loadParameters() {
     
     luaInterface.unloadTable();
   }
-  
+  else flag = false;
+
   if (luaInterface.loadTable(tables.planetParameters)) {
     using namespace Planet;
     
@@ -321,6 +449,7 @@ bool Parameters::loadParameters() {
     
     luaInterface.unloadTable();
   }
+  else flag = false;
 
   
   if (luaInterface.loadTable(tables.shipParameters)) {
@@ -330,7 +459,7 @@ bool Parameters::loadParameters() {
     alienTexFile = luaInterface.getValue<std::string>("alienTexFile");
     
     shipRect = luaInterface.getValueSDL<SDL_Rect>("shipRect");
-    totalCrew = luaInterface.getValue<int>("totalCrew");
+    shipPopulation = luaInterface.getValue<int>("shipPopulation");
     
     speed = luaInterface.getValue<int>("speed");
     alienSpeed = luaInterface.getValue<double>("alienSpeed");
@@ -338,9 +467,19 @@ bool Parameters::loadParameters() {
   
     luaInterface.unloadTable();
   }
-  
+  else flag = false;
+
   if (luaInterface.loadTable("ui")) {
     using namespace UI;
+    
+    if (luaInterface.loadTable("map")) {
+      using namespace Map;
+      
+      rect = luaInterface.getValueSDL<SDL_Rect>("rect");
+      gridOffset = luaInterface.getValue<int>("gridOffset");
+      
+      luaInterface.unloadTable();
+    }
     
     if (luaInterface.loadTable("eventPanel")) {
       using namespace EventPanel;
@@ -355,7 +494,8 @@ bool Parameters::loadParameters() {
       
       luaInterface.unloadTable();
     }
-    
+    else flag = false;
+
     if (luaInterface.loadTable("mainMenu")) {
       using namespace MainMenu;
       
@@ -371,7 +511,8 @@ bool Parameters::loadParameters() {
       
       luaInterface.unloadTable();
     }
-    
+    else flag = false;
+
     if (luaInterface.loadTable("scoreboard")) {
       using namespace Scoreboard;
       
@@ -388,7 +529,8 @@ bool Parameters::loadParameters() {
       
       luaInterface.unloadTable();
     }
-    
+    else flag = false;
+
     if (luaInterface.loadTable("endScreen")) {
       using namespace EndScreen;
       
@@ -404,7 +546,8 @@ bool Parameters::loadParameters() {
       
       luaInterface.unloadTable();
     }
-    
+    else flag = false;
+
     if (luaInterface.loadTable("textBox")) {
       using namespace TextBox;
       
@@ -419,19 +562,21 @@ bool Parameters::loadParameters() {
       
       luaInterface.unloadTable();
     }
-    
+    else flag = false;
+
     if (luaInterface.loadTable("slider")) {
       using namespace Slider;
       
-      baseFilename = luaInterface.getValue<std::string>("baseFilename");
-      knobFilename = luaInterface.getValue<std::string>("knobFilename");
+      baseTexFile = luaInterface.getValue<std::string>("baseTexFile");
+      sliderTexFile = luaInterface.getValue<std::string>("sliderTexFile");
       
       baseColor = luaInterface.getValueSDL<SDL_Color>("baseColor");
-      knobColor = luaInterface.getValueSDL<SDL_Color>("knobColor");
+      sliderColor = luaInterface.getValueSDL<SDL_Color>("sliderColor");
       
       luaInterface.unloadTable();
     }
-    
+    else flag = false;
+
     if (luaInterface.loadTable("button")) {
       using namespace Button;
       
@@ -439,7 +584,8 @@ bool Parameters::loadParameters() {
       
       luaInterface.unloadTable();
     }
-    
+    else flag = false;
+
     luaInterface.unloadTable();
   }
 

@@ -5,12 +5,19 @@
 //  Created by Ian Holdeman on 7/14/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Abstract base class for all screens containing essential properties and
+//  methods for managing UI elements, and handling some events. Also contains
+//  virtual methods to ensure implementation of required game loop methods.
 
 // MARK: Header File
 #include "Screen.hpp"
 
 // MARK: Parameter File
 #include "Parameters.hpp"
+
+
+// MARK: - Screen Methods
 
 void Screen::checkForHovering(Game::State *gs, int screen) {
   for (Button& b : *getActiveScreenButtons(screen))

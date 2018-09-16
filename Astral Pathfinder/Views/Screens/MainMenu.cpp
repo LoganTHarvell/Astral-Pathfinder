@@ -5,12 +5,16 @@
 //  Created by Ian Holdeman on 7/14/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Extension of the Screen class for the Main Menu screen. Initializes
+//  appropriate UI elements and updates them accordingly.
 
 // MARK: Header File
 #include "MainMenu.hpp"
 
 // MARK: Parameter File
 #include "Parameters.hpp"
+
 
 // MARK: - MainMenu Initialization
 

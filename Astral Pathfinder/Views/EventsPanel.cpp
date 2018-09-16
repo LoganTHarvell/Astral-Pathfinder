@@ -5,7 +5,12 @@
 //  Created by Ian Holdeman on 4/28/18.
 //  Copyright © 2018 Logan Harvell, Ian Holdeman. All rights reserved.
 //
+//  Description:
+//  Sub-screen manager for displaying relevant and updated event information.
+//  Contains all necessary UI elements and handles their initialization, events,
+//  update, and rendering.
 
+// MARK: Header File
 #include "EventsPanel.hpp"
 
 
@@ -44,8 +49,7 @@ void EventsPanel::render(Game::State *gameState) {
 
 // MARK: - EventsPanel Methods
 
-// Handles the math involved with scrolling
-// I believe scroll is how many pixels you'll be moving
+// Enables scrolling
 void EventsPanel::scrollPanel(int scroll) {
   int newY;
   if (scroll < 0) {
