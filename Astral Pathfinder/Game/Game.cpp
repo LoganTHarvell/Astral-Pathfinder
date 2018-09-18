@@ -139,7 +139,7 @@ void Game::handleEvents() {
         SDL_Keycode key = event.key.keysym.sym;
   
         // Enables hot reloading of parameters
-        // TODO: Create a hot reload methods for appropriate values
+        // TODO: Create hot reload methods for appropriate values
         if (uiManager->getActiveScreen() != UIManager::ScreenType::scores
             && key == SDLK_h) {
           Parameters::loadParameters();

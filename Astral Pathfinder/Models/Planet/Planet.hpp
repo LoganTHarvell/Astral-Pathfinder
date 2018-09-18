@@ -86,7 +86,7 @@ private:
   SDL_Point coordinates;
 
   // TODO: Chage to resource component system
-  // Possibly split into mining, farming, and population
+  // Possibly split into mining, farming, and population components
   
   // TODO: Rework events component to reduce coupling
   EventsComponent *eventManager = nullptr;

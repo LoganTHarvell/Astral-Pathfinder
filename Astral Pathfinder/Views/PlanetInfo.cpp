@@ -170,7 +170,7 @@ int PlanetInfo::getSliderPercent() {
 // MARK: - Helper Methods
 
 // TODO: Clean up all below code, add comments, whitespace, hard coded values
-// split long lines into multiple like this, assign long stuff to temp variables
+// split long lines into multiple like this, use temp variables for readability
 
 // Sets text to each textbox in PlanetInfo
 void PlanetInfo::setBoxes(Planet p) {

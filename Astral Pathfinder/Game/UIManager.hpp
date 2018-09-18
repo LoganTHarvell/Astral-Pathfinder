@@ -70,7 +70,6 @@ private:
   SDL_Texture *gameScreen = nullptr;
   SDL_Color prevColor, timeColor;
   
-  // Screens
   MainMenu mainMenu;
   Scoreboard scoreboard;
   EndScreen endScreen;

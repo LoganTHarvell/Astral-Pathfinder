@@ -18,11 +18,8 @@
 
 
 // MARK: - Parameter Constants
-// TODO: Make a Singleton Class
+// TODO: Make a Singleton class
 namespace Parameters {
-
-  // Base file path for resources directory
-  const std::string resourcePath = SDL_GetBasePath();
   
   const std::string title =
   "It is recommended you enlarge your screen for optimal gameplay.\n"
@@ -48,8 +45,10 @@ namespace Parameters {
   "\n"
   "You are the Astral Pathfinder.";
   
-  // Constants for parameter initialization
   namespace {
+    // Base file path for resources directory
+    const std::string resourcePath = SDL_GetBasePath();
+    
     const std::string luaConfigFile = resourcePath + "config.lua";
   
     struct {
