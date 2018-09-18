@@ -91,14 +91,18 @@ private:
   // TODO: move update score to game class
   void updateTotalScore(PlanetManager *pm, Uint32 elapsedTime);
   
+  // Setters
   SDL_Color setTotalScoreColor();
   void setSelectedPlanet(Planet p);
   void setDockedPlanet(Planet p);
+  void setActiveScreen(int screen);
+  void setEndGameFlags(int nextScreen, Game::State *gs);
+  
+  // Event Handling
   void handleMouseDown(Game::State *gs, PlanetManager *pm);
   void checkClickedArea(SDL_Point p);
   void checkSliderMovement(PlanetInfo *pi, Game::State *gs, PlanetManager *pm);
-  void setActiveScreen(int screen);
-  void setEndGameFlags(int nextScreen, Game::State *gs);
+
 };
 
 #endif /* UIManager_hpp */

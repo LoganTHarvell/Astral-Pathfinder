@@ -23,6 +23,7 @@
 #include "GameObject.hpp"
 
 // MARK: Source Files
+#include "Game.hpp"
 #include "EventsComponent.hpp"
 
 
@@ -64,6 +65,7 @@ public:
   int getFarmingPercent() { return farmingPercent; };
   int getInfraPercent() { return infraPercent; };
   int getReservePercent() { return reservePercent; };
+  
   void setMiningPercent(int percent) { miningPercent = percent; };
   void setFarmingPercent(int percent) { farmingPercent = percent; };
   void setInfraPercent(int percent) { infraPercent = percent; };

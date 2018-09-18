@@ -19,7 +19,6 @@
 #include "TextureManager.hpp"
 
 // MARK: Source Files
-#include "Game.hpp"
 #include "PlanetManager.hpp"
 #include "PlayerShip.hpp"
 #include "Map.hpp"

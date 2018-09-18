@@ -48,6 +48,26 @@ void TextBox::clean() {
 
 
 // MARK: - TextBox Methods
+
+void TextBox::setYCoord(int y) {
+  rect.y = y;
+}
+
+void TextBox::setKey(long k) {
+  key = k;
+}
+
+void TextBox::setRectXW(int x, int w) {
+  rect.x = x;
+  rect.w = w;
+}
+
+// Helper function to check for nullptr
+bool TextBox::checkNull() {
+  if (texture == nullptr) return true;
+  else return false;
+}
+
 // TODO: Take in parameters instead of having methods for each special case
 
 // Default function to give a textbox actual text
@@ -116,16 +136,4 @@ void TextBox::setFinalScore(const std::string words) {
   texture = SDL_CreateTextureFromSurface(Game::renderer, surface);
   SDL_FreeSurface(surface);
   TTF_CloseFont(font);
-}
-
-// Helper function to check for nullptr
-bool TextBox::checkNull() {
-  if (texture == nullptr) return true;
-  else return false;
-}
-
-// Helper function to set x and w values -- cleaner this way
-void TextBox::setRect(int x, int w) {
-  rect.x = x;
-  rect.w = w;
 }

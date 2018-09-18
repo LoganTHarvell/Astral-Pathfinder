@@ -43,6 +43,16 @@ public:
   void clean();
   
   // MARK: - TextBox Methods
+  
+  SDL_Rect getRect() { return rect; }
+  long getKey() { return key; }
+  
+  void setRectXW(int x, int w);
+  void setYCoord(int y);
+  void setKey(long k);
+  
+  bool checkNull();
+  
   // TODO: Take in parameters instead of having methods for each special case
   
   void setMessage(const std::string words, SDL_Color color = Parameters::UI::TextBox::color);
@@ -50,13 +60,6 @@ public:
   void setScoreboardMessage(const std::string words, SDL_Color color = Parameters::UI::TextBox::color);
   void setEventMessage(const std::string words, SDL_Color color);
   void setFinalScore(const std::string words);
-  bool checkNull();
-  void setRect(int x, int w);
-  SDL_Rect getRect() { return rect; }
-  void setYCoord(int y) { rect.y = y; }
-  void setKey(long k) { key = k; }
-  long getKey() { return key; }
-  
   
 private:
   

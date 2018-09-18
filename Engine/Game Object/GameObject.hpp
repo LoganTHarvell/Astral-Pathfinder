@@ -17,9 +17,6 @@
 #include "SDL2/SDL.h"
 #include "ColliderComponent.hpp"
 
-// TODO: Remove once Game is implemented as a singleton
-#include "Game.hpp"
-
 
 // MARK: - GameObject Class
 
@@ -27,29 +24,39 @@ class GameObject {
   
 public:
   
+  // MARK: - Initialization Methods
+  
+  void init(SDL_Rect rect, int rotation, SDL_Texture *texture);
+  
   // MARK: - Game Loop Methods
   
   // TODO: Implement for a base gameObject, override in sub-classes
-  virtual void update(Game::State *gs) = 0;
-  virtual void render(Game::State *gs) = 0;
+  void update();
+  void render(SDL_Renderer *renderer);
   
   //MARK: - GameObject Methods
   
-  ColliderComponent getCollider();
   SDL_Point getPosition();
-  void setPosition(SDL_Point p);
   SDL_Rect getRect();
-  void scale(float x);
+  int getRotation();
   SDL_Point getCenter();
+  ColliderComponent getCollider();
   
 protected:
   
   // MARK: - GameObject Fields
   
   SDL_Rect rect;
+  int rotation;
   SDL_Texture *texture = nullptr;
   ColliderComponent *collider = nullptr;
+
+  // MARK: - Helper Methods
+
+  void setPosition(SDL_Point p);
   
+  void scale(float x);
+
 };
 
 #endif /* GameObject_hpp */

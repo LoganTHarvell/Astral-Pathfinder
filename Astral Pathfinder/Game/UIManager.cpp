@@ -290,6 +290,53 @@ void UIManager::setDockedPlanet(Planet p) {
   DockedPlanetInfo.setUiTextures(p);
 }
 
+// Changes screens during transitions
+void UIManager::setActiveScreen(int screen) {
+  
+  switch (screen) {
+    case menu:
+      activeScreen = menu;
+      break;
+    case scores:
+      activeScreen = scores;
+      break;
+    case game:
+      activeScreen = game;
+      break;
+    case over:
+      activeScreen = over;
+      break;
+    case quit:
+      activeScreen = quit;
+  
+    default:
+      break;
+  }
+
+}
+
+// Special functions to handle ending the game from different screens
+void UIManager::setEndGameFlags(int nextScreen, Game::State *gs) {
+  if (activeScreen == game) {
+    gs->frame = 0;
+    gs->gameOver = false;
+    gs->endgameFrame = 0;
+    gs->endgame = Game::State::none;
+    gs->restartGame = true;
+    gs->skipMainMenu = true;
+    gs->mouseDown = false;
+  }
+  
+  else if (activeScreen == menu) {
+    gs->frame = 0;
+    gs->gameOver = false;
+    gs->endgameFrame = 0;
+    gs->endgame = Game::State::none;
+    gs->restartGame = true;
+    gs->mouseDown = false;
+  }
+}
+
 // Check for mouse click inside any of the info windows
 void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
   
@@ -354,52 +401,5 @@ void UIManager::checkClickedArea(SDL_Point p) {
   }
   else {
     currentWindow = none;
-  }
-}
-
-// Changes screens during transitions
-void UIManager::setActiveScreen(int screen) {
-  
-  switch (screen) {
-    case menu:
-      activeScreen = menu;
-      break;
-    case scores:
-      activeScreen = scores;
-      break;
-    case game:
-      activeScreen = game;
-      break;
-    case over:
-      activeScreen = over;
-      break;
-    case quit:
-      activeScreen = quit;
-  
-    default:
-      break;
-  }
-
-}
-
-// Special functions to handle ending the game from different screens
-void UIManager::setEndGameFlags(int nextScreen, Game::State *gs) {
-  if (activeScreen == game) {
-    gs->frame = 0;
-    gs->gameOver = false;
-    gs->endgameFrame = 0;
-    gs->endgame = Game::State::none;
-    gs->restartGame = true;
-    gs->skipMainMenu = true;
-    gs->mouseDown = false;
-  }
-  
-  else if (activeScreen == menu) {
-    gs->frame = 0;
-    gs->gameOver = false;
-    gs->endgameFrame = 0;
-    gs->endgame = Game::State::none;
-    gs->restartGame = true;
-    gs->mouseDown = false;
   }
 }
