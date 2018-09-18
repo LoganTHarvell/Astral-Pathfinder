@@ -91,7 +91,7 @@ namespace Parameters {
     SDL_Color warningColor = { 255, 255, 0 };
     
     // File path to main game screen background texture
-    std::string gameScreenFile = "../Resources/gameScreen2.png";
+    std::string gameScreenFile = resourcePath + "gameScreen2.png";
   
   }
  
@@ -100,9 +100,9 @@ namespace Parameters {
   namespace Planet {
     
     // Planet texture information
-    std::string planetTextureFile = "../Resources/planet2.png";
+    std::string planetTextureFile = resourcePath + "planet2.png";
     int planetTexSize = 16;
-    std::string planetOutlineFile = "../Resources/planetOutline.png";
+    std::string planetOutlineFile = resourcePath + "planetOutline.png";
     int planetOutlineSize = 24;
     
     // Resource information, ranges expressed as (max - min)
@@ -177,8 +177,8 @@ namespace Parameters {
   
   namespace Ship {
     
-    std::string playerTexFile = "../Resources/movingPlayerShip2.png";
-    std::string alienTexFile = "../Resources/alienShip.png";
+    std::string playerTexFile = resourcePath + "movingPlayerShip2.png";
+    std::string alienTexFile = resourcePath + "alienShip.png";
     
     // Ship rect geometry in { x, y, w, h }
     SDL_Rect shipRect = { 0, 0, 48, 24 };
@@ -221,7 +221,7 @@ namespace Parameters {
     
     namespace MainMenu {
       
-      std::string textureFile = "../Resources/mainMenu.png";
+      std::string textureFile = resourcePath + "mainMenu.png";
       
       // Button selectable geometry in { x, y, w, h }
       SDL_Rect startGameButton = { 600, 401, 424, 57 };
@@ -239,8 +239,8 @@ namespace Parameters {
     
     namespace Scoreboard {
      
-      std::string textureFile = "../Resources/scoreboard.png";
-      std::string scoresFile = "Resources/Scores/scoreboard.txt";
+      std::string textureFile = resourcePath + "scoreboard.png";
+      std::string scoresFile = resourcePath + "scoreboard.txt";
       
       int scoreboardMax = 10;
       
@@ -267,9 +267,9 @@ namespace Parameters {
       SDL_Rect playAgainBorder = { 270, 662, 460, 95 };
       SDL_Rect mainMenuBorder = { 867, 666, 460, 92 };
       
-      std::string winTextureFile = "../Resources/winScreen.png";
-      std::string loseTextureFile = "../Resources/loseScreen.png";
-      std::string crashTextureFile = "../Resources/alienScreen.png";
+      std::string winTextureFile = resourcePath + "winScreen.png";
+      std::string loseTextureFile = resourcePath + "loseScreen.png";
+      std::string crashTextureFile = resourcePath + "alienScreen.png";
     
     }
     
@@ -279,7 +279,7 @@ namespace Parameters {
       
       // Texture color in { r, g, b } (0-255)
       SDL_Color color = { 0, 128, 0 };
-      std::string fontFile = "../Resources/MODENINE.TTF";
+      std::string fontFile = resourcePath + "MODENINE.TTF";
       
       int regFontSize = 36;
       int eventFontSize = 18;
@@ -294,8 +294,8 @@ namespace Parameters {
     
     namespace Slider {
       
-      std::string baseTexFile = "../Resources/base.png";
-      std::string sliderTexFile = "../Resources/slider.png";
+      std::string baseTexFile = resourcePath + "base.png";
+      std::string sliderTexFile = resourcePath + "slider.png";
       
       // Texture color in { r, g, b } (0-255)
       SDL_Color baseColor = { 150, 150, 150 };
@@ -307,7 +307,7 @@ namespace Parameters {
     
     namespace Button {
       
-      std::string textureFile = "../Resources/border.png";
+      std::string textureFile = resourcePath + "border.png";
     
     }
       
@@ -328,8 +328,9 @@ namespace Parameters {
  * 5. Unload table by calling unloadTable()
  * 6. Repeat steps 3-5 for all tables with values to be retrieved
  *
- * NOTE: If the file contains SDL types, LuaInterfaceSDL must be used, and
+ * NOTE #1: If the file contains SDL types, LuaInterfaceSDL must be used, and
  * to retrieve SDL types, use getValueSDL<type>("valueName")
+ * NOTE #2: Loaded filenames must prepend the resource filepath
  *
 */
 
@@ -338,7 +339,7 @@ bool Parameters::loadParameters() {
   bool flag = true;
   
   LuaInterfaceSDL2 luaInterface = LuaInterfaceSDL2();
-  
+    
   // Initializes Lua config file
   if (!luaInterface.init(luaConfigFile)) return false;
   
@@ -392,7 +393,8 @@ bool Parameters::loadParameters() {
     goodColor = luaInterface.getValueSDL<SDL_Color>("goodColor");
     warningColor = luaInterface.getValueSDL<SDL_Color>("warningColor");
     
-    gameScreenFile = luaInterface.getValue<std::string>("gameScreenFile");
+    gameScreenFile = resourcePath;
+    gameScreenFile += luaInterface.getValue<std::string>("gameScreenFile");
     
     luaInterface.unloadTable();
   }
@@ -401,10 +403,12 @@ bool Parameters::loadParameters() {
   if (luaInterface.loadTable(tables.planetParameters)) {
     using namespace Planet;
     
-    planetTextureFile = luaInterface.getValue<std::string>("planetTextureFile");
+    planetTextureFile = resourcePath;
+    planetTextureFile += luaInterface.getValue<std::string>("planetTextureFile");
     planetTexSize = luaInterface.getValue<int>("planetTexSize");
     
-    planetOutlineFile = luaInterface.getValue<std::string>("planetOutlineFile");
+    planetOutlineFile = resourcePath;
+    planetOutlineFile += luaInterface.getValue<std::string>("planetOutlineFile");
     planetOutlineSize = luaInterface.getValue<int>("planetOutlineSize");
     
     minFertility = luaInterface.getValue<int>("minFertility");
@@ -455,8 +459,10 @@ bool Parameters::loadParameters() {
   if (luaInterface.loadTable(tables.shipParameters)) {
     using namespace Ship;
     
-    playerTexFile = luaInterface.getValue<std::string>("playerTexFile");
-    alienTexFile = luaInterface.getValue<std::string>("alienTexFile");
+    playerTexFile = resourcePath;
+    playerTexFile += luaInterface.getValue<std::string>("playerTexFile");
+    alienTexFile = resourcePath;
+    alienTexFile += luaInterface.getValue<std::string>("alienTexFile");
     
     shipRect = luaInterface.getValueSDL<SDL_Rect>("shipRect");
     shipPopulation = luaInterface.getValue<int>("shipPopulation");
@@ -499,7 +505,8 @@ bool Parameters::loadParameters() {
     if (luaInterface.loadTable("mainMenu")) {
       using namespace MainMenu;
       
-      textureFile = luaInterface.getValue<std::string>("textureFile");
+      textureFile = resourcePath;
+      textureFile += luaInterface.getValue<std::string>("textureFile");
       
       startGameButton = luaInterface.getValueSDL<SDL_Rect>("startGameButton");
       scoreboardButton = luaInterface.getValueSDL<SDL_Rect>("scoreboardButton");
@@ -516,8 +523,10 @@ bool Parameters::loadParameters() {
     if (luaInterface.loadTable("scoreboard")) {
       using namespace Scoreboard;
       
-      textureFile = luaInterface.getValue<std::string>("textureFile");
-      scoresFile = luaInterface.getValue<std::string>("scoresFile");
+      textureFile = resourcePath;
+      textureFile += luaInterface.getValue<std::string>("textureFile");
+      scoresFile = resourcePath;
+      scoresFile += luaInterface.getValue<std::string>("scoresFile");
       
       scoreboardMax = luaInterface.getValue<int>("scoreboardMax");
       
@@ -540,9 +549,12 @@ bool Parameters::loadParameters() {
       playAgainBorder = luaInterface.getValueSDL<SDL_Rect>("playAgainBorder");
       mainMenuBorder = luaInterface.getValueSDL<SDL_Rect>("mainMenuBorder");
       
-      winTextureFile = luaInterface.getValue<std::string>("winTextureFile");
-      loseTextureFile = luaInterface.getValue<std::string>("loseTextureFile");
-      crashTextureFile = luaInterface.getValue<std::string>("crashTextureFile");
+      winTextureFile = resourcePath;
+      winTextureFile += luaInterface.getValue<std::string>("winTextureFile");
+      loseTextureFile = resourcePath;
+      loseTextureFile += luaInterface.getValue<std::string>("loseTextureFile");
+      crashTextureFile = resourcePath;
+      crashTextureFile += luaInterface.getValue<std::string>("crashTextureFile");
       
       luaInterface.unloadTable();
     }
@@ -552,7 +564,8 @@ bool Parameters::loadParameters() {
       using namespace TextBox;
       
       color = luaInterface.getValueSDL<SDL_Color>("color");
-      fontFile = luaInterface.getValue<std::string>("fontFile");
+      fontFile = resourcePath;
+      fontFile += luaInterface.getValue<std::string>("fontFile");
       regFontSize = luaInterface.getValue<int>("regFontSize");
       eventFontSize = luaInterface.getValue<int>("eventFontSize");
       finalScoreFontSize = luaInterface.getValue<int>("finalScoreFontSize");
@@ -567,8 +580,10 @@ bool Parameters::loadParameters() {
     if (luaInterface.loadTable("slider")) {
       using namespace Slider;
       
-      baseTexFile = luaInterface.getValue<std::string>("baseTexFile");
-      sliderTexFile = luaInterface.getValue<std::string>("sliderTexFile");
+      baseTexFile = resourcePath;
+      baseTexFile += luaInterface.getValue<std::string>("baseTexFile");
+      sliderTexFile = resourcePath;
+      sliderTexFile += luaInterface.getValue<std::string>("sliderTexFile");
       
       baseColor = luaInterface.getValueSDL<SDL_Color>("baseColor");
       sliderColor = luaInterface.getValueSDL<SDL_Color>("sliderColor");
@@ -580,7 +595,8 @@ bool Parameters::loadParameters() {
     if (luaInterface.loadTable("button")) {
       using namespace Button;
       
-      textureFile = luaInterface.getValue<std::string>("textureFile");
+      textureFile = resourcePath;
+      textureFile += luaInterface.getValue<std::string>("textureFile");
       
       luaInterface.unloadTable();
     }
