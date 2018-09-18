@@ -1,0 +1,5 @@
+# Astral Pathfinder Git Attributes
+
+# Vendored Code
+Engine/Lua/Library/* linguist-vendored
+Engine/SDL2/* linguist-vendored
