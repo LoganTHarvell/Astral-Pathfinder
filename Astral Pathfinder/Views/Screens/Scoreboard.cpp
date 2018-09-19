@@ -29,7 +29,7 @@ void Scoreboard::init() {
   
   TextureManager::loadTexture(textureFile, &texture, Game::renderer);
   
-  addButton(scores, mainMenuButton, mainMenuBorder, menu);
+  addButton(ButtonID::menu, mainMenuButton, mainMenuBorder);
   
   TextBox box;
   SDL_Rect temp;
@@ -58,7 +58,7 @@ void Scoreboard::render(Game::State *gs) {
   SDL_RenderCopy(Game::renderer, texture, NULL,
                  &Parameters::UIManager::screenRect);
   
-  renderButtons(scores);
+  renderButtons();
   
   for (int i = 0; i < scoreboardMax; i++) {
     if (boardScores[i] > -1) {
@@ -81,6 +81,20 @@ void Scoreboard::writeScore(Game::State *gs, int score) {
   file << message << endl;
   file.close();
 }
+
+// Evaluates buttonID and checks for transitions
+Screen::ID Scoreboard::getNextScreen(int buttonID) {
+  switch (buttonID) {
+    case menu:
+      return ID::menu;
+      
+    default:
+      return none;
+  }
+}
+
+
+// MARK: - Scoreboard Helper Methods
 
 void Scoreboard::readScores() {
   using namespace std;

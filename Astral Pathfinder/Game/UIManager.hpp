@@ -38,10 +38,6 @@
 class UIManager {
 
 public:
-  enum ScreenType {
-    menu, scores, game, over, quit
-  };
-  
   // MARK: - UIManager Initialization
   void init(Game::State *gameState);
   
@@ -50,15 +46,11 @@ public:
   void render(Game::State *gameState, PlanetManager *pm);
   
   // MARK: - Getter Methods
-  ScreenType getActiveScreen() { return activeScreen; };
+  Screen::ID getActiveScreen() { return activeScreen; };
   bool checkStartScreens();
   
-private:
-  
+private:  
   // MARK: - UIManager Screens
-  
-  // TODO: move score and prevScore to game state
-  int score, prevScore;
   
   // TODO: Move all gameplay UI elements to a gameplayScreen
   TextBox time;
@@ -70,7 +62,6 @@ private:
   SDL_Texture *gameScreen = nullptr;
   SDL_Color prevColor, timeColor;
   
-  // Screens
   MainMenu mainMenu;
   Scoreboard scoreboard;
   EndScreen endScreen;
@@ -79,27 +70,32 @@ private:
     none, currentPlanetWindow, selectedPlanetWindow
   } currentWindow = none;
   
-  ScreenType activeScreen = menu;
+  Screen::ID activeScreen = Screen::ID::menu;
   
   bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true;
   bool mainMenuFlag, scoreboardFlag;
+ 
+  int score, prevScore;
   
   // MARK: - Helper Methods
   
   void updateTime(Uint32);
   SDL_Color checkTime(Uint32 elapsedTime);
   
-  // TODO: move update score to game class
   void updateTotalScore(PlanetManager *pm, Uint32 elapsedTime);
   
+  // Setters
   SDL_Color setTotalScoreColor();
   void setSelectedPlanet(Planet p);
   void setDockedPlanet(Planet p);
+  void setActiveScreen(Screen::ID screen);
+  void setEndGameFlags(Screen::ID nextScreen, Game::State *gs);
+  
+  // Event Handling
   void handleMouseDown(Game::State *gs, PlanetManager *pm);
   void checkClickedArea(SDL_Point p);
   void checkSliderMovement(PlanetInfo *pi, Game::State *gs, PlanetManager *pm);
-  void setActiveScreen(int screen);
-  void setEndGameFlags(int nextScreen, Game::State *gs);
+
 };
 
 #endif /* UIManager_hpp */

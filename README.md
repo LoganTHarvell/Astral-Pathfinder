@@ -1,4 +1,4 @@
-# Astral-Pathfinder
+# Astral Pathfinder
 A real-time space sim game written in C++ with the SDL2 library and a Lua interface for data and scripting.
 Created and owned by [Logan Harvell](https://github.com/LoganTHarvell), collaboration by [Ian Holdeman](https://github.com/iholdeman1).
 

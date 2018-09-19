@@ -25,7 +25,19 @@ EventsComponent::EventsComponent(SDL_Point p) {
 void EventsComponent::update(bool blight, bool plague, bool minCollapse, bool popDec, bool overProd) {
   events.blight = blight;
   events.plague = plague;
-  events.populationDec = popDec;
   events.mineCollapse = minCollapse;
+  events.populationDec = popDec;
   events.isOverproducing = overProd;
+}
+
+
+// MARK: - EventsComponent Methods
+
+
+void EventsComponent::setPopulationDec(bool declining) {
+  events.populationDec = declining;
+}
+
+void EventsComponent::setOverproducing(bool overproducing) {
+  events.isOverproducing = overproducing;
 }

@@ -17,6 +17,9 @@
 #include "SDL2/SDL.h"
 #include "GameObject.hpp"
 
+// MARK: Source Files
+#include "Game.hpp"
+
 
 // MARK: - Ship Class
 
@@ -41,7 +44,6 @@ public:
   // MARK: - Ship Methods
   
   ShipType getTag() { return tag; };
-  int getRotation() { return rotation; };
   SDL_Point getVelocity() { return velocity; }
   SDL_Point getUIPosition() { return getCenter(); };
   SDL_Point mapPosition();
@@ -53,7 +55,6 @@ protected:
   
   ShipType tag;
   SDL_Point velocity;
-  int rotation;
   
   // MARK: - Helper Methods
   bool boundaryCollision();

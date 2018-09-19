@@ -16,7 +16,10 @@
 #include "SDL2/SDL.h"
 
 
+// MARK: - EventsCompnonent Class
+
 class EventsComponent {
+
 public:
   
   // MARK: - Constructors, Destructor
@@ -27,20 +30,28 @@ public:
   // MARK: - Game Loop Methods
   
   void update(bool blight, bool plague, bool minCollapse, bool popDec, bool overProd);
+
+  // MARK: - EventsComponent Methods
   
+  // Getters
   SDL_Point getLocation() { return location; }
   bool getBlight() { return events.blight; }
   bool getPlague() { return events.plague; }
   bool getMineCollapse() { return events.mineCollapse; }
   bool getPopulationDec() { return events.populationDec; }
   bool getOverProducing() { return events.isOverproducing; }
-  bool getTest() { return true; }
+  
+  // Setters
+  void setPopulationDec(bool declining);
+  void setOverproducing(bool overproducing);
   
 private:
   
+  // MARK: - EventsComponent Fields
+  
   struct {
-    bool isOverproducing;
     bool populationDec;
+    bool isOverproducing;
     bool plague;
     bool blight;
     bool mineCollapse;

@@ -29,6 +29,16 @@ public:
   
   void update(Game::State *gs);
   void render(Game::State *gs);
+  
+  // MARK: - EndScreen Methods
+  
+  ID getNextScreen(int buttonID);
+  
+private:
+  
+  enum ButtonID {
+    replay, menu
+  };
 
 };
 

@@ -19,7 +19,6 @@
 #include "TextureManager.hpp"
 
 // MARK: Source Files
-#include "Game.hpp"
 #include "PlanetManager.hpp"
 #include "PlayerShip.hpp"
 #include "Map.hpp"
@@ -214,7 +213,6 @@ void Planet::updateStatus() {
     status = discovered;
 }
 
-// TODO: Move to events component
 void Planet::updateRandomEvents(Uint32 frame) {
   using namespace Parameters::Planet;
   
@@ -384,34 +382,45 @@ void Planet::updateEventComponent() {
   eventManager->update(events.blight, events.plague, events.mineCollapse, populationDec, isOverproducing);
 }
 
-// TODO: Move hard coded values to parameters
 // Updates a planet color code based on status
 void Planet::updateColors() {
+  using namespace Parameters::Planet;
+
   if (status == undiscovered) {
-    SDL_SetTextureAlphaMod(texture, 127);
+    SDL_SetTextureAlphaMod(texture, undiscColor.a);
+    SDL_SetTextureColorMod(texture,
+                           undiscColor.r, undiscColor.g, undiscColor.b);
     return;
   }
   
-  SDL_SetTextureAlphaMod(texture, 255);
+  // Resets alpha value
+  SDL_SetTextureAlphaMod(texture, normalAlpha);
+  
   if (selected) {
-    SDL_SetTextureColorMod(texture, 0, 255, 0);
+    SDL_SetTextureColorMod(texture,
+                           selectedColor.r, selectedColor.g, selectedColor.b);
     return;
   }
   
   if (status == discovered) {
-    SDL_SetTextureColorMod(texture, 255, 255, 255);
+    SDL_SetTextureColorMod(texture,
+                           discoverColor.r, discoverColor.g, discoverColor.b);
     return;
   }
   
-  if (isOverproducing)
-    SDL_SetTextureColorMod(texture, 200, 0, 0);
-  
-  else if (populationDec)
-    SDL_SetTextureColorMod(texture, 200, 200, 0);
-  
+  // Colony related color codes
+  if (populationDec) {
+    SDL_SetTextureColorMod(texture,
+                           popDecColor.r, popDecColor.g, popDecColor.b);
+  }
+  else if (isOverproducing) {
+    SDL_SetTextureColorMod(texture,
+                           overprodColor.r, overprodColor.g, overprodColor.b);
+  }
   else {
-    SDL_SetTextureAlphaMod(texture, 150);
-    SDL_SetTextureColorMod(texture, 0, 175, 0);
+    SDL_SetTextureAlphaMod(texture, colonyColor.a);
+    SDL_SetTextureColorMod(texture,
+                           colonyColor.r, colonyColor.g, colonyColor.b);
   }
 }
 

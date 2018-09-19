@@ -18,7 +18,7 @@
 
 
 // MARK: - Parameter Constants
-// TODO: Make a Singleton Class
+// TODO: Make a Singleton class
 namespace Parameters {
   
   const std::string title =
@@ -45,9 +45,11 @@ namespace Parameters {
   "\n"
   "You are the Astral Pathfinder.";
   
-  // Constants for parameter initialization
   namespace {
-    const std::string luaConfigFile = "Resources/config.lua";
+    // Base file path for resources directory
+    const std::string resourcePath = SDL_GetBasePath();
+    
+    const std::string luaConfigFile = resourcePath + "config.lua";
   
     struct {
       std::string gameParameters = "game";
@@ -128,6 +130,14 @@ namespace Parameters {
     extern int planetTexSize;
     extern std::string planetOutlineFile;
     extern int planetOutlineSize;
+    
+    extern Uint8 normalAlpha;
+    extern SDL_Color undiscColor;
+    extern SDL_Color discoverColor;
+    extern SDL_Color colonyColor;
+    extern SDL_Color popDecColor;
+    extern SDL_Color overprodColor;
+    extern SDL_Color selectedColor;
     
     // Planet initial attribute information
     extern int minFertility;

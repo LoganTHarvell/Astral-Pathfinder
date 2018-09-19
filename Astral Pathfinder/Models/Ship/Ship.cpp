@@ -17,7 +17,6 @@
 #include <iostream>
 
 // MARK: Source Files
-#include "Game.hpp"
 #include "Map.hpp"
 
 // MARK: Aliases

@@ -17,6 +17,7 @@
 // MARK: Libraries and Frameworks
 #include "SDL2/SDL.h"
 #include <vector>
+#include <map>
 
 // MARK: Source Files
 #include "TextBox.hpp"
@@ -26,12 +27,16 @@
 
 
 // MARK: - Screen Class
-// TODO: - Make a generic class without game specific attributes
-// Use entity component system for buttons
+// TODO: Make a generic class without game specific attributes
 
 class Screen {
   
 public:
+  // Screen Identifiers
+  enum ID {
+    none=-1, menu, scores, game, over, quit
+  };
+  
   // MARK: - Screen Initialization
   virtual void init() = 0;
   
@@ -40,30 +45,25 @@ public:
   virtual void render(Game::State *gs) = 0;
   
   // MARK: - Screen Methods
-  void checkForHovering(Game::State *gs, int screen);
-  int checkClick(Game::State *gs, int screen);
+  void checkForHovering(Game::State *gs);
+  int checkClick(Game::State *gs);
   
   // TODO: Rework buttons without screen information, make buttons generic
-  void addButton(int currentScreen, SDL_Rect bounds, SDL_Rect border,
-                 int nextScreen);
-  void renderButtons(int screen);
+  void addButton(int id, SDL_Rect bounds, SDL_Rect border);
+  void renderButtons();
   
 protected:
-  enum activeScreen {
-    none=-1, menu, scores, game, over, quit
-  };
   
+  // MARK: - Screen Fields
+
   SDL_Texture *texture = nullptr;
   SDL_Rect borderRect;
     
 private:
   
-  // TODO: Simplify to one list of buttons
-  std::vector<Button> mainMenuButtons;
-  std::vector<Button> scoreboardButtons;
-  std::vector<Button> endScreenButtons;
+  std::vector<Button> buttons;
+  std::map<int, int> actions;
   
-  std::vector<Button> *getActiveScreenButtons(int screen);
 };
 
 #endif /* Screen_hpp */

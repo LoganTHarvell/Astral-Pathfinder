@@ -108,7 +108,6 @@ SDL_Rect LuaInterfaceSDL2::convertLuaSDL<SDL_Rect>(const std::string key) {
   SDL_Rect r = { x, y, w, h };
   
   return r;
-  
 }
 
 template <>
@@ -123,11 +122,22 @@ SDL_Color LuaInterfaceSDL2::convertLuaSDL<SDL_Color>(const std::string key) {
   Uint8 r = getValue<int>("r");
   Uint8 g = getValue<int>("g");
   Uint8 b = getValue<int>("b");
+
+  SDL_Color c;
   
-  SDL_Color c = { r, g, b };
+  // Checks for an alpha value
+  bool alphaExists = lua_getfield(L, -1, "a");
+  lua_pop(L, 1);
+  
+  if (alphaExists) {
+    Uint8 a = getValue<int>("a");
+    c = { r, g, b, a };
+  }
+  else {
+    c = { r, g, b };
+  }
   
   return c;
-  
 }
 
 // MARK: - Explicit Instantions for Template Methods

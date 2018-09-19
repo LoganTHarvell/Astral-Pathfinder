@@ -28,7 +28,7 @@
 void UIManager::init(Game::State *gameState) {
   using namespace Parameters::UIManager;
 
-  // TODO: move all gameplay UI elements into a gameplayScreen
+  // TODO: Move all gameplay UI elements into a gameplayScreen
   
   // Gameplay UI element initialziation
   time.init(timeRect);
@@ -52,7 +52,7 @@ void UIManager::init(Game::State *gameState) {
   scoreboard.init();
   endScreen.init();
   
-  if (gameState->skipMainMenu) activeScreen = game;
+  if (gameState->skipMainMenu) activeScreen = Screen::ID::game;
 }
 
 
@@ -66,24 +66,28 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
   }
   
   // If on the main menu, check game state for button interaction
-  else if (activeScreen == menu) {
-    mainMenu.checkForHovering(gameState, activeScreen);
+  else if (activeScreen == Screen::ID::menu) {
+    mainMenu.checkForHovering(gameState);
     
     if (gameState->mouseDown) {
-      int newScreen = mainMenu.checkClick(gameState, activeScreen);
-      if (newScreen != -1)
-        setActiveScreen(newScreen);
+      int buttonID = mainMenu.checkClick(gameState);
+      if (buttonID != -1) {
+        Screen::ID newScreen = mainMenu.getNextScreen(buttonID);
+        if (newScreen != Screen::ID::none) setActiveScreen(newScreen);
+      }
     }
   }
   
   // If on scoreboard, check for button interaction
-  else if (activeScreen == scores) {
-    scoreboard.checkForHovering(gameState, activeScreen);
+  else if (activeScreen == Screen::ID::scores) {
+    scoreboard.checkForHovering(gameState);
     
     if (gameState->mouseDown) {
-      int newScreen = scoreboard.checkClick(gameState, activeScreen);
-      if (newScreen != -1)
-        setActiveScreen(newScreen);
+      int buttonID = scoreboard.checkClick(gameState);
+      if (buttonID != -1) {
+        Screen::ID newScreen = scoreboard.getNextScreen(buttonID);
+        if (newScreen != Screen::ID::none) setActiveScreen(newScreen);
+      }
     }
   }
   
@@ -92,16 +96,19 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     if (!SDL_IsTextInputActive()) SDL_StartTextInput();
     
     endScreen.update(gameState);
-    endScreen.checkForHovering(gameState, over);
+    endScreen.checkForHovering(gameState);
     
     if (gameState->mouseDown) {
-      int newScreen = endScreen.checkClick(gameState, over);
+      int buttonID = endScreen.checkClick(gameState);
       
-      if (newScreen != -1) {
-        setActiveScreen(newScreen);
-        SDL_StopTextInput();
-        scoreboard.writeScore(gameState, score);
-        setEndGameFlags(newScreen, gameState);
+      if (buttonID != -1) {
+        Screen::ID newScreen = endScreen.getNextScreen(buttonID);
+        if (newScreen != Screen::ID::none) {
+          setActiveScreen(newScreen);
+          SDL_StopTextInput();
+          scoreboard.writeScore(gameState, score);
+          setEndGameFlags(newScreen, gameState);
+        }
       }
     }
   
@@ -148,19 +155,19 @@ void UIManager::update(Game::State *gameState, PlanetManager *planetManager, Shi
     handleMouseDown(gameState, planetManager);
   }
   
-  if (activeScreen == quit) gameState->endgame = Game::State::quit;
+  if (activeScreen == Screen::ID::quit) gameState->endgame = Game::State::quit;
 }
 
 void UIManager::render(Game::State *gameState, PlanetManager *pm) {
   using namespace Parameters::UIManager;
   
   // Main Menu Screen
-  if (activeScreen == menu) {
+  if (activeScreen == Screen::ID::menu) {
     mainMenu.render(gameState);
   }
   
   // Scoreboard Screen
-  else if (activeScreen == scores) {
+  else if (activeScreen == Screen::ID::scores) {
     scoreboard.render(gameState);
   }
   
@@ -216,7 +223,7 @@ void UIManager::render(Game::State *gameState, PlanetManager *pm) {
 
 // Helper method to check for both screens in one call
 bool UIManager::checkStartScreens() {
-  if (activeScreen == menu || activeScreen == scores) return true;
+  if (activeScreen == Screen::ID::menu || activeScreen == Screen::ID::scores) return true;
   return false;
 }
 
@@ -290,6 +297,53 @@ void UIManager::setDockedPlanet(Planet p) {
   DockedPlanetInfo.setUiTextures(p);
 }
 
+// Changes screens during transitions
+void UIManager::setActiveScreen(Screen::ID screen) {
+  
+  switch (screen) {
+    case Screen::ID::menu:
+      activeScreen = Screen::ID::menu;
+      break;
+    case Screen::ID::scores:
+      activeScreen = Screen::ID::scores;
+      break;
+    case Screen::game:
+      activeScreen = Screen::ID::game;
+      break;
+    case Screen::ID::over:
+      activeScreen = Screen::ID::over;
+      break;
+    case Screen::ID::quit:
+      activeScreen = Screen::ID::quit;
+  
+    default:
+      break;
+  }
+
+}
+
+// Special functions to handle ending the game from different screens
+void UIManager::setEndGameFlags(Screen::ID nextScreen, Game::State *gs) {
+  if (activeScreen == Screen::ID::game) {
+    gs->frame = 0;
+    gs->gameOver = false;
+    gs->endgameFrame = 0;
+    gs->endgame = Game::State::none;
+    gs->restartGame = true;
+    gs->skipMainMenu = true;
+    gs->mouseDown = false;
+  }
+  
+  else if (activeScreen == Screen::ID::menu) {
+    gs->frame = 0;
+    gs->gameOver = false;
+    gs->endgameFrame = 0;
+    gs->endgame = Game::State::none;
+    gs->restartGame = true;
+    gs->mouseDown = false;
+  }
+}
+
 // Check for mouse click inside any of the info windows
 void UIManager::handleMouseDown(Game::State *gs, PlanetManager *pm) {
   
@@ -354,52 +408,5 @@ void UIManager::checkClickedArea(SDL_Point p) {
   }
   else {
     currentWindow = none;
-  }
-}
-
-// Changes screens during transitions
-void UIManager::setActiveScreen(int screen) {
-  
-  switch (screen) {
-    case menu:
-      activeScreen = menu;
-      break;
-    case scores:
-      activeScreen = scores;
-      break;
-    case game:
-      activeScreen = game;
-      break;
-    case over:
-      activeScreen = over;
-      break;
-    case quit:
-      activeScreen = quit;
-  
-    default:
-      break;
-  }
-
-}
-
-// Special functions to handle ending the game from different screens
-void UIManager::setEndGameFlags(int nextScreen, Game::State *gs) {
-  if (activeScreen == game) {
-    gs->frame = 0;
-    gs->gameOver = false;
-    gs->endgameFrame = 0;
-    gs->endgame = Game::State::none;
-    gs->restartGame = true;
-    gs->skipMainMenu = true;
-    gs->mouseDown = false;
-  }
-  
-  else if (activeScreen == menu) {
-    gs->frame = 0;
-    gs->gameOver = false;
-    gs->endgameFrame = 0;
-    gs->endgame = Game::State::none;
-    gs->restartGame = true;
-    gs->mouseDown = false;
   }
 }

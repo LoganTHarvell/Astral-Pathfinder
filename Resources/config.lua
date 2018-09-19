@@ -45,16 +45,23 @@ local parameters = {
     goodColor = { r = 0, g = 128, b = 0 },
     warningColor = { r = 255, g = 255, b = 0 },
 
-    gameScreenFile = "../Resources/gameScreen2.png"
+    gameScreenFile = "gameScreen2.png"
   },
 
   planet = {
-    planetTextureFile = "../Resources/planet2.png",
+    planetTextureFile = "planet2.png",
     planetTexSize = 16,
-
-    planetOutlineFile = "../Resources/planetOutline.png",
+    planetOutlineFile = "planetOutline.png",
     planetOutlineSize = 24,
 
+    normalAlpha = 255,
+    selectedColor = { r = 0, g = 255, b = 0 },
+    undiscColor = { r = 200, g = 200, b = 200, a = 150 },
+    discoverColor = { r = 255, g = 255, b = 255 },
+    colonyColor = { r = 0, g = 255, b = 0, a = 150 },
+    popDecColor = { r = 200, g = 200, b = 0 },
+    overprodColor = { r = 200, g = 0,  b = 0 },
+    
     -- Planet initialization information
     -- Percents should be a value between 0 and 100
     minFertility = 20,
@@ -113,8 +120,8 @@ local parameters = {
   },
 
   ship = {
-    playerTexFile = "../Resources/movingPlayerShip2.png",
-    alienTexFile = "../Resources/alienShip.png";
+    playerTexFile = "movingPlayerShip2.png",
+    alienTexFile = "alienShip.png";
 
     shipRect = { x = 0, y = 0, w = 48, h = 24 },
     shipPopulation = 1000,
@@ -145,7 +152,7 @@ local parameters = {
     },
 
     mainMenu = {
-      textureFile = "../Resources/mainMenu.png",
+      textureFile = "mainMenu.png",
       startGameButton = { x = 600, y = 401, w = 424, h = 57 },
       scoreboardButton = { x = 600, y = 538, w = 424, h = 58 },
       exitGameButton = { x = 600, y = 676, w = 424, h = 54 },
@@ -155,8 +162,8 @@ local parameters = {
     },
 
     scoreboard = {
-      textureFile = "../Resources/scoreboard.png",
-      scoresFile = "Resources/Scores/scoreboard.txt",
+      textureFile = "scoreboard.png",
+      scoresFile = "scoreboard.txt",
 
       scoreboardMax = 10,
 
@@ -173,14 +180,14 @@ local parameters = {
       playAgainBorder = { x = 270, y = 662, w = 460, h = 95 },
       mainMenuBorder = { x = 867, y = 666, w = 460, h = 92 },
 
-      winTextureFile = "../Resources/winScreen.png",
-      loseTextureFile = "../Resources/loseScreen.png",
-      crashTextureFile = "../Resources/alienScreen.png"
+      winTextureFile = "winScreen.png",
+      loseTextureFile = "loseScreen.png",
+      crashTextureFile = "alienScreen.png"
     },
 
     textBox = {
       color = { r = 0, g = 128, b = 0 },
-      fontFile = "../Resources/MODENINE.TTF",
+      fontFile = "MODENINE.TTF",
 
       regFontSize = 36,
       eventFontSize = 18,
@@ -191,8 +198,8 @@ local parameters = {
     },
 
     slider = {
-      baseTexFile = "../Resources/base.png",
-      sliderTexFile = "../Resources/slider.png",
+      baseTexFile = "base.png",
+      sliderTexFile = "slider.png",
 
       -- RGB values should be within the range 0 - 255
       baseColor = { r = 150, g = 150, b = 150 },
@@ -200,7 +207,7 @@ local parameters = {
     },
 
     button = {
-      textureFile = "../Resources/border.png"
+      textureFile = "border.png"
     }
   }
 

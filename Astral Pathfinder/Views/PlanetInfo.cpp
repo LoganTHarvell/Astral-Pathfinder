@@ -170,7 +170,7 @@ int PlanetInfo::getSliderPercent() {
 // MARK: - Helper Methods
 
 // TODO: Clean up all below code, add comments, whitespace, hard coded values
-// split long lines into multiple like this, assign long stuff to temp variables
+// split long lines into multiple like this, use temp variables for readability
 
 // Sets text to each textbox in PlanetInfo
 void PlanetInfo::setBoxes(Planet p) {
@@ -188,10 +188,10 @@ void PlanetInfo::setBoxes(Planet p) {
     
     food = "Fertility: " + std::to_string(p.getFertility());
     minerals = "Deposits: " + std::to_string(p.getDeposits());
-    popText.setRect(origin.x+(origin.w/2)+40, (origin.w/2)-50);
-    farmingText.setRect(origin.x+(origin.w/2)+40, (origin.w/2)-50);
-    miningText.setRect(origin.x+5, (origin.w/2)-40);
-    locationText.setRect(origin.x+5, (origin.w/2)-40);
+    popText.setRectXW(origin.x+(origin.w/2)+40, (origin.w/2)-50);
+    farmingText.setRectXW(origin.x+(origin.w/2)+40, (origin.w/2)-50);
+    miningText.setRectXW(origin.x+5, (origin.w/2)-40);
+    locationText.setRectXW(origin.x+5, (origin.w/2)-40);
   }
   
   if (populationAmount > 0 || p.playerIsDocked()) {
@@ -206,10 +206,10 @@ void PlanetInfo::setBoxes(Planet p) {
     fertPercent = setStringSpaces(p.getFarmingPercent()) + std::to_string(p.getFarmingPercent()) + "%";
     infPercent = setStringSpaces(p.getInfraPercent()) + std::to_string(p.getInfraPercent()) + "%";
     resPercent = setStringSpaces(p.getReservePercent()) + std::to_string(p.getReservePercent()) + "%";
-    popText.setRect(origin.x+(origin.w/2), (origin.w/2)-10);
-    farmingText.setRect(origin.x+(origin.w/2), (origin.w/2)-10);
-    miningText.setRect(origin.x+5, (origin.w/2)-15);
-    locationText.setRect(origin.x+5, (origin.w/2)-15);
+    popText.setRectXW(origin.x+(origin.w/2), (origin.w/2)-10);
+    farmingText.setRectXW(origin.x+(origin.w/2), (origin.w/2)-10);
+    miningText.setRectXW(origin.x+5, (origin.w/2)-15);
+    locationText.setRectXW(origin.x+5, (origin.w/2)-15);
     
     dpText.setMessage(depoPercent.c_str());
     fpText.setMessage(fertPercent.c_str());
@@ -264,7 +264,7 @@ std::string PlanetInfo::setStringSpaces(int p) {
   return s;
 }
 
-// TODO: clean this code up, hard coded values must be moved to parameters
+// TODO: Clean this up, hard coded values must be moved to parameters
 // Sets rects for each item in the PlanetInfo boxes
 void PlanetInfo::setUiRects() {
   int buffer = 5;                   // Buffer from borders or other elements

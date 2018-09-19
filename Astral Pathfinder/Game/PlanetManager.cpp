@@ -116,7 +116,7 @@ void PlanetManager::render(Game::State *gameState) {
     p.render(gameState);
   
     if (gameState->debugMode) {
-      DebugTools::renderVertices(p.getCollider().getVertices(), Game::renderer);
+      p.getCollider().renderVertices(Game::renderer);
     }
   }
 }

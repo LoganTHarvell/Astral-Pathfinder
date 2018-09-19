@@ -42,7 +42,6 @@ void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
   
   int flags = 0;
   
-  // TODO: move SDL init flags to parameters
   int imgFlags = IMG_INIT_PNG;
   if (fullscreen) {
     flags = SDL_WINDOW_FULLSCREEN_DESKTOP;
@@ -139,8 +138,8 @@ void Game::handleEvents() {
         SDL_Keycode key = event.key.keysym.sym;
   
         // Enables hot reloading of parameters
-        // TODO: Create a hot reload methods for appropriate values
-        if (uiManager->getActiveScreen() != UIManager::ScreenType::scores
+        // TODO: Create hot reload methods for appropriate values
+        if (uiManager->getActiveScreen() != Screen::ID::scores
             && key == SDLK_h) {
           Parameters::loadParameters();
           SDL_SetWindowPosition(window, windowRect.x, windowRect.y);
@@ -298,6 +297,10 @@ void Game::clean() {
   SDL_Quit();
   IMG_Quit();
   TTF_Quit();
+  
+  delete planetManager;
+  delete shipManager;
+  delete uiManager;
   
   std::cout << "Game cleaned." << std::endl;
 }

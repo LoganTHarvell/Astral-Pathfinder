@@ -37,7 +37,7 @@ public:
   
   void update(SDL_Point center, PointVector vertices);
   
-  //MARK: - Collider Methods
+  //MARK: - ColliderComponent Methods
   
   bool collisionCircle(int radius, PointVector vertices);
   bool collisionAABB(SDL_Rect r);
@@ -49,6 +49,8 @@ public:
   
   int minAlongAxis(PointVector vertices, SDL_Point axis);
   int maxAlongAxis(PointVector vertices, SDL_Point axis);
+  
+  void renderVertices(SDL_Renderer *renderer);
   
 private:
   
@@ -63,15 +65,5 @@ private:
   PointVector getNormals(PointVector vertices);
   
 };
-
-
-// MARK: - Debug Tools
-// TODO: Move Debug tools to a separate Debug class
-
-namespace DebugTools {
-  
-  void renderVertices(std::vector<SDL_Point> vertices, SDL_Renderer *renderer);
-
-}
 
 #endif /* ColliderComponent_hpp */

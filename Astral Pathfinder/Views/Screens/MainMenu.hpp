@@ -29,6 +29,17 @@ public:
   
   void update(Game::State *gs);
   void render(Game::State *gs);
+  
+  // MARK: - MainMenu Methods
+  
+  ID getNextScreen(int buttonID);
+  
+private:
+  
+  // Button identifiers
+  enum ButtonID {
+    play, scores, quit
+  };
 
 };
 

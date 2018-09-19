@@ -19,6 +19,7 @@
 // MARK: - Scoreboard Class
 
 class Scoreboard : public Screen {
+
 public:
   
   // MARK: - Scoreboard Initialization
@@ -33,8 +34,13 @@ public:
   // MARK: - Scoreboard Methods
   
   void writeScore(Game::State *gs, int score);
+  ID getNextScreen(int buttonID);
   
 private:
+  
+  enum ButtonID {
+    menu
+  };
   
   // MARK: - Scoreboard Fields
   
