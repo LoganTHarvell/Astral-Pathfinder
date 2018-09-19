@@ -30,7 +30,6 @@ public:
   
   // MARK: - Game Loop Methods
   
-  // TODO: Implement for a base gameObject, override in sub-classes
   void update();
   void render(SDL_Renderer *renderer);
   
