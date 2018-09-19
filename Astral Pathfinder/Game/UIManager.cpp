@@ -28,7 +28,7 @@
 void UIManager::init(Game::State *gameState) {
   using namespace Parameters::UIManager;
 
-  // TODO: move all gameplay UI elements into a gameplayScreen
+  // TODO: Move all gameplay UI elements into a gameplayScreen
   
   // Gameplay UI element initialziation
   time.init(timeRect);

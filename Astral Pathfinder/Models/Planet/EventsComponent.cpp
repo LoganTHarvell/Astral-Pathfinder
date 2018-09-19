@@ -30,6 +30,10 @@ void EventsComponent::update(bool blight, bool plague, bool minCollapse, bool po
   events.isOverproducing = overProd;
 }
 
+
+// MARK: - EventsComponent Methods
+
+
 void EventsComponent::setPopulationDec(bool declining) {
   events.populationDec = declining;
 }

@@ -264,7 +264,7 @@ std::string PlanetInfo::setStringSpaces(int p) {
   return s;
 }
 
-// TODO: clean this code up, hard coded values must be moved to parameters
+// TODO: Clean this up, hard coded values must be moved to parameters
 // Sets rects for each item in the PlanetInfo boxes
 void PlanetInfo::setUiRects() {
   int buffer = 5;                   // Buffer from borders or other elements

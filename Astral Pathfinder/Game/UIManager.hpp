@@ -57,9 +57,6 @@ private:
   
   // MARK: - UIManager Screens
   
-  // TODO: move score and prevScore to game state
-  int score, prevScore;
-  
   // TODO: Move all gameplay UI elements to a gameplayScreen
   TextBox time;
   TextBox totalScore, finalScore, playerName;
@@ -82,13 +79,14 @@ private:
   
   bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true;
   bool mainMenuFlag, scoreboardFlag;
+ 
+  int score, prevScore;
   
   // MARK: - Helper Methods
   
   void updateTime(Uint32);
   SDL_Color checkTime(Uint32 elapsedTime);
   
-  // TODO: move update score to game class
   void updateTotalScore(PlanetManager *pm, Uint32 elapsedTime);
   
   // Setters

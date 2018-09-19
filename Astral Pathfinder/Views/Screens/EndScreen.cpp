@@ -30,7 +30,7 @@ void EndScreen::init() {
 void EndScreen::update(Game::State *gs) {
   using namespace Parameters::UI::EndScreen;
   
-  // TODO: put clean function in case someone spams endless restarts
+  // TODO: Put clean function in case someone spams endless restarts
   if (texture == nullptr) {
     if (gs->endgame == Game::State::allDiscovered)
       TextureManager::loadTexture(winTextureFile, &texture, Game::renderer);

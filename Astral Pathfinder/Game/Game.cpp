@@ -42,7 +42,6 @@ void Game::init(const std::string title, SDL_Rect rect, bool fullscreen) {
   
   int flags = 0;
   
-  // TODO: move SDL init flags to parameters
   int imgFlags = IMG_INIT_PNG;
   if (fullscreen) {
     flags = SDL_WINDOW_FULLSCREEN_DESKTOP;

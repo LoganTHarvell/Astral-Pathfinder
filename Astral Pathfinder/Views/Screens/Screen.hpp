@@ -26,7 +26,7 @@
 
 
 // MARK: - Screen Class
-// TODO: - Make a generic class without game specific attributes
+// TODO: Make a generic class without game specific attributes
 // Use entity component system for buttons
 
 class Screen {

@@ -382,7 +382,6 @@ void Planet::updateEventComponent() {
   eventManager->update(events.blight, events.plague, events.mineCollapse, populationDec, isOverproducing);
 }
 
-// TODO: Move hard coded values to parameters
 // Updates a planet color code based on status
 void Planet::updateColors() {
   using namespace Parameters::Planet;
