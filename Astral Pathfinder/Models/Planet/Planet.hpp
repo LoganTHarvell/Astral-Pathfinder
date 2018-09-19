@@ -87,7 +87,7 @@ private:
   Status status;
   SDL_Point coordinates;
 
-  // TODO: Chage to resource component system
+  // TODO: Change to resource component system
   // Possibly split into mining, farming, and population components
   
   // TODO: Rework events component to reduce coupling

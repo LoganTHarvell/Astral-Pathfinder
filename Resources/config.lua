@@ -51,10 +51,17 @@ local parameters = {
   planet = {
     planetTextureFile = "planet2.png",
     planetTexSize = 16,
-
     planetOutlineFile = "planetOutline.png",
     planetOutlineSize = 24,
 
+    normalAlpha = 255,
+    selectedColor = { r = 0, g = 255, b = 0 },
+    undiscColor = { r = 200, g = 200, b = 200, a = 150 },
+    discoverColor = { r = 255, g = 255, b = 255 },
+    colonyColor = { r = 0, g = 255, b = 0, a = 150 },
+    popDecColor = { r = 200, g = 200, b = 0 },
+    overprodColor = { r = 200, g = 0,  b = 0 },
+    
     -- Planet initialization information
     -- Percents should be a value between 0 and 100
     minFertility = 20,

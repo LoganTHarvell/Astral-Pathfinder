@@ -131,6 +131,14 @@ namespace Parameters {
     extern std::string planetOutlineFile;
     extern int planetOutlineSize;
     
+    extern Uint8 normalAlpha;
+    extern SDL_Color undiscColor;
+    extern SDL_Color discoverColor;
+    extern SDL_Color colonyColor;
+    extern SDL_Color popDecColor;
+    extern SDL_Color overprodColor;
+    extern SDL_Color selectedColor;
+    
     // Planet initial attribute information
     extern int minFertility;
     extern int fertilityRange;

@@ -105,6 +105,14 @@ namespace Parameters {
     std::string planetOutlineFile = resourcePath + "planetOutline.png";
     int planetOutlineSize = 24;
     
+    Uint8 normalAlpha = 255;
+    SDL_Color selectedColor = { 0, 255, 0 };
+    SDL_Color undiscColor = { 200, 200, 200, 150 };
+    SDL_Color discoverColor = { 255, 255, 255 };
+    SDL_Color colonyColor = { 0, 255, 0, 150 };
+    SDL_Color popDecColor = { 200, 200, 0 };
+    SDL_Color overprodColor = { 200, 0,  0 };
+    
     // Resource information, ranges expressed as (max - min)
     int minFertility = 20;
     int fertilityRange = (200 - minFertility);
@@ -410,6 +418,14 @@ bool Parameters::loadParameters() {
     planetOutlineFile = resourcePath;
     planetOutlineFile += luaInterface.getValue<std::string>("planetOutlineFile");
     planetOutlineSize = luaInterface.getValue<int>("planetOutlineSize");
+    
+    normalAlpha = luaInterface.getValue<int>("normalAlpha");
+    undiscColor = luaInterface.getValueSDL<SDL_Color>("undiscColor");
+    discoverColor = luaInterface.getValueSDL<SDL_Color>("discoverColor");
+    colonyColor = luaInterface.getValueSDL<SDL_Color>("colonyColor");
+    popDecColor = luaInterface.getValueSDL<SDL_Color>("popDecColor");
+    overprodColor = luaInterface.getValueSDL<SDL_Color>("overprodColor");
+    selectedColor = luaInterface.getValueSDL<SDL_Color>("selectedColor");
     
     minFertility = luaInterface.getValue<int>("minFertility");
     fertilityRange = luaInterface.getValue<int>("maxFertility") - minFertility;
