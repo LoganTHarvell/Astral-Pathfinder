@@ -34,13 +34,15 @@ public:
   bool getMineCollapse() { return events.mineCollapse; }
   bool getPopulationDec() { return events.populationDec; }
   bool getOverProducing() { return events.isOverproducing; }
-  bool getTest() { return true; }
+  
+  void setPopulationDec(bool declining);
+  void setOverproducing(bool overproducing);
   
 private:
   
   struct {
-    bool isOverproducing;
     bool populationDec;
+    bool isOverproducing;
     bool plague;
     bool blight;
     bool mineCollapse;
