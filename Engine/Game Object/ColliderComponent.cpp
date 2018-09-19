@@ -146,6 +146,14 @@ int ColliderComponent::maxAlongAxis(PointVector vertices, SDL_Point axis) {
   return max;
 }
 
+void ColliderComponent::renderVertices(SDL_Renderer *renderer) {
+  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+  for (auto v : vertices) {
+    SDL_RenderDrawPoint(renderer, v.x, v.y);
+  }
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+}
+
 
 // MARK: - Helper Methods
 
@@ -182,16 +190,4 @@ PointVector ColliderComponent::getNormals(PointVector vertices) {
                       -(vertices[1].y - vertices[vertices.size()-1].y) });
   
   return normals;
-}
-
-
-// MARK: - Debug Tools
-
-void DebugTools::renderVertices(std::vector<SDL_Point> vertices,
-                                SDL_Renderer *renderer) {
-  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-  for (auto v : vertices) {
-    SDL_RenderDrawPoint(renderer, v.x, v.y);
-  }
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }
