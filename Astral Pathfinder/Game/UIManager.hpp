@@ -38,10 +38,6 @@
 class UIManager {
 
 public:
-  enum ScreenType {
-    menu, scores, game, over, quit
-  };
-  
   // MARK: - UIManager Initialization
   void init(Game::State *gameState);
   
@@ -50,11 +46,10 @@ public:
   void render(Game::State *gameState, PlanetManager *pm);
   
   // MARK: - Getter Methods
-  ScreenType getActiveScreen() { return activeScreen; };
+  Screen::ID getActiveScreen() { return activeScreen; };
   bool checkStartScreens();
   
-private:
-  
+private:  
   // MARK: - UIManager Screens
   
   // TODO: Move all gameplay UI elements to a gameplayScreen
@@ -75,7 +70,7 @@ private:
     none, currentPlanetWindow, selectedPlanetWindow
   } currentWindow = none;
   
-  ScreenType activeScreen = menu;
+  Screen::ID activeScreen = Screen::ID::menu;
   
   bool currentPlanetWindowCleaned = true, selectedPlanetWindowCleaned = true;
   bool mainMenuFlag, scoreboardFlag;
@@ -93,8 +88,8 @@ private:
   SDL_Color setTotalScoreColor();
   void setSelectedPlanet(Planet p);
   void setDockedPlanet(Planet p);
-  void setActiveScreen(int screen);
-  void setEndGameFlags(int nextScreen, Game::State *gs);
+  void setActiveScreen(Screen::ID screen);
+  void setEndGameFlags(Screen::ID nextScreen, Game::State *gs);
   
   // Event Handling
   void handleMouseDown(Game::State *gs, PlanetManager *pm);

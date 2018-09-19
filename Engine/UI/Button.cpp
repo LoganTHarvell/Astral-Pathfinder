@@ -15,12 +15,12 @@
 
 // MARK: - Button Initialization
 
-void Button::init(SDL_Rect text, SDL_Rect outline, int screen,
+void Button::init(SDL_Rect text, SDL_Rect outline, int id,
                   std::string textureFile, SDL_Renderer *renderer) {
+  this->id = id;
   bounds = text;
   border = outline;
   isActive = false;
-  nextScreen = screen;
   
   TextureManager::loadTexture(textureFile, &texture, renderer);
 }

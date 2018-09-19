@@ -23,9 +23,9 @@ void MainMenu::init() {
   
   TextureManager::loadTexture(textureFile, &texture, Game::renderer);
   
-  addButton(menu, startGameButton, startGameBorder, game);
-  addButton(menu, scoreboardButton, scoreboardBorder, scores);
-  addButton(menu, exitGameButton, exitGameBorder, quit);
+  addButton(play, startGameButton, startGameBorder);
+  addButton(scores, scoreboardButton, scoreboardBorder);
+  addButton(quit, exitGameButton, exitGameBorder);
 }
 
 
@@ -38,5 +38,23 @@ void MainMenu::render(Game::State *gs) {
   SDL_RenderCopy(Game::renderer, texture, NULL,
                  &Parameters::UIManager::screenRect);
   
-  renderButtons(menu);
+  renderButtons();
+}
+
+
+// MARK: - MainMenu Methods
+
+// Evaluates buttonID and checks for transitions
+Screen::ID MainMenu::getNextScreen(int buttonID) {
+  switch (buttonID) {
+    case play:
+      return ID::game;
+    case scores:
+      return ID::scores;
+    case quit:
+      return ID::quit;
+      
+    default:
+      return none;
+  }
 }

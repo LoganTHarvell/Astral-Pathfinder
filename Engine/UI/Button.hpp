@@ -39,18 +39,16 @@ public:
   void checkIfHovering(SDL_Point dragLocation);
   bool checkClick(SDL_Point p);
   
-  // TODO: Remove next screen stuff, should just be standard on/off
-  int getNextScreen() { return nextScreen; }
-  
+  int getID() { return id; }
   
 private:
   
   // MARK: - Button Fields
-  
+ 
+  int id;
   SDL_Rect bounds, border;
   bool isActive;
   SDL_Texture *texture = nullptr;
-  int nextScreen;
 
 };
 

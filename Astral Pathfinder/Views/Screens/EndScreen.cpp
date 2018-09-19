@@ -20,8 +20,8 @@
 void EndScreen::init() {
   using namespace Parameters::UI::EndScreen;
   
-  addButton(over, playAgainButton, playAgainBorder, game);
-  addButton(over, mainMenuButton, mainMenuBorder, menu);
+  addButton(replay, playAgainButton, playAgainBorder);
+  addButton(menu, mainMenuButton, mainMenuBorder);
 }
 
 
@@ -30,7 +30,6 @@ void EndScreen::init() {
 void EndScreen::update(Game::State *gs) {
   using namespace Parameters::UI::EndScreen;
   
-  // TODO: Put clean function in case someone spams endless restarts
   if (texture == nullptr) {
     if (gs->endgame == Game::State::allDiscovered)
       TextureManager::loadTexture(winTextureFile, &texture, Game::renderer);
@@ -47,5 +46,21 @@ void EndScreen::render(Game::State *gs) {
   SDL_RenderCopy(Game::renderer, texture, NULL,
                  &Parameters::UIManager::screenRect);
   
-  renderButtons(over);
+  renderButtons();
+}
+
+
+// MARK: - EndScreen Methods
+
+// Evaluates buttonID and checks for transitions
+Screen::ID EndScreen::getNextScreen(int buttonID) {
+  switch (buttonID) {
+    case replay:
+      return ID::game;
+    case menu:
+      return ID::menu;
+      
+    default:
+      return none;
+  }
 }

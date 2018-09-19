@@ -19,51 +19,27 @@
 
 // MARK: - Screen Methods
 
-void Screen::checkForHovering(Game::State *gs, int screen) {
-  for (Button& b : *getActiveScreenButtons(screen))
-    b.checkIfHovering(gs->dragLocation);
+void Screen::checkForHovering(Game::State *gs) {
+  for (Button& b : buttons) b.checkIfHovering(gs->dragLocation);
 }
 
-int Screen::checkClick(Game::State *gs, int screen) {
-  for (Button& b : *getActiveScreenButtons(screen))
-    if (b.checkClick(gs->clickLocation))
-      return b.getNextScreen();
+int Screen::checkClick(Game::State *gs) {
+  for (Button& b : buttons) {
+    if (b.checkClick(gs->clickLocation)) return b.getID();
+  }
   
   return -1;
 }
 
-void Screen::addButton(int currentScreen, SDL_Rect bounds, SDL_Rect border,
-                       int nextScreen) {
+void Screen::addButton(int buttonID, SDL_Rect bounds, SDL_Rect border) {
   using namespace Parameters::UI::Button;
+  
   Button newButton;
-  newButton.init(bounds, border, nextScreen, textureFile, Game::renderer);
+  newButton.init(bounds, border, buttonID, textureFile, Game::renderer);
   
-  getActiveScreenButtons(currentScreen)->push_back(newButton);
+  buttons.push_back(newButton);
 }
 
-void Screen::renderButtons(int screen) {
-  for (Button b : *getActiveScreenButtons(screen)) {
-    b.render(Game::renderer);
-  }
-}
-
-std::vector<Button> *Screen::getActiveScreenButtons(int screen) {  
-  switch (screen) {
-    case menu:
-      return &mainMenuButtons;
-      break;
-      
-    case scores:
-      return &scoreboardButtons;
-      break;
-      
-    case over:
-      return &endScreenButtons;
-      break;
-      
-    default:
-      break;
-  }
-  
-  return {};
+void Screen::renderButtons() {
+  for (Button b : buttons) b.render(Game::renderer);
 }

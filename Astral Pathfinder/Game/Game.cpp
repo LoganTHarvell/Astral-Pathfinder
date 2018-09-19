@@ -139,7 +139,7 @@ void Game::handleEvents() {
   
         // Enables hot reloading of parameters
         // TODO: Create hot reload methods for appropriate values
-        if (uiManager->getActiveScreen() != UIManager::ScreenType::scores
+        if (uiManager->getActiveScreen() != Screen::ID::scores
             && key == SDLK_h) {
           Parameters::loadParameters();
           SDL_SetWindowPosition(window, windowRect.x, windowRect.y);
@@ -297,6 +297,10 @@ void Game::clean() {
   SDL_Quit();
   IMG_Quit();
   TTF_Quit();
+  
+  delete planetManager;
+  delete shipManager;
+  delete uiManager;
   
   std::cout << "Game cleaned." << std::endl;
 }
